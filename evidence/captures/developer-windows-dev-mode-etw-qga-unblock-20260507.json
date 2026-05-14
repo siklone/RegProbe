@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T09:53:52.3649659Z",
+  "record_id": "developer.windows-dev-mode",
+  "run_id": "developer-windows-dev-mode-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock",
+  "value_name": "AllowDevelopmentWithoutDevLicense",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4440 registry events and 522 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock / AllowDevelopmentWithoutDevLicense from the helper probe, returning 0xC0000034 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0xC0000034",
+    "event_count": 4440,
+    "caller_stack_event_count": 522,
+    "target_key_event_count": 7,
+    "target_value_event_count": 2,
+    "target_command_event_count": 3,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-windows-dev-mode-etw-qga-unblock-20260507/developer-windows-dev-mode-etw-qga-unblock-20260507-summary.json",
+      "sha256": "9bd72dd178da47ba58d05617c662f32587e20c2811e4b0aa201d150eefe577a0",
+      "size": 7639,
+      "collected_utc": "2026-05-07T09:53:52.3649659Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-windows-dev-mode-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "fe6c7b66aed7404d10aa068ec57cd291056b6e1984f29c81002f4b641f849b79",
+      "size": 5370195,
+      "collected_utc": "2026-05-07T09:53:52.3649659Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-windows-dev-mode-etw-qga-unblock-20260507/developer-windows-dev-mode-etw-qga-unblock-20260507.etl",
+      "sha256": "5aa974ca069e41e26ab155e4da0e9ad1940a5db72f0ec46dec1e2357dd58204c",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T09:53:52.3649659Z"
+    }
+  ]
+}

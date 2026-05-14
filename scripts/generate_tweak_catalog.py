@@ -16,6 +16,8 @@ OUTPUT_MD = REPO_ROOT / "Docs" / "tweaks" / "tweak-catalog.md"
 OUTPUT_CSV = REPO_ROOT / "Docs" / "tweaks" / "tweak-catalog.csv"
 OUTPUT_TEST_TEMPLATE = REPO_ROOT / "Docs" / "tweaks" / "tweak-test-template.csv"
 OUTPUT_HTML = REPO_ROOT / "Docs" / "tweaks" / "tweak-catalog.html"
+APP_SURFACE_MANIFEST = REPO_ROOT / "Docs" / "research" / "app-surface" / "validated-registry-values.json"
+CSV_LINE_TERMINATOR = "\n"
 DOC_INDEX_START = "<!-- TWEAK INDEX START -->"
 DOC_INDEX_END = "<!-- TWEAK INDEX END -->"
 
@@ -172,6 +174,50 @@ def doc_for_id(tweak_id: str) -> str:
     return DOC_MAP.get(prefix, DEFAULT_DOC)
 
 
+def risk_from_app_surface(value: str) -> str:
+    normalized = " ".join(str(value or "").replace("-", " ").split()).strip()
+    if not normalized:
+        return "Research"
+    return normalized.title().replace(" ", "")
+
+
+def collect_app_surface_entries(existing: Dict[str, TweakEntry]) -> None:
+    if not APP_SURFACE_MANIFEST.exists():
+        return
+
+    try:
+        import json
+
+        manifest = json.loads(APP_SURFACE_MANIFEST.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return
+
+    for category_key, category in sorted((manifest.get("categories") or {}).items()):
+        category_name = str((category or {}).get("name") or category_key.title()).strip()
+        risk = risk_from_app_surface(str((category or {}).get("risk_level") or "Research"))
+        for item in (category or {}).get("entries") or []:
+            if not isinstance(item, dict):
+                continue
+            tweak_id = str(item.get("id") or "").strip()
+            if not tweak_id:
+                continue
+            key = tweak_id.lower()
+            if key in existing:
+                continue
+
+            source = str(item.get("documentation") or "").strip() or str(APP_SURFACE_MANIFEST.relative_to(REPO_ROOT))
+            existing[key] = TweakEntry(
+                tweak_id=tweak_id,
+                name=str(item.get("name") or tweak_id).strip(),
+                description=str(item.get("description") or "").strip(),
+                risk=risk,
+                category=category_name,
+                area="Registry",
+                source=source,
+                docs=doc_for_id(tweak_id),
+            )
+
+
 def doc_href(doc_path: str, tweak_id: str) -> str:
     if not doc_path:
         return ""
@@ -299,6 +345,8 @@ def collect_entries() -> List[TweakEntry]:
                 docs=doc_for_id(tweak_id),
             )
 
+    collect_app_surface_entries(entries)
+
     return sorted(entries.values(), key=lambda entry: entry.tweak_id.lower())
 
 
@@ -331,7 +379,7 @@ def write_markdown(entries: List[TweakEntry]) -> None:
 def write_csv(entries: List[TweakEntry]) -> None:
     OUTPUT_CSV.parent.mkdir(parents=True, exist_ok=True)
     with OUTPUT_CSV.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.writer(handle)
+        writer = csv.writer(handle, lineterminator=CSV_LINE_TERMINATOR)
         writer.writerow(["id", "name", "description", "risk", "category", "area", "source", "docs"])
         for entry in entries:
             writer.writerow([
@@ -433,7 +481,7 @@ def write_html(entries: List[TweakEntry]) -> None:
 def write_test_template(entries: List[TweakEntry]) -> None:
     OUTPUT_TEST_TEMPLATE.parent.mkdir(parents=True, exist_ok=True)
     with OUTPUT_TEST_TEMPLATE.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.writer(handle)
+        writer = csv.writer(handle, lineterminator=CSV_LINE_TERMINATOR)
         writer.writerow([
             "id",
             "name",

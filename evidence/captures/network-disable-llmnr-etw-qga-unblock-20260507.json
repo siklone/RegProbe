@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T09:58:24.0027755Z",
+  "record_id": "network.disable-llmnr",
+  "run_id": "network-disable-llmnr-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+  "value_name": "EnableMulticast",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4498 registry events and 571 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient / EnableMulticast from the helper probe, returning 0xC0000034 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0xC0000034",
+    "event_count": 4498,
+    "caller_stack_event_count": 571,
+    "target_key_event_count": 15,
+    "target_value_event_count": 5,
+    "target_command_event_count": 6,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-llmnr-etw-qga-unblock-20260507/network-disable-llmnr-etw-qga-unblock-20260507-summary.json",
+      "sha256": "53b32872d8640c1fb115ca923eb268b69e0265d0b0bf4a900acfd939747b884c",
+      "size": 7437,
+      "collected_utc": "2026-05-07T09:58:24.0027755Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-llmnr-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "faf746bb675d6b7c8d242932583656e553fe1a5e6133890f28f8f64bbebb80b8",
+      "size": 5361612,
+      "collected_utc": "2026-05-07T09:58:24.0027755Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-llmnr-etw-qga-unblock-20260507/network-disable-llmnr-etw-qga-unblock-20260507.etl",
+      "sha256": "5bb39d188ae0a550a359f26b8f7636c2e735b5c154a10d13c70ccc75d397be3d",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T09:58:24.0027755Z"
+    }
+  ]
+}

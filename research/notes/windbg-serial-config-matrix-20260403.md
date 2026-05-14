@@ -1,4 +1,4 @@
-﻿# WinDbg Serial Config Matrix
+# WinDbg Serial Config Matrix
 
 Date: `2026-04-03`
 
@@ -25,17 +25,17 @@ Date: `2026-04-03`
 ## Retained audit bundle
 
 - Matrix:
-  - [windbg-serial-config-matrix-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-serial-config-matrix-20260403.json)
-  - [windbg-serial-config-execution-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-serial-config-execution-20260403.json)
-  - [windbg-serial-config-recovery-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-serial-config-recovery-20260403.json)
-  - [windbg-serial-config-variants-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-serial-config-variants-20260403.json)
+  - [windbg-serial-config-matrix-20260403.json](../../registry-research-framework/audit/windbg-serial-config-matrix-20260403.json)
+  - [windbg-serial-config-execution-20260403.json](../../registry-research-framework/audit/windbg-serial-config-execution-20260403.json)
+  - [windbg-serial-config-recovery-20260403.json](../../registry-research-framework/audit/windbg-serial-config-recovery-20260403.json)
+  - [windbg-serial-config-variants-20260403.json](../../registry-research-framework/audit/windbg-serial-config-variants-20260403.json)
 - Prepare bundles:
-  - [windbg-serial-config-prepare-guest-restart-kd-bonc-rxloss-false-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-serial-config-prepare-guest-restart-kd-bonc-rxloss-false-20260403.json)
-  - [windbg-serial-config-prepare-guest-restart-kd-bonc-rxloss-true-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-serial-config-prepare-guest-restart-kd-bonc-rxloss-true-20260403.json)
-  - [windbg-serial-config-prepare-guest-restart-kd-none-rxloss-false-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-serial-config-prepare-guest-restart-kd-none-rxloss-false-20260403.json)
-  - [windbg-serial-config-prepare-guest-restart-kd-none-rxloss-true-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-serial-config-prepare-guest-restart-kd-none-rxloss-true-20260403.json)
+  - [windbg-serial-config-prepare-guest-restart-kd-bonc-rxloss-false-20260403.json](../../registry-research-framework/audit/windbg-serial-config-prepare-guest-restart-kd-bonc-rxloss-false-20260403.json)
+  - [windbg-serial-config-prepare-guest-restart-kd-bonc-rxloss-true-20260403.json](../../registry-research-framework/audit/windbg-serial-config-prepare-guest-restart-kd-bonc-rxloss-true-20260403.json)
+  - [windbg-serial-config-prepare-guest-restart-kd-none-rxloss-false-20260403.json](../../registry-research-framework/audit/windbg-serial-config-prepare-guest-restart-kd-none-rxloss-false-20260403.json)
+  - [windbg-serial-config-prepare-guest-restart-kd-none-rxloss-true-20260403.json](../../registry-research-framework/audit/windbg-serial-config-prepare-guest-restart-kd-none-rxloss-true-20260403.json)
 - Executed profile bundles:
-  - [windbg-serial-config-bundle-guest-restart-kd-bonc-rxloss-false-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-serial-config-bundle-guest-restart-kd-bonc-rxloss-false-20260403.json)
-  - [windbg-serial-config-bundle-guest-restart-kd-bonc-rxloss-true-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-serial-config-bundle-guest-restart-kd-bonc-rxloss-true-20260403.json)
-  - [windbg-serial-config-bundle-guest-restart-kd-none-rxloss-false-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-serial-config-bundle-guest-restart-kd-none-rxloss-false-20260403.json)
-  - [windbg-serial-config-bundle-guest-restart-kd-none-rxloss-true-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-serial-config-bundle-guest-restart-kd-none-rxloss-true-20260403.json)
+  - [windbg-serial-config-bundle-guest-restart-kd-bonc-rxloss-false-20260403.json](../../registry-research-framework/audit/windbg-serial-config-bundle-guest-restart-kd-bonc-rxloss-false-20260403.json)
+  - [windbg-serial-config-bundle-guest-restart-kd-bonc-rxloss-true-20260403.json](../../registry-research-framework/audit/windbg-serial-config-bundle-guest-restart-kd-bonc-rxloss-true-20260403.json)
+  - [windbg-serial-config-bundle-guest-restart-kd-none-rxloss-false-20260403.json](../../registry-research-framework/audit/windbg-serial-config-bundle-guest-restart-kd-none-rxloss-false-20260403.json)
+  - [windbg-serial-config-bundle-guest-restart-kd-none-rxloss-true-20260403.json](../../registry-research-framework/audit/windbg-serial-config-bundle-guest-restart-kd-none-rxloss-true-20260403.json)

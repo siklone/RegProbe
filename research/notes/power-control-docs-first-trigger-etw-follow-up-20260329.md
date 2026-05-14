@@ -66,4 +66,4 @@ The next justified move is one of:
 
 ## Audit artifact
 
-- [power-control-docs-first-trigger-etw-follow-up-20260329.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-control-docs-first-trigger-etw-follow-up-20260329.json)
+- [power-control-docs-first-trigger-etw-follow-up-20260329.json](../../registry-research-framework/audit/power-control-docs-first-trigger-etw-follow-up-20260329.json)

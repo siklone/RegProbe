@@ -7,18 +7,18 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 
 | Field | Value |
 | --- | --- |
-| Total records | 333 |
-| Validated | 255 |
+| Total records | 356 |
+| Validated | 271 |
 | Deprecated | 55 |
 | Review required | 0 |
-| Records with evidence | 333 |
+| Records with evidence | 356 |
 | Records without evidence | 0 |
-| Records missing validation proof | 10 |
+| Records missing validation proof | 17 |
 | Deprecated missing validation proof | 0 |
-| Class A | 245 |
-| Class B | 21 |
+| Class A | 263 |
+| Class B | 19 |
 | Class C | 2 |
-| Class D | 10 |
+| Class D | 17 |
 | Class E | 55 |
 
 ## Category coverage
@@ -26,15 +26,16 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Category | Records |
 | --- | --- |
 | Audio | 5 |
-| Cleanup | 5 |
+| Cleanup | 15 |
 | Developer | 13 |
 | Explorer | 18 |
+| Misc | 1 |
 | Network | 31 |
 | Notifications | 5 |
 | Performance | 3 |
-| Peripheral | 3 |
-| Power | 32 |
-| Privacy | 84 |
+| Peripheral | 9 |
+| Power | 33 |
+| Privacy | 89 |
 | Security | 26 |
 | System | 85 |
 | Visibility | 23 |
@@ -133,7 +134,8 @@ Current writes
 | `runtime-beep-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - Beep driver start mode | [evidence/files/vm/beep_start_toggle_out.txt](../evidence/files/vm-tooling-staging/beep_start_toggle_out.txt) | `high` | value, behavior, version-scope |
 | `app-audio-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-audio-disable-beep` | `repo-doc` | `Current repo docs` | Repo source note for audio.disable-beep | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | path, value, ui-mapping |
-| `vm-audio.disable-beep-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for Start | [evidence/captures/audio-disable-beep-etw-stackwalk-attempt-20260424.json](../evidence/captures/audio-disable-beep-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-summary.json](../evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-summary.json) and [evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-stage.json](../evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
+| `vm-audio.disable-beep-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for Start | [evidence/captures/audio-disable-beep-etw-stackwalk-attempt-20260424.json](../evidence/captures/audio-disable-beep-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-summary.json](../evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-summary.json) and [evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-stage.json](../evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
+| `vm-audio.disable-beep-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for Start | [evidence/captures/audio-disable-beep-etw-qga-unblock-20260507.json](../evidence/captures/audio-disable-beep-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/audio-disable-beep-etw-qga-unblock-20260507/audio-disable-beep-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/audio-disable-beep-etw-qga-unblock-20260507/audio-disable-beep-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/audio-disable-beep-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/audio-disable-beep-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/audio-disable-beep-etw-qga-unblock-20260507/audio-disable-beep-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/audio-disable-beep-etw-qga-unblock-20260507/audio-disable-beep-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-audio.disable-beep-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for Beep | [evidence/raw/ghidra/ghidra-audio-disable-beep-20260424-batch2/summary.json](../evidence/raw/ghidra/ghidra-audio-disable-beep-20260424-batch2/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -244,10 +246,11 @@ Current writes
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `procmon-audio-show-disconnected-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | [evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](../evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) and [evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
-| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md](../evidence/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md) | `high` | path, behavior, ui-mapping |
-| `runtime-audio-show-disconnected-devices-v31` | `wpr-trace` | `unspecified` | Win25H2Clean v3.1 runtime lane - Audio DeviceCpl ShowDisconnectedDevices | [evidence/files/vm/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json](../evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json) and [evidence/files/vm/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md](../evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md) | `medium` | path, value, behavior, rollback |
+| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `Our Ghidra headless analysis` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md](../evidence/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md) | `high` | path, behavior, ui-mapping |
+| `runtime-audio-show-disconnected-devices-v31` | `wpr-trace` | `VM WPR trace` | Win25H2Clean v3.1 runtime lane - Audio DeviceCpl ShowDisconnectedDevices | [evidence/files/vm/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json](../evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json) and [evidence/files/vm/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md](../evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md) | `medium` | path, value, behavior, rollback |
 | `app-audio-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-audio.show-disconnected-devices-etw-stackwalk-attempt-20260424h` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-summary.json](../evidence/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-summary.json) and [evidence/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-stage.json](../evidence/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-stage.json) and [evidence/captures/audio-show-disconnected-devices-etw-stackwalk-attempt-20260424.json](../evidence/captures/audio-show-disconnected-devices-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-audio.show-disconnected-devices-etw-stackwalk-attempt-20260424h` | `etw-trace` | `VM ETW trace` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-summary.json](../evidence/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-summary.json) and [evidence/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-stage.json](../evidence/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-stage.json) and [evidence/captures/audio-show-disconnected-devices-etw-stackwalk-attempt-20260424.json](../evidence/captures/audio-show-disconnected-devices-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-audio.show-disconnected-devices-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for ShowDisconnectedDevices | [evidence/captures/audio-show-disconnected-devices-etw-qga-unblock-20260507.json](../evidence/captures/audio-show-disconnected-devices-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/audio-show-disconnected-devices-etw-qga-unblock-20260507/audio-show-disconnected-devices-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/audio-show-disconnected-devices-etw-qga-unblock-20260507/audio-show-disconnected-devices-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/audio-show-disconnected-devices-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/audio-show-disconnected-devices-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/audio-show-disconnected-devices-etw-qga-unblock-20260507/audio-show-disconnected-devices-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/audio-show-disconnected-devices-etw-qga-unblock-20260507/audio-show-disconnected-devices-etw-qga-unblock-20260507.etl) | `medium` | runtime-observation, tooling-fix, path, version-scope |
 
 **Artifact refs**
 
@@ -368,9 +371,10 @@ Current writes
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `procmon-audio-show-hidden-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | [research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md](notes/audio.show-hidden-devices-v31-reaudit-20260327.md); [evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md](../evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md); [evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
-| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/raw/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md](../evidence/raw/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md) | `high` | path, behavior, ui-mapping |
+| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `Our Ghidra headless analysis` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/raw/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md](../evidence/raw/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md) | `high` | path, behavior, ui-mapping |
 | `app-audio-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-audio.show-hidden-devices-etw-stackwalk-20260424e` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk review for ShowHiddenDevices retained no exact target hit | [evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-summary.json](../evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-summary.json) and [evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-stage.json](../evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-stage.json) and [evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.etl](../evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.etl) and [evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/normalized-registry-bundle.json) and [evidence/captures/audio-show-hidden-devices-etw-stackwalk-20260424.json](../evidence/captures/audio-show-hidden-devices-etw-stackwalk-20260424.json) | `medium` | runtime-review-artifact, version-scope, investigation-open-question |
+| `vm-audio.show-hidden-devices-etw-stackwalk-20260424e` | `etw-trace` | `VM ETW trace` | Bounded KVM ETW stackwalk review for ShowHiddenDevices retained no exact target hit | [evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-summary.json](../evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-summary.json) and [evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-stage.json](../evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-stage.json) and [evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.etl](../evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.etl) and [evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/normalized-registry-bundle.json) and [evidence/captures/audio-show-hidden-devices-etw-stackwalk-20260424.json](../evidence/captures/audio-show-hidden-devices-etw-stackwalk-20260424.json) | `medium` | runtime-review-artifact, version-scope, investigation-open-question |
+| `vm-audio.show-hidden-devices-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for ShowHiddenDevices | [evidence/captures/audio-show-hidden-devices-etw-qga-unblock-20260507.json](../evidence/captures/audio-show-hidden-devices-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/audio-show-hidden-devices-etw-qga-unblock-20260507/audio-show-hidden-devices-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/audio-show-hidden-devices-etw-qga-unblock-20260507/audio-show-hidden-devices-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/audio-show-hidden-devices-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/audio-show-hidden-devices-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/audio-show-hidden-devices-etw-qga-unblock-20260507/audio-show-hidden-devices-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/audio-show-hidden-devices-etw-qga-unblock-20260507/audio-show-hidden-devices-etw-qga-unblock-20260507.etl) | `medium` | runtime-observation, tooling-fix, path, version-scope |
 
 **Validation proof**
 
@@ -720,7 +724,8 @@ Current writes
 | `ms-dotnet-cli-telemetry` | `official-doc` | `Microsoft official doc` | Microsoft Learn: .NET SDK and .NET CLI telemetry | [https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry](https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry) | `high` | value, allowed-values, behavior |
 | `ms-win32-environment` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_Environment class | [https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment) | `high` | path, behavior |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-developer.dotnet-telemetry-disable-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DOTNET_CLI_TELEMETRY_OPTOUT | [evidence/captures/developer-dotnet-telemetry-disable-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-dotnet-telemetry-disable-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-summary.json](../evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-summary.json) and [evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-stage.json](../evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.dotnet-telemetry-disable-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for DOTNET_CLI_TELEMETRY_OPTOUT | [evidence/captures/developer-dotnet-telemetry-disable-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-dotnet-telemetry-disable-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-summary.json](../evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-summary.json) and [evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-stage.json](../evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.dotnet-telemetry-disable-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for DOTNET_CLI_TELEMETRY_OPTOUT | [evidence/captures/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507.json](../evidence/captures/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507.etl) | `medium` | runtime-observation, tooling-fix, path, version-scope |
 | `vm-developer.dotnet-telemetry-disable-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DOTNET_CLI_TELEMETRY_OPTOUT | [evidence/raw/ghidra/ghidra-developer-dotnet-telemetry-disable-20260424-batch6/summary.json](../evidence/raw/ghidra/ghidra-developer-dotnet-telemetry-disable-20260424-batch6/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -833,7 +838,8 @@ Current writes
 | `ms-maximum-path-limitation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Maximum Path Length Limitation | [https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation](https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation) | `high` | path, value, behavior |
 | `procmon-developer-long-paths` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Developer settings page reads LongPathsEnabled | [evidence/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv](../evidence/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv) and [evidence/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md](../evidence/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md) | `medium` | path, value, behavior, ui-mapping |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-developer.enable-windows-long-paths-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for LongPathsEnabled | [evidence/captures/developer-enable-windows-long-paths-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-enable-windows-long-paths-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-summary.json](../evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-summary.json) and [evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-stage.json](../evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.enable-windows-long-paths-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for LongPathsEnabled | [evidence/captures/developer-enable-windows-long-paths-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-enable-windows-long-paths-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-summary.json](../evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-summary.json) and [evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-stage.json](../evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.enable-windows-long-paths-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for LongPathsEnabled | [evidence/captures/developer-enable-windows-long-paths-etw-qga-unblock-20260507.json](../evidence/captures/developer-enable-windows-long-paths-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/developer-enable-windows-long-paths-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/developer-enable-windows-long-paths-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/developer-enable-windows-long-paths-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/developer-enable-windows-long-paths-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-developer.enable-windows-long-paths-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for LongPathsEnabled | [evidence/raw/ghidra/ghidra-developer-enable-windows-long-paths-20260424-batch2/summary.json](../evidence/raw/ghidra/ghidra-developer-enable-windows-long-paths-20260424-batch2/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -947,7 +953,8 @@ Current writes
 | `node-cli-max-old-space-size` | `official-doc` | `Microsoft official doc` | Node.js CLI documentation: --max-old-space-size | [https://nodejs.org/api/cli.html](https://nodejs.org/api/cli.html) | `high` | value, allowed-values, behavior |
 | `ms-win32-environment` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_Environment class | [https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment) | `high` | path, behavior |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-developer.nodejs-performance-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for NODE_OPTIONS | [evidence/captures/developer-nodejs-performance-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-nodejs-performance-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-summary.json](../evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-summary.json) and [evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-stage.json](../evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.nodejs-performance-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for NODE_OPTIONS | [evidence/captures/developer-nodejs-performance-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-nodejs-performance-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-summary.json](../evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-summary.json) and [evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-stage.json](../evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.nodejs-performance-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for NODE_OPTIONS | [evidence/captures/developer-nodejs-performance-etw-qga-unblock-20260507.json](../evidence/captures/developer-nodejs-performance-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-qga-unblock-20260507/developer-nodejs-performance-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-qga-unblock-20260507/developer-nodejs-performance-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-qga-unblock-20260507/developer-nodejs-performance-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-qga-unblock-20260507/developer-nodejs-performance-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-developer.nodejs-performance-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for NODE_OPTIONS | [evidence/raw/ghidra/ghidra-developer-nodejs-performance-20260424-batch6/summary.json](../evidence/raw/ghidra/ghidra-developer-nodejs-performance-20260424-batch6/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -1062,7 +1069,8 @@ Current writes
 | `local-powershell-executionpolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx) | `high` | path, value, allowed-values |
 | `local-powershell-executionpolicy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml) | `high` | behavior, side-effects |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-developer.powershell-execution-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ExecutionPolicy | [evidence/captures/developer-powershell-execution-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-powershell-execution-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-summary.json](../evidence/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-summary.json) and [evidence/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-stage.json](../evidence/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.powershell-execution-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for ExecutionPolicy | [evidence/captures/developer-powershell-execution-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-powershell-execution-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-summary.json](../evidence/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-summary.json) and [evidence/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-stage.json](../evidence/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.powershell-execution-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for ExecutionPolicy | [evidence/captures/developer-powershell-execution-etw-qga-unblock-20260507.json](../evidence/captures/developer-powershell-execution-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/developer-powershell-execution-etw-qga-unblock-20260507/developer-powershell-execution-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/developer-powershell-execution-etw-qga-unblock-20260507/developer-powershell-execution-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/developer-powershell-execution-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/developer-powershell-execution-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/developer-powershell-execution-etw-qga-unblock-20260507/developer-powershell-execution-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/developer-powershell-execution-etw-qga-unblock-20260507/developer-powershell-execution-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-developer.powershell-execution-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ExecutionPolicy | [evidence/raw/ghidra/ghidra-developer-powershell-execution-20260424-batch3/summary.json](../evidence/raw/ghidra/ghidra-developer-powershell-execution-20260424-batch3/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -1179,7 +1187,8 @@ Current writes
 | `local-filesys-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx](../evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-filesys-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml](../evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml) | `high` | behavior, default, side-effects |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-developer.python-path-fix-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for LongPathsEnabled | [evidence/captures/developer-python-path-fix-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-python-path-fix-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-summary.json](../evidence/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-summary.json) and [evidence/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-stage.json](../evidence/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.python-path-fix-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for LongPathsEnabled | [evidence/captures/developer-python-path-fix-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-python-path-fix-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-summary.json](../evidence/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-summary.json) and [evidence/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-stage.json](../evidence/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.python-path-fix-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for LongPathsEnabled | [evidence/captures/developer-python-path-fix-etw-qga-unblock-20260507.json](../evidence/captures/developer-python-path-fix-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/developer-enable-windows-long-paths-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/developer-enable-windows-long-paths-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/developer-enable-windows-long-paths-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/developer-enable-windows-long-paths-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-developer.python-path-fix-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for LongPathsEnabled | [evidence/raw/ghidra/ghidra-developer-python-path-fix-20260424-batch3/summary.json](../evidence/raw/ghidra/ghidra-developer-python-path-fix-20260424-batch3/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -1292,7 +1301,8 @@ Current writes
 | `ms-run-registry-keys` | `official-doc` | `Microsoft official doc` | Run and RunOnce Registry Keys | [https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys](https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys) | `high` | path, behavior, version-scope |
 | `openssh-ssh-agent-doc` | `official-doc` | `Microsoft official doc` | OpenSSH manual: ssh-agent | [https://man.openbsd.org/ssh-agent](https://man.openbsd.org/ssh-agent) | `medium` | behavior, side-effects |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-developer.ssh-agent-autostart-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for SSH Agent | [evidence/captures/developer-ssh-agent-autostart-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-ssh-agent-autostart-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-summary.json](../evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-summary.json) and [evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-stage.json](../evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.ssh-agent-autostart-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for SSH Agent | [evidence/captures/developer-ssh-agent-autostart-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-ssh-agent-autostart-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-summary.json](../evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-summary.json) and [evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-stage.json](../evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.ssh-agent-autostart-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for SSH Agent | [evidence/captures/developer-ssh-agent-autostart-etw-qga-unblock-20260507.json](../evidence/captures/developer-ssh-agent-autostart-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-qga-unblock-20260507/developer-ssh-agent-autostart-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-qga-unblock-20260507/developer-ssh-agent-autostart-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-qga-unblock-20260507/developer-ssh-agent-autostart-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-qga-unblock-20260507/developer-ssh-agent-autostart-etw-qga-unblock-20260507.etl) | `medium` | runtime-observation, tooling-fix, path, version-scope |
 | `vm-developer.ssh-agent-autostart-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for SSH Agent | [evidence/raw/ghidra/ghidra-developer-ssh-agent-autostart-20260424-batch3/summary.json](../evidence/raw/ghidra/ghidra-developer-ssh-agent-autostart-20260424-batch3/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -1408,7 +1418,8 @@ Current writes
 | `local-appxpackagemanager-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-appxpackagemanager-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml) | `high` | behavior, default, side-effects |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-developer-windows-dev-mode-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW stage receipt for AllowDevelopmentWithoutDevLicense | [evidence/captures/developer-windows-dev-mode-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-windows-dev-mode-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/developer-windows-dev-mode-etw-20260424-batch1/developer-windows-dev-mode-etw-20260424-batch1-stage.json](../evidence/raw/etw-stackwalk/developer-windows-dev-mode-etw-20260424-batch1/developer-windows-dev-mode-etw-20260424-batch1-stage.json) | `low` | behavior, version-scope |
+| `vm-developer-windows-dev-mode-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW stage receipt for AllowDevelopmentWithoutDevLicense | [evidence/captures/developer-windows-dev-mode-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-windows-dev-mode-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/developer-windows-dev-mode-etw-20260424-batch1/developer-windows-dev-mode-etw-20260424-batch1-stage.json](../evidence/raw/etw-stackwalk/developer-windows-dev-mode-etw-20260424-batch1/developer-windows-dev-mode-etw-20260424-batch1-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.windows-dev-mode-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for AllowDevelopmentWithoutDevLicense | [evidence/captures/developer-windows-dev-mode-etw-qga-unblock-20260507.json](../evidence/captures/developer-windows-dev-mode-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/developer-windows-dev-mode-etw-qga-unblock-20260507/developer-windows-dev-mode-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/developer-windows-dev-mode-etw-qga-unblock-20260507/developer-windows-dev-mode-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/developer-windows-dev-mode-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/developer-windows-dev-mode-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/developer-windows-dev-mode-etw-qga-unblock-20260507/developer-windows-dev-mode-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/developer-windows-dev-mode-etw-qga-unblock-20260507/developer-windows-dev-mode-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-developer-windows-dev-mode-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for AllowDevelopmentWithoutDevLicense | [evidence/raw/ghidra/ghidra-developer-windows-dev-mode-20260424-batch1/summary.json](../evidence/raw/ghidra/ghidra-developer-windows-dev-mode-20260424-batch1/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -1633,7 +1644,8 @@ Current writes
 | `ms-gppref-global-folder-options-vista-alwaysshowicons` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista alwaysShowIcons | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-25h2-explorer-advanced-iconsonly` | `raw-registry-dump` | `unspecified` | 25H2 raw registry and default-hive corroboration for IconsOnly | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt); [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
 | `procmon-iconsonly-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer IconsOnly runtime surface | [evidence/raw/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt](../evidence/raw/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt) | `high` | path, value, behavior, version-scope |
-| `vm-explorer.always-show-icons-never-thumbnails-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for IconsOnly | [evidence/captures/explorer-always-show-icons-never-thumbnails-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-always-show-icons-never-thumbnails-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-summary.json](../evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-summary.json) and [evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-stage.json](../evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.always-show-icons-never-thumbnails-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for IconsOnly | [evidence/captures/explorer-always-show-icons-never-thumbnails-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-always-show-icons-never-thumbnails-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-summary.json](../evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-summary.json) and [evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-stage.json](../evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.always-show-icons-never-thumbnails-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for IconsOnly | [evidence/captures/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507.json](../evidence/captures/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507.etl) | `medium` | runtime-observation, tooling-fix, path, version-scope |
 | `vm-explorer.always-show-icons-never-thumbnails-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for IconsOnly | [evidence/raw/ghidra/ghidra-explorer-always-show-icons-never-thumbnails-20260424-batch4/summary.json](../evidence/raw/ghidra/ghidra-explorer-always-show-icons-never-thumbnails-20260424-batch4/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -1747,7 +1759,8 @@ Current writes
 | `ms-low-disk-warning-article` | `official-doc` | `Microsoft official doc` | Microsoft Learn troubleshooting article for low disk space warnings | [https://learn.microsoft.com/fr-fr/troubleshoot/windows-server/shell-experience/temp-folder-with-logon-session-id-deleted](https://learn.microsoft.com/fr-fr/troubleshoot/windows-server/shell-experience/temp-folder-with-logon-session-id-deleted) | `high` | path, value, behavior |
 | `dump-25h2-policies-explorer-nolowdiskspacechecks` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for NoLowDiskSpaceChecks | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer-disable-low-disk-space-warning-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW stage receipt for NoLowDiskSpaceChecks | [evidence/captures/explorer-disable-low-disk-space-warning-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-disable-low-disk-space-warning-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-20260424-batch1/explorer-disable-low-disk-space-warning-etw-20260424-batch1-stage.json](../evidence/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-20260424-batch1/explorer-disable-low-disk-space-warning-etw-20260424-batch1-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer-disable-low-disk-space-warning-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW stage receipt for NoLowDiskSpaceChecks | [evidence/captures/explorer-disable-low-disk-space-warning-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-disable-low-disk-space-warning-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-20260424-batch1/explorer-disable-low-disk-space-warning-etw-20260424-batch1-stage.json](../evidence/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-20260424-batch1/explorer-disable-low-disk-space-warning-etw-20260424-batch1-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.disable-low-disk-space-warning-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for NoLowDiskSpaceChecks | [evidence/captures/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507.json](../evidence/captures/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-explorer-disable-low-disk-space-warning-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for NoLowDiskSpaceChecks | [evidence/raw/ghidra/ghidra-explorer-disable-low-disk-space-warning-20260424-batch1/summary.json](../evidence/raw/ghidra/ghidra-explorer-disable-low-disk-space-warning-20260424-batch1/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -1864,7 +1877,8 @@ Current writes
 | `local-taskbar-admx-chat` | `official-doc` | `Microsoft official doc` | Local Microsoft Taskbar.admx ConfigureChatIcon mapping | [evidence/files/external/c/Windows/PolicyDefinitions/Taskbar.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Taskbar.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-taskbar-adml-chat` | `official-doc` | `Microsoft official doc` | Local Microsoft Taskbar.adml ConfigureChatIcon help text | [evidence/files/external/c/PolicyDefinitions/en-US/Taskbar.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Taskbar.adml) | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.disable-taskbar-chat-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ChatIcon | [evidence/captures/explorer-disable-taskbar-chat-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-disable-taskbar-chat-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-summary.json](../evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-summary.json) and [evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-stage.json](../evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.disable-taskbar-chat-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for ChatIcon | [evidence/captures/explorer-disable-taskbar-chat-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-disable-taskbar-chat-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-summary.json](../evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-summary.json) and [evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-stage.json](../evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.disable-taskbar-chat-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for ChatIcon | [evidence/captures/explorer-disable-taskbar-chat-etw-qga-unblock-20260507.json](../evidence/captures/explorer-disable-taskbar-chat-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-qga-unblock-20260507/explorer-disable-taskbar-chat-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-qga-unblock-20260507/explorer-disable-taskbar-chat-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-qga-unblock-20260507/explorer-disable-taskbar-chat-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-qga-unblock-20260507/explorer-disable-taskbar-chat-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-explorer.disable-taskbar-chat-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ChatIcon | [evidence/raw/ghidra/ghidra-explorer-disable-taskbar-chat-20260424-batch2/summary.json](../evidence/raw/ghidra/ghidra-explorer-disable-taskbar-chat-20260424-batch2/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -1976,10 +1990,11 @@ Current writes
 | --- | --- | --- | --- | --- | --- | --- |
 | `dump-25h2-explorer-advanced-usecompactmode` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for UseCompactMode | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
 | `procmon-explorer-compact-mode` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer UseCompactMode runtime reads | [evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md](../evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md) and [evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md](../evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
-| `ghidra-explorerframe-usecompactmode` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - ExplorerFrame UseCompactMode handlers | [evidence/raw/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md](../evidence/raw/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md) | `high` | path, behavior, ui-mapping |
+| `ghidra-explorerframe-usecompactmode` | `ghidra-headless` | `Our Ghidra headless analysis` | Our Ghidra decompilation - ExplorerFrame UseCompactMode handlers | [evidence/raw/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md](../evidence/raw/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md) | `high` | path, behavior, ui-mapping |
 | `runtime-explorer-compact-incident-review-20260327` | `vm-incident` | `unspecified` | Incident reviewed - Explorer compact mode runtime rerun on visible-shell baseline | [research/notes/explorer-compact-runtime-incident-review-20260327.md](notes/explorer-compact-runtime-incident-review-20260327.md) and [evidence/files/vm/explorer-compact-runtime-20260327-223536/summary.json](../evidence/files/vm-tooling-staging/explorer-compact-runtime-20260327-223536/summary.json) | `high` | behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.enable-explorer-compact-mode-etw-stackwalk-attempt-20260424h` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-summary.json](../evidence/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-summary.json) and [evidence/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-stage.json](../evidence/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-stage.json) and [evidence/captures/explorer-enable-explorer-compact-mode-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-enable-explorer-compact-mode-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-explorer.enable-explorer-compact-mode-etw-stackwalk-attempt-20260424h` | `etw-trace` | `VM ETW trace` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-summary.json](../evidence/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-summary.json) and [evidence/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-stage.json](../evidence/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-stage.json) and [evidence/captures/explorer-enable-explorer-compact-mode-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-enable-explorer-compact-mode-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-explorer.enable-explorer-compact-mode-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for UseCompactMode | [evidence/captures/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507.json](../evidence/captures/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507.etl) | `medium` | runtime-observation, tooling-fix, path, version-scope |
 
 **Validation proof**
 
@@ -2093,7 +2108,8 @@ Current writes
 | `dump-25h2-explorer-advanced-hidedriveswithnomedia` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for HideDrivesWithNoMedia | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
 | `procmon-hidedriveswithnomedia-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer HideDrivesWithNoMedia runtime surface | [evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt](../evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation for HideDrivesWithNoMedia | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.hide-empty-drives-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for HideDrivesWithNoMedia | [evidence/captures/explorer-hide-empty-drives-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-hide-empty-drives-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-summary.json](../evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-summary.json) and [evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-stage.json](../evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.hide-empty-drives-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for HideDrivesWithNoMedia | [evidence/captures/explorer-hide-empty-drives-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-hide-empty-drives-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-summary.json](../evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-summary.json) and [evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-stage.json](../evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.hide-empty-drives-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for HideDrivesWithNoMedia | [evidence/captures/explorer-hide-empty-drives-etw-qga-unblock-20260507.json](../evidence/captures/explorer-hide-empty-drives-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-qga-unblock-20260507/explorer-hide-empty-drives-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-qga-unblock-20260507/explorer-hide-empty-drives-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-qga-unblock-20260507/explorer-hide-empty-drives-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-qga-unblock-20260507/explorer-hide-empty-drives-etw-qga-unblock-20260507.etl) | `medium` | runtime-observation, tooling-fix, path, version-scope |
 | `vm-explorer.hide-empty-drives-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for HideDrivesWithNoMedia | [evidence/raw/ghidra/ghidra-explorer-hide-empty-drives-20260424-batch4/summary.json](../evidence/raw/ghidra/ghidra-explorer-hide-empty-drives-20260424-batch4/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -2208,7 +2224,8 @@ Current writes
 | `dump-hkcu25h2-explorer-advanced-separateprocess` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for SeparateProcess | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
 | `procmon-separateprocess-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer SeparateProcess runtime surface | [evidence/raw/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt](../evidence/raw/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.launch-folder-windows-in-a-separate-process-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for SeparateProcess | [evidence/captures/explorer-launch-folder-windows-in-a-separate-process-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-launch-folder-windows-in-a-separate-process-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-summary.json](../evidence/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-summary.json) and [evidence/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-stage.json](../evidence/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.launch-folder-windows-in-a-separate-process-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for SeparateProcess | [evidence/captures/explorer-launch-folder-windows-in-a-separate-process-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-launch-folder-windows-in-a-separate-process-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-summary.json](../evidence/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-summary.json) and [evidence/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-stage.json](../evidence/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for SeparateProcess | [evidence/captures/explorer-launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507.json](../evidence/captures/explorer-launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/explorer-launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507/explorer-launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/explorer-launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507/explorer-launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/explorer-launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/explorer-launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/explorer-launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507/explorer-launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/explorer-launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507/explorer-launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507.etl) | `medium` | runtime-observation, tooling-fix, path, version-scope |
 | `vm-explorer.launch-folder-windows-in-a-separate-process-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for SeparateProcess | [evidence/raw/ghidra/ghidra-explorer-launch-folder-windows-separate-process-20260424-batch4/summary.json](../evidence/raw/ghidra/ghidra-explorer-launch-folder-windows-separate-process-20260424-batch4/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -2323,7 +2340,8 @@ Current writes
 | `dump-hkcu25h2-explorer-advanced-showcompcolor` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for ShowCompColor | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
 | `procmon-showcompcolor-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowCompColor runtime surface | [evidence/raw/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md](../evidence/raw/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.show-compressed-and-encrypted-files-in-color-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ShowCompColor | [evidence/captures/explorer-show-compressed-and-encrypted-files-in-color-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-compressed-and-encrypted-files-in-color-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-summary.json](../evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-stage.json](../evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-compressed-and-encrypted-files-in-color-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for ShowCompColor | [evidence/captures/explorer-show-compressed-and-encrypted-files-in-color-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-compressed-and-encrypted-files-in-color-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-summary.json](../evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-stage.json](../evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for ShowCompColor | [evidence/captures/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507.json](../evidence/captures/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507.etl) | `medium` | runtime-observation, tooling-fix, path, version-scope |
 | `vm-explorer.show-compressed-and-encrypted-files-in-color-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ShowCompColor | [evidence/raw/ghidra/ghidra-explorer-show-compressed-and-encrypted-files-in-color-20260424-batch5/summary.json](../evidence/raw/ghidra/ghidra-explorer-show-compressed-and-encrypted-files-in-color-20260424-batch5/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -2438,7 +2456,8 @@ Current writes
 | `dump-25h2-explorer-showdrivelettersfirst` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for ShowDriveLettersFirst | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
 | `procmon-showdrivelettersfirst-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowDriveLettersFirst runtime surface | [evidence/raw/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt](../evidence/raw/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.show-drive-letters-first-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ShowDriveLettersFirst | [evidence/captures/explorer-show-drive-letters-first-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-drive-letters-first-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-summary.json](../evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-stage.json](../evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-drive-letters-first-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for ShowDriveLettersFirst | [evidence/captures/explorer-show-drive-letters-first-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-drive-letters-first-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-summary.json](../evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-stage.json](../evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-drive-letters-first-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for ShowDriveLettersFirst | [evidence/captures/explorer-show-drive-letters-first-etw-qga-unblock-20260507.json](../evidence/captures/explorer-show-drive-letters-first-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-qga-unblock-20260507/explorer-show-drive-letters-first-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-qga-unblock-20260507/explorer-show-drive-letters-first-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-qga-unblock-20260507/explorer-show-drive-letters-first-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-qga-unblock-20260507/explorer-show-drive-letters-first-etw-qga-unblock-20260507.etl) | `medium` | runtime-observation, tooling-fix, path, version-scope |
 | `vm-explorer.show-drive-letters-first-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ShowDriveLettersFirst | [evidence/raw/ghidra/ghidra-explorer-show-drive-letters-first-20260424-batch5/summary.json](../evidence/raw/ghidra/ghidra-explorer-show-drive-letters-first-20260424-batch5/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -2553,7 +2572,8 @@ Current writes
 | `dump-hkcu25h2-explorer-advanced-hidefileext` | `raw-registry-dump` | `unspecified` | 25H2 default hive and raw dump corroboration for HideFileExt | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg); [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, value, version-scope |
 | `procmon-hidefileext-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer file-extension visibility runtime surface | [evidence/raw/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md](../evidence/raw/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.show-file-extensions-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for HideFileExt | [evidence/captures/explorer-show-file-extensions-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-file-extensions-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-summary.json](../evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-stage.json](../evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-file-extensions-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for HideFileExt | [evidence/captures/explorer-show-file-extensions-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-file-extensions-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-summary.json](../evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-stage.json](../evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-file-extensions-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for HideFileExt | [evidence/captures/explorer-show-file-extensions-etw-qga-unblock-20260507.json](../evidence/captures/explorer-show-file-extensions-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-qga-unblock-20260507/explorer-show-file-extensions-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-qga-unblock-20260507/explorer-show-file-extensions-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-qga-unblock-20260507/explorer-show-file-extensions-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-qga-unblock-20260507/explorer-show-file-extensions-etw-qga-unblock-20260507.etl) | `medium` | runtime-observation, tooling-fix, path, version-scope |
 | `vm-explorer.show-file-extensions-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for HideFileExt | [evidence/raw/ghidra/ghidra-explorer-show-file-extensions-20260424-batch5/summary.json](../evidence/raw/ghidra/ghidra-explorer-show-file-extensions-20260424-batch5/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -2668,7 +2688,8 @@ Current writes
 | `dump-hkcu25h2-explorer-cabinetstate-fullpath` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for FullPath | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
 | `repo-provenance-explorer-show-full-path` | `repo-doc` | `Current repo docs` | Repo source note for explorer.show-full-path | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | path, value, ui-mapping |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.show-full-path-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for FullPath | [evidence/captures/explorer-show-full-path-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-full-path-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-summary.json](../evidence/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-stage.json](../evidence/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-full-path-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for FullPath | [evidence/captures/explorer-show-full-path-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-full-path-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-summary.json](../evidence/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-stage.json](../evidence/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-full-path-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for FullPath | [evidence/captures/explorer-show-full-path-etw-qga-unblock-20260507.json](../evidence/captures/explorer-show-full-path-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/explorer-show-full-path-etw-qga-unblock-20260507/explorer-show-full-path-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/explorer-show-full-path-etw-qga-unblock-20260507/explorer-show-full-path-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-full-path-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/explorer-show-full-path-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/explorer-show-full-path-etw-qga-unblock-20260507/explorer-show-full-path-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/explorer-show-full-path-etw-qga-unblock-20260507/explorer-show-full-path-etw-qga-unblock-20260507.etl) | `medium` | runtime-observation, tooling-fix, path, version-scope |
 | `vm-explorer.show-full-path-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for FullPath | [evidence/raw/ghidra/ghidra-explorer-show-full-path-20260424-batch5/summary.json](../evidence/raw/ghidra/ghidra-explorer-show-full-path-20260424-batch5/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -2783,7 +2804,8 @@ Current writes
 | `dump-hkcu25h2-explorer-advanced-hidden` | `raw-registry-dump` | `unspecified` | 25H2 default hive and raw dump corroboration for Hidden | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg); [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, value, version-scope |
 | `procmon-hidden-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer hidden-file visibility runtime surface | [evidence/raw/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md](../evidence/raw/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.show-hidden-files-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for Hidden | [evidence/captures/explorer-show-hidden-files-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-hidden-files-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-summary.json](../evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-stage.json](../evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-hidden-files-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for Hidden | [evidence/captures/explorer-show-hidden-files-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-hidden-files-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-summary.json](../evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-stage.json](../evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-hidden-files-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for Hidden | [evidence/captures/explorer-show-hidden-files-etw-qga-unblock-20260507.json](../evidence/captures/explorer-show-hidden-files-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-qga-unblock-20260507/explorer-show-hidden-files-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-qga-unblock-20260507/explorer-show-hidden-files-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-qga-unblock-20260507/explorer-show-hidden-files-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-qga-unblock-20260507/explorer-show-hidden-files-etw-qga-unblock-20260507.etl) | `medium` | runtime-observation, tooling-fix, path, version-scope |
 | `vm-explorer.show-hidden-files-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for Hidden | [evidence/raw/ghidra/ghidra-explorer-show-hidden-files-20260424-batch5/summary.json](../evidence/raw/ghidra/ghidra-explorer-show-hidden-files-20260424-batch5/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -2898,7 +2920,8 @@ Current writes
 | `dump-hkcu25h2-explorer-advanced-showinfotip` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for ShowInfoTip | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
 | `procmon-showinfotip-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowInfoTip runtime surface | [evidence/raw/procmon/explorer.show-info-tips/showinfotip-result.txt](../evidence/raw/procmon/explorer.show-info-tips/showinfotip-result.txt) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.show-info-tips-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ShowInfoTip | [evidence/captures/explorer-show-info-tips-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-info-tips-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-summary.json](../evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-stage.json](../evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-info-tips-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for ShowInfoTip | [evidence/captures/explorer-show-info-tips-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-info-tips-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-summary.json](../evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-stage.json](../evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-info-tips-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for ShowInfoTip | [evidence/captures/explorer-show-info-tips-etw-qga-unblock-20260507.json](../evidence/captures/explorer-show-info-tips-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-qga-unblock-20260507/explorer-show-info-tips-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-qga-unblock-20260507/explorer-show-info-tips-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-qga-unblock-20260507/explorer-show-info-tips-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-qga-unblock-20260507/explorer-show-info-tips-etw-qga-unblock-20260507.etl) | `medium` | runtime-observation, tooling-fix, path, version-scope |
 | `vm-explorer.show-info-tips-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ShowInfoTip | [evidence/raw/ghidra/ghidra-explorer-show-info-tips-20260424-batch4/summary.json](../evidence/raw/ghidra/ghidra-explorer-show-info-tips-20260424-batch4/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -3013,7 +3036,8 @@ Current writes
 | `dump-25h2-explorer-advanced-showsuperhidden` | `raw-registry-dump` | `unspecified` | 25H2 dump and default hive corroboration for ShowSuperHidden | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
 | `procmon-showsuperhidden-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowSuperHidden runtime surface | [evidence/raw/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt](../evidence/raw/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.show-protected-operating-system-files-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ShowSuperHidden | [evidence/captures/explorer-show-protected-operating-system-files-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-protected-operating-system-files-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-summary.json](../evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-stage.json](../evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-protected-operating-system-files-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for ShowSuperHidden | [evidence/captures/explorer-show-protected-operating-system-files-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-protected-operating-system-files-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-summary.json](../evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-stage.json](../evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-protected-operating-system-files-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for ShowSuperHidden | [evidence/captures/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507.json](../evidence/captures/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507.etl) | `medium` | runtime-observation, tooling-fix, path, version-scope |
 | `vm-explorer.show-protected-operating-system-files-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ShowSuperHidden | [evidence/raw/ghidra/ghidra-explorer-show-protected-operating-system-files-20260424-batch4/summary.json](../evidence/raw/ghidra/ghidra-explorer-show-protected-operating-system-files-20260424-batch4/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -3128,7 +3152,8 @@ Current writes
 | `dump-25h2-explorer-showrecent` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for ShowRecent | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
 | `procmon-showrecent-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowRecent runtime surface | [evidence/raw/procmon/explorer.show-recent-items/showrecent-result.txt](../evidence/raw/procmon/explorer.show-recent-items/showrecent-result.txt) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation for ShowRecent | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.show-recent-items-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ShowRecent | [evidence/captures/explorer-show-recent-items-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-recent-items-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-summary.json](../evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-stage.json](../evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-recent-items-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for ShowRecent | [evidence/captures/explorer-show-recent-items-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-recent-items-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-summary.json](../evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-stage.json](../evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-recent-items-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for ShowRecent | [evidence/captures/explorer-show-recent-items-etw-qga-unblock-20260507.json](../evidence/captures/explorer-show-recent-items-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-qga-unblock-20260507/explorer-show-recent-items-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-qga-unblock-20260507/explorer-show-recent-items-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-qga-unblock-20260507/explorer-show-recent-items-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-qga-unblock-20260507/explorer-show-recent-items-etw-qga-unblock-20260507.etl) | `medium` | runtime-observation, tooling-fix, path, version-scope |
 | `vm-explorer.show-recent-items-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ShowRecent | [evidence/raw/ghidra/ghidra-explorer-show-recent-items-20260424-batch6/summary.json](../evidence/raw/ghidra/ghidra-explorer-show-recent-items-20260424-batch6/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -3243,7 +3268,8 @@ Current writes
 | `dump-25h2-explorer-advanced-showstatusbar` | `raw-registry-dump` | `unspecified` | 25H2 raw registry and default-hive corroboration for ShowStatusBar | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt); [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
 | `procmon-showstatusbar-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowStatusBar runtime surface | [evidence/raw/procmon/explorer.show-status-bar/showstatusbar-result.txt](../evidence/raw/procmon/explorer.show-status-bar/showstatusbar-result.txt) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.show-status-bar-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ShowStatusBar | [evidence/captures/explorer-show-status-bar-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-status-bar-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-summary.json](../evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-stage.json](../evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-status-bar-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for ShowStatusBar | [evidence/captures/explorer-show-status-bar-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-status-bar-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-summary.json](../evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-stage.json](../evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-status-bar-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for ShowStatusBar | [evidence/captures/explorer-show-status-bar-etw-qga-unblock-20260507.json](../evidence/captures/explorer-show-status-bar-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-qga-unblock-20260507/explorer-show-status-bar-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-qga-unblock-20260507/explorer-show-status-bar-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-qga-unblock-20260507/explorer-show-status-bar-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-qga-unblock-20260507/explorer-show-status-bar-etw-qga-unblock-20260507.etl) | `medium` | runtime-observation, tooling-fix, path, version-scope |
 | `vm-explorer.show-status-bar-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ShowStatusBar | [evidence/raw/ghidra/ghidra-explorer-show-status-bar-20260424-batch6/summary.json](../evidence/raw/ghidra/ghidra-explorer-show-status-bar-20260424-batch6/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -3494,6 +3520,127 @@ Current writes
 
 ---
 
+### Misc
+
+### `misc.optimize-7zip-settings`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class A` |
+| Category | `Misc` |
+| Area | `7-Zip User Options` |
+| Scope | `user` |
+| Source file | [research/records/misc.optimize-7zip-settings.review.json](records/misc.optimize-7zip-settings.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `True` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Review-required audit trail for the live Configure 7-Zip Context Menu Settings card. The app already ships the current 7-zip user options action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/MiscTweakProvider.cs |
+| Notes | The live app ships this first-party card outside the validated research-provider surface. Promotion gate now treats this checked-in implementation as matching the research record. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `sevenzip-options-bundle` | `HKCU\Software\7-Zip\Options` | `OptionBundle` | `CurrentAppProfile` | `value` | The current engine tweak writes four coordinated values under HKCU\Software\7-Zip\Options. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `actionable` |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | 7-zip, cascadedmenu, elimdupextract, menuicons, writezoneidextract |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / misc/desc.md#7-zip-settings | [https://github.com/nohuto/win-config/blob/main/misc/desc.md#7-zip-settings](https://github.com/nohuto/win-config/blob/main/misc/desc.md#7-zip-settings) | Documents the exact 7-Zip registry values used for the compact context menu configuration. |
+
+**Targets**
+
+#### `sevenzip-options-bundle`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKCU\Software\7-Zip\Options` |
+| Value name | `OptionBundle` |
+| Value type | `registry value set` |
+| Notes | The current engine tweak writes four coordinated values under HKCU/Software/7-Zip/Options. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | The setting stays at the existing or default state because this review record does not apply a value. | repo-tweak-provenance, engine-implementation |
+| `value` | `CurrentAppProfile` | Current 7-Zip option bundle | Writes the checked-in CascadedMenu, ElimDupExtract, MenuIcons, and WriteZoneIdExtract values. | repo-tweak-provenance, app-provider, engine-implementation, vm-misc.optimize-7zip-settings-app-qa-20260507 |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Research tracking and backlog reduction only | sevenzip-options-bundle: missing None - Keep the current or default state until this first-party card completes the research-provider promotion path. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Windows/default hold | ['Research tracking only', 'Backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Current app behavior', 'VM app QA', 'Research comparison'] | ['Systems where the listed tradeoffs are unacceptable'] | `True` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for misc.optimize-7zip-settings | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Misc/SevenZipSettingsTweak.cs | `high` | path, value, behavior |
+| `vm-misc.optimize-7zip-settings-app-qa-20260507` | `vm-test` | `VM test / probe` | RegProbe app QA apply/rollback proof for misc.optimize-7zip-settings | [evidence/captures/misc-optimize-7zip-settings-app-qa-20260507.json](../evidence/captures/misc-optimize-7zip-settings-app-qa-20260507.json) | `high` | path, value, behavior, side-effects, ui-mapping |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/misc/misc.md](../Docs/misc/misc.md) |
+| Exact quote / path | [Docs/misc/misc.md:266](../Docs/misc/misc.md:266) documents 7-Zip Settings; [Docs/misc/misc.md:275-288](../Docs/misc/misc.md:275-288) lists CascadedMenu, ElimDupExtract, MenuIcons, and WriteZoneIdExtract under HKCU/Software/7-Zip/Options. |
+| Key found on page | `True` |
+| Notes | The misc documentation names the exact 7-Zip Options registry values and the app profile values used by this card. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `True` |
+| Recommended for general users | `True` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | Validation proof, checked-in provider/engine mapping, and 2026-05-07 VM app QA now converge: the app detected, applied, verified, and rolled back this card successfully under the QA-only gated mutation override. |
+
+---
+
 ### Network
 
 ### `network.disable-active-probing`
@@ -3586,7 +3733,8 @@ Current writes
 | `ms-ncsi-icm-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for NCSI active probing policy | [evidence/files/external/c/PolicyDefinitions/en-US/ICM.adml](../evidence/files/external/c/PolicyDefinitions/en-US/ICM.adml) | `high` | behavior, risk, default |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | ui-mapping, value, path |
 | `nohuto-ncsi-mirror` | `registry-observation` | `VM registry observation` | nohuto mirror - NCSI NoActiveProbe registry evidence | [research/_source-mirrors/win-config/network/desc.md](_source-mirrors/win-config/network/desc.md) and [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, value, behavior |
-| `vm-network.disable-active-probing-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for NoActiveProbe | [evidence/captures/network-disable-active-probing-etw-stackwalk-attempt-20260424.json](../evidence/captures/network-disable-active-probing-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-summary.json](../evidence/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-summary.json) and [evidence/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-stage.json](../evidence/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-active-probing-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for NoActiveProbe | [evidence/captures/network-disable-active-probing-etw-stackwalk-attempt-20260424.json](../evidence/captures/network-disable-active-probing-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-summary.json](../evidence/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-summary.json) and [evidence/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-stage.json](../evidence/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-active-probing-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for NoActiveProbe | [evidence/captures/network-disable-active-probing-etw-qga-unblock-20260507.json](../evidence/captures/network-disable-active-probing-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/network-disable-active-probing-etw-qga-unblock-20260507/network-disable-active-probing-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/network-disable-active-probing-etw-qga-unblock-20260507/network-disable-active-probing-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/network-disable-active-probing-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/network-disable-active-probing-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/network-disable-active-probing-etw-qga-unblock-20260507/network-disable-active-probing-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/network-disable-active-probing-etw-qga-unblock-20260507/network-disable-active-probing-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-network.disable-active-probing-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for NoActiveProbe | [evidence/raw/ghidra/ghidra-network-disable-active-probing-20260424-batch2/summary.json](../evidence/raw/ghidra/ghidra-network-disable-active-probing-20260424-batch2/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -3717,6 +3865,7 @@ Current writes
 | `ms-admin-shares-missing` | `official-doc` | `Microsoft official doc` | Microsoft Learn: administrative shares are missing | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/problems-administrative-shares-missing](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/problems-administrative-shares-missing) | `high` | path, value, default, allowed-values, behavior, risk |
 | `ms-mss-autosharewks` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: ADMX_MSS-legacy / Pol_MSS_AutoShareWks | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-mss-legacy](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-mss-legacy) | `medium` | ui-mapping, version-scope |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/NetworkTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-network.disable-default-shares-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk probe receipt | [evidence/captures/network-disable-default-shares-etw-qga-unblock-20260507.json](../evidence/captures/network-disable-default-shares-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507.etl) and [evidence/raw/etw-stackwalk/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507.etl) | `medium` | path, value, version-scope |
 
 **Validation proof**
 
@@ -3829,7 +3978,8 @@ Current writes
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-ipv6-config` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Configure IPv6 in Windows | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows) | `high` | path, value, allowed-values, behavior, risk |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | ui-mapping, value |
-| `vm-network.disable-ipv6-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DisabledComponents | [evidence/captures/network-disable-ipv6-etw-stackwalk-attempt-20260424.json](../evidence/captures/network-disable-ipv6-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-summary.json](../evidence/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-summary.json) and [evidence/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-stage.json](../evidence/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-ipv6-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for DisabledComponents | [evidence/captures/network-disable-ipv6-etw-stackwalk-attempt-20260424.json](../evidence/captures/network-disable-ipv6-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-summary.json](../evidence/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-summary.json) and [evidence/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-stage.json](../evidence/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-ipv6-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for DisabledComponents | [evidence/captures/network-disable-ipv6-etw-qga-unblock-20260507.json](../evidence/captures/network-disable-ipv6-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/network-disable-ipv6-etw-qga-unblock-20260507/network-disable-ipv6-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/network-disable-ipv6-etw-qga-unblock-20260507/network-disable-ipv6-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/network-disable-ipv6-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/network-disable-ipv6-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/network-disable-ipv6-etw-qga-unblock-20260507/network-disable-ipv6-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/network-disable-ipv6-etw-qga-unblock-20260507/network-disable-ipv6-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-network.disable-ipv6-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisabledComponents | [evidence/raw/ghidra/ghidra-network-disable-ipv6-20260424-batch6/summary.json](../evidence/raw/ghidra/ghidra-network-disable-ipv6-20260424-batch6/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -3944,7 +4094,8 @@ Current writes
 | `local-dnsclient-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx) | `high` | path, value, allowed-values |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-llmnr` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
-| `vm-network.disable-llmnr-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EnableMulticast | [evidence/captures/network-disable-llmnr-etw-stackwalk-attempt-20260424.json](../evidence/captures/network-disable-llmnr-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-summary.json](../evidence/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-summary.json) and [evidence/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-stage.json](../evidence/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-llmnr-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for EnableMulticast | [evidence/captures/network-disable-llmnr-etw-stackwalk-attempt-20260424.json](../evidence/captures/network-disable-llmnr-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-summary.json](../evidence/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-summary.json) and [evidence/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-stage.json](../evidence/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-llmnr-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for EnableMulticast | [evidence/captures/network-disable-llmnr-etw-qga-unblock-20260507.json](../evidence/captures/network-disable-llmnr-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/network-disable-llmnr-etw-qga-unblock-20260507/network-disable-llmnr-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/network-disable-llmnr-etw-qga-unblock-20260507/network-disable-llmnr-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/network-disable-llmnr-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/network-disable-llmnr-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/network-disable-llmnr-etw-qga-unblock-20260507/network-disable-llmnr-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/network-disable-llmnr-etw-qga-unblock-20260507/network-disable-llmnr-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-network.disable-llmnr-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EnableMulticast | [evidence/raw/ghidra/ghidra-network-disable-llmnr-20260424-batch3/summary.json](../evidence/raw/ghidra/ghidra-network-disable-llmnr-20260424-batch3/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -4190,7 +4341,8 @@ Current writes
 | `ms-dnsclient-mdns-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for mDNS | [evidence/files/external/c/Windows/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/Windows/PolicyDefinitions/DnsClient.admx) | `high` | path, value, allowed-values |
 | `ms-dnsclient-mdns-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for mDNS policy | [evidence/files/external/c/PolicyDefinitions/en-US/DnsClient.adml](../evidence/files/external/c/PolicyDefinitions/en-US/DnsClient.adml) | `high` | behavior, default |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | ui-mapping, value |
-| `vm-network.disable-mdns-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EnableMDNS | [evidence/captures/network-disable-mdns-etw-stackwalk-attempt-20260424.json](../evidence/captures/network-disable-mdns-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-summary.json](../evidence/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-summary.json) and [evidence/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-stage.json](../evidence/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-mdns-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for EnableMDNS | [evidence/captures/network-disable-mdns-etw-stackwalk-attempt-20260424.json](../evidence/captures/network-disable-mdns-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-summary.json](../evidence/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-summary.json) and [evidence/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-stage.json](../evidence/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-mdns-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for EnableMDNS | [evidence/captures/network-disable-mdns-etw-qga-unblock-20260507.json](../evidence/captures/network-disable-mdns-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/network-disable-mdns-etw-qga-unblock-20260507/network-disable-mdns-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/network-disable-mdns-etw-qga-unblock-20260507/network-disable-mdns-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/network-disable-mdns-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/network-disable-mdns-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/network-disable-mdns-etw-qga-unblock-20260507/network-disable-mdns-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/network-disable-mdns-etw-qga-unblock-20260507/network-disable-mdns-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-network.disable-mdns-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EnableMDNS | [evidence/raw/ghidra/ghidra-network-disable-mdns-20260424-batch3/summary.json](../evidence/raw/ghidra/ghidra-network-disable-mdns-20260424-batch3/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -4439,7 +4591,8 @@ Current writes
 | `local-dnsclient-netbios-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx NetBIOS enum mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx) | `high` | path, value, allowed-values, behavior |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-netbios-resolution` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
-| `vm-network.disable-netbios-resolution-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EnableNetbios | [evidence/captures/network-disable-netbios-resolution-etw-stackwalk-attempt-20260427.json](../evidence/captures/network-disable-netbios-resolution-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-summary.json) and [evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-stage.json](../evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-netbios-resolution-etw-stackwalk-attempt-20260427` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for EnableNetbios | [evidence/captures/network-disable-netbios-resolution-etw-stackwalk-attempt-20260427.json](../evidence/captures/network-disable-netbios-resolution-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-summary.json) and [evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-stage.json](../evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-netbios-resolution-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for EnableNetbios | [evidence/captures/network-disable-netbios-resolution-etw-qga-unblock-20260507.json](../evidence/captures/network-disable-netbios-resolution-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-qga-unblock-20260507/network-disable-netbios-resolution-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-qga-unblock-20260507/network-disable-netbios-resolution-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-qga-unblock-20260507/network-disable-netbios-resolution-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-qga-unblock-20260507/network-disable-netbios-resolution-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-network.disable-netbios-resolution-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EnableNetbios | [evidence/raw/ghidra/ghidra-network-disable-netbios-resolution-20260427a/summary.json](../evidence/raw/ghidra/ghidra-network-disable-netbios-resolution-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -4554,7 +4707,8 @@ Current writes
 | `ms-plaintext-smb-password-policy` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: LocalPoliciesSecurityOptions / plaintext SMB passwords | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#microsoft-network-client-send-unencrypted-password-to-third-party-smb-servers](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#microsoft-network-client-send-unencrypted-password-to-third-party-smb-servers) | `high` | path, value, allowed-values, behavior, risk |
 | `ms-sceregvl-plaintext-smb-password` | `official-doc` | `Microsoft official doc` | Local Microsoft security metadata: sceregvl.inf | [evidence/files/external/c/Windows/inf/sceregvl.inf.md](../evidence/files/external/c/Windows/inf/sceregvl.inf.md) | `high` | path, value |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-network.disable-plaintext-smb-passwords-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EnablePlainTextPassword | [evidence/captures/network-disable-plaintext-smb-passwords-etw-stackwalk-attempt-20260427.json](../evidence/captures/network-disable-plaintext-smb-passwords-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-summary.json) and [evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-stage.json](../evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-plaintext-smb-passwords-etw-stackwalk-attempt-20260427` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for EnablePlainTextPassword | [evidence/captures/network-disable-plaintext-smb-passwords-etw-stackwalk-attempt-20260427.json](../evidence/captures/network-disable-plaintext-smb-passwords-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-summary.json) and [evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-stage.json](../evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-plaintext-smb-passwords-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for EnablePlainTextPassword | [evidence/captures/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507.json](../evidence/captures/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-network.disable-plaintext-smb-passwords-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EnablePlainTextPassword | [evidence/raw/ghidra/ghidra-network-disable-plaintext-smb-passwords-20260427b/summary.json](../evidence/raw/ghidra/ghidra-network-disable-plaintext-smb-passwords-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -4669,7 +4823,8 @@ Current writes
 | `local-dnsclient-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx) | `high` | path, value, allowed-values |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-smart-name-resolution` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
-| `vm-network.disable-smart-name-resolution-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DisableSmartNameResolution | [evidence/captures/network-disable-smart-name-resolution-etw-stackwalk-attempt-20260427.json](../evidence/captures/network-disable-smart-name-resolution-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-summary.json) and [evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-stage.json](../evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-smart-name-resolution-etw-stackwalk-attempt-20260427` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for DisableSmartNameResolution | [evidence/captures/network-disable-smart-name-resolution-etw-stackwalk-attempt-20260427.json](../evidence/captures/network-disable-smart-name-resolution-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-summary.json) and [evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-stage.json](../evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-smart-name-resolution-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for DisableSmartNameResolution | [evidence/captures/network-disable-smart-name-resolution-etw-qga-unblock-20260507.json](../evidence/captures/network-disable-smart-name-resolution-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-qga-unblock-20260507/network-disable-smart-name-resolution-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-qga-unblock-20260507/network-disable-smart-name-resolution-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-qga-unblock-20260507/network-disable-smart-name-resolution-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-qga-unblock-20260507/network-disable-smart-name-resolution-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-network.disable-smart-name-resolution-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisableSmartNameResolution | [evidence/raw/ghidra/ghidra-network-disable-smart-name-resolution-20260427b/summary.json](../evidence/raw/ghidra/ghidra-network-disable-smart-name-resolution-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -4785,7 +4940,8 @@ Current writes
 | `ms-smb-disable-enable` | `official-doc` | `Microsoft official doc` | Microsoft SMBv1/v2/v3 detection and enable or disable guidance | [https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3#disable-smbv1](https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3#disable-smbv1) | `high` | path, value, allowed-values, behavior, version-scope, risk |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-smb1` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk, version-scope |
-| `vm-network.disable-smb1-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for SMB1 | [evidence/captures/network-disable-smb1-etw-stackwalk-attempt-20260427.json](../evidence/captures/network-disable-smb1-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-summary.json) and [evidence/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-stage.json](../evidence/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-smb1-etw-stackwalk-attempt-20260427` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for SMB1 | [evidence/captures/network-disable-smb1-etw-stackwalk-attempt-20260427.json](../evidence/captures/network-disable-smb1-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-summary.json) and [evidence/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-stage.json](../evidence/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-smb1-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for SMB1 | [evidence/captures/network-disable-smb1-etw-qga-unblock-20260507.json](../evidence/captures/network-disable-smb1-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/network-disable-smb1-etw-qga-unblock-20260507/network-disable-smb1-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/network-disable-smb1-etw-qga-unblock-20260507/network-disable-smb1-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/network-disable-smb1-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/network-disable-smb1-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/network-disable-smb1-etw-qga-unblock-20260507/network-disable-smb1-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/network-disable-smb1-etw-qga-unblock-20260507/network-disable-smb1-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-network.disable-smb1-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for SMB1 | [evidence/raw/ghidra/ghidra-network-disable-smb1-20260427b/summary.json](../evidence/raw/ghidra/ghidra-network-disable-smb1-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -5010,7 +5166,8 @@ Current writes
 | `ms-wifisense-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for Wi-Fi Sense policy | [evidence/files/external/c/Windows/PolicyDefinitions/wlansvc.admx](../evidence/files/external/c/Windows/PolicyDefinitions/wlansvc.admx) | `high` | path, value, allowed-values |
 | `ms-wifisense-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for Wi-Fi Sense policy | [evidence/files/external/c/PolicyDefinitions/en-US/wlansvc.adml](../evidence/files/external/c/PolicyDefinitions/en-US/wlansvc.adml) | `high` | behavior, default, risk |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-network.disable-wifi-sense-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for AutoConnectAllowedOEM | [evidence/captures/network-disable-wifi-sense-etw-stackwalk-attempt-20260427.json](../evidence/captures/network-disable-wifi-sense-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-summary.json) and [evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-stage.json](../evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-wifi-sense-etw-stackwalk-attempt-20260427` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for AutoConnectAllowedOEM | [evidence/captures/network-disable-wifi-sense-etw-stackwalk-attempt-20260427.json](../evidence/captures/network-disable-wifi-sense-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-summary.json) and [evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-stage.json](../evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-wifi-sense-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for AutoConnectAllowedOEM | [evidence/captures/network-disable-wifi-sense-etw-qga-unblock-20260507.json](../evidence/captures/network-disable-wifi-sense-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-qga-unblock-20260507/network-disable-wifi-sense-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-qga-unblock-20260507/network-disable-wifi-sense-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-qga-unblock-20260507/network-disable-wifi-sense-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-qga-unblock-20260507/network-disable-wifi-sense-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-network.disable-wifi-sense-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for AutoConnectAllowedOEM | [evidence/raw/ghidra/ghidra-network-disable-wifi-sense-20260427b/summary.json](../evidence/raw/ghidra/ghidra-network-disable-wifi-sense-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -6087,7 +6244,8 @@ Current writes
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-smb-security-troubleshooting` | `official-doc` | `Microsoft official doc` | Microsoft SMB security enhancements troubleshooting | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing) | `high` | path, value, allowed-values, behavior, risk |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-network.smb-encrypt-data-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EncryptData | [evidence/captures/network-smb-encrypt-data-etw-stackwalk-attempt-20260427.json](../evidence/captures/network-smb-encrypt-data-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/network-smb-encrypt-data-etw-20260427a/network-smb-encrypt-data-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/network-smb-encrypt-data-etw-20260427a/network-smb-encrypt-data-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-network.smb-encrypt-data-etw-stackwalk-attempt-20260427` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for EncryptData | [evidence/captures/network-smb-encrypt-data-etw-stackwalk-attempt-20260427.json](../evidence/captures/network-smb-encrypt-data-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/network-smb-encrypt-data-etw-20260427a/network-smb-encrypt-data-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/network-smb-encrypt-data-etw-20260427a/network-smb-encrypt-data-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-network.smb-encrypt-data-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for EncryptData | [evidence/captures/network-smb-encrypt-data-etw-qga-unblock-20260507.json](../evidence/captures/network-smb-encrypt-data-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/network-smb-encrypt-data-etw-qga-unblock-20260507/network-smb-encrypt-data-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/network-smb-encrypt-data-etw-qga-unblock-20260507/network-smb-encrypt-data-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/network-smb-encrypt-data-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/network-smb-encrypt-data-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/network-smb-encrypt-data-etw-qga-unblock-20260507/network-smb-encrypt-data-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/network-smb-encrypt-data-etw-qga-unblock-20260507/network-smb-encrypt-data-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-network.smb-encrypt-data-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EncryptData | [evidence/raw/ghidra/ghidra-network-smb-encrypt-data-20260427a/summary.json](../evidence/raw/ghidra/ghidra-network-smb-encrypt-data-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -7817,11 +7975,12 @@ Current writes
 | --- | --- | --- | --- | --- | --- | --- |
 | `runtime-taskbar-animations-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - TaskbarAnimations registry mapping | [evidence/files/vm/taskbar_animations_probe_out.txt](../evidence/files/vm-tooling-staging/taskbar_animations_probe_out.txt) | `high` | value, behavior, version-scope |
 | `procmon-taskbar-animations-registry-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - explorer.exe TaskbarAnimations runtime reads | [evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt](../evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt) and [evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv](../evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv) and [evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt](../evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt) and [evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv](../evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv) | `high` | path, value, behavior, ui-mapping |
-| `ghidra-taskbar-taskbaranimations` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - Taskbar.dll TaskbarAnimations read path | [evidence/raw/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md](../evidence/raw/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md) | `high` | path, behavior, ui-mapping |
+| `ghidra-taskbar-taskbaranimations` | `ghidra-headless` | `Our Ghidra headless analysis` | Our Ghidra decompilation - Taskbar.dll TaskbarAnimations read path | [evidence/raw/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md](../evidence/raw/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md) | `high` | path, behavior, ui-mapping |
 | `runtime-taskbar-animations-incident-review-20260327` | `vm-incident` | `unspecified` | Incident reviewed - Taskbar animations runtime rerun on visible-shell baseline | [research/notes/taskbar-animations-runtime-incident-review-20260327.md](notes/taskbar-animations-runtime-incident-review-20260327.md) and [evidence/files/vm/taskbar-animations-runtime-20260327-224704/summary.json](../evidence/files/vm-tooling-staging/taskbar-animations-runtime-20260327-224704/summary.json) | `high` | behavior, version-scope |
 | `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-performance-disable-taskbar-animations` | `repo-doc` | `Current repo docs` | Repo source note for performance.disable-taskbar-animations | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | path, value, ui-mapping |
-| `vm-performance.disable-taskbar-animations-etw-stackwalk-attempt-20260424h` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-summary.json](../evidence/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-summary.json) and [evidence/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-stage.json](../evidence/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-stage.json) and [evidence/captures/performance-disable-taskbar-animations-etw-stackwalk-attempt-20260424.json](../evidence/captures/performance-disable-taskbar-animations-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-performance.disable-taskbar-animations-etw-stackwalk-attempt-20260424h` | `etw-trace` | `VM ETW trace` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-summary.json](../evidence/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-summary.json) and [evidence/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-stage.json](../evidence/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-stage.json) and [evidence/captures/performance-disable-taskbar-animations-etw-stackwalk-attempt-20260424.json](../evidence/captures/performance-disable-taskbar-animations-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-performance.disable-taskbar-animations-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for TaskbarAnimations | [evidence/captures/performance-disable-taskbar-animations-etw-qga-unblock-20260507.json](../evidence/captures/performance-disable-taskbar-animations-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/performance-disable-taskbar-animations-etw-qga-unblock-20260507/performance-disable-taskbar-animations-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/performance-disable-taskbar-animations-etw-qga-unblock-20260507/performance-disable-taskbar-animations-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/performance-disable-taskbar-animations-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/performance-disable-taskbar-animations-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/performance-disable-taskbar-animations-etw-qga-unblock-20260507/performance-disable-taskbar-animations-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/performance-disable-taskbar-animations-etw-qga-unblock-20260507/performance-disable-taskbar-animations-etw-qga-unblock-20260507.etl) | `medium` | runtime-observation, tooling-fix, path, version-scope |
 
 **Validation proof**
 
@@ -7846,6 +8005,254 @@ Current writes
 ---
 
 ### Peripheral
+
+### `peripheral.audio-disable-ducking`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class A` |
+| Category | `Peripheral` |
+| Area | `Audio Communications Preference` |
+| Scope | `user` |
+| Source file | [research/records/peripheral.audio-disable-ducking.review.json](records/peripheral.audio-disable-ducking.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `True` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Validated app-surface record for the Disable Audio Ducking card. The research provider now surfaces the current app action, which writes UserDuckingPreference=3 for the current user.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
+| Notes | The research manifest now surfaces this card. The older first-party AudioTweakProvider implementation remains in code, but the live provider loader adds the research provider first and de-duplicates the same tweak id. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `audio-ducking-preference` | `HKCU\Software\Microsoft\Multimedia\Audio` | `UserDuckingPreference` | `3` | `value` | The current engine tweak writes UserDuckingPreference=3 on the current user profile. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `actionable` |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | audio ducking, userduckingpreference |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| decompiled-pseudocode / USBHUB3 | [https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3](https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3) | USB hub pseudocode relevant to USB and peripheral registry behavior. |
+| win-config / peripheral/desc.md#audio-ducking | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#audio-ducking](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#audio-ducking) | Documents the Windows audio ducking setting and the UserDuckingPreference registry value. |
+
+Windows Internals references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+
+**Targets**
+
+#### `audio-ducking-preference`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKCU\Software\Microsoft\Multimedia\Audio` |
+| Value name | `UserDuckingPreference` |
+| Value type | `REG_DWORD` |
+| Notes | The current engine tweak writes UserDuckingPreference=3 on the current user profile. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | Windows keeps the existing or default communications-ducking preference because the value is not explicitly set. | repo-tweak-provenance, engine-implementation |
+| `value` | `3` | Do nothing | Sets the communications ducking preference to 3, which corresponds to the Do nothing state used by the current app. | repo-tweak-provenance, app-provider, engine-implementation, etw-userduckingpreference-20260507, ghidra-mmsys-userduckingpreference-20260507 |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Windows profiles where no explicit communications-ducking override is desired | audio-ducking-preference: missing None - Leave the communications-ducking value unset unless the user explicitly chooses the Do nothing profile. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `windows-or-existing-default` | Windows or existing default | ['General users', 'Systems where communications ducking should stay at the existing profile'] | ['Users who want Windows to stop lowering other audio during calls'] | `True` |
+| `current-app-profile` | Current app profile | ['Users who do not want Windows to lower other audio during calls'] | ['Users who prefer Windows communications ducking'] | `True` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for peripheral.audio-disable-ducking | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/AudioTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Peripheral/AudioTweaks.cs | `high` | path, value, behavior |
+| `etw-userduckingpreference-20260507` | `etw-trace` | `VM ETW trace` | QGA ETW stackwalk - UserDuckingPreference runtime registry probe | [evidence/raw/etw-stackwalk/peripheral-audio-ducking-etw-20260507/peripheral-audio-ducking-etw-20260507-summary.json](../evidence/raw/etw-stackwalk/peripheral-audio-ducking-etw-20260507/peripheral-audio-ducking-etw-20260507-summary.json) and [evidence/raw/etw-stackwalk/peripheral-audio-ducking-etw-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/peripheral-audio-ducking-etw-20260507/normalized-registry-bundle.json) | `high` | path, value, runtime-read, version-scope |
+| `ghidra-mmsys-userduckingpreference-20260507` | `ghidra-headless` | `Our Ghidra headless analysis` | QGA Ghidra string/xref - mmsys.cpl UserDuckingPreference handlers | [evidence/raw/ghidra/peripheral-audio-ducking-ghidra-20260507/evidence.json](../evidence/raw/ghidra/peripheral-audio-ducking-ghidra-20260507/evidence.json) and [evidence/raw/ghidra/peripheral-audio-ducking-ghidra-20260507/ghidra-matches.md](../evidence/raw/ghidra/peripheral-audio-ducking-ghidra-20260507/ghidra-matches.md) | `high` | path, behavior, ui-mapping, version-scope |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [evidence/raw/ghidra/peripheral-audio-ducking-ghidra-20260507/ghidra-matches.md](../evidence/raw/ghidra/peripheral-audio-ducking-ghidra-20260507/ghidra-matches.md) |
+| Exact quote / path | mmsys.cpl Ghidra string/xref probe found UserDuckingPreference in two naturally resolved decompiled functions, including call sites that reference SHGetValueW and SHSetValueW. The paired ETW stackwalk run [evidence/raw/etw-stackwalk/peripheral-audio-ducking-etw-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/peripheral-audio-ducking-etw-20260507/normalized-registry-bundle.json) captured an exact RegQueryValue event for UserDuckingPreference during the guest registry probe. |
+| Key found on page | `True` |
+| Notes | Validated on 2026-05-07 with QGA-first VM tooling. Ghidra provides the code-side mmsys.cpl string/xref evidence; ETW provides a runtime registry trace with caller-stack capture for the exact value name. A stale value left by an earlier Procmon timeout was removed after the evidence run and the guest was verified back to value_exists=false. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `True` |
+| Recommended for general users | `False` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | The value path, app write, runtime trace, static mmsys.cpl string/xref evidence, and rollback story now converge. The research provider can safely surface the current app profile while preserving previous-value rollback. |
+
+---
+
+### `peripheral.audio-disable-enhancements`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class B` |
+| Category | `Peripheral` |
+| Area | `Audio Enhancement Flags` |
+| Scope | `device` |
+| Source file | [research/records/peripheral.audio-disable-enhancements.review.json](records/peripheral.audio-disable-enhancements.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Closed audit trail for the live Disable Audio Enhancements card. VM probes proved the documented MMDevices endpoint enhancement values are protected by Windows ACLs on the current build, so the app now reports this card as not applicable instead of attempting a misleading root-level or access-denied mutation.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/AudioTweakProvider.cs |
+| Notes | The provider mapping exists, but the current implementation is a protected-ACL guard. It enumerates MMDevices endpoint enhancement targets and returns NotApplicable rather than writing protected device keys. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Decision-Gated |
+| Action state | `research-gated` |
+| Gating reason | This record is strong enough to show, but it still needs a tighter runtime-trace layer before it becomes Class A. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | disable audio enhancements |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 1 audit token(s) in win-config. |
+| decompiled-pseudocode / USBHUB3 | [https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3](https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3) | USB hub pseudocode relevant to USB and peripheral registry behavior. |
+
+Windows Internals references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+
+**Targets**
+
+#### `audio-enhancement-bundle`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKCU\Software\Microsoft\Windows\CurrentVersion\Audio + HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render` |
+| Value name | `EnhancementBundle` |
+| Value type | `registry value set` |
+| Notes | The current engine tweak detects the protected MMDevices lane and returns NotApplicable instead of writing. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | The setting stays at the existing or default state because this review record does not apply a value. | repo-tweak-provenance, engine-implementation |
+| `value` | `CurrentAppProfile` | Current audio enhancement bundle | Former write bundle kept for audit history only; the app no longer mutates these values because MMDevices endpoint keys are protected. | repo-tweak-provenance, app-provider, engine-implementation, vm-peripheral.audio-disable-enhancements-app-qa-protected-acl-20260508 |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Research tracking and backlog reduction only | audio-enhancement-bundle: missing None - Keep the current or default state until this first-party card completes the research-provider promotion path. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Windows/default hold | ['Research tracking only', 'Backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Current app behavior', 'VM app QA', 'Research comparison'] | ['Systems where the listed tradeoffs are unacceptable'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for peripheral.audio-disable-enhancements | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/AudioTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Peripheral/AudioTweaks.cs | `high` | path, value, behavior |
+| `vm-peripheral.audio-disable-enhancements-app-qa-20260507` | `vm-test` | `VM test / probe` | RegProbe app QA access-denied failure for peripheral.audio-disable-enhancements | [evidence/captures/peripheral-audio-disable-enhancements-app-qa-20260507.json](../evidence/captures/peripheral-audio-disable-enhancements-app-qa-20260507.json) | `high` | behavior, risk, side-effects, ui-mapping |
+| `vm-peripheral.audio-disable-enhancements-app-qa-protected-acl-20260508` | `vm-test` | `VM test / probe` | RegProbe app QA protected-ACL not-applicable proof for peripheral.audio-disable-enhancements | [evidence/captures/peripheral-audio-disable-enhancements-app-qa-protected-acl-20260508.json](../evidence/captures/peripheral-audio-disable-enhancements-app-qa-protected-acl-20260508.json) | `high` | behavior, risk, ui-mapping |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/peripheral/peripheral.md](../Docs/peripheral/peripheral.md) |
+| Exact quote / path | [Docs/peripheral/peripheral.md:97](../Docs/peripheral/peripheral.md:97) documents Disable Audio Enhancements and lists the MMDevices Audio Render/Capture property values touched by this card. |
+| Key found on page | `True` |
+| Notes | The peripheral documentation maps the audio-enhancement control to the MMDevices Audio property/FxProperties values and notes the elevation/device-scope tradeoff. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `False` |
+| Why | The current app mapping, documentation, failed 2026-05-07 mutation attempt, explicit 2026-05-08 per-device write probe, and redesigned 2026-05-08 VM app QA now agree: the MMDevices endpoint enhancement values are protected and this card should fail closed as not applicable rather than mutate. |
+
+---
 
 ### `peripheral.autoplay-take-no-action`
 
@@ -7963,6 +8370,7 @@ Current writes
 | `microsoft-learn-autoplay-handlers` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Windows settings reference - AutoplayHandlers registry values | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common) | `high` | path, value, allowed-values, behavior |
 | `local-autoplay-adml-remember-choice` | `official-doc` | `Microsoft official doc` | Local Microsoft AutoPlay.adml remembered-choice guidance | [evidence/files/external/c/PolicyDefinitions/en-US/AutoPlay.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AutoPlay.adml) | `high` | behavior, default, side-effects |
 | `app-peripheral-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `kvm-user-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM user-scope current-state revalidation batch | [registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 
@@ -8230,6 +8638,510 @@ Current writes
 
 ---
 
+### `peripheral.keyboard-disable-language-hotkey`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class A` |
+| Category | `Peripheral` |
+| Area | `Keyboard Layout Toggle Bundle` |
+| Scope | `user` |
+| Source file | [research/records/peripheral.keyboard-disable-language-hotkey.review.json](records/peripheral.keyboard-disable-language-hotkey.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `True` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Review-required audit trail for the live Disable Language Switch Hotkey card. The app already ships the current keyboard layout toggle bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/PeripheralTweakProvider.cs |
+| Notes | The live app ships this first-party card outside the validated research-provider surface. Promotion gate now treats this checked-in implementation as matching the research record. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `keyboard-language-hotkey-bundle` | `HKCU\Keyboard Layout\Toggle` | `ToggleBundle` | `DisabledHotkeys` | `value` | The current engine tweak writes three coordinated values under HKCU\Keyboard Layout\Toggle. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `actionable` |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | disable language switch hotkey |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 1 audit token(s) in win-config. |
+| decompiled-pseudocode / USBHUB3 | [https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3](https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3) | USB hub pseudocode relevant to USB and peripheral registry behavior. |
+
+Windows Internals references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+
+**Targets**
+
+#### `keyboard-language-hotkey-bundle`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKCU\Keyboard Layout\Toggle` |
+| Value name | `ToggleBundle` |
+| Value type | `registry value set` |
+| Notes | The current engine tweak writes three coordinated values under HKCU/Keyboard Layout/Toggle. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | The setting stays at the existing or default state because this review record does not apply a value. | repo-tweak-provenance, engine-implementation |
+| `value` | `DisabledHotkeys` | Disabled language-switch hotkeys | Writes the checked-in Language Hotkey, Hotkey, and Layout Hotkey values to 3. | repo-tweak-provenance, app-provider, engine-implementation, vm-peripheral.keyboard-disable-language-hotkey-app-qa-20260507 |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Research tracking and backlog reduction only | keyboard-language-hotkey-bundle: missing None - Keep the current or default state until this first-party card completes the research-provider promotion path. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Windows/default hold | ['Research tracking only', 'Backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Current app behavior', 'VM app QA', 'Research comparison'] | ['Systems where the listed tradeoffs are unacceptable'] | `True` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for peripheral.keyboard-disable-language-hotkey | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Peripheral/KeyboardTweaks.cs | `high` | path, value, behavior |
+| `vm-peripheral.keyboard-disable-language-hotkey-app-qa-20260507` | `vm-test` | `VM test / probe` | RegProbe app QA apply/rollback proof for peripheral.keyboard-disable-language-hotkey | [evidence/captures/peripheral-keyboard-disable-language-hotkey-app-qa-20260507.json](../evidence/captures/peripheral-keyboard-disable-language-hotkey-app-qa-20260507.json) | `high` | path, value, behavior, side-effects, ui-mapping |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/peripheral/peripheral.md](../Docs/peripheral/peripheral.md) |
+| Exact quote / path | [Docs/peripheral/peripheral.md:62](../Docs/peripheral/peripheral.md:62) documents Disable Language Switch Hotkey and lists Language Hotkey, Hotkey, and Layout Hotkey under HKCU/Keyboard Layout/Toggle. |
+| Key found on page | `True` |
+| Notes | The peripheral documentation ties the Ctrl+Shift / Alt+Shift language-switch UI action to the three Keyboard Layout Toggle values used by the app. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `True` |
+| Recommended for general users | `True` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | Validation proof, checked-in provider/engine mapping, and 2026-05-07 VM app QA now converge: the app detected, applied, verified, and rolled back this card successfully under the QA-only gated mutation override. |
+
+---
+
+### `peripheral.keyboard-optimize-repeat`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class A` |
+| Category | `Peripheral` |
+| Area | `Keyboard Repeat Profile` |
+| Scope | `user` |
+| Source file | [research/records/peripheral.keyboard-optimize-repeat.review.json](records/peripheral.keyboard-optimize-repeat.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `True` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Review-required audit trail for the live Set Keyboard Repeat and Cursor Blink Values card. The app already ships the current keyboard repeat profile action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/PeripheralTweakProvider.cs |
+| Notes | The live app ships this first-party card outside the validated research-provider surface. Promotion gate now treats this checked-in implementation as matching the research record. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `keyboard-repeat-profile` | `HKCU\Control Panel\Keyboard + HKCU\Control Panel\Desktop` | `ProfileBundle` | `CurrentAppProfile` | `value` | The current engine tweak writes two keyboard values and one desktop cursor-blink value. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `actionable` |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | keyboard values, keyboarddelay, keyboardspeed, cursorblinkrate |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| decompiled-pseudocode / USBHUB3 | [https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3](https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3) | USB hub pseudocode relevant to USB and peripheral registry behavior. |
+| win-config / peripheral/desc.md#keyboard-values | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#keyboard-values](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#keyboard-values) | Documents keyboard-related registry values used for repeat rate and input behavior tuning. |
+
+Windows Internals references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+
+**Targets**
+
+#### `keyboard-repeat-profile`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKCU\Control Panel\Keyboard + HKCU\Control Panel\Desktop` |
+| Value name | `ProfileBundle` |
+| Value type | `registry value set` |
+| Notes | The current engine tweak writes two keyboard values and one desktop cursor-blink value. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | The setting stays at the existing or default state because this review record does not apply a value. | repo-tweak-provenance, engine-implementation |
+| `value` | `CurrentAppProfile` | Current keyboard repeat profile | Writes the checked-in KeyboardDelay, KeyboardSpeed, and CursorBlinkRate values. | repo-tweak-provenance, app-provider, engine-implementation, vm-peripheral.keyboard-optimize-repeat-app-qa-20260507 |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Research tracking and backlog reduction only | keyboard-repeat-profile: missing None - Keep the current or default state until this first-party card completes the research-provider promotion path. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Windows/default hold | ['Research tracking only', 'Backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Current app behavior', 'VM app QA', 'Research comparison'] | ['Systems where the listed tradeoffs are unacceptable'] | `True` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for peripheral.keyboard-optimize-repeat | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Peripheral/KeyboardTweaks.cs | `high` | path, value, behavior |
+| `vm-peripheral.keyboard-optimize-repeat-app-qa-20260507` | `vm-test` | `VM test / probe` | RegProbe app QA apply/rollback proof for peripheral.keyboard-optimize-repeat | [evidence/captures/peripheral-keyboard-optimize-repeat-app-qa-20260507.json](../evidence/captures/peripheral-keyboard-optimize-repeat-app-qa-20260507.json) | `high` | path, value, behavior, side-effects, ui-mapping |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/peripheral/peripheral.md](../Docs/peripheral/peripheral.md) |
+| Exact quote / path | [Docs/peripheral/peripheral.md:55](../Docs/peripheral/peripheral.md:55) documents Keyboard Values; [Docs/peripheral/peripheral.md:57-61](../Docs/peripheral/peripheral.md:57-61) lists repeat delay, repeat rate, and cursor blink changed values. |
+| Key found on page | `True` |
+| Notes | The peripheral documentation maps the keyboard repeat profile to repeat delay, repeat rate, and cursor blink settings tracked by the app card. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `True` |
+| Recommended for general users | `True` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | Validation proof, checked-in provider/engine mapping, and 2026-05-07 VM app QA now converge: the app detected, applied, verified, and rolled back this card successfully under the QA-only gated mutation override. |
+
+---
+
+### `peripheral.mouse-disable-acceleration`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class A` |
+| Category | `Peripheral` |
+| Area | `Mouse Acceleration Profile` |
+| Scope | `user` |
+| Source file | [research/records/peripheral.mouse-disable-acceleration.review.json](records/peripheral.mouse-disable-acceleration.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `True` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Review-required audit trail for the live Disable Enhanced Pointer Precision (Mouse Acceleration) card. The app already ships the current mouse acceleration profile action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/PeripheralTweakProvider.cs |
+| Notes | The live app ships this first-party card outside the validated research-provider surface. Promotion gate now treats this checked-in implementation as matching the research record. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `mouse-acceleration-profile` | `HKCU\Control Panel\Mouse` | `ProfileBundle` | `NonAcceleratedProfile` | `value` | The current engine tweak writes four coordinated values under HKCU\Control Panel\Mouse. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `actionable` |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | mouse values, mousespeed, mousethreshold1, mousethreshold2, mousesensitivity |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| decompiled-pseudocode / USBHUB3 | [https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3](https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3) | USB hub pseudocode relevant to USB and peripheral registry behavior. |
+| win-config / peripheral/desc.md#mouse-values | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#mouse-values](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#mouse-values) | Documents mouse acceleration, threshold, and sensitivity registry values. |
+
+Windows Internals references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+
+**Targets**
+
+#### `mouse-acceleration-profile`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKCU\Control Panel\Mouse` |
+| Value name | `ProfileBundle` |
+| Value type | `registry value set` |
+| Notes | The current engine tweak writes four coordinated values under HKCU/Control Panel/Mouse. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | The setting stays at the existing or default state because this review record does not apply a value. | repo-tweak-provenance, engine-implementation |
+| `value` | `NonAcceleratedProfile` | Non-accelerated mouse profile | Writes the checked-in MouseSpeed, MouseThreshold1, MouseThreshold2, and MouseSensitivity values. | repo-tweak-provenance, app-provider, engine-implementation, vm-peripheral.mouse-disable-acceleration-app-qa-20260507 |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Research tracking and backlog reduction only | mouse-acceleration-profile: missing None - Keep the current or default state until this first-party card completes the research-provider promotion path. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Windows/default hold | ['Research tracking only', 'Backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Current app behavior', 'VM app QA', 'Research comparison'] | ['Systems where the listed tradeoffs are unacceptable'] | `True` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for peripheral.mouse-disable-acceleration | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Peripheral/MouseTweaks.cs | `high` | path, value, behavior |
+| `vm-peripheral.mouse-disable-acceleration-app-qa-20260507` | `vm-test` | `VM test / probe` | RegProbe app QA apply/rollback proof for peripheral.mouse-disable-acceleration | [evidence/captures/peripheral-mouse-disable-acceleration-app-qa-20260507.json](../evidence/captures/peripheral-mouse-disable-acceleration-app-qa-20260507.json) | `high` | path, value, behavior, side-effects, ui-mapping |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/peripheral/peripheral.md](../Docs/peripheral/peripheral.md) |
+| Exact quote / path | [Docs/peripheral/peripheral.md:36-48](../Docs/peripheral/peripheral.md:36-48) documents the disabled Enhance Pointer Precision state: MouseThreshold1=0, MouseThreshold2=0, MouseSpeed=0, and MouseSensitivity=10. |
+| Key found on page | `True` |
+| Notes | The peripheral documentation names the HKCU Control Panel Mouse values for enabled and disabled pointer-precision states. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `True` |
+| Recommended for general users | `True` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | Validation proof, checked-in provider/engine mapping, and 2026-05-07 VM app QA now converge: the app detected, applied, verified, and rolled back this card successfully under the QA-only gated mutation override. |
+
+---
+
+### `peripheral.mouse-disable-throttle`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class A` |
+| Category | `Peripheral` |
+| Area | `Raw Mouse Throttle Bundle` |
+| Scope | `user` |
+| Source file | [research/records/peripheral.mouse-disable-throttle.review.json](records/peripheral.mouse-disable-throttle.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `True` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Review-required audit trail for the live Disable Mouse Throttling for Background Windows card. The app already ships the current raw mouse throttle bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/PeripheralTweakProvider.cs |
+| Notes | The live app ships this first-party card outside the validated research-provider surface. Promotion gate now treats this checked-in implementation as matching the research record. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `mouse-throttle-profile` | `HKCU\Control Panel\Mouse` | `ProfileBundle` | `CurrentAppProfile` | `value` | The current engine tweak writes three coordinated values under HKCU\Control Panel\Mouse. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `actionable` |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | mouse values, rawmousethrottleenabled, rawmousethrottleduration, rawmousethrottleleeway |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| decompiled-pseudocode / USBHUB3 | [https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3](https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3) | USB hub pseudocode relevant to USB and peripheral registry behavior. |
+| win-config / peripheral/desc.md#mouse-values | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#mouse-values](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md#mouse-values) | Documents raw mouse throttling and related mouse input registry behavior. |
+
+Windows Internals references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+
+**Targets**
+
+#### `mouse-throttle-profile`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKCU\Control Panel\Mouse` |
+| Value name | `ProfileBundle` |
+| Value type | `registry value set` |
+| Notes | The current engine tweak writes three coordinated values under HKCU/Control Panel/Mouse. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | The setting stays at the existing or default state because this review record does not apply a value. | repo-tweak-provenance, engine-implementation |
+| `value` | `CurrentAppProfile` | Current raw mouse throttle profile | Writes the checked-in RawMouseThrottleEnabled, RawMouseThrottleDuration, and RawMouseThrottleLeeway values. | repo-tweak-provenance, app-provider, engine-implementation, vm-peripheral.mouse-disable-throttle-app-qa-20260507 |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Research tracking and backlog reduction only | mouse-throttle-profile: missing None - Keep the current or default state until this first-party card completes the research-provider promotion path. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Windows/default hold | ['Research tracking only', 'Backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Current app behavior', 'VM app QA', 'Research comparison'] | ['Systems where the listed tradeoffs are unacceptable'] | `True` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for peripheral.mouse-disable-throttle | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/PeripheralTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Peripheral/MouseTweaks.cs | `high` | path, value, behavior |
+| `vm-peripheral.mouse-disable-throttle-app-qa-20260507` | `vm-test` | `VM test / probe` | RegProbe app QA apply/rollback proof for peripheral.mouse-disable-throttle | [evidence/captures/peripheral-mouse-disable-throttle-app-qa-20260507.json](../evidence/captures/peripheral-mouse-disable-throttle-app-qa-20260507.json) | `high` | path, value, behavior, side-effects, ui-mapping |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/peripheral/peripheral.md](../Docs/peripheral/peripheral.md) |
+| Exact quote / path | [Docs/peripheral/peripheral.md:8-25](../Docs/peripheral/peripheral.md:8-25) documents RawMouseThrottleDuration, RawMouseThrottleEnabled, RawMouseThrottleForced, and RawMouseThrottleLeeway. |
+| Key found on page | `True` |
+| Notes | The peripheral documentation includes retained source notes for raw mouse throttling values and the duration/leeway thresholds used by this card. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `True` |
+| Recommended for general users | `True` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | Validation proof, checked-in provider/engine mapping, and 2026-05-07 VM app QA now converge: the app detected, applied, verified, and rolled back this card successfully under the QA-only gated mutation override. |
+
+---
+
 ### Power
 
 ### `power.control.class1-initial-unpark-count`
@@ -8237,13 +9149,13 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Power` |
 | Area | `Raw Power Manager Registry` |
 | Scope | `device` |
 | Source file | [research/records/power.control.class1-initial-unpark-count.json](records/power.control.class1-initial-unpark-count.json) |
 | V3.1 evidence root | [evidence/records/power.control.class1-initial-unpark-count](../evidence/records/power.control.class1-initial-unpark-count) |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -8267,10 +9179,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Decision-Gated |
-| Action state | `research-gated` |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A. |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `actionable` |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -8294,7 +9206,7 @@ Current writes
 | Path | `HKLM\SYSTEM\CurrentControlSet\Control\Power` |
 | Value name | `Class1InitialUnparkCount` |
 | Value type | `REG_DWORD` |
-| Notes | This candidate is tracked as a raw kernel-facing value, not as a published end-user tweak profile. |
+| Notes | This candidate is promoted as a conservative research-card raw power value; do not claim a universal performance win. |
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
@@ -8310,7 +9222,7 @@ Current writes
 
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
-| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['General users', 'One-click apply surfaces'] | `False` |
+| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['General users expecting a guaranteed performance gain', 'Systems where hardware-specific CPU parking behavior has not been reviewed'] | `True` |
 
 **Evidence**
 
@@ -8322,8 +9234,9 @@ Current writes
 | `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | `VM Procmon trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/power-control-class1-initial-unpark-count-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/power-control-class1-initial-unpark-count-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) | `medium` | behavior, risk, version-scope |
-| `vm-power-control-lightweight-runtime-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight ETW follow-up for remaining docs-first power-control values | [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/results.json) and [research/notes/power-control-lightweight-runtime-follow-up-20260330.md](notes/power-control-lightweight-runtime-follow-up-20260330.md) | `high` | behavior, risk, version-scope |
-| `vm-power.control.class1-initial-unpark-count-etw-stackwalk-attempt-20260424i` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-summary.json](../evidence/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-summary.json) and [evidence/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-stage.json](../evidence/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-stage.json) and [evidence/captures/power-control-class1-initial-unpark-count-etw-stackwalk-attempt-20260424.json](../evidence/captures/power-control-class1-initial-unpark-count-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-power-control-lightweight-runtime-20260330` | `etw-trace` | `VM ETW trace` | Tools-hardened lightweight ETW follow-up for remaining docs-first power-control values | [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/results.json) and [research/notes/power-control-lightweight-runtime-follow-up-20260330.md](notes/power-control-lightweight-runtime-follow-up-20260330.md) | `high` | behavior, risk, version-scope |
+| `vm-power.control.class1-initial-unpark-count-etw-stackwalk-attempt-20260424i` | `etw-trace` | `VM ETW trace` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-summary.json](../evidence/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-summary.json) and [evidence/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-stage.json](../evidence/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-stage.json) and [evidence/captures/power-control-class1-initial-unpark-count-etw-stackwalk-attempt-20260424.json](../evidence/captures/power-control-class1-initial-unpark-count-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-power.control.class1-initial-unpark-count-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for Class1InitialUnparkCount | [evidence/captures/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507.json](../evidence/captures/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 
 **Validation proof**
 
@@ -8338,12 +9251,12 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Class1InitialUnparkCount now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. App mapping is tracked separately and does not block evidence classification. |
+| Why | Class1InitialUnparkCount now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. The 2026-05-08 promotion review pack approves this app-mapped raw power card for conservative promotion with no universal performance-win claim. |
 
 ---
 
@@ -8434,12 +9347,12 @@ Current writes
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes for HiberFileSizePercent | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
 | `static-power-control-residual-string-20260330` | `repo-doc` | `Current repo docs` | Residual value-exists string triage for HiberFileSizePercent | [evidence/files/vm/registry-batch-string-20260330-141213/results.json](../evidence/files/vm-tooling-staging/registry-batch-string-20260330-141213/results.json) and [research/notes/kernel-power-96-residual-value-exists-static-triage-20260330.md](notes/kernel-power-96-residual-value-exists-static-triage-20260330.md) | `high` | path, value, version-scope |
-| `vm-power-control-hiber-runtime-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight ETW follow-up for HiberFileSizePercent | [evidence/files/vm/power-control-lightweight-runtime-20260330-164001/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-164001/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-164001/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-164001/results.json) and [research/notes/power-control-hiber-file-size-percent-lightweight-runtime-20260330.md](notes/power-control-hiber-file-size-percent-lightweight-runtime-20260330.md) | `medium` | behavior, risk, version-scope |
+| `vm-power-control-hiber-runtime-20260330` | `etw-trace` | `VM ETW trace` | Tools-hardened lightweight ETW follow-up for HiberFileSizePercent | [evidence/files/vm/power-control-lightweight-runtime-20260330-164001/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-164001/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-164001/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-164001/results.json) and [research/notes/power-control-hiber-file-size-percent-lightweight-runtime-20260330.md](notes/power-control-hiber-file-size-percent-lightweight-runtime-20260330.md) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-hiber-kvm-local-kd-20260406` | `vm-test` | `VM test / probe` | Linux KVM local-KD follow-up for HiberFileSizePercent | [evidence/files/vm/local-kd-hiber-symbols-20260406a/local-kd-hiber-symbols-20260406a-summary.json](../evidence/files/vm-tooling-staging/local-kd-hiber-symbols-20260406a/local-kd-hiber-symbols-20260406a-summary.json) and [evidence/files/vm/local-kd-hiber-symbols-20260406a/local-kd-hiber-symbols-20260406a.log](../evidence/files/vm-tooling-staging/local-kd-hiber-symbols-20260406a/local-kd-hiber-symbols-20260406a.log) and [evidence/files/vm/local-kd-hiber-disasm-20260406a/local-kd-hiber-disasm-20260406a-summary.json](../evidence/files/vm-tooling-staging/local-kd-hiber-disasm-20260406a/local-kd-hiber-disasm-20260406a-summary.json) and [evidence/files/vm/local-kd-hiber-disasm-20260406a/local-kd-hiber-disasm-20260406a.log](../evidence/files/vm-tooling-staging/local-kd-hiber-disasm-20260406a/local-kd-hiber-disasm-20260406a.log) and [evidence/files/vm/local-kd-hiber-strings-20260406a/local-kd-hiber-strings-20260406a-summary.json](../evidence/files/vm-tooling-staging/local-kd-hiber-strings-20260406a/local-kd-hiber-strings-20260406a-summary.json) and [evidence/files/vm/local-kd-hiber-strings-20260406a/local-kd-hiber-strings-20260406a.log](../evidence/files/vm-tooling-staging/local-kd-hiber-strings-20260406a/local-kd-hiber-strings-20260406a.log) and [research/notes/power-control-hiber-file-size-percent-kvm-local-kd-follow-up-20260406.md](notes/power-control-hiber-file-size-percent-kvm-local-kd-follow-up-20260406.md) | `medium` | path, value, behavior, version-scope |
 | `vm-power-control-hiber-kvm-procmon-runtime-20260407` | `vm-test` | `VM test / probe` | Linux KVM Procmon runtime replay for HiberFileSizePercent | [evidence/files/vm/hiberfilesizepercent-procmon-kvm-20260407c/hiberfilesizepercent-procmon-kvm-20260407c-summary.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-20260407c/hiberfilesizepercent-procmon-kvm-20260407c-summary.json) and [evidence/files/vm/hiberfilesizepercent-procmon-kvm-20260407c/hiberfilesizepercent-procmon-kvm-20260407c.txt](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-20260407c/hiberfilesizepercent-procmon-kvm-20260407c.txt) and [evidence/files/vm/hiberfilesizepercent-procmon-kvm-20260407c/host-review.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-20260407c/host-review.json) and [research/notes/power-control-hiber-file-size-percent-kvm-procmon-runtime-20260407.md](notes/power-control-hiber-file-size-percent-kvm-procmon-runtime-20260407.md) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-hiber-kvm-procmon-recovery-20260407` | `vm-test` | `VM test / probe` | Linux KVM recovery-backed Procmon replay for HiberFileSizePercent | [evidence/files/vm/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a-summary.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a-summary.json) and [evidence/files/vm/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a.txt](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a.txt) and [evidence/files/vm/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a.hits.csv](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a.hits.csv) and [evidence/files/vm/hiberfilesizepercent-procmon-kvm-recovery-20260407a/host-review.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-recovery-20260407a/host-review.json) and [research/notes/power-control-hiber-file-size-percent-kvm-procmon-recovery-20260407.md](notes/power-control-hiber-file-size-percent-kvm-procmon-recovery-20260407.md) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-hiber-kvm-reboot-observation-20260407` | `vm-test` | `VM test / probe` | Linux KVM reboot-backed observation for HiberFileSizePercent | [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-summary.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-summary.json) and [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-before.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-before.json) and [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-after.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-after.json) and [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-powercfg-a-before.txt](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-powercfg-a-before.txt) and [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-powercfg-a-after.txt](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-powercfg-a-after.txt) and [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/host-review.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/host-review.json) and [research/notes/power-control-hiber-file-size-percent-kvm-reboot-follow-up-20260407.md](notes/power-control-hiber-file-size-percent-kvm-reboot-follow-up-20260407.md) | `medium` | path, value, behavior, version-scope |
-| `vm-power-control-hiber-wpr-qga-runtime-read-20260412` | `etw-trace` | `unspecified` | QGA-launched WPR boot trace captures HiberFileSizePercent QueryValue | [evidence/files/vm/hiberfilesizepercent-wpr-qga-runtime-read-20260412/hiberfilesizepercent-wpr-qga-smoke-20260412f-summary.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-wpr-qga-runtime-read-20260412/hiberfilesizepercent-wpr-qga-smoke-20260412f-summary.json) and [evidence/files/vm/hiberfilesizepercent-wpr-qga-runtime-read-20260412/hiberfilesizepercent-wpr-qga-smoke-20260412f.normalized.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-wpr-qga-runtime-read-20260412/hiberfilesizepercent-wpr-qga-smoke-20260412f.normalized.json) and [research/notes/power-control-hiber-file-size-percent-wpr-qga-runtime-read-20260412.md](notes/power-control-hiber-file-size-percent-wpr-qga-runtime-read-20260412.md) | `high` | path, value, behavior, version-scope |
+| `vm-power-control-hiber-wpr-qga-runtime-read-20260412` | `etw-trace` | `VM ETW trace` | QGA-launched WPR boot trace captures HiberFileSizePercent QueryValue | [evidence/files/vm/hiberfilesizepercent-wpr-qga-runtime-read-20260412/hiberfilesizepercent-wpr-qga-smoke-20260412f-summary.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-wpr-qga-runtime-read-20260412/hiberfilesizepercent-wpr-qga-smoke-20260412f-summary.json) and [evidence/files/vm/hiberfilesizepercent-wpr-qga-runtime-read-20260412/hiberfilesizepercent-wpr-qga-smoke-20260412f.normalized.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-wpr-qga-runtime-read-20260412/hiberfilesizepercent-wpr-qga-smoke-20260412f.normalized.json) and [research/notes/power-control-hiber-file-size-percent-wpr-qga-runtime-read-20260412.md](notes/power-control-hiber-file-size-percent-wpr-qga-runtime-read-20260412.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-hiber-file-size-percent-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for HiberFileSizePercent | [evidence/raw/ghidra/ghidra-power-control-hiber-file-size-percent-20260424-batch1/summary.json](../evidence/raw/ghidra/ghidra-power-control-hiber-file-size-percent-20260424-batch1/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -8550,6 +9463,8 @@ Blocking issues:
 | `static-power-control-string-20260329` | `repo-doc` | `Current repo docs` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) | `high` | path, value, version-scope |
 | `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `high` | behavior, risk, version-scope |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
+| `related-power-disable-hibernation-firmware-limit-20260508` | `related-record` | `unspecified` | Sibling hibernation app card firmware-limit closure | [research/records/power.disable-hibernation.review.json](records/power.disable-hibernation.review.json) and [evidence/captures/power-disable-hibernation-app-qa-not-applicable-20260508.json](../evidence/captures/power-disable-hibernation-app-qa-not-applicable-20260508.json) | `high` | behavior, risk, platform-limit, ui-mapping |
 
 **Validation proof**
 
@@ -8569,7 +9484,7 @@ Blocking issues:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | HibernateEnabled now has converged cross-layer evidence on RegProbe-Baseline-Clean-20260329: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and an exact runtime read from smss.exe captured by the guest-processed stepwise Procmon boot log. App mapping is tracked separately and does not block evidence classification. |
+| Why | HibernateEnabled now has converged cross-layer evidence on RegProbe-Baseline-Clean-20260329: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and an exact runtime read from smss.exe captured by the guest-processed stepwise Procmon boot log. The 2026-05-08 promotion review pack keeps the raw value out of the product apply path because the sibling hibernation app card proves the current VM lane is firmware-limited and requires a hibernation-capable validation profile before any conditional promote. |
 
 ---
 
@@ -8657,8 +9572,8 @@ Blocking issues:
 | `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | `VM Procmon trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) | `medium` | behavior, risk, version-scope |
-| `vm-power-control-trigger-etw-followup-20260329` | `etw-trace` | `unspecified` | Trigger-based ETW follow-up for HibernateEnabledDefault | [evidence/files/vm/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/summary.json) and [evidence/files/vm/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-trigger-etw-trigger.log](../evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-trigger-etw-trigger.log) and [research/notes/power-control-docs-first-trigger-etw-follow-up-20260329.md](notes/power-control-docs-first-trigger-etw-follow-up-20260329.md) | `medium` | behavior, risk, version-scope |
-| `vm-power-control-trigger-etw-guestvar-20260329` | `etw-trace` | `unspecified` | Guest-return ETW trigger follow-up for docs-first power-control values | [evidence/files/vm/power-control-docs-first-trigger-etw-guestvar-20260329-233504/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-guestvar-20260329-233504/summary.json) and [evidence/files/vm/power-control-docs-first-trigger-etw-guestvar-20260329-233504/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-guestvar-20260329-233504/results.json) and [research/notes/power-control-docs-first-trigger-etw-guestvar-follow-up-20260329.md](notes/power-control-docs-first-trigger-etw-guestvar-follow-up-20260329.md) | `medium` | behavior, risk, version-scope |
+| `vm-power-control-trigger-etw-followup-20260329` | `etw-trace` | `VM ETW trace` | Trigger-based ETW follow-up for HibernateEnabledDefault | [evidence/files/vm/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/summary.json) and [evidence/files/vm/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-trigger-etw-trigger.log](../evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-trigger-etw-trigger.log) and [research/notes/power-control-docs-first-trigger-etw-follow-up-20260329.md](notes/power-control-docs-first-trigger-etw-follow-up-20260329.md) | `medium` | behavior, risk, version-scope |
+| `vm-power-control-trigger-etw-guestvar-20260329` | `etw-trace` | `VM ETW trace` | Guest-return ETW trigger follow-up for docs-first power-control values | [evidence/files/vm/power-control-docs-first-trigger-etw-guestvar-20260329-233504/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-guestvar-20260329-233504/summary.json) and [evidence/files/vm/power-control-docs-first-trigger-etw-guestvar-20260329-233504/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-guestvar-20260329-233504/results.json) and [research/notes/power-control-docs-first-trigger-etw-guestvar-follow-up-20260329.md](notes/power-control-docs-first-trigger-etw-guestvar-follow-up-20260329.md) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-hibernate-default-kvm-reboot-20260407` | `vm-test` | `VM test / probe` | Linux KVM reboot-backed observation for HibernateEnabledDefault | [evidence/files/vm/hibernateenableddefault-reboot-kvm-20260407a/hibernateenableddefault-reboot-kvm-20260407a-summary.json](../evidence/files/vm-tooling-staging/hibernateenableddefault-reboot-kvm-20260407a/hibernateenableddefault-reboot-kvm-20260407a-summary.json) and [evidence/files/vm/hibernateenableddefault-reboot-kvm-20260407a/hibernateenableddefault-reboot-kvm-20260407a-before.json](../evidence/files/vm-tooling-staging/hibernateenableddefault-reboot-kvm-20260407a/hibernateenableddefault-reboot-kvm-20260407a-before.json) and [evidence/files/vm/hibernateenableddefault-reboot-kvm-20260407a/hibernateenableddefault-reboot-kvm-20260407a-after.json](../evidence/files/vm-tooling-staging/hibernateenableddefault-reboot-kvm-20260407a/hibernateenableddefault-reboot-kvm-20260407a-after.json) and [evidence/files/vm/hibernateenableddefault-reboot-kvm-20260407a/hibernateenableddefault-reboot-kvm-20260407a-powercfg-a-before.txt](../evidence/files/vm-tooling-staging/hibernateenableddefault-reboot-kvm-20260407a/hibernateenableddefault-reboot-kvm-20260407a-powercfg-a-before.txt) and [evidence/files/vm/hibernateenableddefault-reboot-kvm-20260407a/hibernateenableddefault-reboot-kvm-20260407a-powercfg-a-after.txt](../evidence/files/vm-tooling-staging/hibernateenableddefault-reboot-kvm-20260407a/hibernateenableddefault-reboot-kvm-20260407a-powercfg-a-after.txt) and [evidence/files/vm/hibernateenableddefault-reboot-kvm-20260407a/host-review.json](../evidence/files/vm-tooling-staging/hibernateenableddefault-reboot-kvm-20260407a/host-review.json) and [research/notes/power-control-hibernate-enabled-default-kvm-reboot-follow-up-20260407.md](notes/power-control-hibernate-enabled-default-kvm-reboot-follow-up-20260407.md) | `medium` | path, value, behavior, version-scope |
 
 **Validation proof**
@@ -8691,13 +9606,13 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Power` |
 | Area | `Raw Power Manager Registry` |
 | Scope | `device` |
 | Source file | [research/records/power.control.lid-reliability-state.json](records/power.control.lid-reliability-state.json) |
 | V3.1 evidence root | [evidence/records/power.control.lid-reliability-state](../evidence/records/power.control.lid-reliability-state) |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -8721,10 +9636,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Decision-Gated |
-| Action state | `research-gated` |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A. |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `actionable` |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -8748,7 +9663,7 @@ Current writes
 | Path | `HKLM\SYSTEM\CurrentControlSet\Control\Power` |
 | Value name | `LidReliabilityState` |
 | Value type | `REG_DWORD` |
-| Notes | This candidate is tracked as a raw kernel-facing value, not as a published end-user tweak profile. |
+| Notes | This candidate is promoted as a conservative research-card raw power value; systems without an ACPI lid device may treat it as inert. |
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
@@ -8764,7 +9679,7 @@ Current writes
 
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
-| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['General users', 'One-click apply surfaces'] | `False` |
+| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['Desktop or VM systems where no ACPI lid device is present', 'Users expecting a visible behavior change on non-laptop hardware'] | `True` |
 
 **Evidence**
 
@@ -8775,7 +9690,8 @@ Current writes
 | `static-power-control-string-20260329` | `repo-doc` | `Current repo docs` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) | `high` | path, value, version-scope |
 | `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `high` | behavior, risk, version-scope |
-| `vm-power.control.lid-reliability-state-etw-stackwalk-attempt-20260424i` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-summary.json](../evidence/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-summary.json) and [evidence/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-stage.json](../evidence/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-stage.json) and [evidence/captures/power-control-lid-reliability-state-etw-stackwalk-attempt-20260424.json](../evidence/captures/power-control-lid-reliability-state-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-power.control.lid-reliability-state-etw-stackwalk-attempt-20260424i` | `etw-trace` | `VM ETW trace` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-summary.json](../evidence/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-summary.json) and [evidence/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-stage.json](../evidence/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-stage.json) and [evidence/captures/power-control-lid-reliability-state-etw-stackwalk-attempt-20260424.json](../evidence/captures/power-control-lid-reliability-state-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-power.control.lid-reliability-state-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for LidReliabilityState | [evidence/captures/power-control-lid-reliability-state-etw-qga-unblock-20260507.json](../evidence/captures/power-control-lid-reliability-state-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/power-control-lid-reliability-state-etw-qga-unblock-20260507/power-control-lid-reliability-state-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/power-control-lid-reliability-state-etw-qga-unblock-20260507/power-control-lid-reliability-state-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/power-control-lid-reliability-state-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/power-control-lid-reliability-state-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/power-control-lid-reliability-state-etw-qga-unblock-20260507/power-control-lid-reliability-state-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/power-control-lid-reliability-state-etw-qga-unblock-20260507/power-control-lid-reliability-state-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 
 **Validation proof**
 
@@ -8790,12 +9706,12 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | LidReliabilityState now has converged cross-layer evidence on RegProbe-Baseline-Clean-20260329: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and an exact runtime read from System captured by the guest-processed stepwise Procmon boot log. App mapping is tracked separately and does not block evidence classification. |
+| Why | LidReliabilityState now has converged cross-layer evidence on RegProbe-Baseline-Clean-20260329: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and an exact runtime read from System captured by the guest-processed stepwise Procmon boot log. The 2026-05-08 promotion review pack approves this app-mapped raw power card for conservative promotion with an ACPI lid/hardware applicability note. |
 
 ---
 
@@ -8804,13 +9720,13 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Power` |
 | Area | `Raw Power Manager Registry` |
 | Scope | `device` |
 | Source file | [research/records/power.control.mf-buffering-threshold.json](records/power.control.mf-buffering-threshold.json) |
 | V3.1 evidence root | [evidence/records/power.control.mf-buffering-threshold](../evidence/records/power.control.mf-buffering-threshold) |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -8834,10 +9750,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Decision-Gated |
-| Action state | `research-gated` |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A. |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `actionable` |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -8861,7 +9777,7 @@ Current writes
 | Path | `HKLM\SYSTEM\CurrentControlSet\Control\Power` |
 | Value name | `MfBufferingThreshold` |
 | Value type | `REG_DWORD` |
-| Notes | This candidate is tracked as a raw kernel-facing value, not as a published end-user tweak profile. |
+| Notes | This candidate is promoted as a conservative research-card raw power value; media-stack impact remains workload-specific. |
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
@@ -8877,7 +9793,7 @@ Current writes
 
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
-| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['General users', 'One-click apply surfaces'] | `False` |
+| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['Users expecting a guaranteed media playback improvement', 'Systems where media workload impact has not been reviewed'] | `True` |
 
 **Evidence**
 
@@ -8889,8 +9805,9 @@ Current writes
 | `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | `VM Procmon trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/power-control-mf-buffering-threshold-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/power-control-mf-buffering-threshold-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) | `medium` | behavior, risk, version-scope |
-| `vm-power-control-lightweight-runtime-remaining-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight ETW I/O burst follow-up for remaining power-control values | [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/results.json) and [research/notes/power-control-lightweight-runtime-remaining-two-20260330.md](notes/power-control-lightweight-runtime-remaining-two-20260330.md) | `high` | behavior, risk, version-scope |
-| `vm-power.control.mf-buffering-threshold-etw-stackwalk-attempt-20260424i` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-summary.json](../evidence/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-summary.json) and [evidence/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-stage.json](../evidence/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-stage.json) and [evidence/captures/power-control-mf-buffering-threshold-etw-stackwalk-attempt-20260424.json](../evidence/captures/power-control-mf-buffering-threshold-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-power-control-lightweight-runtime-remaining-20260330` | `etw-trace` | `VM ETW trace` | Tools-hardened lightweight ETW I/O burst follow-up for remaining power-control values | [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/results.json) and [research/notes/power-control-lightweight-runtime-remaining-two-20260330.md](notes/power-control-lightweight-runtime-remaining-two-20260330.md) | `high` | behavior, risk, version-scope |
+| `vm-power.control.mf-buffering-threshold-etw-stackwalk-attempt-20260424i` | `etw-trace` | `VM ETW trace` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-summary.json](../evidence/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-summary.json) and [evidence/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-stage.json](../evidence/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-stage.json) and [evidence/captures/power-control-mf-buffering-threshold-etw-stackwalk-attempt-20260424.json](../evidence/captures/power-control-mf-buffering-threshold-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-power.control.mf-buffering-threshold-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for MfBufferingThreshold | [evidence/captures/power-control-mf-buffering-threshold-etw-qga-unblock-20260507.json](../evidence/captures/power-control-mf-buffering-threshold-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/power-control-mf-buffering-threshold-etw-qga-unblock-20260507/power-control-mf-buffering-threshold-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/power-control-mf-buffering-threshold-etw-qga-unblock-20260507/power-control-mf-buffering-threshold-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/power-control-mf-buffering-threshold-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/power-control-mf-buffering-threshold-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/power-control-mf-buffering-threshold-etw-qga-unblock-20260507/power-control-mf-buffering-threshold-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/power-control-mf-buffering-threshold-etw-qga-unblock-20260507/power-control-mf-buffering-threshold-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 
 **Validation proof**
 
@@ -8905,12 +9822,12 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | MfBufferingThreshold now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW I/O burst follow-up. App mapping is tracked separately and does not block evidence classification. |
+| Why | MfBufferingThreshold now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW I/O burst follow-up. The 2026-05-08 promotion review pack approves this app-mapped raw power card for conservative promotion with workload-specific media buffering language. |
 
 ---
 
@@ -8919,17 +9836,17 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Power` |
 | Area | `Raw Power Manager Registry` |
 | Scope | `device` |
 | Source file | [research/records/power.control.perf-calculate-actual-utilization.json](records/power.control.perf-calculate-actual-utilization.json) |
 | V3.1 evidence root | [evidence/records/power.control.perf-calculate-actual-utilization](../evidence/records/power.control.perf-calculate-actual-utilization) |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Validated candidate package for PerfCalculateActualUtilization under HKLM\SYSTEM\CurrentControlSet\Control\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 captured an exact runtime read for PerfCalculateActualUtilization. App surfacing remains a separate product decision from evidence classification.
+**Summary:** Validated candidate package for PerfCalculateActualUtilization under HKLM\SYSTEM\CurrentControlSet\Control\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 captured an exact runtime read for PerfCalculateActualUtilization. A later one-value reboot experiment observed a Startup Repair regression after setting the value to `0`, so non-default values are treated as advanced, snapshot-gated, VM-profile-sensitive experiments rather than general-user tweaks.
 
 **Current implementation**
 
@@ -8937,7 +9854,7 @@ Current writes
 | --- | --- |
 | Status | `matches-research` |
 | Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
-| Notes | The app now surfaces PerfCalculateActualUtilization directly as a research-card registry value. |
+| Notes | The app now surfaces PerfCalculateActualUtilization directly as a warning-gated research-card registry value. Non-default values require snapshot/overlay replay before reboot testing. |
 
 Current writes
 
@@ -8949,10 +9866,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Decision-Gated |
-| Action state | `research-gated` |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A. |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `actionable` |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -8976,7 +9893,7 @@ Current writes
 | Path | `HKLM\SYSTEM\CurrentControlSet\Control\Power` |
 | Value name | `PerfCalculateActualUtilization` |
 | Value type | `REG_DWORD` |
-| Notes | This candidate is tracked as a raw kernel-facing value, not as a published end-user tweak profile. |
+| Notes | This candidate is promoted as a warning-gated research-card raw power value; CPU-utilization behavior can be host and hardware dependent. `PerfCalculateActualUtilization=0` produced a reboot regression on the available VM profile during the 2026-05-08 pilot and must not be treated as a safe default. |
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
@@ -8992,7 +9909,7 @@ Current writes
 
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
-| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['General users', 'One-click apply surfaces'] | `False` |
+| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['Generic enterprise golden images', 'VMs where host/guest CPU-utilization reporting must remain unchanged'] | `True` |
 
 **Evidence**
 
@@ -9004,8 +9921,10 @@ Current writes
 | `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | `VM Procmon trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/power-control-perf-calculate-actual-utilization-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/power-control-perf-calculate-actual-utilization-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) | `medium` | behavior, risk, version-scope |
-| `vm-power-control-lightweight-runtime-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight ETW follow-up for remaining docs-first power-control values | [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/results.json) and [research/notes/power-control-lightweight-runtime-follow-up-20260330.md](notes/power-control-lightweight-runtime-follow-up-20260330.md) | `high` | behavior, risk, version-scope |
-| `vm-power.control.perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424i` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-summary.json](../evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-summary.json) and [evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-stage.json](../evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-stage.json) and [evidence/captures/power-control-perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424.json](../evidence/captures/power-control-perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-power-control-lightweight-runtime-20260330` | `etw-trace` | `VM ETW trace` | Tools-hardened lightweight ETW follow-up for remaining docs-first power-control values | [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/results.json) and [research/notes/power-control-lightweight-runtime-follow-up-20260330.md](notes/power-control-lightweight-runtime-follow-up-20260330.md) | `high` | behavior, risk, version-scope |
+| `vm-power.control.perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424i` | `etw-trace` | `VM ETW trace` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-summary.json](../evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-summary.json) and [evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-stage.json](../evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-stage.json) and [evidence/captures/power-control-perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424.json](../evidence/captures/power-control-perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-power.control.perf-calculate-actual-utilization-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for PerfCalculateActualUtilization | [evidence/captures/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507.json](../evidence/captures/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
+| `vm-power.control.perf-calculate-actual-utilization-value-experiment-20260508` | `vm-test` | `VM reboot experiment` | One-value reboot experiment for PerfCalculateActualUtilization=0 | [registry-value experiment](../registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.json) and [recovery note](../registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.md) | `high` | risk, rollback-limit, reboot-regression, vm-profile-scope |
 
 **Validation proof**
 
@@ -9014,18 +9933,18 @@ Current writes
 | Source | [Docs/power/power.md](../Docs/power/power.md) |
 | Exact quote / path | [Docs/power/power.md:181](../Docs/power/power.md:181) shows `PerfCalculateActualUtilization` with observed literal `1` in the repo power notes. |
 | Key found on page | `True` |
-| Notes | The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for PerfCalculateActualUtilization. App surfacing is tracked separately from evidence classification. |
+| Notes | The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for PerfCalculateActualUtilization. The 2026-05-08 value experiment adds a negative reboot-health signal for `0` on the available VM profile. |
 
 **Decision**
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | PerfCalculateActualUtilization now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. App mapping is tracked separately and does not block evidence classification. |
+| Why | PerfCalculateActualUtilization now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. The 2026-05-08 promotion review pack approves this app-mapped raw power card as promoted-with-warnings because VM CPU-utilization reporting and bare-metal power behavior can diverge. The later 2026-05-08 one-value experiment observed a reboot regression after applying `0`, so non-default testing must stay snapshot-gated and advanced-user only. |
 
 ---
 
@@ -9119,9 +10038,10 @@ Current writes
 | `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | `VM Procmon trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/power-control-timer-rebase-threshold-on-drips-exit-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/power-control-timer-rebase-threshold-on-drips-exit-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) | `medium` | behavior, risk, version-scope |
-| `vm-power-control-drips-capability-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight DRIPS capability gate for TimerRebaseThresholdOnDripsExit | [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/results.json) and [research/notes/power-control-lightweight-runtime-remaining-two-20260330.md](notes/power-control-lightweight-runtime-remaining-two-20260330.md) | `high` | behavior, risk, version-scope |
+| `vm-power-control-drips-capability-20260330` | `etw-trace` | `VM ETW trace` | Tools-hardened lightweight DRIPS capability gate for TimerRebaseThresholdOnDripsExit | [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/results.json) and [research/notes/power-control-lightweight-runtime-remaining-two-20260330.md](notes/power-control-lightweight-runtime-remaining-two-20260330.md) | `high` | behavior, risk, version-scope |
 | `vm-power-control-drips-kvm-reboot-20260407` | `vm-test` | `VM test / probe` | Linux KVM reboot-backed observation for TimerRebaseThresholdOnDripsExit | [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-summary.json](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-summary.json) and [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-before.json](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-before.json) and [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-after.json](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-after.json) and [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-powercfg-a-before.txt](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-powercfg-a-before.txt) and [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-powercfg-a-after.txt](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-powercfg-a-after.txt) and [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/host-review.json](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/host-review.json) and [research/notes/power-control-timer-rebase-threshold-on-drips-exit-kvm-reboot-follow-up-20260407.md](notes/power-control-timer-rebase-threshold-on-drips-exit-kvm-reboot-follow-up-20260407.md) | `medium` | path, value, behavior, version-scope |
-| `vm-power.control.timer-rebase-threshold-on-drips-exit-etw-stackwalk-attempt-20260424h` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-summary.json](../evidence/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-summary.json) and [evidence/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-stage.json](../evidence/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-stage.json) and [evidence/captures/power-control-timer-rebase-threshold-on-drips-exit-etw-stackwalk-attempt-20260424.json](../evidence/captures/power-control-timer-rebase-threshold-on-drips-exit-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-power.control.timer-rebase-threshold-on-drips-exit-etw-stackwalk-attempt-20260424h` | `etw-trace` | `VM ETW trace` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-summary.json](../evidence/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-summary.json) and [evidence/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-stage.json](../evidence/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-stage.json) and [evidence/captures/power-control-timer-rebase-threshold-on-drips-exit-etw-stackwalk-attempt-20260424.json](../evidence/captures/power-control-timer-rebase-threshold-on-drips-exit-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-power.control.timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for TimerRebaseThresholdOnDripsExit | [evidence/captures/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507.json](../evidence/captures/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 
 **Validation proof**
 
@@ -9253,7 +10173,7 @@ Windows Internals references:
 | `nohuto-power-disable-idle-states-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for DisableIdleStatesAtBoot | [research/_source-mirrors/win-registry/records/Power.txt](_source-mirrors/win-registry/records/Power.txt) | `medium` | path, value, behavior |
 | `vm-cpu-idle-bundle-probe` | `vm-test` | `VM test / probe` | Win25H2Clean reversible probe for the CPU idle-state bundle | [evidence/files/vm/cpu_idle_probe.json](../evidence/files/vm-tooling-staging/cpu_idle_probe.json) | `high` | path, value, behavior, rollback |
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | [Docs/power/power.md](../Docs/power/power.md) | `medium` | ui-mapping, app-mismatch |
-| `ghidra-cpu-idle-no-match-20260327` | `ghidra-trace` | `unspecified` | Our Ghidra follow-up - ntoskrnl CPU idle string/xref probes | [evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md](../evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md) and [evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md](../evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md) | `medium` | version-scope, open-question |
+| `ghidra-cpu-idle-no-match-20260327` | `ghidra-trace` | `Our Ghidra analysis` | Our Ghidra follow-up - ntoskrnl CPU idle string/xref probes | [evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md](../evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md) and [evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md](../evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md) | `medium` | version-scope, open-question |
 | `vm-cpu-idle-benchmark-incident-20260327` | `vm-incident` | `unspecified` | Win25H2Clean rebooted CPU idle benchmark incident | [research/vm-incidents.json](vm-incidents.json) and [research/notes/cpu-idle-states-follow-up-20260327.md](notes/cpu-idle-states-follow-up-20260327.md) and [evidence/records/power.disable-cpu-idle-states/behavior-lane.log](../evidence/records/power.disable-cpu-idle-states/behavior-lane.log) | `high` | incident-review, version-scope, side-effects |
 | `vm-cpu-idle-runtime-lane-20260327` | `vm-test` | `VM test / probe` | Win25H2Clean v3.1 runtime lane for the CPU idle-state bundle | [evidence/files/vm/cpu-idle-runtime-20260327-072057/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/summary.json) and [evidence/files/vm/cpu-idle-runtime-20260327-072057/cpu-idle-runtime.etl.md](../evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/cpu-idle-runtime.etl.md) and [evidence/files/vm/cpu-idle-runtime-20260327-232151/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-232151/summary.json) and [evidence/files/vm/cpu-idle-runtime-20260327-232151/cpu-idle-runtime.etl.md](../evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-232151/cpu-idle-runtime.etl.md) | `high` | version-scope, incident-review, side-effects |
 | `vm-cpu-idle-write-diagnostics-20260328` | `vm-test` | `VM test / probe` | Win25H2Clean write diagnostics for the CPU idle-state bundle | [evidence/files/vm/cpu-idle-write-diagnostics-20260328-191358/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-191358/summary.json) and [evidence/files/vm/cpu-idle-write-diagnostics-20260328-193355/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-193355/summary.json) and [evidence/files/vm/cpu-idle-write-diagnostics-20260328-194225/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-194225/summary.json) and [evidence/files/vm/cpu-idle-write-diagnostics-20260328-194947/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-194947/summary.json) and [research/notes/power-disable-cpu-idle-states-write-diagnostics-20260328.md](notes/power-disable-cpu-idle-states-write-diagnostics-20260328.md) | `medium` | version-scope, incident-review, open-question |
@@ -9261,7 +10181,7 @@ Windows Internals references:
 | `vm-cpu-idle-minimal-regwrite-20260328` | `vm-test` | `VM test / probe` | Win25H2Clean minimal direct registry write diagnostic for the CPU idle-state bundle | [evidence/files/vm/cpu-idle-minimal-regwrite-20260328-201526/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-minimal-regwrite-20260328-201526/summary.json) and [evidence/files/vm/cpu-idle-minimal-regwrite-20260328-201526/cpu-idle-minimal-regwrite-result.json](../evidence/files/vm-tooling-staging/cpu-idle-minimal-regwrite-20260328-201526/cpu-idle-minimal-regwrite-result.json) and [research/notes/power-disable-cpu-idle-states-tooling-chain-review-20260328.md](notes/power-disable-cpu-idle-states-tooling-chain-review-20260328.md) | `high` | path, value, rollback, open-question |
 | `vm-cpu-idle-stepwise-orchestration-20260329` | `vm-test` | `VM test / probe` | Win25H2Clean excluded-baseline stepwise CPU idle orchestration package | [evidence/files/vm/cpu-idle-runtime-20260329-015521/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-runtime-20260329-015521/summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/session.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/session.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-a-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-a-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-b-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-b-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-c1-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-c1-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-c2-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-c2-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-c3-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-c3-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-c4-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-c4-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-d-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-d-summary.json) and [research/notes/power-disable-cpu-idle-states-stepwise-orchestration-20260329.md](notes/power-disable-cpu-idle-states-stepwise-orchestration-20260329.md) | `high` | path, value, rollback, version-scope, open-question |
 | `analysis-power-disable-cpu-idle-states-decision-gate-review-20260412` | `analysis-output` | `unspecified` | Decision gate review promotes the advanced CPU idle-state app profile | [research/notes/power-disable-cpu-idle-states-decision-gate-review-20260412.md](notes/power-disable-cpu-idle-states-decision-gate-review-20260412.md) | `medium` | risk, rollback, version-scope, ui-mapping |
-| `vm-cpu-idle-bundle-etw-stackwalk-review-20260424` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk review for the CPU idle-states power key | [evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl](../evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl) and [evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main-summary.json](../evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main-summary.json) and [evidence/captures/power-disable-cpu-idle-states-etw-events-20260424.json](../evidence/captures/power-disable-cpu-idle-states-etw-events-20260424.json) and [evidence/captures/power-disable-cpu-idle-states-etw-stackwalk-20260424.json](../evidence/captures/power-disable-cpu-idle-states-etw-stackwalk-20260424.json) | `medium` | path, behavior, version-scope |
+| `vm-cpu-idle-bundle-etw-stackwalk-review-20260424` | `etw-trace` | `VM ETW trace` | Bounded KVM ETW stackwalk review for the CPU idle-states power key | [evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl](../evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl) and [evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main-summary.json](../evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main-summary.json) and [evidence/captures/power-disable-cpu-idle-states-etw-events-20260424.json](../evidence/captures/power-disable-cpu-idle-states-etw-events-20260424.json) and [evidence/captures/power-disable-cpu-idle-states-etw-stackwalk-20260424.json](../evidence/captures/power-disable-cpu-idle-states-etw-stackwalk-20260424.json) | `medium` | path, behavior, version-scope |
 
 **Validation proof**
 
@@ -9282,6 +10202,137 @@ Windows Internals references:
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
 | Why | The repo power notes and the Win25H2Clean probe line up on the same raw bundle and show both the current observed baseline and the app profile. The current-build Ghidra follow-up still did not surface a direct ntoskrnl lead, but the remaining layers now converge strongly enough for this project: follow-up minimal VMware smoke and direct registry-write diagnostics proved that generic guest execution, host copy-back, and the raw bundle writes themselves were healthy under C:/RegProbe-Diag, and the final excluded-baseline stepwise runtime package on RegProbe-Baseline-20260328 completed baseline apply, rebooted post-boot read, WPR start, WPR stop, ETL existence, host copy-back, restore, and post-restore verification. The remaining issue is not runtime or reversibility. Within RegProbe, undocumented raw control surfaces can still reach Class A when cross-layer evidence is strong enough. This makes the existing app profile apply-allowed as an advanced-only surface, not recommended for general users or battery-sensitive systems. |
+
+---
+
+### `power.disable-cpu-parking`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class A` |
+| Category | `Power` |
+| Area | `PowerCfg Core Parking` |
+| Scope | `device` |
+| Source file | [research/records/power.disable-cpu-parking.review.json](records/power.disable-cpu-parking.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `True` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Review-required audit trail for the live CPU core parking card. The app already exposes a command-backed powercfg implementation, and repo docs map the tweak id to core-parking research, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/PowerTweakProvider.cs |
+| Notes | The live app ships this as a first-party power command card rather than through the research-provider surface. Promotion gate now treats this checked-in implementation as matching the research record. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `cpu-core-parking-command` | `powercfg.exe /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES 100 /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES 100 /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMAXCORES 100 /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMAXCORES 100 /setactive SCHEME_CURRENT` | `CoreParkingPercent` | `100` | `value` | The implementation snapshots the prior AC/DC min/max values and restores them on rollback. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `actionable` |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode, win-registry |
+| Matched tokens | writes, core, parking, related, power, registry, values, used, this, including, latencytoleranceparked, latencytolerancesoftparked, class1initialunparkcount, multiparkgranularity, tweak, power values |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 14 audit token(s) in win-config. |
+| win-config / nvidia/desc.md | [https://github.com/nohuto/win-config/blob/main/nvidia/desc.md](https://github.com/nohuto/win-config/blob/main/nvidia/desc.md) | Matched 10 audit token(s) in win-config. |
+| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 10 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+| win-config / power/desc.md#power-values | [https://github.com/nohuto/win-config/blob/main/power/desc.md#power-values](https://github.com/nohuto/win-config/blob/main/power/desc.md#power-values) | Documents the power-manager registry values that influence core parking and latency tolerances. |
+| win-registry / Power Values | [https://github.com/nohuto/win-registry?tab=readme-ov-file#power-values](https://github.com/nohuto/win-registry?tab=readme-ov-file#power-values) | Provides nohuto's reverse-engineered registry notes for power-manager values. |
+
+Windows Internals references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+
+**Targets**
+
+#### `cpu-core-parking-command`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `command` |
+| Path | `powercfg.exe /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES 100 /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES 100 /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMAXCORES 100 /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMAXCORES 100 /setactive SCHEME_CURRENT` |
+| Value name | `CoreParkingPercent` |
+| Value type | `percent` |
+| Notes | Detection reads the current AC/DC values for both minimum and maximum core parking, apply sets all four values to 100, and rollback restores the detected snapshot. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `feature-dependent` | - | Windows-managed core parking | The active scheme's current core-parking limits are whatever the system already uses before the tweak is applied. | repo-power-doc, engine-cpu-parking-command |
+| `value` | `100` | Core parking disabled | The app forces CPMINCORES and CPMAXCORES to 100 for both AC and DC so the active power plan stops parking cores. | repo-power-doc, repo-power-provenance, app-power-provider, engine-cpu-parking-command, vm-power.disable-cpu-parking-app-qa-20260507 |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed processor baseline | Systems where the active power plan keeps its own core-parking settings | cpu-core-parking-command: feature-dependent None - The active scheme can vary by machine, so the current core-parking values should be observed rather than assumed. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Windows/default hold | ['Research tracking only', 'Power command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Current app behavior', 'VM app QA', 'Research comparison'] | ['Systems where the listed tradeoffs are unacceptable'] | `True` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power catalog entry | [Docs/power/power.md](../Docs/power/power.md) | `medium` | behavior, ui-mapping |
+| `repo-power-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for power.disable-cpu-parking | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `high` | behavior, risk |
+| `app-power-provider` | `repo-code` | `Current repo code` | Live power provider mapping | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | ui-mapping |
+| `engine-cpu-parking-command` | `repo-code` | `Current repo code` | Current core-parking implementation | engine/Tweaks/Commands/Power/DisableCpuCoreParkingTweak.cs | `high` | path, value, behavior |
+| `vm-power.disable-cpu-parking-app-qa-20260507` | `vm-test` | `VM test / probe` | RegProbe app QA apply/rollback proof for power.disable-cpu-parking | [evidence/captures/power-disable-cpu-parking-app-qa-20260507.json](../evidence/captures/power-disable-cpu-parking-app-qa-20260507.json) | `high` | path, value, behavior, side-effects, ui-mapping |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/power/power.md](../Docs/power/power.md) |
+| Exact quote / path | [Docs/power/power.md:139-154](../Docs/power/power.md:139-154) documents Control/Power processor parking-related values such as LatencyToleranceParked and LatencyToleranceSoftParked; [Docs/tweaks/tweak-catalog.md:52](../Docs/tweaks/tweak-catalog.md:52) maps the current card to the CPU parking implementation. |
+| Key found on page | `True` |
+| Notes | The power documentation names the low-level power-manager values adjacent to the core-parking card, while the checked-in command/provider code supplies the exact powercfg/app write contract. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `True` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | Validation proof, checked-in provider/engine mapping, and 2026-05-07 VM app QA now converge: the app detected, applied, verified, and rolled back this card successfully under the QA-only gated mutation override. |
 
 ---
 
@@ -9414,6 +10465,137 @@ Windows Internals references:
 
 ---
 
+### `power.disable-hibernation`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class B` |
+| Category | `Power` |
+| Area | `PowerCfg Hibernation` |
+| Scope | `device` |
+| Source file | [research/records/power.disable-hibernation.review.json](records/power.disable-hibernation.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Closed environment-limited audit trail for the live hibernation card. The app ships the powercfg-backed action and correctly reports firmware-limited VMs as not applicable, but this command card is rejected for research-provider promotion until a hibernation-capable validation lane exists.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/PowerTweakProvider.cs |
+| Notes | The live app ships this as a first-party power command card instead of through the research-provider surface. Promotion gate now treats this checked-in implementation as matching the research record. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `hibernation-mode-command` | `powercfg.exe /hibernate` | `Mode` | `Disabled` | `value` | Detection reads /availablesleepstates, apply uses /hibernate off, and rollback uses /hibernate on when the prior state was enabled. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Decision-Gated |
+| Action state | `research-gated` |
+| Gating reason | This record is strong enough to show, but it still needs a tighter runtime-trace layer before it becomes Class A. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | disable hibernation, runs, powercfg, hibernate, this, disables, hibernation, removes, hiberfil |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 9 audit token(s) in win-config. |
+| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 7 audit token(s) in win-config. |
+| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 6 audit token(s) in win-config. |
+| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+
+**Targets**
+
+#### `hibernation-mode-command`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `command` |
+| Path | `powercfg.exe /hibernate` |
+| Value name | `Mode` |
+| Value type | `enum` |
+| Notes | Detection parses powercfg /availablesleepstates output to determine whether hibernation is currently enabled. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `value` | `Enabled` | Hibernation enabled | Hibernation remains available on the system. | repo-power-doc, engine-disable-hibernation-command |
+| `value` | `Disabled` | Hibernation disabled | The app applies powercfg /hibernate off and removes hibernation availability. | repo-power-doc, repo-power-provenance, app-power-provider, engine-disable-hibernation-command |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed sleep baseline | Systems where hibernation availability depends on device capabilities and prior operator choices | hibernation-mode-command: feature-dependent None - Hibernation availability can vary by device and current configuration, so the current state should be observed rather than assumed. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Windows/default hold | ['Research tracking only', 'Power command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Current app behavior', 'VM app QA', 'Research comparison'] | ['Systems where the listed tradeoffs are unacceptable'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power catalog entry | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, behavior, ui-mapping |
+| `repo-power-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for power.disable-hibernation | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-power-provider` | `repo-code` | `Current repo code` | Live power provider mapping | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | ui-mapping |
+| `engine-disable-hibernation-command` | `repo-code` | `Current repo code` | Current hibernation command implementation | engine/Tweaks/Commands/Power/DisableHibernationTweak.cs | `high` | path, value, behavior |
+| `vm-power.disable-hibernation-app-qa-20260507` | `vm-test` | `VM test / probe` | RegProbe app QA not-applicable observation for power.disable-hibernation | [evidence/captures/power-disable-hibernation-app-qa-20260507.json](../evidence/captures/power-disable-hibernation-app-qa-20260507.json) | `medium` | behavior, risk, ui-mapping |
+| `vm-power.disable-hibernation-app-qa-not-applicable-20260508` | `vm-test` | `VM test / probe` | RegProbe app QA current not-applicable observation for power.disable-hibernation | [evidence/captures/power-disable-hibernation-app-qa-not-applicable-20260508.json](../evidence/captures/power-disable-hibernation-app-qa-not-applicable-20260508.json) | `high` | behavior, risk, ui-mapping |
+| `related-power.control.hibernate-enabled-cross-layer` | `related-record` | `unspecified` | Sibling HibernateEnabled cross-layer evidence | [research/records/power.control.hibernate-enabled.json](records/power.control.hibernate-enabled.json) | `high` | path, value, behavior |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/power/power.md](../Docs/power/power.md) |
+| Exact quote / path | [Docs/power/power.md:339](../Docs/power/power.md:339) documents Disable Hibernation; [Docs/power/power.md:376](../Docs/power/power.md:376) records that powercfg /hibernate off sets HibernateEnabled to 0. |
+| Key found on page | `True` |
+| Notes | The power documentation explains S4 hibernation behavior and maps the app command to the powercfg /hibernate off registry effect. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | The app mapping is documented, the sibling HibernateEnabled raw control has cross-layer evidence, and 2026-05-07 plus 2026-05-08 app QA prove correct firmware-limited not-applicable handling on the available VM. Direct apply/rollback mutation proof still requires a hibernation-capable VM or bare-metal lane, so this app card is closed as rejected for research-provider promotion rather than left as an active blocker. |
+
+---
+
 ### `power.disable-network-power-saving.policy`
 
 | Field | Value |
@@ -9459,13 +10641,28 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `` |
-| Has nohuto lineage | `` |
-| Has Windows Internals notes | `` |
-| Needs review | `` |
-| Source repositories |  |
-| Matched tokens |  |
-| Lineage note |  |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | tcpip, multimedia, systemprofile, systemresponsiveness, disabletaskoffload |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 5 audit token(s) in win-config. |
+| win-config / system/assets/mmcss-CiConfigInitialize.c | [https://github.com/nohuto/win-config/blob/main/system/assets/mmcss-CiConfigInitialize.c](https://github.com/nohuto/win-config/blob/main/system/assets/mmcss-CiConfigInitialize.c) | Matched 4 audit token(s) in win-config. |
+| win-registry / records/MultiMedia.txt | [https://github.com/nohuto/win-registry/blob/main/records/MultiMedia.txt](https://github.com/nohuto/win-registry/blob/main/records/MultiMedia.txt) | Matched 4 audit token(s) in win-registry. |
+| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
 
 **Targets**
 
@@ -9515,6 +10712,7 @@ Current writes
 | `ms-task-offload` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Using Registry Values to Enable and Disable Task Offloading | [https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading](https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading) | `high` | path, value, allowed-values, behavior |
 | `ms-mmcss` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Multimedia Class Scheduler Service | [https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service](https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service) | `high` | path, value, behavior, allowed-values |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-power.disable-network-power-saving.policy-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk probe receipt | [evidence/captures/power-disable-network-power-saving-policy-etw-qga-unblock-20260507.json](../evidence/captures/power-disable-network-power-saving-policy-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507.etl) and [evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507.etl) | `medium` | path, value, version-scope |
 
 **Validation proof**
 
@@ -9641,6 +10839,7 @@ Windows Internals references:
 | `local-power-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Power.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/Power.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Power.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-power-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Power.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Power.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Power.adml) | `high` | behavior, default, side-effects |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-power.disable-power-throttling-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk probe receipt | [evidence/captures/power-disable-power-throttling-etw-qga-unblock-20260507.json](../evidence/captures/power-disable-power-throttling-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507/power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507/power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507/power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507/power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507.etl) | `medium` | path, value, version-scope |
 
 **Validation proof**
 
@@ -9661,6 +10860,247 @@ Windows Internals references:
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
 | Why | The local Microsoft policy files clearly document the path, values, and meaning, and the app writes the documented turn-off value. There is no remaining edge left for the app path. |
+
+---
+
+### `power.disable-superfetch`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class A` |
+| Category | `Power` |
+| Area | `SysMain Service Stop Command` |
+| Scope | `device` |
+| Source file | [research/records/power.disable-superfetch.review.json](records/power.disable-superfetch.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `True` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Validated audit trail for the live Disable Superfetch (SysMain) card. The app ships the current SysMain service stop command action through the first-party provider, and 2026-05-08 clean-baseline VM app QA now proves detect/apply/verify/rollback from a running SysMain baseline.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/PerformanceTweakProvider.cs |
+| Notes | The live app ships this first-party card outside the validated research-provider surface. Promotion gate now treats this checked-in implementation as matching the research record. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `sysmain-service-command` | `sc.exe SysMain` | `ServiceState` | `Stopped` | `value` | The current engine tweak detects with sc query SysMain, applies sc stop SysMain, and uses sc start SysMain for rollback when the previous state was running. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `actionable` |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | sysmain, superfetch, enableprefetcher |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+| win-config / system/desc.md (SysMain section) | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Documents SysMain behavior, prefetched metadata, and the Windows Internals link used as subsystem context. |
+
+Windows Internals references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+
+**Targets**
+
+#### `sysmain-service-command`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `command` |
+| Path | `sc.exe SysMain` |
+| Value name | `ServiceState` |
+| Value type | `enum` |
+| Notes | The current engine tweak detects with sc query SysMain, applies sc stop SysMain, waits for the service transition to settle, and uses sc start SysMain for rollback when the previous state was running. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | The current service state is observed at runtime rather than assumed by this review record. | repo-tweak-provenance, engine-implementation |
+| `value` | `Stopped` | Stop SysMain | Runs the checked-in sc stop SysMain action after querying the current service state. | repo-tweak-provenance, app-provider, engine-implementation, vm-power.disable-superfetch-app-qa-clean-baseline-20260508 |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Research tracking and backlog reduction only | sysmain-service-command: feature-dependent None - Keep the current or default state until this first-party card completes the research-provider promotion path. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Windows/default hold | ['Research tracking only', 'Backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Current app behavior', 'VM app QA', 'Research comparison'] | ['Systems where the listed tradeoffs are unacceptable'] | `True` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for power.disable-superfetch | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Commands/Performance/DisableSuperfetchTweak.cs | `high` | path, value, behavior |
+| `vm-power.disable-superfetch-app-qa-20260507` | `vm-test` | `VM test / probe` | RegProbe app QA already-applied observation for power.disable-superfetch | [evidence/captures/power-disable-superfetch-app-qa-20260507.json](../evidence/captures/power-disable-superfetch-app-qa-20260507.json) | `medium` | value, behavior, ui-mapping |
+| `vm-power.disable-superfetch-app-qa-clean-baseline-20260508` | `vm-test` | `VM test / probe` | RegProbe app QA clean-baseline mutation proof for power.disable-superfetch | [evidence/captures/power-disable-superfetch-app-qa-clean-baseline-20260508.json](../evidence/captures/power-disable-superfetch-app-qa-clean-baseline-20260508.json) | `high` | value, behavior, rollback, ui-mapping |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/SERVICES_DOCUMENTATION.md](../Docs/SERVICES_DOCUMENTATION.md) |
+| Exact quote / path | [Docs/SERVICES_DOCUMENTATION.md:19](../Docs/SERVICES_DOCUMENTATION.md:19) lists SysMain as the service that prefetches application data; [Docs/tweaks/tweak-catalog.md:57](../Docs/tweaks/tweak-catalog.md:57) maps power.disable-superfetch to the SysMain command implementation. |
+| Key found on page | `True` |
+| Notes | The service documentation identifies SysMain/Superfetch behavior, and the tweak catalog maps the shipped card to the checked-in command implementation. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `True` |
+| Recommended for general users | `True` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | Validation proof, provider mapping, checked-in command implementation, and 2026-05-08 clean-baseline VM app QA now align. The QA run proved detect/apply/verify/rollback from a running SysMain baseline and restored the original running state. |
+
+---
+
+### `power.disable-usb-selective-suspend`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class A` |
+| Category | `Power` |
+| Area | `PowerCfg USB Selective Suspend` |
+| Scope | `device` |
+| Source file | [research/records/power.disable-usb-selective-suspend.review.json](records/power.disable-usb-selective-suspend.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `True` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Review-required audit trail for the live USB selective suspend card. The app already exposes a command-backed powercfg implementation, and repo docs plus provenance overrides map the tweak id to USB power-management research, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/PowerTweakProvider.cs |
+| Notes | The live app ships this as a first-party power command card rather than through the research-provider surface. Promotion gate now treats this checked-in implementation as matching the research record. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `usb-selective-suspend-command` | `powercfg.exe /setacvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0 /setdcvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0 /setactive SCHEME_CURRENT` | `UsbSelectiveSuspend` | `0` | `value` | The implementation snapshots the prior AC/DC values and restores them on rollback. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `actionable` |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+#### `usb-selective-suspend-command`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `command` |
+| Path | `powercfg.exe /setacvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0 /setdcvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0 /setactive SCHEME_CURRENT` |
+| Value name | `UsbSelectiveSuspend` |
+| Value type | `enum` |
+| Notes | Detection reads the current AC/DC values, apply sets both values to 0, and rollback restores the detected snapshot. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `feature-dependent` | - | Windows-managed USB selective suspend | The active scheme's current USB selective suspend values are whatever the system already uses before the tweak is applied. | repo-power-doc, engine-usb-suspend-command |
+| `value` | `0` | USB selective suspend disabled | The app forces the active scheme's AC and DC USB selective suspend values to 0. | repo-power-doc, repo-power-provenance-override, app-power-provider, engine-usb-suspend-command, vm-power.disable-usb-selective-suspend-app-qa-20260507 |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed USB power baseline | Systems where the active power plan keeps its own USB selective suspend values | usb-selective-suspend-command: feature-dependent None - The active scheme can vary by machine, so the current USB selective suspend values should be observed rather than assumed. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Windows/default hold | ['Research tracking only', 'Power command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Current app behavior', 'VM app QA', 'Research comparison'] | ['Systems where the listed tradeoffs are unacceptable'] | `True` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power USB power-management notes | [Docs/power/power.md](../Docs/power/power.md) | `medium` | behavior, risk |
+| `repo-power-provenance-override` | `repo-doc` | `Current repo docs` | Repo provenance override for power.disable-usb-selective-suspend | [Docs/tweaks/tweak-provenance-overrides.json](../Docs/tweaks/tweak-provenance-overrides.json) | `high` | behavior, risk |
+| `app-power-provider` | `repo-code` | `Current repo code` | Live power provider mapping | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | ui-mapping |
+| `engine-usb-suspend-command` | `repo-code` | `Current repo code` | Current USB selective suspend implementation | engine/Tweaks/Commands/Power/DisableUsbSelectiveSuspendTweak.cs | `high` | path, value, behavior |
+| `vm-power.disable-usb-selective-suspend-app-qa-20260507` | `vm-test` | `VM test / probe` | RegProbe app QA apply/rollback proof for power.disable-usb-selective-suspend | [evidence/captures/power-disable-usb-selective-suspend-app-qa-20260507.json](../evidence/captures/power-disable-usb-selective-suspend-app-qa-20260507.json) | `high` | path, value, behavior, side-effects, ui-mapping |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/power/power.md](../Docs/power/power.md) |
+| Exact quote / path | [Docs/power/power.md:251](../Docs/power/power.md:251) documents Disable Device Powersavings; [Docs/power/power.md:255](../Docs/power/power.md:255) states that this includes USB selective suspend and related idle power management. |
+| Key found on page | `True` |
+| Notes | The power documentation covers USB selective suspend/device power-savings behavior, and the checked-in command implementation supplies the exact active-scheme powercfg values and rollback snapshot. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `True` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | Validation proof, checked-in provider/engine mapping, and 2026-05-07 VM app QA now converge: the app detected, applied, verified, and rolled back this card successfully under the QA-only gated mutation override. |
 
 ---
 
@@ -9766,17 +11206,18 @@ Windows Internals references:
 | `ms-iot-services-wsearch` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Windows Search | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) | `high` | path, value, default, behavior, side-effects, version-scope |
 | `ms-search-indexing-overview` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Search indexing process overview | [https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview](https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview) | `high` | behavior, side-effects, version-scope |
 | `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-power-disable-windows-search-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW stage receipt for WSearch backing registry key | [evidence/captures/power-disable-windows-search-etw-stackwalk-attempt-20260424.json](../evidence/captures/power-disable-windows-search-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/power-disable-windows-search-etw-20260424-batch1/power-disable-windows-search-etw-20260424-batch1-stage.json](../evidence/raw/etw-stackwalk/power-disable-windows-search-etw-20260424-batch1/power-disable-windows-search-etw-20260424-batch1-stage.json) | `low` | behavior, version-scope |
+| `vm-power-disable-windows-search-service-qga-20260507` | `vm-test` | `VM test / probe` | QGA service inspection receipt for WSearch | [evidence/captures/power-disable-windows-search-service-qga-20260507.json](../evidence/captures/power-disable-windows-search-service-qga-20260507.json) and [evidence/raw/service-inspection/power-disable-windows-search-service-qga-20260507/service-inspection.json](../evidence/raw/service-inspection/power-disable-windows-search-service-qga-20260507/service-inspection.json) | `high` | path, value, version-scope |
+| `vm-power-disable-windows-search-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW stage receipt for WSearch backing registry key | [evidence/captures/power-disable-windows-search-etw-stackwalk-attempt-20260424.json](../evidence/captures/power-disable-windows-search-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/power-disable-windows-search-etw-20260424-batch1/power-disable-windows-search-etw-20260424-batch1-stage.json](../evidence/raw/etw-stackwalk/power-disable-windows-search-etw-20260424-batch1/power-disable-windows-search-etw-20260424-batch1-stage.json) | `low` | behavior, version-scope |
 | `vm-power-disable-windows-search-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for WSearch | [evidence/raw/ghidra/ghidra-power-disable-windows-search-20260424-batch1/summary.json](../evidence/raw/ghidra/ghidra-power-disable-windows-search-20260424-batch1/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) |
-| Exact quote / path | Windows Search (WSearch); Manual; Provides content indexing, property caching, and search results for files, e-mail, and other content.; OK to disable: This service provides functionality that is useful to some but not all enterprises, and security-focused enterprises that don't use it can safely disable it. |
+| Source | [evidence/captures/power-disable-windows-search-service-qga-20260507.json](../evidence/captures/power-disable-windows-search-service-qga-20260507.json) |
+| Exact quote / path | SERVICE_NAME: WSearch; DISPLAY_NAME: Windows Search; START_TYPE: 2   AUTO_START  (DELAYED); Start REG_DWORD 0x2; Win32_Service StartMode Auto; Get-Service StartType Automatic |
 | Key found on page | `True` |
-| Notes | The Microsoft services guidance page explicitly lists the WSearch service, documents its Manual baseline and behavior, and marks it OK to disable. |
+| Notes | The QGA receipt proves the exact SCM control surface and current VM state on Windows build 26200.8246 without mutation. Microsoft service guidance remains the evidence for the documented baseline and OK-to-disable decision. |
 
 **Decision**
 
@@ -10242,6 +11683,7 @@ Windows Internals references:
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mapping |
 | `engine-power-perfboostmode` | `repo-code` | `Current repo code` | Command-backed CPU boost implementation | engine/Tweaks/Commands/Power/SetCpuBoostPerfModeTweak.cs | `high` | path, value, behavior, ui-mapping, app-mapping |
 | `runtime-perfboostmode-diff` | `vm-test` | `VM test / probe` | Guest reversible probe for PERFBOOSTMODE | [evidence/files/vm/perfboostmode-transition-probe.txt](../evidence/files/vm-tooling-staging/perfboostmode-transition-probe.txt) | `high` | path, value, behavior, version-scope |
+| `kvm-user-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM user-scope current-state revalidation batch | [registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -10426,6 +11868,7 @@ Windows Internals references:
 | `ms-mmcss` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Multimedia Class Scheduler Service | [https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service](https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service) | `high` | path, allowed-values, behavior, version-scope |
 | `vm-games-mmcss-baseline` | `vm-test` | `VM test / probe` | Win25H2Clean export of the built-in Games MMCSS task | [evidence/files/vm/registry-dumps/mmcss-games-task-20260325-031514/mmcss-games-task.txt](../evidence/files/vm-tooling-staging/registry-dumps/mmcss-games-task-20260325-031514/mmcss-games-task.txt) | `high` | path, value, default |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -10539,11 +11982,11 @@ Current writes
 | `vm-session-manager-power-baseline-20260328` | `registry-observation` | `VM registry observation` | Win25H2Clean Session Manager Power baseline export | [evidence/files/vm/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.reg](../evidence/files/vm-tooling-staging/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.reg) and [evidence/files/vm/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.txt](../evidence/files/vm-tooling-staging/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.txt) | `high` | path, value, default, version-scope |
 | `ghidra-watchdog-nextgate-ntoskrnl-20260328` | `decompilation` | `Our Ghidra decompilation` | Current-build ntoskrnl Ghidra fallback for the watchdog timeout pair | [evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md](../evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md) and [evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json](../evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json) | `high` | path, value, behavior, version-scope |
 | `repo-pofx-pseudocode-watchdog` | `repo-doc` | `Current repo docs` | Repo PoFxInitPowerManagement pseudocode lead | [Docs/privacy/assets/sleepstudy-PoFxInitPowerManagement.c](../Docs/privacy/assets/sleepstudy-PoFxInitPowerManagement.c) and [research/notes/power-session-watchdog-timeouts-runtime-prep-20260328.md](notes/power-session-watchdog-timeouts-runtime-prep-20260328.md) | `medium` | behavior, side-effects, version-scope |
-| `vm-watchdog-boot-trace-20260328` | `etw-trace` | `unspecified` | Win25H2Clean reboot-verified watchdog timeout boot trace | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/summary.json](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/summary.json) and [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md) and [research/notes/power-session-watchdog-timeouts-boot-trace-20260328.md](notes/power-session-watchdog-timeouts-boot-trace-20260328.md) | `high` | value, behavior, version-scope |
-| `vm-watchdog-etl-registry-review-20260328` | `etw-trace` | `unspecified` | Host-side ETL registry review for Session Manager Power | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/registry-dump-watchdog-session-manager-power.txt](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-watchdog-session-manager-power.txt) and [research/notes/power-session-watchdog-timeouts-etl-registry-review-20260328.md](notes/power-session-watchdog-timeouts-etl-registry-review-20260328.md) | `high` | path, behavior, version-scope |
+| `vm-watchdog-boot-trace-20260328` | `etw-trace` | `VM ETW trace` | Win25H2Clean reboot-verified watchdog timeout boot trace | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/summary.json](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/summary.json) and [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md) and [research/notes/power-session-watchdog-timeouts-boot-trace-20260328.md](notes/power-session-watchdog-timeouts-boot-trace-20260328.md) | `high` | value, behavior, version-scope |
+| `vm-watchdog-etl-registry-review-20260328` | `etw-trace` | `VM ETW trace` | Host-side ETL registry review for Session Manager Power | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/registry-dump-watchdog-session-manager-power.txt](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-watchdog-session-manager-power.txt) and [research/notes/power-session-watchdog-timeouts-etl-registry-review-20260328.md](notes/power-session-watchdog-timeouts-etl-registry-review-20260328.md) | `high` | path, behavior, version-scope |
 | `vm-watchdog-procmon-bootlog-20260328` | `procmon` | `unspecified` | Win25H2Clean Procmon boot-log review for Session Manager Power | [evidence/files/vm/watchdog-procmon-bootlog-20260328-131306/summary.json](../evidence/files/vm-tooling-staging/watchdog-procmon-bootlog-20260328-131306/summary.json) and [evidence/files/vm/watchdog-procmon-bootlog-20260328-131306/summary-collect.json](../evidence/files/vm-tooling-staging/watchdog-procmon-bootlog-20260328-131306/summary-collect.json) and [evidence/files/vm/watchdog-procmon-bootlog-20260328-131306/watchdog-procmon-bootlog.hits.csv](../evidence/files/vm-tooling-staging/watchdog-procmon-bootlog-20260328-131306/watchdog-procmon-bootlog.hits.csv) and [research/notes/power-session-watchdog-timeouts-procmon-bootlog-20260328.md](notes/power-session-watchdog-timeouts-procmon-bootlog-20260328.md) | `high` | path, behavior, version-scope |
 | `vm-watchdog-sleep-capability-20260328` | `vm-observation` | `unspecified` | Win25H2Clean sleep capability for the watchdog lane | [evidence/files/vm/watchdog-sleep-capability-20260328-104406/summary.json](../evidence/files/vm-tooling-staging/watchdog-sleep-capability-20260328-104406/summary.json) and [evidence/files/vm/watchdog-sleep-capability-20260328-104406/powercfg-a.txt](../evidence/files/vm-tooling-staging/watchdog-sleep-capability-20260328-104406/powercfg-a.txt) and [research/notes/power-session-watchdog-timeouts-sleep-capability-20260328.md](notes/power-session-watchdog-timeouts-sleep-capability-20260328.md) | `medium` | risk, version-scope |
-| `vm-watchdog-dcomlaunch-attribution-20260328` | `etw-trace` | `unspecified` | DcomLaunch attribution for the watchdog svchost lead | [evidence/files/vm/watchdog-dcomlaunch-attribution-20260328/summary.json](../evidence/files/vm-tooling-staging/watchdog-dcomlaunch-attribution-20260328/summary.json) and [evidence/files/vm/watchdog-dcomlaunch-attribution-20260328/dcomlaunch-services.json](../evidence/files/vm-tooling-staging/watchdog-dcomlaunch-attribution-20260328/dcomlaunch-services.json) and [evidence/files/vm/watchdog-dcomlaunch-attribution-20260328/svchost-pid980-etl-lines.txt](../evidence/files/vm-tooling-staging/watchdog-dcomlaunch-attribution-20260328/svchost-pid980-etl-lines.txt) and [research/notes/power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328.md](notes/power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328.md) | `high` | path, behavior, version-scope |
+| `vm-watchdog-dcomlaunch-attribution-20260328` | `etw-trace` | `VM ETW trace` | DcomLaunch attribution for the watchdog svchost lead | [evidence/files/vm/watchdog-dcomlaunch-attribution-20260328/summary.json](../evidence/files/vm-tooling-staging/watchdog-dcomlaunch-attribution-20260328/summary.json) and [evidence/files/vm/watchdog-dcomlaunch-attribution-20260328/dcomlaunch-services.json](../evidence/files/vm-tooling-staging/watchdog-dcomlaunch-attribution-20260328/dcomlaunch-services.json) and [evidence/files/vm/watchdog-dcomlaunch-attribution-20260328/svchost-pid980-etl-lines.txt](../evidence/files/vm-tooling-staging/watchdog-dcomlaunch-attribution-20260328/svchost-pid980-etl-lines.txt) and [research/notes/power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328.md](notes/power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328.md) | `high` | path, behavior, version-scope |
 | `vm-watchdog-postboot-power-trigger-20260328` | `procmon` | `unspecified` | Targeted post-boot Procmon trigger for the DcomLaunch Power lane | [evidence/files/vm/watchdog-power-trigger-20260328-141804/summary.json](../evidence/files/vm-tooling-staging/watchdog-power-trigger-20260328-141804/summary.json) and [evidence/files/vm/watchdog-power-trigger-20260328-141804/watchdog-power-trigger.txt](../evidence/files/vm-tooling-staging/watchdog-power-trigger-20260328-141804/watchdog-power-trigger.txt) and [evidence/files/vm/watchdog-power-trigger-20260328-141804/watchdog-power-trigger-tasklist.txt](../evidence/files/vm-tooling-staging/watchdog-power-trigger-20260328-141804/watchdog-power-trigger-tasklist.txt) and [evidence/files/vm/watchdog-power-trigger-20260328-141804/watchdog-power-trigger-sc-power.txt](../evidence/files/vm-tooling-staging/watchdog-power-trigger-20260328-141804/watchdog-power-trigger-sc-power.txt) and [research/notes/power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328.md](notes/power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328.md) | `high` | behavior, risk, version-scope |
 | `vm-watchdog-s1-procmon-follow-up-20260328` | `vm-observation` | `unspecified` | S1-specific Procmon follow-up for the watchdog lane | [evidence/files/vm/watchdog-s1-procmon-20260328-144402/summary.json](../evidence/files/vm-tooling-staging/watchdog-s1-procmon-20260328-144402/summary.json) and [evidence/files/vm/watchdog-s1-procmon-20260328-144402/watchdog-s1-procmon-lastwake-postcheck.txt](../evidence/files/vm-tooling-staging/watchdog-s1-procmon-20260328-144402/watchdog-s1-procmon-lastwake-postcheck.txt) and [evidence/files/vm/watchdog-s1-procmon-20260328-144402/watchdog-s1-procmon-kernelpower-postcheck.txt](../evidence/files/vm-tooling-staging/watchdog-s1-procmon-20260328-144402/watchdog-s1-procmon-kernelpower-postcheck.txt) and [research/notes/power-session-watchdog-timeouts-s1-procmon-follow-up-20260328.md](notes/power-session-watchdog-timeouts-s1-procmon-follow-up-20260328.md) | `medium` | risk, version-scope |
 | `vm-watchdog-s1-scheduled-procmon-follow-up-20260328` | `vm-observation` | `unspecified` | S1 scheduled-task Procmon follow-up for the watchdog lane | [evidence/files/vm/watchdog-s1-scheduled-procmon-20260328-150559/summary.json](../evidence/files/vm-tooling-staging/watchdog-s1-scheduled-procmon-20260328-150559/summary.json) and [evidence/files/vm/watchdog-s1-scheduled-procmon-20260328-150559/watchdog-s1-scheduled-procmon-live-postmortem.txt](../evidence/files/vm-tooling-staging/watchdog-s1-scheduled-procmon-20260328-150559/watchdog-s1-scheduled-procmon-live-postmortem.txt) and [research/notes/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.md](notes/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.md) | `medium` | risk, version-scope |
@@ -10584,6 +12027,604 @@ Blocking issues:
 ---
 
 ### Privacy
+
+### `misc.disable-edge-features`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class A` |
+| Category | `Privacy` |
+| Area | `Microsoft Edge Policy Bundle` |
+| Scope | `device` |
+| Source file | [research/records/misc.disable-edge-features.review.json](records/misc.disable-edge-features.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `True` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Review-required audit trail for the live Disable Microsoft Edge Features card. The app already ships the current microsoft edge policy bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| Notes | The live app ships this first-party card outside the validated research-provider surface. Promotion gate now treats this checked-in implementation as matching the research record. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `edge-policy-bundle` | `HKLM\Software\Policies\Microsoft\Edge + HKLM/HKCU\Software\Policies\Microsoft\Windows\EdgeUI` | `PolicyBundle` | `CurrentAppProfile` | `value` | The current engine tweak writes a coordinated bundle across the Edge policy path and the legacy EdgeUI policy path. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `actionable` |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | disables, telemetry, personalization, sync, sidebar, shopping, rewards, other, edge, features, also, edgeui, various |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 12 audit token(s) in win-config. |
+| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 10 audit token(s) in win-config. |
+| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 9 audit token(s) in win-config. |
+
+**Targets**
+
+#### `edge-policy-bundle`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKLM\Software\Policies\Microsoft\Edge + HKLM/HKCU\Software\Policies\Microsoft\Windows\EdgeUI` |
+| Value name | `PolicyBundle` |
+| Value type | `registry value set` |
+| Notes | The current engine tweak writes a coordinated bundle across the Edge policy path and the legacy EdgeUI policy path. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | The setting stays at the existing or default state because this review record does not apply a value. | repo-tweak-provenance, engine-implementation |
+| `value` | `CurrentAppProfile` | Current Edge policy bundle | Writes the checked-in Edge and EdgeUI policy bundle defined by the current engine tweak. | repo-tweak-provenance, app-provider, engine-implementation, vm-misc.disable-edge-features-app-qa-20260507 |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Research tracking and backlog reduction only | edge-policy-bundle: missing None - Keep the current or default state until this first-party card completes the research-provider promotion path. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Windows/default hold | ['Research tracking only', 'Backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Current app behavior', 'VM app QA', 'Research comparison'] | ['Systems where the listed tradeoffs are unacceptable'] | `True` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for misc.disable-edge-features | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Misc/DisableEdgeFeaturesTweaks.cs | `high` | path, value, behavior |
+| `vm-misc.disable-edge-features-app-qa-20260507` | `vm-test` | `VM test / probe` | RegProbe app QA apply/rollback proof for misc.disable-edge-features | [evidence/captures/misc-disable-edge-features-app-qa-20260507.json](../evidence/captures/misc-disable-edge-features-app-qa-20260507.json) | `high` | path, value, behavior, side-effects, ui-mapping |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/misc/misc.md](../Docs/misc/misc.md) |
+| Exact quote / path | [Docs/misc/misc.md:561](../Docs/misc/misc.md:561) documents the Disable Edge Features policy bundle; [Docs/misc/misc.md:565-598](../Docs/misc/misc.md:565-598) lists the retained Edge policy values and EdgeUI values used by this card. |
+| Key found on page | `True` |
+| Notes | The misc documentation maps this card to the Edge policy bundle and names the Microsoft Edge / EdgeUI policy values that the current app writes. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `True` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | Validation proof, checked-in provider/engine mapping, and 2026-05-07 VM app QA now converge: the app detected, applied, verified, and rolled back this card successfully under the QA-only gated mutation override. |
+
+---
+
+### `misc.disable-office-telemetry`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class A` |
+| Category | `Privacy` |
+| Area | `Microsoft Office Telemetry Policy Bundle` |
+| Scope | `user` |
+| Source file | [research/records/misc.disable-office-telemetry.review.json](records/misc.disable-office-telemetry.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `True` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Review-required audit trail for the live Disable Microsoft Office Telemetry card. The app already ships the current microsoft office telemetry policy bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| Notes | The live app ships this first-party card outside the validated research-provider surface. Promotion gate now treats this checked-in implementation as matching the research record. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `office-telemetry-bundle` | `HKCU\Software\Policies\Microsoft\Office\16.0\OSM + related Office policy paths` | `PolicyBundle` | `CurrentAppProfile` | `value` | The current engine tweak writes coordinated HKCU policy values under Office\16.0\OSM and related common feedback paths. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `actionable` |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | office telemetry, osm, preventedapplications |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / misc/desc.md#disable-ms-office-telemetry | [https://github.com/nohuto/win-config/blob/main/misc/desc.md#disable-ms-office-telemetry](https://github.com/nohuto/win-config/blob/main/misc/desc.md#disable-ms-office-telemetry) | Documents Office telemetry categories and the exact OSM registry values used to block reporting. |
+
+Other source references:
+
+| Kind | Title | Location | Summary |
+| --- | --- | --- | --- |
+| microsoft | Manage the privacy of data monitored by Telemetry in Office | [https://learn.microsoft.com/en-us/office/compatibility/manage-the-privacy-of-data-monitored-by-telemetry-in-office](https://learn.microsoft.com/en-us/office/compatibility/manage-the-privacy-of-data-monitored-by-telemetry-in-office) | Official Microsoft documentation for the Office telemetry agent and privacy controls. |
+
+**Targets**
+
+#### `office-telemetry-bundle`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKCU\Software\Policies\Microsoft\Office\16.0\OSM + related Office policy paths` |
+| Value name | `PolicyBundle` |
+| Value type | `registry value set` |
+| Notes | The current engine tweak writes coordinated HKCU policy values under Office/16.0/OSM and related common feedback paths. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | The setting stays at the existing or default state because this review record does not apply a value. | repo-tweak-provenance, engine-implementation |
+| `value` | `CurrentAppProfile` | Current Office telemetry bundle | Writes the checked-in Office telemetry, feedback, prevented application, and prevented solution-type values. | repo-tweak-provenance, app-provider, engine-implementation, vm-misc.disable-office-telemetry-app-qa-20260507 |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Research tracking and backlog reduction only | office-telemetry-bundle: missing None - Keep the current or default state until this first-party card completes the research-provider promotion path. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Windows/default hold | ['Research tracking only', 'Backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Current app behavior', 'VM app QA', 'Research comparison'] | ['Systems where the listed tradeoffs are unacceptable'] | `True` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for misc.disable-office-telemetry | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Misc/DisableOfficeTelemetryTweak.cs | `high` | path, value, behavior |
+| `vm-misc.disable-office-telemetry-app-qa-20260507` | `vm-test` | `VM test / probe` | RegProbe app QA apply/rollback proof for misc.disable-office-telemetry | [evidence/captures/misc-disable-office-telemetry-app-qa-20260507.json](../evidence/captures/misc-disable-office-telemetry-app-qa-20260507.json) | `high` | path, value, behavior, side-effects, ui-mapping |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/misc/misc.md](../Docs/misc/misc.md) |
+| Exact quote / path | [Docs/misc/misc.md:404](../Docs/misc/misc.md:404) documents Disable MS Office Telemetry; [Docs/misc/misc.md:428-456](../Docs/misc/misc.md:428-456) lists the Office OSM preventedapplications and preventedsolutiontypes policy values. |
+| Key found on page | `True` |
+| Notes | The misc documentation names the Office telemetry policy paths, values, and data meanings used by the current Office telemetry card. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `True` |
+| Recommended for general users | `True` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | Validation proof, checked-in provider/engine mapping, and 2026-05-07 VM app QA now converge: the app detected, applied, verified, and rolled back this card successfully under the QA-only gated mutation override. |
+
+---
+
+### `misc.disable-onedrive`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class A` |
+| Category | `Privacy` |
+| Area | `OneDrive Policy and Explorer Bundle` |
+| Scope | `device` |
+| Source file | [research/records/misc.disable-onedrive.review.json](records/misc.disable-onedrive.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `True` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Review-required audit trail for the live Disable OneDrive card. The app already ships the current onedrive policy and explorer bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| Notes | The live app ships this first-party card outside the validated research-provider surface. Promotion gate now treats this checked-in implementation as matching the research record. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `onedrive-policy-bundle` | `HKLM\Software\Policies\Microsoft\Windows\OneDrive + HKLM\SOFTWARE\Microsoft\OneDrive + HKCU\Software\Classes\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}` | `PolicyBundle` | `CurrentAppProfile` | `value` | The current engine tweak writes a coordinated bundle across policy, product, and Explorer namespace paths. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `actionable` |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | disable onedrive |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 1 audit token(s) in win-config. |
+
+**Targets**
+
+#### `onedrive-policy-bundle`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKLM\Software\Policies\Microsoft\Windows\OneDrive + HKLM\SOFTWARE\Microsoft\OneDrive + HKCU\Software\Classes\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}` |
+| Value name | `PolicyBundle` |
+| Value type | `registry value set` |
+| Notes | The current engine tweak writes a coordinated bundle across policy, product, and Explorer namespace paths. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | The setting stays at the existing or default state because this review record does not apply a value. | repo-tweak-provenance, engine-implementation |
+| `value` | `CurrentAppProfile` | Current OneDrive bundle | Writes the checked-in OneDrive policy, sign-in traffic, and Explorer namespace values. | repo-tweak-provenance, app-provider, engine-implementation, vm-misc.disable-onedrive-app-qa-20260507 |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Research tracking and backlog reduction only | onedrive-policy-bundle: missing None - Keep the current or default state until this first-party card completes the research-provider promotion path. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Windows/default hold | ['Research tracking only', 'Backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Current app behavior', 'VM app QA', 'Research comparison'] | ['Systems where the listed tradeoffs are unacceptable'] | `True` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for misc.disable-onedrive | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Misc/DisableOneDriveTweaks.cs | `high` | path, value, behavior |
+| `vm-misc.disable-onedrive-app-qa-20260507` | `vm-test` | `VM test / probe` | RegProbe app QA apply/rollback proof for misc.disable-onedrive | [evidence/captures/misc-disable-onedrive-app-qa-20260507.json](../evidence/captures/misc-disable-onedrive-app-qa-20260507.json) | `high` | path, value, behavior, side-effects, ui-mapping |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/misc/misc.md](../Docs/misc/misc.md) |
+| Exact quote / path | [Docs/misc/misc.md:465](../Docs/misc/misc.md:465) documents Disable OneDrive; [Docs/misc/misc.md:469-551](../Docs/misc/misc.md:469-551) names the OneDrive policy and Explorer namespace values used by this card. |
+| Key found on page | `True` |
+| Notes | The misc documentation maps DisableLibrariesDefaultSaveToOneDrive, DisableFileSync, DisableFileSyncNGSC, DisableMeteredNetworkFileSync, PreventNetworkTrafficPreUserSignIn, and the Explorer namespace pin values to the OneDrive disable behavior. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `True` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | Validation proof, checked-in provider/engine mapping, and 2026-05-07 VM app QA now converge: the app detected, applied, verified, and rolled back this card successfully under the QA-only gated mutation override. |
+
+---
+
+### `misc.disable-visual-studio-telemetry`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class A` |
+| Category | `Privacy` |
+| Area | `Visual Studio Telemetry Policy Bundle` |
+| Scope | `device` |
+| Source file | [research/records/misc.disable-visual-studio-telemetry.review.json](records/misc.disable-visual-studio-telemetry.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `True` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Review-required audit trail for the live Disable Visual Studio Telemetry card. The app already ships the current visual studio telemetry policy bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| Notes | The live app ships this first-party card outside the validated research-provider surface. Promotion gate now treats this checked-in implementation as matching the research record. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `visual-studio-telemetry-bundle` | `HKLM\SOFTWARE\Policies\Microsoft\VisualStudio + HKLM\SOFTWARE\Microsoft\VSCommon` | `PolicyBundle` | `CurrentAppProfile` | `value` | The current engine tweak writes policy values plus per-version VSCommon SQM values for Visual Studio 2015 through 2022. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `actionable` |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | visual studio telemetry, sqm, feedback |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / misc/desc.md#disable-vs-telemetry | [https://github.com/nohuto/win-config/blob/main/misc/desc.md#disable-vs-telemetry](https://github.com/nohuto/win-config/blob/main/misc/desc.md#disable-vs-telemetry) | Documents the Visual Studio telemetry and feedback controls across supported versions. |
+
+**Targets**
+
+#### `visual-studio-telemetry-bundle`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKLM\SOFTWARE\Policies\Microsoft\VisualStudio + HKLM\SOFTWARE\Microsoft\VSCommon` |
+| Value name | `PolicyBundle` |
+| Value type | `registry value set` |
+| Notes | The current engine tweak writes policy values plus per-version VSCommon SQM values for Visual Studio 2015 through 2022. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | The setting stays at the existing or default state because this review record does not apply a value. | repo-tweak-provenance, engine-implementation |
+| `value` | `CurrentAppProfile` | Current Visual Studio telemetry bundle | Writes the checked-in SQM, feedback, and versioned VSCommon opt-in values. | repo-tweak-provenance, app-provider, engine-implementation, vm-misc.disable-visual-studio-telemetry-app-qa-20260507 |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Research tracking and backlog reduction only | visual-studio-telemetry-bundle: missing None - Keep the current or default state until this first-party card completes the research-provider promotion path. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Windows/default hold | ['Research tracking only', 'Backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Current app behavior', 'VM app QA', 'Research comparison'] | ['Systems where the listed tradeoffs are unacceptable'] | `True` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for misc.disable-visual-studio-telemetry | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Misc/DisableVisualStudioTelemetryTweak.cs | `high` | path, value, behavior |
+| `vm-misc.disable-visual-studio-telemetry-app-qa-20260507` | `vm-test` | `VM test / probe` | RegProbe app QA apply/rollback proof for misc.disable-visual-studio-telemetry | [evidence/captures/misc-disable-visual-studio-telemetry-app-qa-20260507.json](../evidence/captures/misc-disable-visual-studio-telemetry-app-qa-20260507.json) | `high` | path, value, behavior, side-effects, ui-mapping |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/misc/misc.md](../Docs/misc/misc.md) |
+| Exact quote / path | [Docs/misc/misc.md:331](../Docs/misc/misc.md:331) documents Disable VS Telemetry and the Visual Studio SQM, feedback, IntelliCode, and DiagnosticsHub-related policy/data paths. |
+| Key found on page | `True` |
+| Notes | The misc documentation names the Visual Studio telemetry, SQM, feedback, and remote-analysis controls that the current app card writes or audits. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `True` |
+| Recommended for general users | `True` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | Validation proof, checked-in provider/engine mapping, and 2026-05-07 VM app QA now converge: the app detected, applied, verified, and rolled back this card successfully under the QA-only gated mutation override. |
+
+---
+
+### `misc.disable-vscode-telemetry`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class A` |
+| Category | `Privacy` |
+| Area | `VS Code User Settings Profile` |
+| Scope | `user` |
+| Source file | [research/records/misc.disable-vscode-telemetry.review.json](records/misc.disable-vscode-telemetry.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `True` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Review-required audit trail for the live VS Code Telemetry & Online Features card. The app already ships the current vs code user settings profile action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `matches-research` |
+| Provider source | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| Notes | The live app ships this first-party card outside the validated research-provider surface. Promotion gate now treats this checked-in implementation as matching the research record. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `vscode-settings-profile` | `%APPDATA%\Code\User\settings.json` | `ManagedKeysProfile` | `privacy` | `value` | The current tweak is choice-backed. The live provider instantiates it with the default selected profile, which is the privacy profile. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `actionable` |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+#### `vscode-settings-profile`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `file` |
+| Path | `%APPDATA%\Code\User\settings.json` |
+| Value name | `ManagedKeysProfile` |
+| Value type | `JSON setting bundle` |
+| Notes | The current tweak is choice-backed. The live provider instantiates it with the default selected profile, which is the privacy profile. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Windows or tool default | VS Code uses the existing or default settings-file state because the managed keys are absent. | repo-tweak-provenance, engine-implementation |
+| `value` | `privacy` | Privacy-focused profile | Writes the checked-in VS Code telemetry and experiment keys that the current app selects by default. | repo-tweak-provenance, app-provider, engine-implementation, vm-misc.disable-vscode-telemetry-app-qa-20260507 |
+| `value` | `quiet` | Quiet / manual profile | Writes the stricter checked-in profile that also disables updates, recommendations, autofetch, and package lookups. | repo-tweak-provenance, app-provider, engine-implementation, vm-misc.disable-vscode-telemetry-app-qa-20260507 |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Hold current or default state | Research tracking and backlog reduction only | vscode-settings-profile: missing None - Keep the current or default state until this first-party card completes the research-provider promotion path. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Windows/default hold | ['Research tracking only', 'Backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Current app behavior', 'VM app QA', 'Research comparison'] | ['Systems where the listed tradeoffs are unacceptable'] | `True` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for misc.disable-vscode-telemetry | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | ui-mapping, behavior |
+| `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping |
+| `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Misc/DisableVSCodeTelemetryTweak.cs | `high` | path, value, behavior |
+| `vm-misc.disable-vscode-telemetry-app-qa-20260507` | `vm-test` | `VM test / probe` | RegProbe app QA apply/rollback proof for misc.disable-vscode-telemetry | [evidence/captures/misc-disable-vscode-telemetry-app-qa-20260507.json](../evidence/captures/misc-disable-vscode-telemetry-app-qa-20260507.json) | `high` | path, value, behavior, side-effects, ui-mapping |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/misc/misc.md](../Docs/misc/misc.md) |
+| Exact quote / path | [Docs/misc/misc.md:297](../Docs/misc/misc.md:297) documents Disable VSC Telemetry and the VS Code telemetry/update/online-feature settings used by this card. |
+| Key found on page | `True` |
+| Notes | The misc documentation maps the VS Code settings profile to telemetry level, update mode, online experiments, git/npm online fetches, and recommendation controls. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `True` |
+| Recommended for general users | `True` |
+| Restore default supported | `False` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | Validation proof, checked-in provider/engine mapping, and 2026-05-07 VM app QA now converge: the app detected, applied, verified, and rolled back this card successfully under the QA-only gated mutation override. |
+
+---
 
 ### `privacy.block-microsoft-accounts`
 
@@ -10787,6 +12828,7 @@ Current writes
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-appprivacy-admx` | `official-doc` | `Microsoft official doc` | Microsoft AppPrivacy administrative template | [evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx) | `high` | path, value, allowed-values |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current privacy provider broad deny bundle | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | ui-mapping, behavior |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -11531,6 +13573,7 @@ Current writes
 | `admx-appcompat-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) | `high` | path, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
 | `procmon-appcompat-engine` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - AppCompat policy path bundle | [evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml](../evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml) and [evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv](../evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv) | `high` | value, behavior, version-scope |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -12504,6 +14547,7 @@ Current writes
 | `ms-dotnet-cli-telemetry` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Telemetry for the .NET CLI | [https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry](https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry) | `high` | value, allowed-values, behavior |
 | `ms-win32-environment` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_Environment class | [https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment) | `high` | path, default, behavior |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-user-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM user-scope current-state revalidation batch | [registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 
@@ -12731,7 +14775,8 @@ Current writes
 | `local-windowscopilot-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-copilot` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
-| `vm-privacy.disable-copilot-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for TurnOffWindowsCopilot | [evidence/captures/privacy-disable-copilot-etw-stackwalk-attempt-20260427.json](../evidence/captures/privacy-disable-copilot-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-20260427b/privacy-disable-copilot-etw-20260427b-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-20260427b/privacy-disable-copilot-etw-20260427b-summary.json) | `low` | behavior, version-scope |
+| `vm-privacy.disable-copilot-etw-stackwalk-attempt-20260427` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for TurnOffWindowsCopilot | [evidence/captures/privacy-disable-copilot-etw-stackwalk-attempt-20260427.json](../evidence/captures/privacy-disable-copilot-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-20260427b/privacy-disable-copilot-etw-20260427b-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-20260427b/privacy-disable-copilot-etw-20260427b-summary.json) | `low` | behavior, version-scope |
+| `vm-privacy.disable-copilot-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for TurnOffWindowsCopilot | [evidence/captures/privacy-disable-copilot-etw-qga-unblock-20260507.json](../evidence/captures/privacy-disable-copilot-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-qga-unblock-20260507c/privacy-disable-copilot-etw-qga-unblock-20260507c-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-qga-unblock-20260507c/privacy-disable-copilot-etw-qga-unblock-20260507c-summary.json) and [evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-qga-unblock-20260507c/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-qga-unblock-20260507c/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-qga-unblock-20260507c/privacy-disable-copilot-etw-qga-unblock-20260507c.etl](../evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-qga-unblock-20260507c/privacy-disable-copilot-etw-qga-unblock-20260507c.etl) | `medium` | runtime-observation, tooling-fix, version-scope, behavior |
 | `vm-privacy.disable-copilot-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for TurnOffWindowsCopilot | [evidence/raw/ghidra/ghidra-privacy-disable-copilot-20260427b/summary.json](../evidence/raw/ghidra/ghidra-privacy-disable-copilot-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -12847,6 +14892,7 @@ Current writes
 | `local-grouppolicy-adml-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml EnableCDP help text | [evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-enablecdp-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - EnableCdp policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
+| `vm-privacy.disable-cross-device-experiences.policy-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk probe receipt | [evidence/captures/privacy-disable-cross-device-experiences-policy-etw-qga-unblock-20260507.json](../evidence/captures/privacy-disable-cross-device-experiences-policy-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507.etl) | `medium` | path, value, version-scope |
 
 **Validation proof**
 
@@ -13683,7 +15729,8 @@ Nohuto lineage references:
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-find-my-device` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-findmydevice-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - Find My Device policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
-| `vm-privacy.disable-find-my-device-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for AllowFindMyDevice | [evidence/captures/privacy-disable-find-my-device-etw-stackwalk-attempt-20260427.json](../evidence/captures/privacy-disable-find-my-device-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/privacy-disable-find-my-device-etw-20260427a/privacy-disable-find-my-device-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-find-my-device-etw-20260427a/privacy-disable-find-my-device-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-privacy.disable-find-my-device-etw-stackwalk-attempt-20260427` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for AllowFindMyDevice | [evidence/captures/privacy-disable-find-my-device-etw-stackwalk-attempt-20260427.json](../evidence/captures/privacy-disable-find-my-device-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/privacy-disable-find-my-device-etw-20260427a/privacy-disable-find-my-device-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-find-my-device-etw-20260427a/privacy-disable-find-my-device-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-privacy.disable-find-my-device-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for AllowFindMyDevice | [evidence/captures/privacy-disable-find-my-device-etw-qga-unblock-20260507.json](../evidence/captures/privacy-disable-find-my-device-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/privacy-disable-find-my-device-etw-qga-unblock-20260507/privacy-disable-find-my-device-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-find-my-device-etw-qga-unblock-20260507/privacy-disable-find-my-device-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/privacy-disable-find-my-device-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/privacy-disable-find-my-device-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/privacy-disable-find-my-device-etw-qga-unblock-20260507/privacy-disable-find-my-device-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/privacy-disable-find-my-device-etw-qga-unblock-20260507/privacy-disable-find-my-device-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-privacy.disable-find-my-device-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for AllowFindMyDevice | [evidence/raw/ghidra/ghidra-privacy-disable-find-my-device-20260427a/summary.json](../evidence/raw/ghidra/ghidra-privacy-disable-find-my-device-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -15745,7 +17792,8 @@ Current writes
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `procmon-crossdevice-resume-probe` | `procmon-trace` | `VM Procmon trace` | Guest Procmon probe for CrossDeviceResume resume toggle | [evidence/raw/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt](../evidence/raw/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt) and [evidence/raw/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md](../evidence/raw/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md) | `medium` | path, behavior, version-scope |
 | `ms-connectivity-disable-cross-device-resume` | `policy-csp` | `Microsoft policy CSP` | Microsoft Learn: Policy CSP - Connectivity / DisableCrossDeviceResume | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume) | `high` | behavior, version-scope |
-| `vm-privacy.disable-resume-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for IsResumeAllowed | [evidence/captures/privacy-disable-resume-etw-stackwalk-attempt-20260427.json](../evidence/captures/privacy-disable-resume-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/privacy-disable-resume-etw-20260427a/privacy-disable-resume-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-resume-etw-20260427a/privacy-disable-resume-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-privacy.disable-resume-etw-stackwalk-attempt-20260427` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for IsResumeAllowed | [evidence/captures/privacy-disable-resume-etw-stackwalk-attempt-20260427.json](../evidence/captures/privacy-disable-resume-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/privacy-disable-resume-etw-20260427a/privacy-disable-resume-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-resume-etw-20260427a/privacy-disable-resume-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-privacy.disable-resume-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for IsResumeAllowed | [evidence/captures/privacy-disable-resume-etw-qga-unblock-20260507.json](../evidence/captures/privacy-disable-resume-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/privacy-disable-resume-etw-qga-unblock-20260507/privacy-disable-resume-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-resume-etw-qga-unblock-20260507/privacy-disable-resume-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/privacy-disable-resume-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/privacy-disable-resume-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/privacy-disable-resume-etw-qga-unblock-20260507/privacy-disable-resume-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/privacy-disable-resume-etw-qga-unblock-20260507/privacy-disable-resume-etw-qga-unblock-20260507.etl) | `medium` | runtime-observation, tooling-fix, path, version-scope |
 | `vm-privacy.disable-resume-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for IsResumeAllowed | [evidence/raw/ghidra/ghidra-privacy-disable-resume-20260427a/summary.json](../evidence/raw/ghidra/ghidra-privacy-disable-resume-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -16317,7 +18365,8 @@ Current writes
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-steps-recorder` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-uar-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableUAR policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
-| `vm-privacy.disable-steps-recorder-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DisableUAR | [evidence/captures/privacy-disable-steps-recorder-etw-stackwalk-attempt-20260427.json](../evidence/captures/privacy-disable-steps-recorder-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-20260427a/privacy-disable-steps-recorder-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-20260427a/privacy-disable-steps-recorder-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-privacy.disable-steps-recorder-etw-stackwalk-attempt-20260427` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for DisableUAR | [evidence/captures/privacy-disable-steps-recorder-etw-stackwalk-attempt-20260427.json](../evidence/captures/privacy-disable-steps-recorder-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-20260427a/privacy-disable-steps-recorder-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-20260427a/privacy-disable-steps-recorder-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-privacy.disable-steps-recorder-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for DisableUAR | [evidence/captures/privacy-disable-steps-recorder-etw-qga-unblock-20260507.json](../evidence/captures/privacy-disable-steps-recorder-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-qga-unblock-20260507/privacy-disable-steps-recorder-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-qga-unblock-20260507/privacy-disable-steps-recorder-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-qga-unblock-20260507/privacy-disable-steps-recorder-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-qga-unblock-20260507/privacy-disable-steps-recorder-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-privacy.disable-steps-recorder-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisableUAR | [evidence/raw/ghidra/ghidra-privacy-disable-steps-recorder-20260427a/summary.json](../evidence/raw/ghidra/ghidra-privacy-disable-steps-recorder-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -16466,6 +18515,7 @@ Current writes
 | `local-cloudcontent-adml-settings` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightOnSettings help text | [evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml) | `high` | behavior, default, side-effects |
 | `local-cloudcontent-admx-welcome` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.admx DisableWindowsSpotlightWindowsWelcomeExperience mapping | [evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-cloudcontent-adml-welcome` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightWindowsWelcomeExperience help text | [evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml) | `high` | behavior, default, side-effects |
+| `vm-privacy.disable-suggestions.policy-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk HKCU probe receipt | [evidence/captures/privacy-disable-suggestions-policy-etw-qga-unblock-20260507.json](../evidence/captures/privacy-disable-suggestions-policy-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507.etl) and [evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507.etl) and 3 additional raw artifact refs listed in the receipt | `low` | path, version-scope |
 
 **Validation proof**
 
@@ -17843,7 +19893,8 @@ Current writes
 | `local-security-defaults-hide-username` | `official-doc` | `Microsoft official doc` | Local Windows default security baseline entry | [evidence/files/external/c/Windows/inf/defltbase.inf.md](../evidence/files/external/c/Windows/inf/defltbase.inf.md) | `high` | default, value |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-hide-username-at-signin` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
-| `vm-privacy.hide-username-at-signin-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DontDisplayUserName | [evidence/captures/privacy-hide-username-at-signin-etw-stackwalk-attempt-20260427.json](../evidence/captures/privacy-hide-username-at-signin-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-20260427a/privacy-hide-username-at-signin-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-20260427a/privacy-hide-username-at-signin-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-privacy.hide-username-at-signin-etw-stackwalk-attempt-20260427` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for DontDisplayUserName | [evidence/captures/privacy-hide-username-at-signin-etw-stackwalk-attempt-20260427.json](../evidence/captures/privacy-hide-username-at-signin-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-20260427a/privacy-hide-username-at-signin-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-20260427a/privacy-hide-username-at-signin-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-privacy.hide-username-at-signin-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for DontDisplayUserName | [evidence/captures/privacy-hide-username-at-signin-etw-qga-unblock-20260507.json](../evidence/captures/privacy-hide-username-at-signin-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-qga-unblock-20260507/privacy-hide-username-at-signin-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-qga-unblock-20260507/privacy-hide-username-at-signin-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-qga-unblock-20260507/privacy-hide-username-at-signin-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-qga-unblock-20260507/privacy-hide-username-at-signin-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-privacy.hide-username-at-signin-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DontDisplayUserName | [evidence/raw/ghidra/ghidra-privacy-hide-username-at-signin-20260427a/summary.json](../evidence/raw/ghidra/ghidra-privacy-hide-username-at-signin-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -18072,7 +20123,8 @@ Current writes
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-limit-dump-collection` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-crashdump-gate` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto crash-dump gate trace | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/IopInitializeDumpPolicySettings.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/IopInitializeDumpPolicySettings.c); [Docs/privacy/assets/crashdmp.c](../Docs/privacy/assets/crashdmp.c) | `medium` | path, behavior, dependency |
-| `vm-privacy.limit-dump-collection-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for LimitDumpCollection | [evidence/captures/privacy-limit-dump-collection-etw-stackwalk-attempt-20260427.json](../evidence/captures/privacy-limit-dump-collection-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/privacy-limit-dump-collection-etw-20260427a/privacy-limit-dump-collection-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/privacy-limit-dump-collection-etw-20260427a/privacy-limit-dump-collection-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-privacy.limit-dump-collection-etw-stackwalk-attempt-20260427` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for LimitDumpCollection | [evidence/captures/privacy-limit-dump-collection-etw-stackwalk-attempt-20260427.json](../evidence/captures/privacy-limit-dump-collection-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/privacy-limit-dump-collection-etw-20260427a/privacy-limit-dump-collection-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/privacy-limit-dump-collection-etw-20260427a/privacy-limit-dump-collection-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-privacy.limit-dump-collection-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for LimitDumpCollection | [evidence/captures/privacy-limit-dump-collection-etw-qga-unblock-20260507.json](../evidence/captures/privacy-limit-dump-collection-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/privacy-limit-dump-collection-etw-qga-unblock-20260507/privacy-limit-dump-collection-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/privacy-limit-dump-collection-etw-qga-unblock-20260507/privacy-limit-dump-collection-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/privacy-limit-dump-collection-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/privacy-limit-dump-collection-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/privacy-limit-dump-collection-etw-qga-unblock-20260507/privacy-limit-dump-collection-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/privacy-limit-dump-collection-etw-qga-unblock-20260507/privacy-limit-dump-collection-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-privacy.limit-dump-collection-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for LimitDumpCollection | [evidence/raw/ghidra/ghidra-privacy-limit-dump-collection-20260427a/summary.json](../evidence/raw/ghidra/ghidra-privacy-limit-dump-collection-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -18189,6 +20241,7 @@ Current writes
 | `local-datacollection-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DataCollection.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adml](../evidence/files/external/c/PolicyDefinitions/en-US/DataCollection.adml) | `high` | behavior, default, version-scope, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `nohuto-allowtelemetry-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - AllowTelemetry policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -18568,14 +20621,15 @@ Current writes
 | `vm-policy-system-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
 | `nohuto-uac-bootphase` | `decompilation` | `Our Ghidra decompilation` | Boot-phase UAC policy cluster lead | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c) | `medium` | path, behavior, dependency |
 | `static-policy-system-enable-virtualization-20260330` | `decompilation` | `Our Ghidra decompilation` | Path-aware static probe for EnableVirtualization | [evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json](../evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json) and [evidence/raw/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md](../evidence/raw/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md) | `high` | path, value, behavior, version-scope |
-| `vm-policy-system-enable-virtualization-runtime-20260330` | `etw-trace` | `unspecified` | Path-aware lightweight ETW follow-up for EnableVirtualization | [evidence/files/path-aware/path-aware-runtime-20260330-221529/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-221529/summary.json) and [evidence/files/path-aware/path-aware-runtime-20260330-221529/policy-system-enable-virtualization/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-221529/policy-system-enable-virtualization/summary.json) | `medium` | behavior, risk, version-scope |
-| `vm-policy-system-enable-virtualization-runtime-secondary-20260331` | `etw-trace` | `unspecified` | Secondary-profile path-aware ETW replay for EnableVirtualization | [evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/summary.json](../evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/summary.json) and [evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/policy-system-enable-virtualization/summary.json](../evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/policy-system-enable-virtualization/summary.json) | `medium` | behavior, risk, version-scope |
+| `vm-policy-system-enable-virtualization-runtime-20260330` | `etw-trace` | `VM ETW trace` | Path-aware lightweight ETW follow-up for EnableVirtualization | [evidence/files/path-aware/path-aware-runtime-20260330-221529/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-221529/summary.json) and [evidence/files/path-aware/path-aware-runtime-20260330-221529/policy-system-enable-virtualization/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-221529/policy-system-enable-virtualization/summary.json) | `medium` | behavior, risk, version-scope |
+| `vm-policy-system-enable-virtualization-runtime-secondary-20260331` | `etw-trace` | `VM ETW trace` | Secondary-profile path-aware ETW replay for EnableVirtualization | [evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/summary.json](../evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/summary.json) and [evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/policy-system-enable-virtualization/summary.json](../evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/policy-system-enable-virtualization/summary.json) | `medium` | behavior, risk, version-scope |
 | `vm-policy-system-enable-virtualization-kvm-procmon-20260406` | `procmon-trace` | `VM Procmon trace` | Linux KVM Procmon replay for EnableVirtualization | [evidence/files/vm/enablevirtualization-procmon-kvm-20260406b/enablevirtualization-procmon-kvm-20260406b-summary.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-20260406b/enablevirtualization-procmon-kvm-20260406b-summary.json) and [evidence/files/vm/enablevirtualization-procmon-kvm-20260406b/host-review.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-20260406b/host-review.json) | `medium` | behavior, risk, version-scope |
 | `vm-policy-system-enable-virtualization-kvm-local-kd-20260406` | `vm-test` | `VM test / probe` | Linux KVM local-KD disassembly for EnableVirtualization | [evidence/files/vm/local-kd-enablevirtualization-slice-20260406a/local-kd-enablevirtualization-slice-20260406a-summary.json](../evidence/files/vm-tooling-staging/local-kd-enablevirtualization-slice-20260406a/local-kd-enablevirtualization-slice-20260406a-summary.json) and [evidence/files/vm/local-kd-enablevirtualization-slice-20260406a/local-kd-enablevirtualization-slice-20260406a.log](../evidence/files/vm-tooling-staging/local-kd-enablevirtualization-slice-20260406a/local-kd-enablevirtualization-slice-20260406a.log) and [evidence/files/vm/local-kd-enablevirtualization-strings-20260406a/local-kd-enablevirtualization-strings-20260406a-summary.json](../evidence/files/vm-tooling-staging/local-kd-enablevirtualization-strings-20260406a/local-kd-enablevirtualization-strings-20260406a-summary.json) and [evidence/files/vm/local-kd-enablevirtualization-strings-20260406a/local-kd-enablevirtualization-strings-20260406a.log](../evidence/files/vm-tooling-staging/local-kd-enablevirtualization-strings-20260406a/local-kd-enablevirtualization-strings-20260406a.log) and [research/notes/policy-system-enable-virtualization-kvm-local-kd-disasm-follow-up-20260406.md](notes/policy-system-enable-virtualization-kvm-local-kd-disasm-follow-up-20260406.md) | `medium` | path, value, behavior, version-scope |
 | `vm-policy-system-enable-virtualization-kvm-procmon-recovery-20260407` | `procmon-trace` | `VM Procmon trace` | Linux KVM recovery-backed Procmon replay for EnableVirtualization | [evidence/files/vm/enablevirtualization-procmon-kvm-recovery-20260407a/enablevirtualization-procmon-kvm-recovery-20260407a-summary.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-recovery-20260407a/enablevirtualization-procmon-kvm-recovery-20260407a-summary.json) and [evidence/files/vm/enablevirtualization-procmon-kvm-recovery-20260407a/enablevirtualization-procmon-kvm-recovery-20260407a.txt](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-recovery-20260407a/enablevirtualization-procmon-kvm-recovery-20260407a.txt) and [evidence/files/vm/enablevirtualization-procmon-kvm-recovery-20260407a/host-review.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-recovery-20260407a/host-review.json) and [research/notes/policy-system-enable-virtualization-kvm-procmon-recovery-20260407.md](notes/policy-system-enable-virtualization-kvm-procmon-recovery-20260407.md) | `medium` | behavior, risk, version-scope |
 | `vm-policy-system-enable-virtualization-kvm-procmon-bootlog-20260407` | `vm-test` | `VM test / probe` | Linux KVM Procmon bootlog probe for EnableVirtualization | [evidence/files/vm/enablevirtualization-procmon-kvm-bootlog-20260407h/summary-arm.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-bootlog-20260407h/summary-arm.json) and [evidence/files/vm/enablevirtualization-procmon-kvm-bootlog-20260407h/summary-collect.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-bootlog-20260407h/summary-collect.json) and [evidence/files/vm/enablevirtualization-procmon-kvm-bootlog-20260407h/host-review.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-bootlog-20260407h/host-review.json) and [research/notes/policy-system-enable-virtualization-kvm-procmon-bootlog-20260407.md](notes/policy-system-enable-virtualization-kvm-procmon-bootlog-20260407.md) | `medium` | behavior, risk, version-scope |
-| `vm-policy-system-enable-virtualization-wpr-qga-runtime-read-20260413` | `etw-trace` | `unspecified` | QGA-launched WPR boot trace captures exact EnableVirtualization QueryValue hits | [evidence/files/vm/enablevirtualization-wpr-qga-runtime-read-20260413/enable-virtualization-wpr-qga-20260413b-summary.json](../evidence/files/vm-tooling-staging/enablevirtualization-wpr-qga-runtime-read-20260413/enable-virtualization-wpr-qga-20260413b-summary.json) and [evidence/files/vm/enablevirtualization-wpr-qga-runtime-read-20260413/enable-virtualization-wpr-qga-20260413b.normalized.json](../evidence/files/vm-tooling-staging/enablevirtualization-wpr-qga-runtime-read-20260413/enable-virtualization-wpr-qga-20260413b.normalized.json) and [research/notes/policy-system-enable-virtualization-wpr-qga-runtime-read-20260413.md](notes/policy-system-enable-virtualization-wpr-qga-runtime-read-20260413.md) | `high` | path, value, behavior, version-scope |
-| `vm-policy.system.enable-virtualization-etw-stackwalk-attempt-20260424i` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-summary.json](../evidence/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-summary.json) and [evidence/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-stage.json](../evidence/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-stage.json) and [evidence/captures/policy-system-enable-virtualization-etw-stackwalk-attempt-20260424.json](../evidence/captures/policy-system-enable-virtualization-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-policy-system-enable-virtualization-wpr-qga-runtime-read-20260413` | `etw-trace` | `VM ETW trace` | QGA-launched WPR boot trace captures exact EnableVirtualization QueryValue hits | [evidence/files/vm/enablevirtualization-wpr-qga-runtime-read-20260413/enable-virtualization-wpr-qga-20260413b-summary.json](../evidence/files/vm-tooling-staging/enablevirtualization-wpr-qga-runtime-read-20260413/enable-virtualization-wpr-qga-20260413b-summary.json) and [evidence/files/vm/enablevirtualization-wpr-qga-runtime-read-20260413/enable-virtualization-wpr-qga-20260413b.normalized.json](../evidence/files/vm-tooling-staging/enablevirtualization-wpr-qga-runtime-read-20260413/enable-virtualization-wpr-qga-20260413b.normalized.json) and [research/notes/policy-system-enable-virtualization-wpr-qga-runtime-read-20260413.md](notes/policy-system-enable-virtualization-wpr-qga-runtime-read-20260413.md) | `high` | path, value, behavior, version-scope |
+| `vm-policy.system.enable-virtualization-etw-stackwalk-attempt-20260424i` | `etw-trace` | `VM ETW trace` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-summary.json](../evidence/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-summary.json) and [evidence/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-stage.json](../evidence/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-stage.json) and [evidence/captures/policy-system-enable-virtualization-etw-stackwalk-attempt-20260424.json](../evidence/captures/policy-system-enable-virtualization-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-policy.system.enable-virtualization-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for EnableVirtualization | [evidence/captures/policy-system-enable-virtualization-etw-qga-unblock-20260507.json](../evidence/captures/policy-system-enable-virtualization-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/policy-system-enable-virtualization-etw-qga-unblock-20260507/policy-system-enable-virtualization-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/policy-system-enable-virtualization-etw-qga-unblock-20260507/policy-system-enable-virtualization-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/policy-system-enable-virtualization-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/policy-system-enable-virtualization-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/policy-system-enable-virtualization-etw-qga-unblock-20260507/policy-system-enable-virtualization-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/policy-system-enable-virtualization-etw-qga-unblock-20260507/policy-system-enable-virtualization-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 
 **Validation proof**
 
@@ -18698,6 +20752,7 @@ Current writes
 | `vm-defender-submit-samples-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean absent-value check for Defender sample submission | [evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt](../evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt) | `medium` | path, runtime-read, default |
 | `vm-defender-submit-samples-state2` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon read for SubmitSamplesConsent = 2 | [evidence/raw/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt](../evidence/raw/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt) | `high` | path, value, runtime-read, behavior |
 | `app-security-provider-disable-defender-sample-submission` | `repo-code` | `Current repo code` | Current security provider sample-submission write | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 
@@ -18926,6 +20981,7 @@ Current writes
 | `vm-defender-enhanced-notifications-enabled` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon enabled-state read for Security Center notifications policy | [evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt](../evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt) | `high` | path, value, runtime-read, behavior |
 | `vm-defender-enhanced-notifications-reporting-alias-check` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon reporting-path alias check | [evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt](../evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt) | `medium` | path, runtime-read |
 | `app-security-provider-disable-enhanced-notifications` | `repo-code` | `Current repo code` | Current security provider enhanced notifications write | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | ui-mapping, path, value |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 
@@ -19037,6 +21093,7 @@ Current writes
 | `local-filesys-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx](../evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-filesys-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml](../evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml) | `high` | behavior, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -19265,6 +21322,7 @@ Current writes
 | `local-credui-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/CredUI.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CredUI.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-credui-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredUI.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/CredUI.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CredUI.adml) | `high` | behavior, default, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -19377,6 +21435,7 @@ Current writes
 | `local-credentialproviders-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft CredentialProviders.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/CredentialProviders.admx](../evidence/files/external/c/Windows/PolicyDefinitions/CredentialProviders.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-credentialproviders-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft CredentialProviders.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/CredentialProviders.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CredentialProviders.adml) | `high` | behavior, default, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -19614,6 +21673,7 @@ Windows Internals references:
 | `local-exploitguard-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft ExploitGuard.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/ExploitGuard.adml](../evidence/files/external/c/PolicyDefinitions/en-US/ExploitGuard.adml) | `high` | behavior, default, side-effects |
 | `ms-exploit-protection-doc` | `official-doc` | `Microsoft official doc` | Microsoft Learn exploit protection guidance | [https://learn.microsoft.com/en-us/defender-endpoint/customize-exploit-protection](https://learn.microsoft.com/en-us/defender-endpoint/customize-exploit-protection) | `high` | behavior, allowed-values, risk |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 
@@ -19727,6 +21787,7 @@ Current writes
 | `local-systemrestore-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft SystemRestore.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/SystemRestore.admx](../evidence/files/external/c/Windows/PolicyDefinitions/SystemRestore.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-systemrestore-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft SystemRestore.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/SystemRestore.adml](../evidence/files/external/c/PolicyDefinitions/en-US/SystemRestore.adml) | `high` | behavior, default, side-effects, risk |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 
@@ -19857,6 +21918,7 @@ Current writes
 | `local-windowsfirewall-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsFirewall.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsFirewall.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsFirewall.adml) | `high` | behavior, default, side-effects |
 | `ms-azure-firewall-runtime-paths` | `troubleshoot-doc` | `Microsoft support doc` | Microsoft Learn: Azure VM firewall recovery guidance | [https://learn.microsoft.com/en-us/troubleshoot/azure/virtual-machines/windows/disable-guest-os-firewall-windows](https://learn.microsoft.com/en-us/troubleshoot/azure/virtual-machines/windows/disable-guest-os-firewall-windows) | `medium-high` | path, runtime-surface |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-matching |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 
@@ -19984,6 +22046,7 @@ Current writes
 | `local-windowsupdate-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-windowsupdate-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsUpdate.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsUpdate.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsUpdate.adml) | `high` | behavior, default, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, app-matches |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 
@@ -20249,6 +22312,7 @@ Current writes
 | `vm-defender-spynet-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon baseline for Defender MAPS policy path | [evidence/raw/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt](../evidence/raw/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt) | `high` | path, runtime-read, default |
 | `vm-defender-spynet-state2` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon read for SpyNetReporting = 2 | [evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt](../evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt) | `high` | path, value, runtime-read, behavior |
 | `app-security-provider-enable-defender-maps-advanced-membership` | `repo-code` | `Current repo code` | Current security provider MAPS membership write | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-security.enable-defender-maps-advanced-membership-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk probe receipt | [evidence/captures/security-enable-defender-maps-advanced-membership-etw-qga-unblock-20260507.json](../evidence/captures/security-enable-defender-maps-advanced-membership-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507/security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507/security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507/security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507/security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507.etl) | `medium` | path, value, version-scope |
 
 **Validation proof**
 
@@ -20360,6 +22424,7 @@ Current writes
 | `local-passport-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Passport.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/Passport.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Passport.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-passport-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Passport.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Passport.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Passport.adml) | `high` | behavior, default, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping, ui-mapping |
+| `kvm-machine-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine/policy current-state revalidation batch | [registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 
@@ -20474,6 +22539,7 @@ Current writes
 | `local-sudo-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft Sudo.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/Sudo.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Sudo.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-sudo-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft Sudo.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Sudo.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Sudo.adml) | `high` | behavior, default, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-security.enable-sudo-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk probe receipt | [evidence/captures/security-enable-sudo-etw-qga-unblock-20260507.json](../evidence/captures/security-enable-sudo-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/security-enable-sudo-enabled-etw-qga-unblock-20260507/security-enable-sudo-enabled-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/security-enable-sudo-enabled-etw-qga-unblock-20260507/security-enable-sudo-enabled-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/security-enable-sudo-enabled-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/security-enable-sudo-enabled-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/security-enable-sudo-enabled-etw-qga-unblock-20260507/security-enable-sudo-enabled-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/security-enable-sudo-enabled-etw-qga-unblock-20260507/security-enable-sudo-enabled-etw-qga-unblock-20260507.etl) | `medium` | path, value, version-scope |
 
 **Validation proof**
 
@@ -20592,6 +22658,7 @@ Current writes
 | `vm-defender-hide-exclusions-root-visibility` | `vm-test` | `VM test / probe` | Win25H2Clean visibility change with root-path HideExclusionsFromLocalAdmins = 1 | [evidence/files/vm/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json](../evidence/files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json) | `high` | value, behavior |
 | `vm-defender-hide-exclusions-policymanager-alias` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Policy Manager alias for HideExclusionsFromLocalAdmins = 1 | [evidence/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt](../evidence/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt) | `high` | path, value, runtime-read, behavior |
 | `app-security-provider-hide-defender-exclusions-from-local-admins` | `repo-code` | `Current repo code` | Current security provider HideExclusionsFromLocalAdmins write | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -20720,6 +22787,7 @@ Current writes
 | `local-powershellpolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-powershellpolicy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml) | `high` | behavior, default, side-effects, risk |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -20879,6 +22947,7 @@ Current writes
 | `vm-defender-threat-file-hash-root-pe-no-hash` | `vm-test` | `VM test / probe` | Legacy root PE pass still produced no event 1120 | [evidence/files/vm/defender-threat-file-hash-legacyroot-1-custom-20260325-133409/defender-threat-file-hash-legacyroot-1-custom-events.json](../evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-custom-20260325-133409/defender-threat-file-hash-legacyroot-1-custom-events.json) | `high` | behavior, runtime-read |
 | `vm-defender-threat-file-hash-policymanager-pe-no-hash` | `vm-test` | `VM test / probe` | Policy Manager PE pass still produced no event 1120 | [evidence/files/vm/defender-threat-file-hash-policymanager-1-custom-20260325-135316/defender-threat-file-hash-policymanager-1-custom-events.json](../evidence/files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-custom-20260325-135316/defender-threat-file-hash-policymanager-1-custom-events.json) | `high` | behavior, runtime-read |
 | `vm-defender-threat-file-hash-mpengine-pe-reboot-no-hash` | `vm-test` | `VM test / probe` | Rebooted MpEngine PE pass still produced no event 1120 | [evidence/files/vm/defender-threat-file-hash-mpengine-1-custom-20260325-140816/defender-threat-file-hash-mpengine-1-custom-events.json](../evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-custom-20260325-140816/defender-threat-file-hash-mpengine-1-custom-events.json) | `high` | behavior, runtime-read, path |
+| `vm-security.threat-file-hash-logging-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk probe receipt | [evidence/captures/security-threat-file-hash-logging-etw-qga-unblock-20260507.json](../evidence/captures/security-threat-file-hash-logging-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507/security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507/security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507/security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507/security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507.etl) and [evidence/raw/etw-stackwalk/security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507/security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507/security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507/security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507/security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507.etl) and 3 additional raw artifact refs listed in the receipt | `medium` | path, value, version-scope |
 
 **Validation proof**
 
@@ -21138,6 +23207,7 @@ Current writes
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-uac-bootphase` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto boot-phase UAC value read | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c) | `medium` | path, behavior, dependency |
 | `procmon-uac-never-notify` | `procmon-trace` | `VM Procmon trace` | Procmon capture - UAC policy value reads | [evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md](../evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md) and [evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md](../evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md) | `high` | path, value, behavior, ui-mapping |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -21475,7 +23545,8 @@ Current writes
 | --- | --- | --- | --- | --- | --- | --- |
 | `microsoft-support-display-parameters` | `official-doc` | `Microsoft official doc` | Microsoft Support: Stop error information isn't displayed on the blue screen in Windows | [https://support.microsoft.com/en-us/topic/stop-error-information-isn-t-displayed-on-the-blue-screen-in-windows-216528fb-94fd-11a2-2675-398ecf5cc237](https://support.microsoft.com/en-us/topic/stop-error-information-isn-t-displayed-on-the-blue-screen-in-windows-216528fb-94fd-11a2-2675-398ecf5cc237) | `high` | path, value, allowed-values, behavior |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-system.bsod-display-parameters-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DisplayParameters | [evidence/captures/system-bsod-display-parameters-etw-stackwalk-attempt-20260427.json](../evidence/captures/system-bsod-display-parameters-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/system-bsod-display-parameters-etw-20260427a/system-bsod-display-parameters-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/system-bsod-display-parameters-etw-20260427a/system-bsod-display-parameters-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-system.bsod-display-parameters-etw-stackwalk-attempt-20260427` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for DisplayParameters | [evidence/captures/system-bsod-display-parameters-etw-stackwalk-attempt-20260427.json](../evidence/captures/system-bsod-display-parameters-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/system-bsod-display-parameters-etw-20260427a/system-bsod-display-parameters-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/system-bsod-display-parameters-etw-20260427a/system-bsod-display-parameters-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-system.bsod-display-parameters-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for DisplayParameters | [evidence/captures/system-bsod-display-parameters-etw-qga-unblock-20260507.json](../evidence/captures/system-bsod-display-parameters-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/system-bsod-display-parameters-etw-qga-unblock-20260507/system-bsod-display-parameters-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/system-bsod-display-parameters-etw-qga-unblock-20260507/system-bsod-display-parameters-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/system-bsod-display-parameters-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/system-bsod-display-parameters-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/system-bsod-display-parameters-etw-qga-unblock-20260507/system-bsod-display-parameters-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/system-bsod-display-parameters-etw-qga-unblock-20260507/system-bsod-display-parameters-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-system.bsod-display-parameters-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisplayParameters | [evidence/raw/ghidra/ghidra-system-bsod-display-parameters-20260427a/summary.json](../evidence/raw/ghidra/ghidra-system-bsod-display-parameters-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -22177,7 +24248,7 @@ Current writes
 | `ms-windowed-games-optimizations` | `official-doc` | `Microsoft official doc` | Microsoft Support: Optimizations for windowed games in Windows | [https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952](https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952) | `medium` | behavior, side-effects, version-scope |
 | `repo-system-doc-fso` | `repo-doc` | `Current repo docs` | Repo system research notes for Fullscreen Optimizations | [Docs/system/system.md](../Docs/system/system.md) | `medium` | value, ui-mapping, app-mismatch |
 | `procmon-fullscreen-gameconfigstore-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - svchost.exe GameConfigStore fullscreen tuple read | [evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt](../evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt) and [evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv](../evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv) | `high` | path, value, behavior |
-| `ghidra-resourcepolicysrv-fullscreen` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - ResourcePolicyServer GameConfigStore path | [evidence/raw/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md](../evidence/raw/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md) and [evidence/raw/ghidra/system.disable-fullscreen-optimizations/evidence.json](../evidence/raw/ghidra/system.disable-fullscreen-optimizations/evidence.json) | `high` | path, value, behavior |
+| `ghidra-resourcepolicysrv-fullscreen` | `ghidra-headless` | `Our Ghidra headless analysis` | Our Ghidra decompilation - ResourcePolicyServer GameConfigStore path | [evidence/raw/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md](../evidence/raw/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md) and [evidence/raw/ghidra/system.disable-fullscreen-optimizations/evidence.json](../evidence/raw/ghidra/system.disable-fullscreen-optimizations/evidence.json) | `high` | path, value, behavior |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-batch-probe-20260320-disable-fullscreen-optimizations` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Fullscreen optimizations override bundle | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
 | `vm-fullscreen-automated-probe-20260326` | `vm-test` | `VM test / probe` | Win25H2Clean automated fullscreen follow-up | [evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt](../evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt) and [evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json](../evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json) and [evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv](../evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv) | `medium` | version-scope, rollback, open-question |
@@ -22406,10 +24477,11 @@ Current writes
 | `repo-system-doc-jpeg` | `repo-doc` | `Current repo docs` | Repo system research notes for wallpaper JPEG import quality | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, behavior, ui-mapping, app-mismatch |
 | `repo-system-decomp-jpegtranscode` | `decompilation` | `Our Ghidra decompilation` | Decompiled wallpaper transcode path for JPEGImportQuality | [Docs/system/assets/jpeg-TranscodeImage.c](../Docs/system/assets/jpeg-TranscodeImage.c) | `high` | path, value, behavior |
 | `procmon-jpegimportquality-explorer-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer JPEGImportQuality runtime read | [evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt](../evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt) and [evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv](../evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv) | `high` | path, value, behavior |
-| `ghidra-shell32-jpegimportquality` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - shell32 JPEGImportQuality transcode path | [evidence/raw/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md](../evidence/raw/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md) | `high` | path, value, behavior |
+| `ghidra-shell32-jpegimportquality` | `ghidra-headless` | `Our Ghidra headless analysis` | Our Ghidra decompilation - shell32 JPEGImportQuality transcode path | [evidence/raw/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md](../evidence/raw/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md) | `high` | path, value, behavior |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-batch-probe-20260320-disable-jpeg-reduction` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Wallpaper JPEG import quality | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
-| `runtime-jpegimportquality-v31-20260327` | `etw-trace` | `unspecified` | Win25H2Clean v3.1 runtime lane - JPEG wallpaper apply | [evidence/files/vm/jpeg-import-quality-runtime-20260327-124349/summary.json](../evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/summary.json) and [evidence/files/vm/jpeg-import-quality-runtime-20260327-124349/jpeg-import-quality-runtime.etl.md](../evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/jpeg-import-quality-runtime.etl.md) | `medium` | path, value, behavior, rollback |
+| `runtime-jpegimportquality-v31-20260327` | `etw-trace` | `VM ETW trace` | Win25H2Clean v3.1 runtime lane - JPEG wallpaper apply | [evidence/files/vm/jpeg-import-quality-runtime-20260327-124349/summary.json](../evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/summary.json) and [evidence/files/vm/jpeg-import-quality-runtime-20260327-124349/jpeg-import-quality-runtime.etl.md](../evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/jpeg-import-quality-runtime.etl.md) | `medium` | path, value, behavior, rollback |
+| `kvm-user-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM user-scope current-state revalidation batch | [registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 
@@ -22523,7 +24595,8 @@ Current writes
 | `ms-support-restart-apps` | `official-doc` | `Microsoft official doc` | Microsoft support article for the Restart apps sign-in feature | [https://support.microsoft.com/en-us/windows/sign-in-options-in-windows-8ae09c04-c5da-41c9-972f-b126a13d18a8](https://support.microsoft.com/en-us/windows/sign-in-options-in-windows-8ae09c04-c5da-41c9-972f-b126a13d18a8) | `medium` | behavior, default, side-effects, version-scope |
 | `runtime-restartapps-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - RestartApps registry mapping | [evidence/files/vm/restartapps_toggle_out.txt](../evidence/files/vm-tooling-staging/restartapps_toggle_out.txt) | `high` | value, behavior, version-scope |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
-| `vm-system.disable-restartable-apps-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for RestartApps | [evidence/captures/system-disable-restartable-apps-etw-stackwalk-attempt-20260427.json](../evidence/captures/system-disable-restartable-apps-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/system-disable-restartable-apps-etw-20260427b/system-disable-restartable-apps-etw-20260427b-summary.json](../evidence/raw/etw-stackwalk/system-disable-restartable-apps-etw-20260427b/system-disable-restartable-apps-etw-20260427b-summary.json) | `low` | behavior, version-scope |
+| `vm-system.disable-restartable-apps-etw-stackwalk-attempt-20260427` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for RestartApps | [evidence/captures/system-disable-restartable-apps-etw-stackwalk-attempt-20260427.json](../evidence/captures/system-disable-restartable-apps-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/system-disable-restartable-apps-etw-20260427b/system-disable-restartable-apps-etw-20260427b-summary.json](../evidence/raw/etw-stackwalk/system-disable-restartable-apps-etw-20260427b/system-disable-restartable-apps-etw-20260427b-summary.json) | `low` | behavior, version-scope |
+| `vm-system.disable-restartable-apps-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for RestartApps | [evidence/captures/system-disable-restartable-apps-etw-qga-unblock-20260507.json](../evidence/captures/system-disable-restartable-apps-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/system-disable-restartable-apps-etw-qga-unblock-20260507/system-disable-restartable-apps-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/system-disable-restartable-apps-etw-qga-unblock-20260507/system-disable-restartable-apps-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/system-disable-restartable-apps-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/system-disable-restartable-apps-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/system-disable-restartable-apps-etw-qga-unblock-20260507/system-disable-restartable-apps-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/system-disable-restartable-apps-etw-qga-unblock-20260507/system-disable-restartable-apps-etw-qga-unblock-20260507.etl) | `medium` | runtime-observation, tooling-fix, path, version-scope |
 | `vm-system.disable-restartable-apps-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for RestartApps | [evidence/raw/ghidra/ghidra-system-disable-restartable-apps-20260427b/summary.json](../evidence/raw/ghidra/ghidra-system-disable-restartable-apps-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -22973,6 +25046,7 @@ Current writes
 | `ms-shell-icons-shortcut-arrow` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: remove shortcut arrow using Shell Icons value 29 | [https://learn.microsoft.com/en-us/answers/questions/5515171/cannot-remove-shortcut-arrow-have-tried-tweaking-p](https://learn.microsoft.com/en-us/answers/questions/5515171/cannot-remove-shortcut-arrow-have-tried-tweaking-p) | `medium` | path, value, default, behavior |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-incident-shortcut-arrow-shell-drop` | `vm-incident` | `unspecified` | VM incident review - shortcut-arrow shell drop | [research/vm-incidents.json](vm-incidents.json) | `medium` | behavior, side-effects, version-scope |
+| `kvm-policy-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope policy revalidation batch | [registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -23083,10 +25157,11 @@ Current writes
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-startup-delay` | `repo-doc` | `Current repo docs` | Repo system research notes for startup delay | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `ghidra-explorer-serialize-search` | `ghidra-headless` | `unspecified` | Our Ghidra headless string search on explorer.exe for Serialize | [evidence/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt](../evidence/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt) | `medium` | path, string-reference, behavior |
+| `ghidra-explorer-serialize-search` | `ghidra-headless` | `Our Ghidra headless analysis` | Our Ghidra headless string search on explorer.exe for Serialize | [evidence/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt](../evidence/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt) | `medium` | path, string-reference, behavior |
 | `vm-batch-probe-20260320-disable-startup-delay` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Explorer startup delay | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
 | `procmon-startup-delay-shell-restart` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - Explorer shell restart reads StartupDelayInMSec | [evidence/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md](../evidence/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md) | `medium` | path, value, behavior, ui-mapping |
-| `wpr-startup-delay-shell-restart` | `wpr-trace` | `unspecified` | Win25H2Clean WPR trace - Explorer shell restart with StartupDelayInMSec missing and 0 | [research/notes/startup-delay-wpr-trace-20260326.md](notes/startup-delay-wpr-trace-20260326.md) | `medium` | behavior, runtime-trace, shell-health |
+| `wpr-startup-delay-shell-restart` | `wpr-trace` | `VM WPR trace` | Win25H2Clean WPR trace - Explorer shell restart with StartupDelayInMSec missing and 0 | [research/notes/startup-delay-wpr-trace-20260326.md](notes/startup-delay-wpr-trace-20260326.md) | `medium` | behavior, runtime-trace, shell-health |
+| `kvm-user-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM user-scope current-state revalidation batch | [registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Artifact refs**
 
@@ -23661,6 +25736,7 @@ Current writes
 | `repo-system-decomp-game-mode` | `decompilation` | `Our Ghidra decompilation` | Decompiled Game Mode handler string reference | [Docs/system/assets/gamemode-GamingHandlers.c](../Docs/system/assets/gamemode-GamingHandlers.c) | `medium` | path, value, behavior, ui-mapping |
 | `repo-system-doc-game-mode` | `repo-doc` | `Current repo docs` | Repo system research notes for Game Mode | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-user-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM user-scope current-state revalidation batch | [registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 
@@ -23774,7 +25850,8 @@ Current writes
 | `repo-system-doc-hags` | `repo-doc` | `Current repo docs` | Repo system research notes for HAGS | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `runtime-hags-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe for HwSchMode | [evidence/files/vm/hags_toggle_out.txt](../evidence/files/vm-tooling-staging/hags_toggle_out.txt) | `high` | path, value, behavior, version-scope |
-| `vm-system.enable-hags-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for HwSchMode | [evidence/captures/system-enable-hags-etw-stackwalk-attempt-20260427.json](../evidence/captures/system-enable-hags-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/system-enable-hags-etw-20260427b/system-enable-hags-etw-20260427b-summary.json](../evidence/raw/etw-stackwalk/system-enable-hags-etw-20260427b/system-enable-hags-etw-20260427b-summary.json) | `low` | behavior, version-scope |
+| `vm-system.enable-hags-etw-stackwalk-attempt-20260427` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for HwSchMode | [evidence/captures/system-enable-hags-etw-stackwalk-attempt-20260427.json](../evidence/captures/system-enable-hags-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/system-enable-hags-etw-20260427b/system-enable-hags-etw-20260427b-summary.json](../evidence/raw/etw-stackwalk/system-enable-hags-etw-20260427b/system-enable-hags-etw-20260427b-summary.json) | `low` | behavior, version-scope |
+| `vm-system.enable-hags-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for HwSchMode | [evidence/captures/system-enable-hags-etw-qga-unblock-20260507.json](../evidence/captures/system-enable-hags-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-system.enable-hags-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for HwSchMode | [evidence/raw/ghidra/ghidra-system-enable-hags-20260427b/summary.json](../evidence/raw/ghidra/ghidra-system-enable-hags-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -23998,13 +26075,13 @@ Current writes
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `vm-executive-lightweight-runtime-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight ETW runtime follow-up for the Executive worker-thread pair | [evidence/files/vm/executive-worker-threads-lightweight-runtime-20260330-122422/summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/summary.json) and [evidence/files/vm/executive-worker-threads-lightweight-runtime-20260330-122422/system-executive-additional-worker-threads/summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/system-executive-additional-worker-threads/summary.json) and [research/notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md](notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md) | `high` | path, value, behavior, runtime-proof, version-scope |
+| `vm-executive-lightweight-runtime-20260330` | `etw-trace` | `VM ETW trace` | Tools-hardened lightweight ETW runtime follow-up for the Executive worker-thread pair | [evidence/files/vm/executive-worker-threads-lightweight-runtime-20260330-122422/summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/summary.json) and [evidence/files/vm/executive-worker-threads-lightweight-runtime-20260330-122422/system-executive-additional-worker-threads/summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/system-executive-additional-worker-threads/summary.json) and [research/notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md](notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md) | `high` | path, value, behavior, runtime-proof, version-scope |
 | `vm-session-manager-executive-baseline-20260328` | `registry-observation` | `VM registry observation` | Win25H2Clean Session Manager Executive baseline export | [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg) and [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt) | `high` | path, value, default, version-scope |
 | `ghidra-executive-worker-threads-nextgate-ntoskrnl-20260328` | `decompilation` | `Our Ghidra decompilation` | Current-build ntoskrnl Ghidra fallback for the Executive worker-thread pair | [evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md](../evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md) and [evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json](../evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json) | `high` | path, value, behavior, version-scope |
 | `kernel-power-existing-static-probe-20260328` | `inference` | `unspecified` | Kernel power static probe summary for existing Session Manager candidates | [registry-research-framework/audit/kernel-power-existing-static-probe-20260328.json](../registry-research-framework/audit/kernel-power-existing-static-probe-20260328.json) and [research/notes/kernel-power-existing-static-triage-20260328.md](notes/kernel-power-existing-static-triage-20260328.md) | `medium` | path, version-scope |
 | `kernel-power-existing-next-gate-20260328` | `inference` | `unspecified` | Kernel power next-gate intake summary | [registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json](../registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json) and [research/notes/kernel-power-next-gate-ghidra-review-20260328.md](notes/kernel-power-next-gate-ghidra-review-20260328.md) | `medium` | risk, version-scope |
-| `vm-executive-etl-registry-review-20260328` | `etw-trace` | `unspecified` | Bounded host-side ETL review for Session Manager Executive | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md) and [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt) and [research/notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md](notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md) | `medium` | path, behavior, version-scope |
-| `vm-executive-etw-keyword-review-20260328` | `etw-trace` | `unspecified` | ETW-specific keyword review for the Executive worker-thread pair | [evidence/files/vm/executive-etw-keyword-review-20260328-180226/summary.json](../evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/summary.json) and [evidence/files/vm/executive-etw-keyword-review-20260328-180226/executive-etw-keyword-review.txt](../evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/executive-etw-keyword-review.txt) and [research/notes/system-executive-additional-worker-threads-follow-up-package-20260328.md](notes/system-executive-additional-worker-threads-follow-up-package-20260328.md) | `medium` | path, behavior, version-scope |
+| `vm-executive-etl-registry-review-20260328` | `etw-trace` | `VM ETW trace` | Bounded host-side ETL review for Session Manager Executive | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md) and [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt) and [research/notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md](notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md) | `medium` | path, behavior, version-scope |
+| `vm-executive-etw-keyword-review-20260328` | `etw-trace` | `VM ETW trace` | ETW-specific keyword review for the Executive worker-thread pair | [evidence/files/vm/executive-etw-keyword-review-20260328-180226/summary.json](../evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/summary.json) and [evidence/files/vm/executive-etw-keyword-review-20260328-180226/executive-etw-keyword-review.txt](../evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/executive-etw-keyword-review.txt) and [research/notes/system-executive-additional-worker-threads-follow-up-package-20260328.md](notes/system-executive-additional-worker-threads-follow-up-package-20260328.md) | `medium` | path, behavior, version-scope |
 | `vm-executive-procmon-bootlog-20260328` | `procmon-trace` | `VM Procmon trace` | Procmon boot-log review for the Executive worker-thread pair | [evidence/files/vm/executive-worker-threads-procmon-bootlog-20260328-172645/summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary.json) and [evidence/files/vm/executive-worker-threads-procmon-bootlog-20260328-172645/summary-collect.json](../evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary-collect.json) and [research/notes/system-executive-additional-worker-threads-procmon-bootlog-20260328.md](notes/system-executive-additional-worker-threads-procmon-bootlog-20260328.md) | `medium` | behavior, version-scope |
 | `vm-executive-stress-trigger-20260328` | `procmon-trace` | `VM Procmon trace` | Shell-safe post-boot stress trigger for the Executive worker-thread pair | [evidence/files/vm/executive-worker-threads-stress-20260328-184856/summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/summary.json) and [evidence/files/vm/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress.txt](../evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress.txt) and [research/notes/system-executive-additional-worker-threads-stress-trigger-20260328.md](notes/system-executive-additional-worker-threads-stress-trigger-20260328.md) | `medium` | behavior, version-scope |
 | `vm-executive-kvm-procmon-runtime-20260406` | `procmon-trace` | `VM Procmon trace` | Host-driven KVM Procmon replay for the Executive worker-thread pair | [evidence/files/vm/executive-worker-threads-procmon-kvm-20260406e/executive-worker-threads-procmon-kvm-20260406e-summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-procmon-kvm-20260406e/executive-worker-threads-procmon-kvm-20260406e-summary.json) and [evidence/files/vm/executive-worker-threads-procmon-kvm-20260406e/host-review.json](../evidence/files/vm-tooling-staging/executive-worker-threads-procmon-kvm-20260406e/host-review.json) and [research/notes/system-executive-additional-worker-threads-kvm-procmon-runtime-20260406.md](notes/system-executive-additional-worker-threads-kvm-procmon-runtime-20260406.md) | `medium` | behavior, version-scope |
@@ -24031,7 +26108,7 @@ Current writes
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The Executive worker-thread pair now has a clean baseline export, a bounded boot-time ETL extract that proves early Session Manager\Executive activity from System (PID 4), exact current-build ntoskrnl string hits, current-build Ghidra fallback artifacts, a supporting live KVM local-KD symbol query for the exact `ExpAdditional*` data names, a matching live KVM value dump that still shows the pair at `0 / 0`, and a tools-hardened lightweight ETW follow-up that produced exact RegQueryValue hits for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads under a concurrent burst trigger. That is enough for Class A within this project even though the lane remains research-only and not app-actionable. |
+| Why | The Executive worker-thread pair now has a clean baseline export, a bounded boot-time ETL extract that proves early Session Manager\Executive activity from System (PID 4), exact current-build ntoskrnl string hits, current-build Ghidra fallback artifacts, a supporting live KVM local-KD symbol query for the exact `ExpAdditional*` data names, a matching live KVM value dump that still shows the pair at `0 / 0`, and a tools-hardened lightweight ETW follow-up that produced exact RegQueryValue hits for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads under a concurrent burst trigger. That is enough for Class A within this project, but the 2026-05-08 promotion review pack closes the product decision as intentional hold because manual worker-thread overrides require per-machine profiling and can regress context-switch behavior on low-vCPU systems. |
 
 ---
 
@@ -24117,8 +26194,8 @@ Current writes
 | `vm-session-manager-executive-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
 | `static-executive-uuid-sequence-number-20260330` | `decompilation` | `Our Ghidra decompilation` | Residual static triage for UuidSequenceNumber | [evidence/files/vm/registry-batch-string-20260330-141213/results.json](../evidence/files/vm-tooling-staging/registry-batch-string-20260330-141213/results.json) and [research/notes/kernel-power-96-residual-value-exists-static-triage-20260330.md](notes/kernel-power-96-residual-value-exists-static-triage-20260330.md) | `high` | path, value, version-scope |
 | `kvm-static-executive-uuid-string-20260406` | `decompilation` | `Our Ghidra decompilation` | KVM PDB-backed string replay for UuidSequenceNumber | [evidence/raw/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json](../evidence/raw/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json) and [evidence/raw/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json](../evidence/raw/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json) and [research/notes/system-executive-uuid-sequence-number-kvm-string-follow-up-20260406.md](notes/system-executive-uuid-sequence-number-kvm-string-follow-up-20260406.md) | `medium` | path, value, version-scope |
-| `vm-session-manager-executive-etl-adjacent-20260328` | `etw-trace` | `unspecified` | Bounded Executive ETL review with adjacent UuidSequenceNumber activity | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md) and [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt) and [research/notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md](notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md) | `medium` | path, behavior, runtime-proof, version-scope |
-| `vm-executive-uuid-lightweight-runtime-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight ETW follow-up for UuidSequenceNumber | [evidence/files/vm/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/summary.json](../evidence/files/vm-tooling-staging/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/summary.json) and [evidence/files/vm/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/system-executive-uuid-sequence-number/summary.json](../evidence/files/vm-tooling-staging/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/system-executive-uuid-sequence-number/summary.json) and [research/notes/system-executive-uuid-sequence-number-lightweight-runtime-20260330.md](notes/system-executive-uuid-sequence-number-lightweight-runtime-20260330.md) | `medium` | behavior, risk, version-scope |
+| `vm-session-manager-executive-etl-adjacent-20260328` | `etw-trace` | `VM ETW trace` | Bounded Executive ETL review with adjacent UuidSequenceNumber activity | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md) and [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt) and [research/notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md](notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md) | `medium` | path, behavior, runtime-proof, version-scope |
+| `vm-executive-uuid-lightweight-runtime-20260330` | `etw-trace` | `VM ETW trace` | Tools-hardened lightweight ETW follow-up for UuidSequenceNumber | [evidence/files/vm/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/summary.json](../evidence/files/vm-tooling-staging/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/summary.json) and [evidence/files/vm/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/system-executive-uuid-sequence-number/summary.json](../evidence/files/vm-tooling-staging/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/system-executive-uuid-sequence-number/summary.json) and [research/notes/system-executive-uuid-sequence-number-lightweight-runtime-20260330.md](notes/system-executive-uuid-sequence-number-lightweight-runtime-20260330.md) | `medium` | behavior, risk, version-scope |
 | `vm-executive-uuid-kvm-procmon-runtime-20260406` | `procmon-trace` | `VM Procmon trace` | KVM Procmon UUID / RPC / COM replay for UuidSequenceNumber | [evidence/files/vm/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a.txt](../evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a.txt) and [evidence/files/vm/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a-summary.json](../evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a-summary.json) and [research/notes/system-executive-uuid-sequence-number-kvm-procmon-runtime-20260406.md](notes/system-executive-uuid-sequence-number-kvm-procmon-runtime-20260406.md) | `medium` | behavior, risk, version-scope |
 | `vm-executive-uuid-thread-burst-20260330` | `inference` | `unspecified` | Alternate thread-burst follow-up for UuidSequenceNumber | [research/notes/system-executive-uuid-sequence-number-thread-burst-20260330.md](notes/system-executive-uuid-sequence-number-thread-burst-20260330.md) and [registry-research-framework/audit/system-executive-uuid-sequence-number-thread-burst-20260330.json](../registry-research-framework/audit/system-executive-uuid-sequence-number-thread-burst-20260330.json) | `medium` | risk, version-scope |
 | `vm-executive-uuid-kvm-executive-burst-20260406` | `procmon-trace` | `VM Procmon trace` | KVM Executive-burst Procmon replay for UuidSequenceNumber | [evidence/files/vm/uuidsequence-procmon-kvm-executive-burst-20260406b/uuidsequence-procmon-kvm-executive-burst-20260406b-summary.json](../evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-executive-burst-20260406b/uuidsequence-procmon-kvm-executive-burst-20260406b-summary.json) and [evidence/files/vm/uuidsequence-procmon-kvm-executive-burst-20260406b/host-review.json](../evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-executive-burst-20260406b/host-review.json) and [research/notes/system-executive-uuid-sequence-number-kvm-executive-burst-20260406.md](notes/system-executive-uuid-sequence-number-kvm-executive-burst-20260406.md) | `medium` | behavior, risk, version-scope |
@@ -24136,7 +26213,7 @@ Current writes
 | `reactos-executive-uuid-adjacent-20260328` | `open-source-reference` | `unspecified` | ReactOS adjacent context for UuidSequenceNumber | [evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json](../evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json) and [research/notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md](notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md) | `medium` | behavior, dependency, version-scope |
 | `vm-executive-uuid-kvm-wpr-addboot-20260407` | `wpr` | `unspecified` | Linux KVM boot-registry WPR addboot follow-up for UuidSequenceNumber | [evidence/files/vm/uuidsequence-wpr-addboot-kvm-20260407cd/c-summary-arm.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-addboot-kvm-20260407cd/c-summary-arm.json) and [evidence/files/vm/uuidsequence-wpr-addboot-kvm-20260407cd/c-stage.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-addboot-kvm-20260407cd/c-stage.json) and [evidence/files/vm/uuidsequence-wpr-addboot-kvm-20260407cd/d-summary-arm.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-addboot-kvm-20260407cd/d-summary-arm.json) and [evidence/files/vm/uuidsequence-wpr-addboot-kvm-20260407cd/d-stage.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-addboot-kvm-20260407cd/d-stage.json) and [evidence/files/vm/uuidsequence-wpr-addboot-kvm-20260407cd/host-review.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-addboot-kvm-20260407cd/host-review.json) and [research/notes/system-executive-uuid-sequence-number-kvm-wpr-addboot-follow-up-20260407.md](notes/system-executive-uuid-sequence-number-kvm-wpr-addboot-follow-up-20260407.md) | `medium` | behavior, risk, version-scope |
 | `vm-executive-uuid-kvm-wpr-qga-runtime-read-20260413` | `wpr` | `unspecified` | Linux KVM QGA-launched WPR boot-registry runtime read for UuidSequenceNumber | [evidence/files/vm/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a-summary.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a-summary.json) and [evidence/files/vm/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a.normalized.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a.normalized.json) and [research/notes/system-executive-uuid-sequence-number-wpr-qga-runtime-read-20260413.md](notes/system-executive-uuid-sequence-number-wpr-qga-runtime-read-20260413.md) | `high` | path, value, behavior, runtime-proof, version-scope |
-| `vm-system.executive-uuid-sequence-number-etw-stackwalk-20260424e` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk captures exact UuidSequenceNumber helper query | [evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-summary.json](../evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-summary.json) and [evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-stage.json](../evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-stage.json) and [evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e.etl](../evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e.etl) and [evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/normalized-registry-bundle.json) and [evidence/captures/system-executive-uuid-sequence-number-etw-stackwalk-20260424.json](../evidence/captures/system-executive-uuid-sequence-number-etw-stackwalk-20260424.json) | `medium` | runtime-observation, version-scope |
+| `vm-system.executive-uuid-sequence-number-etw-stackwalk-20260424e` | `etw-trace` | `VM ETW trace` | Bounded KVM ETW stackwalk captures exact UuidSequenceNumber helper query | [evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-summary.json](../evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-summary.json) and [evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-stage.json](../evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-stage.json) and [evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e.etl](../evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e.etl) and [evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/normalized-registry-bundle.json) and [evidence/captures/system-executive-uuid-sequence-number-etw-stackwalk-20260424.json](../evidence/captures/system-executive-uuid-sequence-number-etw-stackwalk-20260424.json) | `medium` | runtime-observation, version-scope |
 
 **Validation proof**
 
@@ -24792,8 +26869,8 @@ Current writes
 | `ms-threaded-dpcs` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Introduction to threaded DPCs | [https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs) | `high` | path, value, default, behavior, side-effects, version-scope |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-thread-dpc-enable-bounded-suite` | `vm-test` | `VM test / probe` | Win25H2Clean bounded reboot suite for ThreadDpcEnable = 0 | [research/notes/thread-dpc-enable-vm-suite-20260324.md](notes/thread-dpc-enable-vm-suite-20260324.md) | `medium` | value, default, behavior, version-scope |
-| `etw-thread-dpc-enable-cpu3` | `etw-trace` | `unspecified` | WPR trace for ThreadDpcEnable CPU bounded run | [evidence/files/vm/thread-dpc-enable-0-cpu3.etl.md](../evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md) | `medium` | behavior, version-scope |
-| `etw-thread-dpc-enable-mem2` | `etw-trace` | `unspecified` | WPR trace for ThreadDpcEnable memory bounded run | [evidence/files/vm/thread-dpc-enable-0-mem2.etl.md](../evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md) | `medium` | behavior, version-scope |
+| `etw-thread-dpc-enable-cpu3` | `etw-trace` | `VM ETW trace` | WPR trace for ThreadDpcEnable CPU bounded run | [evidence/files/vm/thread-dpc-enable-0-cpu3.etl.md](../evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md) | `medium` | behavior, version-scope |
+| `etw-thread-dpc-enable-mem2` | `etw-trace` | `VM ETW trace` | WPR trace for ThreadDpcEnable memory bounded run | [evidence/files/vm/thread-dpc-enable-0-mem2.etl.md](../evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md) | `medium` | behavior, version-scope |
 
 **Validation proof**
 
@@ -24905,7 +26982,7 @@ Current writes
 | `repo-session-manager-kernel-doc` | `repo-doc` | `Current repo docs` | Repo system notes for Session Manager Kernel values | [Docs/system/system.md](../Docs/system/system.md) | `high` | path, value, behavior |
 | `vm-session-manager-kernel-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, default, version-scope |
 | `static-session-manager-kernel-targeted-string-20260331` | `decompilation` | `Our Ghidra decompilation` | Broad targeted static triage for Session Manager Kernel candidates | [evidence/files/vm/targeted-string-batch-primary-20260331-135356/results.json](../evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json) and [research/notes/kernel-power-96-broad-targeted-string-follow-up-20260331.md](notes/kernel-power-96-broad-targeted-string-follow-up-20260331.md) | `high` | path, value, version-scope |
-| `vm-session-manager-kernel-lightweight-runtime-20260331` | `etw-trace` | `unspecified` | Tools-hardened single-reboot ETW batch for Session Manager Kernel | [evidence/files/vm/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/summary.json](../evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/summary.json) and [evidence/files/vm/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json](../evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json) and [research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md](notes/session-manager-kernel-batch-lightweight-runtime-20260331.md) | `high` | path, value, behavior, runtime-proof, version-scope |
+| `vm-session-manager-kernel-lightweight-runtime-20260331` | `etw-trace` | `VM ETW trace` | Tools-hardened single-reboot ETW batch for Session Manager Kernel | [evidence/files/vm/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/summary.json](../evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/summary.json) and [evidence/files/vm/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json](../evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json) and [research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md](notes/session-manager-kernel-batch-lightweight-runtime-20260331.md) | `high` | path, value, behavior, runtime-proof, version-scope |
 | `source-enrichment-disable-exception-chain-validation-20260412` | `analysis-output` | `unspecified` | System Informer source-enrichment follow-up for DisableExceptionChainValidation | [registry-research-framework/audit/source-enrichment-systeminformer-follow-up-20260412.json](../registry-research-framework/audit/source-enrichment-systeminformer-follow-up-20260412.json) and [research/notes/source-enrichment-systeminformer-follow-up-20260412.md](notes/source-enrichment-systeminformer-follow-up-20260412.md) | `medium` | value, behavior, version-scope |
 
 **Validation proof**
@@ -24926,7 +27003,7 @@ Current writes
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | DisableExceptionChainValidation now has converged project evidence on the tools-hardened baseline: broad phase-0 existence, repo system notes, a current-build ntoskrnl static hit, and an exact early-boot runtime read from the single-reboot Session Manager Kernel ETW batch. The value remains research-only and not app-mapped, but that no longer blocks Class A. |
+| Why | DisableExceptionChainValidation now has converged project evidence on the tools-hardened baseline: broad phase-0 existence, repo system notes, a current-build ntoskrnl static hit, and an exact early-boot runtime read from the single-reboot Session Manager Kernel ETW batch. The 2026-05-08 promotion review pack closes the product decision as security hold because disabling exception-chain validation is a mitigation-bypass surface and must never become a default end-user apply path. |
 
 ---
 
@@ -25351,7 +27428,8 @@ Current writes
 | `ms-memory-management-qna-nonpaged` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: default registry value for Memory Management | [https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m](https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m) | `medium` | path, value, default, behavior |
 | `ms-memory-limits` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Memory Limits for Windows Releases | [https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases](https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases) | `high` | behavior, version-scope |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
-| `vm-system.memory-nonpaged-pool-dynamic-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for NonPagedPoolSize | [evidence/captures/system-memory-nonpaged-pool-dynamic-etw-stackwalk-attempt-20260427.json](../evidence/captures/system-memory-nonpaged-pool-dynamic-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-20260427b/system-memory-nonpaged-pool-dynamic-etw-20260427b-summary.json](../evidence/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-20260427b/system-memory-nonpaged-pool-dynamic-etw-20260427b-summary.json) | `low` | behavior, version-scope |
+| `vm-system.memory-nonpaged-pool-dynamic-etw-stackwalk-attempt-20260427` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for NonPagedPoolSize | [evidence/captures/system-memory-nonpaged-pool-dynamic-etw-stackwalk-attempt-20260427.json](../evidence/captures/system-memory-nonpaged-pool-dynamic-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-20260427b/system-memory-nonpaged-pool-dynamic-etw-20260427b-summary.json](../evidence/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-20260427b/system-memory-nonpaged-pool-dynamic-etw-20260427b-summary.json) | `low` | behavior, version-scope |
+| `vm-system.memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for NonPagedPoolSize | [evidence/captures/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507.json](../evidence/captures/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-system.memory-nonpaged-pool-dynamic-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for NonPagedPoolSize | [evidence/raw/ghidra/ghidra-system-memory-nonpaged-pool-dynamic-20260427b/summary.json](../evidence/raw/ghidra/ghidra-system-memory-nonpaged-pool-dynamic-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -25463,7 +27541,8 @@ Current writes
 | `ms-memory-management-qna-paged` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: default registry value for Memory Management | [https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m](https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m) | `medium` | path, value, default, behavior |
 | `ms-unable-allocate-paged-pool` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Unable to allocate memory from the system paged pool | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/unable-allocate-memory-system-paged-pool](https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/unable-allocate-memory-system-paged-pool) | `high` | path, value, behavior, risk, version-scope |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
-| `vm-system.memory-paged-pool-dynamic-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for PagedPoolSize | [evidence/captures/system-memory-paged-pool-dynamic-etw-stackwalk-attempt-20260427.json](../evidence/captures/system-memory-paged-pool-dynamic-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-20260427b/system-memory-paged-pool-dynamic-etw-20260427b-summary.json](../evidence/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-20260427b/system-memory-paged-pool-dynamic-etw-20260427b-summary.json) | `low` | behavior, version-scope |
+| `vm-system.memory-paged-pool-dynamic-etw-stackwalk-attempt-20260427` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for PagedPoolSize | [evidence/captures/system-memory-paged-pool-dynamic-etw-stackwalk-attempt-20260427.json](../evidence/captures/system-memory-paged-pool-dynamic-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-20260427b/system-memory-paged-pool-dynamic-etw-20260427b-summary.json](../evidence/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-20260427b/system-memory-paged-pool-dynamic-etw-20260427b-summary.json) | `low` | behavior, version-scope |
+| `vm-system.memory-paged-pool-dynamic-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for PagedPoolSize | [evidence/captures/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507.json](../evidence/captures/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-system.memory-paged-pool-dynamic-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for PagedPoolSize | [evidence/raw/ghidra/ghidra-system-memory-paged-pool-dynamic-20260427b/summary.json](../evidence/raw/ghidra/ghidra-system-memory-paged-pool-dynamic-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -25804,7 +27883,8 @@ Current writes
 | `ms-performance-tuning-web-servers` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Performance Tuning Web Servers | [https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/web-server/](https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/web-server/) | `high` | path, default, behavior, side-effects, version-scope |
 | `ms-using-agestore` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Using AgeStore | [https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/using-agestore](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/using-agestore) | `high` | default, value, behavior, side-effects |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-system.ntfs-disable-last-access-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for NtfsDisableLastAccessUpdate | [evidence/captures/system-ntfs-disable-last-access-etw-stackwalk-attempt-20260427.json](../evidence/captures/system-ntfs-disable-last-access-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-20260427a/system-ntfs-disable-last-access-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-20260427a/system-ntfs-disable-last-access-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-system.ntfs-disable-last-access-etw-stackwalk-attempt-20260427` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for NtfsDisableLastAccessUpdate | [evidence/captures/system-ntfs-disable-last-access-etw-stackwalk-attempt-20260427.json](../evidence/captures/system-ntfs-disable-last-access-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-20260427a/system-ntfs-disable-last-access-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-20260427a/system-ntfs-disable-last-access-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-system.ntfs-disable-last-access-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for NtfsDisableLastAccessUpdate | [evidence/captures/system-ntfs-disable-last-access-etw-qga-unblock-20260507.json](../evidence/captures/system-ntfs-disable-last-access-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-qga-unblock-20260507/system-ntfs-disable-last-access-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-qga-unblock-20260507/system-ntfs-disable-last-access-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-qga-unblock-20260507/system-ntfs-disable-last-access-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-qga-unblock-20260507/system-ntfs-disable-last-access-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-system.ntfs-disable-last-access-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for NtfsDisableLastAccessUpdate | [evidence/raw/ghidra/ghidra-system-ntfs-disable-last-access-20260427a/summary.json](../evidence/raw/ghidra/ghidra-system-ntfs-disable-last-access-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -26259,6 +28339,7 @@ Current writes
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-batch-probe-20260320-priority-control` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Win32PrioritySeparation tuning | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
 | `vm-manual-benchmark-20260324-priority-control` | `vm-test` | `VM test / probe` | Win25H2Clean manual benchmark pass - Win32PrioritySeparation | [evidence/files/vm/priority-control-20260324-201011/summary.json](../evidence/files/vm-tooling-staging/priority-control-20260324-201011/summary.json) | `medium` | value, behavior, rollback, performance |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -26387,10 +28468,11 @@ Current writes
 | `ms-admx-reliability-persistent-timestamp` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Policy CSP - ADMX_Reliability / EE_EnablePersistentTimeStamp | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability) | `high` | path, value, behavior, version-scope |
 | `repo-system-doc-reliability-timestamp` | `repo-doc` | `Current repo docs` | Repo system research notes for reliability timestamping | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, behavior |
 | `repo-system-decomp-reliability-timestamp` | `decompilation` | `Our Ghidra decompilation` | Decompiled OsEventsTimestampInterval read path | [Docs/system/assets/timestamp-OsEventsTimestampInterval.c](../Docs/system/assets/timestamp-OsEventsTimestampInterval.c) | `high` | path, value, behavior |
-| `ghidra-diagtrack-reliability-20260326` | `ghidra-trace` | `unspecified` | Our Ghidra decompilation - diagtrack.dll reliability string/xref export | [evidence/raw/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md](../evidence/raw/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md) and [evidence/raw/ghidra/system.reliability-timestamp-enabled/evidence.json](../evidence/raw/ghidra/system.reliability-timestamp-enabled/evidence.json) | `medium` | version-scope, string-reference, open-question |
+| `ghidra-diagtrack-reliability-20260326` | `ghidra-trace` | `Our Ghidra analysis` | Our Ghidra decompilation - diagtrack.dll reliability string/xref export | [evidence/raw/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md](../evidence/raw/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md) and [evidence/raw/ghidra/system.reliability-timestamp-enabled/evidence.json](../evidence/raw/ghidra/system.reliability-timestamp-enabled/evidence.json) | `medium` | version-scope, string-reference, open-question |
 | `vm-reliability-procmon-attempts-20260326` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon trigger attempts for Reliability timestamp reads | [research/notes/reliability-timestamp-probe-attempts-20260326.md](notes/reliability-timestamp-probe-attempts-20260326.md) | `medium` | version-scope, open-question |
 | `vm-reliability-follow-up-20260326` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes | [research/notes/reliability-timestamp-follow-up-20260326.md](notes/reliability-timestamp-follow-up-20260326.md) and [evidence/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt](../evidence/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt) and [evidence/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv](../evidence/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv) | `medium` | version-scope, open-question |
-| `vm-system.reliability-timestamp-enabled-etw-stackwalk-20260424e` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk review for TimeStampEnabled retained no exact target hit | [evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-summary.json](../evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-summary.json) and [evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-stage.json](../evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-stage.json) and [evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.etl](../evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.etl) and [evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/normalized-registry-bundle.json) and [evidence/captures/system-reliability-timestamp-enabled-etw-stackwalk-20260424.json](../evidence/captures/system-reliability-timestamp-enabled-etw-stackwalk-20260424.json) | `medium` | runtime-open-question, version-scope, investigation-open-question |
+| `vm-system.reliability-timestamp-enabled-etw-stackwalk-20260424e` | `etw-trace` | `VM ETW trace` | Bounded KVM ETW stackwalk review for TimeStampEnabled retained no exact target hit | [evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-summary.json](../evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-summary.json) and [evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-stage.json](../evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-stage.json) and [evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.etl](../evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.etl) and [evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/normalized-registry-bundle.json) and [evidence/captures/system-reliability-timestamp-enabled-etw-stackwalk-20260424.json](../evidence/captures/system-reliability-timestamp-enabled-etw-stackwalk-20260424.json) | `medium` | runtime-open-question, version-scope, investigation-open-question |
+| `vm-system.reliability-timestamp-enabled-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for TimeStampEnabled | [evidence/captures/system-reliability-timestamp-enabled-etw-qga-unblock-20260507.json](../evidence/captures/system-reliability-timestamp-enabled-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/system-reliability-timestamp-enabled-etw-qga-unblock-20260507/system-reliability-timestamp-enabled-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/system-reliability-timestamp-enabled-etw-qga-unblock-20260507/system-reliability-timestamp-enabled-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/system-reliability-timestamp-enabled-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/system-reliability-timestamp-enabled-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/system-reliability-timestamp-enabled-etw-qga-unblock-20260507/system-reliability-timestamp-enabled-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/system-reliability-timestamp-enabled-etw-qga-unblock-20260507/system-reliability-timestamp-enabled-etw-qga-unblock-20260507.etl) | `medium` | runtime-observation, tooling-fix, path, version-scope |
 
 **Validation proof**
 
@@ -26501,6 +28583,7 @@ Current writes
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-iot-services-btagservice` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Bluetooth Audio Gateway Service | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) | `high` | path, value, default, behavior, side-effects, version-scope |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -26611,6 +28694,7 @@ Current writes
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-iot-services-bthserv` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Bluetooth Support Service | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) | `high` | path, value, default, behavior, side-effects, version-scope |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -26722,6 +28806,7 @@ Current writes
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-iot-services-bluetoothuserservice` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Bluetooth User Service | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) | `high` | path, value, default, behavior, side-effects, version-scope |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -26832,6 +28917,7 @@ Current writes
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-iot-services-diagtrack` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Connected User Experiences and Telemetry | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) | `high` | path, value, default, behavior, side-effects, version-scope |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -26942,6 +29028,7 @@ Current writes
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-iot-services-printnotify` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Print Notification Service | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) | `high` | path, value, default, behavior, side-effects, version-scope |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -27052,6 +29139,7 @@ Current writes
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-iot-services-spooler` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Print Spooler | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) | `high` | path, value, default, behavior, side-effects, version-scope |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -27164,17 +29252,18 @@ Current writes
 | `local-scm-wsearch-2026-03-14` | `repo-doc` | `Current repo docs` | Local SCM snapshot - WSearch | [research/notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt](notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt) | `high` | path, value, version-scope |
 | `ms-search-indexing-overview` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Search indexing process overview | [https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview](https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview) | `high` | behavior, side-effects, version-scope |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-wsearch-etw-stackwalk-20260424` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk receipt for the Windows Search service key | [evidence/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-summary.json](../evidence/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-summary.json) and [evidence/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-stage.json](../evidence/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-stage.json) and [evidence/captures/system-services-disable-windows-search-etw-stackwalk-attempt-20260424.json](../evidence/captures/system-services-disable-windows-search-etw-stackwalk-attempt-20260424.json) | `medium` | behavior, risk, version-scope |
-| `vm-wsearch-ghidra-launch-receipt-20260424` | `ghidra-trace` | `unspecified` | Guest Ghidra string-xref launcher receipt for WSearch | [evidence/raw/ghidra/ghidra-system-services-disable-windows-search-20260424-main/summary.json](../evidence/raw/ghidra/ghidra-system-services-disable-windows-search-20260424-main/summary.json) | `low` | open-question, version-scope |
+| `vm-system-services-disable-windows-search-service-qga-20260507` | `vm-test` | `VM test / probe` | QGA service inspection receipt for WSearch | [evidence/captures/system-services-disable-windows-search-service-qga-20260507.json](../evidence/captures/system-services-disable-windows-search-service-qga-20260507.json) and [evidence/raw/service-inspection/power-disable-windows-search-service-qga-20260507/service-inspection.json](../evidence/raw/service-inspection/power-disable-windows-search-service-qga-20260507/service-inspection.json) | `high` | path, value, version-scope |
+| `vm-wsearch-etw-stackwalk-20260424` | `etw-trace` | `VM ETW trace` | Bounded KVM ETW stackwalk receipt for the Windows Search service key | [evidence/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-summary.json](../evidence/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-summary.json) and [evidence/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-stage.json](../evidence/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-stage.json) and [evidence/captures/system-services-disable-windows-search-etw-stackwalk-attempt-20260424.json](../evidence/captures/system-services-disable-windows-search-etw-stackwalk-attempt-20260424.json) | `medium` | behavior, risk, version-scope |
+| `vm-wsearch-ghidra-launch-receipt-20260424` | `ghidra-trace` | `Our Ghidra analysis` | Guest Ghidra string-xref launcher receipt for WSearch | [evidence/raw/ghidra/ghidra-system-services-disable-windows-search-20260424-main/summary.json](../evidence/raw/ghidra/ghidra-system-services-disable-windows-search-20260424-main/summary.json) | `low` | open-question, version-scope |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) |
-| Exact quote / path | Windows Search (WSearch) \| Manual \| OK to disable \| Provides content indexing, property caching, and search results for files, e-mail, and other content. |
+| Source | [evidence/captures/system-services-disable-windows-search-service-qga-20260507.json](../evidence/captures/system-services-disable-windows-search-service-qga-20260507.json) |
+| Exact quote / path | SERVICE_NAME: WSearch; DISPLAY_NAME: Windows Search; START_TYPE: 2   AUTO_START  (DELAYED); Start REG_DWORD 0x2; Win32_Service StartMode Auto; Get-Service StartType Automatic |
 | Key found on page | `True` |
-| Notes | The official Learn services page documents the exact WSearch service name, default start mode, disable guidance, and behavior. A companion SCM snapshot is checked in at [research/notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt.](notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt.) |
+| Notes | The QGA receipt proves the exact SCM control surface and current VM state on Windows build 26200.8246 without mutation. Microsoft service guidance remains the evidence for the documented baseline and OK-to-disable decision. |
 
 **Decision**
 
@@ -27390,6 +29479,7 @@ Current writes
 | `repo-system-doc-shutdown` | `repo-doc` | `Current repo docs` | Repo shutdown timing notes | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, default |
 | `vm-wait-to-kill-service-timeout-probe` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe for WaitToKillServiceTimeout | [evidence/files/vm/wait-to-kill-service-timeout-probe-20260325-103117/wait-to-kill-service-timeout-probe.txt](../evidence/files/vm-tooling-staging/wait-to-kill-service-timeout-probe-20260325-103117/wait-to-kill-service-timeout-probe.txt) | `high` | path, value, runtime-read, restore |
 | `app-system-registry-provider-service-timeout` | `repo-code` | `Current repo code` | Current app implementation for service shutdown timeout | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | ui-mapping, path, value |
+| `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
 
 **Validation proof**
 
@@ -27616,7 +29706,8 @@ Current writes
 | `local-logon-adml-acrylic` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Logon.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Logon.adml) | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-acrylic-logon` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
-| `vm-visibility.disable-acrylic-logon-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DisableAcrylicBackgroundOnLogon | [evidence/captures/visibility-disable-acrylic-logon-etw-stackwalk-attempt-20260427.json](../evidence/captures/visibility-disable-acrylic-logon-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-20260427a/visibility-disable-acrylic-logon-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-20260427a/visibility-disable-acrylic-logon-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-visibility.disable-acrylic-logon-etw-stackwalk-attempt-20260427` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for DisableAcrylicBackgroundOnLogon | [evidence/captures/visibility-disable-acrylic-logon-etw-stackwalk-attempt-20260427.json](../evidence/captures/visibility-disable-acrylic-logon-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-20260427a/visibility-disable-acrylic-logon-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-20260427a/visibility-disable-acrylic-logon-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-visibility.disable-acrylic-logon-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for DisableAcrylicBackgroundOnLogon | [evidence/captures/visibility-disable-acrylic-logon-etw-qga-unblock-20260507.json](../evidence/captures/visibility-disable-acrylic-logon-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-qga-unblock-20260507/visibility-disable-acrylic-logon-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-qga-unblock-20260507/visibility-disable-acrylic-logon-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-qga-unblock-20260507/visibility-disable-acrylic-logon-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-qga-unblock-20260507/visibility-disable-acrylic-logon-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-visibility.disable-acrylic-logon-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisableAcrylicBackgroundOnLogon | [evidence/raw/ghidra/ghidra-visibility-disable-acrylic-logon-20260427a/summary.json](../evidence/raw/ghidra/ghidra-visibility-disable-acrylic-logon-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -29649,6 +31740,7 @@ Current writes
 | `repo-visibility-language-bar` | `repo-doc` | `Current repo docs` | Repo visibility notes for language bar | [Docs/visibility/visibility.md](../Docs/visibility/visibility.md) | `medium` | path, value, allowed-values, behavior |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `procmon-language-bar-showstatus` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - ShowStatus language bar restart read | [evidence/raw/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md](../evidence/raw/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md) | `medium` | path, value, behavior, ui-mapping |
+| `kvm-user-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM user-scope current-state revalidation batch | [registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 
@@ -29935,8 +32027,8 @@ Current writes
 | --- | --- |
 | Label | `Class B` |
 | Title | Strong but Decision-Gated |
-| Action state | `research-gated` |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A. |
+| Action state | `actionable` |
+| Gating reason | This record stays below Class A because supportability or confidence is still mixed, but the current promoted decision allows app apply and rollback. |
 
 **Sources**
 
@@ -29977,7 +32069,7 @@ Current writes
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
 | `windows-11-default` | Windows 11 default | ['General users', 'People staying on stock Windows 11 context-menu behavior'] | ['Users who strongly prefer the classic menu'] | `False` |
-| `classic-context-menu` | Classic context menu | ['Windows 11 users who prefer the older context menu', 'Power users who want full right-click commands visible immediately'] | ['Users who only want Microsoft-documented settings in the validated set'] | `False` |
+| `classic-context-menu` | Classic context menu | ['Windows 11 users who prefer the older context menu', 'Power users who want full right-click commands visible immediately'] | ['Users who only want Microsoft-documented settings in the validated set'] | `True` |
 
 **Evidence**
 
@@ -29986,6 +32078,7 @@ Current writes
 | `repo-visibility-classic-context` | `repo-doc` | `Current repo docs` | Repo visibility notes for classic context menu | [Docs/visibility/visibility.md](../Docs/visibility/visibility.md) | `medium` | path, value, default, behavior |
 | `repo-visibility-classic-context-usecase` | `repo-doc` | `Current repo docs` | Repo visibility use-case guide for classic context menu | [Docs/visibility/use-case-guide.md](../Docs/visibility/use-case-guide.md) | `medium` | path, value |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
+| `kvm-user-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM user-scope current-state revalidation batch | [registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json) | `medium` | path, runtime-read, default, version-scope |
 
 **Validation proof**
 
@@ -30109,7 +32202,8 @@ Nohuto lineage references:
 | `repo-provenance-audio-disable-spatial-audio` | `repo-doc` | `Current repo docs` | Repo source note for audio.disable-spatial-audio | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | path, value, ui-mapping |
 | `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
 | `guest-audio-string-scan` | `vm-test` | `VM test / probe` | Guest string scan for spatial-audio registry contract | [evidence/files/vm/spatial_audio_string_search.txt](../evidence/files/vm-tooling-staging/spatial_audio_string_search.txt) | `low` | behavior, app-mismatch |
-| `vm-audio-disable-spatial-audio-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW stage receipt for DisableSpatialOnLowLatency | [evidence/captures/audio-disable-spatial-audio-etw-stackwalk-attempt-20260424.json](../evidence/captures/audio-disable-spatial-audio-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/audio-disable-spatial-audio-etw-20260424-batch1/audio-disable-spatial-audio-etw-20260424-batch1-stage.json](../evidence/raw/etw-stackwalk/audio-disable-spatial-audio-etw-20260424-batch1/audio-disable-spatial-audio-etw-20260424-batch1-stage.json) | `low` | behavior, version-scope |
+| `vm-audio-disable-spatial-audio-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW stage receipt for DisableSpatialOnLowLatency | [evidence/captures/audio-disable-spatial-audio-etw-stackwalk-attempt-20260424.json](../evidence/captures/audio-disable-spatial-audio-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/audio-disable-spatial-audio-etw-20260424-batch1/audio-disable-spatial-audio-etw-20260424-batch1-stage.json](../evidence/raw/etw-stackwalk/audio-disable-spatial-audio-etw-20260424-batch1/audio-disable-spatial-audio-etw-20260424-batch1-stage.json) | `low` | behavior, version-scope |
+| `vm-audio.disable-spatial-audio-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk probe receipt | [evidence/captures/audio-disable-spatial-audio-etw-qga-unblock-20260507.json](../evidence/captures/audio-disable-spatial-audio-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507.etl) | `medium` | path, value, version-scope |
 | `vm-audio-disable-spatial-audio-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisableSpatialOnLowLatency | [evidence/raw/ghidra/ghidra-audio-disable-spatial-audio-20260424-batch1/summary.json](../evidence/raw/ghidra/ghidra-audio-disable-spatial-audio-20260424-batch1/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -30370,10 +32464,11 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `windows-terminal-settings-doc` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Windows Terminal settings | [https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup](https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup) | `medium` | behavior, app-mismatch |
-| `ghidra-terminalapp-memory-scan` | `ghidra-headless` | `unspecified` | Ghidra headless raw-memory scan of TerminalApp.dll | [evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt](../evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt); [evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt](../evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt) | `medium` | negative-evidence, binary-scan |
-| `wpr-terminal-launch-trace` | `wpr-trace` | `unspecified` | WPR capture of Windows Terminal launch | [evidence/files/host/terminal-launch.etl.md](../evidence/files/host-temp/terminal-launch.etl.md) | `low` | behavior, process-tree, startup-context |
+| `ghidra-terminalapp-memory-scan` | `ghidra-headless` | `Our Ghidra headless analysis` | Ghidra headless raw-memory scan of TerminalApp.dll | [evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt](../evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt); [evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt](../evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt) | `medium` | negative-evidence, binary-scan |
+| `wpr-terminal-launch-trace` | `wpr-trace` | `VM WPR trace` | WPR capture of Windows Terminal launch | [evidence/files/host/terminal-launch.etl.md](../evidence/files/host-temp/terminal-launch.etl.md) | `low` | behavior, process-tree, startup-context |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-developer.terminal-dev-mode-etw-stackwalk-attempt-20260424h` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-summary.json](../evidence/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-summary.json) and [evidence/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-stage.json](../evidence/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-stage.json) and [evidence/captures/developer-terminal-dev-mode-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-terminal-dev-mode-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-developer.terminal-dev-mode-etw-stackwalk-attempt-20260424h` | `etw-trace` | `VM ETW trace` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-summary.json](../evidence/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-summary.json) and [evidence/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-stage.json](../evidence/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-stage.json) and [evidence/captures/developer-terminal-dev-mode-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-terminal-dev-mode-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-developer.terminal-dev-mode-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk HKCU probe receipt | [evidence/captures/developer-terminal-dev-mode-etw-qga-unblock-20260507.json](../evidence/captures/developer-terminal-dev-mode-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507.etl) and [evidence/raw/etw-stackwalk/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507.etl) | `low` | path, version-scope |
 
 **Validation proof**
 
@@ -30756,7 +32851,8 @@ Nohuto lineage references:
 | `vscode-settings-reference` | `official-doc` | `Microsoft official doc` | VS Code documentation: Default settings reference | [https://code.visualstudio.com/docs/reference/default-settings](https://code.visualstudio.com/docs/reference/default-settings) | `high` | value, allowed-values, behavior |
 | `vscode-source-control-faq` | `official-doc` | `Microsoft official doc` | VS Code documentation: Source Control FAQ | [https://code.visualstudio.com/docs/sourcecontrol/faq](https://code.visualstudio.com/docs/sourcecontrol/faq) | `high` | value, behavior |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
-| `vm-developer.vscode-git-autofetch-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DisableGitAutofetch | [evidence/captures/developer-vscode-git-autofetch-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-vscode-git-autofetch-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-summary.json](../evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-summary.json) and [evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-stage.json](../evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.vscode-git-autofetch-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for DisableGitAutofetch | [evidence/captures/developer-vscode-git-autofetch-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-vscode-git-autofetch-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-summary.json](../evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-summary.json) and [evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-stage.json](../evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.vscode-git-autofetch-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk HKCU probe receipt | [evidence/captures/developer-vscode-git-autofetch-etw-qga-unblock-20260507.json](../evidence/captures/developer-vscode-git-autofetch-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507/developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507/developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507/developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507/developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507.etl) | `low` | path, version-scope |
 | `vm-developer.vscode-git-autofetch-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisableGitAutofetch | [evidence/raw/ghidra/ghidra-developer-vscode-git-autofetch-20260424-batch2/summary.json](../evidence/raw/ghidra/ghidra-developer-vscode-git-autofetch-20260424-batch2/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -31178,17 +33274,9 @@ Blocking issues:
 
 | Field | Value |
 | --- | --- |
-| Status | `partially-matches` |
+| Status | `not-mapped` |
 | Provider source | app/Services/TweakProviders/PowerTweakProvider.cs |
-| Notes | The app writes DisableTaskOffload = 0, NetworkThrottlingIndex = 0xFFFFFFFF, and SystemResponsiveness = 10. Only two of these values are backed by primary Microsoft documentation in this review, and the bundle mixes separate feature areas. |
-
-Current writes
-
-| Target | Path | Value | State | Kind | Notes |
-| --- | --- | --- | --- | --- | --- |
-| `disable-task-offload` | `HKLM\System\CurrentControlSet\Services\TCPIP\Parameters` | `DisableTaskOffload` | `0` | `value` |  |
-| `network-throttling-index` | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile` | `NetworkThrottlingIndex` | `4294967295` | `value` |  |
-| `system-responsiveness` | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile` | `SystemResponsiveness` | `10` | `value` |  |
+| Notes | The checked-in app no longer exposes this mixed parent bundle. It now surfaces the child power.disable-network-power-saving.policy record with DisableTaskOffload = 0 and SystemResponsiveness = 10; the opaque NetworkThrottlingIndex write is retained here only as historical audit context. |
 
 **Evidence class**
 
@@ -31203,28 +33291,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | tcpip, multimedia, systemprofile, networkthrottlingindex, systemresponsiveness |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 5 audit token(s) in win-config. |
-| win-config / system/assets/mmcss-CiConfigInitialize.c | [https://github.com/nohuto/win-config/blob/main/system/assets/mmcss-CiConfigInitialize.c](https://github.com/nohuto/win-config/blob/main/system/assets/mmcss-CiConfigInitialize.c) | Matched 4 audit token(s) in win-config. |
-| win-registry / records/MultiMedia.txt | [https://github.com/nohuto/win-registry/blob/main/records/MultiMedia.txt](https://github.com/nohuto/win-registry/blob/main/records/MultiMedia.txt) | Matched 4 audit token(s) in win-registry. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -31286,8 +33359,9 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-task-offload` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Using Registry Values to Enable and Disable Task Offloading | [https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading](https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading) | `high` | path, value, allowed-values, behavior |
 | `ms-mmcss` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Multimedia Class Scheduler Service | [https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service](https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service) | `high` | path, value, behavior, allowed-values |
-| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-power-provider` | `repo-code` | `Current repo code` | Historical app implementation before the policy split | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | [Docs/power/power.md](../Docs/power/power.md) | `medium` | ui-mapping, app-mismatch |
+| `vm-power.disable-network-power-saving-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk probe receipt | [evidence/captures/power-disable-network-power-saving-etw-qga-unblock-20260507.json](../evidence/captures/power-disable-network-power-saving-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507.etl) and [evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507.etl) and 3 additional raw artifact refs listed in the receipt | `medium` | path, value, version-scope |
 
 **Validation proof**
 
@@ -32138,6 +34212,7 @@ Nohuto lineage references:
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `ghidra-sharedexperiences-singleton` | `decompiled-pseudocode` | `Nohuto upstream pseudocode` | Decompiled Shared Experiences singleton | [Docs/privacy/assets/crossdev-SharedExperiencesSingleton.c](../Docs/privacy/assets/crossdev-SharedExperiencesSingleton.c) | `medium` | path, value, behavior |
 | `guest-crossdevice-launch` | `vm-test` | `VM test / probe` | Guest launch of CrossDeviceResume | [evidence/files/vm/crossdevice_resume_probe.csv](../evidence/files/vm-tooling-staging/crossdevice_resume_probe.csv) | `low` | behavior, version-scope |
+| `vm-privacy.disable-cross-device-experiences-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk probe receipt | [evidence/captures/privacy-disable-cross-device-experiences-etw-qga-unblock-20260507.json](../evidence/captures/privacy-disable-cross-device-experiences-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507.etl) | `medium` | path, value, version-scope |
 
 **Validation proof**
 
@@ -33354,6 +35429,7 @@ Nohuto lineage references:
 | `local-cloudcontent-adml-welcome` | `official-doc` | `Microsoft official doc` | Local Microsoft CloudContent.adml DisableWindowsSpotlightWindowsWelcomeExperience help text | [evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CloudContent.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `repo-privacy-verified-suggestions-cdm` | `repo-doc` | `Current repo docs` | Repo privacy docs for Content Delivery Manager suggestions | [Docs/privacy/privacy-verified.md](../Docs/privacy/privacy-verified.md) | `high` | path, value, behavior |
+| `vm-privacy.disable-suggestions-cdm-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk HKCU probe receipt | [evidence/captures/privacy-disable-suggestions-cdm-etw-qga-unblock-20260507.json](../evidence/captures/privacy-disable-suggestions-cdm-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507.etl) and [evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507.etl) and 15 additional raw artifact refs listed in the receipt | `low` | path, version-scope |
 
 **Validation proof**
 
@@ -33627,7 +35703,8 @@ Current writes
 | `local-deviceguard-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DeviceGuard.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/DeviceGuard.admx](../evidence/files/external/c/Windows/PolicyDefinitions/DeviceGuard.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-deviceguard-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DeviceGuard.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/DeviceGuard.adml](../evidence/files/external/c/PolicyDefinitions/en-US/DeviceGuard.adml) | `high` | behavior, default, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-security.disable-vbs-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EnableVirtualizationBasedSecurity | [evidence/captures/security-disable-vbs-etw-stackwalk-attempt-20260427.json](../evidence/captures/security-disable-vbs-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/security-disable-vbs-etw-20260427a/security-disable-vbs-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/security-disable-vbs-etw-20260427a/security-disable-vbs-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-security.disable-vbs-etw-stackwalk-attempt-20260427` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for EnableVirtualizationBasedSecurity | [evidence/captures/security-disable-vbs-etw-stackwalk-attempt-20260427.json](../evidence/captures/security-disable-vbs-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/security-disable-vbs-etw-20260427a/security-disable-vbs-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/security-disable-vbs-etw-20260427a/security-disable-vbs-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-security.disable-vbs-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for EnableVirtualizationBasedSecurity | [evidence/captures/security-disable-vbs-etw-qga-unblock-20260507.json](../evidence/captures/security-disable-vbs-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/security-disable-vbs-etw-qga-unblock-20260507/security-disable-vbs-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/security-disable-vbs-etw-qga-unblock-20260507/security-disable-vbs-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/security-disable-vbs-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/security-disable-vbs-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/security-disable-vbs-etw-qga-unblock-20260507/security-disable-vbs-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/security-disable-vbs-etw-qga-unblock-20260507/security-disable-vbs-etw-qga-unblock-20260507.etl) | `medium` | runtime-observation, tooling-fix, path, version-scope |
 | `vm-security.disable-vbs-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EnableVirtualizationBasedSecurity | [evidence/raw/ghidra/ghidra-security-disable-vbs-20260427a/summary.json](../evidence/raw/ghidra/ghidra-security-disable-vbs-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -34862,13 +36939,13 @@ Blocking issues:
 | `vm-session-manager-io-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
 | `ms-removable-storage-allow-remote-dasd-20260407` | `official-doc` | `Microsoft official doc` | Microsoft Learn ADMX_RemovableStorage mapping for AllowRemoteDASD | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-removablestorage](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-removablestorage) and [research/notes/system-io-allow-remote-dasd-official-policy-follow-up-20260407.md](notes/system-io-allow-remote-dasd-official-policy-follow-up-20260407.md) | `high` | path, value, behavior, version-scope |
 | `static-session-manager-io-allow-remote-dasd-20260330` | `decompilation` | `Our Ghidra decompilation` | Path-aware static probe for AllowRemoteDASD | [evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json](../evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json) and [evidence/raw/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md](../evidence/raw/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md) | `high` | path, value, behavior, version-scope |
-| `vm-session-manager-io-allow-remote-dasd-runtime-20260330` | `etw-trace` | `unspecified` | Path-aware lightweight ETW follow-up for AllowRemoteDASD | [evidence/files/path-aware/path-aware-runtime-20260330-220218/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-220218/summary.json) and [evidence/files/path-aware/path-aware-runtime-20260330-220218/system-io-allow-remote-dasd/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-220218/system-io-allow-remote-dasd/summary.json) | `medium` | behavior, risk, version-scope |
+| `vm-session-manager-io-allow-remote-dasd-runtime-20260330` | `etw-trace` | `VM ETW trace` | Path-aware lightweight ETW follow-up for AllowRemoteDASD | [evidence/files/path-aware/path-aware-runtime-20260330-220218/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-220218/summary.json) and [evidence/files/path-aware/path-aware-runtime-20260330-220218/system-io-allow-remote-dasd/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-220218/system-io-allow-remote-dasd/summary.json) | `medium` | behavior, risk, version-scope |
 | `historical-collision-note-20260328` | `repo-doc` | `Current repo docs` | Historical collision review for AllowRemoteDASD | [research/notes/kernel-power-existing-static-triage-20260328.md](notes/kernel-power-existing-static-triage-20260328.md) | `medium` | behavior, risk |
 | `vm-session-manager-io-allow-remote-dasd-kvm-procmon-20260406` | `procmon-trace` | `VM Procmon trace` | Linux KVM Procmon replay for AllowRemoteDASD | [evidence/files/vm/allowremotedasd-procmon-kvm-20260406b/allowremotedasd-procmon-kvm-20260406b-summary.json](../evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-20260406b/allowremotedasd-procmon-kvm-20260406b-summary.json) and [evidence/files/vm/allowremotedasd-procmon-kvm-20260406b/host-review.json](../evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-20260406b/host-review.json) | `medium` | behavior, risk, version-scope |
 | `vm-session-manager-io-allow-remote-dasd-kvm-local-kd-20260406` | `vm-test` | `VM test / probe` | Linux KVM local-KD live symbol query for AllowRemoteDASD | [evidence/files/vm/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h-summary.json](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h-summary.json) and [evidence/files/vm/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h.log](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h.log) | `medium` | behavior, version-scope |
 | `vm-session-manager-io-allow-remote-dasd-kvm-local-kd-disasm-20260406` | `vm-test` | `VM test / probe` | Linux KVM local-KD disassembly for AllowRemoteDASD | [evidence/files/vm/local-kd-allowremotedasd-disasm-20260406a/local-kd-allowremotedasd-disasm-20260406a-summary.json](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-disasm-20260406a/local-kd-allowremotedasd-disasm-20260406a-summary.json) and [evidence/files/vm/local-kd-allowremotedasd-disasm-20260406a/local-kd-allowremotedasd-disasm-20260406a.log](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-disasm-20260406a/local-kd-allowremotedasd-disasm-20260406a.log) and [evidence/files/vm/local-kd-allowremotedasd-strings-20260406a/local-kd-allowremotedasd-strings-20260406a-summary.json](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-strings-20260406a/local-kd-allowremotedasd-strings-20260406a-summary.json) and [evidence/files/vm/local-kd-allowremotedasd-strings-20260406a/local-kd-allowremotedasd-strings-20260406a.log](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-strings-20260406a/local-kd-allowremotedasd-strings-20260406a.log) and [research/notes/system-io-allow-remote-dasd-kvm-local-kd-disasm-follow-up-20260406.md](notes/system-io-allow-remote-dasd-kvm-local-kd-disasm-follow-up-20260406.md) | `medium` | path, behavior, version-scope |
 | `vm-session-manager-io-allow-remote-dasd-kvm-procmon-recovery-20260407` | `procmon-trace` | `VM Procmon trace` | Linux KVM recovery-backed Procmon replay for AllowRemoteDASD | [evidence/files/vm/allowremotedasd-procmon-kvm-recovery-20260407a/allowremotedasd-procmon-kvm-recovery-20260407a-summary.json](../evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-recovery-20260407a/allowremotedasd-procmon-kvm-recovery-20260407a-summary.json) and [evidence/files/vm/allowremotedasd-procmon-kvm-recovery-20260407a/allowremotedasd-procmon-kvm-recovery-20260407a.txt](../evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-recovery-20260407a/allowremotedasd-procmon-kvm-recovery-20260407a.txt) and [evidence/files/vm/allowremotedasd-procmon-kvm-recovery-20260407a/host-review.json](../evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-recovery-20260407a/host-review.json) and [research/notes/system-io-allow-remote-dasd-kvm-procmon-recovery-20260407.md](notes/system-io-allow-remote-dasd-kvm-procmon-recovery-20260407.md) | `medium` | behavior, risk, version-scope |
-| `vm-session-manager-io-allow-remote-dasd-etw-stackwalk-20260424` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk review for deprecated AllowRemoteDASD path | [evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424.etl](../evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424.etl) and [evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424-summary.json](../evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424-summary.json) and [evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/normalized-registry-bundle.json) and [evidence/captures/system-io-allow-remote-dasd-etw-stackwalk-20260424.json](../evidence/captures/system-io-allow-remote-dasd-etw-stackwalk-20260424.json) | `medium` | behavior, risk, version-scope |
+| `vm-session-manager-io-allow-remote-dasd-etw-stackwalk-20260424` | `etw-trace` | `VM ETW trace` | Bounded KVM ETW stackwalk review for deprecated AllowRemoteDASD path | [evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424.etl](../evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424.etl) and [evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424-summary.json](../evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424-summary.json) and [evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/normalized-registry-bundle.json) and [evidence/captures/system-io-allow-remote-dasd-etw-stackwalk-20260424.json](../evidence/captures/system-io-allow-remote-dasd-etw-stackwalk-20260424.json) | `medium` | behavior, risk, version-scope |
 
 **Validation proof**
 
@@ -36062,7 +38139,7 @@ Windows Internals references:
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, behavior, ui-mapping, app-mismatch |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 | `ghidra-serialize-timer-expiration-gate` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c) and [evidence/raw/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md](../evidence/raw/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md) and [evidence/raw/ghidra/system.kernel-serialize-timer-expiration/evidence.json](../evidence/raw/ghidra/system.kernel-serialize-timer-expiration/evidence.json) | `high` | path, value, behavior, runtime-gate |
-| `vm-system.kernel-serialize-timer-expiration-etw-stackwalk-20260424e` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk captures exact SerializeTimerExpiration helper query | [evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-summary.json](../evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-summary.json) and [evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-stage.json](../evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-stage.json) and [evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.etl](../evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.etl) and [evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/normalized-registry-bundle.json) and [evidence/captures/system-kernel-serialize-timer-expiration-etw-stackwalk-20260424.json](../evidence/captures/system-kernel-serialize-timer-expiration-etw-stackwalk-20260424.json) | `medium` | runtime-observation, version-scope |
+| `vm-system.kernel-serialize-timer-expiration-etw-stackwalk-20260424e` | `etw-trace` | `VM ETW trace` | Bounded KVM ETW stackwalk captures exact SerializeTimerExpiration helper query | [evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-summary.json](../evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-summary.json) and [evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-stage.json](../evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-stage.json) and [evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.etl](../evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.etl) and [evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/normalized-registry-bundle.json) and [evidence/captures/system-kernel-serialize-timer-expiration-etw-stackwalk-20260424.json](../evidence/captures/system-kernel-serialize-timer-expiration-etw-stackwalk-20260424.json) | `medium` | runtime-observation, version-scope |
 
 **Validation proof**
 
@@ -37053,6 +39130,588 @@ Blocking issues:
 
 ---
 
+### `cleanup.directx-shader-cache`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Cleanup` |
+| Area | `Shader Cache Cleanup` |
+| Scope | `user` |
+| Source file | [research/records/cleanup.directx-shader-cache.review.json](records/cleanup.directx-shader-cache.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live DirectX shader-cache cleanup card. The app already ships this file-backed cleanup action from the first-party provider and the repo cleanup docs describe the same cache directories, but the card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/MiscTweakProvider.cs |
+| Notes | The live app still ships this as a first-party cleanup card instead of through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `shader-cache-files` | `%LOCALAPPDATA%\D3DSCache; %LOCALAPPDATA%\NVIDIA\DXCache; %LOCALAPPDATA%\NVIDIA\GLCache; %LOCALAPPDATA%\NVIDIA Corporation\NV_Cache; %LOCALAPPDATA%\AMD\DXCache; %LOCALAPPDATA%\Intel\DXCache` | `CleanupAction` | `Cleared` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | directx shader cache, d3dscache, nvidia cache |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md#directx-shader-cache | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#directx-shader-cache](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#directx-shader-cache) | Lists the DirectX, NVIDIA, and related shader cache directories cleared by this tweak. |
+
+**Targets**
+
+#### `shader-cache-files`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `file` |
+| Path | `%LOCALAPPDATA%\D3DSCache; %LOCALAPPDATA%\NVIDIA\DXCache; %LOCALAPPDATA%\NVIDIA\GLCache; %LOCALAPPDATA%\NVIDIA Corporation\NV_Cache; %LOCALAPPDATA%\AMD\DXCache; %LOCALAPPDATA%\Intel\DXCache` |
+| Value name | `CleanupAction` |
+| Value type | `file cleanup action` |
+| Notes | This is a one-shot file cleanup action rather than a persistent setting. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | No cleanup action | Shader-cache files remain until the operator or Windows removes them. | repo-cleanup-doc, engine-shader-cache-cleanup |
+| `value` | `Cleared` | Clear shader caches | Deletes the DirectX and vendor shader-cache directories that the current app enumerates. | repo-cleanup-doc, repo-cleanup-provenance, app-misc-provider, engine-shader-cache-cleanup |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed shader-cache baseline | Systems where shader-cache files are created and rebuilt by Windows and GPU drivers as needed | shader-cache-files: unknown None - This card represents an operator-triggered cleanup action, not a persistent default state. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Cleanup command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | `Current repo docs` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) | `high` | path, behavior, ui-mapping |
+| `repo-cleanup-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for cleanup.directx-shader-cache | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-misc-provider` | `repo-code` | `Current repo code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs | `high` | ui-mapping |
+| `engine-shader-cache-cleanup` | `repo-code` | `Current repo code` | Current shader-cache cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearDirectXShaderCacheTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider. |
+
+Blocking issues:
+- The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.
+- This is a maintenance action with no rollback support.
+
+---
+
+### `cleanup.eventlog-system`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Cleanup` |
+| Area | `System Event Log Cleanup` |
+| Scope | `device` |
+| Source file | [research/records/cleanup.eventlog-system.review.json](records/cleanup.eventlog-system.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live System event-log cleanup card. The app already ships the wevtutil-backed action and the repo cleanup docs describe the same log-clear flow, but the card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Notes | The live app still ships this as a first-party system cleanup card instead of through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `system-event-log-command` | `%SystemRoot%\System32\wevtutil.exe` | `SystemLogAction` | `Cleared` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `True` |
+| Source repositories | win-config |
+| Matched tokens |  |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
+
+**Targets**
+
+#### `system-event-log-command`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `command` |
+| Path | `%SystemRoot%\System32\wevtutil.exe` |
+| Value name | `SystemLogAction` |
+| Value type | `enum` |
+| Notes | There is no rollback command for a cleared event log. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `value` | `Analyzed` | Analyze System log | Reads current System log metadata without clearing the log. | repo-cleanup-doc, engine-system-event-log-command |
+| `value` | `Cleared` | Clear System log | Runs wevtutil cl System to remove System log entries. | repo-cleanup-doc, repo-cleanup-provenance, app-system-provider, engine-system-event-log-command |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows event-log baseline | Systems where the System event log remains available until an operator clears it | system-event-log-command: unknown None - This card represents an operator-triggered maintenance action, not a persistent default state. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Cleanup command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | `Current repo docs` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) | `high` | path, behavior, ui-mapping |
+| `repo-cleanup-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for cleanup.eventlog-system | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-system-provider` | `repo-code` | `Current repo code` | Live system provider mapping | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | ui-mapping |
+| `engine-system-event-log-command` | `repo-code` | `Current repo code` | Current System event-log cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearEventLogsTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The live event-log clear behavior is clear and repo-backed, but this one-shot cleanup card still lives only in the first-party provider. |
+
+Blocking issues:
+- The card has not yet been promoted from the first-party system provider into the research-provider surface.
+- Clearing the event log has no rollback path.
+
+---
+
+### `cleanup.font-cache`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Cleanup` |
+| Area | `Font Cache Cleanup` |
+| Scope | `device` |
+| Source file | [research/records/cleanup.font-cache.review.json](records/cleanup.font-cache.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live font-cache cleanup card. The app already ships this file-backed cleanup action and repo cleanup docs describe the same cache files and service handling, but the card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/MiscTweakProvider.cs |
+| Notes | The live app still ships this as a first-party cleanup card instead of through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `font-cache-files` | `%WINDIR%\ServiceProfiles\LocalService\AppData\Local\FontCache; %WINDIR%\System32\FNTCACHE.DAT` | `CleanupAction` | `Cleared` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | font cache, fontcache, fntcache.dat |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md#font-cache | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#font-cache](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#font-cache) | Explains the font cache files and the FontCache service stop/start flow. |
+
+**Targets**
+
+#### `font-cache-files`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `file` |
+| Path | `%WINDIR%\ServiceProfiles\LocalService\AppData\Local\FontCache; %WINDIR%\System32\FNTCACHE.DAT` |
+| Value name | `CleanupAction` |
+| Value type | `file cleanup action` |
+| Notes | This is a one-shot cleanup action rather than a persistent font configuration setting. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | No cleanup action | Font-cache files remain until Windows or an operator removes them. | repo-cleanup-doc, engine-font-cache-cleanup |
+| `value` | `Cleared` | Clear font cache | Stops the FontCache service, removes the tracked cache files, and restarts the service. | repo-cleanup-doc, repo-cleanup-provenance, app-misc-provider, engine-font-cache-cleanup |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed font-cache baseline | Systems where Windows maintains font-cache files until a troubleshooting action clears them | font-cache-files: unknown None - This card represents an operator-triggered cleanup action, not a persistent default state. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Cleanup command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | `Current repo docs` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) | `high` | path, behavior, ui-mapping |
+| `repo-cleanup-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for cleanup.font-cache | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-misc-provider` | `repo-code` | `Current repo code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs | `high` | ui-mapping |
+| `engine-font-cache-cleanup` | `repo-code` | `Current repo code` | Current font-cache cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearFontCacheTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider. |
+
+Blocking issues:
+- The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.
+- This is a maintenance action with no rollback support.
+
+---
+
+### `cleanup.memory-dumps`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Cleanup` |
+| Area | `Crash Dump Cleanup` |
+| Scope | `device` |
+| Source file | [research/records/cleanup.memory-dumps.review.json](records/cleanup.memory-dumps.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live memory-dump cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same dump paths, but the card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/MiscTweakProvider.cs |
+| Notes | The live app still ships this as a first-party cleanup card instead of through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `memory-dump-files` | `%WINDIR%\MEMORY.DMP; %WINDIR%\Minidump` | `CleanupAction` | `Cleared` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | deletes, %windir%, memory, files, under, minidump, memory dump, livekernelreports, memory.dmp |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 6 audit token(s) in win-config. |
+| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 5 audit token(s) in win-config. |
+| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 5 audit token(s) in win-config. |
+| win-config / cleanup/desc.md#bsod-memory-dump-files | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#bsod-memory-dump-files](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#bsod-memory-dump-files) | Documents the crash dump paths removed by this cleanup option. |
+
+**Targets**
+
+#### `memory-dump-files`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `file` |
+| Path | `%WINDIR%\MEMORY.DMP; %WINDIR%\Minidump` |
+| Value name | `CleanupAction` |
+| Value type | `file cleanup action` |
+| Notes | This is a one-shot cleanup action rather than a persistent dump-policy setting. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | No cleanup action | Crash-dump files remain until the operator or Windows removes them. | repo-cleanup-doc, engine-memory-dump-cleanup |
+| `value` | `Cleared` | Clear memory dump files | Deletes MEMORY.DMP and the Minidump directory tracked by the current app. | repo-cleanup-doc, repo-cleanup-provenance, app-misc-provider, engine-memory-dump-cleanup |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed crash-dump baseline | Systems where crash-dump files remain available until they are manually removed or overwritten | memory-dump-files: unknown None - This card represents an operator-triggered cleanup action, not a persistent default state. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Cleanup command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | `Current repo docs` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) | `high` | path, behavior, ui-mapping |
+| `repo-cleanup-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for cleanup.memory-dumps | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-misc-provider` | `repo-code` | `Current repo code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs | `high` | ui-mapping |
+| `engine-memory-dump-cleanup` | `repo-code` | `Current repo code` | Current memory-dump cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearMemoryDumpFilesTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider. |
+
+Blocking issues:
+- The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.
+- This is a maintenance action with no rollback support.
+
+---
+
+### `cleanup.prefetch-files`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Cleanup` |
+| Area | `Prefetch Cleanup` |
+| Scope | `device` |
+| Source file | [research/records/cleanup.prefetch-files.review.json](records/cleanup.prefetch-files.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live Prefetch cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same Prefetch directory, but the card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/MiscTweakProvider.cs |
+| Notes | The live app still ships this as a first-party cleanup card instead of through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `prefetch-files` | `%WINDIR%\Prefetch` | `CleanupAction` | `Cleared` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | clears, prefetch, files, from, %windir%, over, time, sysmain, enableprefetcher |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 7 audit token(s) in win-config. |
+| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 6 audit token(s) in win-config. |
+| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 5 audit token(s) in win-config. |
+| win-config / cleanup/desc.md#prefetch-files | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#prefetch-files](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#prefetch-files) | Documents the Prefetch folder and the rebuild behavior after cleanup. |
+
+Windows Internals references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Subsystem context for SysMain, prefetch, and related Windows internals. |
+
+**Targets**
+
+#### `prefetch-files`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `file` |
+| Path | `%WINDIR%\Prefetch` |
+| Value name | `CleanupAction` |
+| Value type | `file cleanup action` |
+| Notes | This is a one-shot cleanup action rather than a persistent Prefetch policy setting. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | No cleanup action | Prefetch files remain until the operator or Windows removes them. | repo-cleanup-doc, engine-prefetch-cleanup |
+| `value` | `Cleared` | Clear Prefetch files | Deletes the Prefetch directory contents tracked by the current app. | repo-cleanup-doc, repo-cleanup-provenance, app-misc-provider, engine-prefetch-cleanup |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed Prefetch baseline | Systems where Prefetch files remain available until they are manually cleared or regenerated by Windows | prefetch-files: unknown None - This card represents an operator-triggered cleanup action, not a persistent default state. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Cleanup command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | `Current repo docs` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) | `high` | path, behavior, ui-mapping |
+| `repo-cleanup-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for cleanup.prefetch-files | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-misc-provider` | `repo-code` | `Current repo code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs | `high` | ui-mapping |
+| `engine-prefetch-cleanup` | `repo-code` | `Current repo code` | Current Prefetch cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearPrefetchFilesTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider. |
+
+Blocking issues:
+- The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.
+- This is a maintenance action with no rollback support.
+
+---
+
 ### `cleanup.product-key`
 
 | Field | Value |
@@ -37416,6 +40075,588 @@ Blocking issues:
 
 ---
 
+### `cleanup.temp-files`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Cleanup` |
+| Area | `Temporary File Cleanup` |
+| Scope | `device` |
+| Source file | [research/records/cleanup.temp-files.review.json](records/cleanup.temp-files.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live temporary-file cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same temp directories, but the card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/MiscTweakProvider.cs |
+| Notes | The live app still ships this as a first-party cleanup card instead of through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `temporary-files` | `%TEMP%; %WINDIR%\Temp` | `CleanupAction` | `Cleared` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | temporary files, %temp%, windows temp |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md#temporary-files | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#temporary-files](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#temporary-files) | Documents the user and Windows temp directories cleared by this tweak. |
+
+**Targets**
+
+#### `temporary-files`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `file` |
+| Path | `%TEMP%; %WINDIR%\Temp` |
+| Value name | `CleanupAction` |
+| Value type | `file cleanup action` |
+| Notes | This is a one-shot cleanup action rather than a persistent temp-file policy setting. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | No cleanup action | Temporary files remain until the operator or Windows removes them. | repo-cleanup-doc, engine-temp-files-cleanup |
+| `value` | `Cleared` | Clear temporary files | Deletes files under the user temp and Windows temp directories, skipping files in use. | repo-cleanup-doc, repo-cleanup-provenance, app-misc-provider, engine-temp-files-cleanup |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed temporary-file baseline | Systems where temporary files remain until an operator or Windows cleanup flow removes them | temporary-files: unknown None - This card represents an operator-triggered cleanup action, not a persistent default state. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Cleanup command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | `Current repo docs` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) | `high` | path, behavior, ui-mapping |
+| `repo-cleanup-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for cleanup.temp-files | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-misc-provider` | `repo-code` | `Current repo code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs | `high` | ui-mapping |
+| `engine-temp-files-cleanup` | `repo-code` | `Current repo code` | Current temporary-file cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearTemporaryFilesTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider. |
+
+Blocking issues:
+- The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.
+- This is a maintenance action with no rollback support.
+
+---
+
+### `cleanup.thumbnail-cache`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Cleanup` |
+| Area | `Explorer Thumbnail Cache Cleanup` |
+| Scope | `user` |
+| Source file | [research/records/cleanup.thumbnail-cache.review.json](records/cleanup.thumbnail-cache.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live thumbnail-cache cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the Explorer thumbnail-cache files, but the card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/MiscTweakProvider.cs |
+| Notes | The live app still ships this as a first-party cleanup card instead of through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `thumbnail-cache-files` | `%LOCALAPPDATA%\Microsoft\Windows\Explorer\thumbcache_*.db` | `CleanupAction` | `Cleared` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | thumbnail cache, explorer, *.db |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md#thumbnail-cache | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#thumbnail-cache](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#thumbnail-cache) | Documents the Explorer thumbnail cache files that are rebuilt automatically. |
+
+**Targets**
+
+#### `thumbnail-cache-files`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `file` |
+| Path | `%LOCALAPPDATA%\Microsoft\Windows\Explorer\thumbcache_*.db` |
+| Value name | `CleanupAction` |
+| Value type | `file cleanup action` |
+| Notes | This is a one-shot cleanup action rather than a persistent Explorer setting. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | No cleanup action | Thumbnail-cache files remain until the operator or Windows removes them. | repo-cleanup-doc, engine-thumbnail-cache-cleanup |
+| `value` | `Cleared` | Clear thumbnail cache | Deletes the thumbnail-cache files enumerated by the current app. | repo-cleanup-doc, repo-cleanup-provenance, app-misc-provider, engine-thumbnail-cache-cleanup |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed thumbnail-cache baseline | Systems where Explorer rebuilds thumbnail-cache files after they are cleared | thumbnail-cache-files: unknown None - This card represents an operator-triggered cleanup action, not a persistent default state. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Cleanup command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | `Current repo docs` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) | `high` | path, behavior, ui-mapping |
+| `repo-cleanup-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for cleanup.thumbnail-cache | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-misc-provider` | `repo-code` | `Current repo code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs | `high` | ui-mapping |
+| `engine-thumbnail-cache-cleanup` | `repo-code` | `Current repo code` | Current thumbnail-cache cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearThumbnailCacheTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider. |
+
+Blocking issues:
+- The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.
+- This is a maintenance action with no rollback support.
+
+---
+
+### `cleanup.wer-files`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Cleanup` |
+| Area | `Windows Error Reporting Cleanup` |
+| Scope | `device` |
+| Source file | [research/records/cleanup.wer-files.review.json](records/cleanup.wer-files.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live Windows Error Reporting cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same WER directories, but the card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/MiscTweakProvider.cs |
+| Notes | The live app still ships this as a first-party cleanup card instead of through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `wer-files` | `%PROGRAMDATA%\Microsoft\Windows\WER; %LOCALAPPDATA%\Microsoft\Windows\WER; %TEMP%\WER` | `CleanupAction` | `Cleared` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | wer, windows error reporting, programdata microsoft windows wer |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md#wer-files | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#wer-files](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#wer-files) | Documents the WER system and per-user report queues cleared by this tweak. |
+
+Other source references:
+
+| Kind | Title | Location | Summary |
+| --- | --- | --- | --- |
+| microsoft | Windows Error Reporting | [https://learn.microsoft.com/en-us/windows/win32/wer/windows-error-reporting](https://learn.microsoft.com/en-us/windows/win32/wer/windows-error-reporting) | Official Microsoft overview of WER data and report handling. |
+
+**Targets**
+
+#### `wer-files`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `file` |
+| Path | `%PROGRAMDATA%\Microsoft\Windows\WER; %LOCALAPPDATA%\Microsoft\Windows\WER; %TEMP%\WER` |
+| Value name | `CleanupAction` |
+| Value type | `file cleanup action` |
+| Notes | This is a one-shot cleanup action rather than a persistent WER policy setting. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | No cleanup action | WER files remain until the operator or Windows removes them. | repo-cleanup-doc, engine-wer-cleanup |
+| `value` | `Cleared` | Clear WER files | Deletes the WER crash dumps and report metadata tracked by the current app. | repo-cleanup-doc, repo-cleanup-provenance, app-misc-provider, engine-wer-cleanup |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed WER baseline | Systems where WER files remain available until they are manually cleared or rotated away | wer-files: unknown None - This card represents an operator-triggered cleanup action, not a persistent default state. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Cleanup command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | `Current repo docs` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) | `high` | path, behavior, ui-mapping |
+| `repo-cleanup-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for cleanup.wer-files | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-misc-provider` | `repo-code` | `Current repo code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs | `high` | ui-mapping |
+| `engine-wer-cleanup` | `repo-code` | `Current repo code` | Current WER cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearWERFilesTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider. |
+
+Blocking issues:
+- The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.
+- This is a maintenance action with no rollback support.
+
+---
+
+### `cleanup.windows-old`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Cleanup` |
+| Area | `Windows.old Cleanup` |
+| Scope | `device` |
+| Source file | [research/records/cleanup.windows-old.review.json](records/cleanup.windows-old.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live Windows.old cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same rollback-sensitive folder, but the card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/MiscTweakProvider.cs |
+| Notes | The live app still ships this as a first-party cleanup card instead of through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `windows-old-folder` | `%SystemDrive%\Windows.old` | `CleanupAction` | `Cleared` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | windows.old, previous version of windows |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md#windowsold | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#windowsold](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#windowsold) | Documents removing the previous Windows installation under Windows.old. |
+
+Other source references:
+
+| Kind | Title | Location | Summary |
+| --- | --- | --- | --- |
+| microsoft | Delete your previous version of Windows | [https://support.microsoft.com/en-us/windows/delete-your-previous-version-of-windows-f8b26680-e083-c710-b757-7567d69dbb74](https://support.microsoft.com/en-us/windows/delete-your-previous-version-of-windows-f8b26680-e083-c710-b757-7567d69dbb74) | Official Microsoft guidance explaining the rollback impact of deleting Windows.old. |
+
+**Targets**
+
+#### `windows-old-folder`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `file` |
+| Path | `%SystemDrive%\Windows.old` |
+| Value name | `CleanupAction` |
+| Value type | `file cleanup action` |
+| Notes | This is a one-shot cleanup action rather than a persistent rollback policy setting. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | No cleanup action | Windows.old remains available until the operator or Windows removes it. | repo-cleanup-doc, engine-windows-old-cleanup |
+| `value` | `Cleared` | Delete Windows.old | Deletes Windows.old folders on fixed drives, removing that rollback folder from the system. | repo-cleanup-doc, repo-cleanup-provenance, app-misc-provider, engine-windows-old-cleanup |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed Windows.old baseline | Systems where Windows.old remains available until cleanup or retention rules remove it | windows-old-folder: unknown None - This card represents an operator-triggered cleanup action, not a persistent default state. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Cleanup command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | `Current repo docs` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) | `high` | path, behavior, ui-mapping |
+| `repo-cleanup-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for cleanup.windows-old | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-misc-provider` | `repo-code` | `Current repo code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs | `high` | ui-mapping |
+| `engine-windows-old-cleanup` | `repo-code` | `Current repo code` | Current Windows.old cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearWindowsOldTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The live cleanup behavior and repo-backed folder target are clear, but this one-shot cleanup card still lives only in the first-party provider. |
+
+Blocking issues:
+- The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.
+- Deleting Windows.old has no rollback path through the app.
+
+---
+
+### `cleanup.windows-update-cache`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Cleanup` |
+| Area | `Windows Update Cache Cleanup` |
+| Scope | `device` |
+| Source file | [research/records/cleanup.windows-update-cache.review.json](records/cleanup.windows-update-cache.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live Windows Update cache cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same update-cache directories, but the card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/MiscTweakProvider.cs |
+| Notes | The live app still ships this as a first-party cleanup card instead of through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `windows-update-cache-files` | `%WINDIR%\SoftwareDistribution; %WINDIR%\System32\catroot2` | `CleanupAction` | `Cleared` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | windows update cache, softwaredistribution, catroot2 |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md#windows-update-cache | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#windows-update-cache](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#windows-update-cache) | Documents the Windows Update cache paths and service stop sequence used for reset. |
+
+**Targets**
+
+#### `windows-update-cache-files`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `file` |
+| Path | `%WINDIR%\SoftwareDistribution; %WINDIR%\System32\catroot2` |
+| Value name | `CleanupAction` |
+| Value type | `file cleanup action` |
+| Notes | This is a one-shot cleanup action rather than a persistent Windows Update policy setting. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | No cleanup action | Windows Update cache directories remain until the operator or Windows cleanup flow removes them. | repo-cleanup-doc, engine-windows-update-cache-cleanup |
+| `value` | `Cleared` | Clear Windows Update cache | Deletes the Windows Update cache directories tracked by the current app. | repo-cleanup-doc, repo-cleanup-provenance, app-misc-provider, engine-windows-update-cache-cleanup |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed update-cache baseline | Systems where Windows Update maintains its cache directories until troubleshooting or service activity resets them | windows-update-cache-files: unknown None - This card represents an operator-triggered cleanup action, not a persistent default state. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Cleanup command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | `Current repo docs` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) | `high` | path, behavior, ui-mapping |
+| `repo-cleanup-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for cleanup.windows-update-cache | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-misc-provider` | `repo-code` | `Current repo code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs | `high` | ui-mapping |
+| `engine-windows-update-cache-cleanup` | `repo-code` | `Current repo code` | Current Windows Update cache cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearWindowsUpdateCacheTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider. |
+
+Blocking issues:
+- The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.
+- This is a maintenance action with no rollback support.
+
+---
+
 ### Network
 
 ### `network.flush-dns-cache`
@@ -37668,364 +40909,6 @@ Other source references:
 Blocking issues:
 - Tweak provenance still marks network.reset-winsock as category-fallback and review-only.
 - The command is a repair action that usually expects reboot and does not support rollback.
-
----
-
-### Power
-
-### `power.disable-cpu-parking`
-
-| Field | Value |
-| --- | --- |
-| Status | `review-required` |
-| Evidence class | `Class D` |
-| Category | `Power` |
-| Area | `PowerCfg Core Parking` |
-| Scope | `device` |
-| Source file | [research/records/power.disable-cpu-parking.review.json](records/power.disable-cpu-parking.review.json) |
-| V3.1 evidence root | - |
-| Apply allowed | `False` |
-| Confidence | `medium` |
-| Needs VM validation | `True` |
-
-**Summary:** Review-required audit trail for the live CPU core parking card. The app already exposes a command-backed powercfg implementation, and repo docs map the tweak id to core-parking research, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.
-
-**Current implementation**
-
-| Field | Value |
-| --- | --- |
-| Status | `unknown` |
-| Provider source | app/Services/TweakProviders/PowerTweakProvider.cs |
-| Notes | The live app still ships this as a first-party power command card rather than through the research-provider surface. |
-
-Current writes
-
-| Target | Path | Value | State | Kind | Notes |
-| --- | --- | --- | --- | --- | --- |
-| `cpu-core-parking-command` | `powercfg.exe /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES 100 /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES 100 /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMAXCORES 100 /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMAXCORES 100 /setactive SCHEME_CURRENT` | `CoreParkingPercent` | `100` | `value` | The implementation snapshots the prior AC/DC min/max values and restores them on rollback. |
-
-**Evidence class**
-
-| Field | Value |
-| --- | --- |
-| Label | `Class D` |
-| Title | Key Known, Value Semantics Unknown |
-| Action state | `research-gated` |
-| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
-
-**Sources**
-
-| Field | Value |
-| --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode, win-registry |
-| Matched tokens | writes, core, parking, related, power, registry, values, used, this, including, latencytoleranceparked, latencytolerancesoftparked, class1initialunparkcount, multiparkgranularity, tweak, power values |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 14 audit token(s) in win-config. |
-| win-config / nvidia/desc.md | [https://github.com/nohuto/win-config/blob/main/nvidia/desc.md](https://github.com/nohuto/win-config/blob/main/nvidia/desc.md) | Matched 10 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 10 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-| win-config / power/desc.md#power-values | [https://github.com/nohuto/win-config/blob/main/power/desc.md#power-values](https://github.com/nohuto/win-config/blob/main/power/desc.md#power-values) | Documents the power-manager registry values that influence core parking and latency tolerances. |
-| win-registry / Power Values | [https://github.com/nohuto/win-registry?tab=readme-ov-file#power-values](https://github.com/nohuto/win-registry?tab=readme-ov-file#power-values) | Provides nohuto's reverse-engineered registry notes for power-manager values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
-
-**Targets**
-
-#### `cpu-core-parking-command`
-
-| Field | Value |
-| --- | --- |
-| Location kind | `command` |
-| Path | `powercfg.exe /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES 100 /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES 100 /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMAXCORES 100 /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMAXCORES 100 /setactive SCHEME_CURRENT` |
-| Value name | `CoreParkingPercent` |
-| Value type | `percent` |
-| Notes | Detection reads the current AC/DC values for both minimum and maximum core parking, apply sets all four values to 100, and rollback restores the detected snapshot. |
-
-| State | Value | Label | Meaning | Evidence IDs |
-| --- | --- | --- | --- | --- |
-| `feature-dependent` | - | Windows-managed core parking | The active scheme's current core-parking limits are whatever the system already uses before the tweak is applied. | repo-power-doc, engine-cpu-parking-command |
-| `value` | `100` | Core parking disabled | The app forces CPMINCORES and CPMAXCORES to 100 for both AC and DC so the active power plan stops parking cores. | repo-power-doc, repo-power-provenance, app-power-provider, engine-cpu-parking-command |
-
-**Windows defaults**
-
-| Label | Applies to | States |
-| --- | --- | --- |
-| Windows-managed processor baseline | Systems where the active power plan keeps its own core-parking settings | cpu-core-parking-command: feature-dependent None - The active scheme can vary by machine, so the current core-parking values should be observed rather than assumed. |
-
-**Recommended profiles**
-
-| Profile | Label | Intended for | Avoid for | Apply allowed |
-| --- | --- | --- | --- | --- |
-| `hold-for-research` | Hold for research | ['Research tracking only', 'Power command backlog reduction'] | ['Published presets', 'General users'] | `False` |
-| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
-
-**Evidence**
-
-| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- | --- |
-| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power catalog entry | [Docs/power/power.md](../Docs/power/power.md) | `medium` | behavior, ui-mapping |
-| `repo-power-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for power.disable-cpu-parking | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `high` | behavior, risk |
-| `app-power-provider` | `repo-code` | `Current repo code` | Live power provider mapping | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | ui-mapping |
-| `engine-cpu-parking-command` | `repo-code` | `Current repo code` | Current core-parking implementation | engine/Tweaks/Commands/Power/DisableCpuCoreParkingTweak.cs | `high` | path, value, behavior |
-
-**Decision**
-
-| Field | Value |
-| --- | --- |
-| Apply allowed | `False` |
-| Recommended for general users | `False` |
-| Restore default supported | `False` |
-| Restore previous supported | `True` |
-| Needs VM validation | `True` |
-| Why | The live powercfg behavior is clear and reversible, but the card still lives only in the first-party power provider and has not yet been promoted into the research-provider surface. |
-
-Blocking issues:
-- The card has not yet been promoted from the first-party power provider into the research-provider surface.
-- This review pass documents the behavior but does not yet publish it as a validated research card.
-
----
-
-### `power.disable-hibernation`
-
-| Field | Value |
-| --- | --- |
-| Status | `review-required` |
-| Evidence class | `Class D` |
-| Category | `Power` |
-| Area | `PowerCfg Hibernation` |
-| Scope | `device` |
-| Source file | [research/records/power.disable-hibernation.review.json](records/power.disable-hibernation.review.json) |
-| V3.1 evidence root | - |
-| Apply allowed | `False` |
-| Confidence | `medium` |
-| Needs VM validation | `True` |
-
-**Summary:** Review-required audit trail for the live hibernation card. The app already ships the powercfg-backed action and repo docs map the tweak id to that same flow, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.
-
-**Current implementation**
-
-| Field | Value |
-| --- | --- |
-| Status | `unknown` |
-| Provider source | app/Services/TweakProviders/PowerTweakProvider.cs |
-| Notes | The live app still ships this as a first-party power command card instead of through the research-provider surface. |
-
-Current writes
-
-| Target | Path | Value | State | Kind | Notes |
-| --- | --- | --- | --- | --- | --- |
-| `hibernation-mode-command` | `powercfg.exe /hibernate` | `Mode` | `Disabled` | `value` | Detection reads /availablesleepstates, apply uses /hibernate off, and rollback uses /hibernate on when the prior state was enabled. |
-
-**Evidence class**
-
-| Field | Value |
-| --- | --- |
-| Label | `Class D` |
-| Title | Key Known, Value Semantics Unknown |
-| Action state | `research-gated` |
-| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
-
-**Sources**
-
-| Field | Value |
-| --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | disable hibernation, runs, powercfg, hibernate, this, disables, hibernation, removes, hiberfil |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 9 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 7 audit token(s) in win-config. |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 6 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
-
-**Targets**
-
-#### `hibernation-mode-command`
-
-| Field | Value |
-| --- | --- |
-| Location kind | `command` |
-| Path | `powercfg.exe /hibernate` |
-| Value name | `Mode` |
-| Value type | `enum` |
-| Notes | Detection parses powercfg /availablesleepstates output to determine whether hibernation is currently enabled. |
-
-| State | Value | Label | Meaning | Evidence IDs |
-| --- | --- | --- | --- | --- |
-| `value` | `Enabled` | Hibernation enabled | Hibernation remains available on the system. | repo-power-doc, engine-disable-hibernation-command |
-| `value` | `Disabled` | Hibernation disabled | The app applies powercfg /hibernate off and removes hibernation availability. | repo-power-doc, repo-power-provenance, app-power-provider, engine-disable-hibernation-command |
-
-**Windows defaults**
-
-| Label | Applies to | States |
-| --- | --- | --- |
-| Windows-managed sleep baseline | Systems where hibernation availability depends on device capabilities and prior operator choices | hibernation-mode-command: feature-dependent None - Hibernation availability can vary by device and current configuration, so the current state should be observed rather than assumed. |
-
-**Recommended profiles**
-
-| Profile | Label | Intended for | Avoid for | Apply allowed |
-| --- | --- | --- | --- | --- |
-| `hold-for-research` | Hold for research | ['Research tracking only', 'Power command backlog reduction'] | ['Published presets', 'General users'] | `False` |
-| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
-
-**Evidence**
-
-| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- | --- |
-| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power catalog entry | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, behavior, ui-mapping |
-| `repo-power-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for power.disable-hibernation | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
-| `app-power-provider` | `repo-code` | `Current repo code` | Live power provider mapping | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | ui-mapping |
-| `engine-disable-hibernation-command` | `repo-code` | `Current repo code` | Current hibernation command implementation | engine/Tweaks/Commands/Power/DisableHibernationTweak.cs | `high` | path, value, behavior |
-
-**Decision**
-
-| Field | Value |
-| --- | --- |
-| Apply allowed | `False` |
-| Recommended for general users | `False` |
-| Restore default supported | `False` |
-| Restore previous supported | `True` |
-| Needs VM validation | `True` |
-| Why | The live powercfg behavior is clear and reversible, but the card still lives only in the first-party power provider and has not yet been promoted into the research-provider surface. |
-
-Blocking issues:
-- The card has not yet been promoted from the first-party power provider into the research-provider surface.
-- This review pass documents the behavior but does not yet publish it as a validated research card.
-
----
-
-### `power.disable-usb-selective-suspend`
-
-| Field | Value |
-| --- | --- |
-| Status | `review-required` |
-| Evidence class | `Class D` |
-| Category | `Power` |
-| Area | `PowerCfg USB Selective Suspend` |
-| Scope | `device` |
-| Source file | [research/records/power.disable-usb-selective-suspend.review.json](records/power.disable-usb-selective-suspend.review.json) |
-| V3.1 evidence root | - |
-| Apply allowed | `False` |
-| Confidence | `medium` |
-| Needs VM validation | `True` |
-
-**Summary:** Review-required audit trail for the live USB selective suspend card. The app already exposes a command-backed powercfg implementation, and repo docs plus provenance overrides map the tweak id to USB power-management research, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.
-
-**Current implementation**
-
-| Field | Value |
-| --- | --- |
-| Status | `unknown` |
-| Provider source | app/Services/TweakProviders/PowerTweakProvider.cs |
-| Notes | The live app still ships this as a first-party power command card rather than through the research-provider surface. |
-
-Current writes
-
-| Target | Path | Value | State | Kind | Notes |
-| --- | --- | --- | --- | --- | --- |
-| `usb-selective-suspend-command` | `powercfg.exe /setacvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0 /setdcvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0 /setactive SCHEME_CURRENT` | `UsbSelectiveSuspend` | `0` | `value` | The implementation snapshots the prior AC/DC values and restores them on rollback. |
-
-**Evidence class**
-
-| Field | Value |
-| --- | --- |
-| Label | `Class D` |
-| Title | Key Known, Value Semantics Unknown |
-| Action state | `research-gated` |
-| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
-
-**Sources**
-
-| Field | Value |
-| --- | --- |
-| Coverage state | `` |
-| Has nohuto lineage | `` |
-| Has Windows Internals notes | `` |
-| Needs review | `` |
-| Source repositories |  |
-| Matched tokens |  |
-| Lineage note |  |
-
-**Targets**
-
-#### `usb-selective-suspend-command`
-
-| Field | Value |
-| --- | --- |
-| Location kind | `command` |
-| Path | `powercfg.exe /setacvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0 /setdcvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0 /setactive SCHEME_CURRENT` |
-| Value name | `UsbSelectiveSuspend` |
-| Value type | `enum` |
-| Notes | Detection reads the current AC/DC values, apply sets both values to 0, and rollback restores the detected snapshot. |
-
-| State | Value | Label | Meaning | Evidence IDs |
-| --- | --- | --- | --- | --- |
-| `feature-dependent` | - | Windows-managed USB selective suspend | The active scheme's current USB selective suspend values are whatever the system already uses before the tweak is applied. | repo-power-doc, engine-usb-suspend-command |
-| `value` | `0` | USB selective suspend disabled | The app forces the active scheme's AC and DC USB selective suspend values to 0. | repo-power-doc, repo-power-provenance-override, app-power-provider, engine-usb-suspend-command |
-
-**Windows defaults**
-
-| Label | Applies to | States |
-| --- | --- | --- |
-| Windows-managed USB power baseline | Systems where the active power plan keeps its own USB selective suspend values | usb-selective-suspend-command: feature-dependent None - The active scheme can vary by machine, so the current USB selective suspend values should be observed rather than assumed. |
-
-**Recommended profiles**
-
-| Profile | Label | Intended for | Avoid for | Apply allowed |
-| --- | --- | --- | --- | --- |
-| `hold-for-research` | Hold for research | ['Research tracking only', 'Power command backlog reduction'] | ['Published presets', 'General users'] | `False` |
-| `current-app-profile` | Current app profile | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
-
-**Evidence**
-
-| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
-| --- | --- | --- | --- | --- | --- | --- |
-| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power USB power-management notes | [Docs/power/power.md](../Docs/power/power.md) | `medium` | behavior, risk |
-| `repo-power-provenance-override` | `repo-doc` | `Current repo docs` | Repo provenance override for power.disable-usb-selective-suspend | [Docs/tweaks/tweak-provenance-overrides.json](../Docs/tweaks/tweak-provenance-overrides.json) | `high` | behavior, risk |
-| `app-power-provider` | `repo-code` | `Current repo code` | Live power provider mapping | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | ui-mapping |
-| `engine-usb-suspend-command` | `repo-code` | `Current repo code` | Current USB selective suspend implementation | engine/Tweaks/Commands/Power/DisableUsbSelectiveSuspendTweak.cs | `high` | path, value, behavior |
-
-**Decision**
-
-| Field | Value |
-| --- | --- |
-| Apply allowed | `False` |
-| Recommended for general users | `False` |
-| Restore default supported | `False` |
-| Restore previous supported | `True` |
-| Needs VM validation | `True` |
-| Why | The live powercfg behavior is clear and reversible, but the card still lives only in the first-party power provider and has not yet been promoted into the research-provider surface. |
-
-Blocking issues:
-- The card has not yet been promoted from the first-party power provider into the research-provider surface.
-- This review pass documents the behavior but does not yet publish it as a validated research card.
 
 ---
 

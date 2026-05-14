@@ -39,6 +39,15 @@ public abstract class CommandTweak : ITweak
     protected abstract bool ParseDetectedState(CommandResult result, out string state);
     protected abstract bool VerifyApplied(CommandResult result);
 
+    protected virtual TweakStatus GetDetectedStatus(CommandResult result, string detectedState)
+        => VerifyApplied(result) ? TweakStatus.Applied : TweakStatus.Detected;
+
+    protected virtual TimeSpan ApplySettleDelay => TimeSpan.Zero;
+
+    protected virtual TimeSpan RollbackSettleDelay => TimeSpan.Zero;
+
+    protected virtual TweakResult? CreateApplyFailureResult(CommandResult result) => null;
+
     public async Task<TweakResult> DetectAsync(CancellationToken ct)
     {
         ct.ThrowIfCancellationRequested();
@@ -74,10 +83,9 @@ public abstract class CommandTweak : ITweak
 
             _hasDetected = true;
 
-            // Check if the tweak is already in the desired (applied) state
-            var isApplied = VerifyApplied(result);
+            var detectedStatus = GetDetectedStatus(result, _detectedState);
             return new TweakResult(
-                isApplied ? TweakStatus.Applied : TweakStatus.Detected,
+                detectedStatus,
                 $"Current state: {_detectedState}",
                 DateTimeOffset.UtcNow);
         }
@@ -114,11 +122,19 @@ public abstract class CommandTweak : ITweak
 
             if (result.ExitCode != 0)
             {
+                var customFailure = CreateApplyFailureResult(result);
+                if (customFailure is not null)
+                {
+                    return customFailure;
+                }
+
                 return new TweakResult(
                     TweakStatus.Failed,
                     $"Apply command failed with exit code {result.ExitCode}: {result.StandardError}",
                     DateTimeOffset.UtcNow);
             }
+
+            await WaitForSettleAsync(ApplySettleDelay, ct);
 
             return new TweakResult(
                 TweakStatus.Applied,
@@ -164,7 +180,24 @@ public abstract class CommandTweak : ITweak
                     DateTimeOffset.UtcNow);
             }
 
-            if (VerifyApplied(result))
+            if (!ParseDetectedState(result, out var detectedState))
+            {
+                return new TweakResult(
+                    TweakStatus.Failed,
+                    "Failed to parse verification state.",
+                    DateTimeOffset.UtcNow);
+            }
+
+            var detectedStatus = GetDetectedStatus(result, detectedState);
+            if (detectedStatus == TweakStatus.NotApplicable)
+            {
+                return new TweakResult(
+                    TweakStatus.NotApplicable,
+                    $"Verification not applicable: {detectedState}",
+                    DateTimeOffset.UtcNow);
+            }
+
+            if (detectedStatus == TweakStatus.Applied || VerifyApplied(result))
             {
                 return new TweakResult(
                     TweakStatus.Verified,
@@ -240,6 +273,8 @@ public abstract class CommandTweak : ITweak
                     DateTimeOffset.UtcNow);
             }
 
+            await WaitForSettleAsync(RollbackSettleDelay, ct);
+
             return new TweakResult(
                 TweakStatus.RolledBack,
                 "Successfully restored original state.",
@@ -258,4 +293,7 @@ public abstract class CommandTweak : ITweak
                 ex);
         }
     }
+
+    private static Task WaitForSettleAsync(TimeSpan delay, CancellationToken ct)
+        => delay > TimeSpan.Zero ? Task.Delay(delay, ct) : Task.CompletedTask;
 }

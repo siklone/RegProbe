@@ -39,9 +39,9 @@ Do not edit manually.
 
 | ID | Name | Changes | Risk | Source |
 | --- | --- | --- | --- | --- |
-| <a id="notifications.disable-feedback-frequency"></a> `notifications.disable-feedback-frequency` | Disable Feedback Requests | Stops Windows from asking for feedback or ratings. | Safe | `app\Services\TweakProviders\PrivacyTweakProvider.cs#L533` |
-| <a id="notifications.disable-lock-screen"></a> `notifications.disable-lock-screen` | Disable Lock Screen Notifications | Prevents app notifications from showing on the lock screen. | Advanced | `app\Services\TweakProviders\PrivacyTweakProvider.cs#L520` |
-| <a id="notifications.disable-mirroring"></a> `notifications.disable-mirroring` | Disable Notification Mirroring | Stops notifications from being mirrored to other devices. | Advanced | `app\Services\TweakProviders\PrivacyTweakProvider.cs#L571` |
-| <a id="notifications.disable-tile"></a> `notifications.disable-tile` | Disable Tile Notifications | Prevents apps from updating tiles and tile badges. | Advanced | `app\Services\TweakProviders\PrivacyTweakProvider.cs#L558` |
-| <a id="notifications.disable-toast"></a> `notifications.disable-toast` | Disable Toast Notifications | Blocks balloon and toast notifications for all applications for the current user. | Advanced | `app\Services\TweakProviders\PrivacyTweakProvider.cs#L507` |
+| <a id="notifications.disable-feedback-frequency"></a> `notifications.disable-feedback-frequency` | Windows Feedback Request Frequency | Windows can occasionally ask for feedback. This tweak sets a user preference intended to reduce or stop those requests. | Medium | `research/records/notifications.disable-feedback-frequency.review.json` |
+| <a id="notifications.disable-lock-screen"></a> `notifications.disable-lock-screen` | Lock Screen Toast Notifications | Windows can show some app notifications directly on the lock screen. This policy decides whether apps can raise those lock-screen toast a... | Medium | `research/records/notifications.disable-lock-screen.json` |
+| <a id="notifications.disable-mirroring"></a> `notifications.disable-mirroring` | Notification Mirroring | Windows can mirror some notifications to other devices. This policy decides whether that cross-device mirroring is allowed for the curren... | Medium | `research/records/notifications.disable-mirroring.json` |
+| <a id="notifications.disable-tile"></a> `notifications.disable-tile` | Tile Notifications | Tile notifications are the live updates and badges some Windows tiles can show. This policy decides whether those tile updates are allowe... | Medium | `research/records/notifications.disable-tile.json` |
+| <a id="notifications.disable-toast"></a> `notifications.disable-toast` | Toast Notifications | Toast notifications are the pop-up alerts apps show in Windows. This policy decides whether apps can raise those pop-ups for the current... | Medium | `research/records/notifications.disable-toast.json` |
 <!-- TWEAK INDEX END -->

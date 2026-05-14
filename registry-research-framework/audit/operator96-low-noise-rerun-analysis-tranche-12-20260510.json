@@ -1,0 +1,362 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-11T15:13:38Z",
+  "input_dir": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12",
+  "pattern": "operator96-*.json",
+  "artifact_count": 10,
+  "error_count": 0,
+  "counts": {
+    "by_verdict": {
+      "noisy": 10
+    },
+    "by_confidence": {
+      "low": 10
+    },
+    "by_host_noise": {
+      "noisy": 10
+    }
+  },
+  "results": [
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-064-disablevsynclatencyupdate-0.json",
+      "experiment_id": "operator96-064-disablevsynclatencyupdate-0",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\DisableVsyncLatencyUpdate",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "DisableVsyncLatencyUpdate",
+      "value_data": 0,
+      "verdict": "noisy",
+      "confidence": "low",
+      "host_noise": "noisy",
+      "delta_pct": null,
+      "reason": "host preflight marked one or more stages noisy",
+      "metrics_used": [
+        "host_noise_meta"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "noisy",
+          "confidence": "low",
+          "delta_pct": null,
+          "reason": "host preflight marked one or more stages noisy",
+          "metrics_used": [
+            "host_noise_meta"
+          ],
+          "stage": null
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    },
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-064-disablevsynclatencyupdate-1.json",
+      "experiment_id": "operator96-064-disablevsynclatencyupdate-1",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\DisableVsyncLatencyUpdate",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "DisableVsyncLatencyUpdate",
+      "value_data": 1,
+      "verdict": "noisy",
+      "confidence": "low",
+      "host_noise": "noisy",
+      "delta_pct": null,
+      "reason": "host preflight marked one or more stages noisy",
+      "metrics_used": [
+        "host_noise_meta"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "noisy",
+          "confidence": "low",
+          "delta_pct": null,
+          "reason": "host preflight marked one or more stages noisy",
+          "metrics_used": [
+            "host_noise_meta"
+          ],
+          "stage": null
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    },
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-066-enableinputsuppression-0.json",
+      "experiment_id": "operator96-066-enableinputsuppression-0",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\EnableInputSuppression",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "EnableInputSuppression",
+      "value_data": 0,
+      "verdict": "noisy",
+      "confidence": "low",
+      "host_noise": "noisy",
+      "delta_pct": null,
+      "reason": "host preflight marked one or more stages noisy",
+      "metrics_used": [
+        "host_noise_meta"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "noisy",
+          "confidence": "low",
+          "delta_pct": null,
+          "reason": "host preflight marked one or more stages noisy",
+          "metrics_used": [
+            "host_noise_meta"
+          ],
+          "stage": null
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    },
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-066-enableinputsuppression-1.json",
+      "experiment_id": "operator96-066-enableinputsuppression-1",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\EnableInputSuppression",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "EnableInputSuppression",
+      "value_data": 1,
+      "verdict": "noisy",
+      "confidence": "low",
+      "host_noise": "noisy",
+      "delta_pct": null,
+      "reason": "host preflight marked one or more stages noisy",
+      "metrics_used": [
+        "host_noise_meta"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "noisy",
+          "confidence": "low",
+          "delta_pct": null,
+          "reason": "host preflight marked one or more stages noisy",
+          "metrics_used": [
+            "host_noise_meta"
+          ],
+          "stage": null
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    },
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-067-perfchecktimerimplementation-0.json",
+      "experiment_id": "operator96-067-perfchecktimerimplementation-0",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PerfCheckTimerImplementation",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PerfCheckTimerImplementation",
+      "value_data": 0,
+      "verdict": "noisy",
+      "confidence": "low",
+      "host_noise": "noisy",
+      "delta_pct": null,
+      "reason": "host preflight marked one or more stages noisy",
+      "metrics_used": [
+        "host_noise_meta"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "noisy",
+          "confidence": "low",
+          "delta_pct": null,
+          "reason": "host preflight marked one or more stages noisy",
+          "metrics_used": [
+            "host_noise_meta"
+          ],
+          "stage": null
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    },
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-067-perfchecktimerimplementation-1.json",
+      "experiment_id": "operator96-067-perfchecktimerimplementation-1",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PerfCheckTimerImplementation",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PerfCheckTimerImplementation",
+      "value_data": 1,
+      "verdict": "noisy",
+      "confidence": "low",
+      "host_noise": "noisy",
+      "delta_pct": null,
+      "reason": "host preflight marked one or more stages noisy",
+      "metrics_used": [
+        "host_noise_meta"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "noisy",
+          "confidence": "low",
+          "delta_pct": null,
+          "reason": "host preflight marked one or more stages noisy",
+          "metrics_used": [
+            "host_noise_meta"
+          ],
+          "stage": null
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    },
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-068-standbyconnectivitygraceperiod-0.json",
+      "experiment_id": "operator96-068-standbyconnectivitygraceperiod-0",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\StandbyConnectivityGracePeriod",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "StandbyConnectivityGracePeriod",
+      "value_data": 0,
+      "verdict": "noisy",
+      "confidence": "low",
+      "host_noise": "noisy",
+      "delta_pct": null,
+      "reason": "host preflight marked one or more stages noisy",
+      "metrics_used": [
+        "host_noise_meta"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "noisy",
+          "confidence": "low",
+          "delta_pct": null,
+          "reason": "host preflight marked one or more stages noisy",
+          "metrics_used": [
+            "host_noise_meta"
+          ],
+          "stage": null
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    },
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-068-standbyconnectivitygraceperiod-1.json",
+      "experiment_id": "operator96-068-standbyconnectivitygraceperiod-1",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\StandbyConnectivityGracePeriod",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "StandbyConnectivityGracePeriod",
+      "value_data": 1,
+      "verdict": "noisy",
+      "confidence": "low",
+      "host_noise": "noisy",
+      "delta_pct": null,
+      "reason": "host preflight marked one or more stages noisy",
+      "metrics_used": [
+        "host_noise_meta"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "noisy",
+          "confidence": "low",
+          "delta_pct": null,
+          "reason": "host preflight marked one or more stages noisy",
+          "metrics_used": [
+            "host_noise_meta"
+          ],
+          "stage": null
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    },
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-069-enforceausteritymode-0.json",
+      "experiment_id": "operator96-069-enforceausteritymode-0",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\EnforceAusterityMode",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "EnforceAusterityMode",
+      "value_data": 0,
+      "verdict": "noisy",
+      "confidence": "low",
+      "host_noise": "noisy",
+      "delta_pct": null,
+      "reason": "host preflight marked one or more stages noisy",
+      "metrics_used": [
+        "host_noise_meta"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "noisy",
+          "confidence": "low",
+          "delta_pct": null,
+          "reason": "host preflight marked one or more stages noisy",
+          "metrics_used": [
+            "host_noise_meta"
+          ],
+          "stage": null
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    },
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-069-enforceausteritymode-1.json",
+      "experiment_id": "operator96-069-enforceausteritymode-1",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\EnforceAusterityMode",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "EnforceAusterityMode",
+      "value_data": 1,
+      "verdict": "noisy",
+      "confidence": "low",
+      "host_noise": "noisy",
+      "delta_pct": null,
+      "reason": "host preflight marked one or more stages noisy",
+      "metrics_used": [
+        "host_noise_meta"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "noisy",
+          "confidence": "low",
+          "delta_pct": null,
+          "reason": "host preflight marked one or more stages noisy",
+          "metrics_used": [
+            "host_noise_meta"
+          ],
+          "stage": null
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    }
+  ],
+  "errors": []
+}

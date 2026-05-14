@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T10:17:56.6291565Z",
+  "record_id": "system.reliability-timestamp-enabled",
+  "run_id": "system-reliability-timestamp-enabled-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability",
+  "value_name": "TimeStampEnabled",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4441 registry events and 524 caller-stack events. The QGA-launched helper targeted HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability / TimeStampEnabled and the bundle contains target-key activity, but no exact RegQueryValue event for TimeStampEnabled was observed on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": false,
+    "operation": "RegOpenKey",
+    "representative_status": "0xC0000034",
+    "event_count": 4441,
+    "caller_stack_event_count": 524,
+    "target_key_event_count": 10,
+    "target_value_event_count": 0,
+    "target_command_event_count": 1,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/system-reliability-timestamp-enabled-etw-qga-unblock-20260507/system-reliability-timestamp-enabled-etw-qga-unblock-20260507-summary.json",
+      "sha256": "5d58895e69dc195134bdd7b753f1894684fe890eb28293a1e998207f9cb63c01",
+      "size": 7893,
+      "collected_utc": "2026-05-07T10:17:56.6291565Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system-reliability-timestamp-enabled-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "a85f3e48e50f62876fc2a943f60d66a8ff4f84f429688e4d59f3168f1d7d4541",
+      "size": 5597052,
+      "collected_utc": "2026-05-07T10:17:56.6291565Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system-reliability-timestamp-enabled-etw-qga-unblock-20260507/system-reliability-timestamp-enabled-etw-qga-unblock-20260507.etl",
+      "sha256": "70cb9a652fa8c9b1342987296ed27d6a2ccc28b90e453f9ad3b4fc6897784fa3",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T10:17:56.6291565Z"
+    }
+  ]
+}

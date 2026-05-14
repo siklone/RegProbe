@@ -149,16 +149,172 @@ The proof model and vocabulary are documented in more detail in [Proof model and
 | `Experimental` | Promising, but still under validation |
 | `Research-only` | Retained record, not safe to expose for apply |
 | `Blocked` | Known control surface, insufficient runtime proof |
+| `Rejected` | Closed promotion decision with a named evidence lane or deprecation reason |
 | `Archived` | Retained to avoid rediscovering dead ends |
+
+## Rejected Closure Ledger
+
+Rejected does not mean "missing evidence" by default. When a setting is unsafe, platform-limited, protected by ACLs, deprecated, first-party-only, or non-reversible, RegProbe records that lane as a closure decision instead of keeping it in the active blocked queue.
+
+Use [rejected-closure-ledger.md](registry-research-framework/audit/rejected-closure-ledger.md) to audit every rejected record. The gate contract keeps the old blocker context under `rejection_closure.superseded_blockers`, while `promotion_blockers` carries a compact `promotion-disposition-*` or `deprecated-record` closure label.
+
+## Research Clean State
+
+The current v3.6 research snapshot is zero-pending: no active blockers, no promotion-eligible limbo, no unclassified rejected records, and no invalid gate entries. Use [v36-clean-state-report.md](registry-research-framework/audit/v36-clean-state-report.md) for the combined audit contract and [app-retest-readiness-latest.md](registry-research-framework/audit/app-retest-readiness-latest.md) before manual Windows app retesting.
 
 ## Start Here
 
 - I want to use the app: [User guide](Docs/product/user-guide.md)
+- I want to sanity-check the app with a fresh user: [10-minute user test](Docs/product/10-minute-user-test.md)
 - I want the public support story: [Support matrix](Docs/product/support-matrix.md)
 - I want to build the app: [Build and run](#build-and-run)
 - I want to contribute research: [Contributing](CONTRIBUTING.md)
+- I want contributor tools inside the app: open Contributor Lab from a repo/dev build
+- I want the contributor tooling map: [Research tooling map](Docs/research/tooling-map.md)
+- I want the current artifact map instead of raw audit folders: [Research artifact map](Docs/research/artifact-map.md)
+- I want to understand certified vs community runs: [Run tiers](Docs/research/run-tiers.md)
 
 The docs are now split the same way the repo is meant to feel from the outside: [Docs/product](Docs/product/README.md) for public-facing usage and trust signals, [Docs/research](Docs/research/README.md) for contributor and validation depth.
+
+Audience boundary: the WPF app is the end-user product. Python scripts and JSON
+artifacts are the canonical contributor API for research, VM campaigns, app QA,
+and agentic AI workflows. The .NET research CLI remains a compatibility surface;
+prefer Python mirrors for new research work, especially on Linux hosts without
+the Windows desktop runtime. The `tweak list/apply/revert` CLI path is retained
+for advanced Windows/headless workflows, not for normal app users.
+
+Contributor Lab is the app-side companion for that boundary. It appears only in
+contributor/dev contexts and starts behind an acknowledgement gate. It shows
+Windows/VM readiness, safe command packs, and research observations such as
+Operator96 without promoting them to normal end-user cards.
+
+## Single Setting Check
+
+If you want to sanity-check one tweak, one registry value, or one path before opening the app, use the single-setting inspector. The Python mirror is the canonical contributor path; run the .NET CLI version only as a compatibility route inside the Windows VM or on a host with the desktop runtime installed.
+
+```bash
+# Host-safe inspector; does not require the Windows desktop runtime
+python3 registry-research-framework/scripts/check_single_tweak.py SystemResponsiveness
+
+# Ask whether specific values are tracked by that setting
+python3 registry-research-framework/scripts/check_single_tweak.py SystemResponsiveness --expected-value 10 --expected-value 30000
+
+# Emit the same inspection result as JSON
+python3 registry-research-framework/scripts/check_single_tweak.py SystemResponsiveness --expected-value 10 --json
+```
+
+```powershell
+# Equivalent .NET CLI path for Windows/VM or desktop-runtime hosts
+dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness --expected-value 10 --expected-value 30000
+```
+
+That command reports:
+
+- matching record and tweak ids
+- promotion state and rollback support
+- app card presence and documentation file
+- tracked registry paths and value names
+- app-written values
+- whether requested values are present in tracked targets, app writes, profiles, or proof text
+- linked evidence and nearby source hits
+
+When you read an app card, treat the `CLAIM BOUNDARY` section as part of the product contract. `WHAT WE KNOW` describes the evidence-backed key, value, rollback, and promotion state. `WHAT WE DO NOT CLAIM` is just as important: key/value existence alone does not imply a benchmark win, ETW/WPR runtime proof, or complete undocumented semantics. For example, the app now surfaces `power.disable-network-power-saving.policy` for `DisableTaskOffload = 0` and `SystemResponsiveness = 10`, while the older mixed parent bundle keeps the opaque `NetworkThrottlingIndex` write only as archived audit context.
+
+## Single Tweak App QA Plan
+
+If you want to retest one app card end to end, generate the exact QA commands before opening the desktop app. The Python planner is the safest host-side option; it prints the same app, guest VM, and KVM commands without launching the Windows-targeted CLI.
+
+```bash
+# Generate the manual app-QA plan for one setting
+python3 registry-research-framework/scripts/check_single_tweak_app_qa.py SystemResponsiveness
+
+# Keep the value checks in the plan and emit the same result as JSON
+python3 registry-research-framework/scripts/check_single_tweak_app_qa.py SystemResponsiveness --expected-value 10 --expected-value 30000 --json
+```
+
+```powershell
+# Equivalent .NET CLI path for Windows/VM or desktop-runtime hosts
+dotnet run --project cli/cli.csproj -- research qa-plan SystemResponsiveness --expected-value 10 --expected-value 30000 --json
+```
+
+That command gives you:
+
+- the exact shipped tweak/card candidate that matches the query
+- the direct desktop-app QA command using `--qa-run-tweak`
+- the guest VM helper command using `scripts/vm/guest-app-tweak-qa.ps1`
+- the KVM batch command if you want to drive the same check from the host
+- the expected report fields and stage list to verify
+- the linked research doc, rollback support, and evidence locations to sanity-check while the app is open
+
+## Promoted App QA Batch
+
+If you want to retest several shipped cards in one pass, generate or run a promoted app-QA batch. This is the host-safe mirror of `research qa-batch`: use the Python planner from Linux hosts, and use the .NET CLI in the Windows VM or on a desktop-runtime host.
+
+```bash
+# Plan a small promoted batch without touching the VM
+python3 registry-research-framework/scripts/check_promoted_tweak_app_qa_batch.py --category Power --category Explorer --total-limit 4
+
+# Run a live KVM batch across a hand-picked set of cards
+python3 registry-research-framework/scripts/check_promoted_tweak_app_qa_batch.py --id power.disable-fast-startup --id power.disable-windows-search --id explorer.hide-empty-drives --id privacy.disable-find-my-device --run-kvm --json
+```
+
+That command gives you:
+
+- the selected promoted/apply-allowed cards
+- each card's research doc and rollback expectations
+- the exact QA commands per card
+- optional live KVM app-QA results collected in one host-side batch
+- an audit snapshot in `registry-research-framework/audit/promoted-app-qa-batch-latest.json`
+
+The latest batch file is only the newest run. If you want cumulative coverage across several live QA passes, also open:
+
+- `registry-research-framework/audit/promoted-app-qa-batch-history.jsonl`
+- `registry-research-framework/audit/promoted-app-qa-coverage-latest.json`
+- `registry-research-framework/audit/promoted-app-qa-coverage-latest.md`
+
+Current audit snapshot: as of 2026-05-12, app retest readiness is passing with `265` app-surface entries, `0` app-only backlog items, `261` apply-allowed records, and `0` missing rollback stories. Promoted app-QA coverage is `258/258` (`100.0%`) with no uncovered promoted app-QA candidates remaining. Re-run readiness and the batch checker after changing app providers, evidence promotion gates, rollback behavior, or card mapping.
+
+The latest live retest also keeps two small operator artifacts:
+
+- `registry-research-framework/audit/app-retest-vm-health-latest.json`
+- `registry-research-framework/audit/single-tweak-check-systemresponsiveness-latest.json`
+- `registry-research-framework/audit/app-visual-retest-20260512/visual-retest-report.md`
+
+If a live card reports `already-applied`, that can be a valid pass: the app must still verify the desired value, keep the card/evidence contract intact, and skip standalone rollback only when no mutation was performed.
+
+## Registry Value Experiment Lane
+
+For pasted `reg add` batches or opaque power/kernel values, do not stop at "the key exists" or "the value is absent." Parse the batch into one-value experiments, then test present values with sensible alternates and send missing/opaque values through ETW, Procmon, or static-string evidence before closing them.
+
+```bash
+python3 scripts/registry/parse_reg_add_batch.py \
+  --input pasted-reg-adds.txt \
+  --json-output registry-research-framework/audit/registry-value-experiments/operator-batch.json \
+  --markdown-output registry-research-framework/audit/registry-value-experiments/operator-batch.md
+```
+
+Boot-sensitive apply/reboot lanes must use `--require-domain-snapshot` or a disposable qcow2 overlay. The `pilot-perf-calculate-actual-utilization-0` artifact in `registry-research-framework/audit/registry-value-experiments/` is the safety example: `PerfCalculateActualUtilization=0` caused a reboot regression on the available VM profile and the image was not recovered by offline registry restore, NTFS repair, SFC, DISM, System Restore, or update uninstall.
+
+## Retest Readiness Check
+
+If you are about to retest the desktop app and want one quick truth pass first, use the `research readiness` check. The Python command below is the host-safe mirror for Linux; the .NET CLI command is equivalent when the Windows desktop runtime is available.
+
+```bash
+# Run the full app-retest readiness check
+python3 registry-research-framework/scripts/check_app_retest_readiness.py
+
+# Emit the same readiness report as JSON
+python3 registry-research-framework/scripts/check_app_retest_readiness.py --json
+```
+
+That command checks:
+
+- public docs truth and contributor-doc drift
+- user-facing tweak catalog wording
+- app-surface card coverage and linked record docs
+- evidence corpus and evidence-atlas count consistency
+- rollback story coverage for apply-allowed records
+- latest KVM app publish/deploy smoke and lane-health status
 
 ## What Ships Today
 
@@ -204,7 +360,7 @@ Collection mode is explicit now. `evidence` is the safe default for research and
 
 VM secret handling was also tightened. Repo-tracked VM scripts no longer keep plaintext guest passwords. Credentials are resolved from explicit input first, then environment variables such as `REGPROBE_VM_GUEST_USER` and `REGPROBE_VM_GUEST_PASSWORD`, and finally from a DPAPI-protected CLIXML credential file referenced outside the repo. `vmrun` still consumes credentials at invocation time because that is a VMware CLI limitation, but the repo avoids storing or logging those secrets directly and the shared VM helper masks them in runner output.
 
-For hard runtime cases, the escalation path extends beyond "reboot and idle." The checked-in path moves from targeted `ETW` or runtime trace work, to the safe mega-trigger runtime lane, to `WinDbg` boot registry tracing when QGA allows it, and then to source-enrichment cross-reference through `ReactOS`, `WRK`, `System Informer`, `Sandboxie`, `Wine`, `ADMX`, and `WDK`. ETL discovery feeds the queue, feature-area enrichment and triage narrow the candidate set, VM safety bench results promote only the profiles that meet the retained bar, and hard blockers record the missing prerequisite instead of collapsing into generic review language. Some lanes are still intentionally held, but they are held with reasons: exact runtime reads are missing, the VM cannot expose the right power state, or the probe is boot-unsafe without a dedicated lane.
+For hard runtime cases, the escalation path extends beyond "reboot and idle." The checked-in path moves from targeted `ETW` or runtime trace work, to the safe mega-trigger runtime lane, to `WinDbg` boot registry tracing when QGA allows it, and then to source-enrichment cross-reference through `ReactOS`, `WRK`, `System Informer`, `Sandboxie`, `Wine`, `ADMX`, and `WDK`. ETL discovery feeds the queue, feature-area enrichment and triage narrow the candidate set, VM safety bench results promote only the profiles that meet the retained bar, and hard blockers record the missing prerequisite instead of collapsing into generic review language. The v3.6 clean-state checkpoint has no active blocked worklist; rejected and held records are retained as classified audit history instead of active execution debt.
 
 For the full validation flow, start with the [VM workflow](Docs/research/vm-workflow.md), [Runtime escalation](Docs/research/runtime-escalation.md), and the historical [Pipeline v3.1](registry-research-framework/docs/pipeline-v3.1.md) reference when an older audit pack still points to it.
 
@@ -213,12 +369,15 @@ For the full validation flow, start with the [VM workflow](Docs/research/vm-work
 <!-- BEGIN:RESEARCH_HEALTH -->
 | Metric | Value |
 |--------|-------|
-| Promoted | 250 |
-| Blocked | 18 |
+| Promoted | 256 |
+| Blocked | 3 |
 | Revalidation Pending | 0 |
-| Gate Health | green |
+| Gate Health | 🟡 yellow |
 | Schema Complete | 100% |
-| Missing Docs | 0 |
+| Missing Docs | 17 |
+| Blocked Actionability | 3 active |
+| Blocked Worklist Gate | PASS |
+| Blocked Worklist | `registry-research-framework/audit/blocked-worklist.md` |
 <!-- END:RESEARCH_HEALTH -->
 
 ## Repo Shape
@@ -245,6 +404,18 @@ The supported validation VM is `Win25H2Clean`, and the checked-in canonical snap
 The baseline is tooling-first. Defender stays enabled, exclusions are bounded to trusted tooling, app payloads do not persist in the saved baseline, and app launch smoke is allowed only as an ephemeral deploy/validate/cleanup lane. The details matter because registry evidence collected from a messy VM is worse than no evidence: it looks authoritative while quietly carrying someone else's state.
 
 Start with the [VM workflow](Docs/research/vm-workflow.md) when you need the whole flow, and use [Runtime escalation](Docs/research/runtime-escalation.md) when a value needs more than a simple before/after check.
+
+### VM Health And QGA Launch
+
+KVM runners that rely on QEMU Guest Agent now fail fast before launching guest work. Run the non-mutating health check first when ETW, WPR, or Ghidra produces a transport-looking failure:
+
+```bash
+python3 scripts/vm-kvm/vm-health-check.py --domain regprobe-win11-25h2-session --connect qemu:///session --json
+```
+
+Decision tree: if `domstate` is not `running`, start or restore the VM before collecting evidence. If `guest_ping`, `guest_info`, or `guest_exec` fails, repair QGA in the guest or rerun the health check; do not treat a downstream `ensure-admin-shell` timeout as evidence. If QGA is healthy, keep the default `--launch-transport auto --preflight require` path for ETW/Ghidra. Use `--launch-transport send-key` only when you intentionally want the interactive fallback, and expect summaries to record `launch_transport=send-key`.
+
+When recovering old blocked evidence, prefer a small QGA-first retry over dragging stale guest artifacts into the repo. The current repeatable pattern is a narrow ETW stackwalk with `--stackwalk-event RegQueryValue`, small buffers, `--ingest-to-repo`, and the default QGA preflight. Keep raw tracerpt XML ignored, commit the summary, ETL, normalized bundle, and `evidence/captures/...` receipt, then refresh the published research surfaces with `python3 scripts/refresh_research_publish_surfaces.py`.
 
 ## Scripts
 
@@ -334,6 +505,18 @@ On hosts using the repo-local SDK:
 ```bash
 ./dotnetw test tests/tests.csproj -c Release --no-build -v minimal -p:EnableWindowsTargeting=true
 ```
+
+If a Linux host can build `net8.0-windows` but cannot execute the WPF testhost because `Microsoft.WindowsDesktop.App` is unavailable, run the tests in the KVM Windows guest instead:
+
+```bash
+# Build the test output on the host first if needed
+./dotnetw build tests/tests.csproj -c Release -p:EnableWindowsTargeting=true
+
+# Stage test output plus repo data into the VM and run the WindowsDesktop suite there
+python3 scripts/vm-kvm/run-guest-dotnet-tests.py --wait-timeout 1800
+```
+
+That VM runner stages `tests/bin/Release/net8.0-windows`, `Docs`, `research/records`, and `research/promotion-gates.json` under `C:\RegProbe` before calling the guest SDK. Use `--filter <expression>` for a single C# test.
 
 ### Package
 

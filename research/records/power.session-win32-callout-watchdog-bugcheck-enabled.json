@@ -331,7 +331,12 @@
       "win32-callout-watchdog-bugcheck-procmon-saveas-timeout-on-bounded-callout-lane",
       "win32-callout-watchdog-bugcheck-no-primary-current-build-doc",
       "win32-callout-watchdog-bugcheck-semantics-unproven"
-    ]
+    ],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "intentional-hold-closed",
+    "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+    "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers.",
+    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
   },
   "open_questions": [
     "Can a future boot-time trace or descriptor-consumption pass identify which current-build routine consumes the `Session Manager\\Power` row for `PopWin32CalloutWatchdogBugcheckEnabled`?",
@@ -352,5 +357,5 @@
       "notes": "A host-side `ntoskrnl.exe` decode found a `Session Manager\\Power` descriptor row for `Win32CalloutWatchdogBugcheckEnabled` pointing at the same static RVA as live `nt!PopWin32CalloutWatchdogBugcheckEnabled`."
     }
   ],
-  "last_reviewed_utc": "2026-04-28T06:11:02Z"
+  "last_reviewed_utc": "2026-05-07T20:20:00Z"
 }

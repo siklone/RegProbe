@@ -1,0 +1,222 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "cleanup.memory-dumps",
+  "tweak_id": "cleanup.memory-dumps",
+  "record_status": "review-required",
+  "summary": "Review-required audit trail for the live memory-dump cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same dump paths, but the card has not yet been promoted into the validated research-provider surface.",
+  "setting": {
+    "name": "Clear Memory Dump Files",
+    "category": "Cleanup",
+    "area": "Crash Dump Cleanup",
+    "scope": "device",
+    "casual_explanation": "This deletes Windows crash-dump files such as MEMORY.DMP and minidumps.",
+    "why_people_change_it": "People clear crash dumps when they want to reclaim disk space after collecting the files they need for troubleshooting.",
+    "tradeoffs_overview": "Clearing the files reclaims space but also removes crash-dump artifacts that might be useful for later debugging.",
+    "professional_notes": "The current app deletes %WINDIR%\\MEMORY.DMP when present and removes the %WINDIR%\\Minidump directory contents. Repo cleanup docs identify the same memory-dump cleanup surface.",
+    "targets": [
+      {
+        "target_id": "memory-dump-files",
+        "location_kind": "file",
+        "path": "%WINDIR%\\MEMORY.DMP; %WINDIR%\\Minidump",
+        "value_name": "CleanupAction",
+        "value_type": "file cleanup action",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "No cleanup action",
+            "meaning": "Crash-dump files remain until the operator or Windows removes them.",
+            "evidence_ids": [
+              "repo-cleanup-doc",
+              "engine-memory-dump-cleanup"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "Cleared",
+            "label": "Clear memory dump files",
+            "meaning": "Deletes MEMORY.DMP and the Minidump directory tracked by the current app.",
+            "evidence_ids": [
+              "repo-cleanup-doc",
+              "repo-cleanup-provenance",
+              "app-misc-provider",
+              "engine-memory-dump-cleanup"
+            ]
+          }
+        ],
+        "notes": "This is a one-shot cleanup action rather than a persistent dump-policy setting."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "unknown",
+    "provider_source": "app/Services/TweakProviders/MiscTweakProvider.cs",
+    "notes": "The live app still ships this as a first-party cleanup card instead of through the research-provider surface.",
+    "writes": [
+      {
+        "target_id": "memory-dump-files",
+        "path": "%WINDIR%\\MEMORY.DMP; %WINDIR%\\Minidump",
+        "value_name": "CleanupAction",
+        "value_type": "file cleanup action",
+        "state_kind": "value",
+        "value": "Cleared"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows-managed crash-dump baseline",
+      "applies_to": "Systems where crash-dump files remain available until they are manually removed or overwritten",
+      "states": [
+        {
+          "target_id": "memory-dump-files",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "This card represents an operator-triggered cleanup action, not a persistent default state."
+        }
+      ],
+      "notes": "Use detection and operator intent rather than assuming a fixed baseline.",
+      "evidence_ids": [
+        "repo-cleanup-doc",
+        "engine-memory-dump-cleanup"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only",
+        "Cleanup command backlog reduction"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "memory-dump-files",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Keep the live cleanup card documented without publishing it as a validated research-provider preset yet."
+        }
+      ],
+      "good_when": "You want the shipped cleanup action represented honestly in the corpus.",
+      "bad_when": "You need a validated research-provider cleanup card.",
+      "tradeoffs": [
+        "The live app behavior is documented.",
+        "The card remains outside the validated research-provider surface."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-cleanup-doc",
+        "repo-cleanup-provenance"
+      ]
+    },
+    {
+      "profile_id": "current-app-action",
+      "label": "Current app action",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "memory-dump-files",
+          "state_kind": "value",
+          "value": "Cleared",
+          "rationale": "Capture the exact dump-file cleanup action that the live app currently performs."
+        }
+      ],
+      "good_when": "You are auditing the current dump cleanup card as shipped by the app.",
+      "bad_when": "You need a validated research-provider cleanup preset.",
+      "tradeoffs": [
+        "The current app behavior is explicit.",
+        "The card is still held outside the validated research-provider surface."
+      ],
+      "apply_allowed": false,
+      "notes": "Blocked until this cleanup surface completes the normal validation path.",
+      "evidence_ids": [
+        "repo-cleanup-doc",
+        "app-misc-provider",
+        "engine-memory-dump-cleanup"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-cleanup-doc",
+      "kind": "repo-doc",
+      "title": "Repo cleanup catalog entry",
+      "location": "Docs/cleanup/cleanup.md",
+      "summary": "The cleanup documentation identifies memory-dump files as a cleanup surface and points at the Windows dump paths.",
+      "supports": [
+        "path",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-cleanup-provenance",
+      "kind": "repo-doc",
+      "title": "Repo tweak provenance for cleanup.memory-dumps",
+      "location": "Docs/tweaks/tweak-provenance.md",
+      "summary": "The tweak provenance table keeps cleanup.memory-dumps tied to the checked-in cleanup source set.",
+      "supports": [
+        "behavior",
+        "risk"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-misc-provider",
+      "kind": "repo-code",
+      "title": "Live cleanup provider mapping",
+      "location": "app/Services/TweakProviders/MiscTweakProvider.cs",
+      "summary": "The live app yields ClearMemoryDumpFilesTweak directly from the first-party cleanup provider.",
+      "supports": [
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "engine-memory-dump-cleanup",
+      "kind": "repo-code",
+      "title": "Current memory-dump cleanup implementation",
+      "location": "engine/Tweaks/Commands/Cleanup/ClearMemoryDumpFilesTweak.cs",
+      "summary": "The engine tweak deletes %WINDIR%\\MEMORY.DMP when present and clears the %WINDIR%\\Minidump directory.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": false,
+    "needs_vm_validation": true,
+    "why": "The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider.",
+    "manual_review_required": true,
+    "blocking_issues": [
+      "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+      "This is a maintenance action with no rollback support."
+    ],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "non-reversible-or-high-risk-action",
+    "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+    "promotion_reopen_criteria": "Reopen only if the app gains a verified rollback/snapshot contract and dedicated validation proof for the exact action.",
+    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
+  },
+  "last_reviewed_utc": "2026-05-07T20:20:00Z"
+}

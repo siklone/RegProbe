@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T09:50:51.8708812Z",
+  "record_id": "developer.nodejs-performance",
+  "run_id": "developer-nodejs-performance-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment",
+  "value_name": "NODE_OPTIONS",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4442 registry events and 525 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment / NODE_OPTIONS from the helper probe, returning 0xC0000034 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0xC0000034",
+    "event_count": 4442,
+    "caller_stack_event_count": 525,
+    "target_key_event_count": 13,
+    "target_value_event_count": 1,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-qga-unblock-20260507/developer-nodejs-performance-etw-qga-unblock-20260507-summary.json",
+      "sha256": "8ad28f2810ca0387e6176f37ce6a97696e8f114c18d505ba2af197aad2b6c27a",
+      "size": 7665,
+      "collected_utc": "2026-05-07T09:50:51.8708812Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "ad66c2d51a2e754961bd101b90905c4ade549cafbe699635acbd778ed6ee2e40",
+      "size": 5413916,
+      "collected_utc": "2026-05-07T09:50:51.8708812Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-qga-unblock-20260507/developer-nodejs-performance-etw-qga-unblock-20260507.etl",
+      "sha256": "8f9cf3e599cff01cbdf2f996586adb69925da97e8c033f680a2ac623a7bb6439",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T09:50:51.8708812Z"
+    }
+  ]
+}

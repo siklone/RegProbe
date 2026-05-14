@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T09:24:46.6097846Z",
+  "record_id": "security.disable-vbs",
+  "run_id": "security-disable-vbs-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeviceGuard",
+  "value_name": "EnableVirtualizationBasedSecurity",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4396 registry events and 525 caller-stack events. The QGA-launched helper targeted HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeviceGuard / EnableVirtualizationBasedSecurity and the bundle contains target-key activity, but no exact RegQueryValue event for EnableVirtualizationBasedSecurity was observed on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": false,
+    "operation": "RegOpenKey",
+    "representative_status": "0xC0000034",
+    "event_count": 4396,
+    "caller_stack_event_count": 525,
+    "target_key_event_count": 9,
+    "target_value_event_count": 0,
+    "target_command_event_count": 1,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/security-disable-vbs-etw-qga-unblock-20260507/security-disable-vbs-etw-qga-unblock-20260507-summary.json",
+      "sha256": "6c6bfd3c15d51b5920b7c960ddb72e4d87e4f31eda917e5207b2484db1aef380",
+      "size": 7441,
+      "collected_utc": "2026-05-07T09:24:46.6097846Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/security-disable-vbs-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "bb6b149a22785fe989f51e043aafc2b7c5600fb31924da7bc26b8d0a78d6931b",
+      "size": 5197362,
+      "collected_utc": "2026-05-07T09:24:46.6097846Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/security-disable-vbs-etw-qga-unblock-20260507/security-disable-vbs-etw-qga-unblock-20260507.etl",
+      "sha256": "169287cbd3e2271f04d461f320dbea066607e6ad2d45a8b17cfa66672db3be53",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T09:24:46.6097846Z"
+    }
+  ]
+}

@@ -159,6 +159,20 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "kvm-policy-revalidation-batch-20260505",
+      "kind": "runtime-read",
+      "title": "KVM machine-scope policy revalidation batch",
+      "location": "registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json",
+      "summary": "A KVM guest batch on build 26200 re-read selected machine-scope policy targets without changing guest configuration. The System\\CurrentControlSet\\Policies root still exists on the live guest and NtfsDisableEncryption remains absent in the current baseline state.",
+      "supports": [
+        "path",
+        "value",
+        "runtime-read",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -174,7 +188,7 @@
   "version_stable": [
     "25H2"
   ],
-  "last_reviewed_utc": "2026-03-26T00:00:00Z",
+  "last_reviewed_utc": "2026-05-05T13:13:57.1735609Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx",
     "exact_quote_or_path": "evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx (NtfsDisableEncryption enabledValue=1, disabledValue=0); evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml (enabling the setting prevents access to and creation of encrypted files and requires a reboot to take effect).",

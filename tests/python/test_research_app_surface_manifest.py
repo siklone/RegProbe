@@ -99,6 +99,17 @@ def app_only_catalog_entries() -> list[dict]:
     return payload.get("tweaks") or []
 
 
+def covered_live_tweak_ids() -> set[str]:
+    covered: set[str] = set()
+    for path in sorted(RECORDS_ROOT.glob("*.json")):
+        record = load_json(path)
+        for key in ("record_id", "tweak_id", "legacy_id"):
+            value = str(record.get(key) or "").strip()
+            if value:
+                covered.add(value)
+    return covered
+
+
 def live_provider_tweak_sources() -> dict[str, str]:
     ids: dict[str, str] = {}
 
@@ -595,10 +606,7 @@ class ResearchAppSurfaceManifestTests(unittest.TestCase):
             )
 
     def test_app_only_catalog_ledger_matches_live_provider_minus_record_corpus(self) -> None:
-        record_ids = {
-            str(load_json(path).get("record_id") or path.stem)
-            for path in sorted(RECORDS_ROOT.glob("*.json"))
-        }
+        record_ids = covered_live_tweak_ids()
         actual = {
             tweak_id
             for tweak_id in live_provider_tweak_sources()
@@ -612,10 +620,7 @@ class ResearchAppSurfaceManifestTests(unittest.TestCase):
         self.assertEqual(expected, actual)
 
     def test_app_only_catalog_ledger_provider_sources_match_live_provider_files(self) -> None:
-        record_ids = {
-            str(load_json(path).get("record_id") or path.stem)
-            for path in sorted(RECORDS_ROOT.glob("*.json"))
-        }
+        record_ids = covered_live_tweak_ids()
         live_sources = {
             tweak_id: provider_source
             for tweak_id, provider_source in live_provider_tweak_sources().items()

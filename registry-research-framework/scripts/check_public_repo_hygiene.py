@@ -128,6 +128,7 @@ def build_public_repo_hygiene_report(repo_root: Path) -> dict[str, Any]:
     pr_template_text = pr_template_path.read_text(encoding="utf-8") if pr_template_path.exists() else ""
     user_guide_path = repo_root / "Docs" / "product" / "user-guide.md"
     user_guide_text = user_guide_path.read_text(encoding="utf-8") if user_guide_path.exists() else ""
+    cli_docs_text = cli_docs_path.read_text(encoding="utf-8") if cli_docs_path.exists() else ""
     media_doc_text = media_doc_path.read_text(encoding="utf-8") if media_doc_path.exists() else ""
     bug_report_text = (issue_template_dir / "bug-report.yml").read_text(encoding="utf-8") if (issue_template_dir / "bug-report.yml").exists() else ""
     feature_request_text = (issue_template_dir / "feature-request.yml").read_text(encoding="utf-8") if (issue_template_dir / "feature-request.yml").exists() else ""
@@ -147,6 +148,15 @@ def build_public_repo_hygiene_report(repo_root: Path) -> dict[str, Any]:
         "media_doc_present": media_doc_path.exists(),
         "readme_surface_names_current": all(token in readme_text for token in ("`Tweaks`", "`Recovery`", "`Diagnostics`")) and "`Configuration` is the main workspace" not in readme_text,
         "user_guide_surface_names_current": all(token in user_guide_text for token in ("`Tweaks`", "`Recovery`", "`Diagnostics`")) and "`Configuration` is the main tweak workspace" not in user_guide_text,
+        "readme_mentions_research_checks": "research inspect" in readme_text and "research readiness" in readme_text,
+        "contributing_mentions_research_checks": "research inspect" in contributing_text and "research readiness" in contributing_text,
+        "cli_docs_mentions_research_checks": "research inspect" in cli_docs_text and "research readiness" in cli_docs_text,
+        "readme_mentions_app_qa_plan": "research qa-plan" in readme_text,
+        "contributing_mentions_app_qa_plan": "research qa-plan" in contributing_text,
+        "cli_docs_mentions_app_qa_plan": "research qa-plan" in cli_docs_text,
+        "readme_mentions_app_qa_batch": "research qa-batch" in readme_text,
+        "contributing_mentions_app_qa_batch": "research qa-batch" in contributing_text,
+        "cli_docs_mentions_app_qa_batch": "research qa-batch" in cli_docs_text,
         "contributing_has_safe_flow_expectations": "Detect -> Apply -> Verify -> Rollback" in contributing_text and "integration coverage" in contributing_text,
         "contributing_has_media_lane_expectations": "Docs/product/media.md" in contributing_text,
         "contributing_has_cli_docs_expectations": "Docs/product/cli.md" in contributing_text,
@@ -190,6 +200,24 @@ def build_public_repo_hygiene_report(repo_root: Path) -> dict[str, Any]:
         errors.append("README.md still drifts from the shipped Tweaks/Recovery/Diagnostics surface language.")
     if not checks["user_guide_surface_names_current"]:
         errors.append("Docs/product/user-guide.md still drifts from the shipped Tweaks/Recovery/Diagnostics surface language.")
+    if not checks["readme_mentions_research_checks"]:
+        errors.append("README.md is missing the research inspect or research readiness examples.")
+    if not checks["contributing_mentions_research_checks"]:
+        errors.append("CONTRIBUTING.md is missing the research inspect or research readiness workflow.")
+    if not checks["cli_docs_mentions_research_checks"]:
+        errors.append("Docs/product/cli.md is missing the research inspect or research readiness command coverage.")
+    if not checks["readme_mentions_app_qa_plan"]:
+        errors.append("README.md is missing the research qa-plan workflow.")
+    if not checks["contributing_mentions_app_qa_plan"]:
+        errors.append("CONTRIBUTING.md is missing the research qa-plan workflow.")
+    if not checks["cli_docs_mentions_app_qa_plan"]:
+        errors.append("Docs/product/cli.md is missing the research qa-plan command coverage.")
+    if not checks["readme_mentions_app_qa_batch"]:
+        errors.append("README.md is missing the research qa-batch workflow.")
+    if not checks["contributing_mentions_app_qa_batch"]:
+        errors.append("CONTRIBUTING.md is missing the research qa-batch workflow.")
+    if not checks["cli_docs_mentions_app_qa_batch"]:
+        errors.append("Docs/product/cli.md is missing the research qa-batch command coverage.")
     if not checks["contributing_has_safe_flow_expectations"]:
         errors.append("CONTRIBUTING.md no longer carries the SAFE flow integration expectation.")
     if not checks["contributing_has_media_lane_expectations"]:

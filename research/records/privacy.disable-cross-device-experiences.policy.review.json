@@ -4,7 +4,7 @@
   "record_id": "privacy.disable-cross-device-experiences.policy",
   "tweak_id": "privacy.disable-cross-device-experiences.policy",
   "record_status": "validated",
-  "last_reviewed_utc": "2026-04-30T18:35:43Z",
+  "last_reviewed_utc": "2026-05-07T14:43:50.544726Z",
   "summary": "Controls the official machine policy for Cross-Device Experiences. The current app writes EnableCdp = 0 as part of the broader bundle, but this child record tracks only the documented machine policy while the user-side CDP preset values remain in the deprecated parent audit trail.",
   "setting": {
     "name": "Cross-Device Experiences Machine Policy",
@@ -236,6 +236,19 @@
       "strength": "high",
       "artifact_status": "missing",
       "artifact_integrity_note": "Missing local artifact(s): research/_source-mirrors/win-config/privacy/desc.md"
+    },
+    {
+      "evidence_id": "vm-privacy.disable-cross-device-experiences.policy-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk probe receipt",
+      "location": "evidence/captures/privacy-disable-cross-device-experiences-policy-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 1 target value(s): `EnableCdp`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 1/1 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "validation_proof": {
@@ -265,7 +278,7 @@
     },
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "host-timeout-at-tracerpt"
+      "status": "qga_unblocked_ingest_ok"
     },
     "static_reviewed": {
       "ghidra": true,
@@ -291,7 +304,9 @@
       "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `EnableCdp`."
     },
-    "notes": "This policy-only child is backed by Microsoft CSP and ADMX documentation. The retained local enrichment corpus does not contribute candidate-specific ReactOS or WRK hits for `EnableCdp`, and exact 2026-04-24 ReactOS doxygen searches also returned no direct match, so the record stays official-doc-backed. A bounded 2026-04-24 ETW stackwalk retry for `EnableCdp` reached `stage = tracerpt` before the hard 90 second timeout fired without uploading a repo-visible bundle, and a same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start."
-  },
-  "last_reviewed_utc": "2026-04-28T10:50:56Z"
+    "notes": "This policy-only child is backed by Microsoft CSP and ADMX documentation. The retained local enrichment corpus does not contribute candidate-specific ReactOS or WRK hits for `EnableCdp`, and exact 2026-04-24 ReactOS doxygen searches also returned no direct match, so the record stays official-doc-backed. A bounded 2026-04-24 ETW stackwalk retry for `EnableCdp` reached `stage = tracerpt` before the hard 90 second timeout fired without uploading a repo-visible bundle, and a same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier timeout/upload blocker for 1/1 target probe(s) and produced host-ingested raw ETL/XML plus normalized bundles; the captured value reads are QGA-launched probe reads, not independent product-consumer proof.",
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/privacy-disable-cross-device-experiences-policy-etw-qga-unblock-20260507.json"
+  }
 }

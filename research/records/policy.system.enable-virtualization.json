@@ -289,6 +289,21 @@
         "transport-blocker"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-policy.system.enable-virtualization-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk runtime receipt for EnableVirtualization",
+      "location": "evidence/captures/policy-system-enable-virtualization-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/policy-system-enable-virtualization-etw-qga-unblock-20260507/policy-system-enable-virtualization-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/policy-system-enable-virtualization-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/policy-system-enable-virtualization-etw-qga-unblock-20260507/policy-system-enable-virtualization-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4441 registry events with 527 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System` / `EnableVirtualization`, returning `0x80000005` on the clean baseline.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -301,7 +316,12 @@
     "why": "EnableVirtualization is backed by repo documentation, phase-0 baseline existence, a current-build ntoskrnl value hit with adjacent UAC-policy context, shell-safe runtime follow-ups across multiple transports, a KVM bootlog probe that completed a real reboot but showed `/EnableBootLogging` is not accepted on the current guest, a KVM local-KD disassembly that confirms the live current-build `Policies\\System` path plus the adjacent `EnableLUA` / `EnableVirtualization` / `EnableInstallerDetection` family on the running guest, and a QGA-launched WPR boot trace that retained five exact quoted `EnableVirtualization` `QueryValue` lines during boot. The WPR normalizer binds those retained exact-value hits to the intended `Policies\\System` target path supplied to the run, and that path was already independently corroborated by the earlier static and local-KD work. The record therefore no longer lacks runtime attribution. It remains intentionally held because this is a research-only legacy UAC virtualization control that is not mapped to a supported app surface.",
     "blocking_issues": [
       "enable-virtualization-research-only-raw-policy-system-value"
-    ]
+    ],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "intentional-hold-closed",
+    "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+    "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers.",
+    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
   },
   "source_enrichment": {
     "last_updated_utc": "2026-04-28T11:02:09Z",
@@ -323,19 +343,19 @@
       "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `EnableVirtualization`."
     },
-    "notes": "Retained source-enrichment output `source-enrichment-20260403-192135` keeps the lane research-only and records no candidate-specific ReactOS or WRK hits. Exact 2026-04-24 ReactOS doxygen searches for `EnableVirtualization` also returned no direct match. The only retained source-mirror-style support in that batch is the local DeviceGuard ADMX mapping, so this record remains policy-template-backed rather than ReactOS/WRK-backed. A bounded 2026-04-24 KVM ETW stackwalk retry for EnableVirtualization reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so this closes the ETW attempt as a transport receipt rather than as exact runtime proof.",
+    "notes": "Retained source-enrichment output `source-enrichment-20260403-192135` keeps the lane research-only and records no candidate-specific ReactOS or WRK hits. Exact 2026-04-24 ReactOS doxygen searches for `EnableVirtualization` also returned no direct match. The only retained source-mirror-style support in that batch is the local DeviceGuard ADMX mapping, so this record remains policy-template-backed rather than ReactOS/WRK-backed. A bounded 2026-04-24 KVM ETW stackwalk retry for EnableVirtualization reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so this closes the ETW attempt as a transport receipt rather than as exact runtime proof. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier ETW ingest/upload blocker and produced an exact helper-triggered `RegQueryValue` for `EnableVirtualization` with caller-stack capture.",
     "ghidra": true,
     "ghidra_status": "path_aware_static_probe_retained",
     "ghidra_artifact": "evidence/raw/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md",
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "artifact_upload_timeout"
+      "status": "qga_unblocked_ingest_ok"
     },
     "etw_stackwalk_reviewed": true,
-    "etw_stackwalk_review_status": "artifact_upload_timeout",
-    "etw_stackwalk_review_artifact": "evidence/captures/policy-system-enable-virtualization-etw-stackwalk-attempt-20260424.json"
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/policy-system-enable-virtualization-etw-qga-unblock-20260507.json"
   },
-  "last_reviewed_utc": "2026-04-28T11:02:09Z",
+  "last_reviewed_utc": "2026-05-07T20:20:00Z",
   "version_stable": [
     "25H2"
   ]

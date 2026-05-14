@@ -5,7 +5,90 @@ import argparse
 import json
 import subprocess
 import sys
+import tempfile
+import time
 from pathlib import Path
+from typing import Any
+
+
+REQUIRED_CARD_FIELDS = [
+    "TweakId",
+    "Name",
+    "Category",
+    "EvidenceClass",
+    "ResearchStatus",
+    "RollbackSnapshotState",
+    "HasClaimBoundary",
+    "WhatWeKnowSummary",
+    "WhatWeDoNotClaimSummary",
+    "ProofLanes",
+]
+REQUIRED_PROOF_LANES = ["docs", "runtime", "source", "rollback"]
+
+
+def parse_report_text(report_text: str) -> tuple[dict[str, object], str | None]:
+    if not report_text.strip():
+        return {}, "empty-report"
+    try:
+        report = json.loads(report_text)
+    except json.JSONDecodeError as exc:
+        return {"parse_error": True, "raw": report_text}, str(exc)
+    if not isinstance(report, dict):
+        return {"parse_error": True, "raw": report_text}, "report root is not an object"
+    return report, None
+
+
+def download_guest_report(
+    repo_root: Path,
+    guest_output: str,
+    *,
+    attempts: int = 10,
+    delay_seconds: float = 1.0,
+) -> tuple[dict[str, object], dict[str, object]]:
+    downloader = repo_root / "scripts" / "vm-kvm" / "qga-get-file.py"
+    last_fetch: dict[str, object] = {
+        "status": "not-attempted",
+        "guest_output": guest_output,
+    }
+    for attempt in range(1, attempts + 1):
+        with tempfile.TemporaryDirectory(prefix="regprobe-qa-report-") as temp_dir:
+            destination = Path(temp_dir) / "qa-report.json"
+            proc = subprocess.run(
+                [
+                    sys.executable,
+                    str(downloader),
+                    "--source",
+                    guest_output,
+                    "--destination",
+                    str(destination),
+                ],
+                cwd=repo_root,
+                capture_output=True,
+                text=True,
+            )
+
+            fetch: dict[str, object] = {
+                "status": "ok" if proc.returncode == 0 else "failed",
+                "attempt": attempt,
+                "attempts": attempts,
+                "returncode": proc.returncode,
+                "stdout": proc.stdout,
+                "stderr": proc.stderr,
+                "guest_output": guest_output,
+                "host_output": str(destination),
+            }
+            last_fetch = fetch
+            if proc.returncode == 0 and destination.exists():
+                report_text = destination.read_text(encoding="utf-8")
+                report, parse_error = parse_report_text(report_text)
+                fetch["parse_error"] = parse_error
+                fetch["bytes"] = destination.stat().st_size
+                return report, fetch
+
+        if attempt < attempts:
+            time.sleep(delay_seconds)
+
+    return {}, last_fetch
 
 
 def load_ids(id_args: list[str], id_file: str | None) -> list[str]:
@@ -25,6 +108,71 @@ def load_ids(id_args: list[str], id_file: str | None) -> list[str]:
     return deduped
 
 
+def has_required_value(value: Any) -> bool:
+    if value is None:
+        return False
+    if isinstance(value, str):
+        return bool(value.strip())
+    if isinstance(value, list):
+        return bool(value)
+    return True
+
+
+def summarize_card_snapshot(report: dict[str, object]) -> dict[str, object]:
+    card = report.get("Card")
+    if not isinstance(card, dict):
+        return {
+            "status": "missing-card",
+            "present": False,
+            "has_claim_boundary": False,
+            "present_fields": [],
+            "missing_fields": REQUIRED_CARD_FIELDS,
+            "proof_lanes": [],
+            "missing_proof_lanes": REQUIRED_PROOF_LANES,
+            "failures": ["missing-card-snapshot"],
+        }
+
+    present_fields = [field for field in REQUIRED_CARD_FIELDS if has_required_value(card.get(field))]
+    missing_fields = [field for field in REQUIRED_CARD_FIELDS if field not in present_fields]
+
+    proof_lanes: list[str] = []
+    for lane in card.get("ProofLanes") or []:
+        if not isinstance(lane, dict):
+            continue
+        key = str(lane.get("Key") or "").strip().lower()
+        if key:
+            proof_lanes.append(key)
+
+    proof_lane_set = set(proof_lanes)
+    missing_proof_lanes = [lane for lane in REQUIRED_PROOF_LANES if lane not in proof_lane_set]
+    has_claim_boundary = bool(card.get("HasClaimBoundary"))
+
+    failures: list[str] = []
+    if missing_fields:
+        failures.append("missing-card-fields:" + ",".join(missing_fields))
+    if not has_claim_boundary:
+        failures.append("missing-claim-boundary")
+    if missing_proof_lanes:
+        failures.append("missing-proof-lanes:" + ",".join(missing_proof_lanes))
+
+    return {
+        "status": "ok" if not failures else "invalid-card",
+        "present": True,
+        "has_claim_boundary": has_claim_boundary,
+        "present_fields": present_fields,
+        "missing_fields": missing_fields,
+        "proof_lanes": proof_lanes,
+        "missing_proof_lanes": missing_proof_lanes,
+        "failures": failures,
+    }
+
+
+def summarize_contract_failures(failures: list[str]) -> str:
+    if not failures:
+        return "QA card snapshot contract passed."
+    return "QA card snapshot contract failed: " + "; ".join(failures)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run guest-side RegProbe tweak QA batch through the interactive app harness.")
     parser.add_argument("--id", action="append", default=[], help="Tweak id to validate. Repeat for multiple ids.")
@@ -32,6 +180,11 @@ def main() -> int:
     parser.add_argument("--guest-dir", default=r"C:\Tools\ValidationController\smoke")
     parser.add_argument("--guest-script", default="")
     parser.add_argument("--wait-timeout", type=int, default=600)
+    parser.add_argument(
+        "--allow-gated-mutation",
+        action="store_true",
+        help="Pass the explicit QA-only gated mutation override to the app. Intended for VM evidence acquisition only.",
+    )
     args = parser.parse_args()
 
     tweak_ids = load_ids(args.id, args.id_file)
@@ -61,6 +214,8 @@ def main() -> int:
             "--wait-timeout",
             str(args.wait_timeout),
         ]
+        if args.allow_gated_mutation:
+            cmd.append("--ps-arg=-AllowGatedMutation")
         proc = subprocess.run(cmd, cwd=repo_root, capture_output=True, text=True)
 
         try:
@@ -74,15 +229,28 @@ def main() -> int:
 
         execution = payload.get("execution", {}) if isinstance(payload, dict) else {}
         report: dict[str, object] = {}
+        report_source = "missing"
+        report_parse_error = None
+        report_fetch: dict[str, object] | None = None
         if isinstance(execution, dict):
             report_text = execution.get("stdout")
             if isinstance(report_text, str) and report_text.strip():
-                try:
-                    report = json.loads(report_text)
-                except json.JSONDecodeError:
-                    report = {"parse_error": True, "raw": report_text}
+                report, report_parse_error = parse_report_text(report_text)
+                report_source = "stdout"
 
-        success = bool(report.get("Success")) if report else False
+        if not report or report.get("parse_error"):
+            fallback_report, report_fetch = download_guest_report(repo_root, guest_output)
+            if fallback_report and not fallback_report.get("parse_error"):
+                report = fallback_report
+                report_source = "guest-file"
+                report_parse_error = None
+            elif report_fetch:
+                report_parse_error = str(report_fetch.get("parse_error") or report_parse_error or report_fetch.get("stderr") or "guest report unavailable")
+
+        app_success = bool(report.get("Success")) if report else False
+        card_snapshot = summarize_card_snapshot(report) if report else {}
+        contract_failures = list(card_snapshot.get("failures") or []) if isinstance(card_snapshot, dict) else []
+        success = app_success and not contract_failures
         overall_success = overall_success and success
         results.append(
             {
@@ -90,9 +258,22 @@ def main() -> int:
                 "host_exit": proc.returncode,
                 "execution_exit": execution.get("exitcode") if isinstance(execution, dict) else None,
                 "payload_status": payload.get("status") if isinstance(payload, dict) else None,
-                "report_success": report.get("Success") if report else None,
+                "report_source": report_source,
+                "report_parse_error": report_parse_error,
+                "report_fetch_status": report_fetch.get("status") if isinstance(report_fetch, dict) else None,
+                "report_app_success": report.get("Success") if report else None,
+                "report_success": success if report else None,
                 "report_status": report.get("Status") if report else None,
                 "report_summary": report.get("Summary") if report else None,
+                "report_contract_status": card_snapshot.get("status") if isinstance(card_snapshot, dict) else None,
+                "report_contract_summary": summarize_contract_failures(contract_failures) if report else None,
+                "report_contract_failures": contract_failures,
+                "report_card_present": card_snapshot.get("present") if isinstance(card_snapshot, dict) else None,
+                "report_card_has_claim_boundary": card_snapshot.get("has_claim_boundary") if isinstance(card_snapshot, dict) else None,
+                "report_card_present_fields": card_snapshot.get("present_fields") if isinstance(card_snapshot, dict) else [],
+                "report_card_missing_fields": card_snapshot.get("missing_fields") if isinstance(card_snapshot, dict) else [],
+                "report_card_proof_lanes": card_snapshot.get("proof_lanes") if isinstance(card_snapshot, dict) else [],
+                "report_card_missing_proof_lanes": card_snapshot.get("missing_proof_lanes") if isinstance(card_snapshot, dict) else [],
                 "report": report,
             }
         )

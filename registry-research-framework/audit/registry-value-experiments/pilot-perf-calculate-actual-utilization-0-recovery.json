@@ -1,0 +1,109 @@
+{
+  "status": "unrecovered-shut-off",
+  "generated_utc": "2026-05-08T22:01:20Z",
+  "experiment_id": "pilot-perf-calculate-actual-utilization-0",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "PerfCalculateActualUtilization",
+  "tested_value": 0,
+  "original_value": 1,
+  "after_apply_value": 0,
+  "observations": [
+    {
+      "phase": "pre_reboot_smoke",
+      "result": "partial-pass",
+      "hard_checks_passed": [
+        "shell-process-presence",
+        "cmd-ver",
+        "powershell-version"
+      ],
+      "best_effort_passed": [
+        "settings-uri-launch"
+      ],
+      "known_harness_issue": "notepad/calc probes used empty ArgumentList; fixed in run-guest-registry-value-experiment.py after this pilot"
+    },
+    {
+      "phase": "after_apply_reboot",
+      "result": "fail",
+      "error": "guest-did-not-return-after-apply-reboot",
+      "visible_state": "Windows Automatic Repair / Startup Repair"
+    },
+    {
+      "phase": "winre_offline_registry_restore",
+      "result": "completed",
+      "commands": [
+        "reg load HKLM\\OFFLINE C:\\Windows\\System32\\Config\\SYSTEM",
+        "reg query HKLM\\OFFLINE\\Select",
+        "reg query \"HKLM\\OFFLINE\\ControlSet001\\Control\\Power\" /v PerfCalculateActualUtilization",
+        "reg add \"HKLM\\OFFLINE\\ControlSet001\\Control\\Power\" /v PerfCalculateActualUtilization /t REG_DWORD /d 1 /f",
+        "reg add \"HKLM\\OFFLINE\\ControlSet001\\Control\\Power\" /v HibernateEnabled /t REG_DWORD /d 0 /f",
+        "reg add \"HKLM\\OFFLINE\\ControlSet001\\Control\\Session Manager\\Power\" /v HiberbootEnabled /t REG_DWORD /d 0 /f",
+        "reg unload HKLM\\OFFLINE"
+      ],
+      "select_state": {
+        "Current": 1,
+        "Default": 1,
+        "Failed": 0,
+        "LastKnownGood": 1
+      }
+    },
+    {
+      "phase": "startup_repair_log",
+      "result": "captured",
+      "srttrail_summary": {
+        "number_of_repair_attempts": 4,
+        "number_of_root_causes": 0
+      }
+    },
+    {
+      "phase": "bcd_recovery_bypass",
+      "result": "attempted-then-reverted",
+      "commands": [
+        "bcdedit /set {default} recoveryenabled No",
+        "bcdedit /set {default} bootstatuspolicy IgnoreAllFailures"
+      ],
+      "post_attempt_state": "guest still did not return to QGA and remained stuck after Windows Boot Manager",
+      "reverted_with": "SystemRescue offline BCD hive edit restored recoveryenabled=1 and bootstatuspolicy=0"
+    },
+    {
+      "phase": "systemrescue_disk_repair",
+      "result": "completed",
+      "details": [
+        "Booted SystemRescue 13.00 official ISO.",
+        "Mounted Windows NTFS volume after ntfsfix -d.",
+        "Verified PerfCalculateActualUtilization was already restored to 1.",
+        "Restored BCD recovery flags from the EFI BCD store."
+      ]
+    },
+    {
+      "phase": "winre_filesystem_and_component_repair",
+      "result": "partial",
+      "details": [
+        "chkdsk C: /f corrected corrupt NTFS metadata and reported no further filesystem action required.",
+        "offline sfc reported no integrity violations.",
+        "dism /Image:C:\\ /Cleanup-Image /RevertPendingActions completed once, but reboot still returned to Startup Repair.",
+        "later DISM retry with /ScratchDir:C:\\Temp failed with 0x800f082f.",
+        "safe mode also returned to Startup Repair; safeboot, sos, and bootlog flags were removed."
+      ]
+    },
+    {
+      "phase": "winre_update_uninstall",
+      "result": "failed",
+      "details": [
+        "Uninstall latest quality update failed.",
+        "Uninstall latest feature update failed."
+      ]
+    },
+    {
+      "phase": "final_state",
+      "result": "unrecovered",
+      "domain_state": "shut off",
+      "note": "VM left shut off to preserve failed state and avoid further mutation."
+    }
+  ],
+  "verdict": {
+    "classification": "reboot-regression-observed-on-this-vm-profile",
+    "causality_note": "The lane proves an observed regression after setting the value to 0 and rebooting. It does not prove the value is the only possible cause because filesystem corruption and pending-action symptoms were also observed during recovery.",
+    "recommendation": "treat non-default values as advanced opt-in, reboot-risky, and VM-profile-sensitive until a disposable-overlay replay proves a safe envelope",
+    "future_gate": "require libvirt domain snapshot or disposable overlay before future boot-critical value experiments"
+  }
+}

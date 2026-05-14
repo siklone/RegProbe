@@ -238,6 +238,21 @@
       "strength": "low"
     },
     {
+      "evidence_id": "vm-explorer.disable-taskbar-chat-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk runtime receipt for ChatIcon",
+      "location": "evidence/captures/explorer-disable-taskbar-chat-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-qga-unblock-20260507/explorer-disable-taskbar-chat-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-qga-unblock-20260507/explorer-disable-taskbar-chat-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4445 registry events with 525 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat` / `ChatIcon`, returning `0xC0000034` on the clean baseline.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
       "evidence_id": "vm-explorer.disable-taskbar-chat-ghidra-launch-receipt-20260424",
       "kind": "vm-test",
       "title": "Guest Ghidra launch receipt for ChatIcon",
@@ -259,7 +274,7 @@
     "why": "Local Microsoft policy files document the exact ConfigureChatIcon device-policy surface, enum values, and Hide behavior. The app now writes the same machine-policy path and uses the documented Hide value 2, so the implementation matches the researched control surface. recommended_for_general_users remains false because the practical benefit is mostly cosmetic and Windows defaults may already suit most users.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-29T20:05:00Z",
+  "last_reviewed_utc": "2026-05-07T10:07:20.3461021Z",
   "version_stable": [
     "25H2"
   ],
@@ -295,11 +310,11 @@
     },
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "ingest_missing_etl"
+      "status": "qga_unblocked_ingest_ok"
     },
     "etw_stackwalk_reviewed": true,
-    "etw_stackwalk_review_status": "ingest_missing_etl",
-    "etw_stackwalk_review_artifact": "evidence/captures/explorer-disable-taskbar-chat-etw-stackwalk-attempt-20260424.json",
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/explorer-disable-taskbar-chat-etw-qga-unblock-20260507.json",
     "static_reviewed": {
       "ghidra": true,
       "status": "launch_blocked"
@@ -307,6 +322,6 @@
     "ghidra": true,
     "ghidra_status": "launch_blocked",
     "ghidra_artifact": "evidence/raw/ghidra/ghidra-explorer-disable-taskbar-chat-20260424-batch2/summary.json",
-    "notes": "A bounded 2026-04-24 ETW retry for `HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat` / `ChatIcon` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo. A same-day guest Ghidra retry for `ChatIcon` failed in `ensure-admin-shell` before any xref bundle reached the host."
+    "notes": "A bounded 2026-04-24 ETW retry for `HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat` / `ChatIcon` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo. A same-day guest Ghidra retry for `ChatIcon` failed in `ensure-admin-shell` before any xref bundle reached the host. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier ETW ingest/upload blocker and produced an exact helper-triggered `RegQueryValue` for `ChatIcon` with caller-stack capture."
   }
 }

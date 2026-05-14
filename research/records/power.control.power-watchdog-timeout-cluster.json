@@ -340,7 +340,12 @@
       "powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit",
       "powerwatchdog-timeout-family-helper-query-only-single-member",
       "powerwatchdog-timeout-family-no-primary-current-build-doc"
-    ]
+    ],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "intentional-hold-closed",
+    "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+    "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers.",
+    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
   },
   "open_questions": [
     "Can a targeted binary probe or new runtime trace find a direct current-build pivot for any of the five `PowerWatchdog*TimeoutMsec` values?",
@@ -361,7 +366,7 @@
       "notes": "The 2026-04-23 capture retained the physical ETL, backfilled a guest-side tracerpt XML sidecar after host parser fallback, and normalized one exact `RegQueryValue` event for `PowerWatchdogPoCalloutTimeoutMsec`; status `0xC0000034` confirms the value remains absent on the clean baseline."
     }
   ],
-  "last_reviewed_utc": "2026-04-28T06:23:50Z",
+  "last_reviewed_utc": "2026-05-07T20:20:00Z",
   "source_enrichment": {
     "last_updated_utc": "2026-04-28T06:23:50Z",
     "notes": "A 2026-04-23 skip-tracerpt ETW stackwalk rerun used guest-side tracerpt XML backfill and captured one exact helper-triggered `RegQueryValue` for `PowerWatchdogPoCalloutTimeoutMsec`; parser visibility is now closed for one watchdog-timeout sibling, but the broader family still lacks a named current-build seeding or consumer path. Retained source-enrichment output still keeps all five `PowerWatchdog*TimeoutMsec` names on the ReactOS/WRK zero-exact-target-hits side of the local corpus, and exact 2026-04-24 ReactOS doxygen searches for representative value names still returned no direct match. A bounded 2026-04-23 guest Ghidra retry for `PowerWatchdogPoCalloutTimeoutMsec` stalled at `invoke-wrapper` with no returned evidence bundle, so that static lane remains blocked rather than proved negative. A fresh bounded 2026-04-24 guest Ghidra retry failed even earlier in `ensure-admin-shell` with a host-visible admin-shell timeout summary, which keeps the family blocked on guest-control transport rather than adding negative static evidence.",

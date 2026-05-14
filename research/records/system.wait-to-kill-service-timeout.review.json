@@ -198,6 +198,20 @@
         "value"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "kvm-machine-scope-revalidation-batch-20260505",
+      "kind": "runtime-read",
+      "title": "KVM machine-scope current-state revalidation batch",
+      "location": "registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json",
+      "summary": "A KVM guest batch on build 26200 re-read selected machine-scope service and registry targets without changing guest configuration. The current guest still reports WaitToKillServiceTimeout = 5000 at HKLM\\SYSTEM\\CurrentControlSet\\Control.",
+      "supports": [
+        "path",
+        "value",
+        "runtime-read",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -216,5 +230,5 @@
     "key_found_on_page": true,
     "notes": "The reversible VM probe confirmed the current baseline, the app write, and a clean restore."
   },
-  "last_reviewed_utc": "2026-03-25T07:40:00Z"
+  "last_reviewed_utc": "2026-05-05T13:08:51.8557437Z"
 }

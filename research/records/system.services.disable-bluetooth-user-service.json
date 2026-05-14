@@ -169,6 +169,20 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "kvm-machine-scope-revalidation-batch-20260505",
+      "kind": "runtime-read",
+      "title": "KVM machine-scope current-state revalidation batch",
+      "location": "registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json",
+      "summary": "A KVM guest batch on build 26200 re-read selected machine-scope service and registry targets without changing guest configuration. The BluetoothUserService_* family still resolves on the live guest with its current start-mode metadata.",
+      "supports": [
+        "path",
+        "value",
+        "runtime-read",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -181,7 +195,7 @@
     "why": "Microsoft documents Bluetooth User Support Service `(BluetoothUserService)` with a Manual default start mode, marks it `OK to disable`, and states that it supports Bluetooth features relevant to each user session. The app disables instantiated `BluetoothUserService_*` services, which is how the per-user service family appears in practice, so the runtime surface still matches the documented family cleanly.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-25T09:35:00Z",
+  "last_reviewed_utc": "2026-05-05T13:08:51.8557437Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
     "exact_quote_or_path": "Bluetooth User Support Service (BluetoothUserService) | Manual | OK to disable | Supports proper functionality of Bluetooth features relevant to each user session.",

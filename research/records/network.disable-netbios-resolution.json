@@ -265,6 +265,21 @@
       "strength": "low"
     },
     {
+      "evidence_id": "vm-network.disable-netbios-resolution-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk runtime receipt for EnableNetbios",
+      "location": "evidence/captures/network-disable-netbios-resolution-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-qga-unblock-20260507/network-disable-netbios-resolution-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-qga-unblock-20260507/network-disable-netbios-resolution-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 5028 registry events with 1181 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient` / `EnableNetbios`, returning `0xC0000034` on the clean baseline.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
       "evidence_id": "vm-network.disable-netbios-resolution-ghidra-launch-receipt-20260427",
       "kind": "vm-test",
       "title": "Guest Ghidra launch receipt for EnableNetbios",
@@ -289,7 +304,7 @@
   "version_stable": [
     "25H2"
   ],
-  "last_reviewed_utc": "2026-04-30T00:20:00Z",
+  "last_reviewed_utc": "2026-05-07T08:58:04Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx",
     "exact_quote_or_path": "<policy name=\"DNS_Netbios\" ... key=\"Software\\Policies\\Microsoft\\Windows NT\\DNSClient\"> <enum id=\"DNS_Netbios_Box\" valueName=\"EnableNetbios\" required=\"true\"> <item displayName=\"$(string.DNS_Netbios_Disable)\"><value><decimal value=\"0\" /></value></item>",
@@ -300,11 +315,11 @@
     "last_updated_utc": "2026-04-28T16:03:07Z",
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "runner_timeout_tracerpt"
+      "status": "qga_unblocked_ingest_ok"
     },
     "etw_stackwalk_reviewed": true,
-    "etw_stackwalk_review_status": "runner_timeout_tracerpt",
-    "etw_stackwalk_review_artifact": "evidence/captures/network-disable-netbios-resolution-etw-stackwalk-attempt-20260427.json",
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/network-disable-netbios-resolution-etw-qga-unblock-20260507.json",
     "static_reviewed": {
       "ghidra": true,
       "status": "launcher_exception"
@@ -312,7 +327,7 @@
     "ghidra": true,
     "ghidra_status": "launcher_exception",
     "ghidra_artifact": "evidence/raw/ghidra/ghidra-network-disable-netbios-resolution-20260427a/summary.json",
-    "notes": "A bounded 2026-04-27 ETW retry for `HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient` / `EnableNetbios` advanced as far as `tracerpt` before the 90 second timeout cut it off; no ETL, XML, or normalized bundle reached the repo. A same-day guest Ghidra retry for `EnableNetbios` got past the earlier admin-shell failure mode but still stopped with `launcher-exception` before any evidence.json bundle was produced. Retained local corpus review for `EnableNetbios` also found no candidate-specific ReactOS or WRK source hit.",
+    "notes": "The 2026-04-27 ETW retry for `EnableNetbios` advanced as far as `tracerpt` before timing out without repo-visible ETL/XML ingest. A 2026-05-07 QGA-first ETW stackwalk rerun cleared that blocker and produced an exact helper-triggered `RegQueryValue` for `EnableNetbios` with caller-stack capture. The same-day guest Ghidra retry from 2026-04-27 still remains a `launcher-exception` failure receipt, and retained local corpus review found no candidate-specific ReactOS or WRK source hit.",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true

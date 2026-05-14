@@ -1,0 +1,1668 @@
+{
+  "generated_utc": "2026-05-12T19:55:15Z",
+  "status": "PASS",
+  "selection": {
+    "requested_ids": [],
+    "requested_categories": [],
+    "limit_per_category": 1,
+    "total_limit": 5,
+    "run_kvm": true,
+    "wait_timeout": 900
+  },
+  "sources": {
+    "promotion_gates": "research/promotion-gates.json",
+    "catalog_csv": "Docs/tweaks/tweak-catalog.csv",
+    "single_tweak_app_qa": "registry-research-framework/scripts/check_single_tweak_app_qa.py",
+    "kvm_batch_runner": "scripts/vm-kvm/run-guest-app-tweak-qa-batch.py"
+  },
+  "catalog_candidate_count": 258,
+  "selected_candidate_count": 5,
+  "errors": [],
+  "candidates": [
+    {
+      "tweak_id": "audio.disable-beep",
+      "qa_tweak_id": "audio.disable-beep",
+      "candidate_id": "audio.disable-beep",
+      "record_id": "audio.disable-beep",
+      "category": "Audio",
+      "name": "System Beep Driver",
+      "documentation": "research/records/audio.disable-beep.review.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect audio.disable-beep",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'audio.disable-beep' --qa-output 'C:\\Tools\\ValidationController\\smoke\\audio.disable-beep.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'audio.disable-beep' --qa-output 'C:\\Tools\\ValidationController\\smoke\\audio.disable-beep.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'audio.disable-beep' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\audio.disable-beep.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'audio.disable-beep' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\audio.disable-beep.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'audio.disable-beep'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "cleanup.disable-reserved-storage",
+      "qa_tweak_id": "cleanup.disable-reserved-storage",
+      "candidate_id": "cleanup.disable-reserved-storage",
+      "record_id": "cleanup.disable-reserved-storage",
+      "category": "Cleanup",
+      "name": "Disable Reserved Storage",
+      "documentation": "research/records/cleanup.disable-reserved-storage.review.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect cleanup.disable-reserved-storage",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'cleanup.disable-reserved-storage' --qa-output 'C:\\Tools\\ValidationController\\smoke\\cleanup.disable-reserved-storage.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'cleanup.disable-reserved-storage' --qa-output 'C:\\Tools\\ValidationController\\smoke\\cleanup.disable-reserved-storage.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'cleanup.disable-reserved-storage' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\cleanup.disable-reserved-storage.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'cleanup.disable-reserved-storage' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\cleanup.disable-reserved-storage.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'cleanup.disable-reserved-storage'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "developer.docker-performance",
+      "qa_tweak_id": "developer.docker-performance",
+      "candidate_id": "developer.docker-performance",
+      "record_id": "developer.docker-performance",
+      "category": "Developer",
+      "name": "Docker Desktop WSL 2 Backend",
+      "documentation": "research/records/developer.docker-performance.review.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect developer.docker-performance",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.docker-performance' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.docker-performance.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.docker-performance' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.docker-performance.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.docker-performance' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.docker-performance.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.docker-performance' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.docker-performance.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'developer.docker-performance'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "explorer.always-show-icons-never-thumbnails",
+      "qa_tweak_id": "explorer.always-show-icons-never-thumbnails",
+      "candidate_id": "explorer.always-show-icons-never-thumbnails",
+      "record_id": "explorer.always-show-icons-never-thumbnails",
+      "category": "Explorer",
+      "name": "Always Show Icons, Never Thumbnails",
+      "documentation": "research/records/explorer.always-show-icons-never-thumbnails.review.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect explorer.always-show-icons-never-thumbnails",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.always-show-icons-never-thumbnails' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.always-show-icons-never-thumbnails.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.always-show-icons-never-thumbnails' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.always-show-icons-never-thumbnails.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.always-show-icons-never-thumbnails' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.always-show-icons-never-thumbnails.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.always-show-icons-never-thumbnails' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.always-show-icons-never-thumbnails.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'explorer.always-show-icons-never-thumbnails'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "misc.disable-edge-features",
+      "qa_tweak_id": "misc.disable-edge-features",
+      "candidate_id": "misc.disable-edge-features",
+      "record_id": "misc.disable-edge-features",
+      "category": "Misc",
+      "name": "Disable Microsoft Edge Features",
+      "documentation": "Docs/misc/misc.md",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": false,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect misc.disable-edge-features",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'misc.disable-edge-features' --qa-output 'C:\\Tools\\ValidationController\\smoke\\misc.disable-edge-features.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'misc.disable-edge-features' --qa-output 'C:\\Tools\\ValidationController\\smoke\\misc.disable-edge-features.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'misc.disable-edge-features' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\misc.disable-edge-features.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'misc.disable-edge-features' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\misc.disable-edge-features.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'misc.disable-edge-features'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    }
+  ],
+  "run_results": [
+    {
+      "tweak_id": "audio.disable-beep",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "audio.disable-beep",
+        "TweakName": "System Beep Driver",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "GatedMutationOverrideRequested": false,
+        "GatedMutationOverrideUsed": false,
+        "Card": {
+          "TweakId": "audio.disable-beep",
+          "Name": "System Beep Driver",
+          "Category": "Audio",
+          "Description": "This affects the old system beep behavior driven by the Beep driver. Most people will never notice it unless they are cleaning up legacy system sounds or debugging old compatibility behavior.",
+          "FriendlyDescription": "This affects the old system beep behavior driven by the Beep driver. Most people will never notice it unless they are cleaning up legacy system sounds or debugging old compatibility behavior.",
+          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep\\Start",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: This affects the old system beep behavior driven by the Beep driver. Most people will never notice it unless they are cleaning up legacy system sounds or debugging old compatibility behavior. Evidence: Guest reversible probe at evidence/files/vm-tooling-staging/beep_start_toggle_out.txt confirmed BASELINE=1, AFTER_4=4, AFTER_1=1, RESTORED=1. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "Guest reversible probe at evidence/files/vm-tooling-staging/beep_start_toggle_out.txt confirmed BASELINE=1, AFTER_4=4, AFTER_1=1, RESTORED=1.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "Guest reversible probe on Win25H2Clean confirmed Start transitions through 1 and 4 before restoring to 1.",
+              "Source": "Guest reversible probe - Beep driver start mode: evidence/files/vm-tooling-staging/beep_start_toggle_out.txt"
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#audio.disable-beep",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Audio",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\peripheral\\peripheral.md#audio.disable-beep",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current option is 'System start (observed baseline)'. Selected option is 'Disabled'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "System start (observed baseline)",
+            "TargetValue": "Disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'System start (observed baseline)'. Selected option is 'Disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep\\Start: 1 -> 4",
+                "TimestampText": "22:54:45"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Disabled",
+            "TargetValue": "Disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'System start (observed baseline)'. Selected option is 'Disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep\\Start: 1 -> 4",
+                "TimestampText": "22:54:45"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Disabled'.",
+                "TimestampText": "22:54:48"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Disabled'.",
+                "TimestampText": "22:54:48"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "System start (observed baseline)",
+            "TargetValue": "Disabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'System start (observed baseline)'. Selected option is 'Disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep\\Start: 1 -> 4",
+                "TimestampText": "22:54:45"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Disabled'.",
+                "TimestampText": "22:54:48"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Disabled'.",
+                "TimestampText": "22:54:48"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "22:54:49"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current option is 'System start (observed baseline)'. Selected option is 'Disabled'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "System start (observed baseline)",
+            "TargetValue": "Disabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'System start (observed baseline)'. Selected option is 'Disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep\\Start: 1 -> 4",
+                "TimestampText": "22:54:49"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Disabled'.",
+                "TimestampText": "22:54:48"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Disabled'.",
+                "TimestampText": "22:54:48"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "22:54:49"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-12T19:54:45.8864724+00:00",
+        "CompletedAtUtc": "2026-05-12T19:54:49.1990785+00:00"
+      },
+      "qa_tweak_id": "audio.disable-beep",
+      "candidate_id": "audio.disable-beep",
+      "card_name": "System Beep Driver",
+      "documentation": "research/records/audio.disable-beep.review.json"
+    },
+    {
+      "tweak_id": "cleanup.disable-reserved-storage",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "not-applicable",
+      "report_summary": "Reserved Storage is currently in use by Windows servicing. Wait for servicing operations to complete and try again later.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "cleanup.disable-reserved-storage",
+        "TweakName": "Disable Reserved Storage",
+        "Success": true,
+        "Status": "not-applicable",
+        "Summary": "Reserved Storage is currently in use by Windows servicing. Wait for servicing operations to complete and try again later.",
+        "RollbackRequested": true,
+        "GatedMutationOverrideRequested": false,
+        "GatedMutationOverrideUsed": false,
+        "Card": {
+          "TweakId": "cleanup.disable-reserved-storage",
+          "Name": "Disable Reserved Storage",
+          "Category": "Cleanup",
+          "Description": "Reserved storage keeps disk space available for Windows updates, temporary files, and servicing. This tweak uses the official DISM command surface to disable that reserved space and reclaim capacity on smaller drives.",
+          "FriendlyDescription": "Reserved storage keeps disk space available for Windows updates, temporary files, and servicing. This tweak uses the official DISM command surface to disable that reserved space and reclaim capacity on smaller drives.",
+          "RegistryPath": "",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Reserved storage keeps disk space available for Windows updates, temporary files, and servicing. This tweak uses the official DISM command surface to disable that reserved space and reclaim capacity on smaller drives. Evidence: Microsoft publishes Reserved Storage through DISM command and API surfaces, and the current cleanup.disable-reserved-storage command tweak matches that documented model. The ReserveManager DisableDeletes write is treated as a side effect of the official DIS... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "Microsoft publishes Reserved Storage through DISM command and API surfaces, and the current cleanup.disable-reserved-storage command tweak matches that documented model. The ReserveManager DisableDeletes write is treated as a side effect of the official DIS...",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism-storage-reserve?view=windows-11"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "Read-only command run: dism.exe /Online /Get-ReservedStorageState returned 'Reserved storage is disabled.' on the current machine. This confirms the documented detect surface is live on this build.",
+              "Source": "Local DISM detect run for Reserved Storage state: Local run - 2026-03-13, Windows 11 Pro 10.0.26200.8037"
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+              "Source": "win-config / privacy/desc.md: https://github.com/nohuto/win-config/blob/main/privacy/desc.md"
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#cleanup.disable-reserved-storage",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Cleanup",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\cleanup\\cleanup.md#cleanup.disable-reserved-storage",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current state: Reserved Storage: Enabled",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Reserved Storage: Enabled",
+            "TargetValue": "Optimized",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current state: Reserved Storage: Enabled",
+                "TimestampText": "22:55:03"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Reserved Storage: Enabled",
+            "TargetValue": "Optimized",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current state: Reserved Storage: Enabled",
+                "TimestampText": "22:55:03"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Not applicable",
+                "Message": "Reserved Storage is currently in use by Windows servicing. Wait for servicing operations to complete and try again later.",
+                "TimestampText": "22:55:04"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Skipped",
+                "Message": "Apply returned NotApplicable.",
+                "TimestampText": "22:55:04"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Skipped",
+                "Message": "Apply returned NotApplicable.",
+                "TimestampText": "22:55:04"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Successfully restored original state.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Reserved Storage: Enabled",
+            "TargetValue": "Optimized",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current state: Reserved Storage: Enabled",
+                "TimestampText": "22:55:03"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Not applicable",
+                "Message": "Reserved Storage is currently in use by Windows servicing. Wait for servicing operations to complete and try again later.",
+                "TimestampText": "22:55:04"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Skipped",
+                "Message": "Apply returned NotApplicable.",
+                "TimestampText": "22:55:04"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Successfully restored original state.",
+                "TimestampText": "22:55:04"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current state: Reserved Storage: Enabled",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Reserved Storage: Enabled",
+            "TargetValue": "Optimized",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current state: Reserved Storage: Enabled",
+                "TimestampText": "22:55:04"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Not applicable",
+                "Message": "Reserved Storage is currently in use by Windows servicing. Wait for servicing operations to complete and try again later.",
+                "TimestampText": "22:55:04"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Skipped",
+                "Message": "Apply returned NotApplicable.",
+                "TimestampText": "22:55:04"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Successfully restored original state.",
+                "TimestampText": "22:55:04"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-12T19:55:00.4908305+00:00",
+        "CompletedAtUtc": "2026-05-12T19:55:04.4909162+00:00"
+      },
+      "qa_tweak_id": "cleanup.disable-reserved-storage",
+      "candidate_id": "cleanup.disable-reserved-storage",
+      "card_name": "Disable Reserved Storage",
+      "documentation": "research/records/cleanup.disable-reserved-storage.review.json"
+    },
+    {
+      "tweak_id": "developer.docker-performance",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "developer.docker-performance",
+        "TweakName": "Docker Desktop WSL 2 Backend",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "GatedMutationOverrideRequested": false,
+        "GatedMutationOverrideUsed": false,
+        "Card": {
+          "TweakId": "developer.docker-performance",
+          "Name": "Docker Desktop WSL 2 Backend",
+          "Category": "Developer",
+          "Description": "Docker Desktop can use the WSL 2 backend on Windows. The app writes Docker's documented settings-file field and does not claim a measured performance change.",
+          "FriendlyDescription": "Docker Desktop can use the WSL 2 backend on Windows. The app writes Docker's documented settings-file field and does not claim a measured performance change.",
+          "RegistryPath": "",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Docker Desktop can use the WSL 2 backend on Windows. The app writes Docker's documented settings-file field and does not claim a measured performance change. Evidence: Docker's settings pages document the WSL 2 based engine setting in the Docker settings model, and the change-settings page lists the Windows settings-store.json file location at %APPDATA%\\Docker\\settings-store.json. The app now writes that documented settin... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "Docker's settings pages document the WSL 2 based engine setting in the Docker settings model, and the change-settings page lists the Windows settings-store.json file location at %APPDATA%\\Docker\\settings-store.json. The app now writes that documented settin...",
+              "Source": "Validation proof source: https://docs.docker.com/enterprise/security/hardened-desktop/settings-management/settings-reference/"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#developer.docker-performance",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Developer",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweaks.md#developer.docker-performance",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Docker Desktop WSL 2 backend is disabled or not configured.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Unknown",
+            "TargetValue": "Optimized",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Docker Desktop WSL 2 backend is disabled or not configured.",
+                "TimestampText": "22:55:14"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Optimized",
+            "TargetValue": "Optimized",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Docker Desktop WSL 2 backend is disabled or not configured.",
+                "TimestampText": "22:55:15"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Enabled Docker Desktop WSL 2 backend.",
+                "TimestampText": "22:55:15"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified Docker Desktop WSL 2 backend is enabled.",
+                "TimestampText": "22:55:15"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Removed Docker settings file created by the tweak.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Optimized",
+            "TargetValue": "Optimized",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Docker Desktop WSL 2 backend is disabled or not configured.",
+                "TimestampText": "22:55:15"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Enabled Docker Desktop WSL 2 backend.",
+                "TimestampText": "22:55:15"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified Docker Desktop WSL 2 backend is enabled.",
+                "TimestampText": "22:55:15"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Removed Docker settings file created by the tweak.",
+                "TimestampText": "22:55:15"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Docker Desktop WSL 2 backend is disabled or not configured.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Optimized",
+            "TargetValue": "Optimized",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Docker Desktop WSL 2 backend is disabled or not configured.",
+                "TimestampText": "22:55:15"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Enabled Docker Desktop WSL 2 backend.",
+                "TimestampText": "22:55:15"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified Docker Desktop WSL 2 backend is enabled.",
+                "TimestampText": "22:55:15"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Removed Docker settings file created by the tweak.",
+                "TimestampText": "22:55:15"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-12T19:55:14.972565+00:00",
+        "CompletedAtUtc": "2026-05-12T19:55:15.3449437+00:00"
+      },
+      "qa_tweak_id": "developer.docker-performance",
+      "candidate_id": "developer.docker-performance",
+      "card_name": "Docker Desktop WSL 2 Backend",
+      "documentation": "research/records/developer.docker-performance.review.json"
+    },
+    {
+      "tweak_id": "explorer.always-show-icons-never-thumbnails",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "explorer.always-show-icons-never-thumbnails",
+        "TweakName": "Always Show Icons, Never Thumbnails",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "GatedMutationOverrideRequested": false,
+        "GatedMutationOverrideUsed": false,
+        "Card": {
+          "TweakId": "explorer.always-show-icons-never-thumbnails",
+          "Name": "Always Show Icons, Never Thumbnails",
+          "Category": "Explorer",
+          "Description": "Explorer can show file icons instead of generating thumbnails.",
+          "FriendlyDescription": "Explorer can show file icons instead of generating thumbnails.",
+          "RegistryPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Explorer can show file icons instead of generating thumbnails. Evidence: The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 1 and was restored after the probe. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 1 and was restored after the probe.",
+              "Source": "Validation proof source: evidence/files/vm-tooling-staging/iconsonly-result.txt"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote IconsOnly = 0 and IconsOnly = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly with matching D...",
+              "Source": "Procmon capture - Explorer IconsOnly runtime surface: evidence/raw/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt"
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#explorer.always-show-icons-never-thumbnails",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Explorer",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#explorer.always-show-icons-never-thumbnails",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current option is 'Allow thumbnails'. Selected option is 'Always show icons, never thumbnails'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Allow thumbnails",
+            "TargetValue": "Always show icons, never thumbnails",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'Allow thumbnails'. Selected option is 'Always show icons, never thumbnails'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly: 0 -> 1",
+                "TimestampText": "22:55:26"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Always show icons, never thumbnails",
+            "TargetValue": "Always show icons, never thumbnails",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'Allow thumbnails'. Selected option is 'Always show icons, never thumbnails'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly: 0 -> 1",
+                "TimestampText": "22:55:27"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Always show icons, never thumbnails'.",
+                "TimestampText": "22:55:27"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Always show icons, never thumbnails'.",
+                "TimestampText": "22:55:27"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Allow thumbnails",
+            "TargetValue": "Always show icons, never thumbnails",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'Allow thumbnails'. Selected option is 'Always show icons, never thumbnails'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly: 0 -> 1",
+                "TimestampText": "22:55:27"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Always show icons, never thumbnails'.",
+                "TimestampText": "22:55:27"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Always show icons, never thumbnails'.",
+                "TimestampText": "22:55:27"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "22:55:27"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current option is 'Allow thumbnails'. Selected option is 'Always show icons, never thumbnails'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Allow thumbnails",
+            "TargetValue": "Always show icons, never thumbnails",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'Allow thumbnails'. Selected option is 'Always show icons, never thumbnails'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly: 0 -> 1",
+                "TimestampText": "22:55:27"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Always show icons, never thumbnails'.",
+                "TimestampText": "22:55:27"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Always show icons, never thumbnails'.",
+                "TimestampText": "22:55:27"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "22:55:27"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-12T19:55:26.9132823+00:00",
+        "CompletedAtUtc": "2026-05-12T19:55:27.3506139+00:00"
+      },
+      "qa_tweak_id": "explorer.always-show-icons-never-thumbnails",
+      "candidate_id": "explorer.always-show-icons-never-thumbnails",
+      "card_name": "Always Show Icons, Never Thumbnails",
+      "documentation": "research/records/explorer.always-show-icons-never-thumbnails.review.json"
+    },
+    {
+      "tweak_id": "misc.disable-edge-features",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "misc.disable-edge-features",
+        "TweakName": "Disable Microsoft Edge Features",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "GatedMutationOverrideRequested": false,
+        "GatedMutationOverrideUsed": false,
+        "Card": {
+          "TweakId": "misc.disable-edge-features",
+          "Name": "Disable Microsoft Edge Features",
+          "Category": "Misc",
+          "Description": "Disables telemetry, personalization, sync, sidebar, shopping, rewards, and various other Edge features. Also disables Windows 8/8.1 EdgeUI features.",
+          "FriendlyDescription": "Disables telemetry, personalization, sync, sidebar, shopping, rewards, and various other Edge features. Also disables Windows 8/8.1 EdgeUI features.",
+          "RegistryPath": "",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Disables telemetry, personalization, sync, sidebar, shopping, rewards, and various other Edge features. Also disables Windows 8/8.1 EdgeUI features. Evidence: The misc documentation maps this card to the Edge policy bundle and names the Microsoft Edge / EdgeUI policy values that the current app writes. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The misc documentation maps this card to the Edge policy bundle and names the Microsoft Edge / EdgeUI policy values that the current app writes.",
+              "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\misc\\misc.md"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override and confirmed the card snapshot contract, detect/apply/verify flow, and rollback...",
+              "Source": "RegProbe app QA apply/rollback proof for misc.disable-edge-features: evidence/captures/misc-disable-edge-features-app-qa-20260507.json"
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+              "Source": "win-config / misc/desc.md: https://github.com/nohuto/win-config/blob/main/misc/desc.md"
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#misc.disable-edge-features",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Misc",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\misc\\misc.md#misc.disable-edge-features",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Detected 0 of 40 values (matches: 0, missing: 40).",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Unknown",
+            "TargetValue": "Multiple values",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 0 of 40 values (matches: 0, missing: 40).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\AutoImportAtFirstRun: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultBrowserSettingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultSensorsSetting: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeCollectionsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeFollowEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeShoppingAssistantEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideFirstRunExperience: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideRestoreDialogEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ImplicitSignInEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageAllowedBackgroundTypes: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageContentEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageHideDefaultTopSites: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageQuickLinksEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PersonalizationReportingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PinBrowserEssentialsToolbarButton: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\QuickSearchShowMiniMenu: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SearchbarAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowMicrosoftRewards: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowRecommendationsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SplitScreenEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StandaloneHubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StartupBoostEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SyncDisabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TabServicesEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TextPredictionEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TrackingPrevention: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\UserFeedbackAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing",
+                "TimestampText": "22:55:37"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 0 of 40 values (matches: 0, missing: 40).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\AutoImportAtFirstRun: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultBrowserSettingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultSensorsSetting: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeCollectionsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeFollowEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeShoppingAssistantEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideFirstRunExperience: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideRestoreDialogEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ImplicitSignInEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageAllowedBackgroundTypes: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageContentEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageHideDefaultTopSites: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageQuickLinksEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PersonalizationReportingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PinBrowserEssentialsToolbarButton: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\QuickSearchShowMiniMenu: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SearchbarAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowMicrosoftRewards: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowRecommendationsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SplitScreenEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StandaloneHubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StartupBoostEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SyncDisabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TabServicesEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TextPredictionEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TrackingPrevention: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\UserFeedbackAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing",
+                "TimestampText": "22:55:38"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Updated 40 values.",
+                "TimestampText": "22:55:41"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired values.",
+                "TimestampText": "22:55:41"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 0 of 40 values (matches: 0, missing: 40).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\AutoImportAtFirstRun: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultBrowserSettingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultSensorsSetting: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeCollectionsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeFollowEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeShoppingAssistantEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideFirstRunExperience: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideRestoreDialogEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ImplicitSignInEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageAllowedBackgroundTypes: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageContentEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageHideDefaultTopSites: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageQuickLinksEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PersonalizationReportingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PinBrowserEssentialsToolbarButton: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\QuickSearchShowMiniMenu: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SearchbarAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowMicrosoftRewards: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowRecommendationsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SplitScreenEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StandaloneHubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StartupBoostEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SyncDisabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TabServicesEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TextPredictionEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TrackingPrevention: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\UserFeedbackAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing",
+                "TimestampText": "22:55:38"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Updated 40 values.",
+                "TimestampText": "22:55:41"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired values.",
+                "TimestampText": "22:55:41"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "22:55:43"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Detected 0 of 40 values (matches: 0, missing: 40).",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 0 of 40 values (matches: 0, missing: 40).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\AutoImportAtFirstRun: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultBrowserSettingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultSensorsSetting: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeCollectionsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeFollowEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeShoppingAssistantEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideFirstRunExperience: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideRestoreDialogEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ImplicitSignInEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageAllowedBackgroundTypes: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageContentEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageHideDefaultTopSites: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageQuickLinksEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PersonalizationReportingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PinBrowserEssentialsToolbarButton: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\QuickSearchShowMiniMenu: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SearchbarAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowMicrosoftRewards: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowRecommendationsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SplitScreenEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StandaloneHubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StartupBoostEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SyncDisabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TabServicesEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TextPredictionEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TrackingPrevention: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\UserFeedbackAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing",
+                "TimestampText": "22:55:43"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Updated 40 values.",
+                "TimestampText": "22:55:41"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired values.",
+                "TimestampText": "22:55:41"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "22:55:43"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-12T19:55:37.8892138+00:00",
+        "CompletedAtUtc": "2026-05-12T19:55:43.2125031+00:00"
+      },
+      "qa_tweak_id": "misc.disable-edge-features",
+      "candidate_id": "misc.disable-edge-features",
+      "card_name": "Disable Microsoft Edge Features",
+      "documentation": "Docs/misc/misc.md"
+    }
+  ],
+  "summary": {
+    "planned_count": 5,
+    "planned_apply_allowed_count": 5,
+    "live_success_count": 5,
+    "live_failure_count": 0,
+    "categories": [
+      "Audio",
+      "Cleanup",
+      "Developer",
+      "Explorer",
+      "Misc"
+    ]
+  }
+}

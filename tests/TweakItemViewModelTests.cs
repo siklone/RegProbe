@@ -260,6 +260,95 @@ public sealed class TweakItemViewModelTests
     }
 
     [Fact]
+    public void ClaimBoundary_SeparatesKnownClaimFromRuntimeNonClaim()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new TestTweak(
+            "power.disable-network-power-saving.policy",
+            "Network Power and Multimedia Responsiveness",
+            "These settings affect TCP/IP task offloads and MMCSS CPU reservation.");
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false);
+
+        viewModel.ApplyEvidenceClassification(new TweakEvidenceClassEntry
+        {
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            EvidenceClass = "A",
+            ClassLabel = "Class A",
+            ClassTitle = "Ready",
+            ClassDescription = "Ready for app surface",
+            ActionState = "actionable",
+            GatingReason = string.Empty,
+            IsActionable = true,
+            ShowInApp = true,
+            RestoreStoryKnown = true,
+            ValidatedSemantics = new TweakEvidenceProofBlock
+            {
+                Summary = "DisableTaskOffload and SystemResponsiveness are documented; NetworkThrottlingIndex is excluded.",
+                HasSemanticsEvidence = true,
+                HasValidationProof = true
+            },
+            RuntimeProof = new TweakEvidenceProofBlock
+            {
+                Summary = string.Empty,
+                HasRuntimeEvidence = false
+            }
+        });
+        viewModel.ApplyResearchPromotionGate(new TweakPromotionGateEntry
+        {
+            CandidateId = tweak.Id,
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            TweakOrigin = "research-derived",
+            PromotionState = "promoted",
+            RecordPromotionAllowed = true,
+            TweakIngestAllowed = true,
+            ApplyAllowed = true,
+            AppMappingStatus = "matches-research",
+            NextMissingLayer = "none",
+            DebugOverrideAllowed = false,
+            RollbackStatus = new TweakRollbackGateStatus
+            {
+                RollbackDeclared = true,
+                RollbackVerified = true,
+                RollbackVerificationMethod = "record-restore-story"
+            }
+        });
+
+        Assert.True(viewModel.HasClaimBoundary);
+        Assert.Contains("DisableTaskOffload", viewModel.WhatWeKnowSummary);
+        Assert.Contains("NetworkThrottlingIndex is excluded", viewModel.WhatWeKnowSummary);
+        Assert.Contains("No benchmark, ETW/WPR trace", viewModel.WhatWeDoNotClaimSummary);
+    }
+
+    [Fact]
+    public void ClaimBoundary_MarksArchivedRecordsAsAuditTrailOnly()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new TestTweak("power.disable-network-power-saving");
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false);
+
+        viewModel.ApplyEvidenceClassification(new TweakEvidenceClassEntry
+        {
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            EvidenceClass = "E",
+            ClassLabel = "Class E",
+            ClassTitle = "Archived / Audit Trail",
+            ClassDescription = "Deprecated audit trail",
+            ActionState = "archived",
+            GatingReason = "Archived audit trail only.",
+            IsActionable = false,
+            ShowInApp = false,
+            IsArchived = true
+        });
+
+        Assert.True(viewModel.HasClaimBoundary);
+        Assert.Contains("Archived", viewModel.WhatWeDoNotClaimSummary);
+        Assert.Contains("not a normal app-ready tweak", viewModel.WhatWeDoNotClaimSummary);
+    }
+
+    [Fact]
     public void CompactStateAndScope_ExposeCompactTweaksMetadata()
     {
         var pipeline = new TweakExecutionPipeline(new RecordingLogger());
@@ -344,14 +433,16 @@ public sealed class TweakItemViewModelTests
 
     private sealed class TestTweak : ITweak
     {
-        public TestTweak(string id)
+        public TestTweak(string id, string name = "Test", string description = "Test")
         {
             Id = id;
+            Name = name;
+            Description = description;
         }
 
         public string Id { get; }
-        public string Name => "Test";
-        public string Description => "Test";
+        public string Name { get; }
+        public string Description { get; }
         public TweakRiskLevel Risk => TweakRiskLevel.Safe;
         public bool RequiresElevation => false;
 

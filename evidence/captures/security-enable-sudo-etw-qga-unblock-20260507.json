@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T14:43:50.544726Z",
+  "record_id": "security.enable-sudo",
+  "run_id": "security-enable-sudo-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 1 target value(s): `Enabled`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 1/1 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+  "aggregate_observation": {
+    "target_count": 1,
+    "exact_probe_value_query_count": 1,
+    "all_artifacts_ingested": true,
+    "launch_transport": "qga",
+    "probe_read_not_product_consumer_proof": true
+  },
+  "target_observations": [
+    {
+      "run_id": "security-enable-sudo-enabled-etw-qga-unblock-20260507",
+      "registry_path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Sudo",
+      "value_name": "Enabled",
+      "exact_probe_value_query": true,
+      "operation": "RegQueryValue",
+      "representative_status": "0xC0000034",
+      "event_count": 4421,
+      "caller_stack_event_count": 525,
+      "target_key_event_count": 8,
+      "target_value_event_count": 17,
+      "exact_target_value_event_count": 2,
+      "target_command_event_count": 2,
+      "launch_transport": "qga"
+    }
+  ],
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/security-enable-sudo-enabled-etw-qga-unblock-20260507/security-enable-sudo-enabled-etw-qga-unblock-20260507-summary.json",
+      "sha256": "0ba248a62901e39514c15616981f7c30430d6500d294c2137f388a0480d3271e",
+      "size": 7615,
+      "collected_utc": "2026-05-07T14:37:56.1821268Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/security-enable-sudo-enabled-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "97d95d449c0b1145d091309ea2c29caf597819dec0f119c17e01991f3a5702c4",
+      "size": 5397195,
+      "collected_utc": "2026-05-07T14:37:56.1821268Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/security-enable-sudo-enabled-etw-qga-unblock-20260507/security-enable-sudo-enabled-etw-qga-unblock-20260507.etl",
+      "sha256": "b995342a50cadce366464b6a299cc11d20a35785c8142a34bbe79ccd83150630",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T14:37:56.1821268Z"
+    }
+  ]
+}

@@ -42,8 +42,8 @@ normalization_note: raw-tracerpt-registry-hit-line
 
 This closes the old `runtime_no_read` gap for the record. Earlier Procmon and lightweight ETW lanes had repeatedly shown adjacent `Control\Power` activity or exact value-name text, but not a normalized runtime read. This WPR boot trace gives the missing exact `Registry / QueryValue / HiberFileSizePercent` event.
 
-One normalizer fix came out of this run. The tracerpt CSV can place the registry value name beyond the declared header columns, so `Import-Csv` can lose the actual value-name field even though the raw line contains it. [scripts/vm/guest-tools/run-wpr-boot-registry-probe.ps1](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/scripts/vm/guest-tools/run-wpr-boot-registry-probe.ps1) now falls back to raw registry hit lines when the structured CSV pass produces no events.
+One normalizer fix came out of this run. The tracerpt CSV can place the registry value name beyond the declared header columns, so `Import-Csv` can lose the actual value-name field even though the raw line contains it. [scripts/vm/guest-tools/run-wpr-boot-registry-probe.ps1](../../scripts/vm/guest-tools/run-wpr-boot-registry-probe.ps1) now falls back to raw registry hit lines when the structured CSV pass produces no events.
 
 ## Retained audit artifact
 
-- [power-control-hiber-file-size-percent-wpr-qga-runtime-read-20260412.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-control-hiber-file-size-percent-wpr-qga-runtime-read-20260412.json)
+- [power-control-hiber-file-size-percent-wpr-qga-runtime-read-20260412.json](../../registry-research-framework/audit/power-control-hiber-file-size-percent-wpr-qga-runtime-read-20260412.json)

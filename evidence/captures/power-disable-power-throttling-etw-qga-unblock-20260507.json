@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T14:43:50.544726Z",
+  "record_id": "power.disable-power-throttling",
+  "run_id": "power-disable-power-throttling-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 1 target value(s): `PowerThrottlingOff`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 1/1 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+  "aggregate_observation": {
+    "target_count": 1,
+    "exact_probe_value_query_count": 1,
+    "all_artifacts_ingested": true,
+    "launch_transport": "qga",
+    "probe_read_not_product_consumer_proof": true
+  },
+  "target_observations": [
+    {
+      "run_id": "power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507",
+      "registry_path": "HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+      "value_name": "PowerThrottlingOff",
+      "exact_probe_value_query": true,
+      "operation": "RegQueryValue",
+      "representative_status": "0xC0000034",
+      "event_count": 4402,
+      "caller_stack_event_count": 525,
+      "target_key_event_count": 7,
+      "target_value_event_count": 1,
+      "exact_target_value_event_count": 1,
+      "target_command_event_count": 2,
+      "launch_transport": "qga"
+    }
+  ],
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507/power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507-summary.json",
+      "sha256": "0b88d3132b466b75fa77939c717e1e93f6d53ef2a620f00918f48a4bef34bd08",
+      "size": 8295,
+      "collected_utc": "2026-05-07T14:24:42.2589841Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "abf2e193f20c53844010a6c7a503f99203eeccce176afc4f768a70b1c4220657",
+      "size": 5842874,
+      "collected_utc": "2026-05-07T14:24:42.2589841Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507/power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507.etl",
+      "sha256": "cbdd427e5c96a402d632819ac20847f4e6a2623d455ff05182225aec9f290021",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T14:24:42.2589841Z"
+    }
+  ]
+}

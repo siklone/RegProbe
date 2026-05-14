@@ -1,0 +1,2229 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-13T23:48:21Z",
+  "purpose": "Quarantine ledger for cleanup candidates. This ledger does not delete files.",
+  "deletion_policy": [
+    "No file is deleted by this generator.",
+    "Delete only when live_reference_count is 0.",
+    "Delete only when a replacement artifact or explicit obsolete reason is recorded.",
+    "Manual review is required for raw ETL/PML and vm-tooling-staging bundles."
+  ],
+  "summary": {
+    "total_items": 89,
+    "delete_eligible_count": 0,
+    "referenced_count": 89,
+    "total_size_bytes": 678702358,
+    "categories": {
+      "audit-archive-named-sample": 10,
+      "large-raw-trace-sample": 25,
+      "old-dated-audit-output-sample": 25,
+      "operator96-superseded-pilot": 4,
+      "vm-tooling-staging-oldest-sample": 25
+    }
+  },
+  "items": [
+    {
+      "path": "registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.json",
+      "kind": "file",
+      "category": "operator96-superseded-pilot",
+      "size_bytes": 4469,
+      "stale_reason": "pilot artifact superseded by full operator96 baseline, but referenced as safety example",
+      "replacement_artifacts": [
+        "registry-research-framework/audit/operator96-value-campaign-tranche-20260509.json",
+        "registry-research-framework/audit/registry-value-experiment-analysis.json",
+        "registry-research-framework/audit/operator96-enriched-value-matrix-20260510.json"
+      ],
+      "reference_terms": [
+        "pilot-perf-calculate-actual-utilization-0-recovery",
+        "pilot-perf-calculate-actual-utilization-0-recovery.json",
+        "registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.json"
+      ],
+      "live_reference_count": 2,
+      "references_sample": [
+        "research/evidence-atlas.md",
+        "research/records/power.control.perf-calculate-actual-utilization.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-referenced"
+    },
+    {
+      "path": "registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.md",
+      "kind": "file",
+      "category": "operator96-superseded-pilot",
+      "size_bytes": 3741,
+      "stale_reason": "pilot artifact superseded by full operator96 baseline, but referenced as safety example",
+      "replacement_artifacts": [
+        "registry-research-framework/audit/operator96-value-campaign-tranche-20260509.json",
+        "registry-research-framework/audit/registry-value-experiment-analysis.json",
+        "registry-research-framework/audit/operator96-enriched-value-matrix-20260510.json"
+      ],
+      "reference_terms": [
+        "pilot-perf-calculate-actual-utilization-0-recovery",
+        "pilot-perf-calculate-actual-utilization-0-recovery.md",
+        "registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.md"
+      ],
+      "live_reference_count": 2,
+      "references_sample": [
+        "research/evidence-atlas.md",
+        "research/records/power.control.perf-calculate-actual-utilization.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-referenced"
+    },
+    {
+      "path": "registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.json",
+      "kind": "file",
+      "category": "operator96-superseded-pilot",
+      "size_bytes": 12248,
+      "stale_reason": "pilot artifact superseded by full operator96 baseline, but referenced as safety example",
+      "replacement_artifacts": [
+        "registry-research-framework/audit/operator96-value-campaign-tranche-20260509.json",
+        "registry-research-framework/audit/registry-value-experiment-analysis.json",
+        "registry-research-framework/audit/operator96-enriched-value-matrix-20260510.json"
+      ],
+      "reference_terms": [
+        "pilot-perf-calculate-actual-utilization-0",
+        "pilot-perf-calculate-actual-utilization-0.json",
+        "registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.json"
+      ],
+      "live_reference_count": 5,
+      "references_sample": [
+        "CONTRIBUTING.md",
+        "README.md",
+        "registry-research-framework/audit/registry-value-experiments/README.md",
+        "research/evidence-atlas.md",
+        "research/records/power.control.perf-calculate-actual-utilization.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-referenced"
+    },
+    {
+      "path": "registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.md",
+      "kind": "file",
+      "category": "operator96-superseded-pilot",
+      "size_bytes": 1737,
+      "stale_reason": "pilot artifact superseded by full operator96 baseline, but referenced as safety example",
+      "replacement_artifacts": [
+        "registry-research-framework/audit/operator96-value-campaign-tranche-20260509.json",
+        "registry-research-framework/audit/registry-value-experiment-analysis.json",
+        "registry-research-framework/audit/operator96-enriched-value-matrix-20260510.json"
+      ],
+      "reference_terms": [
+        "pilot-perf-calculate-actual-utilization-0",
+        "pilot-perf-calculate-actual-utilization-0.md",
+        "registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.md"
+      ],
+      "live_reference_count": 5,
+      "references_sample": [
+        "CONTRIBUTING.md",
+        "README.md",
+        "registry-research-framework/audit/registry-value-experiments/README.md",
+        "research/evidence-atlas.md",
+        "research/records/power.control.perf-calculate-actual-utilization.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-referenced"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/defender-cloud-demo-extracted",
+      "kind": "directory",
+      "category": "vm-tooling-staging-oldest-sample",
+      "size_bytes": 314,
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "defender-cloud-demo-extracted",
+        "evidence/files/vm-tooling-staging/defender-cloud-demo-extracted"
+      ],
+      "live_reference_count": 1,
+      "references_sample": [
+        "research/notes/security-threat-file-hash-logging-validation-20260325.md"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/showinfotip-1-hits.csv..md",
+      "kind": "file",
+      "category": "vm-tooling-staging-oldest-sample",
+      "size_bytes": 306,
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/files/vm-tooling-staging/showinfotip-1-hits.csv..md",
+        "showinfotip-1-hits.csv.",
+        "showinfotip-1-hits.csv..md"
+      ],
+      "live_reference_count": 6,
+      "references_sample": [
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/records/explorer.show-info-tips.review.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/showsuperhidden-1-hits.csv..md",
+      "kind": "file",
+      "category": "vm-tooling-staging-oldest-sample",
+      "size_bytes": 310,
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/files/vm-tooling-staging/showsuperhidden-1-hits.csv..md",
+        "showsuperhidden-1-hits.csv.",
+        "showsuperhidden-1-hits.csv..md"
+      ],
+      "live_reference_count": 6,
+      "references_sample": [
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/records/explorer.show-protected-operating-system-files.review.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md",
+      "kind": "file",
+      "category": "vm-tooling-staging-oldest-sample",
+      "size_bytes": 309,
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md",
+        "thread-dpc-enable-0-cpu3.etl",
+        "thread-dpc-enable-0-cpu3.etl.md"
+      ],
+      "live_reference_count": 8,
+      "references_sample": [
+        "registry-research-framework/discovery/etl-corpus-inventory.json",
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/notes/thread-dpc-enable-vm-suite-20260324.md",
+        "research/records/system.kernel-thread-dpc-enable.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md",
+      "kind": "file",
+      "category": "vm-tooling-staging-oldest-sample",
+      "size_bytes": 309,
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md",
+        "thread-dpc-enable-0-mem2.etl",
+        "thread-dpc-enable-0-mem2.etl.md"
+      ],
+      "live_reference_count": 8,
+      "references_sample": [
+        "registry-research-framework/discovery/etl-corpus-inventory.json",
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/notes/thread-dpc-enable-vm-suite-20260324.md",
+        "research/records/system.kernel-thread-dpc-enable.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md",
+      "kind": "file",
+      "category": "vm-tooling-staging-oldest-sample",
+      "size_bytes": 312,
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md",
+        "vm-batch-probe-20260320.json.",
+        "vm-batch-probe-20260320.json..md"
+      ],
+      "live_reference_count": 8,
+      "references_sample": [
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/records/security.trusted-path-credential-prompting.review.json",
+        "research/records/system.disable-auto-maintenance.review.json",
+        "research/records/system.memory-large-system-cache-client.review.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/ghidra-probes",
+      "kind": "directory",
+      "category": "vm-tooling-staging-oldest-sample",
+      "size_bytes": 17905,
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/files/vm-tooling-staging/ghidra-probes",
+        "ghidra-probes"
+      ],
+      "live_reference_count": 2,
+      "references_sample": [
+        "registry-research-framework/tools/run-path-aware-static-probe.ps1",
+        "scripts/vm/run-ghidra-string-xref-probe.ps1"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/beep_start_toggle_out.txt",
+      "kind": "file",
+      "category": "vm-tooling-staging-oldest-sample",
+      "size_bytes": 42,
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "beep_start_toggle_out",
+        "beep_start_toggle_out.txt",
+        "evidence/files/vm-tooling-staging/beep_start_toggle_out.txt"
+      ],
+      "live_reference_count": 9,
+      "references_sample": [
+        "registry-research-framework/audit/promoted-app-qa-batch-20260512-live-14.json",
+        "registry-research-framework/audit/promoted-app-qa-batch-20260512-live-5.json",
+        "registry-research-framework/audit/promoted-app-qa-batch-latest.json",
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/crossdevice_resume_probe.csv",
+      "kind": "file",
+      "category": "vm-tooling-staging-oldest-sample",
+      "size_bytes": 44894268,
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
+      "replacement_artifacts": [
+        "evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv"
+      ],
+      "reference_terms": [
+        "crossdevice_resume_probe",
+        "crossdevice_resume_probe.csv",
+        "evidence/files/vm-tooling-staging/crossdevice_resume_probe.csv"
+      ],
+      "live_reference_count": 11,
+      "references_sample": [
+        "evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/evidence-not-found/privacy.disable-cross-device-experiences.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "delete-after-review"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118",
+      "kind": "directory",
+      "category": "vm-tooling-staging-oldest-sample",
+      "size_bytes": 2502,
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
+      "replacement_artifacts": [
+        "evidence/raw/procmon/security-disable-enhanced-defender-notifications-validation-20260324/defender-disable-enhanced-securitycenter-1.txt"
+      ],
+      "reference_terms": [
+        "defender-enhanced-notifications-securitycenter-1-20260324-213118",
+        "evidence/files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118"
+      ],
+      "live_reference_count": 7,
+      "references_sample": [
+        "registry-research-framework/enrichment/enrichment-cache.jsonl",
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/records/security.disable-enhanced-defender-notifications.review.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "delete-after-review"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845",
+      "kind": "directory",
+      "category": "vm-tooling-staging-oldest-sample",
+      "size_bytes": 12140,
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
+      "replacement_artifacts": [
+        "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt"
+      ],
+      "reference_terms": [
+        "defender-threat-file-hash-legacyroot-1-20260325-011845",
+        "evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845"
+      ],
+      "live_reference_count": 8,
+      "references_sample": [
+        "registry-research-framework/enrichment/enrichment-cache.jsonl",
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/notes/security-threat-file-hash-logging-validation-20260325.md",
+        "research/records/security.threat-file-hash-logging.review.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "delete-after-review"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039",
+      "kind": "directory",
+      "category": "vm-tooling-staging-oldest-sample",
+      "size_bytes": 301,
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "defender-threat-file-hash-mpengine-1-20260325-100039",
+        "evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039"
+      ],
+      "live_reference_count": 6,
+      "references_sample": [
+        "research/evidence-atlas.md",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/notes/security-threat-file-hash-logging-validation-20260325.md",
+        "research/records/security.threat-file-hash-logging.review.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-20260325-012333",
+      "kind": "directory",
+      "category": "vm-tooling-staging-oldest-sample",
+      "size_bytes": 13011,
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
+      "replacement_artifacts": [
+        "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt"
+      ],
+      "reference_terms": [
+        "defender-threat-file-hash-policymanager-1-20260325-012333",
+        "evidence/files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-20260325-012333"
+      ],
+      "live_reference_count": 1,
+      "references_sample": [
+        "research/notes/security-threat-file-hash-logging-validation-20260325.md"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "delete-after-review"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/devmode_longpaths_probe.csv",
+      "kind": "file",
+      "category": "vm-tooling-staging-oldest-sample",
+      "size_bytes": 713282,
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
+      "replacement_artifacts": [
+        "evidence/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv"
+      ],
+      "reference_terms": [
+        "devmode_longpaths_probe",
+        "devmode_longpaths_probe.csv",
+        "evidence/files/vm-tooling-staging/devmode_longpaths_probe.csv"
+      ],
+      "live_reference_count": 9,
+      "references_sample": [
+        "evidence/files/missing/devmode-longpaths-probe-pml.md",
+        "evidence/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md",
+        "evidence/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv",
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "delete-after-review"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/devmode_probe2.csv",
+      "kind": "file",
+      "category": "vm-tooling-staging-oldest-sample",
+      "size_bytes": 1463100,
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
+      "replacement_artifacts": [
+        "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv"
+      ],
+      "reference_terms": [
+        "devmode_probe2",
+        "devmode_probe2.csv",
+        "evidence/files/vm-tooling-staging/devmode_probe2.csv"
+      ],
+      "live_reference_count": 10,
+      "references_sample": [
+        "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv",
+        "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt",
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/evidence-not-found/developer.windows-dev-mode.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "delete-after-review"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/devmode_probe2.txt",
+      "kind": "file",
+      "category": "vm-tooling-staging-oldest-sample",
+      "size_bytes": 765,
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
+      "replacement_artifacts": [
+        "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt"
+      ],
+      "reference_terms": [
+        "devmode_probe2",
+        "devmode_probe2.txt",
+        "evidence/files/vm-tooling-staging/devmode_probe2.txt"
+      ],
+      "live_reference_count": 10,
+      "references_sample": [
+        "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv",
+        "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt",
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/evidence-not-found/developer.windows-dev-mode.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "delete-after-review"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/feedback_notifications_probe.txt",
+      "kind": "file",
+      "category": "vm-tooling-staging-oldest-sample",
+      "size_bytes": 862,
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
+      "replacement_artifacts": [
+        "evidence/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt"
+      ],
+      "reference_terms": [
+        "evidence/files/vm-tooling-staging/feedback_notifications_probe.txt",
+        "feedback_notifications_probe",
+        "feedback_notifications_probe.txt"
+      ],
+      "live_reference_count": 6,
+      "references_sample": [
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/records/privacy.disable-feedback-notifications.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "delete-after-review"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/gamemode_admin_probe.txt",
+      "kind": "file",
+      "category": "vm-tooling-staging-oldest-sample",
+      "size_bytes": 454,
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
+      "replacement_artifacts": [
+        "evidence/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt"
+      ],
+      "reference_terms": [
+        "evidence/files/vm-tooling-staging/gamemode_admin_probe.txt",
+        "gamemode_admin_probe",
+        "gamemode_admin_probe.txt"
+      ],
+      "live_reference_count": 8,
+      "references_sample": [
+        "registry-research-framework/enrichment/enrichment-cache.jsonl",
+        "registry-research-framework/queue/research-queue.json",
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/records/system.enable-game-mode.review.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "delete-after-review"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/gamemode_admin_zero_probe.txt",
+      "kind": "file",
+      "category": "vm-tooling-staging-oldest-sample",
+      "size_bytes": 454,
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
+      "replacement_artifacts": [
+        "evidence/raw/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt"
+      ],
+      "reference_terms": [
+        "evidence/files/vm-tooling-staging/gamemode_admin_zero_probe.txt",
+        "gamemode_admin_zero_probe",
+        "gamemode_admin_zero_probe.txt"
+      ],
+      "live_reference_count": 7,
+      "references_sample": [
+        "registry-research-framework/queue/research-queue.json",
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/records/system.enable-game-mode.review.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "delete-after-review"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/ghidra_explorer_serialize.txt",
+      "kind": "file",
+      "category": "vm-tooling-staging-oldest-sample",
+      "size_bytes": 40815,
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
+      "replacement_artifacts": [
+        "evidence/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt"
+      ],
+      "reference_terms": [
+        "evidence/files/vm-tooling-staging/ghidra_explorer_serialize.txt",
+        "ghidra_explorer_serialize",
+        "ghidra_explorer_serialize.txt"
+      ],
+      "live_reference_count": 11,
+      "references_sample": [
+        "evidence/records/system.disable-startup-delay/full-evidence.json",
+        "evidence/records/system.disable-startup-delay/static.json",
+        "evidence/records/system.disable-startup-delay/verdict.md",
+        "registry-research-framework/enrichment/enrichment-cache.jsonl",
+        "research/evidence-atlas.md",
+        "research/evidence-audit.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "delete-after-review"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/hags_toggle_out.txt",
+      "kind": "file",
+      "category": "vm-tooling-staging-oldest-sample",
+      "size_bytes": 52,
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/files/vm-tooling-staging/hags_toggle_out.txt",
+        "hags_toggle_out",
+        "hags_toggle_out.txt"
+      ],
+      "live_reference_count": 8,
+      "references_sample": [
+        "registry-research-framework/enrichment/enrichment-cache.jsonl",
+        "registry-research-framework/queue/research-queue.json",
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/records/system.enable-hags.review.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/hideemptydrives-0-hits.csv",
+      "kind": "file",
+      "category": "vm-tooling-staging-oldest-sample",
+      "size_bytes": 467,
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
+      "replacement_artifacts": [
+        "evidence/raw/procmon/explorer-hide-empty-drives-validation-20260324/hideemptydrives-0-hits.csv"
+      ],
+      "reference_terms": [
+        "evidence/files/vm-tooling-staging/hideemptydrives-0-hits.csv",
+        "hideemptydrives-0-hits",
+        "hideemptydrives-0-hits.csv"
+      ],
+      "live_reference_count": 1,
+      "references_sample": [
+        "research/notes/explorer-hide-empty-drives-validation-20260324.md"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "delete-after-review"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/hideemptydrives-1-hits.csv",
+      "kind": "file",
+      "category": "vm-tooling-staging-oldest-sample",
+      "size_bytes": 467,
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
+      "replacement_artifacts": [
+        "evidence/raw/procmon/explorer-hide-empty-drives-validation-20260324/hideemptydrives-1-hits.csv"
+      ],
+      "reference_terms": [
+        "evidence/files/vm-tooling-staging/hideemptydrives-1-hits.csv",
+        "hideemptydrives-1-hits",
+        "hideemptydrives-1-hits.csv"
+      ],
+      "live_reference_count": 1,
+      "references_sample": [
+        "research/notes/explorer-hide-empty-drives-validation-20260324.md"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "delete-after-review"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/hideemptydrives-result.txt",
+      "kind": "file",
+      "category": "vm-tooling-staging-oldest-sample",
+      "size_bytes": 933,
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
+      "replacement_artifacts": [
+        "evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt"
+      ],
+      "reference_terms": [
+        "evidence/files/vm-tooling-staging/hideemptydrives-result.txt",
+        "hideemptydrives-result",
+        "hideemptydrives-result.txt"
+      ],
+      "live_reference_count": 8,
+      "references_sample": [
+        "registry-research-framework/enrichment/enrichment-cache.jsonl",
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/notes/explorer-hide-empty-drives-validation-20260324.md",
+        "research/records/explorer.hide-empty-drives.review.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "delete-after-review"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/iconsonly-0-hits.csv",
+      "kind": "file",
+      "category": "vm-tooling-staging-oldest-sample",
+      "size_bytes": 811,
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
+      "replacement_artifacts": [
+        "evidence/raw/procmon/explorer-always-show-icons-never-thumbnails-validation-20260324/iconsonly-0-hits.csv"
+      ],
+      "reference_terms": [
+        "evidence/files/vm-tooling-staging/iconsonly-0-hits.csv",
+        "iconsonly-0-hits",
+        "iconsonly-0-hits.csv"
+      ],
+      "live_reference_count": 1,
+      "references_sample": [
+        "research/notes/explorer-always-show-icons-never-thumbnails-validation-20260324.md"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "delete-after-review"
+    },
+    {
+      "path": "evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml",
+      "kind": "file",
+      "category": "large-raw-trace-sample",
+      "size_bytes": 63543227,
+      "stale_reason": "large raw trace; keep until indexed replacement/derived parse is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "appcompat-policy-bundle-procmon",
+        "appcompat-policy-bundle-procmon.pml",
+        "evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml"
+      ],
+      "live_reference_count": 9,
+      "references_sample": [
+        "evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.csv",
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/records/privacy.disable-appcompat-engine.policy.review.json",
+        "research/records/privacy.disable-switchback.policy.review.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml",
+      "kind": "file",
+      "category": "large-raw-trace-sample",
+      "size_bytes": 61748389,
+      "stale_reason": "large raw trace; keep until indexed replacement/derived parse is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "appdeviceinventory-policy-procmon",
+        "appdeviceinventory-policy-procmon.pml",
+        "evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml"
+      ],
+      "live_reference_count": 10,
+      "references_sample": [
+        "evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.csv",
+        "evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.csv",
+        "evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.csv",
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml",
+      "kind": "file",
+      "category": "large-raw-trace-sample",
+      "size_bytes": 60503124,
+      "stale_reason": "large raw trace; keep until indexed replacement/derived parse is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "disable-pca-policy-procmon",
+        "disable-pca-policy-procmon.pml",
+        "evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml"
+      ],
+      "live_reference_count": 9,
+      "references_sample": [
+        "evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.csv",
+        "evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.csv",
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/records/privacy.disable-program-compatibility-assistant.review.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.etl",
+      "kind": "file",
+      "category": "large-raw-trace-sample",
+      "size_bytes": 51380224,
+      "stale_reason": "large raw trace; keep until indexed replacement/derived parse is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.etl",
+        "system.reliability-timestamp-enabled-etw-20260424e",
+        "system.reliability-timestamp-enabled-etw-20260424e.etl"
+      ],
+      "live_reference_count": 10,
+      "references_sample": [
+        "evidence/captures/system-reliability-timestamp-enabled-etw-stackwalk-20260424.json",
+        "evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/normalized-registry-bundle.json",
+        "evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-stage.json",
+        "evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-summary.json",
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424.etl",
+      "kind": "file",
+      "category": "large-raw-trace-sample",
+      "size_bytes": 29360128,
+      "stale_reason": "large raw trace; keep until indexed replacement/derived parse is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424.etl",
+        "system-io-allow-remote-dasd-etw-20260424",
+        "system-io-allow-remote-dasd-etw-20260424.etl"
+      ],
+      "live_reference_count": 10,
+      "references_sample": [
+        "evidence/captures/system-io-allow-remote-dasd-etw-stackwalk-20260424.json",
+        "evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/normalized-registry-bundle.json",
+        "evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424-summary.json",
+        "evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-summary.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-atlas.md",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423.etl",
+      "kind": "file",
+      "category": "large-raw-trace-sample",
+      "size_bytes": 26214400,
+      "stale_reason": "large raw trace; keep until indexed replacement/derived parse is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/raw/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423.etl",
+        "power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423",
+        "power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423.etl"
+      ],
+      "live_reference_count": 9,
+      "references_sample": [
+        "evidence/captures/power-watchdog-po-callout-timeout-msec-etw-stackwalk-20260423.json",
+        "evidence/raw/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json",
+        "evidence/raw/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423-summary.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-classes.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-quoted-20260423/timer-check-flags-etw-stackwalk-quoted-20260423.etl",
+      "kind": "file",
+      "category": "large-raw-trace-sample",
+      "size_bytes": 20971520,
+      "stale_reason": "large raw trace; keep until indexed replacement/derived parse is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-quoted-20260423/timer-check-flags-etw-stackwalk-quoted-20260423.etl",
+        "timer-check-flags-etw-stackwalk-quoted-20260423",
+        "timer-check-flags-etw-stackwalk-quoted-20260423.etl"
+      ],
+      "live_reference_count": 8,
+      "references_sample": [
+        "evidence/captures/timer-check-flags-etw-stackwalk-20260423.json",
+        "evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json",
+        "evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-quoted-20260423/timer-check-flags-etw-stackwalk-quoted-20260423-summary.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/records/system.kernel.timer-check-flags.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl",
+      "kind": "file",
+      "category": "large-raw-trace-sample",
+      "size_bytes": 19922944,
+      "stale_reason": "large raw trace; keep until indexed replacement/derived parse is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl",
+        "wave4-allow-audio-e2e",
+        "wave4-allow-audio-e2e.etl"
+      ],
+      "live_reference_count": 51,
+      "references_sample": [
+        "evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json",
+        "evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e-summary.json",
+        "registry-research-framework/audit/etw-stackwalk-dispatch-batch.json",
+        "registry-research-framework/audit/etw-stackwalk-dispatch-batch.md",
+        "registry-research-framework/audit/etw-stackwalk-execution-manifest.json",
+        "registry-research-framework/audit/etw-stackwalk-execution-manifest.md",
+        "registry-research-framework/audit/etw-stackwalk-execution-pack.json",
+        "registry-research-framework/audit/etw-stackwalk-execution-pack/manifests/etw-stackwalk-dispatch-batch.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e.etl",
+      "kind": "file",
+      "category": "large-raw-trace-sample",
+      "size_bytes": 19922944,
+      "stale_reason": "large raw trace; keep until indexed replacement/derived parse is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e.etl",
+        "system.executive-uuid-sequence-number-etw-20260424e",
+        "system.executive-uuid-sequence-number-etw-20260424e.etl"
+      ],
+      "live_reference_count": 9,
+      "references_sample": [
+        "evidence/captures/system-executive-uuid-sequence-number-etw-stackwalk-20260424.json",
+        "evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/normalized-registry-bundle.json",
+        "evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-stage.json",
+        "evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-summary.json",
+        "research/evidence-atlas.md",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423.etl",
+      "kind": "file",
+      "category": "large-raw-trace-sample",
+      "size_bytes": 19922944,
+      "stale_reason": "large raw trace; keep until indexed replacement/derived parse is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423",
+        "dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423.etl",
+        "evidence/raw/etw-stackwalk/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423.etl"
+      ],
+      "live_reference_count": 8,
+      "references_sample": [
+        "evidence/captures/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-20260423.json",
+        "evidence/raw/etw-stackwalk/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423-summary.json",
+        "evidence/raw/etw-stackwalk/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/records/system.kernel-dpc-watchdog-profile-cluster.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/long-dpc-queue-threshold-etw-stackwalk-quoted-20260423/long-dpc-queue-threshold-etw-stackwalk-quoted-20260423.etl",
+      "kind": "file",
+      "category": "large-raw-trace-sample",
+      "size_bytes": 18874368,
+      "stale_reason": "large raw trace; keep until indexed replacement/derived parse is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/raw/etw-stackwalk/long-dpc-queue-threshold-etw-stackwalk-quoted-20260423/long-dpc-queue-threshold-etw-stackwalk-quoted-20260423.etl",
+        "long-dpc-queue-threshold-etw-stackwalk-quoted-20260423",
+        "long-dpc-queue-threshold-etw-stackwalk-quoted-20260423.etl"
+      ],
+      "live_reference_count": 8,
+      "references_sample": [
+        "evidence/captures/long-dpc-queue-threshold-etw-stackwalk-20260423.json",
+        "evidence/raw/etw-stackwalk/long-dpc-queue-threshold-etw-stackwalk-quoted-20260423/long-dpc-queue-threshold-etw-stackwalk-quoted-20260423-summary.json",
+        "evidence/raw/etw-stackwalk/long-dpc-queue-threshold-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/records/system.kernel-long-dpc-threshold-cluster.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423.etl",
+      "kind": "file",
+      "category": "large-raw-trace-sample",
+      "size_bytes": 17825792,
+      "stale_reason": "large raw trace; keep until indexed replacement/derived parse is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/raw/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423.etl",
+        "win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423",
+        "win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423.etl"
+      ],
+      "live_reference_count": 8,
+      "references_sample": [
+        "evidence/captures/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-20260423.json",
+        "evidence/raw/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json",
+        "evidence/raw/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423-summary.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/records/power.control.win32k-callout-watchdog-timeout-seconds.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423.etl",
+      "kind": "file",
+      "category": "large-raw-trace-sample",
+      "size_bytes": 17825792,
+      "stale_reason": "large raw trace; keep until indexed replacement/derived parse is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423.etl",
+        "watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423",
+        "watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423.etl"
+      ],
+      "live_reference_count": 9,
+      "references_sample": [
+        "evidence/captures/watchdog-resume-timeout-etw-stackwalk-20260423.json",
+        "evidence/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json",
+        "evidence/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423-summary.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-atlas.md",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/long-dpc-runtime-threshold-etw-stackwalk-quoted-20260423/long-dpc-runtime-threshold-etw-stackwalk-quoted-20260423.etl",
+      "kind": "file",
+      "category": "large-raw-trace-sample",
+      "size_bytes": 17825792,
+      "stale_reason": "large raw trace; keep until indexed replacement/derived parse is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/raw/etw-stackwalk/long-dpc-runtime-threshold-etw-stackwalk-quoted-20260423/long-dpc-runtime-threshold-etw-stackwalk-quoted-20260423.etl",
+        "long-dpc-runtime-threshold-etw-stackwalk-quoted-20260423",
+        "long-dpc-runtime-threshold-etw-stackwalk-quoted-20260423.etl"
+      ],
+      "live_reference_count": 8,
+      "references_sample": [
+        "evidence/captures/long-dpc-runtime-threshold-etw-stackwalk-20260423.json",
+        "evidence/raw/etw-stackwalk/long-dpc-runtime-threshold-etw-stackwalk-quoted-20260423/long-dpc-runtime-threshold-etw-stackwalk-quoted-20260423-summary.json",
+        "evidence/raw/etw-stackwalk/long-dpc-runtime-threshold-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/records/system.kernel-long-dpc-threshold-cluster.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/global-timer-resolution-requests-etw-stackwalk-quoted-20260423/global-timer-resolution-requests-etw-stackwalk-quoted-20260423.etl",
+      "kind": "file",
+      "category": "large-raw-trace-sample",
+      "size_bytes": 17825792,
+      "stale_reason": "large raw trace; keep until indexed replacement/derived parse is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/raw/etw-stackwalk/global-timer-resolution-requests-etw-stackwalk-quoted-20260423/global-timer-resolution-requests-etw-stackwalk-quoted-20260423.etl",
+        "global-timer-resolution-requests-etw-stackwalk-quoted-20260423",
+        "global-timer-resolution-requests-etw-stackwalk-quoted-20260423.etl"
+      ],
+      "live_reference_count": 8,
+      "references_sample": [
+        "evidence/captures/global-timer-resolution-requests-etw-stackwalk-20260423.json",
+        "evidence/raw/etw-stackwalk/global-timer-resolution-requests-etw-stackwalk-quoted-20260423/global-timer-resolution-requests-etw-stackwalk-quoted-20260423-summary.json",
+        "evidence/raw/etw-stackwalk/global-timer-resolution-requests-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/records/system.kernel.global-timer-resolution-requests.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423.etl",
+      "kind": "file",
+      "category": "large-raw-trace-sample",
+      "size_bytes": 17825792,
+      "stale_reason": "large raw trace; keep until indexed replacement/derived parse is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/raw/etw-stackwalk/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423.etl",
+        "force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423",
+        "force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423.etl"
+      ],
+      "live_reference_count": 8,
+      "references_sample": [
+        "evidence/captures/force-bugcheck-dpc-watchdog-etw-stackwalk-20260423.json",
+        "evidence/raw/etw-stackwalk/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423-summary.json",
+        "evidence/raw/etw-stackwalk/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/records/system.kernel.force-bugcheck-for-dpc-watchdog.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423/dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423.etl",
+      "kind": "file",
+      "category": "large-raw-trace-sample",
+      "size_bytes": 17825792,
+      "stale_reason": "large raw trace; keep until indexed replacement/derived parse is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423",
+        "dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423.etl",
+        "evidence/raw/etw-stackwalk/dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423/dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423.etl"
+      ],
+      "live_reference_count": 8,
+      "references_sample": [
+        "evidence/captures/dpc-watchdog-profile-offset-etw-stackwalk-20260423.json",
+        "evidence/raw/etw-stackwalk/dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423/dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423-summary.json",
+        "evidence/raw/etw-stackwalk/dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/records/system.kernel-dpc-watchdog-profile-cluster.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/wave4-timercheckflags-e2e/wave4-timercheckflags-e2e.etl",
+      "kind": "file",
+      "category": "large-raw-trace-sample",
+      "size_bytes": 16777216,
+      "stale_reason": "large raw trace; keep until indexed replacement/derived parse is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/raw/etw-stackwalk/wave4-timercheckflags-e2e/wave4-timercheckflags-e2e.etl",
+        "wave4-timercheckflags-e2e",
+        "wave4-timercheckflags-e2e.etl"
+      ],
+      "live_reference_count": 3,
+      "references_sample": [
+        "evidence/raw/etw-stackwalk/wave4-timercheckflags-e2e/normalized-registry-bundle.json",
+        "evidence/raw/etw-stackwalk/wave4-timercheckflags-e2e/wave4-timercheckflags-e2e-summary.json",
+        "registry-research-framework/queue/ghidra-autotrigger-inputs.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.etl",
+      "kind": "file",
+      "category": "large-raw-trace-sample",
+      "size_bytes": 16777216,
+      "stale_reason": "large raw trace; keep until indexed replacement/derived parse is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.etl",
+        "system.kernel-serialize-timer-expiration-etw-20260424e",
+        "system.kernel-serialize-timer-expiration-etw-20260424e.etl"
+      ],
+      "live_reference_count": 13,
+      "references_sample": [
+        "evidence/captures/system-kernel-serialize-timer-expiration-etw-stackwalk-20260424.json",
+        "evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/normalized-registry-bundle.json",
+        "evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-stage.json",
+        "evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-summary.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e.etl",
+      "kind": "file",
+      "category": "large-raw-trace-sample",
+      "size_bytes": 16777216,
+      "stale_reason": "large raw trace; keep until indexed replacement/derived parse is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e.etl",
+        "power.control.ttm-enabled-etw-20260424e",
+        "power.control.ttm-enabled-etw-20260424e.etl"
+      ],
+      "live_reference_count": 10,
+      "references_sample": [
+        "evidence/captures/power-control-ttm-enabled-etw-stackwalk-20260424.json",
+        "evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/normalized-registry-bundle.json",
+        "evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e-stage.json",
+        "evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e-summary.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-classes.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-request-override-callstack-20260423/power-request-override-callstack-20260423.etl",
+      "kind": "file",
+      "category": "large-raw-trace-sample",
+      "size_bytes": 16777216,
+      "stale_reason": "large raw trace; keep until indexed replacement/derived parse is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/raw/etw-stackwalk/power-request-override-callstack-20260423/power-request-override-callstack-20260423.etl",
+        "power-request-override-callstack-20260423",
+        "power-request-override-callstack-20260423.etl"
+      ],
+      "live_reference_count": 8,
+      "references_sample": [
+        "evidence/captures/power-request-override-callstack-20260423.json",
+        "evidence/raw/etw-stackwalk/power-request-override-callstack-20260423/normalized-registry-bundle.json",
+        "evidence/raw/etw-stackwalk/power-request-override-callstack-20260423/power-request-override-callstack-20260423-summary.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/records/power.control.power-request-override-subtree.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+      "kind": "file",
+      "category": "large-raw-trace-sample",
+      "size_bytes": 16777216,
+      "stale_reason": "large raw trace; keep until indexed replacement/derived parse is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl",
+        "power-disable-cpu-idle-states-etw-20260424-main",
+        "power-disable-cpu-idle-states-etw-20260424-main.etl"
+      ],
+      "live_reference_count": 9,
+      "references_sample": [
+        "evidence/captures/power-disable-cpu-idle-states-etw-events-20260424.json",
+        "evidence/captures/power-disable-cpu-idle-states-etw-stackwalk-20260424.json",
+        "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main-stage.json",
+        "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main-summary.json",
+        "research/evidence-atlas.md",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.etl",
+      "kind": "file",
+      "category": "large-raw-trace-sample",
+      "size_bytes": 16777216,
+      "stale_reason": "large raw trace; keep until indexed replacement/derived parse is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "audio.show-hidden-devices-etw-20260424e",
+        "audio.show-hidden-devices-etw-20260424e.etl",
+        "evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.etl"
+      ],
+      "live_reference_count": 10,
+      "references_sample": [
+        "evidence/captures/audio-show-hidden-devices-etw-stackwalk-20260424.json",
+        "evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-stage.json",
+        "evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-summary.json",
+        "evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/normalized-registry-bundle.json",
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl",
+      "kind": "file",
+      "category": "large-raw-trace-sample",
+      "size_bytes": 15728640,
+      "stale_reason": "large raw trace; keep until indexed replacement/derived parse is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl",
+        "wave4-allow-system-required-e2e",
+        "wave4-allow-system-required-e2e.etl"
+      ],
+      "live_reference_count": 53,
+      "references_sample": [
+        "evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json",
+        "evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e-summary.json",
+        "registry-research-framework/audit/etw-stackwalk-capture-plan-check.json",
+        "registry-research-framework/audit/etw-stackwalk-capture-plan-check.md",
+        "registry-research-framework/audit/etw-stackwalk-capture-plan.json",
+        "registry-research-framework/audit/etw-stackwalk-capture-plan.md",
+        "registry-research-framework/audit/etw-stackwalk-dispatch-batch.json",
+        "registry-research-framework/audit/etw-stackwalk-dispatch-batch.md"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/timer-check-flags-etw-stackwalk-20260418.etl",
+      "kind": "file",
+      "category": "large-raw-trace-sample",
+      "size_bytes": 15728640,
+      "stale_reason": "large raw trace; keep until indexed replacement/derived parse is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/timer-check-flags-etw-stackwalk-20260418.etl",
+        "timer-check-flags-etw-stackwalk-20260418",
+        "timer-check-flags-etw-stackwalk-20260418.etl"
+      ],
+      "live_reference_count": 10,
+      "references_sample": [
+        "evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/normalized-registry-bundle.json",
+        "evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/timer-check-flags-etw-stackwalk-20260418-summary.json",
+        "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "registry-research-framework/audit/system-kernel-timer-check-flags-etw-stackwalk-20260418.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive-check.json",
+      "kind": "file",
+      "category": "audit-archive-named-sample",
+      "size_bytes": 577,
+      "stale_reason": "audit artifact name marks it as archived, superseded, obsolete, or stale; keep until live references and replacement surfaces are reviewed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "etw-stackwalk-reopen-baseline-archive-check",
+        "etw-stackwalk-reopen-baseline-archive-check.json",
+        "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive-check.json"
+      ],
+      "live_reference_count": 1,
+      "references_sample": [
+        "registry-research-framework/scripts/check_etw_stackwalk_reopen_baseline_archive.py"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive-check.md",
+      "kind": "file",
+      "category": "audit-archive-named-sample",
+      "size_bytes": 155,
+      "stale_reason": "audit artifact name marks it as archived, superseded, obsolete, or stale; keep until live references and replacement surfaces are reviewed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "etw-stackwalk-reopen-baseline-archive-check",
+        "etw-stackwalk-reopen-baseline-archive-check.md",
+        "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive-check.md"
+      ],
+      "live_reference_count": 1,
+      "references_sample": [
+        "registry-research-framework/scripts/check_etw_stackwalk_reopen_baseline_archive.py"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive.json",
+      "kind": "file",
+      "category": "audit-archive-named-sample",
+      "size_bytes": 3875,
+      "stale_reason": "audit artifact name marks it as archived, superseded, obsolete, or stale; keep until live references and replacement surfaces are reviewed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "etw-stackwalk-reopen-baseline-archive",
+        "etw-stackwalk-reopen-baseline-archive.json",
+        "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive.json"
+      ],
+      "live_reference_count": 18,
+      "references_sample": [
+        "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/README.md",
+        "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/commands/01-promote-previous-snapshot.txt",
+        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/CHECKSUMS.json",
+        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/README.md",
+        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/commands/01-seed-previous-snapshot.txt",
+        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/manifests/baseline/etw-stackwalk-reopen-baseline-archive.json",
+        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/manifests/baseline/etw-stackwalk-reopen-baseline-archive.md",
+        "registry-research-framework/audit/etw-stackwalk-reopen-rotation-ledger.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive.md",
+      "kind": "file",
+      "category": "audit-archive-named-sample",
+      "size_bytes": 920,
+      "stale_reason": "audit artifact name marks it as archived, superseded, obsolete, or stale; keep until live references and replacement surfaces are reviewed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "etw-stackwalk-reopen-baseline-archive",
+        "etw-stackwalk-reopen-baseline-archive.md",
+        "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive.md"
+      ],
+      "live_reference_count": 18,
+      "references_sample": [
+        "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/README.md",
+        "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/commands/01-promote-previous-snapshot.txt",
+        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/CHECKSUMS.json",
+        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/README.md",
+        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/commands/01-seed-previous-snapshot.txt",
+        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/manifests/baseline/etw-stackwalk-reopen-baseline-archive.json",
+        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/manifests/baseline/etw-stackwalk-reopen-baseline-archive.md",
+        "registry-research-framework/audit/etw-stackwalk-reopen-rotation-ledger.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive.zip",
+      "kind": "file",
+      "category": "audit-archive-named-sample",
+      "size_bytes": 4503,
+      "stale_reason": "audit artifact name marks it as archived, superseded, obsolete, or stale; keep until live references and replacement surfaces are reviewed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "etw-stackwalk-reopen-baseline-archive",
+        "etw-stackwalk-reopen-baseline-archive.zip",
+        "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive.zip"
+      ],
+      "live_reference_count": 18,
+      "references_sample": [
+        "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/README.md",
+        "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/commands/01-promote-previous-snapshot.txt",
+        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/CHECKSUMS.json",
+        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/README.md",
+        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/commands/01-seed-previous-snapshot.txt",
+        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/manifests/baseline/etw-stackwalk-reopen-baseline-archive.json",
+        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/manifests/baseline/etw-stackwalk-reopen-baseline-archive.md",
+        "registry-research-framework/audit/etw-stackwalk-reopen-rotation-ledger.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/etw-stackwalk-reopen-history-archive-check.json",
+      "kind": "file",
+      "category": "audit-archive-named-sample",
+      "size_bytes": 707,
+      "stale_reason": "audit artifact name marks it as archived, superseded, obsolete, or stale; keep until live references and replacement surfaces are reviewed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "etw-stackwalk-reopen-history-archive-check",
+        "etw-stackwalk-reopen-history-archive-check.json",
+        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive-check.json"
+      ],
+      "live_reference_count": 1,
+      "references_sample": [
+        "registry-research-framework/scripts/check_etw_stackwalk_reopen_history_archive.py"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/etw-stackwalk-reopen-history-archive-check.md",
+      "kind": "file",
+      "category": "audit-archive-named-sample",
+      "size_bytes": 183,
+      "stale_reason": "audit artifact name marks it as archived, superseded, obsolete, or stale; keep until live references and replacement surfaces are reviewed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "etw-stackwalk-reopen-history-archive-check",
+        "etw-stackwalk-reopen-history-archive-check.md",
+        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive-check.md"
+      ],
+      "live_reference_count": 1,
+      "references_sample": [
+        "registry-research-framework/scripts/check_etw_stackwalk_reopen_history_archive.py"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/etw-stackwalk-reopen-history-archive.json",
+      "kind": "file",
+      "category": "audit-archive-named-sample",
+      "size_bytes": 6124,
+      "stale_reason": "audit artifact name marks it as archived, superseded, obsolete, or stale; keep until live references and replacement surfaces are reviewed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "etw-stackwalk-reopen-history-archive",
+        "etw-stackwalk-reopen-history-archive.json",
+        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive.json"
+      ],
+      "live_reference_count": 10,
+      "references_sample": [
+        "registry-research-framework/audit/etw-stackwalk-reopen-rotation-ledger.json",
+        "registry-research-framework/audit/etw-stackwalk-reopen-seed-receipt.json",
+        "registry-research-framework/scripts/check_etw_stackwalk_reopen_history_archive.py",
+        "registry-research-framework/scripts/check_etw_stackwalk_reopen_rotation_ledger.py",
+        "registry-research-framework/scripts/check_etw_stackwalk_reopen_seed_receipt.py",
+        "registry-research-framework/scripts/generate_etw_stackwalk_reopen_rotation_ledger.py",
+        "registry-research-framework/scripts/generate_etw_stackwalk_reopen_seed_receipt.py",
+        "registry-research-framework/scripts/materialize_etw_stackwalk_reopen_history_archive.py"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/etw-stackwalk-reopen-history-archive.md",
+      "kind": "file",
+      "category": "audit-archive-named-sample",
+      "size_bytes": 1560,
+      "stale_reason": "audit artifact name marks it as archived, superseded, obsolete, or stale; keep until live references and replacement surfaces are reviewed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "etw-stackwalk-reopen-history-archive",
+        "etw-stackwalk-reopen-history-archive.md",
+        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive.md"
+      ],
+      "live_reference_count": 10,
+      "references_sample": [
+        "registry-research-framework/audit/etw-stackwalk-reopen-rotation-ledger.json",
+        "registry-research-framework/audit/etw-stackwalk-reopen-seed-receipt.json",
+        "registry-research-framework/scripts/check_etw_stackwalk_reopen_history_archive.py",
+        "registry-research-framework/scripts/check_etw_stackwalk_reopen_rotation_ledger.py",
+        "registry-research-framework/scripts/check_etw_stackwalk_reopen_seed_receipt.py",
+        "registry-research-framework/scripts/generate_etw_stackwalk_reopen_rotation_ledger.py",
+        "registry-research-framework/scripts/generate_etw_stackwalk_reopen_seed_receipt.py",
+        "registry-research-framework/scripts/materialize_etw_stackwalk_reopen_history_archive.py"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/etw-stackwalk-reopen-history-archive.zip",
+      "kind": "file",
+      "category": "audit-archive-named-sample",
+      "size_bytes": 8568,
+      "stale_reason": "audit artifact name marks it as archived, superseded, obsolete, or stale; keep until live references and replacement surfaces are reviewed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "etw-stackwalk-reopen-history-archive",
+        "etw-stackwalk-reopen-history-archive.zip",
+        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive.zip"
+      ],
+      "live_reference_count": 10,
+      "references_sample": [
+        "registry-research-framework/audit/etw-stackwalk-reopen-rotation-ledger.json",
+        "registry-research-framework/audit/etw-stackwalk-reopen-seed-receipt.json",
+        "registry-research-framework/scripts/check_etw_stackwalk_reopen_history_archive.py",
+        "registry-research-framework/scripts/check_etw_stackwalk_reopen_rotation_ledger.py",
+        "registry-research-framework/scripts/check_etw_stackwalk_reopen_seed_receipt.py",
+        "registry-research-framework/scripts/generate_etw_stackwalk_reopen_rotation_ledger.py",
+        "registry-research-framework/scripts/generate_etw_stackwalk_reopen_seed_receipt.py",
+        "registry-research-framework/scripts/materialize_etw_stackwalk_reopen_history_archive.py"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/kernel-power-net-new-candidates-20260328.json",
+      "kind": "file",
+      "category": "old-dated-audit-output-sample",
+      "size_bytes": 7372,
+      "stale_reason": "older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "kernel-power-net-new-candidates-20260328",
+        "kernel-power-net-new-candidates-20260328.json",
+        "registry-research-framework/audit/kernel-power-net-new-candidates-20260328.json"
+      ],
+      "live_reference_count": 2,
+      "references_sample": [
+        "evidence/files/vm-tooling-staging/registry-batch-existence-20260328-000828/summary.json",
+        "research/notes/kernel-power-net-new-existence-probe-20260328.md"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/kernel-power-net-new-follow-up-20260328.json",
+      "kind": "file",
+      "category": "old-dated-audit-output-sample",
+      "size_bytes": 3660,
+      "stale_reason": "older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "kernel-power-net-new-follow-up-20260328",
+        "kernel-power-net-new-follow-up-20260328.json",
+        "registry-research-framework/audit/kernel-power-net-new-follow-up-20260328.json"
+      ],
+      "live_reference_count": 3,
+      "references_sample": [
+        "evidence/files/vm-tooling-staging/registry-batch-string-20260328-003236/manifest.json",
+        "research/notes/kernel-power-existing-static-triage-20260328.md",
+        "research/notes/kernel-power-net-new-existence-probe-20260328.md"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/kernel-power-existing-static-probe-20260328.json",
+      "kind": "file",
+      "category": "old-dated-audit-output-sample",
+      "size_bytes": 2824,
+      "stale_reason": "older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "kernel-power-existing-static-probe-20260328",
+        "kernel-power-existing-static-probe-20260328.json",
+        "registry-research-framework/audit/kernel-power-existing-static-probe-20260328.json"
+      ],
+      "live_reference_count": 10,
+      "references_sample": [
+        "evidence/files/vm-tooling-staging/registry-batch-string-20260328-003236/summary.json",
+        "evidence/records/system.executive-additional-worker-threads/full-evidence.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "registry-research-framework/enrichment/enrichment-cache.jsonl",
+        "research/evidence-atlas.md",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/power-session-watchdog-timeouts-boot-trace-20260328.json",
+      "kind": "file",
+      "category": "old-dated-audit-output-sample",
+      "size_bytes": 2115,
+      "stale_reason": "older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "power-session-watchdog-timeouts-boot-trace-20260328",
+        "power-session-watchdog-timeouts-boot-trace-20260328.json",
+        "registry-research-framework/audit/power-session-watchdog-timeouts-boot-trace-20260328.json"
+      ],
+      "live_reference_count": 12,
+      "references_sample": [
+        "evidence/records/power.session-watchdog-timeouts/behavior.json",
+        "evidence/records/power.session-watchdog-timeouts/full-evidence.json",
+        "evidence/records/power.session-watchdog-timeouts/runtime.json",
+        "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/system-executive-additional-worker-threads-candidate-package-20260328.json",
+      "kind": "file",
+      "category": "old-dated-audit-output-sample",
+      "size_bytes": 833,
+      "stale_reason": "older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "registry-research-framework/audit/system-executive-additional-worker-threads-candidate-package-20260328.json",
+        "system-executive-additional-worker-threads-candidate-package-20260328",
+        "system-executive-additional-worker-threads-candidate-package-20260328.json"
+      ],
+      "live_reference_count": 1,
+      "references_sample": [
+        "research/notes/system-executive-additional-worker-threads-candidate-package-20260328.md"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/power-session-watchdog-timeouts-etl-registry-review-20260328.json",
+      "kind": "file",
+      "category": "old-dated-audit-output-sample",
+      "size_bytes": 976,
+      "stale_reason": "older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "power-session-watchdog-timeouts-etl-registry-review-20260328",
+        "power-session-watchdog-timeouts-etl-registry-review-20260328.json",
+        "registry-research-framework/audit/power-session-watchdog-timeouts-etl-registry-review-20260328.json"
+      ],
+      "live_reference_count": 8,
+      "references_sample": [
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/notes/power-session-watchdog-timeouts-etl-registry-review-20260328.md",
+        "research/records/power.session-watchdog-timeouts.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/power-session-watchdog-timeouts-candidate-package-20260328.json",
+      "kind": "file",
+      "category": "old-dated-audit-output-sample",
+      "size_bytes": 1059,
+      "stale_reason": "older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "power-session-watchdog-timeouts-candidate-package-20260328",
+        "power-session-watchdog-timeouts-candidate-package-20260328.json",
+        "registry-research-framework/audit/power-session-watchdog-timeouts-candidate-package-20260328.json"
+      ],
+      "live_reference_count": 2,
+      "references_sample": [
+        "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
+        "research/notes/power-session-watchdog-timeouts-candidate-package-20260328.md"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json",
+      "kind": "file",
+      "category": "old-dated-audit-output-sample",
+      "size_bytes": 829,
+      "stale_reason": "older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "power-session-watchdog-timeouts-sleep-capability-20260328",
+        "power-session-watchdog-timeouts-sleep-capability-20260328.json",
+        "registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json"
+      ],
+      "live_reference_count": 7,
+      "references_sample": [
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-atlas.md",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/notes/power-session-watchdog-timeouts-sleep-capability-20260328.md",
+        "research/records/power.session-watchdog-timeouts.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/power-session-watchdog-timeouts-procmon-bootlog-20260328.json",
+      "kind": "file",
+      "category": "old-dated-audit-output-sample",
+      "size_bytes": 1432,
+      "stale_reason": "older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "power-session-watchdog-timeouts-procmon-bootlog-20260328",
+        "power-session-watchdog-timeouts-procmon-bootlog-20260328.json",
+        "registry-research-framework/audit/power-session-watchdog-timeouts-procmon-bootlog-20260328.json"
+      ],
+      "live_reference_count": 8,
+      "references_sample": [
+        "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-atlas.md",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/notes/power-session-watchdog-timeouts-procmon-bootlog-20260328.md",
+        "research/records/power.session-watchdog-timeouts.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328.json",
+      "kind": "file",
+      "category": "old-dated-audit-output-sample",
+      "size_bytes": 1923,
+      "stale_reason": "older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328",
+        "power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328.json",
+        "registry-research-framework/audit/power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328.json"
+      ],
+      "live_reference_count": 8,
+      "references_sample": [
+        "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-atlas.md",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/notes/power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328.md",
+        "research/records/power.session-watchdog-timeouts.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/power-session-watchdog-timeouts-s1-procmon-follow-up-20260328.json",
+      "kind": "file",
+      "category": "old-dated-audit-output-sample",
+      "size_bytes": 1212,
+      "stale_reason": "older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "power-session-watchdog-timeouts-s1-procmon-follow-up-20260328",
+        "power-session-watchdog-timeouts-s1-procmon-follow-up-20260328.json",
+        "registry-research-framework/audit/power-session-watchdog-timeouts-s1-procmon-follow-up-20260328.json"
+      ],
+      "live_reference_count": 9,
+      "references_sample": [
+        "evidence/files/vm-tooling-staging/watchdog-session-timeouts-incident-review-20260412/host-review.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-atlas.md",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/notes/power-session-watchdog-timeouts-incident-review-20260412.md",
+        "research/notes/power-session-watchdog-timeouts-s1-procmon-follow-up-20260328.md"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json",
+      "kind": "file",
+      "category": "old-dated-audit-output-sample",
+      "size_bytes": 1464,
+      "stale_reason": "older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328",
+        "power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json",
+        "registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json"
+      ],
+      "live_reference_count": 10,
+      "references_sample": [
+        "evidence/files/vm-tooling-staging/watchdog-session-timeouts-incident-review-20260412/host-review.json",
+        "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-atlas.md",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/notes/power-session-watchdog-timeouts-incident-review-20260412.md"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/system-executive-additional-worker-threads-etl-registry-review-20260328.json",
+      "kind": "file",
+      "category": "old-dated-audit-output-sample",
+      "size_bytes": 967,
+      "stale_reason": "older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "registry-research-framework/audit/system-executive-additional-worker-threads-etl-registry-review-20260328.json",
+        "system-executive-additional-worker-threads-etl-registry-review-20260328",
+        "system-executive-additional-worker-threads-etl-registry-review-20260328.json"
+      ],
+      "live_reference_count": 13,
+      "references_sample": [
+        "evidence/records/system.executive-uuid-sequence-number/behavior.json",
+        "evidence/records/system.executive-uuid-sequence-number/full-evidence.json",
+        "evidence/records/system.executive-uuid-sequence-number/runtime.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "registry-research-framework/audit/system-executive-uuid-sequence-number-candidate-package-20260331.json",
+        "research/evidence-atlas.md",
+        "research/evidence-classes.json",
+        "research/evidence-index.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/system-executive-additional-worker-threads-procmon-bootlog-20260328.json",
+      "kind": "file",
+      "category": "old-dated-audit-output-sample",
+      "size_bytes": 1472,
+      "stale_reason": "older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "registry-research-framework/audit/system-executive-additional-worker-threads-procmon-bootlog-20260328.json",
+        "system-executive-additional-worker-threads-procmon-bootlog-20260328",
+        "system-executive-additional-worker-threads-procmon-bootlog-20260328.json"
+      ],
+      "live_reference_count": 11,
+      "references_sample": [
+        "evidence/records/system.executive-additional-worker-threads/full-evidence.json",
+        "evidence/records/system.executive-additional-worker-threads/runtime.json",
+        "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-atlas.md",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/system-executive-additional-worker-threads-follow-up-package-20260328.json",
+      "kind": "file",
+      "category": "old-dated-audit-output-sample",
+      "size_bytes": 2115,
+      "stale_reason": "older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "registry-research-framework/audit/system-executive-additional-worker-threads-follow-up-package-20260328.json",
+        "system-executive-additional-worker-threads-follow-up-package-20260328",
+        "system-executive-additional-worker-threads-follow-up-package-20260328.json"
+      ],
+      "live_reference_count": 8,
+      "references_sample": [
+        "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-atlas.md",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/notes/system-executive-additional-worker-threads-follow-up-package-20260328.md",
+        "research/records/system.executive-additional-worker-threads.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/system-executive-additional-worker-threads-reactos-hypothesis-20260328.json",
+      "kind": "file",
+      "category": "old-dated-audit-output-sample",
+      "size_bytes": 878,
+      "stale_reason": "older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "registry-research-framework/audit/system-executive-additional-worker-threads-reactos-hypothesis-20260328.json",
+        "system-executive-additional-worker-threads-reactos-hypothesis-20260328",
+        "system-executive-additional-worker-threads-reactos-hypothesis-20260328.json"
+      ],
+      "live_reference_count": 12,
+      "references_sample": [
+        "evidence/records/system.executive-additional-worker-threads/full-evidence.json",
+        "evidence/records/system.executive-uuid-sequence-number/full-evidence.json",
+        "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "registry-research-framework/enrichment/enrichment-cache.jsonl",
+        "research/evidence-atlas.md",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/system-executive-additional-worker-threads-stress-trigger-20260328.json",
+      "kind": "file",
+      "category": "old-dated-audit-output-sample",
+      "size_bytes": 1973,
+      "stale_reason": "older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "registry-research-framework/audit/system-executive-additional-worker-threads-stress-trigger-20260328.json",
+        "system-executive-additional-worker-threads-stress-trigger-20260328",
+        "system-executive-additional-worker-threads-stress-trigger-20260328.json"
+      ],
+      "live_reference_count": 8,
+      "references_sample": [
+        "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-atlas.md",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/notes/system-executive-additional-worker-threads-stress-trigger-20260328.md",
+        "research/records/system.executive-additional-worker-threads.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/power-disable-cpu-idle-states-write-diagnostics-20260328.json",
+      "kind": "file",
+      "category": "old-dated-audit-output-sample",
+      "size_bytes": 1915,
+      "stale_reason": "older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "power-disable-cpu-idle-states-write-diagnostics-20260328",
+        "power-disable-cpu-idle-states-write-diagnostics-20260328.json",
+        "registry-research-framework/audit/power-disable-cpu-idle-states-write-diagnostics-20260328.json"
+      ],
+      "live_reference_count": 6,
+      "references_sample": [
+        "research/evidence-atlas.md",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/notes/power-disable-cpu-idle-states-write-diagnostics-20260328.md",
+        "research/records/power.disable-cpu-idle-states.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/power-disable-cpu-idle-states-tooling-chain-review-20260328.json",
+      "kind": "file",
+      "category": "old-dated-audit-output-sample",
+      "size_bytes": 1546,
+      "stale_reason": "older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "power-disable-cpu-idle-states-tooling-chain-review-20260328",
+        "power-disable-cpu-idle-states-tooling-chain-review-20260328.json",
+        "registry-research-framework/audit/power-disable-cpu-idle-states-tooling-chain-review-20260328.json"
+      ],
+      "live_reference_count": 6,
+      "references_sample": [
+        "research/evidence-atlas.md",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/notes/power-disable-cpu-idle-states-tooling-chain-review-20260328.md",
+        "research/records/power.disable-cpu-idle-states.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/power-disable-cpu-idle-states-stepwise-orchestration-20260328.json",
+      "kind": "file",
+      "category": "old-dated-audit-output-sample",
+      "size_bytes": 2116,
+      "stale_reason": "older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "power-disable-cpu-idle-states-stepwise-orchestration-20260328",
+        "power-disable-cpu-idle-states-stepwise-orchestration-20260328.json",
+        "registry-research-framework/audit/power-disable-cpu-idle-states-stepwise-orchestration-20260328.json"
+      ],
+      "live_reference_count": 2,
+      "references_sample": [
+        "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
+        "research/notes/power-disable-cpu-idle-states-stepwise-orchestration-20260328.md"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json",
+      "kind": "file",
+      "category": "old-dated-audit-output-sample",
+      "size_bytes": 1868,
+      "stale_reason": "older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "power-session-watchdog-timeouts-stepwise-boot-trace-20260329",
+        "power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json",
+        "registry-research-framework/audit/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json"
+      ],
+      "live_reference_count": 1,
+      "references_sample": [
+        "research/notes/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.md"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/power-control-docs-first-runtime-capture-20260329.json",
+      "kind": "file",
+      "category": "old-dated-audit-output-sample",
+      "size_bytes": 2026,
+      "stale_reason": "older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "power-control-docs-first-runtime-capture-20260329",
+        "power-control-docs-first-runtime-capture-20260329.json",
+        "registry-research-framework/audit/power-control-docs-first-runtime-capture-20260329.json"
+      ],
+      "live_reference_count": 1,
+      "references_sample": [
+        "research/notes/power-control-docs-first-runtime-capture-20260329.md"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/power-control-docs-first-stepwise-runtime-capture-20260329.json",
+      "kind": "file",
+      "category": "old-dated-audit-output-sample",
+      "size_bytes": 1355,
+      "stale_reason": "older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "power-control-docs-first-stepwise-runtime-capture-20260329",
+        "power-control-docs-first-stepwise-runtime-capture-20260329.json",
+        "registry-research-framework/audit/power-control-docs-first-stepwise-runtime-capture-20260329.json"
+      ],
+      "live_reference_count": 39,
+      "references_sample": [
+        "evidence/records/power.control.class1-initial-unpark-count/full-evidence.json",
+        "evidence/records/power.control.class1-initial-unpark-count/runtime.json",
+        "evidence/records/power.control.hibernate-enabled-default/full-evidence.json",
+        "evidence/records/power.control.hibernate-enabled-default/runtime.json",
+        "evidence/records/power.control.hibernate-enabled/full-evidence.json",
+        "evidence/records/power.control.hibernate-enabled/runtime.json",
+        "evidence/records/power.control.lid-reliability-state/full-evidence.json",
+        "evidence/records/power.control.lid-reliability-state/runtime.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/power-control-docs-first-trigger-etw-follow-up-20260329.json",
+      "kind": "file",
+      "category": "old-dated-audit-output-sample",
+      "size_bytes": 3148,
+      "stale_reason": "older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "power-control-docs-first-trigger-etw-follow-up-20260329",
+        "power-control-docs-first-trigger-etw-follow-up-20260329.json",
+        "registry-research-framework/audit/power-control-docs-first-trigger-etw-follow-up-20260329.json"
+      ],
+      "live_reference_count": 11,
+      "references_sample": [
+        "evidence/records/power.control.hibernate-enabled-default/behavior.json",
+        "evidence/records/power.control.hibernate-enabled-default/full-evidence.json",
+        "evidence/records/power.control.hibernate-enabled-default/runtime.json",
+        "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-atlas.md",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    },
+    {
+      "path": "registry-research-framework/audit/power-control-docs-first-trigger-etw-guestvar-follow-up-20260329.json",
+      "kind": "file",
+      "category": "old-dated-audit-output-sample",
+      "size_bytes": 1882,
+      "stale_reason": "older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+      "replacement_artifacts": [],
+      "reference_terms": [
+        "power-control-docs-first-trigger-etw-guestvar-follow-up-20260329",
+        "power-control-docs-first-trigger-etw-guestvar-follow-up-20260329.json",
+        "registry-research-framework/audit/power-control-docs-first-trigger-etw-guestvar-follow-up-20260329.json"
+      ],
+      "live_reference_count": 8,
+      "references_sample": [
+        "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
+        "registry-research-framework/audit/rejected-closure-ledger.json",
+        "research/evidence-atlas.md",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
+        "research/notes/power-control-docs-first-trigger-etw-guestvar-follow-up-20260329.md",
+        "research/records/power.control.hibernate-enabled-default.json"
+      ],
+      "delete_eligible": false,
+      "recommended_action": "keep-pending-review"
+    }
+  ]
+}

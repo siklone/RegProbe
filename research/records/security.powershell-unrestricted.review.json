@@ -245,6 +245,20 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "kvm-policy-revalidation-batch-20260505",
+      "kind": "runtime-read",
+      "title": "KVM machine-scope policy revalidation batch",
+      "location": "registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json",
+      "summary": "A KVM guest batch on build 26200 re-read selected machine-scope policy targets without changing guest configuration. The PowerShell policy root still exists on the live guest and both EnableScripts and ExecutionPolicy remain absent in the current baseline state.",
+      "supports": [
+        "path",
+        "value",
+        "runtime-read",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -260,7 +274,7 @@
   "version_stable": [
     "25H2"
   ],
-  "last_reviewed_utc": "2026-03-26T00:00:00Z",
+  "last_reviewed_utc": "2026-05-05T13:13:57.1735609Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx",
     "exact_quote_or_path": "<policy name=\"EnableScripts\" class=\"Both\" ... key=\"Software\\Policies\\Microsoft\\Windows\\PowerShell\" valueName=\"EnableScripts\">; <enum id=\"ExecutionPolicy\" valueName=\"ExecutionPolicy\" required=\"true\">; PowerShellExecutionPolicy.adml: `Turn on Script Execution` / `This policy setting lets you configure the script execution policy, controlling which scripts are allowed to run.`",

@@ -27,4 +27,4 @@ The retained summary shows:
 - `evidence/files/vm-tooling-staging/timer-check-flags-wpr-qga-no-hit-20260413/timer-check-flags-wpr-qga-20260413a-summary-arm.json`
 - `evidence/files/vm-tooling-staging/timer-check-flags-wpr-qga-no-hit-20260413/timer-check-flags-wpr-qga-20260413a-summary.json`
 - `evidence/files/vm-tooling-staging/timer-check-flags-wpr-qga-no-hit-20260413/timer-check-flags-wpr-qga-20260413a.normalized.json`
-- [system-kernel-timer-check-flags-wpr-qga-no-hit-20260413.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/system-kernel-timer-check-flags-wpr-qga-no-hit-20260413.json)
+- [system-kernel-timer-check-flags-wpr-qga-no-hit-20260413.json](../../registry-research-framework/audit/system-kernel-timer-check-flags-wpr-qga-no-hit-20260413.json)

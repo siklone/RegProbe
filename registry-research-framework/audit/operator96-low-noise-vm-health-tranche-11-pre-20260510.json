@@ -1,0 +1,265 @@
+{
+  "status": "ok",
+  "summary_source": "qga-preflight",
+  "domain": "regprobe-win11-25h2-session",
+  "connect": "qemu:///session",
+  "checks": {
+    "domstate": {
+      "status": "ok",
+      "command": [
+        "virsh",
+        "-c",
+        "qemu:///session",
+        "domstate",
+        "regprobe-win11-25h2-session"
+      ],
+      "returncode": 0,
+      "state": "running",
+      "stdout": "running",
+      "stderr": ""
+    },
+    "guest_ping": {
+      "status": "ok",
+      "command": [
+        "virsh",
+        "-c",
+        "qemu:///session",
+        "qemu-agent-command",
+        "regprobe-win11-25h2-session",
+        "{\"execute\":\"guest-ping\"}"
+      ],
+      "returncode": 0,
+      "stdout": "{\"return\":{}}",
+      "stderr": "",
+      "return": {}
+    },
+    "guest_info": {
+      "status": "ok",
+      "command": [
+        "virsh",
+        "-c",
+        "qemu:///session",
+        "qemu-agent-command",
+        "regprobe-win11-25h2-session",
+        "{\"execute\":\"guest-info\"}"
+      ],
+      "returncode": 0,
+      "stdout": "{\"return\":{\"version\":\"110.0.2\",\"supported_commands\":[{\"enabled\":true,\"name\":\"guest-get-load\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-ssh-remove-authorized-keys\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-ssh-add-authorized-keys\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-ssh-get-authorized-keys\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-devices\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-osinfo\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-timezone\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-users\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-host-name\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-exec\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-exec-status\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-set-user-password\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-fsinfo\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-disks\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-vcpus\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-network-get-interfaces\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-suspend-ram\",\"success-response\":false},{\"enabled\":true,\"name\":\"guest-suspend-disk\",\"success-response\":false},{\"enabled\":true,\"name\":\"guest-fstrim\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-fsfreeze-thaw\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-fsfreeze-freeze-list\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-fsfreeze-freeze\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-fsfreeze-status\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-file-flush\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-file-seek\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-file-write\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-file-read\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-file-close\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-file-open\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-shutdown\",\"success-response\":false},{\"enabled\":true,\"name\":\"guest-info\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-set-time\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-time\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-ping\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-sync\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-sync-delimited\",\"success-response\":true}]}}",
+      "stderr": "",
+      "return": {
+        "version": "110.0.2",
+        "supported_commands": [
+          {
+            "enabled": true,
+            "name": "guest-get-load",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-ssh-remove-authorized-keys",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-ssh-add-authorized-keys",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-ssh-get-authorized-keys",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-get-devices",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-get-osinfo",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-get-timezone",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-get-users",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-get-host-name",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-exec",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-exec-status",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-set-user-password",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-get-fsinfo",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-get-disks",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-get-vcpus",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-network-get-interfaces",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-suspend-ram",
+            "success-response": false
+          },
+          {
+            "enabled": true,
+            "name": "guest-suspend-disk",
+            "success-response": false
+          },
+          {
+            "enabled": true,
+            "name": "guest-fstrim",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-fsfreeze-thaw",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-fsfreeze-freeze-list",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-fsfreeze-freeze",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-fsfreeze-status",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-file-flush",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-file-seek",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-file-write",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-file-read",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-file-close",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-file-open",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-shutdown",
+            "success-response": false
+          },
+          {
+            "enabled": true,
+            "name": "guest-info",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-set-time",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-get-time",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-ping",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-sync",
+            "success-response": true
+          },
+          {
+            "enabled": true,
+            "name": "guest-sync-delimited",
+            "success-response": true
+          }
+        ]
+      }
+    },
+    "guest_exec": {
+      "status": "ok",
+      "command": [
+        "virsh",
+        "-c",
+        "qemu:///session",
+        "qemu-agent-command",
+        "regprobe-win11-25h2-session",
+        "{\"execute\":\"guest-exec-status\",\"arguments\":{\"pid\":3540}}"
+      ],
+      "returncode": 0,
+      "stdout": "{\"return\":{\"exitcode\":0,\"out-data\":\"bnQgYXV0aG9yaXR5XHN5c3RlbQ0K\",\"exited\":true}}",
+      "stderr": "",
+      "return": {
+        "exitcode": 0,
+        "out-data": "bnQgYXV0aG9yaXR5XHN5c3RlbQ0K",
+        "exited": true
+      },
+      "phase": "guest-exec-status",
+      "pid": 3540,
+      "exitcode": 0,
+      "out_data": "nt authority\\system\r\n",
+      "err_data": ""
+    }
+  },
+  "failed_checks": [],
+  "error_kind": null,
+  "recovery_action": "none",
+  "transport_blocker": "none",
+  "guest_health": "stable"
+}

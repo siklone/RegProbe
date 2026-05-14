@@ -463,6 +463,19 @@
         "path"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-security.threat-file-hash-logging-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk probe receipt",
+      "location": "evidence/captures/security-threat-file-hash-logging-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507/security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507/security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507/security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507/security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507.etl and 3 additional raw artifact refs listed in the receipt",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 3 target value(s): `ThreatFileHashLogging`, `EnableFileHashComputation`, `EnableFileHashComputation`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 2/3 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -483,7 +496,7 @@
   "version_stable": [
     "25H2"
   ],
-  "last_reviewed_utc": "2026-04-28T10:54:02Z",
+  "last_reviewed_utc": "2026-05-07T14:43:50.544726Z",
   "source_enrichment": {
     "last_updated_utc": "2026-04-28T10:54:02Z",
     "source_mirror_reviewed": {
@@ -492,7 +505,7 @@
     },
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "host-timeout-at-artifact-upload"
+      "status": "qga_unblocked_ingest_ok"
     },
     "static_reviewed": {
       "ghidra": true,
@@ -516,9 +529,12 @@
       "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `ThreatFileHashLogging`."
     },
-    "notes": "This Defender file-hash logging child remains grounded in Microsoft documentation, a direct MsMpEng runtime read, and the narrowed app write path. Retained source-mirror review adds no candidate-specific ReactOS or WRK corroboration for the root policy value. A bounded 2026-04-24 ETW stackwalk retry for `ThreatFileHashLogging` progressed beyond capture and tracerpt, but still timed out after reaching `stage = artifact-upload` before any repo-visible bundle landed. A same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start.",
+    "notes": "This Defender file-hash logging child remains grounded in Microsoft documentation, a direct MsMpEng runtime read, and the narrowed app write path. Retained source-mirror review adds no candidate-specific ReactOS or WRK corroboration for the root policy value. A bounded 2026-04-24 ETW stackwalk retry for `ThreatFileHashLogging` progressed beyond capture and tracerpt, but still timed out after reaching `stage = artifact-upload` before any repo-visible bundle landed. A same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier timeout/upload blocker for 2/3 target probe(s) and produced host-ingested raw ETL/XML plus normalized bundles; the captured value reads are QGA-launched probe reads, not independent product-consumer proof.",
     "ghidra": true,
-    "ghidra_status": "launch_blocked"
+    "ghidra_status": "launch_blocked",
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/security-threat-file-hash-logging-etw-qga-unblock-20260507.json"
   },
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845/defender-threat-file-hash-legacyroot-1.txt",

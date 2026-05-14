@@ -287,7 +287,12 @@
       "force-bugcheck-dpc-watchdog-wpr-boot-zero-exact-target-hits-current-build",
       "force-bugcheck-dpc-watchdog-no-primary-current-build-doc",
       "force-bugcheck-dpc-watchdog-semantics-unproven"
-    ]
+    ],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "intentional-hold-closed",
+    "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+    "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers.",
+    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
   },
   "open_questions": [
     "Can a future boot/runtime trace capture the exact registry query or descriptor-consumption path that seeds `KiForceBugcheckForDpcWatchdog` from `Session Manager\\\\Kernel`?",
@@ -315,7 +320,7 @@
       "notes": "The 2026-04-23 quoted helper rerun captured an exact ForceBugcheckForDpcWatchdog RegQueryValue event and stack, returning absent-value status on the clean baseline."
     }
   ],
-  "last_reviewed_utc": "2026-04-28T18:15:27Z",
+  "last_reviewed_utc": "2026-05-07T20:20:00Z",
   "no_hit_reason": "candidate-specific-absent: retained ReactOS and WRK source mirrors still carry no direct `ForceBugcheckForDpcWatchdog` hit, and the current runtime proof remains helper-triggered rather than a boot-consumer read.",
   "source_enrichment": {
     "ghidra": true,

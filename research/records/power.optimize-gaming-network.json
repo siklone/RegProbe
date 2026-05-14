@@ -384,6 +384,20 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "kvm-machine-policy-revalidation-batch-20260505",
+      "kind": "runtime-read",
+      "title": "KVM machine/policy current-state revalidation batch",
+      "location": "registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json",
+      "summary": "A KVM guest batch on build 26200 re-read the MMCSS Games task without changing guest configuration. The live guest still reports Priority=2, Scheduling Category=Medium, SFIO Priority=Normal, GPU Priority=8, and Affinity=0 on the built-in Games task.",
+      "supports": [
+        "path",
+        "value",
+        "runtime-read",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -416,7 +430,7 @@
       "notes": "The current provider writes the custom MMCSS Games profile through the same documented fields tracked in the baseline export."
     }
   ],
-  "last_reviewed_utc": "2026-03-26T00:00:00Z",
+  "last_reviewed_utc": "2026-05-06T00:20:41.9332318Z",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/registry-dumps/mmcss-games-task-20260325-031514/mmcss-games-task.txt",
     "exact_quote_or_path": "Affinity=0x0; GPU Priority=0x8; Priority=0x2; Scheduling Category=Medium; SFIO Priority=Normal",

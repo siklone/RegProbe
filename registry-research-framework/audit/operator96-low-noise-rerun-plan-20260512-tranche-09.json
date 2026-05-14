@@ -1,0 +1,3436 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-13T03:39:18Z",
+  "review": "registry-research-framework/audit/operator96-app-surface-review-20260510.json",
+  "campaign_id": "operator96-low-noise-rerun-20260510",
+  "status": "PASS",
+  "summary": {
+    "candidate_record_count": 84,
+    "start_offset": 40,
+    "tranche_record_count": 5,
+    "tranche_expected_experiment_count": 10,
+    "tranche_indexes": [
+      48,
+      49,
+      50,
+      51,
+      52
+    ],
+    "first_tranche_record_count": 5,
+    "first_tranche_expected_experiment_count": 10,
+    "first_tranche_indexes": [
+      1,
+      2,
+      6,
+      9,
+      10
+    ]
+  },
+  "low_noise_policy": {
+    "output_dir": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510",
+    "max_values_per_record": 2,
+    "host_noise_max_retries": 18,
+    "host_noise_retry_interval_seconds": 10.0,
+    "host_noise_busy_threshold_pct": 12.5,
+    "host_noise_load1_per_cpu_threshold": 0.5,
+    "host_noise_sample_interval_seconds": 1.0,
+    "post_reboot_delay_seconds": 90,
+    "claim_rule": "Rerun results may support app-card copy only if host_noise=ok and confidence is not low."
+  },
+  "first_tranche": [
+    {
+      "index": 1,
+      "value_name": "EnableLocalLogonSid",
+      "registry_path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\SYSTEM",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 2,
+      "value_name": "EnableVirtualization",
+      "registry_path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\SYSTEM",
+      "default_status": "known-present",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-present",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 1,
+      "proof_verdict_counts": {
+        "harmful": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 1
+      },
+      "proof_confidence_counts": {
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 6,
+      "value_name": "TickcountRolloverDelay",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "kernel-timing-sensitive"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 1,
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 9,
+      "value_name": "ForceEnableMutantAutoboost",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 10,
+      "value_name": "AllowRemoteDASD",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "default_status": "known-present",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-present",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "deprecated-path-collision removable-storage-policy-is-active-surface"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 1,
+      "proof_verdict_counts": {
+        "noisy": 1
+      },
+      "proof_host_noise_counts": {
+        "noisy": 1
+      },
+      "proof_confidence_counts": {
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    }
+  ],
+  "tranche": [
+    {
+      "index": 48,
+      "value_name": "MfBufferingThreshold",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-present",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-present",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 1,
+      "proof_verdict_counts": {
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 1
+      },
+      "proof_confidence_counts": {
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 49,
+      "value_name": "PerfCalculateActualUtilization",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-present",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-present",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 1,
+      "proof_verdict_counts": {
+        "harmful": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 1
+      },
+      "proof_confidence_counts": {
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 50,
+      "value_name": "SourceSettingsVersion",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-present",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-present",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 3,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "high": 1,
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 51,
+      "value_name": "TimerRebaseThresholdOnDripsExit",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-present",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-present",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "kernel-timing-sensitive"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 3,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 52,
+      "value_name": "HibernateEnabledDefault",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-present",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-present",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 1,
+      "proof_verdict_counts": {
+        "harmful": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 1
+      },
+      "proof_confidence_counts": {
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    }
+  ],
+  "commands": {
+    "plan_only": [
+      "python3",
+      "scripts/vm-kvm/run-guest-registry-value-campaign.py",
+      "--output-dir",
+      "registry-research-framework/audit/registry-value-experiments-low-noise-20260510",
+      "--campaign-output",
+      "registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-09.json",
+      "--markdown-output",
+      "registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-09.md",
+      "--max-values-per-record",
+      "2",
+      "--smoke-profile",
+      "gui",
+      "--stage-wait-timeout",
+      "420",
+      "--reboot-wait-timeout",
+      "420",
+      "--post-reboot-delay-seconds",
+      "90",
+      "--host-noise-max-retries",
+      "18",
+      "--host-noise-retry-interval-seconds",
+      "10.0",
+      "--host-noise-busy-threshold-pct",
+      "12.5",
+      "--host-noise-load1-per-cpu-threshold",
+      "0.5",
+      "--host-noise-sample-interval-seconds",
+      "1.0",
+      "--rerun",
+      "--abort-on-noisy-host",
+      "--only-index",
+      "48",
+      "--only-index",
+      "49",
+      "--only-index",
+      "50",
+      "--only-index",
+      "51",
+      "--only-index",
+      "52"
+    ],
+    "run": [
+      "python3",
+      "scripts/vm-kvm/run-guest-registry-value-campaign.py",
+      "--output-dir",
+      "registry-research-framework/audit/registry-value-experiments-low-noise-20260510",
+      "--campaign-output",
+      "registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-09.json",
+      "--markdown-output",
+      "registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-09.md",
+      "--max-values-per-record",
+      "2",
+      "--smoke-profile",
+      "gui",
+      "--stage-wait-timeout",
+      "420",
+      "--reboot-wait-timeout",
+      "420",
+      "--post-reboot-delay-seconds",
+      "90",
+      "--host-noise-max-retries",
+      "18",
+      "--host-noise-retry-interval-seconds",
+      "10.0",
+      "--host-noise-busy-threshold-pct",
+      "12.5",
+      "--host-noise-load1-per-cpu-threshold",
+      "0.5",
+      "--host-noise-sample-interval-seconds",
+      "1.0",
+      "--rerun",
+      "--abort-on-noisy-host",
+      "--only-index",
+      "48",
+      "--only-index",
+      "49",
+      "--only-index",
+      "50",
+      "--only-index",
+      "51",
+      "--only-index",
+      "52",
+      "--run"
+    ]
+  },
+  "records": [
+    {
+      "index": 1,
+      "value_name": "EnableLocalLogonSid",
+      "registry_path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\SYSTEM",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 2,
+      "value_name": "EnableVirtualization",
+      "registry_path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\SYSTEM",
+      "default_status": "known-present",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-present",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 1,
+      "proof_verdict_counts": {
+        "harmful": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 1
+      },
+      "proof_confidence_counts": {
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 6,
+      "value_name": "TickcountRolloverDelay",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "kernel-timing-sensitive"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 1,
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 9,
+      "value_name": "ForceEnableMutantAutoboost",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 10,
+      "value_name": "AllowRemoteDASD",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "default_status": "known-present",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-present",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "deprecated-path-collision removable-storage-policy-is-active-surface"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 1,
+      "proof_verdict_counts": {
+        "noisy": 1
+      },
+      "proof_host_noise_counts": {
+        "noisy": 1
+      },
+      "proof_confidence_counts": {
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 11,
+      "value_name": "DisableDiskCounters",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "noisy": 2
+      },
+      "proof_host_noise_counts": {
+        "noisy": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 12,
+      "value_name": "IoAllowLoadCrashDumpDriver",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "noisy": 2
+      },
+      "proof_host_noise_counts": {
+        "noisy": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 13,
+      "value_name": "IoEnableSessionZeroAccessCheck",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 14,
+      "value_name": "GlobalTimerResolutionRequests",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "kernel-timing-sensitive"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "low_confidence": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 15,
+      "value_name": "ForceParkingRequested",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 1,
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 16,
+      "value_name": "EnableWerUserReporting",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "noisy": 2
+      },
+      "proof_host_noise_counts": {
+        "noisy": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 17,
+      "value_name": "HyperStartDisabled",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 1,
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 1,
+        "medium": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 18,
+      "value_name": "DisableLightWeightSuspend",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 1,
+        "medium": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 19,
+      "value_name": "TimerCheckFlags",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "kernel-timing-sensitive"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 1,
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 20,
+      "value_name": "ForceIdleGracePeriod",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 1,
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 22,
+      "value_name": "MaxDynamicTickDuration",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "kernel-timing-sensitive"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 1,
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 23,
+      "value_name": "EnableTickAccumulationFromAccountingPeriods",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "kernel-timing-sensitive"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 1,
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 24,
+      "value_name": "EnablePerCpuClockTickScheduling",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "kernel-timing-sensitive"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 25,
+      "value_name": "SerializeTimerExpiration",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "kernel-timing-sensitive"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 1,
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "high": 1,
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 26,
+      "value_name": "XStateContextLookasidePerProcMaxDepth",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 3,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 1,
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 27,
+      "value_name": "LongDpcQueueThreshold",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "kernel-timing-sensitive"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 3,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 28,
+      "value_name": "LongDpcRuntimeThreshold",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "kernel-timing-sensitive"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 3,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 1,
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 29,
+      "value_name": "ForceBugcheckForDpcWatchdog",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "kernel-timing-sensitive",
+          "watchdog-timeout-sensitive",
+          "watchdog/bugcheck-sensitive"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 30,
+      "value_name": "ForceForegroundBoostDecay",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "high": 1,
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 31,
+      "value_name": "RebalanceMinPriority",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 32,
+      "value_name": "InterruptSteeringFlags",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "kernel-timing-sensitive"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 33,
+      "value_name": "AlwaysTrackIoBoosting",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "high": 1,
+        "medium": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 35,
+      "value_name": "MaximumCooperativeIdleSearchWidth",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "high": 1,
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 36,
+      "value_name": "HiberbootEnabled",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "default_status": "known-present",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-present",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 1,
+      "proof_verdict_counts": {
+        "harmful": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 1
+      },
+      "proof_confidence_counts": {
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 37,
+      "value_name": "PowerSettingProfile",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "default_status": "known-present",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-present",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 1,
+      "proof_verdict_counts": {
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 1
+      },
+      "proof_confidence_counts": {
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 38,
+      "value_name": "WatchdogResumeTimeout",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "default_status": "known-present",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-present",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "watchdog-timeout-sensitive",
+          "watchdog/bugcheck-sensitive"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 3,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "low_confidence": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 39,
+      "value_name": "WatchdogSleepTimeout",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "default_status": "known-present",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-present",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "watchdog-timeout-sensitive",
+          "watchdog/bugcheck-sensitive"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 3,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "high": 1,
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 40,
+      "value_name": "SkipTickOverride",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "kernel-timing-sensitive"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 41,
+      "value_name": "Win32CalloutWatchdogBugcheckEnabled",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "watchdog-timeout-sensitive",
+          "watchdog/bugcheck-sensitive"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 42,
+      "value_name": "IdleScanInterval",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 43,
+      "value_name": "SleepStudyDisabled",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 1,
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 44,
+      "value_name": "Class1InitialUnparkCount",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-present",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-present",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 3,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 1,
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 45,
+      "value_name": "CustomizeDuringSetup",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-present",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-present",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 1,
+      "proof_verdict_counts": {
+        "harmful": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 1
+      },
+      "proof_confidence_counts": {
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 46,
+      "value_name": "EnergyEstimationEnabled",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-present",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-present",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 1,
+      "proof_verdict_counts": {
+        "harmful": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 1
+      },
+      "proof_confidence_counts": {
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 47,
+      "value_name": "HiberFileSizePercent",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-present",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-present",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 4,
+      "vm_validated_value_count": 1,
+      "proof_verdict_counts": {
+        "harmful": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 1
+      },
+      "proof_confidence_counts": {
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 48,
+      "value_name": "MfBufferingThreshold",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-present",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-present",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 1,
+      "proof_verdict_counts": {
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 1
+      },
+      "proof_confidence_counts": {
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 49,
+      "value_name": "PerfCalculateActualUtilization",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-present",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-present",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 1,
+      "proof_verdict_counts": {
+        "harmful": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 1
+      },
+      "proof_confidence_counts": {
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 50,
+      "value_name": "SourceSettingsVersion",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-present",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-present",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 3,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "high": 1,
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 51,
+      "value_name": "TimerRebaseThresholdOnDripsExit",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-present",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-present",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "kernel-timing-sensitive"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 3,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 52,
+      "value_name": "HibernateEnabledDefault",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-present",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-present",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 1,
+      "proof_verdict_counts": {
+        "harmful": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 1
+      },
+      "proof_confidence_counts": {
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 53,
+      "value_name": "EventProcessorEnabled",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-present",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-present",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 1,
+      "proof_verdict_counts": {
+        "harmful": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 1
+      },
+      "proof_confidence_counts": {
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 54,
+      "value_name": "LidReliabilityState",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-present",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-present",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 1,
+      "proof_verdict_counts": {
+        "harmful": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 1
+      },
+      "proof_confidence_counts": {
+        "high": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 55,
+      "value_name": "HibernateEnabled",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-present",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-present",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 1,
+      "proof_verdict_counts": {
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 1
+      },
+      "proof_confidence_counts": {
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 56,
+      "value_name": "DisableInboxPepGeneratedConstraints",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 1,
+        "medium": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 57,
+      "value_name": "DisableDisplayBurstOnPowerSourceChange",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "cpu_gain": 1,
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 1,
+        "medium": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 58,
+      "value_name": "IdleProcessorsRequireQosManagement",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "noisy": 2
+      },
+      "proof_host_noise_counts": {
+        "noisy": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 60,
+      "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "noisy": 2
+      },
+      "proof_host_noise_counts": {
+        "noisy": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 61,
+      "value_name": "DeepIoCoalescingEnabled",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 62,
+      "value_name": "IgnoreCsComplianceCheck",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "low_confidence": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 63,
+      "value_name": "DripsSwHwDivergenceEnableLiveDump",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "high": 1,
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 64,
+      "value_name": "DisableVsyncLatencyUpdate",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "noisy": 2
+      },
+      "proof_host_noise_counts": {
+        "noisy": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 66,
+      "value_name": "EnableInputSuppression",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "noisy": 2
+      },
+      "proof_host_noise_counts": {
+        "noisy": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 67,
+      "value_name": "PerfCheckTimerImplementation",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "kernel-timing-sensitive"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "noisy": 2
+      },
+      "proof_host_noise_counts": {
+        "noisy": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 68,
+      "value_name": "StandbyConnectivityGracePeriod",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "noisy": 2
+      },
+      "proof_host_noise_counts": {
+        "noisy": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 69,
+      "value_name": "EnforceAusterityMode",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "noisy": 2
+      },
+      "proof_host_noise_counts": {
+        "noisy": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 70,
+      "value_name": "AlwaysComputeQosHints",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "noisy": 2
+      },
+      "proof_host_noise_counts": {
+        "noisy": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 71,
+      "value_name": "HeteroMultiCoreClassesEnabled",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "noisy": 2
+      },
+      "proof_host_noise_counts": {
+        "noisy": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 72,
+      "value_name": "HeteroMultiClassParkingEnabled",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "noisy": 2
+      },
+      "proof_host_noise_counts": {
+        "noisy": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 73,
+      "value_name": "DisableIdleStatesAtBoot",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 3,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "noisy": 2
+      },
+      "proof_host_noise_counts": {
+        "noisy": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 74,
+      "value_name": "PerfBoostAtGuaranteed",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 75,
+      "value_name": "MSDisabled",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "noisy": 2
+      },
+      "proof_host_noise_counts": {
+        "noisy": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 76,
+      "value_name": "FxAccountingTelemetryDisabled",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 1,
+        "noisy": 1
+      },
+      "proof_host_noise_counts": {
+        "noisy": 1,
+        "ok": 1
+      },
+      "proof_confidence_counts": {
+        "high": 1,
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 77,
+      "value_name": "Win32kCalloutWatchdogTimeoutSeconds",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "watchdog-timeout-sensitive",
+          "watchdog/bugcheck-sensitive"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 78,
+      "value_name": "EnableMinimalHiberFile",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 1,
+        "noisy": 1
+      },
+      "proof_host_noise_counts": {
+        "noisy": 1,
+        "ok": 1
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 79,
+      "value_name": "HiberbootEnabled",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "noisy": 2
+      },
+      "proof_host_noise_counts": {
+        "noisy": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 80,
+      "value_name": "MaximumFrequencyOverride",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 4,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "noisy": 2
+      },
+      "proof_host_noise_counts": {
+        "noisy": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 81,
+      "value_name": "PoFxSystemIrpWaitForReportDevicePowered",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 82,
+      "value_name": "AllowSystemRequiredPowerRequests",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 83,
+      "value_name": "CoalescingFlushInterval",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 1,
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "high": 1,
+        "low": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 84,
+      "value_name": "CoalescingTimerInterval",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "kernel-timing-sensitive"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "high": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 85,
+      "value_name": "HeteroHgsEePerfHintsIndependentEnabled",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 1,
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 86,
+      "value_name": "HeteroHgsPlusDisabled",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 1,
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 87,
+      "value_name": "IpiLastClockOwnerDisable",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 1,
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 88,
+      "value_name": "PowerWatchdogRequestQueueTimeoutMsec",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "watchdog-timeout-sensitive",
+          "watchdog/bugcheck-sensitive"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "cpu_gain": 1,
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 1,
+        "medium": 1
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 90,
+      "value_name": "PowerWatchdogPowerOnGdiTimeoutMsec",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "watchdog-timeout-sensitive",
+          "watchdog/bugcheck-sensitive"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 1,
+        "noisy": 1
+      },
+      "proof_host_noise_counts": {
+        "noisy": 1,
+        "ok": 1
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 91,
+      "value_name": "PowerWatchdogDwmSyncFlushTimeoutMsec",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "watchdog-timeout-sensitive",
+          "watchdog/bugcheck-sensitive"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 1,
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 92,
+      "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [
+          "watchdog-timeout-sensitive",
+          "watchdog/bugcheck-sensitive"
+        ],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 1,
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 94,
+      "value_name": "EnableDsNetRefresh",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "harmful": 1,
+        "low_confidence": 1
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    },
+    {
+      "index": 95,
+      "value_name": "EnabledActions",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+      "default_status": "known-absent",
+      "source_quality": "vm-observed",
+      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_ready": false,
+      "reasons": [
+        "low-noise-repeat-required-before-app-card"
+      ],
+      "gate": {
+        "eligible_for_app_card": true,
+        "default_status": "known-absent",
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+        "risk_flags": [],
+        "blockers": []
+      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 2,
+      "proof_verdict_counts": {
+        "low_confidence": 2
+      },
+      "proof_host_noise_counts": {
+        "ok": 2
+      },
+      "proof_confidence_counts": {
+        "low": 2
+      },
+      "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
+      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T13:55:42.7949166Z",
+  "record_id": "performance.disable-taskbar-animations",
+  "run_id": "performance-disable-taskbar-animations-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+  "value_name": "TaskbarAnimations",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4510 registry events and 524 caller-stack events. The QGA-launched helper targeted HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced / TaskbarAnimations; the bundle contains target command/subkey activity (0 target value events), but no exact current-user HKCU RegQueryValue event for TaskbarAnimations was observed under the SYSTEM QGA context.",
+  "target_observation": {
+    "exact_value_query": false,
+    "operation": "RegQueryValue",
+    "representative_status": null,
+    "event_count": 4510,
+    "caller_stack_event_count": 524,
+    "target_key_event_count": 9,
+    "target_value_event_count": 0,
+    "current_user_hkcu_value_event_count": 0,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/performance-disable-taskbar-animations-etw-qga-unblock-20260507/performance-disable-taskbar-animations-etw-qga-unblock-20260507-summary.json",
+      "sha256": "d293915eb60dd97ebdbf107e88a040d9ce7027300ea835cadcb120625eb95b48",
+      "size": 7975,
+      "collected_utc": "2026-05-07T13:55:42.7949166Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/performance-disable-taskbar-animations-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "75a2c57375739f8116269d2972c9e993bab9c6114f99c053de62a5ee9a9f8923",
+      "size": 5720376,
+      "collected_utc": "2026-05-07T13:55:42.7949166Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/performance-disable-taskbar-animations-etw-qga-unblock-20260507/performance-disable-taskbar-animations-etw-qga-unblock-20260507.etl",
+      "sha256": "ecfe1fa737635eb3b999fa62c6440838f48c9eb51bfa16a02e26bd18106c5fec",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T13:55:42.7949166Z"
+    }
+  ]
+}

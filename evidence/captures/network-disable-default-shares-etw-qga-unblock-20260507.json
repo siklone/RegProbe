@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T14:43:50.544726Z",
+  "record_id": "network.disable-default-shares",
+  "run_id": "network-disable-default-shares-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 2 target value(s): `AutoShareServer`, `AutoShareWks`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 2/2 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+  "aggregate_observation": {
+    "target_count": 2,
+    "exact_probe_value_query_count": 2,
+    "all_artifacts_ingested": true,
+    "launch_transport": "qga",
+    "probe_read_not_product_consumer_proof": true
+  },
+  "target_observations": [
+    {
+      "run_id": "network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507",
+      "registry_path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+      "value_name": "AutoShareServer",
+      "exact_probe_value_query": true,
+      "operation": "RegQueryValue",
+      "representative_status": "0xC0000034",
+      "event_count": 4511,
+      "caller_stack_event_count": 530,
+      "target_key_event_count": 7,
+      "target_value_event_count": 1,
+      "exact_target_value_event_count": 1,
+      "target_command_event_count": 2,
+      "launch_transport": "qga"
+    },
+    {
+      "run_id": "network-disable-default-shares-autosharewks-etw-qga-unblock-20260507",
+      "registry_path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+      "value_name": "AutoShareWks",
+      "exact_probe_value_query": true,
+      "operation": "RegQueryValue",
+      "representative_status": "0xC0000034",
+      "event_count": 4473,
+      "caller_stack_event_count": 530,
+      "target_key_event_count": 7,
+      "target_value_event_count": 1,
+      "exact_target_value_event_count": 1,
+      "target_command_event_count": 2,
+      "launch_transport": "qga"
+    }
+  ],
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507-summary.json",
+      "sha256": "de36b3bedae77ea9be0cc2f068c4ff8ed6bef063dcc33887acb07e15d3f4247b",
+      "size": 8205,
+      "collected_utc": "2026-05-07T14:33:42.2461023Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "50a9ef54fb27d7d0e6f97188569031824ff2d6d47406fbfe2ab654994959a369",
+      "size": 5907742,
+      "collected_utc": "2026-05-07T14:33:42.2461023Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507.etl",
+      "sha256": "75aa2aa5398e8988ff180027abff30da0f8dc2e093dc806ddb70f7aee962a558",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T14:33:42.2461023Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507-summary.json",
+      "sha256": "e299590d209edaaa16d7ff5cb11092fd2186c7a73b236a7bb14e6ba71cdc630f",
+      "size": 8109,
+      "collected_utc": "2026-05-07T14:35:44.3490961Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "c7f937521b21fdd69783bae0f3f289867de9f84d4b0a36d082892f3e21dc889c",
+      "size": 5783023,
+      "collected_utc": "2026-05-07T14:35:44.3490961Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507.etl",
+      "sha256": "bf84cab951ea7d4b868d2ba2258fa2629a0120dff696cdbf4705fda418635b55",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T14:35:44.3490961Z"
+    }
+  ]
+}

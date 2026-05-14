@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T10:14:53.5537858Z",
+  "record_id": "power.control.perf-calculate-actual-utilization",
+  "run_id": "power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "PerfCalculateActualUtilization",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4503 registry events and 571 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power / PerfCalculateActualUtilization from the helper probe, returning 0x80000005 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0x80000005",
+    "event_count": 4503,
+    "caller_stack_event_count": 571,
+    "target_key_event_count": 39,
+    "target_value_event_count": 1,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507-summary.json",
+      "sha256": "2ee669c2fba85ec6e9b066a6e6ae5d7e12aed83114c8d127fd79f16da55af0ae",
+      "size": 8271,
+      "collected_utc": "2026-05-07T10:14:53.5537858Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "85f97d868b66a5360e273e7d095d698ff5e822aa9d24e59365e0b698eec8960a",
+      "size": 5952302,
+      "collected_utc": "2026-05-07T10:14:53.5537858Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507.etl",
+      "sha256": "53054e8d2a439ce3646e44d8364653ccc912cc90bf94e7f086622c27e0ed19cb",
+      "size": 12845056,
+      "collected_utc": "2026-05-07T10:14:53.5537858Z"
+    }
+  ]
+}

@@ -21,15 +21,21 @@ The checked-in v3.6 publishing, manifest, and metrics helpers live in the top-le
 
 | Metric | Value |
 |--------|-------|
-| Promoted | 226 |
-| Blocked | 18 |
-| Revalidation Pending | 24 |
-| Gate Health | 🟢 green |
+| Promoted | 261 |
+| Blocked | 0 |
+| Revalidation Pending | 0 |
+| Gate Health | 🟡 yellow |
 | Schema Complete | 100% |
-| Missing Docs | 0 |
-| Blocked Actionability | 18 hold |
+| Missing Docs | 17 |
+| Blocked Actionability | n/a |
 | Blocked Worklist Gate | PASS |
 | Blocked Worklist | `audit/blocked-worklist.md` |
 <!-- END:RESEARCH_HEALTH -->
 
-For a compact blocked-queue entrypoint, start with `audit/blocked-worklist.md`. For terminal use, `winopt research list-blocked --worklist --actionability active --top 5` shows the highest-priority active items, `winopt research list-blocked --worklist --actionability hold` shows intentional holds, `winopt research show-blocked <candidate-id>` opens one blocked candidate in detail, and `winopt research list-blocked --summary` prints the checked-in lane split without dumping the whole list. The operator flow is documented in `docs/blocked-worklist-operator-guide.md`.
+For a compact blocked-queue entrypoint, start with `audit/blocked-worklist.md`. The active blocked worklist is currently empty: `power.disable-superfetch` now has clean-baseline VM apply/verify/rollback proof, while `peripheral.audio-disable-enhancements` and `power.disable-hibernation` are closed as evidence-backed rejected promotion decisions for protected-ACL and firmware-limited validation lanes. For terminal use, `winopt research list-blocked --summary` prints the checked-in lane split without dumping the whole list, and `winopt research show-blocked <candidate-id>` opens a detailed record if a future blocker appears. The operator flow is documented in `docs/blocked-worklist-operator-guide.md`.
+
+For the current zero-pending snapshot, use `audit/v36-clean-state-report.md`. It aggregates promotion gates, rejected closures, promotion limbo, blocked worklist state, and app retest readiness into one clean-state contract.
+
+For rejected records, use `audit/rejected-closure-ledger.md`. A rejected record should now carry a closure lane such as `promotion-disposition-protected-acl-not-actionable`, `promotion-disposition-environment-limited-validation-lane`, `promotion-disposition-non-reversible-or-high-risk-action`, or `deprecated-record`; the original blocker details remain under `rejection_closure.superseded_blockers` for audit rather than appearing as active work.
+
+For promotion limbo records, use `audit/promotion-eligible-review-pack.md`. It is the final-decision surface for records with full evidence and no active blocker that still need a product verdict: promote, promote with warnings, conditional promote, hold closed, or evidence-backed reject.

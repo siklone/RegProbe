@@ -1,0 +1,120 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T14:43:50.544726Z",
+  "record_id": "system.kernel-dpc-watchdog-control-cluster",
+  "run_id": "system-kernel-dpc-watchdog-control-cluster-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 3 target value(s): `DPCTimeout`, `DpcSoftTimeout`, `DpcCumulativeSoftTimeout`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 3/3 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+  "aggregate_observation": {
+    "target_count": 3,
+    "exact_probe_value_query_count": 3,
+    "all_artifacts_ingested": true,
+    "launch_transport": "qga",
+    "probe_read_not_product_consumer_proof": true
+  },
+  "target_observations": [
+    {
+      "run_id": "system-kernel-dpc-watchdog-dpctimeout-etw-qga-unblock-20260507",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+      "value_name": "DPCTimeout",
+      "exact_probe_value_query": true,
+      "operation": "RegQueryValue",
+      "representative_status": "0xC0000034",
+      "event_count": 5177,
+      "caller_stack_event_count": 1227,
+      "target_key_event_count": 7,
+      "target_value_event_count": 1,
+      "exact_target_value_event_count": 1,
+      "target_command_event_count": 2,
+      "launch_transport": "qga"
+    },
+    {
+      "run_id": "system-kernel-dpc-watchdog-dpcsofttimeout-etw-qga-unblock-20260507",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+      "value_name": "DpcSoftTimeout",
+      "exact_probe_value_query": true,
+      "operation": "RegQueryValue",
+      "representative_status": "0xC0000034",
+      "event_count": 4651,
+      "caller_stack_event_count": 700,
+      "target_key_event_count": 7,
+      "target_value_event_count": 1,
+      "exact_target_value_event_count": 1,
+      "target_command_event_count": 2,
+      "launch_transport": "qga"
+    },
+    {
+      "run_id": "system-kernel-dpc-watchdog-dpccumulativesofttimeout-etw-qga-unblock-20260507",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+      "value_name": "DpcCumulativeSoftTimeout",
+      "exact_probe_value_query": true,
+      "operation": "RegQueryValue",
+      "representative_status": "0xC0000034",
+      "event_count": 4463,
+      "caller_stack_event_count": 530,
+      "target_key_event_count": 7,
+      "target_value_event_count": 1,
+      "exact_target_value_event_count": 1,
+      "target_command_event_count": 2,
+      "launch_transport": "qga"
+    }
+  ],
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-dpctimeout-etw-qga-unblock-20260507/system-kernel-dpc-watchdog-dpctimeout-etw-qga-unblock-20260507-summary.json",
+      "sha256": "65bd3d6a30fe674caad34075f2f16af6bc1f0b422e3031f75c0369c334975aec",
+      "size": 7921,
+      "collected_utc": "2026-05-07T14:11:29.0449269Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-dpctimeout-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "d7f59bcd03533ac31fc9693f379aec0dbe4a83f8e0c383fc3dc5281203259887",
+      "size": 6917147,
+      "collected_utc": "2026-05-07T14:11:29.0449269Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-dpctimeout-etw-qga-unblock-20260507/system-kernel-dpc-watchdog-dpctimeout-etw-qga-unblock-20260507.etl",
+      "sha256": "e9dd5a651c848328f9bbb3e37c4e68f559e4b416823864be48ed3f46d7d35149",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T14:11:29.0449269Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-dpcsofttimeout-etw-qga-unblock-20260507/system-kernel-dpc-watchdog-dpcsofttimeout-etw-qga-unblock-20260507-summary.json",
+      "sha256": "4017d61557cb5b118353af2a8c7dfbb3e718c77d8ad9bf31b76323fb2b4ed5c9",
+      "size": 8049,
+      "collected_utc": "2026-05-07T14:13:16.2632491Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-dpcsofttimeout-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "dd56c928b8397448287277d5fec1aa0630e6791387d511bc10fac81ddf7cc68f",
+      "size": 6079014,
+      "collected_utc": "2026-05-07T14:13:16.2632491Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-dpcsofttimeout-etw-qga-unblock-20260507/system-kernel-dpc-watchdog-dpcsofttimeout-etw-qga-unblock-20260507.etl",
+      "sha256": "38481bc3d34ff4194016df4cd49b7b2ab156fed91ba9bd8870a6be0e8a8afb29",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T14:13:16.2632491Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-dpccumulativesofttimeout-etw-qga-unblock-20260507/system-kernel-dpc-watchdog-dpccumulativesofttimeout-etw-qga-unblock-20260507-summary.json",
+      "sha256": "538e70da2d5615ec14ec1c9b81eafd624593663b37bc180cde39c9ddbbba99ac",
+      "size": 8369,
+      "collected_utc": "2026-05-07T14:15:10.8083142Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-dpccumulativesofttimeout-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "c96c0e32512f5069b7e9cb8b8caa9d1ae449225b39815fa63b837eb61dcc9698",
+      "size": 5945321,
+      "collected_utc": "2026-05-07T14:15:10.8083142Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-dpccumulativesofttimeout-etw-qga-unblock-20260507/system-kernel-dpc-watchdog-dpccumulativesofttimeout-etw-qga-unblock-20260507.etl",
+      "sha256": "a361556125c8766d643f04a476ea49009b7c3b11c2f77021d57915befc676a33",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T14:15:10.8083142Z"
+    }
+  ]
+}

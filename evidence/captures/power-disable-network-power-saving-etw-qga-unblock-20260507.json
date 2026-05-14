@@ -1,0 +1,120 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T14:43:50.544726Z",
+  "record_id": "power.disable-network-power-saving",
+  "run_id": "power-disable-network-power-saving-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 3 target value(s): `DisableTaskOffload`, `SystemResponsiveness`, `NetworkThrottlingIndex`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 3/3 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+  "aggregate_observation": {
+    "target_count": 3,
+    "exact_probe_value_query_count": 3,
+    "all_artifacts_ingested": true,
+    "launch_transport": "qga",
+    "probe_read_not_product_consumer_proof": true
+  },
+  "target_observations": [
+    {
+      "run_id": "power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507",
+      "registry_path": "HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters",
+      "value_name": "DisableTaskOffload",
+      "exact_probe_value_query": true,
+      "operation": "RegQueryValue",
+      "representative_status": "0xC0000034",
+      "event_count": 5046,
+      "caller_stack_event_count": 1180,
+      "target_key_event_count": 49,
+      "target_value_event_count": 1,
+      "exact_target_value_event_count": 1,
+      "target_command_event_count": 2,
+      "launch_transport": "qga"
+    },
+    {
+      "run_id": "power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507",
+      "registry_path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+      "value_name": "SystemResponsiveness",
+      "exact_probe_value_query": true,
+      "operation": "RegQueryValue",
+      "representative_status": "0x80000005",
+      "event_count": 4384,
+      "caller_stack_event_count": 527,
+      "target_key_event_count": 7,
+      "target_value_event_count": 1,
+      "exact_target_value_event_count": 1,
+      "target_command_event_count": 2,
+      "launch_transport": "qga"
+    },
+    {
+      "run_id": "power-disable-network-power-saving-networkthrottlingindex-etw-qga-unblock-20260507",
+      "registry_path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+      "value_name": "NetworkThrottlingIndex",
+      "exact_probe_value_query": true,
+      "operation": "RegQueryValue",
+      "representative_status": "0x80000005",
+      "event_count": 4391,
+      "caller_stack_event_count": 527,
+      "target_key_event_count": 7,
+      "target_value_event_count": 1,
+      "exact_target_value_event_count": 1,
+      "target_command_event_count": 2,
+      "launch_transport": "qga"
+    }
+  ],
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507-summary.json",
+      "sha256": "2132c82117f5e292a77378149367715cd01c681e185efa8d5b2a9e347ccadf43",
+      "size": 8407,
+      "collected_utc": "2026-05-07T14:26:30.4353253Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "f678bed8c15d74ef978f57974e7f4d9501c486eee862ee81aea3ab5693547c90",
+      "size": 7172898,
+      "collected_utc": "2026-05-07T14:26:30.4353253Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507.etl",
+      "sha256": "1b95f937b7f6290f85adc416ecf2d646bddc7a5e5b90ceb5de609dec7b5832f3",
+      "size": 12845056,
+      "collected_utc": "2026-05-07T14:26:30.4353253Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507-summary.json",
+      "sha256": "b85bbce18d0dc46c378d2ceeb6499c7b5cd1d33130624a1fd6d9ee096c99b76b",
+      "size": 8581,
+      "collected_utc": "2026-05-07T14:28:04.8925911Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "7f0d1a04f0fb83efd485ab695b76381e6e5ad3e5eb9db91ebbcb2e9b6203b06a",
+      "size": 5960470,
+      "collected_utc": "2026-05-07T14:28:04.8925911Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507.etl",
+      "sha256": "4b7a256e559ffc3c8533ac6f100ac4a509eb266944aa39fb45ee94d7396196c3",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T14:28:04.8925911Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-disable-network-power-saving-networkthrottlingindex-etw-qga-unblock-20260507/power-disable-network-power-saving-networkthrottlingindex-etw-qga-unblock-20260507-summary.json",
+      "sha256": "3dc5244afb4a081a4b5d2e096c316a6f948798b3cd0da3ccb63c86e841931021",
+      "size": 8646,
+      "collected_utc": "2026-05-07T14:29:47.2002369Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-disable-network-power-saving-networkthrottlingindex-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "613d526a524f16a484b743f11e60365d5d8ddad08ec1eb552c99433155d031f0",
+      "size": 6011775,
+      "collected_utc": "2026-05-07T14:29:47.2002369Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-disable-network-power-saving-networkthrottlingindex-etw-qga-unblock-20260507/power-disable-network-power-saving-networkthrottlingindex-etw-qga-unblock-20260507.etl",
+      "sha256": "95cd13b0159cb19ac74115bde9a42d8032ba57721a85af8517667250febb16ed",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T14:29:47.2002369Z"
+    }
+  ]
+}

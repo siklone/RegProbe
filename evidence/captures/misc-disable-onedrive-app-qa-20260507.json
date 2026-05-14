@@ -1,0 +1,225 @@
+{
+  "TweakId": "misc.disable-onedrive",
+  "TweakName": "Disable OneDrive",
+  "Success": true,
+  "Status": "ok-gated-override",
+  "Summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+  "RollbackRequested": true,
+  "GatedMutationOverrideRequested": true,
+  "GatedMutationOverrideUsed": true,
+  "Card": {
+    "TweakId": "misc.disable-onedrive",
+    "Name": "Disable OneDrive",
+    "Category": "Misc",
+    "Description": "Writes OneDrive policy and Explorer values that disable default-save and sync features, set PreventNetworkTrafficPreUserSignIn, and unpin OneDrive from File Explorer.",
+    "FriendlyDescription": "Writes OneDrive policy and Explorer values that disable default-save and sync features, set PreventNetworkTrafficPreUserSignIn, and unpin OneDrive from File Explorer.",
+    "RegistryPath": "",
+    "EvidenceClass": "B",
+    "EvidenceClassTitle": "Strong but Decision-Gated",
+    "ResearchStatus": "INTENTIONAL HOLD",
+    "IsMutationAllowed": false,
+    "RollbackSnapshotState": "ready",
+    "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+    "HasClaimBoundary": true,
+    "WhatWeKnowSummary": "Claim: Writes OneDrive policy and Explorer values that disable default-save and sync features, set PreventNetworkTrafficPreUserSignIn, and unpin OneDrive from File Explorer. Evidence: The misc documentation maps DisableLibrariesDefaultSaveToOneDrive, DisableFileSync, DisableFileSyncNGSC, DisableMeteredNetworkFileSync, PreventNetworkTrafficPreUserSignIn, and the Explorer namespace pin values to the OneDrive disable behavior. Rollback: Rollback: Verified via record-restore-story.",
+    "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+    "ProofLanes": [
+      {
+        "Key": "docs",
+        "Label": "DOCS",
+        "State": "ready",
+        "Summary": "The misc documentation maps DisableLibrariesDefaultSaveToOneDrive, DisableFileSync, DisableFileSyncNGSC, DisableMeteredNetworkFileSync, PreventNetworkTrafficPreUserSignIn, and the Explorer namespace pin values to the OneDrive disable behavior.",
+        "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\misc\\misc.md"
+      },
+      {
+        "Key": "runtime",
+        "Label": "RUNTIME",
+        "State": "ready",
+        "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "Source": ""
+      },
+      {
+        "Key": "source",
+        "Label": "SOURCE",
+        "State": "ready",
+        "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "Source": "win-config / misc/desc.md: https://github.com/nohuto/win-config/blob/main/misc/desc.md"
+      },
+      {
+        "Key": "rollback",
+        "Label": "ROLLBACK",
+        "State": "ready",
+        "Summary": "Rollback: Verified via record-restore-story.",
+        "Source": "record-restore-story"
+      }
+    ],
+    "ReferenceLinks": [
+      {
+        "Title": "Docs: Details",
+        "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#misc.disable-onedrive",
+        "Kind": "Details"
+      },
+      {
+        "Title": "Docs: Misc",
+        "Url": "C:\\Tools\\AppSmoke\\Docs\\misc\\misc.md#misc.disable-onedrive",
+        "Kind": "Docs"
+      }
+    ]
+  },
+  "Stages": [
+    {
+      "Stage": "detect-before",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Detected 2 of 7 values (matches: 0, missing: 5).",
+      "OutcomeSummary": "Detect - Success",
+      "CurrentValue": "Unknown",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": false,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": false,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 2 of 7 values (matches: 0, missing: 5).\nEntries:\n- HKCU\\Software\\Classes\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\\System.IsPinnedToNameSpaceTree: 1 -\u003E 0\n- HKCU\\Software\\Classes\\Wow6432Node\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\\System.IsPinnedToNameSpaceTree: 1 -\u003E 0\n- HKLM\\SOFTWARE\\Microsoft\\OneDrive\\PreventNetworkTrafficPreUserSignIn: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableFileSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableFileSyncNGSC: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableLibrariesDefaultSaveToOneDrive: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableMeteredNetworkFileSync: missing",
+          "TimestampText": "16:07:44"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        }
+      ]
+    },
+    {
+      "Stage": "apply",
+      "AppliedStatus": "Applied",
+      "StatusMessage": "Run completed.",
+      "OutcomeSummary": "Apply - Success",
+      "CurrentValue": "Multiple values",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": false,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 2 of 7 values (matches: 0, missing: 5).\nEntries:\n- HKCU\\Software\\Classes\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\\System.IsPinnedToNameSpaceTree: 1 -\u003E 0\n- HKCU\\Software\\Classes\\Wow6432Node\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\\System.IsPinnedToNameSpaceTree: 1 -\u003E 0\n- HKLM\\SOFTWARE\\Microsoft\\OneDrive\\PreventNetworkTrafficPreUserSignIn: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableFileSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableFileSyncNGSC: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableLibrariesDefaultSaveToOneDrive: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableMeteredNetworkFileSync: missing",
+          "TimestampText": "16:07:45"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Updated 7 values.",
+          "TimestampText": "16:07:45"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Verified desired values.",
+          "TimestampText": "16:07:45"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Not required",
+          "Message": "Step not executed.",
+          "TimestampText": "-"
+        }
+      ]
+    },
+    {
+      "Stage": "rollback",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Rolled back registry values.",
+      "OutcomeSummary": "Rollback - Rolled Back",
+      "CurrentValue": "Multiple values",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": true,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": true,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 2 of 7 values (matches: 0, missing: 5).\nEntries:\n- HKCU\\Software\\Classes\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\\System.IsPinnedToNameSpaceTree: 1 -\u003E 0\n- HKCU\\Software\\Classes\\Wow6432Node\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\\System.IsPinnedToNameSpaceTree: 1 -\u003E 0\n- HKLM\\SOFTWARE\\Microsoft\\OneDrive\\PreventNetworkTrafficPreUserSignIn: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableFileSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableFileSyncNGSC: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableLibrariesDefaultSaveToOneDrive: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableMeteredNetworkFileSync: missing",
+          "TimestampText": "16:07:45"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Updated 7 values.",
+          "TimestampText": "16:07:45"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Verified desired values.",
+          "TimestampText": "16:07:45"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Rolled back",
+          "Message": "Rolled back registry values.",
+          "TimestampText": "16:07:45"
+        }
+      ]
+    },
+    {
+      "Stage": "detect-after",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Detected 2 of 7 values (matches: 0, missing: 5).",
+      "OutcomeSummary": "Detect - Success",
+      "CurrentValue": "Multiple values",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": true,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": true,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 2 of 7 values (matches: 0, missing: 5).\nEntries:\n- HKCU\\Software\\Classes\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\\System.IsPinnedToNameSpaceTree: 1 -\u003E 0\n- HKCU\\Software\\Classes\\Wow6432Node\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\\System.IsPinnedToNameSpaceTree: 1 -\u003E 0\n- HKLM\\SOFTWARE\\Microsoft\\OneDrive\\PreventNetworkTrafficPreUserSignIn: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableFileSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableFileSyncNGSC: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableLibrariesDefaultSaveToOneDrive: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableMeteredNetworkFileSync: missing",
+          "TimestampText": "16:07:45"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Updated 7 values.",
+          "TimestampText": "16:07:45"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Verified desired values.",
+          "TimestampText": "16:07:45"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Rolled back",
+          "Message": "Rolled back registry values.",
+          "TimestampText": "16:07:45"
+        }
+      ]
+    }
+  ],
+  "StartedAtUtc": "2026-05-07T23:07:42.0988657+00:00",
+  "CompletedAtUtc": "2026-05-07T23:07:45.5577464+00:00"
+}

@@ -7,6 +7,19 @@ RegProbe is both a desktop tweak app and a registry research workspace. The most
 - adding or updating a shipped tweak/provider
 - improving the v3.2 research pipeline, audit flow, or VM tooling
 
+Audience boundary: end users should use the WPF app, not contributor tooling.
+Contributors and agentic AI should treat Python scripts plus JSON artifacts as
+the canonical research API. The .NET research CLI is a compatibility layer; keep
+`tweak list/apply/revert` for advanced Windows/headless usage, but prefer the
+Python mirrors for research inspection, app QA planning, readiness checks, and
+VM campaign automation.
+
+Windows contributors can also use the WPF Contributor Lab from a repo/dev build.
+It is gated by an explicit acknowledgement and is intentionally conservative:
+readiness checks, command packs, and research observations are visible there,
+but direct mutation still requires certified VM/snapshot readiness and the
+canonical Python/VM scripts.
+
 ## Core Rules
 
 - runtime validation happens in the `Win25H2Clean` VM, not on the host
@@ -33,6 +46,34 @@ Wave 1 quality hardening is now the repo baseline.
 - kernel, boot, and driver records require a live mapped runtime lane with physical artifacts before they can finish green
 
 When in doubt, prefer honest `missing-capture`, `staged-without-capture`, or `missing-required-runner` statuses over optimistic prose.
+
+## Rejected Closure Decisions
+
+Do not leave a rejected setting looking like an active evidence blocker. Pick the right closure lane and make it explicit:
+
+- protected or ACL-owned surfaces should cite ACL/API evidence and use a protected-lane closure
+- platform-limited VM behavior should cite the firmware or platform declaration and use an environment-limited closure
+- one-shot cleanup, repair, or destructive actions should use a non-reversible closure unless a tested rollback lane exists
+- deprecated records should stay rejected as `deprecated-record` and remain searchable for history
+
+After changing any rejected decision, run:
+
+```bash
+python3 scripts/refresh_research_publish_surfaces.py
+python3 registry-research-framework/scripts/generate_rejected_closure_ledger.py
+```
+
+Then inspect [rejected-closure-ledger.md](registry-research-framework/audit/rejected-closure-ledger.md). `promotion_blockers` should show the compact closure label, while `rejection_closure.superseded_blockers` preserves the old blocker context for auditors.
+
+## Promotion-Eligible Final Decisions
+
+When `promotion_state=promotion-eligible`, the evidence lane is no longer the blocker. Use the final decision pack to decide whether the record should become promoted, promoted-with-warnings, conditional, hold-closed, or evidence-backed rejected:
+
+```bash
+python3 registry-research-framework/scripts/generate_promotion_eligible_review_pack.py
+```
+
+Then inspect [promotion-eligible-review-pack.md](registry-research-framework/audit/promotion-eligible-review-pack.md). The pack is decision prep only; update the owning research record separately when you are ready to apply a verdict.
 
 ## Wave 2 Metadata
 
@@ -132,6 +173,28 @@ export REGPROBE_VM_BACKEND=kvm
 export REGPROBE_VM_DOMAIN=your-vm-name
 ```
 
+Before running ETW, WPR, or Ghidra KVM lanes, verify QGA without mutating the guest:
+
+```bash
+python3 scripts/vm-kvm/vm-health-check.py --domain regprobe-win11-25h2-session --connect qemu:///session --json
+```
+
+Recovery decision tree:
+
+- `domstate` is not `running`: start, restore, or replace the VM before collecting evidence.
+- `guest_ping`, `guest_info`, or `guest_exec` fails: repair QGA in the guest and rerun the health check; do not continue from a masked `ensure-admin-shell` timeout.
+- Health is `ok`: use the default QGA-first runner path, `--launch-transport auto --preflight require`.
+- You intentionally need keyboard injection: pass `--launch-transport send-key`; this bypasses QGA preflight and the summary must record `launch_transport=send-key`.
+
+Blocked evidence recovery loop:
+
+1. Confirm QGA health with `vm-health-check.py`.
+2. Check guest disk space before ETW; stale `C:\RegProbe-Diag\etw-stackwalk\*202604*` diagnostics can consume tens of GB.
+3. Prefer a narrow QGA-first retry over committing stale giant XML: use `run-guest-etw-stackwalk-capture.py --stackwalk-event RegQueryValue --buffer-size-kb 256 --min-buffers 16 --max-buffers 64 --ingest-to-repo`.
+4. Treat `launch_transport=qga`, `etl_exists=true`, `xml_exists=true`, and normalized bundle `status=ok` as the unblock contract.
+5. Record what the bundle actually proves: exact target `RegQueryValue` is stronger than a helper command line; absent-key/open evidence can support transport and baseline state but should not be overstated.
+6. Add an `evidence/captures/...json` receipt, update the owning record, and run `python3 scripts/refresh_research_publish_surfaces.py`.
+
 ### VMware Workstation
 
 ```bash
@@ -161,11 +224,110 @@ Read these first:
 - [research/README.md](research/README.md)
 - [research/evidence-atlas.md](research/evidence-atlas.md)
 - [research/evidence-audit.json](research/evidence-audit.json)
+- [Docs/research/tooling-map.md](Docs/research/tooling-map.md)
+- [Docs/research/artifact-map.md](Docs/research/artifact-map.md)
+- [Docs/research/run-tiers.md](Docs/research/run-tiers.md)
 - [Docs/research/vm-workflow.md](Docs/research/vm-workflow.md)
 - [Docs/research/runtime-escalation.md](Docs/research/runtime-escalation.md)
 - [Docs/research/script-catalog.md](Docs/research/script-catalog.md)
 - [Docs/TWEAK_SOURCES.md](Docs/TWEAK_SOURCES.md)
 - [Docs/SERVICES_DOCUMENTATION.md](Docs/SERVICES_DOCUMENTATION.md)
+
+## If You Are Starting Cold
+
+If you do not know the repo yet, use this order:
+
+1. Build and test the repo once so you know the baseline is green.
+2. Read the [research tooling map](Docs/research/tooling-map.md) and
+   [artifact map](Docs/research/artifact-map.md), then read
+   [run tiers](Docs/research/run-tiers.md) so you know which scripts are
+   canonical, which outputs are current, and which run artifacts are
+   reference-eligible.
+3. If you are on Windows, open Contributor Lab from the app to check local
+   readiness and copy the safe command pack for the task.
+4. Run a single-setting inspection before editing anything. On Linux hosts
+   without `Microsoft.WindowsDesktop.App`, use the Python mirror; use the .NET
+   CLI in the Windows VM or on a desktop-runtime host only when you explicitly
+   need CLI compatibility.
+
+```bash
+python3 registry-research-framework/scripts/check_single_tweak.py SystemResponsiveness
+python3 registry-research-framework/scripts/check_single_tweak.py SystemResponsiveness --expected-value 10 --expected-value 30000
+```
+
+4. Run the app-retest readiness check if you are about to verify cards, evidence, rollback, or KVM smoke:
+
+```bash
+python3 registry-research-framework/scripts/check_app_retest_readiness.py
+python3 registry-research-framework/scripts/check_app_retest_readiness.py --json
+```
+
+5. Generate the single-card app QA plan before touching the desktop app:
+
+```bash
+python3 registry-research-framework/scripts/check_single_tweak_app_qa.py SystemResponsiveness
+python3 registry-research-framework/scripts/check_single_tweak_app_qa.py SystemResponsiveness --expected-value 10 --expected-value 30000 --json
+```
+
+The equivalent .NET CLI commands are:
+
+```powershell
+dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness --expected-value 10 --expected-value 30000
+dotnet run --project cli/cli.csproj -- research qa-plan SystemResponsiveness --expected-value 10 --expected-value 30000 --json
+```
+
+6. If you are about to retest several shipped cards, plan or run a promoted batch:
+
+```bash
+python3 registry-research-framework/scripts/check_promoted_tweak_app_qa_batch.py --category Power --category Explorer --total-limit 4
+python3 registry-research-framework/scripts/check_promoted_tweak_app_qa_batch.py --id power.disable-fast-startup --id power.disable-windows-search --id explorer.hide-empty-drives --id privacy.disable-find-my-device --run-kvm --json
+```
+
+6. Open the reported research record, app card doc, and source file together.
+7. Only then change provider code, research records, evidence, or docs.
+
+That flow is the fastest way to answer beginner questions such as:
+
+- does this key already exist in the repo?
+- which tweak id owns it?
+- which values does the app write?
+- does the record allow apply or keep the card blocked?
+- is the value only in docs, or does it also exist in code and evidence?
+
+If you are validating the desktop app itself, `research qa-plan` is the next hop after `research inspect` and `research readiness`. It prints the direct app startup-QA command, the guest VM helper command, the expected JSON report contract, and the rollback/card/evidence checks to confirm while the app is open. If you need wider coverage before a release-style retest, `research qa-batch` turns the same truth model into a promoted multi-card batch and can drive the KVM guest lane directly.
+
+When you run several live promoted batches, treat `registry-research-framework/audit/promoted-app-qa-batch-latest.json` as the newest snapshot only. The cumulative view lives in `registry-research-framework/audit/promoted-app-qa-batch-history.jsonl` plus the paired coverage files `promoted-app-qa-coverage-latest.json` and `promoted-app-qa-coverage-latest.md`.
+
+Current audit snapshot: as of 2026-05-14, app retest readiness is passing with `265` app-surface entries, `0` app-only backlog items, `261` apply-allowed records, and `0` missing rollback stories. App-card contracts are `258/258 PASS`, promoted app-QA coverage is `258/258` (`100.0%`), and the latest live promoted app-QA batch is `14/14 PASS`. Operator96 low-noise reruns have `non_ok=0` and `noisy_result_count=0`, but remain Contributor Lab observations because `ready_for_bounded_app_card=0`. If you change shipped providers, card mapping, promotion gates, evidence links, or rollback behavior, refresh the artifact map, readiness, app-card contracts, and promoted app-QA batch coverage before handing the repo back.
+
+For a single-card retest, keep a JSON artifact when the result will be needed later:
+
+```bash
+python3 registry-research-framework/scripts/check_single_tweak_app_qa.py SystemResponsiveness --expected-value 10 --expected-value 30000 --json > registry-research-framework/audit/single-tweak-check-systemresponsiveness-latest.json
+```
+
+An `already-applied` live result is acceptable only when the report still verifies the desired value, preserves the card/evidence drawer contract, and skips standalone rollback because no mutation happened.
+
+For raw registry batches, first turn the paste into a one-value experiment plan:
+
+```bash
+python3 scripts/registry/parse_reg_add_batch.py \
+  --input pasted-reg-adds.txt \
+  --json-output registry-research-framework/audit/registry-value-experiments/operator-batch.json \
+  --markdown-output registry-research-framework/audit/registry-value-experiments/operator-batch.md
+```
+
+Do not apply the whole batch at once. Missing or opaque values need ETW, Procmon, or static-string follow-up before being closed. Present boot-sensitive values need snapshot/overlay-gated apply, basic Windows smoke, reboot health, rollback, reboot, and final smoke. Use `scripts/vm-kvm/run-guest-registry-value-experiment.py --require-domain-snapshot` for libvirt-domain runs; the `pilot-perf-calculate-actual-utilization-0` artifact is the current cautionary example.
+
+## Evidence Card Quality Bar
+
+Do not treat a card as complete just because it names a key and a value. A reviewer should be able to answer three questions without reading your mind:
+
+1. What do we know? Name the exact key, value, app write, promotion state, rollback story, and evidence layer that backs the card.
+2. What do we not claim? Say when the record does not prove runtime behavior, benchmark impact, ETW/WPR activity, or full undocumented semantics.
+3. What happened to ambiguous values? Split or archive them instead of hiding them inside a broad app-ready bundle.
+
+Use `power.disable-network-power-saving.policy` as the current pattern. The shipped app card keeps `DisableTaskOffload = 0` and `SystemResponsiveness = 10`, but the older `power.disable-network-power-saving` parent is intentionally not mapped because its `NetworkThrottlingIndex` write is still opaque. That parent remains in research as audit history, not as a normal apply-ready tweak.
 
 ## Where To Find Keys and Values
 
@@ -469,6 +631,15 @@ For code changes:
 dotnet build RegProbe.sln -c Release
 dotnet test tests/tests.csproj -c Release --no-build -v minimal
 ```
+
+If the host can build but cannot execute `net8.0-windows` tests because the WindowsDesktop runtime is missing, use the KVM guest test lane:
+
+```bash
+dotnet build tests/tests.csproj -c Release -p:EnableWindowsTargeting=true
+python3 scripts/vm-kvm/run-guest-dotnet-tests.py --wait-timeout 1800
+```
+
+The guest runner preserves the repo layout expected by C# tests by staging `Docs`, `research/records`, `research/promotion-gates.json`, and `tests/bin/Release/net8.0-windows` under `C:\RegProbe`.
 
 For research changes:
 

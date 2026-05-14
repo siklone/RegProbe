@@ -30,6 +30,7 @@ The checked-in shipped app is intentionally focused:
 
 - `Tweaks` is the main tweak workspace
 - `Recovery` is for rollback and cleanup flows
+- `Contributor` appears only in contributor/dev contexts and stays behind a risk acknowledgement
 - `Diagnostics` keeps build, repo, and log context nearby
 
 The research pipeline is much broader than the shipped UI. Most users can ignore the repo's traces, audits, ETW captures, and static-analysis exports unless they want to understand why a setting is trusted or blocked.

@@ -50,6 +50,8 @@ public sealed class RegistryValuePresetBatchTweakTests
             Assert.Equal(TweakStatus.Detected, result.Status);
             Assert.Equal("my-devices", tweak.MatchedPresetKey);
             Assert.Equal("My devices only", tweak.MatchedPresetLabel);
+            Assert.Contains("->", result.Message);
+            Assert.DoesNotContain("â†’", result.Message);
         }
         finally
         {

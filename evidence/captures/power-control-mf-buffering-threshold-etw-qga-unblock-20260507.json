@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T10:13:25.2530846Z",
+  "record_id": "power.control.mf-buffering-threshold",
+  "run_id": "power-control-mf-buffering-threshold-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "MfBufferingThreshold",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4500 registry events and 572 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power / MfBufferingThreshold from the helper probe, returning 0x80000005 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0x80000005",
+    "event_count": 4500,
+    "caller_stack_event_count": 572,
+    "target_key_event_count": 39,
+    "target_value_event_count": 1,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/power-control-mf-buffering-threshold-etw-qga-unblock-20260507/power-control-mf-buffering-threshold-etw-qga-unblock-20260507-summary.json",
+      "sha256": "3f79db54600c1583c325740b89339ba652d411417df6822dd278681bce3cd824",
+      "size": 7911,
+      "collected_utc": "2026-05-07T10:13:25.2530846Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-control-mf-buffering-threshold-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "d1e13d5dee7f926a137779cffbeb4260340d01a86886b78c5c2c12ef54363067",
+      "size": 5701999,
+      "collected_utc": "2026-05-07T10:13:25.2530846Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-control-mf-buffering-threshold-etw-qga-unblock-20260507/power-control-mf-buffering-threshold-etw-qga-unblock-20260507.etl",
+      "sha256": "46d79556190ade967508fc2c0fd22ef46005831a1fd12fab09990323eedc62e4",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T10:13:25.2530846Z"
+    }
+  ]
+}

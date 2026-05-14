@@ -9,7 +9,8 @@ param(
     [string]$UserName = 'rai',
     [string]$AppExe = 'C:\Tools\AppSmoke\RegProbe.App.exe',
     [int]$TimeoutSeconds = 300,
-    [switch]$SkipRollback
+    [switch]$SkipRollback,
+    [switch]$AllowGatedMutation
 )
 
 $ErrorActionPreference = 'Stop'
@@ -55,6 +56,10 @@ $argList = @(
 
 if ($SkipRollback) {
     $argList += '--qa-skip-rollback'
+}
+
+if ($AllowGatedMutation) {
+    $argList += '--qa-allow-gated-mutation'
 }
 
 $argumentLine = [string]::Join(' ', $argList)

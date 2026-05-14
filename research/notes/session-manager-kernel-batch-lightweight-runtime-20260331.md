@@ -42,5 +42,5 @@ The VM stayed shell-healthy before and after the single reboot. This batch is no
 
 ## Retained audit artifacts
 
-- [session-manager-kernel-batch-lightweight-runtime-20260331.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/session-manager-kernel-batch-lightweight-runtime-20260331.json)
-- [session-manager-kernel-no-hit-hold-20260331.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/session-manager-kernel-no-hit-hold-20260331.json)
+- [session-manager-kernel-batch-lightweight-runtime-20260331.json](../../registry-research-framework/audit/session-manager-kernel-batch-lightweight-runtime-20260331.json)
+- [session-manager-kernel-no-hit-hold-20260331.json](../../registry-research-framework/audit/session-manager-kernel-no-hit-hold-20260331.json)

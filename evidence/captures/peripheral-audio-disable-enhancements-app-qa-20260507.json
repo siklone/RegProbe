@@ -1,0 +1,230 @@
+{
+  "TweakId": "peripheral.audio-disable-enhancements",
+  "TweakName": "Disable Audio Enhancements",
+  "Success": false,
+  "Status": "check-failed",
+  "Summary": "The tweak flow completed, but at least one apply or rollback checkpoint did not come back clean.",
+  "RollbackRequested": true,
+  "GatedMutationOverrideRequested": true,
+  "GatedMutationOverrideUsed": true,
+  "Card": {
+    "TweakId": "peripheral.audio-disable-enhancements",
+    "Name": "Disable Audio Enhancements",
+    "Category": "Peripheral",
+    "Description": "Disables the audio-enhancement flags and exclusive-mode setting touched by this tweak.",
+    "FriendlyDescription": "Disables the audio-enhancement flags and exclusive-mode setting touched by this tweak.",
+    "RegistryPath": "",
+    "EvidenceClass": "B",
+    "EvidenceClassTitle": "Strong but Decision-Gated",
+    "ResearchStatus": "INTENTIONAL HOLD",
+    "IsMutationAllowed": false,
+    "RollbackSnapshotState": "ready",
+    "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+    "HasClaimBoundary": true,
+    "WhatWeKnowSummary": "Claim: Disables the audio-enhancement flags and exclusive-mode setting touched by this tweak. Evidence: The peripheral documentation maps the audio-enhancement control to the MMDevices Audio property/FxProperties values and notes the elevation/device-scope tradeoff. Rollback: Rollback: Verified via record-restore-story.",
+    "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+    "ProofLanes": [
+      {
+        "Key": "docs",
+        "Label": "DOCS",
+        "State": "ready",
+        "Summary": "The peripheral documentation maps the audio-enhancement control to the MMDevices Audio property/FxProperties values and notes the elevation/device-scope tradeoff.",
+        "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\peripheral\\peripheral.md"
+      },
+      {
+        "Key": "runtime",
+        "Label": "RUNTIME",
+        "State": "ready",
+        "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "Source": ""
+      },
+      {
+        "Key": "source",
+        "Label": "SOURCE",
+        "State": "ready",
+        "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "Source": "win-config / peripheral/desc.md: https://github.com/nohuto/win-config/blob/main/peripheral/desc.md"
+      },
+      {
+        "Key": "rollback",
+        "Label": "ROLLBACK",
+        "State": "ready",
+        "Summary": "Rollback: Verified via record-restore-story.",
+        "Source": "record-restore-story"
+      }
+    ],
+    "ReferenceLinks": [
+      {
+        "Title": "Windows Internals resource page",
+        "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+        "Kind": "Docs"
+      },
+      {
+        "Title": "Docs: Details",
+        "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#peripheral.audio-disable-enhancements",
+        "Kind": "Details"
+      },
+      {
+        "Title": "Docs: Peripheral",
+        "Url": "C:\\Tools\\AppSmoke\\Docs\\peripheral\\peripheral.md#peripheral.audio-disable-enhancements",
+        "Kind": "Docs"
+      }
+    ]
+  },
+  "Stages": [
+    {
+      "Stage": "detect-before",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
+      "OutcomeSummary": "Detect - Success",
+      "CurrentValue": "Unknown",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": false,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": false,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Audio\\DisableProtectedAudioDG: missing\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\MMDevices\\Audio\\Render\\DisableEnhancements: missing",
+          "TimestampText": "16:08:19"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        }
+      ]
+    },
+    {
+      "Stage": "apply",
+      "AppliedStatus": "Error",
+      "StatusMessage": "Run completed with errors.",
+      "OutcomeSummary": "Apply - Failed",
+      "CurrentValue": "Unknown",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": false,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": false,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Audio\\DisableProtectedAudioDG: missing\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\MMDevices\\Audio\\Render\\DisableEnhancements: missing",
+          "TimestampText": "16:08:19"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Failed",
+          "Message": "Apply failed: reg.exe failed (1): ERROR: Access is denied.",
+          "TimestampText": "16:08:19"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Not required",
+          "Message": "Step not executed.",
+          "TimestampText": "-"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Failed",
+          "Message": "Rollback failed: Requested registry access is not allowed.",
+          "TimestampText": "16:08:19"
+        }
+      ]
+    },
+    {
+      "Stage": "rollback",
+      "AppliedStatus": "Error",
+      "StatusMessage": "Rollback failed: Requested registry access is not allowed.",
+      "OutcomeSummary": "Rollback - Failed",
+      "CurrentValue": "Unknown",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": false,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": false,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Audio\\DisableProtectedAudioDG: missing\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\MMDevices\\Audio\\Render\\DisableEnhancements: missing",
+          "TimestampText": "16:08:19"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Failed",
+          "Message": "Apply failed: reg.exe failed (1): ERROR: Access is denied.",
+          "TimestampText": "16:08:19"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Not required",
+          "Message": "Step not executed.",
+          "TimestampText": "-"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Failed",
+          "Message": "Rollback failed: Requested registry access is not allowed.",
+          "TimestampText": "16:08:19"
+        }
+      ]
+    },
+    {
+      "Stage": "detect-after",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
+      "OutcomeSummary": "Detect - Success",
+      "CurrentValue": "Unknown",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": false,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": false,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Audio\\DisableProtectedAudioDG: missing\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\MMDevices\\Audio\\Render\\DisableEnhancements: missing",
+          "TimestampText": "16:08:19"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Failed",
+          "Message": "Apply failed: reg.exe failed (1): ERROR: Access is denied.",
+          "TimestampText": "16:08:19"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Not required",
+          "Message": "Step not executed.",
+          "TimestampText": "-"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Failed",
+          "Message": "Rollback failed: Requested registry access is not allowed.",
+          "TimestampText": "16:08:19"
+        }
+      ]
+    }
+  ],
+  "StartedAtUtc": "2026-05-07T23:08:16.6287607+00:00",
+  "CompletedAtUtc": "2026-05-07T23:08:19.8277697+00:00"
+}

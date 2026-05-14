@@ -1,4 +1,4 @@
-﻿# Source Enrichment Wave
+# Source Enrichment Wave
 
 - Generated: `2026-04-03T16:22:33.304074Z`
 - Output root: `/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135`
@@ -25,6 +25,6 @@
 
 ## Retained audit artifacts
 
-- [source-enrichment-20260403-044821.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/source-enrichment-20260403-044821.json)
-- [source-enrichment-20260403-192135.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/source-enrichment-20260403-192135.json)
-- [source-enrichment-record-mapping-follow-up-20260412.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/source-enrichment-record-mapping-follow-up-20260412.json)
+- [source-enrichment-20260403-044821.json](../../registry-research-framework/audit/source-enrichment-20260403-044821.json)
+- [source-enrichment-20260403-192135.json](../../registry-research-framework/audit/source-enrichment-20260403-192135.json)
+- [source-enrichment-record-mapping-follow-up-20260412.json](../../registry-research-framework/audit/source-enrichment-record-mapping-follow-up-20260412.json)

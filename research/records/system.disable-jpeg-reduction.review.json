@@ -256,6 +256,20 @@
         "rollback"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "kvm-user-scope-revalidation-batch-20260505",
+      "kind": "runtime-read",
+      "title": "KVM user-scope current-state revalidation batch",
+      "location": "registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json",
+      "supports": [
+        "path",
+        "runtime-read",
+        "default",
+        "version-scope"
+      ],
+      "strength": "medium",
+      "summary": "A KVM guest batch on build 26200 re-read the current interactive user desktop hive without changing guest configuration. The live guest still shows JPEGImportQuality unset in the current user snapshot."
     }
   ],
   "decision": {
@@ -272,7 +286,7 @@
     "Can a primary Microsoft source for JPEGImportQuality be captured?",
     "Should this setting be treated only as an advanced wallpaper preference?"
   ],
-  "last_reviewed_utc": "2026-03-27T00:00:00Z",
+  "last_reviewed_utc": "2026-05-06T00:27:35.2558263Z",
   "validation_proof": {
     "source_url": "research/notes/jpeg-import-quality-validation-20260326.md",
     "exact_quote_or_path": "jpegimportquality-state-100.txt: Explorer.EXE RegQueryValue HKCU\\Control Panel\\Desktop\\JPEGImportQuality Data: 100. shell32-jpegimportquality-ghidra.md: shell32.dll xref for JPEGImportQuality in FUN_1800bf050. jpeg-import-quality-runtime-20260327-124349/summary.json: before missing, applied 100, restored missing, wallpaper apply invoked, shell healthy.",

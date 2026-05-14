@@ -304,6 +304,19 @@
         "version-scope"
       ],
       "strength": "low"
+    },
+    {
+      "evidence_id": "vm-privacy.disable-cross-device-experiences-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk probe receipt",
+      "location": "evidence/captures/privacy-disable-cross-device-experiences-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 1 target value(s): `EnableCdp`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 1/1 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof. This receipt covers the HKLM EnableCdp policy target only; the deprecated mixed parent also retains HKCU CDP companion values outside this ETW rerun.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -330,7 +343,7 @@
     },
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "host-timeout-at-tracerpt"
+      "status": "qga_unblocked_ingest_ok"
     },
     "static_reviewed": {
       "ghidra": true,
@@ -356,9 +369,12 @@
       "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `EnableCdp` in the mixed parent lane."
     },
-    "notes": "The deprecated parent CDP bundle remains driven by Microsoft policy documentation, decompiled Settings evidence, and Procmon observation. The retained local enrichment corpus does not add candidate-specific ReactOS or WRK corroboration for the mixed parent lane, and exact 2026-04-24 ReactOS doxygen searches for `EnableCdp` also returned no direct match. A bounded 2026-04-24 ETW stackwalk retry for `EnableCdp` reached `stage = tracerpt` before the hard 90 second timeout fired without uploading a repo-visible bundle, and a same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start."
+    "notes": "The deprecated parent CDP bundle remains driven by Microsoft policy documentation, decompiled Settings evidence, and Procmon observation. The retained local enrichment corpus does not add candidate-specific ReactOS or WRK corroboration for the mixed parent lane, and exact 2026-04-24 ReactOS doxygen searches for `EnableCdp` also returned no direct match. A bounded 2026-04-24 ETW stackwalk retry for `EnableCdp` reached `stage = tracerpt` before the hard 90 second timeout fired without uploading a repo-visible bundle, and a same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier timeout/upload blocker for 1/1 target probe(s) and produced host-ingested raw ETL/XML plus normalized bundles; the captured value reads are QGA-launched probe reads, not independent product-consumer proof. This receipt covers the HKLM EnableCdp policy target only; the deprecated mixed parent also retains HKCU CDP companion values outside this ETW rerun.",
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/privacy-disable-cross-device-experiences-etw-qga-unblock-20260507.json"
   },
-  "last_reviewed_utc": "2026-04-28T10:50:56Z",
+  "last_reviewed_utc": "2026-05-07T14:43:50.544726Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml",
     "exact_quote_or_path": "Local Microsoft GroupPolicy.adml EnableCDP help text: The local ADML help text explains that enabling the policy allows continue experiences, disabling it blocks them, and the not-configured default depends on the Windows edition.",

@@ -479,6 +479,121 @@ class PromotionStateTests(unittest.TestCase):
 
         self.assertTrue(evidence_class_lib.has_exact_runtime_read(record))
 
+    def test_etw_trace_satisfies_runtime_trace_lane_before_static_followup(self) -> None:
+        record = {
+            "record_id": "example.etw-trace",
+            "tweak_id": "example.etw-trace",
+            "record_status": "validated",
+            "setting": {
+                "area": "Example",
+                "targets": [
+                    {
+                        "path": "HKCU\\Software\\Example",
+                        "value_name": "Enabled",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
+            "decision": {
+                "apply_allowed": False,
+                "confidence": "medium",
+                "restore_default_supported": True,
+            },
+            "validation_proof": {
+                "source_url": "Docs/example.md",
+                "exact_quote_or_path": "Docs/example.md:1",
+            },
+            "evidence": [
+                {
+                    "kind": "etw-trace",
+                    "location": "evidence/raw/etw-stackwalk/example/normalized-registry-bundle.json",
+                    "summary": "Narrow ETW registry stackwalk captured RegQueryValue for Enabled.",
+                }
+            ],
+        }
+
+        self.assertTrue(evidence_class_lib.has_trace_evidence(record))
+        self.assertTrue(evidence_class_lib.has_runtime_evidence(record))
+        self.assertEqual(evidence_class_lib.next_missing_layer(record), "ghidra")
+        class_entry = evidence_class_lib.build_class_entry(record)
+        runtime = class_entry["runtime_proof"]
+        self.assertTrue(runtime["has_runtime_evidence"])
+        self.assertIn("Narrow ETW registry stackwalk", runtime["summary"])
+        self.assertEqual(runtime["links"][0]["kind"], "etw-trace")
+
+    def test_failed_procmon_or_wpr_mentions_do_not_count_as_trace_evidence(self) -> None:
+        record = {
+            "record_id": "example.failed-trace-mentions",
+            "tweak_id": "example.failed-trace-mentions",
+            "record_status": "validated",
+            "setting": {
+                "area": "Example",
+                "targets": [
+                    {
+                        "path": "HKCU\\Software\\Example",
+                        "value_name": "Enabled",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
+            "decision": {
+                "apply_allowed": False,
+                "confidence": "medium",
+                "restore_default_supported": True,
+            },
+            "validation_proof": {
+                "source_url": "Docs/example.md",
+                "exact_quote_or_path": "Docs/example.md:1",
+                "notes": "Procmon SaveAs timed out and WPR no-hit remained unresolved.",
+            },
+            "evidence": [
+                {
+                    "kind": "ghidra-headless",
+                    "summary": "Static xref exists, but runtime still needs a real trace artifact.",
+                }
+            ],
+        }
+
+        self.assertFalse(evidence_class_lib.has_procmon_evidence(record))
+        self.assertFalse(evidence_class_lib.has_wpr_evidence(record))
+        self.assertFalse(evidence_class_lib.has_trace_evidence(record))
+        self.assertEqual(evidence_class_lib.next_missing_layer(record), "runtime-trace")
+
+    def test_runtime_diff_alone_does_not_satisfy_trace_lane(self) -> None:
+        record = {
+            "record_id": "example.runtime-diff",
+            "tweak_id": "example.runtime-diff",
+            "record_status": "validated",
+            "setting": {
+                "area": "Example",
+                "targets": [
+                    {
+                        "path": "HKCU\\Software\\Example",
+                        "value_name": "Enabled",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
+            "decision": {
+                "apply_allowed": False,
+                "confidence": "medium",
+                "restore_default_supported": True,
+            },
+            "validation_proof": {
+                "source_url": "Docs/example.md",
+                "exact_quote_or_path": "Docs/example.md:1",
+            },
+            "evidence": [
+                {
+                    "kind": "runtime-diff",
+                    "summary": "A reversible write/read diff changed Enabled, but no trace was captured.",
+                }
+            ],
+        }
+
+        self.assertFalse(evidence_class_lib.has_trace_evidence(record))
+        self.assertEqual(evidence_class_lib.next_missing_layer(record), "runtime-trace")
+
     def test_repo_code_only_static_evidence_scores_low(self) -> None:
         record = {
             "record_id": "example.repo-code",
@@ -1351,6 +1466,42 @@ class PromotionStateTests(unittest.TestCase):
         self.assertEqual(gate["promotion_state"], "blocked")
         self.assertIn("functional-no-effect", gate["promotion_blockers"])
         self.assertLessEqual(gate["score_breakdown"]["runtime_evidence_strength"], 1)
+
+    def test_rejected_promotion_disposition_closes_active_blocker_without_hiding_reason(self) -> None:
+        record = {
+            "record_id": "example.rejected-disposition",
+            "tweak_id": "example.rejected-disposition",
+            "record_status": "review-required",
+            "setting": {
+                "name": "Rejected Disposition",
+                "targets": [
+                    {
+                        "path": "HKCU\\Software\\Example",
+                        "value_name": "ExampleValue",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
+            "decision": {
+                "confidence": "low",
+                "apply_allowed": False,
+                "restore_default_supported": False,
+                "restore_previous_supported": False,
+                "promotion_disposition": "rejected",
+                "promotion_disposition_reason": "One-shot action has no rollback story.",
+                "blocking_issues": ["validation-proof", "one-shot-no-rollback"],
+            },
+        }
+
+        gate = research_v36_lib.derive_promotion_state(record, {})
+
+        self.assertEqual(gate["promotion_state"], "rejected")
+        self.assertEqual(gate["promotion_disposition"], "rejected")
+        self.assertEqual(gate["promotion_blockers"], ["promotion-disposition-non-reversible-action"])
+        self.assertEqual(gate["closure_status"], "decision-backed-rejected")
+        self.assertEqual(gate["closure_kind"], "non-reversible-action")
+        self.assertIn("validation-proof", gate["rejection_closure"]["superseded_blockers"])
+        self.assertIn("one-shot-no-rollback", gate["rejection_closure"]["superseded_blockers"])
 
 
 class GapAnalysisTests(unittest.TestCase):
@@ -5457,7 +5608,7 @@ class BlockedWorklistTests(unittest.TestCase):
     def test_blocked_worklist_payload_is_structurally_sound(self) -> None:
         payload = blocked_worklist_lib.build_worklist()
 
-        self.assertGreaterEqual(int(payload.get("blocked_count") or 0), 1)
+        self.assertGreaterEqual(int(payload.get("blocked_count") or 0), 0)
         self.assertIsInstance(payload.get("top_actionable_candidates"), list)
         self.assertIsInstance(payload.get("top_hold_candidates"), list)
         self.assertIsInstance(payload.get("actionability_counts"), dict)

@@ -3,7 +3,7 @@
 Date: 2026-04-12
 Domain: `regprobe-win11-25h2-session`
 
-We migrated [scripts/vm-kvm/run-guest-registry-policy-probe.py](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/scripts/vm-kvm/run-guest-registry-policy-probe.py) to use the new [scripts/vm-kvm/qga-run-powershell.py](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/scripts/vm-kvm/qga-run-powershell.py) helper in `--no-wait` mode. That matters because these host wrappers were never meant to wait on the guest PowerShell process directly; they launch a guest workflow and then poll stage and summary files from the host bridge.
+We migrated [scripts/vm-kvm/run-guest-registry-policy-probe.py](../../scripts/vm-kvm/run-guest-registry-policy-probe.py) to use the new [scripts/vm-kvm/qga-run-powershell.py](../../scripts/vm-kvm/qga-run-powershell.py) helper in `--no-wait` mode. That matters because these host wrappers were never meant to wait on the guest PowerShell process directly; they launch a guest workflow and then poll stage and summary files from the host bridge.
 
 Smoke command:
 
@@ -36,4 +36,4 @@ The failure was inside the existing Procmon export lane, not the transport layer
 
 ## Audit artifact
 
-- [kvm-qga-registry-policy-probe-smoke-20260412.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/kvm-qga-registry-policy-probe-smoke-20260412.json)
+- [kvm-qga-registry-policy-probe-smoke-20260412.json](../../registry-research-framework/audit/kvm-qga-registry-policy-probe-smoke-20260412.json)

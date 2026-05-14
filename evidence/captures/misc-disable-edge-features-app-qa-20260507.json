@@ -1,0 +1,225 @@
+{
+  "TweakId": "misc.disable-edge-features",
+  "TweakName": "Disable Microsoft Edge Features",
+  "Success": true,
+  "Status": "ok-gated-override",
+  "Summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+  "RollbackRequested": true,
+  "GatedMutationOverrideRequested": true,
+  "GatedMutationOverrideUsed": true,
+  "Card": {
+    "TweakId": "misc.disable-edge-features",
+    "Name": "Disable Microsoft Edge Features",
+    "Category": "Misc",
+    "Description": "Disables telemetry, personalization, sync, sidebar, shopping, rewards, and various other Edge features. Also disables Windows 8/8.1 EdgeUI features.",
+    "FriendlyDescription": "Disables telemetry, personalization, sync, sidebar, shopping, rewards, and various other Edge features. Also disables Windows 8/8.1 EdgeUI features.",
+    "RegistryPath": "",
+    "EvidenceClass": "B",
+    "EvidenceClassTitle": "Strong but Decision-Gated",
+    "ResearchStatus": "INTENTIONAL HOLD",
+    "IsMutationAllowed": false,
+    "RollbackSnapshotState": "ready",
+    "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+    "HasClaimBoundary": true,
+    "WhatWeKnowSummary": "Claim: Disables telemetry, personalization, sync, sidebar, shopping, rewards, and various other Edge features. Also disables Windows 8/8.1 EdgeUI features. Evidence: The misc documentation maps this card to the Edge policy bundle and names the Microsoft Edge / EdgeUI policy values that the current app writes. Rollback: Rollback: Verified via record-restore-story.",
+    "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+    "ProofLanes": [
+      {
+        "Key": "docs",
+        "Label": "DOCS",
+        "State": "ready",
+        "Summary": "The misc documentation maps this card to the Edge policy bundle and names the Microsoft Edge / EdgeUI policy values that the current app writes.",
+        "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\misc\\misc.md"
+      },
+      {
+        "Key": "runtime",
+        "Label": "RUNTIME",
+        "State": "ready",
+        "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "Source": ""
+      },
+      {
+        "Key": "source",
+        "Label": "SOURCE",
+        "State": "ready",
+        "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "Source": "win-config / misc/desc.md: https://github.com/nohuto/win-config/blob/main/misc/desc.md"
+      },
+      {
+        "Key": "rollback",
+        "Label": "ROLLBACK",
+        "State": "ready",
+        "Summary": "Rollback: Verified via record-restore-story.",
+        "Source": "record-restore-story"
+      }
+    ],
+    "ReferenceLinks": [
+      {
+        "Title": "Docs: Details",
+        "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#misc.disable-edge-features",
+        "Kind": "Details"
+      },
+      {
+        "Title": "Docs: Misc",
+        "Url": "C:\\Tools\\AppSmoke\\Docs\\misc\\misc.md#misc.disable-edge-features",
+        "Kind": "Docs"
+      }
+    ]
+  },
+  "Stages": [
+    {
+      "Stage": "detect-before",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Detected 0 of 40 values (matches: 0, missing: 40).",
+      "OutcomeSummary": "Detect - Success",
+      "CurrentValue": "Unknown",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": false,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": false,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 0 of 40 values (matches: 0, missing: 40).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\AutoImportAtFirstRun: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultBrowserSettingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultSensorsSetting: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeCollectionsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeFollowEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeShoppingAssistantEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideFirstRunExperience: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideRestoreDialogEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ImplicitSignInEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageAllowedBackgroundTypes: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageContentEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageHideDefaultTopSites: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageQuickLinksEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PersonalizationReportingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PinBrowserEssentialsToolbarButton: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\QuickSearchShowMiniMenu: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SearchbarAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowMicrosoftRewards: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowRecommendationsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SplitScreenEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StandaloneHubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StartupBoostEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SyncDisabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TabServicesEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TextPredictionEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TrackingPrevention: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\UserFeedbackAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing",
+          "TimestampText": "16:07:24"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        }
+      ]
+    },
+    {
+      "Stage": "apply",
+      "AppliedStatus": "Applied",
+      "StatusMessage": "Run completed.",
+      "OutcomeSummary": "Apply - Success",
+      "CurrentValue": "Multiple values",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": false,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 0 of 40 values (matches: 0, missing: 40).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\AutoImportAtFirstRun: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultBrowserSettingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultSensorsSetting: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeCollectionsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeFollowEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeShoppingAssistantEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideFirstRunExperience: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideRestoreDialogEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ImplicitSignInEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageAllowedBackgroundTypes: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageContentEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageHideDefaultTopSites: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageQuickLinksEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PersonalizationReportingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PinBrowserEssentialsToolbarButton: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\QuickSearchShowMiniMenu: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SearchbarAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowMicrosoftRewards: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowRecommendationsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SplitScreenEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StandaloneHubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StartupBoostEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SyncDisabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TabServicesEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TextPredictionEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TrackingPrevention: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\UserFeedbackAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing",
+          "TimestampText": "16:07:24"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Updated 40 values.",
+          "TimestampText": "16:07:28"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Verified desired values.",
+          "TimestampText": "16:07:28"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Not required",
+          "Message": "Step not executed.",
+          "TimestampText": "-"
+        }
+      ]
+    },
+    {
+      "Stage": "rollback",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Rolled back registry values.",
+      "OutcomeSummary": "Rollback - Rolled Back",
+      "CurrentValue": "Multiple values",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": true,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": true,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 0 of 40 values (matches: 0, missing: 40).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\AutoImportAtFirstRun: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultBrowserSettingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultSensorsSetting: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeCollectionsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeFollowEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeShoppingAssistantEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideFirstRunExperience: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideRestoreDialogEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ImplicitSignInEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageAllowedBackgroundTypes: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageContentEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageHideDefaultTopSites: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageQuickLinksEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PersonalizationReportingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PinBrowserEssentialsToolbarButton: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\QuickSearchShowMiniMenu: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SearchbarAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowMicrosoftRewards: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowRecommendationsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SplitScreenEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StandaloneHubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StartupBoostEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SyncDisabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TabServicesEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TextPredictionEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TrackingPrevention: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\UserFeedbackAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing",
+          "TimestampText": "16:07:24"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Updated 40 values.",
+          "TimestampText": "16:07:28"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Verified desired values.",
+          "TimestampText": "16:07:28"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Rolled back",
+          "Message": "Rolled back registry values.",
+          "TimestampText": "16:07:28"
+        }
+      ]
+    },
+    {
+      "Stage": "detect-after",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Detected 0 of 40 values (matches: 0, missing: 40).",
+      "OutcomeSummary": "Detect - Success",
+      "CurrentValue": "Multiple values",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": true,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": true,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 0 of 40 values (matches: 0, missing: 40).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\AutoImportAtFirstRun: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultBrowserSettingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultSensorsSetting: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeCollectionsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeFollowEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeShoppingAssistantEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideFirstRunExperience: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideRestoreDialogEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ImplicitSignInEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageAllowedBackgroundTypes: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageContentEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageHideDefaultTopSites: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageQuickLinksEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PersonalizationReportingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PinBrowserEssentialsToolbarButton: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\QuickSearchShowMiniMenu: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SearchbarAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowMicrosoftRewards: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowRecommendationsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SplitScreenEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StandaloneHubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StartupBoostEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SyncDisabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TabServicesEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TextPredictionEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TrackingPrevention: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\UserFeedbackAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing",
+          "TimestampText": "16:07:29"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Updated 40 values.",
+          "TimestampText": "16:07:28"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Verified desired values.",
+          "TimestampText": "16:07:28"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Rolled back",
+          "Message": "Rolled back registry values.",
+          "TimestampText": "16:07:28"
+        }
+      ]
+    }
+  ],
+  "StartedAtUtc": "2026-05-07T23:07:24.355392+00:00",
+  "CompletedAtUtc": "2026-05-07T23:07:29.1283472+00:00"
+}

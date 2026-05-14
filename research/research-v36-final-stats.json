@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-08T11:38:15.000794Z",
+  "campaign_id": "v36-repository-zero-pending",
+  "status": "clean-state",
+  "summary": {
+    "total_records": 356,
+    "promoted": 261,
+    "rejected": 95,
+    "blocked": 0,
+    "promotion_eligible": 0,
+    "revalidation_pending": 0,
+    "invalid_gate_entries": 0,
+    "unclassified_rejected": 0,
+    "active_backlog": 0,
+    "limbo_count": 0,
+    "app_surface_entry_count": 265,
+    "apply_allowed_record_count": 261,
+    "records_missing_validation_proof": 17
+  },
+  "checks": {
+    "no_blocked_gate_entries": true,
+    "no_revalidation_pending_gate_entries": true,
+    "no_promotion_eligible_gate_entries": true,
+    "no_invalid_gate_entries": true,
+    "no_unclassified_rejected_records": true,
+    "no_promotion_review_records": true,
+    "blocked_worklist_empty": true,
+    "app_retest_readiness_pass": true,
+    "all_records_classified": true
+  },
+  "sources": {
+    "promotion_gates": "research/promotion-gates.json",
+    "rejected_closure_ledger": "registry-research-framework/audit/rejected-closure-ledger.json",
+    "promotion_eligible_review_pack": "registry-research-framework/audit/promotion-eligible-review-pack.json",
+    "blocked_worklist": "registry-research-framework/audit/blocked-worklist.json",
+    "app_retest_readiness": "registry-research-framework/audit/app-retest-readiness-latest.json"
+  },
+  "rejected_archive": {
+    "total_rejected": 95,
+    "evidence_backed_rejected": 40,
+    "deprecated_records": 55,
+    "closure_status_counts": {
+      "deprecated-record": 55,
+      "evidence-backed-rejected": 40
+    },
+    "closure_kind_counts": {
+      "deprecated-record": 55,
+      "environment-limited-validation-lane": 2,
+      "intentional-hold-closed": 19,
+      "non-reversible-or-high-risk-action": 17,
+      "protected-acl-not-actionable": 1,
+      "security-hold-closed": 1
+    }
+  },
+  "verification": {
+    "app_retest_readiness": "PASS",
+    "blocked_worklist_count": 0,
+    "kvm_app_smoke_status": "ok",
+    "kvm_lane_health_status": "ok",
+    "missing_rollback_story_count": 0
+  },
+  "next_phase_recommendations": [
+    {
+      "id": "qga-etw-ghidra-backfill",
+      "priority": "optional",
+      "summary": "Backfill deeper ETW/Ghidra bundles for promoted records if the VM transport lane needs more proof density."
+    },
+    {
+      "id": "v37-candidate-discovery",
+      "priority": "optional",
+      "summary": "Start a new candidate wave only after preserving this v36 zero-pending snapshot."
+    },
+    {
+      "id": "app-retest",
+      "priority": "recommended",
+      "summary": "Use the app retest readiness report before manual Windows validation of cards, evidence drawers, apply, verify, and rollback."
+    }
+  ]
+}

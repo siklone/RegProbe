@@ -80,6 +80,11 @@ DEFAULT_BACKEND_ID = "rai-linux-vm"
 CURRENT_SCHEMA_VERSION = "1.0"
 STALE_REVALIDATION_DAYS = 28
 STALE_BUILD_THRESHOLD = 2
+REJECTED_PROMOTION_DISPOSITIONS = {
+    "rejected",
+    "archived",
+    "not-promotable",
+}
 STRONG_STATIC_SUPPORTS = {
     "allowed-values",
     "behavior",
@@ -1829,6 +1834,104 @@ def _infer_blocker_driven_missing_layer(base_layer: str, blockers: set[str]) -> 
     return base_layer
 
 
+def _closure_slug(value: str) -> str:
+    slug = re.sub(r"[^a-z0-9]+", "-", str(value or "").strip().lower()).strip("-")
+    return slug or "rejected"
+
+
+def _infer_rejection_closure_kind(
+    record_status: str,
+    promotion_disposition: str,
+    decision: dict[str, Any],
+    blockers: set[str],
+) -> str:
+    explicit_kind = str(decision.get("promotion_disposition_kind") or "").strip()
+    if explicit_kind:
+        return _closure_slug(explicit_kind)
+
+    blocker_text = " ".join(str(item or "") for item in sorted(blockers)).lower()
+    reason_text = str(decision.get("promotion_disposition_reason") or decision.get("why") or "").lower()
+    combined = f"{reason_text} {blocker_text}"
+
+    if record_status == "deprecated" or "deprecated-record" in blockers:
+        return "deprecated-record"
+    if "archived" in blockers or promotion_disposition == "archived":
+        return "archived-record"
+    if "protected-acl" in combined or "protected acl" in combined or "acl" in combined:
+        return "protected-acl-not-actionable"
+    if (
+        "firmware" in combined
+        or "platform limit" in combined
+        or "trigger-not-available" in combined
+        or "validation environment limitation" in combined
+        or "not support hibernation" in combined
+    ):
+        return "environment-limited-validation-lane"
+    if "research-only-raw" in combined:
+        return "research-only-raw-value"
+    if "intentional-hold" in combined:
+        return "intentional-hold"
+    if "high risk" in combined or "reboot-sensitive" in combined:
+        return "high-risk-review-only"
+    if "rollback" in combined or "destructive cleanup" in combined or "maintenance action" in combined:
+        return "non-reversible-action"
+    if "first-party" in combined or "not been promoted" in combined:
+        return "first-party-not-promoted"
+    if "no-runtime-proof" in blockers:
+        return "runtime-lane-not-selected"
+    return _closure_slug(promotion_disposition or "rejected")
+
+
+def _rejection_closure_projection(
+    *,
+    state: str,
+    record_status: str,
+    promotion_disposition: str,
+    decision: dict[str, Any],
+    evidence_status: dict[str, Any],
+    documentation_status: dict[str, Any],
+    hard_blockers: list[str],
+    blocker_set: set[str],
+) -> dict[str, Any] | None:
+    if state != "rejected":
+        return None
+
+    closure_kind = _infer_rejection_closure_kind(
+        record_status,
+        promotion_disposition,
+        decision,
+        blocker_set,
+    )
+    evidence_count = int(evidence_status.get("evidence_count") or 0)
+    confidence = str(documentation_status.get("confidence") or decision.get("confidence") or "unknown")
+    reviewed_utc = str(decision.get("promotion_disposition_reviewed_utc") or "").strip() or None
+    explicit_reason = str(decision.get("promotion_disposition_reason") or "").strip()
+
+    if closure_kind == "deprecated-record":
+        closure_status = "deprecated-record"
+        closure_reason = explicit_reason or "Deprecated record retained for audit/history; not an active evidence gap."
+        closure_blocker = "deprecated-record"
+    elif closure_kind == "archived-record":
+        closure_status = "archived-record"
+        closure_reason = explicit_reason or "Archived record retained for audit/history; not an active evidence gap."
+        closure_blocker = "promotion-disposition-archived-record"
+    else:
+        closure_status = "evidence-backed-rejected" if explicit_reason and evidence_count > 0 else "decision-backed-rejected"
+        closure_reason = explicit_reason or "Rejected promotion decision; inspect superseded_blockers for the underlying lane."
+        closure_blocker = f"promotion-disposition-{closure_kind}"
+
+    return {
+        "status": closure_status,
+        "kind": closure_kind,
+        "reason": closure_reason,
+        "reviewed_utc": reviewed_utc,
+        "closure_blocker": closure_blocker,
+        "superseded_blockers": sorted(dict.fromkeys(hard_blockers)),
+        "evidence_count": evidence_count,
+        "confidence": confidence,
+    }
+
+
 def evaluate_candidate_gate(
     record: dict[str, Any],
     audit: dict[str, Any] | None = None,
@@ -1863,6 +1966,7 @@ def evaluate_candidate_gate(
 
     blockers = [str(item) for item in (decision.get("blocking_issues") or []) if item]
     blocker_set = set(blockers)
+    promotion_disposition = str(decision.get("promotion_disposition") or "").strip().lower()
 
     target = primary_target(record)
     if CURRENT_SCHEMA_VERSION not in SUPPORTED_SCHEMA_VERSIONS:
@@ -1923,6 +2027,8 @@ def evaluate_candidate_gate(
 
     if record_status == "deprecated" or "archived" in blocker_set:
         state = "rejected"
+    elif promotion_disposition in REJECTED_PROMOTION_DISPOSITIONS:
+        state = "rejected"
     elif "schema-version-unsupported" in blocker_set:
         state = "blocked"
     elif hard_blockers:
@@ -1934,11 +2040,24 @@ def evaluate_candidate_gate(
     else:
         state = "promotion-eligible"
 
+    rejection_closure = _rejection_closure_projection(
+        state=state,
+        record_status=record_status,
+        promotion_disposition=promotion_disposition,
+        decision=decision,
+        evidence_status=evidence_status,
+        documentation_status=documentation_status,
+        hard_blockers=hard_blockers,
+        blocker_set=blocker_set,
+    )
+
     promotion_blockers = hard_blockers
     if state == "revalidation-pending":
         promotion_blockers = ["stale-evidence"]
-    elif state == "rejected" and "deprecated-record" in blocker_set:
-        promotion_blockers = ["deprecated-record"]
+    elif state == "rejected" and rejection_closure:
+        promotion_blockers = [str(rejection_closure.get("closure_blocker") or f"promotion-disposition-{promotion_disposition or 'rejected'}")]
+    elif state == "rejected" and not promotion_blockers:
+        promotion_blockers = [f"promotion-disposition-{promotion_disposition or 'rejected'}"]
 
     return {
         "schema_version": CURRENT_SCHEMA_VERSION,
@@ -1949,8 +2068,15 @@ def evaluate_candidate_gate(
         "record_id": str(record.get("record_id") or record.get("tweak_id") or ""),
         "tweak_id": str(record.get("tweak_id") or record.get("record_id") or ""),
         "tweak_origin": tweak_origin,
+        "promotion_disposition": promotion_disposition or None,
+        "promotion_disposition_kind": (rejection_closure or {}).get("kind"),
+        "promotion_disposition_reason": (rejection_closure or {}).get("reason"),
         "promotion_state": state,
         "promotion_blockers": promotion_blockers,
+        "rejection_closure": rejection_closure,
+        "closure_status": (rejection_closure or {}).get("status"),
+        "closure_kind": (rejection_closure or {}).get("kind"),
+        "closure_reason": (rejection_closure or {}).get("reason"),
         "record_promotion_allowed": state in {"promotion-eligible", "promoted", "revalidation-pending"},
         "tweak_ingest_allowed": state == "promoted" and legacy_ingest_promotable,
         "apply_allowed": bool_value(decision.get("apply_allowed")),
@@ -2497,7 +2623,7 @@ def blocked_worklist_surface_status(payload: dict[str, Any] | None = None) -> di
         errors.append("top_actionable_candidates-missing")
     elif expected_actionability_counts.get("active", 0) > 0 and not payload.get("top_actionable_candidates"):
         errors.append("top_actionable_candidates-missing")
-    if not payload.get("lane_focus"):
+    if items and not payload.get("lane_focus"):
         errors.append("lane_focus-missing")
     if any(not item.get("suggested_command") for item in items):
         errors.append("suggested_command-missing")

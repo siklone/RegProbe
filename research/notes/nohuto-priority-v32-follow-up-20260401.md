@@ -35,9 +35,9 @@ What changed from the previous v3.2 pass:
 
 ## Queue result
 
-The current scanner pass now reports both priority items as `resolved` in [nohuto-priority-queue-20260401g.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/nohuto-priority-queue-20260401g.json).
+The current scanner pass now reports both priority items as `resolved` in [nohuto-priority-queue-20260401g.json](../../registry-research-framework/audit/nohuto-priority-queue-20260401g.json).
 
 ## Audit artifacts
 
-- [nohuto-priority-v32-follow-up-20260401.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/nohuto-priority-v32-follow-up-20260401.json)
-- [nohuto-priority-queue-20260401g.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/nohuto-priority-queue-20260401g.json)
+- [nohuto-priority-v32-follow-up-20260401.json](../../registry-research-framework/audit/nohuto-priority-v32-follow-up-20260401.json)
+- [nohuto-priority-queue-20260401g.json](../../registry-research-framework/audit/nohuto-priority-queue-20260401g.json)

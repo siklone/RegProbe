@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T14:43:50.544726Z",
+  "record_id": "security.enable-defender-maps-advanced-membership",
+  "run_id": "security-enable-defender-maps-advanced-membership-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 1 target value(s): `SpyNetReporting`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 1/1 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+  "aggregate_observation": {
+    "target_count": 1,
+    "exact_probe_value_query_count": 1,
+    "all_artifacts_ingested": true,
+    "launch_transport": "qga",
+    "probe_read_not_product_consumer_proof": true
+  },
+  "target_observations": [
+    {
+      "run_id": "security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507",
+      "registry_path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet",
+      "value_name": "SpyNetReporting",
+      "exact_probe_value_query": true,
+      "operation": "RegQueryValue",
+      "representative_status": "0xC0000034",
+      "event_count": 4459,
+      "caller_stack_event_count": 526,
+      "target_key_event_count": 7,
+      "target_value_event_count": 1,
+      "exact_target_value_event_count": 1,
+      "target_command_event_count": 2,
+      "launch_transport": "qga"
+    }
+  ],
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507/security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507-summary.json",
+      "sha256": "5013c22663e9278e6db271cc50b6d9722b0cae34a3dd2e327fc193bfea267aa9",
+      "size": 8763,
+      "collected_utc": "2026-05-07T14:31:34.5949905Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "8ea523cf49c712892310b1037fc77dcc19ebb1159a6b7199be88e2a8875f8778",
+      "size": 6262326,
+      "collected_utc": "2026-05-07T14:31:34.5949905Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507/security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507.etl",
+      "sha256": "3547dd9b649c24da2c12bfbfcd8cef3639f5324825f01ca999176b5b5de6ec35",
+      "size": 12845056,
+      "collected_utc": "2026-05-07T14:31:34.5949905Z"
+    }
+  ]
+}

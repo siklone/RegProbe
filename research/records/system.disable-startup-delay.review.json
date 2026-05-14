@@ -235,6 +235,20 @@
         "shell-health"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "kvm-user-scope-revalidation-batch-20260505",
+      "kind": "runtime-read",
+      "title": "KVM user-scope current-state revalidation batch",
+      "location": "registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json",
+      "supports": [
+        "path",
+        "runtime-read",
+        "default",
+        "version-scope"
+      ],
+      "strength": "medium",
+      "summary": "A KVM guest batch on build 26200 re-read the current interactive user Explorer Serialize branch without changing guest configuration. The live guest still shows StartupDelayInMSec unset in the current user snapshot."
     }
   ],
   "decision": {
@@ -251,7 +265,7 @@
     "Can a primary Microsoft source for StartupDelayInMSec be captured?",
     "Should the Procmon shell-restart lane be re-exported into a checked-in text artifact later?"
   ],
-  "last_reviewed_utc": "2026-03-27T00:00:00Z",
+  "last_reviewed_utc": "2026-05-06T00:27:35.2558263Z",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json",
     "exact_quote_or_path": "vm-batch-probe-20260320.json: system.disable-startup-delay before=__MISSING__, after_apply=0, after_restore=__MISSING__; startup-delay-0.summary.json: before missing, applied 0, restored missing, shell_after explorer/sihost/ShellHost/ctfmon true",

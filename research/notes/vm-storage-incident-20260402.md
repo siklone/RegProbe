@@ -29,4 +29,4 @@ Follow-up:
 
 ## Retained audit artifact
 
-- [vm-storage-incident-20260402.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/vm-storage-incident-20260402.json)
+- [vm-storage-incident-20260402.json](../../registry-research-framework/audit/vm-storage-incident-20260402.json)

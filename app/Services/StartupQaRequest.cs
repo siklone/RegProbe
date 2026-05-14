@@ -7,6 +7,7 @@ internal sealed record StartupQaRequest(
     string TweakId,
     string OutputPath,
     bool RollbackAfterApply,
+    bool AllowGatedMutation,
     bool ShutdownWhenDone)
 {
     public static StartupQaRequest? TryParse(string[] args)
@@ -19,6 +20,7 @@ internal sealed record StartupQaRequest(
         string? tweakId = null;
         string? outputPath = null;
         var rollbackAfterApply = true;
+        var allowGatedMutation = false;
         var shutdownWhenDone = false;
 
         for (var i = 0; i < args.Length; i++)
@@ -50,6 +52,12 @@ internal sealed record StartupQaRequest(
                 continue;
             }
 
+            if (arg.Equals("--qa-allow-gated-mutation", StringComparison.OrdinalIgnoreCase))
+            {
+                allowGatedMutation = true;
+                continue;
+            }
+
             if (arg.Equals("--qa-shutdown", StringComparison.OrdinalIgnoreCase))
             {
                 shutdownWhenDone = true;
@@ -69,6 +77,7 @@ internal sealed record StartupQaRequest(
             tweakId.Trim(),
             Path.GetFullPath(outputPath),
             rollbackAfterApply,
+            allowGatedMutation,
             shutdownWhenDone);
     }
 }

@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T13:50:08.6225969Z",
+  "record_id": "explorer.show-protected-operating-system-files",
+  "run_id": "explorer-show-protected-operating-system-files-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+  "value_name": "ShowSuperHidden",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4510 registry events and 527 caller-stack events. The QGA-launched helper targeted HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced / ShowSuperHidden; the bundle contains target command/subkey activity (0 target value events), but no exact current-user HKCU RegQueryValue event for ShowSuperHidden was observed under the SYSTEM QGA context.",
+  "target_observation": {
+    "exact_value_query": false,
+    "operation": "RegQueryValue",
+    "representative_status": null,
+    "event_count": 4510,
+    "caller_stack_event_count": 527,
+    "target_key_event_count": 9,
+    "target_value_event_count": 0,
+    "current_user_hkcu_value_event_count": 0,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507-summary.json",
+      "sha256": "cf55a06b4680ee112ac60a8cbc82b164a26327004cbbc02fd7bdd1246b36ab9b",
+      "size": 8211,
+      "collected_utc": "2026-05-07T13:50:08.6225969Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "ad846c666da6472b829e1eccda9f91f123d3c3352dd3c62711b8caece3cbb0a0",
+      "size": 5898074,
+      "collected_utc": "2026-05-07T13:50:08.6225969Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507.etl",
+      "sha256": "31a987ea631b18d0b397b35c67e38dd68580eeaad4a56d0897a2534cebf54a04",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T13:50:08.6225969Z"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-﻿# WinDbg Reconnect Command Matrix
+# WinDbg Reconnect Command Matrix
 
 Date: `2026-04-03`
 
@@ -27,13 +27,13 @@ Date: `2026-04-03`
 
 ## Retained audit bundle
 
-- [windbg-reconnect-command-matrix-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-reconnect-command-matrix-20260403.json)
-- [windbg-reconnect-command-execution-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-reconnect-command-execution-20260403.json)
-- [windbg-reconnect-command-recovery-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-reconnect-command-recovery-20260403.json)
-- [windbg-reconnect-command-variants-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-reconnect-command-variants-20260403.json)
-- [windbg-reconnect-command-bundle-guest-restart-breakin-bonc-lead3-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-reconnect-command-bundle-guest-restart-breakin-bonc-lead3-20260403.json)
-- [windbg-reconnect-command-bundle-guest-restart-breakin-bonc-lead10-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-reconnect-command-bundle-guest-restart-breakin-bonc-lead10-20260403.json)
-- [windbg-reconnect-command-bundle-guest-restart-breakin-bonc-lead20-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-reconnect-command-bundle-guest-restart-breakin-bonc-lead20-20260403.json)
-- [windbg-reconnect-command-bundle-guest-restart-breakin-none-lead10-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-reconnect-command-bundle-guest-restart-breakin-none-lead10-20260403.json)
-- [windbg-reconnect-command-bundle-guest-restart-breakin-none-lead20-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-reconnect-command-bundle-guest-restart-breakin-none-lead20-20260403.json)
-- [windbg-reconnect-command-bundle-guest-restart-breakin-b-lead10-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-reconnect-command-bundle-guest-restart-breakin-b-lead10-20260403.json)
+- [windbg-reconnect-command-matrix-20260403.json](../../registry-research-framework/audit/windbg-reconnect-command-matrix-20260403.json)
+- [windbg-reconnect-command-execution-20260403.json](../../registry-research-framework/audit/windbg-reconnect-command-execution-20260403.json)
+- [windbg-reconnect-command-recovery-20260403.json](../../registry-research-framework/audit/windbg-reconnect-command-recovery-20260403.json)
+- [windbg-reconnect-command-variants-20260403.json](../../registry-research-framework/audit/windbg-reconnect-command-variants-20260403.json)
+- [windbg-reconnect-command-bundle-guest-restart-breakin-bonc-lead3-20260403.json](../../registry-research-framework/audit/windbg-reconnect-command-bundle-guest-restart-breakin-bonc-lead3-20260403.json)
+- [windbg-reconnect-command-bundle-guest-restart-breakin-bonc-lead10-20260403.json](../../registry-research-framework/audit/windbg-reconnect-command-bundle-guest-restart-breakin-bonc-lead10-20260403.json)
+- [windbg-reconnect-command-bundle-guest-restart-breakin-bonc-lead20-20260403.json](../../registry-research-framework/audit/windbg-reconnect-command-bundle-guest-restart-breakin-bonc-lead20-20260403.json)
+- [windbg-reconnect-command-bundle-guest-restart-breakin-none-lead10-20260403.json](../../registry-research-framework/audit/windbg-reconnect-command-bundle-guest-restart-breakin-none-lead10-20260403.json)
+- [windbg-reconnect-command-bundle-guest-restart-breakin-none-lead20-20260403.json](../../registry-research-framework/audit/windbg-reconnect-command-bundle-guest-restart-breakin-none-lead20-20260403.json)
+- [windbg-reconnect-command-bundle-guest-restart-breakin-b-lead10-20260403.json](../../registry-research-framework/audit/windbg-reconnect-command-bundle-guest-restart-breakin-b-lead10-20260403.json)

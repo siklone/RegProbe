@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T09:16:53.8156061Z",
+  "record_id": "privacy.disable-find-my-device",
+  "run_id": "privacy-disable-find-my-device-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\FindMyDevice",
+  "value_name": "AllowFindMyDevice",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4531 registry events and 571 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\SOFTWARE\\Policies\\Microsoft\\FindMyDevice / AllowFindMyDevice from the helper probe, returning 0xC0000034 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0xC0000034",
+    "event_count": 4531,
+    "caller_stack_event_count": 571,
+    "target_key_event_count": 7,
+    "target_value_event_count": 1,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-disable-find-my-device-etw-qga-unblock-20260507/privacy-disable-find-my-device-etw-qga-unblock-20260507-summary.json",
+      "sha256": "f2133f910d9a1c50f4381efa7ac8b9780d7ba0f65505a2a5debdf21267b0dc57",
+      "size": 7693,
+      "collected_utc": "2026-05-07T09:16:53.8156061Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-disable-find-my-device-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "3c9740b5236bdff72634e5714bf3afc4b7bd6ec15c70b526a8cd4e878bcbe5b4",
+      "size": 5598822,
+      "collected_utc": "2026-05-07T09:16:53.8156061Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-disable-find-my-device-etw-qga-unblock-20260507/privacy-disable-find-my-device-etw-qga-unblock-20260507.etl",
+      "sha256": "e6c0e8a144a4c34ca7d051b1a162e82abde56500f22c3d509d211eac5826ee1b",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T09:16:53.8156061Z"
+    }
+  ]
+}

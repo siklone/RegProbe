@@ -393,6 +393,20 @@
         "app-mismatch"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "kvm-user-scope-revalidation-batch-20260505",
+      "kind": "runtime-read",
+      "title": "KVM user-scope current-state revalidation batch",
+      "location": "registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json",
+      "supports": [
+        "path",
+        "runtime-read",
+        "default",
+        "version-scope"
+      ],
+      "strength": "medium",
+      "summary": "A KVM guest batch on build 26200 re-read the tracked Autoplay handler defaults under the current interactive user hive without changing guest configuration. The live guest still shows the tracked per-event handler paths present with their default values unset in the current snapshot."
     }
   ],
   "decision": {
@@ -405,7 +419,7 @@
     "why": "Microsoft Learn documents the AutoplayHandlers registry values and the MSTAKENOACTION mapping for the relevant per-event paths.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-21T00:00:00Z",
+  "last_reviewed_utc": "2026-05-06T00:27:35.2558263Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common",
     "exact_quote_or_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers; UserChosenExecuteHandlers\\StorageOnArrival; EventHandlersDefaultSelection\\StorageOnArrival; MSTAKENOACTION = Take no action.",

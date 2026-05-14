@@ -355,7 +355,7 @@ public sealed class ServiceStartModeBatchTweak : ITweak
 
             var startMode = snapshot.StartMode == ServiceStartMode.Unknown ? "Unknown" : snapshot.StartMode.ToString();
             var status = snapshot.Status == ServiceStatus.Unknown ? "Unknown" : snapshot.Status.ToString();
-            lines.Add($"- {target.ServiceName}: {startMode} ({status}) â†’ {target.TargetStartMode}");
+            lines.Add($"- {target.ServiceName}: {startMode} ({status}) -> {target.TargetStartMode}");
         }
 
         return lines.Count == 0 ? string.Empty : string.Join("\n", lines);

@@ -1844,8 +1844,8 @@
       ]
     },
     {
-      "Id": "power.disable-network-power-saving",
-      "Name": "Disable Network Adapter Power Saving",
+      "Id": "power.disable-network-power-saving.policy",
+      "Name": "Network Power and Multimedia Responsiveness",
       "Category": "Power",
       "Risk": "Safe",
       "Source": "app/Services/TweakProviders/PowerTweakProvider.cs#L42",
@@ -1853,7 +1853,7 @@
       "HasWindowsInternalsContext": true,
       "NeedsReview": false,
       "CoverageState": "repo-backed",
-      "Summary": "Matched 5 audit token(s) across win-config, win-registry, decompiled-pseudocode. These links show where the name came from. Value semantics still come from the research record.",
+      "Summary": "Matched network/MMCSS lineage tokens across win-config, win-registry, and decompiled-pseudocode. These links show where names came from; value semantics and the NetworkThrottlingIndex exclusion come from the research record.",
       "SourceRepositories": [
         "win-config",
         "win-registry",
@@ -1863,8 +1863,8 @@
         "tcpip",
         "multimedia",
         "systemprofile",
-        "networkthrottlingindex",
-        "systemresponsiveness"
+        "systemresponsiveness",
+        "disabletaskoffload"
       ],
       "References": [
         {

@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T13:37:05.6349311Z",
+  "record_id": "explorer.show-compressed-and-encrypted-files-in-color",
+  "run_id": "explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+  "value_name": "ShowCompColor",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4502 registry events and 524 caller-stack events. The QGA-launched helper targeted HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced / ShowCompColor; the bundle contains target command/subkey activity, but no exact current-user HKCU RegQueryValue event for ShowCompColor was observed under the SYSTEM QGA context.",
+  "target_observation": {
+    "exact_value_query": false,
+    "operation": "RegOpenKey",
+    "representative_status": "0xC0000034",
+    "event_count": 4502,
+    "caller_stack_event_count": 524,
+    "target_key_event_count": 9,
+    "target_value_event_count": 0,
+    "current_user_hkcu_value_event_count": 0,
+    "target_command_event_count": 1,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507-summary.json",
+      "sha256": "88102a0bdcc1cae3abe48dcb0d30f0696a13b6b6d53d2949bd3b037b497c371a",
+      "size": 8417,
+      "collected_utc": "2026-05-07T13:37:05.6349311Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "a9caa2efcab37430e31a5483aa8de20fb9bb7ba0d1b2539c9e46f9df397ac4ef",
+      "size": 6045239,
+      "collected_utc": "2026-05-07T13:37:05.6349311Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507.etl",
+      "sha256": "a49e568f2e0d0724c6899beabc6bd6125a79b33c9ebbd7573459155de22b23a8",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T13:37:05.6349311Z"
+    }
+  ]
+}

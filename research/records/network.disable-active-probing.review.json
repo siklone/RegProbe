@@ -59,7 +59,6 @@
   "app_current_implementation": {
     "status": "matches-research",
     "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
-    "notes": "The current app now surfaces the NoActiveProbe lane through the research app-surface manifest, preserving the validated machine-policy write state and the research record id for card/evidence binding.",
     "notes": "The app now writes only the documented NCSI policy value HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator\\NoActiveProbe = 1 for this tweak.",
     "writes": [
       {
@@ -219,6 +218,21 @@
       "strength": "low"
     },
     {
+      "evidence_id": "vm-network.disable-active-probing-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk runtime receipt for NoActiveProbe",
+      "location": "evidence/captures/network-disable-active-probing-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-disable-active-probing-etw-qga-unblock-20260507/network-disable-active-probing-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-active-probing-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-active-probing-etw-qga-unblock-20260507/network-disable-active-probing-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4445 registry events with 525 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator` / `NoActiveProbe`, returning `0xC0000034` on the clean baseline.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
       "evidence_id": "vm-network.disable-active-probing-ghidra-launch-receipt-20260424",
       "kind": "vm-test",
       "title": "Guest Ghidra launch receipt for NoActiveProbe",
@@ -240,7 +254,7 @@
     "why": "The NoActiveProbe policy is backed by exact Microsoft ADMX and ADML proof, and the app now writes only that documented machine-policy surface. The tweak is reversible and publishable, but it is not recommended for general users because it can make Windows connectivity detection less accurate.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-30T00:20:00Z",
+  "last_reviewed_utc": "2026-05-07T09:55:21.6444595Z",
   "version_stable": [
     "25H2"
   ],
@@ -276,11 +290,11 @@
     },
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "ingest_missing_etl"
+      "status": "qga_unblocked_ingest_ok"
     },
     "etw_stackwalk_reviewed": true,
-    "etw_stackwalk_review_status": "ingest_missing_etl",
-    "etw_stackwalk_review_artifact": "evidence/captures/network-disable-active-probing-etw-stackwalk-attempt-20260424.json",
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/network-disable-active-probing-etw-qga-unblock-20260507.json",
     "static_reviewed": {
       "ghidra": true,
       "status": "launch_blocked"
@@ -288,6 +302,6 @@
     "ghidra": true,
     "ghidra_status": "launch_blocked",
     "ghidra_artifact": "evidence/raw/ghidra/ghidra-network-disable-active-probing-20260424-batch2/summary.json",
-    "notes": "Official policy docs remain the primary proof surface here. A bounded 2026-04-24 ETW retry for `HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator` / `NoActiveProbe` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo. A same-day guest Ghidra retry for `NoActiveProbe` failed in `ensure-admin-shell` before any xref bundle reached the host."
+    "notes": "Official policy docs remain the primary proof surface here. A bounded 2026-04-24 ETW retry for `HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator` / `NoActiveProbe` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo. A same-day guest Ghidra retry for `NoActiveProbe` failed in `ensure-admin-shell` before any xref bundle reached the host. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier ETW ingest/upload blocker and produced an exact helper-triggered `RegQueryValue` for `NoActiveProbe` with caller-stack capture."
   }
 }

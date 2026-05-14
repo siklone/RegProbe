@@ -24,4 +24,4 @@ Candidate: `policy.system.enable-virtualization`
 
 ## Retained audit artifacts
 
-- [policy-system-enable-virtualization-path-aware-follow-up-20260331.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/policy-system-enable-virtualization-path-aware-follow-up-20260331.json)
+- [policy-system-enable-virtualization-path-aware-follow-up-20260331.json](../../registry-research-framework/audit/policy-system-enable-virtualization-path-aware-follow-up-20260331.json)

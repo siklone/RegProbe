@@ -1,0 +1,235 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "misc.disable-onedrive",
+  "tweak_id": "misc.disable-onedrive",
+  "record_status": "validated",
+  "summary": "Review-required audit trail for the live Disable OneDrive card. The app already ships the current onedrive policy and explorer bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+  "setting": {
+    "name": "Disable OneDrive",
+    "category": "Privacy",
+    "area": "OneDrive Policy and Explorer Bundle",
+    "scope": "device",
+    "casual_explanation": "This writes OneDrive policy and Explorer values that reduce sync behavior and hide the shell entry.",
+    "why_people_change_it": "People use it when they do not want OneDrive sync or do not want the OneDrive shell entry visible in Explorer.",
+    "tradeoffs_overview": "The card documents the live provider behavior, but it has not yet been promoted into the validated research-provider surface.",
+    "professional_notes": "The current app still exposes this tweak through app/Services/TweakProviders/PrivacyTweakProvider.cs and engine/Tweaks/Misc/DisableOneDriveTweaks.cs. The current engine tweak writes a coordinated bundle across policy, product, and Explorer namespace paths. This record keeps the live behavior documented without publishing it as a validated research-provider card yet.",
+    "targets": [
+      {
+        "target_id": "onedrive-policy-bundle",
+        "location_kind": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive + HKLM\\SOFTWARE\\Microsoft\\OneDrive + HKCU\\Software\\Classes\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}",
+        "value_name": "PolicyBundle",
+        "value_type": "registry value set",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Windows or tool default",
+            "meaning": "The setting stays at the existing or default state because this review record does not apply a value.",
+            "evidence_ids": [
+              "repo-tweak-provenance",
+              "engine-implementation"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "CurrentAppProfile",
+            "label": "Current OneDrive bundle",
+            "meaning": "Writes the checked-in OneDrive policy, sign-in traffic, and Explorer namespace values.",
+            "evidence_ids": [
+              "repo-tweak-provenance",
+              "app-provider",
+              "engine-implementation",
+              "vm-misc.disable-onedrive-app-qa-20260507"
+            ]
+          }
+        ],
+        "notes": "The current engine tweak writes a coordinated bundle across policy, product, and Explorer namespace paths."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The live app ships this first-party card outside the validated research-provider surface. Promotion gate now treats this checked-in implementation as matching the research record.",
+    "writes": [
+      {
+        "target_id": "onedrive-policy-bundle",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive + HKLM\\SOFTWARE\\Microsoft\\OneDrive + HKCU\\Software\\Classes\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}",
+        "value_name": "PolicyBundle",
+        "value_type": "registry value set",
+        "state_kind": "value",
+        "value": "CurrentAppProfile",
+        "notes": "The current engine tweak writes a coordinated bundle across policy, product, and Explorer namespace paths."
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Hold current or default state",
+      "applies_to": "Research tracking and backlog reduction only",
+      "states": [
+        {
+          "target_id": "onedrive-policy-bundle",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+        }
+      ],
+      "notes": "This review record documents the live card without promoting it into the validated research-provider surface.",
+      "evidence_ids": [
+        "repo-tweak-provenance",
+        "engine-implementation"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Windows/default hold",
+      "intended_for": [
+        "Research tracking only",
+        "Backlog reduction"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "onedrive-policy-bundle",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+        }
+      ],
+      "good_when": "You want to leave the system at the existing/default state.",
+      "bad_when": "You want to apply the current RegProbe app profile.",
+      "tradeoffs": [
+        "The live app behavior is represented in the corpus.",
+        "The card remains held outside the validated research-provider surface."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-tweak-provenance",
+        "app-provider"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Current app behavior",
+        "VM app QA",
+        "Research comparison"
+      ],
+      "avoid_for": [
+        "Systems where the listed tradeoffs are unacceptable"
+      ],
+      "states": [
+        {
+          "target_id": "onedrive-policy-bundle",
+          "state_kind": "value",
+          "value": "CurrentAppProfile",
+          "rationale": "Capture the exact state or profile that the current app card writes."
+        }
+      ],
+      "good_when": "You are auditing the exact state or profile that the current app currently writes.",
+      "bad_when": "You need a validated research-provider card.",
+      "tradeoffs": [
+        "The current app action is explicit.",
+        "The card still sits outside the validated research-provider surface."
+      ],
+      "apply_allowed": true,
+      "notes": "Validated by 2026-05-07 VM app QA: detect/apply/verify completed and rollback restored the previous state under the QA-only gated mutation override.",
+      "evidence_ids": [
+        "repo-tweak-provenance",
+        "app-provider",
+        "engine-implementation",
+        "vm-misc.disable-onedrive-app-qa-20260507"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-tweak-provenance",
+      "kind": "repo-doc",
+      "title": "Repo tweak provenance for misc.disable-onedrive",
+      "location": "Docs/tweaks/tweak-provenance.md",
+      "summary": "The checked-in tweak provenance tables map misc.disable-onedrive to the current repo implementation.",
+      "supports": [
+        "ui-mapping",
+        "behavior"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-provider",
+      "kind": "repo-code",
+      "title": "Live provider mapping",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The live app still surfaces misc.disable-onedrive through the first-party provider.",
+      "supports": [
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "engine-implementation",
+      "kind": "repo-code",
+      "title": "Current engine implementation",
+      "location": "engine/Tweaks/Misc/DisableOneDriveTweaks.cs",
+      "summary": "The current engine implementation defines the checked-in onedrive policy and explorer bundle behavior for this card.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-misc.disable-onedrive-app-qa-20260507",
+      "kind": "vm-test",
+      "title": "RegProbe app QA apply/rollback proof for misc.disable-onedrive",
+      "location": "evidence/captures/misc-disable-onedrive-app-qa-20260507.json",
+      "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override and confirmed the card snapshot contract, detect/apply/verify flow, and rollback restoration path.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "side-effects",
+        "ui-mapping"
+      ],
+      "strength": "high",
+      "artifact_status": "present"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Validation proof, checked-in provider/engine mapping, and 2026-05-07 VM app QA now converge: the app detected, applied, verified, and rolled back this card successfully under the QA-only gated mutation override.",
+    "manual_review_required": false,
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-05-07T23:30:00Z",
+  "validation_proof": {
+    "source_url": "Docs/misc/misc.md",
+    "exact_quote_or_path": "Docs/misc/misc.md:465 documents Disable OneDrive; Docs/misc/misc.md:469-551 names the OneDrive policy and Explorer namespace values used by this card.",
+    "notes": "The misc documentation maps DisableLibrariesDefaultSaveToOneDrive, DisableFileSync, DisableFileSyncNGSC, DisableMeteredNetworkFileSync, PreventNetworkTrafficPreUserSignIn, and the Explorer namespace pin values to the OneDrive disable behavior.",
+    "key_found_on_page": true
+  },
+  "tested_on": [
+    {
+      "environment": "KVM VM via QGA app QA",
+      "os": "Windows 11",
+      "edition": "25H2 session",
+      "build": "26100",
+      "notes": "2026-05-07 RegProbe app QA status ok-gated-override; artifact evidence/captures/misc-disable-onedrive-app-qa-20260507.json."
+    }
+  ]
+}

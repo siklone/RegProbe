@@ -24,6 +24,25 @@ public sealed partial class TweakItemViewModel
             ? choiceTweak.DefaultChoiceLabel ?? string.Empty
             : string.Empty;
 
+    public string WhatWeKnowSummary => TweakClaimBoundaryPresentation.BuildWhatWeKnowSummary(
+        FriendlyDescription,
+        ValidatedSemanticsSummary,
+        DocsSnapshotText,
+        RollbackSnapshotState,
+        RollbackStoryText);
+
+    public string WhatWeDoNotClaimSummary => TweakClaimBoundaryPresentation.BuildWhatWeDoNotClaimSummary(
+        VerdictState,
+        RuntimeSnapshotState,
+        RuntimeProofSummary,
+        UpstreamLineageSummary,
+        PublicMutationGatingReason,
+        IsMutationAllowed);
+
+    public bool HasClaimBoundary =>
+        !string.IsNullOrWhiteSpace(WhatWeKnowSummary)
+        || !string.IsNullOrWhiteSpace(WhatWeDoNotClaimSummary);
+
     public Brush EvidenceTierBackgroundBrush => TweakResearchPresentation.GetTierBackgroundBrush(EvidenceClassId);
 
     public Brush EvidenceTierBorderBrush => TweakResearchPresentation.GetTierBorderBrush(EvidenceClassId);
@@ -171,7 +190,15 @@ public sealed partial class TweakItemViewModel
             var defaultValue = string.IsNullOrWhiteSpace(DefaultChoiceLabel)
                 ? "Restore default available"
                 : DefaultChoiceLabel;
-            rows.Add(new TweakValueSummaryRowViewModel("DEFAULT", defaultValue, DefaultVsPreviousSummary));
+            rows.Add(new TweakValueSummaryRowViewModel("KNOWN DEFAULT", defaultValue, DefaultVsPreviousSummary));
+        }
+
+        if (!string.IsNullOrWhiteSpace(RollbackStoryText))
+        {
+            rows.Add(new TweakValueSummaryRowViewModel(
+                "ROLLBACK",
+                RollbackStoryText,
+                "Restore previous state"));
         }
 
         if (!string.IsNullOrWhiteSpace(ConfigurationCompactInfoLine))

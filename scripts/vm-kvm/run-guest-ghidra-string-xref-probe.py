@@ -10,6 +10,7 @@ from datetime import datetime
 from pathlib import Path
 
 from guest_bridge import ensure_guest_bridge
+from qga_preflight_lib import QgaPreflightError, require_qga_preflight, write_qga_preflight_summary
 from summary_contract_lib import apply_summary_contract, read_json_object, write_summary_contract
 from vm_env import bridge_base_url, upload_dir as default_upload_dir, vm_connect, vm_domain
 
@@ -48,19 +49,23 @@ def emit_host_step_error(
     output_name: str,
     binary_path: str,
     exc: subprocess.CalledProcessError,
+    launch_transport: str | None = None,
 ) -> dict[str, object]:
+    payload = {
+        "output_name": output_name,
+        "binary_path": binary_path,
+        "status": "error",
+        "host_step": getattr(exc, "stage", None),
+        "exit_code": exc.returncode,
+        "command": [str(part) for part in exc.cmd] if isinstance(exc.cmd, list) else str(exc.cmd),
+        "error": format_process_error(exc),
+        "summary_source": "host-launch-failure",
+    }
+    if launch_transport:
+        payload["launch_transport"] = launch_transport
     return write_summary_contract(
         summary_path,
-        {
-            "output_name": output_name,
-            "binary_path": binary_path,
-            "status": "error",
-            "host_step": getattr(exc, "stage", None),
-            "exit_code": exc.returncode,
-            "command": [str(part) for part in exc.cmd] if isinstance(exc.cmd, list) else str(exc.cmd),
-            "error": format_process_error(exc),
-            "summary_source": "host-launch-failure",
-        },
+        payload,
         default_error_kind="ghidra-string-launch-error",
         default_recovery_action="rerun-ghidra-string-xref-probe",
         default_transport_blocker="launch-failed",
@@ -135,6 +140,7 @@ def emit_launcher_stall_timeout(
     summary_path: Path,
     output_name: str,
     binary_path: str,
+    launch_transport: str,
     launcher_stage: dict[str, object],
     stall_seconds: int,
 ) -> dict[str, object]:
@@ -143,6 +149,7 @@ def emit_launcher_stall_timeout(
         {
             "output_name": output_name,
             "binary_path": binary_path,
+            "launch_transport": launch_transport,
             "status": "timeout",
             "error_kind": "guest-launcher-stall",
             "recovery_action": "inspect-launcher-stage",
@@ -155,6 +162,98 @@ def emit_launcher_stall_timeout(
     )
 
 
+def launch_generated_script(
+    *,
+    repo_root: Path,
+    generated_path: Path,
+    guest_launcher: str,
+    guest_scripts_root: str,
+    marker_name: str,
+    args: argparse.Namespace,
+) -> str:
+    if args.launch_transport in {"auto", "qga"}:
+        preflight = require_qga_preflight(
+            domain=args.domain,
+            connect=args.connect,
+            preflight_mode=args.preflight,
+        )
+        if preflight is not None and preflight.get("status") != "ok":
+            sys.stderr.write("[run-guest-ghidra-string-xref-probe] qga preflight warning; attempting qga transport anyway.\n")
+        qga_cmd = [
+            sys.executable,
+            str(repo_root / "scripts" / "vm-kvm" / "qga-run-powershell.py"),
+            "--domain",
+            args.domain,
+            "--connect",
+            args.connect,
+            "--script",
+            str(generated_path),
+            "--guest-dir",
+            guest_scripts_root,
+            "--no-wait",
+        ]
+        qga_result = subprocess.run(qga_cmd, cwd=str(repo_root), capture_output=True, text=True)
+        if qga_result.returncode == 0:
+            return "qga"
+        raise annotate_process_error(
+            subprocess.CalledProcessError(
+                qga_result.returncode,
+                qga_cmd,
+                output=qga_result.stdout,
+                stderr=qga_result.stderr,
+            ),
+            stage="qga-launch",
+        )
+
+    try:
+        run(
+            [
+                sys.executable,
+                str(repo_root / "scripts" / "vm-kvm" / "ensure-guest-admin-shell.py"),
+                "--repo-root",
+                str(repo_root),
+                "--domain",
+                args.domain,
+                "--connect",
+                args.connect,
+                "--bridge-base-url",
+                args.bridge_base_url,
+                "--upload-dir",
+                str(Path(args.upload_dir).resolve()),
+                "--guest-scripts-root",
+                guest_scripts_root,
+                "--delay-ms",
+                args.delay_ms,
+                "--marker-name",
+                marker_name,
+            ],
+            cwd=repo_root,
+        )
+    except subprocess.CalledProcessError as exc:
+        raise annotate_process_error(exc, stage="ensure-admin-shell") from exc
+
+    try:
+        run(
+            [
+                sys.executable,
+                str(repo_root / "scripts" / "vm-kvm" / "type-to-guest.py"),
+                args.domain,
+                "--connect",
+                args.connect,
+                "--delay-ms",
+                args.delay_ms,
+                "--wake-key",
+                args.wake_key,
+                "--enter",
+                guest_launcher,
+            ],
+            cwd=repo_root,
+        )
+    except subprocess.CalledProcessError as exc:
+        raise annotate_process_error(exc, stage="type-to-guest") from exc
+    return "send-key"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Stage and run run-ghidra-string-xref-probe.ps1 inside the KVM guest.")
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
@@ -165,6 +264,8 @@ def main() -> int:
     parser.add_argument("--guest-scripts-root", default=r"C:\RegProbe-Diag\bootstrap")
     parser.add_argument("--delay-ms", default="18")
     parser.add_argument("--wake-key", default="KEY_ENTER")
+    parser.add_argument("--launch-transport", choices=["auto", "qga", "send-key"], default="auto")
+    parser.add_argument("--preflight", choices=["require", "warn", "off"], default="require")
     parser.add_argument("--timeout-seconds", type=int, default=600)
     parser.add_argument("--launcher-stall-seconds", type=int, default=120)
     parser.add_argument("--binary-path", required=True)
@@ -191,33 +292,6 @@ def main() -> int:
 
     ensure_guest_bridge(repo_root=repo_root, bridge_base_url=args.bridge_base_url, upload_root=upload_dir)
     guest_scripts_root = args.guest_scripts_root
-    try:
-        run(
-            [
-                sys.executable,
-                str(repo_root / "scripts" / "vm-kvm" / "ensure-guest-admin-shell.py"),
-                "--repo-root",
-                str(repo_root),
-                "--domain",
-                args.domain,
-                "--connect",
-                args.connect,
-                "--bridge-base-url",
-                args.bridge_base_url,
-                "--upload-dir",
-                str(upload_dir),
-                "--guest-scripts-root",
-                guest_scripts_root,
-                "--delay-ms",
-                args.delay_ms,
-                "--marker-name",
-                f"{args.output_name}-admin-shell-ready",
-            ],
-            cwd=repo_root,
-        )
-    except subprocess.CalledProcessError as exc:
-        print(json.dumps(emit_host_step_error(summary_path=summary_path, output_name=args.output_name, binary_path=args.binary_path, exc=annotate_process_error(exc, stage="ensure-admin-shell")), indent=2))
-        return 1
 
     bridge = args.bridge_base_url.rstrip("/")
     generated_name = f"guest-ghidra-string-xref-{args.output_name}.ps1"
@@ -355,24 +429,34 @@ def main() -> int:
     )
 
     try:
-        run(
-            [
-                sys.executable,
-                str(repo_root / "scripts" / "vm-kvm" / "type-to-guest.py"),
-                args.domain,
-                "--connect",
-                args.connect,
-                "--delay-ms",
-                args.delay_ms,
-                "--wake-key",
-                args.wake_key,
-                "--enter",
-                guest_launcher,
-            ],
-            cwd=repo_root,
+        launch_transport = launch_generated_script(
+            repo_root=repo_root,
+            generated_path=generated_path,
+            guest_launcher=guest_launcher,
+            guest_scripts_root=guest_scripts_root,
+            marker_name=f"{args.output_name}-admin-shell-ready",
+            args=args,
         )
+    except QgaPreflightError as exc:
+        print(
+            json.dumps(
+                write_qga_preflight_summary(
+                    summary_path,
+                    domain=args.domain,
+                    connect=args.connect,
+                    launch_transport=args.launch_transport,
+                    preflight=exc.preflight,
+                    extra={
+                        "output_name": args.output_name,
+                        "binary_path": args.binary_path,
+                    },
+                ),
+                indent=2,
+            )
+        )
+        return 1
     except subprocess.CalledProcessError as exc:
-        print(json.dumps(emit_host_step_error(summary_path=summary_path, output_name=args.output_name, binary_path=args.binary_path, exc=annotate_process_error(exc, stage="type-to-guest")), indent=2))
+        print(json.dumps(emit_host_step_error(summary_path=summary_path, output_name=args.output_name, binary_path=args.binary_path, exc=exc, launch_transport=args.launch_transport), indent=2))
         return 1
 
     deadline = time.time() + args.timeout_seconds
@@ -392,6 +476,7 @@ def main() -> int:
                     {
                         "output_name": args.output_name,
                         "binary_path": args.binary_path,
+                        "launch_transport": launch_transport,
                         "status": "error",
                         "error_kind": "guest-launcher-error",
                         "recovery_action": "inspect-launcher-stage",
@@ -409,6 +494,7 @@ def main() -> int:
                         summary_path=summary_path,
                         output_name=args.output_name,
                         binary_path=args.binary_path,
+                        launch_transport=launch_transport,
                         launcher_stage=stage_payload,
                         stall_seconds=max(1, min(args.launcher_stall_seconds, args.timeout_seconds)),
                     )
@@ -423,13 +509,15 @@ def main() -> int:
             if "status" not in summary:
                 ghidra_exit = summary.get("ghidra_exit_code")
                 summary["status"] = "ok" if ghidra_exit == 0 else "error"
+            summary["launch_transport"] = launch_transport
+            summary_status = str(summary.get("status") or "").lower()
 
             summary = apply_summary_contract(
                 summary,
-                default_error_kind="ghidra-string-xref-error",
-                default_recovery_action="inspect-ghidra-run",
-                default_transport_blocker="ghidra",
-                default_guest_health="stable" if summary.get("status") == "ok" else "degraded",
+                default_error_kind=None if summary_status == "ok" else "ghidra-string-xref-error",
+                default_recovery_action="none" if summary_status == "ok" else "inspect-ghidra-run",
+                default_transport_blocker="none" if summary_status == "ok" else "ghidra",
+                default_guest_health="stable" if summary_status == "ok" else "degraded",
             )
             summary_path.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
             print(json.dumps(summary, indent=2))
@@ -442,6 +530,7 @@ def main() -> int:
         {
             "output_name": args.output_name,
             "binary_path": args.binary_path,
+            "launch_transport": launch_transport,
             "status": "timeout",
             "launcher_stage": last_stage_payload,
         },

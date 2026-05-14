@@ -7,6 +7,7 @@ public sealed class MainShellCoordinator : ViewModelBase
 {
     private readonly ConfigurationShellViewModel _configurationViewModel;
     private readonly RepairsShellViewModel _repairsViewModel;
+    private readonly ContributorLabViewModel _contributorLabViewModel;
     private readonly AboutViewModel _aboutViewModel;
     private readonly Action<string> _log;
     private ViewModelBase? _currentViewModel;
@@ -14,16 +15,19 @@ public sealed class MainShellCoordinator : ViewModelBase
     public MainShellCoordinator(
         ConfigurationShellViewModel configurationViewModel,
         RepairsShellViewModel repairsViewModel,
+        ContributorLabViewModel contributorLabViewModel,
         AboutViewModel aboutViewModel,
         Action<string> log)
     {
         _configurationViewModel = configurationViewModel ?? throw new ArgumentNullException(nameof(configurationViewModel));
         _repairsViewModel = repairsViewModel ?? throw new ArgumentNullException(nameof(repairsViewModel));
+        _contributorLabViewModel = contributorLabViewModel ?? throw new ArgumentNullException(nameof(contributorLabViewModel));
         _aboutViewModel = aboutViewModel ?? throw new ArgumentNullException(nameof(aboutViewModel));
         _log = log ?? throw new ArgumentNullException(nameof(log));
 
         ShowConfigurationCommand = new RelayCommand(_ => ShowConfiguration());
         ShowRepairsCommand = new RelayCommand(_ => ShowRepairs());
+        ShowContributorCommand = new RelayCommand(_ => ShowContributor());
         ShowAboutCommand = new RelayCommand(_ => ShowAbout());
         FocusSearchCommand = new RelayCommand(_ => FocusSearch());
         ClearFiltersCommand = new RelayCommand(_ => ClearFilters());
@@ -32,6 +36,8 @@ public sealed class MainShellCoordinator : ViewModelBase
     public RelayCommand ShowConfigurationCommand { get; }
 
     public RelayCommand ShowRepairsCommand { get; }
+
+    public RelayCommand ShowContributorCommand { get; }
 
     public RelayCommand ShowAboutCommand { get; }
 
@@ -67,6 +73,8 @@ public sealed class MainShellCoordinator : ViewModelBase
 
     public bool IsRepairsViewActive => ReferenceEquals(CurrentViewModel, _repairsViewModel);
 
+    public bool IsContributorViewActive => ReferenceEquals(CurrentViewModel, _contributorLabViewModel);
+
     public bool IsAboutViewActive => ReferenceEquals(CurrentViewModel, _aboutViewModel);
 
     public void Initialize()
@@ -84,6 +92,11 @@ public sealed class MainShellCoordinator : ViewModelBase
     {
         _repairsViewModel.ShowRepairsWorkspace();
         CurrentViewModel = _repairsViewModel;
+    }
+
+    public void ShowContributor()
+    {
+        CurrentViewModel = _contributorLabViewModel;
     }
 
     public void ShowAbout()
@@ -123,6 +136,7 @@ public sealed class MainShellCoordinator : ViewModelBase
     {
         OnPropertyChanged(nameof(IsConfigurationViewActive));
         OnPropertyChanged(nameof(IsRepairsViewActive));
+        OnPropertyChanged(nameof(IsContributorViewActive));
         OnPropertyChanged(nameof(IsAboutViewActive));
     }
 }

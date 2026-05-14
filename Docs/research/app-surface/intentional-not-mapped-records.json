@@ -43,6 +43,12 @@
       "notes": "The app does not currently expose this watchdog timeout sibling as a tweak or supported UI surface."
     },
     {
+      "record_id": "power.disable-network-power-saving",
+      "reason": "mixed-parent-bundle-retired",
+      "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
+      "notes": "The checked-in app no longer exposes this mixed parent bundle. It now surfaces the child power.disable-network-power-saving.policy record with DisableTaskOffload = 0 and SystemResponsiveness = 10; the opaque NetworkThrottlingIndex write is retained here only as historical audit context."
+    },
+    {
       "record_id": "power.disable-modern-standby",
       "reason": "retired-unsupported-surface",
       "provider_source": "",

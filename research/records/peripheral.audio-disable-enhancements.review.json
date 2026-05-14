@@ -1,0 +1,253 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "peripheral.audio-disable-enhancements",
+  "tweak_id": "peripheral.audio-disable-enhancements",
+  "record_status": "validated",
+  "summary": "Closed audit trail for the live Disable Audio Enhancements card. VM probes proved the documented MMDevices endpoint enhancement values are protected by Windows ACLs on the current build, so the app now reports this card as not applicable instead of attempting a misleading root-level or access-denied mutation.",
+  "setting": {
+    "name": "Disable Audio Enhancements",
+    "category": "Peripheral",
+    "area": "Audio Enhancement Flags",
+    "scope": "device",
+    "casual_explanation": "This card checks whether Windows exposes the audio enhancement endpoint keys, but does not try to write protected MMDevices values.",
+    "why_people_change_it": "People look for this when they want to disable endpoint audio effects, but these device-scoped keys are protected and should not be mutated blindly by the app.",
+    "tradeoffs_overview": "The app now fails closed as not applicable on protected MMDevices ACLs. This avoids partial writes and access-denied rollback noise, but it also means this card is not an actionable end-user tweak.",
+    "professional_notes": "The current app still exposes this card through app/Services/TweakProviders/AudioTweakProvider.cs, but engine/Tweaks/Peripheral/AudioEnhancementsTweak.cs now guards it as not applicable when MMDevices endpoint enhancement keys are protected. 2026-05-08 VM probes confirmed both root-level and per-device MMDevices writes return access denied, so this record is rejected for research-provider promotion.",
+    "targets": [
+      {
+        "target_id": "audio-enhancement-bundle",
+        "location_kind": "registry",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Audio + HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\MMDevices\\Audio\\Render",
+        "value_name": "EnhancementBundle",
+        "value_type": "registry value set",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Windows or tool default",
+            "meaning": "The setting stays at the existing or default state because this review record does not apply a value.",
+            "evidence_ids": [
+              "repo-tweak-provenance",
+              "engine-implementation"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "CurrentAppProfile",
+            "label": "Current audio enhancement bundle",
+            "meaning": "Former write bundle kept for audit history only; the app no longer mutates these values because MMDevices endpoint keys are protected.",
+            "evidence_ids": [
+              "repo-tweak-provenance",
+              "app-provider",
+              "engine-implementation",
+              "vm-peripheral.audio-disable-enhancements-app-qa-protected-acl-20260508"
+            ]
+          }
+        ],
+        "notes": "The current engine tweak detects the protected MMDevices lane and returns NotApplicable instead of writing."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/AudioTweakProvider.cs",
+    "notes": "The provider mapping exists, but the current implementation is a protected-ACL guard. It enumerates MMDevices endpoint enhancement targets and returns NotApplicable rather than writing protected device keys.",
+    "writes": []
+  },
+  "windows_defaults": [
+    {
+      "label": "Hold current or default state",
+      "applies_to": "Research tracking and backlog reduction only",
+      "states": [
+        {
+          "target_id": "audio-enhancement-bundle",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+        }
+      ],
+      "notes": "This review record documents the live card without promoting it into the validated research-provider surface.",
+      "evidence_ids": [
+        "repo-tweak-provenance",
+        "engine-implementation"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Windows/default hold",
+      "intended_for": [
+        "Research tracking only",
+        "Backlog reduction"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "audio-enhancement-bundle",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+        }
+      ],
+      "good_when": "You want to leave the system at the existing/default state.",
+      "bad_when": "You want to apply the current RegProbe app profile.",
+      "tradeoffs": [
+        "The live app behavior is represented in the corpus.",
+        "The card remains held outside the validated research-provider surface."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-tweak-provenance",
+        "app-provider"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Current app behavior",
+        "VM app QA",
+        "Research comparison"
+      ],
+      "avoid_for": [
+        "Systems where the listed tradeoffs are unacceptable"
+      ],
+      "states": [
+        {
+          "target_id": "audio-enhancement-bundle",
+          "state_kind": "value",
+          "value": "CurrentAppProfile",
+          "rationale": "Capture the exact state or profile that the current app card writes."
+        }
+      ],
+      "good_when": "You are auditing the exact state or profile that the current app currently writes.",
+      "bad_when": "You need a validated research-provider card.",
+      "tradeoffs": [
+        "The current app action is explicit.",
+        "The card is closed as not actionable because the documented MMDevices values are protected on the current build."
+      ],
+      "apply_allowed": false,
+      "notes": "2026-05-08 VM app QA confirmed the redesigned app guard reports protected MMDevices endpoint keys as not applicable and does not mutate registry values.",
+      "evidence_ids": [
+        "repo-tweak-provenance",
+        "app-provider",
+        "engine-implementation",
+        "vm-peripheral.audio-disable-enhancements-app-qa-20260507",
+        "vm-peripheral.audio-disable-enhancements-app-qa-protected-acl-20260508"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-tweak-provenance",
+      "kind": "repo-doc",
+      "title": "Repo tweak provenance for peripheral.audio-disable-enhancements",
+      "location": "Docs/tweaks/tweak-provenance.md",
+      "summary": "The checked-in tweak provenance tables map peripheral.audio-disable-enhancements to the current repo implementation.",
+      "supports": [
+        "ui-mapping",
+        "behavior"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-provider",
+      "kind": "repo-code",
+      "title": "Live provider mapping",
+      "location": "app/Services/TweakProviders/AudioTweakProvider.cs",
+      "summary": "The live app still surfaces peripheral.audio-disable-enhancements through the first-party provider.",
+      "supports": [
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "engine-implementation",
+      "kind": "repo-code",
+      "title": "Current engine implementation",
+      "location": "engine/Tweaks/Peripheral/AudioTweaks.cs",
+      "summary": "The current engine implementation routes this card to AudioEnhancementsTweak, which reports protected MMDevices endpoint enhancement keys as NotApplicable instead of writing.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-peripheral.audio-disable-enhancements-app-qa-20260507",
+      "kind": "vm-test",
+      "title": "RegProbe app QA access-denied failure for peripheral.audio-disable-enhancements",
+      "location": "evidence/captures/peripheral-audio-disable-enhancements-app-qa-20260507.json",
+      "summary": "Status check-failed: The tweak flow completed, but at least one apply or rollback checkpoint did not come back clean. The app reached the current mutation path, but the HKLM MMDevices Audio Render write failed with access denied; the implementation needs a safer per-device or permission-aware design before this can be actioned.",
+      "supports": [
+        "behavior",
+        "risk",
+        "side-effects",
+        "ui-mapping"
+      ],
+      "strength": "high",
+      "artifact_status": "present"
+    },
+    {
+      "evidence_id": "vm-peripheral.audio-disable-enhancements-app-qa-protected-acl-20260508",
+      "kind": "vm-test",
+      "title": "RegProbe app QA protected-ACL not-applicable proof for peripheral.audio-disable-enhancements",
+      "location": "evidence/captures/peripheral-audio-disable-enhancements-app-qa-protected-acl-20260508.json",
+      "summary": "Status not-applicable: the app detected protected MMDevices audio endpoint enhancement keys, reported 6 protected device-scoped target values, skipped apply/verify/rollback, and did not write the HKCU DisableProtectedAudioDG value.",
+      "supports": [
+        "behavior",
+        "risk",
+        "ui-mapping"
+      ],
+      "strength": "high",
+      "artifact_status": "present"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": false,
+    "needs_vm_validation": false,
+    "why": "The current app mapping, documentation, failed 2026-05-07 mutation attempt, explicit 2026-05-08 per-device write probe, and redesigned 2026-05-08 VM app QA now agree: the MMDevices endpoint enhancement values are protected and this card should fail closed as not applicable rather than mutate.",
+    "manual_review_required": false,
+    "blocking_issues": [],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "protected-acl-not-actionable",
+    "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the documented MMDevices audio enhancement endpoint values are protected by Windows ACLs on the current build, and the app now reports a truthful NotApplicable state instead of writing.",
+    "promotion_disposition_reviewed_utc": "2026-05-08T08:45:00Z"
+  },
+  "last_reviewed_utc": "2026-05-08T08:45:00Z",
+  "validation_proof": {
+    "source_url": "Docs/peripheral/peripheral.md",
+    "exact_quote_or_path": "Docs/peripheral/peripheral.md:97 documents Disable Audio Enhancements and lists the MMDevices Audio Render/Capture property values touched by this card.",
+    "notes": "The peripheral documentation maps the audio-enhancement control to the MMDevices Audio property/FxProperties values and notes the elevation/device-scope tradeoff.",
+    "key_found_on_page": true
+  },
+  "tested_on": [
+    {
+      "environment": "KVM VM via QGA app QA",
+      "os": "Windows 11",
+      "edition": "25H2 session",
+      "build": "26100",
+      "notes": "2026-05-07 RegProbe app QA status check-failed; artifact evidence/captures/peripheral-audio-disable-enhancements-app-qa-20260507.json."
+    },
+    {
+      "environment": "KVM VM via QGA app QA",
+      "os": "Windows 11",
+      "edition": "25H2 session",
+      "build": "26100",
+      "notes": "2026-05-08 RegProbe app QA status not-applicable after protected-ACL guard; artifacts evidence/captures/peripheral-audio-disable-enhancements-app-qa-protected-acl-20260508.json and evidence/captures/app-qa-audio-protected-acl-20260508.json."
+    }
+  ],
+  "open_questions": [
+    "Should a future audio workflow call a documented Windows audio endpoint API instead of registry mutation for enhancement state?"
+  ]
+}

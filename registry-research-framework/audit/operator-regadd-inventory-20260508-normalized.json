@@ -1,0 +1,970 @@
+{
+  "generated_utc": "2026-05-08T19:45:53Z",
+  "status": "ok",
+  "source": "user-pasted-reg-add-list",
+  "entry_count": 96,
+  "parsed_ok_count": 96,
+  "partial_count": 0,
+  "entries": [
+    {
+      "index": 1,
+      "raw_command": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\SYSTEM\" /v \"EnableLocalLogonSid\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\SYSTEM",
+      "value_name": "EnableLocalLogonSid",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 2,
+      "raw_command": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\SYSTEM\" /v \"EnableVirtualization\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\SYSTEM",
+      "value_name": "EnableVirtualization",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 3,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive\" /v \"AdditionalCriticalWorkerThreads\" /t REG_DWORD /d \"5\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "AdditionalCriticalWorkerThreads",
+      "type": "REG_DWORD",
+      "requested_data": "5",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 4,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive\" /v \"AdditionalDelayedWorkerThreads\" /t REG_DWORD /d \"5\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "AdditionalDelayedWorkerThreads",
+      "type": "REG_DWORD",
+      "requested_data": "5",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 5,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive\" /v \"UuidSequenceNumber\" /t REG_DWORD /d \"3322358\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "UuidSequenceNumber",
+      "type": "REG_DWORD",
+      "requested_data": "3322358",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 6,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive\" /v \"TickcountRolloverDelay\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "TickcountRolloverDelay",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 7,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive\" /v \"KernelWorkerTestFlags\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "KernelWorkerTestFlags",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 8,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive\" /v \"MaximumKernelWorkerThreads\" /t REG_DWORD /d \"25000\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "MaximumKernelWorkerThreads",
+      "type": "REG_DWORD",
+      "requested_data": "25000",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 9,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive\" /v \"ForceEnableMutantAutoboost\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "ForceEnableMutantAutoboost",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 10,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System\" /v \"AllowRemoteDASD\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "value_name": "AllowRemoteDASD",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 11,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System\" /v \"DisableDiskCounters\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "value_name": "DisableDiskCounters",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 12,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System\" /v \"IoAllowLoadCrashDumpDriver\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "value_name": "IoAllowLoadCrashDumpDriver",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 13,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System\" /v \"IoEnableSessionZeroAccessCheck\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "value_name": "IoEnableSessionZeroAccessCheck",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 14,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"GlobalTimerResolutionRequests\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "GlobalTimerResolutionRequests",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 15,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"ForceParkingRequested\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "ForceParkingRequested",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 16,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"EnableWerUserReporting\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "EnableWerUserReporting",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 17,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"HyperStartDisabled\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "HyperStartDisabled",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 18,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"DisableLightWeightSuspend\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "DisableLightWeightSuspend",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 19,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"TimerCheckFlags\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "TimerCheckFlags",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 20,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"ForceIdleGracePeriod\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "ForceIdleGracePeriod",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 21,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"DisableExceptionChainValidation\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "DisableExceptionChainValidation",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 22,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"MaxDynamicTickDuration\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "MaxDynamicTickDuration",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 23,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"EnableTickAccumulationFromAccountingPeriods\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "EnableTickAccumulationFromAccountingPeriods",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 24,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"EnablePerCpuClockTickScheduling\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "EnablePerCpuClockTickScheduling",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 25,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"SerializeTimerExpiration\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "SerializeTimerExpiration",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 26,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"XStateContextLookasidePerProcMaxDepth\" /t REG_DWORD /d \"1024\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "XStateContextLookasidePerProcMaxDepth",
+      "type": "REG_DWORD",
+      "requested_data": "1024",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 27,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"LongDpcQueueThreshold\" /t REG_DWORD /d \"2\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "LongDpcQueueThreshold",
+      "type": "REG_DWORD",
+      "requested_data": "2",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 28,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"LongDpcRuntimeThreshold\" /t REG_DWORD /d \"50\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "LongDpcRuntimeThreshold",
+      "type": "REG_DWORD",
+      "requested_data": "50",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 29,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"ForceBugcheckForDpcWatchdog\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "ForceBugcheckForDpcWatchdog",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 30,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"ForceForegroundBoostDecay\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "ForceForegroundBoostDecay",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 31,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"RebalanceMinPriority\" /t REG_DWORD /d \"16\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "RebalanceMinPriority",
+      "type": "REG_DWORD",
+      "requested_data": "16",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 32,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"InterruptSteeringFlags\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "InterruptSteeringFlags",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 33,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"AlwaysTrackIoBoosting\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "AlwaysTrackIoBoosting",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 34,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"DisableControlFlowGuardExportSuppression\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "DisableControlFlowGuardExportSuppression",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 35,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"MaximumCooperativeIdleSearchWidth\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "MaximumCooperativeIdleSearchWidth",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 36,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\" /v \"HiberbootEnabled\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "HiberbootEnabled",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 37,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\" /v \"PowerSettingProfile\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "PowerSettingProfile",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 38,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\" /v \"WatchdogResumeTimeout\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "WatchdogResumeTimeout",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 39,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\" /v \"WatchdogSleepTimeout\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "WatchdogSleepTimeout",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 40,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\" /v \"SkipTickOverride\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "SkipTickOverride",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 41,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\" /v \"Win32CalloutWatchdogBugcheckEnabled\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "Win32CalloutWatchdogBugcheckEnabled",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 42,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\" /v \"IdleScanInterval\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "IdleScanInterval",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 43,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\" /v \"SleepStudyDisabled\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "SleepStudyDisabled",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 44,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"Class1InitialUnparkCount\" /t REG_DWORD /d \"64\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "Class1InitialUnparkCount",
+      "type": "REG_DWORD",
+      "requested_data": "64",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 45,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"CustomizeDuringSetup\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "CustomizeDuringSetup",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 46,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"EnergyEstimationEnabled\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "EnergyEstimationEnabled",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 47,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"HiberFileSizePercent\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HiberFileSizePercent",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 48,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"MfBufferingThreshold\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "MfBufferingThreshold",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 49,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"PerfCalculateActualUtilization\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PerfCalculateActualUtilization",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 50,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"SourceSettingsVersion\" /t REG_DWORD /d \"4\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "SourceSettingsVersion",
+      "type": "REG_DWORD",
+      "requested_data": "4",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 51,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"TimerRebaseThresholdOnDripsExit\" /t REG_DWORD /d \"60\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "TimerRebaseThresholdOnDripsExit",
+      "type": "REG_DWORD",
+      "requested_data": "60",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 52,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"HibernateEnabledDefault\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HibernateEnabledDefault",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 53,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"EventProcessorEnabled\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "EventProcessorEnabled",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 54,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"LidReliabilityState\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "LidReliabilityState",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 55,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"HibernateEnabled\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HibernateEnabled",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 56,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"DisableInboxPepGeneratedConstraints\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "DisableInboxPepGeneratedConstraints",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 57,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"DisableDisplayBurstOnPowerSourceChange\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "DisableDisplayBurstOnPowerSourceChange",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 58,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"IdleProcessorsRequireQosManagement\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "IdleProcessorsRequireQosManagement",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 59,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"TtmEnabled\" /t REG_DWORD /d \"0\" /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "TtmEnabled",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 60,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"AllowAudioToEnableExecutionRequiredPowerRequests\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 61,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"DeepIoCoalescingEnabled\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "DeepIoCoalescingEnabled",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 62,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"IgnoreCsComplianceCheck\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "IgnoreCsComplianceCheck",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 63,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"DripsSwHwDivergenceEnableLiveDump\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "DripsSwHwDivergenceEnableLiveDump",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 64,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"DisableVsyncLatencyUpdate\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "DisableVsyncLatencyUpdate",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 65,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"SleepstudyAccountingEnabled\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "SleepstudyAccountingEnabled",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 66,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"EnableInputSuppression\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "EnableInputSuppression",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 67,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"PerfCheckTimerImplementation\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PerfCheckTimerImplementation",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 68,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"StandbyConnectivityGracePeriod\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "StandbyConnectivityGracePeriod",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 69,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"EnforceAusterityMode\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "EnforceAusterityMode",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 70,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"AlwaysComputeQosHints\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "AlwaysComputeQosHints",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 71,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"HeteroMultiCoreClassesEnabled\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HeteroMultiCoreClassesEnabled",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 72,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"HeteroMultiClassParkingEnabled\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HeteroMultiClassParkingEnabled",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 73,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"DisableIdleStatesAtBoot\" /t REG_DWORD /d \"2\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "DisableIdleStatesAtBoot",
+      "type": "REG_DWORD",
+      "requested_data": "2",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 74,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"PerfBoostAtGuaranteed\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PerfBoostAtGuaranteed",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 75,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"MSDisabled\" /t REG_DWORD /d \"1\" /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "MSDisabled",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 76,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"FxAccountingTelemetryDisabled\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "FxAccountingTelemetryDisabled",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 77,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"Win32kCalloutWatchdogTimeoutSeconds\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "Win32kCalloutWatchdogTimeoutSeconds",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 78,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"EnableMinimalHiberFile\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "EnableMinimalHiberFile",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 79,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"HiberbootEnabled\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HiberbootEnabled",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 80,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"MaximumFrequencyOverride\" /t REG_DWORD /d \"100\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "MaximumFrequencyOverride",
+      "type": "REG_DWORD",
+      "requested_data": "100",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 81,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"PoFxSystemIrpWaitForReportDevicePowered\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PoFxSystemIrpWaitForReportDevicePowered",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 82,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"AllowSystemRequiredPowerRequests\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "AllowSystemRequiredPowerRequests",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 83,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"CoalescingFlushInterval\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "CoalescingFlushInterval",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 84,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"CoalescingTimerInterval\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "CoalescingTimerInterval",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 85,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"HeteroHgsEePerfHintsIndependentEnabled\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HeteroHgsEePerfHintsIndependentEnabled",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 86,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"HeteroHgsPlusDisabled\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HeteroHgsPlusDisabled",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 87,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"IpiLastClockOwnerDisable\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "IpiLastClockOwnerDisable",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 88,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"PowerWatchdogRequestQueueTimeoutMsec\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogRequestQueueTimeoutMsec",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 89,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"PowerWatchdogPoCalloutTimeoutMsec\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogPoCalloutTimeoutMsec",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 90,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"PowerWatchdogPowerOnGdiTimeoutMsec\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogPowerOnGdiTimeoutMsec",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 91,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"PowerWatchdogDwmSyncFlushTimeoutMsec\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogDwmSyncFlushTimeoutMsec",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 92,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"PowerWatchdogDrvSetMonitorTimeoutMsec\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 93,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ForceHibernateDisabled\" /v \"Policy\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ForceHibernateDisabled",
+      "value_name": "Policy",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 94,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep\" /v \"EnableDsNetRefresh\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+      "value_name": "EnableDsNetRefresh",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 95,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep\" /v \"EnabledActions\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+      "value_name": "EnabledActions",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok"
+    },
+    {
+      "index": 96,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling\" /v \"PowerThrottlingOff\" /t REG_DWORD /d \"1\"",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+      "value_name": "PowerThrottlingOff",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": false,
+      "parse_status": "ok"
+    }
+  ]
+}

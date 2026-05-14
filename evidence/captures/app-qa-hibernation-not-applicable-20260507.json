@@ -1,0 +1,265 @@
+[
+  {
+    "tweak_id": "power.disable-hibernation",
+    "host_exit": 0,
+    "execution_exit": 0,
+    "payload_status": "completed",
+    "report_source": "stdout",
+    "report_parse_error": null,
+    "report_fetch_status": null,
+    "report_app_success": true,
+    "report_success": true,
+    "report_status": "not-applicable",
+    "report_summary": "Current state: Hibernation unavailable: system firmware does not support hibernation",
+    "report_contract_status": "ok",
+    "report_contract_summary": "QA card snapshot contract passed.",
+    "report_contract_failures": [],
+    "report_card_present": true,
+    "report_card_has_claim_boundary": true,
+    "report_card_present_fields": [
+      "TweakId",
+      "Name",
+      "Category",
+      "EvidenceClass",
+      "ResearchStatus",
+      "RollbackSnapshotState",
+      "HasClaimBoundary",
+      "WhatWeKnowSummary",
+      "WhatWeDoNotClaimSummary",
+      "ProofLanes"
+    ],
+    "report_card_missing_fields": [],
+    "report_card_proof_lanes": [
+      "docs",
+      "runtime",
+      "source",
+      "rollback"
+    ],
+    "report_card_missing_proof_lanes": [],
+    "report": {
+      "TweakId": "power.disable-hibernation",
+      "TweakName": "Disable Hibernation",
+      "Success": true,
+      "Status": "not-applicable",
+      "Summary": "Current state: Hibernation unavailable: system firmware does not support hibernation",
+      "RollbackRequested": true,
+      "GatedMutationOverrideRequested": true,
+      "GatedMutationOverrideUsed": true,
+      "Card": {
+        "TweakId": "power.disable-hibernation",
+        "Name": "Disable Hibernation",
+        "Category": "Power",
+        "Description": "Runs powercfg /hibernate off. This disables hibernation and removes hiberfil.sys.",
+        "FriendlyDescription": "Runs powercfg /hibernate off. This disables hibernation and removes hiberfil.sys.",
+        "RegistryPath": "",
+        "EvidenceClass": "B",
+        "EvidenceClassTitle": "Strong but Decision-Gated",
+        "ResearchStatus": "INTENTIONAL HOLD",
+        "IsMutationAllowed": false,
+        "RollbackSnapshotState": "ready",
+        "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+        "HasClaimBoundary": true,
+        "WhatWeKnowSummary": "Claim: Runs powercfg /hibernate off. This disables hibernation and removes hiberfil.sys. Evidence: The power documentation explains S4 hibernation behavior and maps the app command to the powercfg /hibernate off registry effect. Rollback: Rollback: Verified via record-restore-story.",
+        "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "ProofLanes": [
+          {
+            "Key": "docs",
+            "Label": "DOCS",
+            "State": "ready",
+            "Summary": "The power documentation explains S4 hibernation behavior and maps the app command to the powercfg /hibernate off registry effect.",
+            "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\power\\power.md"
+          },
+          {
+            "Key": "runtime",
+            "Label": "RUNTIME",
+            "State": "ready",
+            "Summary": "No runtime proof is attached yet. This record still needs VM validation.",
+            "Source": ""
+          },
+          {
+            "Key": "source",
+            "Label": "SOURCE",
+            "State": "ready",
+            "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+            "Source": "win-config / power/desc.md: https://github.com/nohuto/win-config/blob/main/power/desc.md"
+          },
+          {
+            "Key": "rollback",
+            "Label": "ROLLBACK",
+            "State": "ready",
+            "Summary": "Rollback: Verified via record-restore-story.",
+            "Source": "record-restore-story"
+          }
+        ],
+        "ReferenceLinks": [
+          {
+            "Title": "Docs: Details",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#power.disable-hibernation",
+            "Kind": "Details"
+          },
+          {
+            "Title": "Docs: Power",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\power\\power.md#power.disable-hibernation",
+            "Kind": "Docs"
+          }
+        ]
+      },
+      "Stages": [
+        {
+          "Stage": "detect-before",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Current state: Hibernation unavailable: system firmware does not support hibernation",
+          "OutcomeSummary": "Detect - Skipped",
+          "CurrentValue": "Hibernation unavailable: system firmware does not support hibernation",
+          "TargetValue": "Optimized",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Not applicable",
+              "Message": "Current state: Hibernation unavailable: system firmware does not support hibernation",
+              "TimestampText": "16:15:30"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "apply",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Run completed.",
+          "OutcomeSummary": "Apply - Success",
+          "CurrentValue": "Hibernation unavailable: system firmware does not support hibernation",
+          "TargetValue": "Optimized",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Not applicable",
+              "Message": "Current state: Hibernation unavailable: system firmware does not support hibernation",
+              "TimestampText": "16:15:30"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Skipped",
+              "Message": "Detect returned NotApplicable.",
+              "TimestampText": "16:15:30"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Skipped",
+              "Message": "Detect returned NotApplicable.",
+              "TimestampText": "16:15:30"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Skipped",
+              "Message": "Detect returned NotApplicable.",
+              "TimestampText": "16:15:30"
+            }
+          ]
+        },
+        {
+          "Stage": "rollback",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Rollback not supported for this tweak.",
+          "OutcomeSummary": "Rollback - Skipped",
+          "CurrentValue": "Hibernation unavailable: system firmware does not support hibernation",
+          "TargetValue": "Optimized",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Not applicable",
+              "Message": "Current state: Hibernation unavailable: system firmware does not support hibernation",
+              "TimestampText": "16:15:30"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Skipped",
+              "Message": "Detect returned NotApplicable.",
+              "TimestampText": "16:15:30"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Skipped",
+              "Message": "Detect returned NotApplicable.",
+              "TimestampText": "16:15:30"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Not applicable",
+              "Message": "Rollback not supported for this tweak.",
+              "TimestampText": "16:15:30"
+            }
+          ]
+        },
+        {
+          "Stage": "detect-after",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Current state: Hibernation unavailable: system firmware does not support hibernation",
+          "OutcomeSummary": "Detect - Skipped",
+          "CurrentValue": "Hibernation unavailable: system firmware does not support hibernation",
+          "TargetValue": "Optimized",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Not applicable",
+              "Message": "Current state: Hibernation unavailable: system firmware does not support hibernation",
+              "TimestampText": "16:15:30"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Skipped",
+              "Message": "Detect returned NotApplicable.",
+              "TimestampText": "16:15:30"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Skipped",
+              "Message": "Detect returned NotApplicable.",
+              "TimestampText": "16:15:30"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Not applicable",
+              "Message": "Rollback not supported for this tweak.",
+              "TimestampText": "16:15:30"
+            }
+          ]
+        }
+      ],
+      "StartedAtUtc": "2026-05-07T23:15:27.2426197+00:00",
+      "CompletedAtUtc": "2026-05-07T23:15:30.4981673+00:00"
+    }
+  }
+]

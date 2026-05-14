@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T10:05:49.1123650Z",
+  "record_id": "explorer.disable-low-disk-space-warning",
+  "run_id": "explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+  "value_name": "NoLowDiskSpaceChecks",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4444 registry events and 525 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer / NoLowDiskSpaceChecks from the helper probe, returning 0xC0000034 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0xC0000034",
+    "event_count": 4444,
+    "caller_stack_event_count": 525,
+    "target_key_event_count": 8,
+    "target_value_event_count": 1,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507-summary.json",
+      "sha256": "9ca99ecc4a771410e869326fc83b344dab51a3a80c998b72f6a9c9e82e28348d",
+      "size": 8011,
+      "collected_utc": "2026-05-07T10:05:49.1123650Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "77b44d5fabc62f1413d74da907722160101c0d74ce63a3df782cc6cfb63c03b8",
+      "size": 5662320,
+      "collected_utc": "2026-05-07T10:05:49.1123650Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507.etl",
+      "sha256": "b91040a990466bfe5520cb2d04ba6a55bb637354b4304e7e02a6f7906eddccf8",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T10:05:49.1123650Z"
+    }
+  ]
+}

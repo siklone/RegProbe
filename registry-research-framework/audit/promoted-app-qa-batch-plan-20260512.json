@@ -1,0 +1,332 @@
+{
+  "generated_utc": "2026-05-12T17:04:04Z",
+  "status": "PASS",
+  "selection": {
+    "requested_ids": [],
+    "requested_categories": [],
+    "limit_per_category": 1,
+    "total_limit": 5,
+    "run_kvm": false,
+    "wait_timeout": 900
+  },
+  "sources": {
+    "promotion_gates": "research/promotion-gates.json",
+    "catalog_csv": "Docs/tweaks/tweak-catalog.csv",
+    "single_tweak_app_qa": "registry-research-framework/scripts/check_single_tweak_app_qa.py",
+    "kvm_batch_runner": "scripts/vm-kvm/run-guest-app-tweak-qa-batch.py"
+  },
+  "catalog_candidate_count": 258,
+  "selected_candidate_count": 5,
+  "errors": [],
+  "candidates": [
+    {
+      "tweak_id": "audio.disable-beep",
+      "qa_tweak_id": "audio.disable-beep",
+      "candidate_id": "audio.disable-beep",
+      "record_id": "audio.disable-beep",
+      "category": "Audio",
+      "name": "System Beep Driver",
+      "documentation": "research/records/audio.disable-beep.review.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect audio.disable-beep",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'audio.disable-beep' --qa-output 'C:\\Tools\\ValidationController\\smoke\\audio.disable-beep.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'audio.disable-beep' --qa-output 'C:\\Tools\\ValidationController\\smoke\\audio.disable-beep.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'audio.disable-beep' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\audio.disable-beep.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'audio.disable-beep' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\audio.disable-beep.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'audio.disable-beep'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "cleanup.disable-reserved-storage",
+      "qa_tweak_id": "cleanup.disable-reserved-storage",
+      "candidate_id": "cleanup.disable-reserved-storage",
+      "record_id": "cleanup.disable-reserved-storage",
+      "category": "Cleanup",
+      "name": "Disable Reserved Storage",
+      "documentation": "research/records/cleanup.disable-reserved-storage.review.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect cleanup.disable-reserved-storage",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'cleanup.disable-reserved-storage' --qa-output 'C:\\Tools\\ValidationController\\smoke\\cleanup.disable-reserved-storage.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'cleanup.disable-reserved-storage' --qa-output 'C:\\Tools\\ValidationController\\smoke\\cleanup.disable-reserved-storage.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'cleanup.disable-reserved-storage' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\cleanup.disable-reserved-storage.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'cleanup.disable-reserved-storage' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\cleanup.disable-reserved-storage.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'cleanup.disable-reserved-storage'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "developer.docker-performance",
+      "qa_tweak_id": "developer.docker-performance",
+      "candidate_id": "developer.docker-performance",
+      "record_id": "developer.docker-performance",
+      "category": "Developer",
+      "name": "Docker Desktop WSL 2 Backend",
+      "documentation": "research/records/developer.docker-performance.review.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect developer.docker-performance",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.docker-performance' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.docker-performance.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.docker-performance' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.docker-performance.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.docker-performance' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.docker-performance.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.docker-performance' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.docker-performance.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'developer.docker-performance'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "explorer.always-show-icons-never-thumbnails",
+      "qa_tweak_id": "explorer.always-show-icons-never-thumbnails",
+      "candidate_id": "explorer.always-show-icons-never-thumbnails",
+      "record_id": "explorer.always-show-icons-never-thumbnails",
+      "category": "Explorer",
+      "name": "Always Show Icons, Never Thumbnails",
+      "documentation": "research/records/explorer.always-show-icons-never-thumbnails.review.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect explorer.always-show-icons-never-thumbnails",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.always-show-icons-never-thumbnails' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.always-show-icons-never-thumbnails.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.always-show-icons-never-thumbnails' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.always-show-icons-never-thumbnails.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.always-show-icons-never-thumbnails' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.always-show-icons-never-thumbnails.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.always-show-icons-never-thumbnails' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.always-show-icons-never-thumbnails.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'explorer.always-show-icons-never-thumbnails'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "misc.disable-edge-features",
+      "qa_tweak_id": "misc.disable-edge-features",
+      "candidate_id": "misc.disable-edge-features",
+      "record_id": "misc.disable-edge-features",
+      "category": "Misc",
+      "name": "Disable Microsoft Edge Features",
+      "documentation": "Docs/misc/misc.md",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": false,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect misc.disable-edge-features",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'misc.disable-edge-features' --qa-output 'C:\\Tools\\ValidationController\\smoke\\misc.disable-edge-features.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'misc.disable-edge-features' --qa-output 'C:\\Tools\\ValidationController\\smoke\\misc.disable-edge-features.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'misc.disable-edge-features' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\misc.disable-edge-features.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'misc.disable-edge-features' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\misc.disable-edge-features.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'misc.disable-edge-features'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    }
+  ],
+  "run_results": [],
+  "summary": {
+    "planned_count": 5,
+    "planned_apply_allowed_count": 5,
+    "live_success_count": 0,
+    "live_failure_count": 0,
+    "categories": [
+      "Audio",
+      "Cleanup",
+      "Developer",
+      "Explorer",
+      "Misc"
+    ]
+  }
+}

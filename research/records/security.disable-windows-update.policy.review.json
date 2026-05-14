@@ -241,6 +241,20 @@
         "app-matches"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "kvm-machine-policy-revalidation-batch-20260505",
+      "kind": "runtime-read",
+      "title": "KVM machine/policy current-state revalidation batch",
+      "location": "registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json",
+      "summary": "A KVM guest batch on build 26200 re-read the Windows Update child policy paths without changing guest configuration. The live guest still reports both DisableWindowsUpdateAccess and NoAutoUpdate as absent in the current baseline snapshot.",
+      "supports": [
+        "path",
+        "runtime-read",
+        "default",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -256,7 +270,7 @@
   "version_stable": [
     "25H2"
   ],
-  "last_reviewed_utc": "2026-03-26T00:00:00Z",
+  "last_reviewed_utc": "2026-05-06T00:20:41.9332318Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx",
     "exact_quote_or_path": "NoAutoUpdate under the AU policy key with the expected 1/0 mapping for Configure Automatic Updates.",

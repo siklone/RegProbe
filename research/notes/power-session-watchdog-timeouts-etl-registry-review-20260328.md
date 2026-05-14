@@ -40,4 +40,4 @@ That is stronger than a plain before/after export, but it is still not a direct 
 
 ## Retained audit artifact
 
-- [power-session-watchdog-timeouts-etl-registry-review-20260328.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-session-watchdog-timeouts-etl-registry-review-20260328.json)
+- [power-session-watchdog-timeouts-etl-registry-review-20260328.json](../../registry-research-framework/audit/power-session-watchdog-timeouts-etl-registry-review-20260328.json)

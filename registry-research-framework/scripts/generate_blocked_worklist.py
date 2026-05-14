@@ -41,6 +41,12 @@ GENERIC_SLUG_WORDS = {
 
 def blocker_hint(blockers: list[str], lane: str) -> str:
     lowered = " | ".join(str(item).lower() for item in blockers)
+    if "app-qa-access-denied" in lowered:
+        return "Redesign the current app mutation path before more evidence collection; audio enhancements likely need per-device or permission-aware handling, then rerun VM app QA."
+    if "vm-firmware-hibernation-unsupported" in lowered:
+        return "Move this to a hibernation-capable VM or bare-metal validation lane; the current VM correctly proves not-applicable handling only."
+    if "app-qa-clean-baseline-needed" in lowered:
+        return "Provision a clean baseline where the target service is enabled/running, then rerun VM app QA to prove apply and rollback mutation."
     if "live-reader-binding-unresolved" in lowered:
         return "Target the override response/message boundary next; start with PopPowerRequestHandleRequestOverrideQueryResponse and PopUmpoSendPowerMessage before widening the lane."
     if "restore-story" in lowered or "rollback" in lowered:
@@ -281,6 +287,8 @@ def render_markdown(payload: dict[str, Any]) -> str:
     ]
     for label, count in (payload.get("actionability_counts") or {}).items():
         lines.append(f"- `{label}`: {count}")
+    if not (payload.get("actionability_counts") or {}):
+        lines.append("- No blocked candidates remain.")
 
     lines.extend([
         "",
@@ -302,6 +310,8 @@ def render_markdown(payload: dict[str, Any]) -> str:
             lines.append(f"- `{lane}`: {count} | `{lane_command}`")
         else:
             lines.append(f"- `{lane}`: {count}")
+    if not lane_counts:
+        lines.append("- No blocked candidates remain.")
 
     actionable = [item for item in (payload.get("items") or []) if item.get("actionability") == "active"][:5]
     if actionable:
@@ -320,7 +330,10 @@ def render_markdown(payload: dict[str, Any]) -> str:
             )
 
     lines.extend(["", "## Candidates", ""])
-    for item in payload.get("items") or []:
+    items = payload.get("items") or []
+    if not items:
+        lines.append("- No blocked candidates remain.")
+    for item in items:
         lines.append(f"### `{item['candidate_id']}`")
         lines.append("")
         lines.append(f"- Lane: `{item['next_missing_layer']}`")
