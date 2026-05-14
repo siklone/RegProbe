@@ -43,7 +43,7 @@ public sealed class TweakExecutionPlanSnapshotTests
 
         var snapshot = TweakExecutionPlanSnapshot.Create(viewModel);
 
-        Assert.Equal("Plan (4 steps) • Rollback ready", snapshot.CollapsedSummary);
+        Assert.Equal("Apply review (7 checks) • Rollback ready", snapshot.CollapsedSummary);
         Assert.Contains(@"HKLM\Software\RegProbe\Feature", snapshot.ExportText, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("Rollback story: verified", snapshot.ExportText, StringComparison.OrdinalIgnoreCase);
     }
