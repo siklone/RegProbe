@@ -1,14 +1,16 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-14T12:52:30Z",
+  "generated_utc": "2026-05-14T13:29:09Z",
   "summary": {
-    "artifact_count": 14,
+    "artifact_count": 15,
     "attention_count": 0,
     "normal_app_cards_source": "Docs/research/app-surface/validated-registry-values.json",
     "operator96_normal_app_card_ready": 0,
     "operator96_non_ok_count": 0,
     "operator96_noisy_result_count": 0,
     "cleanup_delete_eligible_count": 0,
+    "cleanup_retained_inventory_count": 89,
+    "cleanup_reference_migration_needed_count": 15,
     "app_card_contract_pass_count": 258,
     "app_card_contract_fail_count": 0,
     "promoted_app_qa_live_success_count": 14,
@@ -18,7 +20,7 @@
   "rules": {
     "end_user_surface": "Normal users start from the WPF app and validated app-surface records, not raw audit folders.",
     "operator96_surface": "Operator96 remains Contributor Lab / research observation unless ready_for_bounded_app_card is positive and all gates stay clean.",
-    "cleanup": "Do not delete archived/raw evidence unless the cleanup quarantine ledger reports live_reference_count=0 and a replacement or explicit obsolete reason exists.",
+    "cleanup": "Do not delete archived/raw evidence unless the cleanup quarantine ledger reports live_reference_count=0 and a replacement or explicit obsolete reason exists. Use the retained inventory plan to reduce references before deletion.",
     "performance_claims": "No benchmark/performance claim ships from a single noisy, low-confidence, or community-only observation."
   },
   "raw_parse_do_not_start_here": [
@@ -183,6 +185,30 @@
         "audit_only_referenced_count": 0,
         "delete_eligible_count": 0,
         "total_size_bytes": 678702358
+      }
+    },
+    {
+      "id": "cleanup-retained-inventory-plan",
+      "path": "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+      "audience": "maintainer, contributor",
+      "tier": "canonical-action-plan",
+      "purpose": "Action plan for retained cleanup inventory that is not currently delete-eligible.",
+      "use_when": "After the quarantine ledger reports retained inventory and you need to reduce references or decide explicit retention.",
+      "avoid_when": "You need the deletion safety contract itself; use cleanup-quarantine-ledger.",
+      "status": "retained-plan-ready",
+      "details": {
+        "plan_path": "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "item_count": 89,
+        "delete_ready_count": 0,
+        "reference_migration_needed_count": 15,
+        "intentional_reference_keep_count": 4,
+        "needs_replacement_or_retention_decision_count": 70,
+        "retained_pending_review_count": 0,
+        "release_state_counts": {
+          "intentional-reference-keep": 4,
+          "needs-replacement-or-retention-decision": 70,
+          "reference-migration-needed": 15
+        }
       }
     },
     {

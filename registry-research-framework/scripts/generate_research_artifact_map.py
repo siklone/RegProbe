@@ -144,6 +144,25 @@ def summarize_cleanup_ledger(repo_root: Path) -> tuple[str, dict[str, Any]]:
     }
 
 
+def summarize_cleanup_retained_plan(repo_root: Path) -> tuple[str, dict[str, Any]]:
+    path = repo_root / "registry-research-framework" / "audit" / "cleanup-retained-inventory-plan-20260514.json"
+    payload = load_json(path)
+    summary = payload.get("summary") if isinstance(payload.get("summary"), dict) else {}
+    delete_ready = int(summary.get("delete_ready_count") or 0)
+    migration_needed = int(summary.get("reference_migration_needed_count") or 0)
+    ok = path.exists() and not payload.get("_load_error") and delete_ready == 0
+    return status_from_bool(ok, ok_label="retained-plan-ready", fail_label="review-delete-ready"), {
+        "plan_path": rel(path, repo_root) if path.exists() else rel(path, repo_root),
+        "item_count": summary.get("item_count"),
+        "delete_ready_count": delete_ready,
+        "reference_migration_needed_count": migration_needed,
+        "intentional_reference_keep_count": summary.get("intentional_reference_keep_count"),
+        "needs_replacement_or_retention_decision_count": summary.get("needs_replacement_or_retention_decision_count"),
+        "retained_pending_review_count": summary.get("retained_pending_review_count"),
+        "release_state_counts": summary.get("release_state_counts"),
+    }
+
+
 def summarize_vm_health(repo_root: Path) -> tuple[str, dict[str, Any]]:
     path = repo_root / "registry-research-framework" / "audit" / "vm-health-check-latest.json"
     payload = load_json(path)
@@ -223,6 +242,7 @@ def build_artifact_map(repo_root: Path = REPO_ROOT) -> dict[str, Any]:
     op96_aggregate_status, op96_aggregate = summarize_operator96_aggregate(repo_root)
     op96_surface_status, op96_surface = summarize_operator96_surface(repo_root)
     cleanup_status, cleanup = summarize_cleanup_ledger(repo_root)
+    retained_plan_status, retained_plan = summarize_cleanup_retained_plan(repo_root)
     vm_status, vm_health = summarize_vm_health(repo_root)
     kvm_status, kvm_smoke = summarize_kvm_smoke(repo_root)
     contributor_smoke_status, contributor_smoke = summarize_contributor_lab_smoke(repo_root)
@@ -326,6 +346,17 @@ def build_artifact_map(repo_root: Path = REPO_ROOT) -> dict[str, Any]:
             details=cleanup,
         ),
         static_artifact(
+            artifact_id="cleanup-retained-inventory-plan",
+            path=str(retained_plan.get("plan_path") or "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json"),
+            audience="maintainer, contributor",
+            tier="canonical-action-plan",
+            purpose="Action plan for retained cleanup inventory that is not currently delete-eligible.",
+            use_when="After the quarantine ledger reports retained inventory and you need to reduce references or decide explicit retention.",
+            avoid_when="You need the deletion safety contract itself; use cleanup-quarantine-ledger.",
+            status=retained_plan_status,
+            details=retained_plan,
+        ),
+        static_artifact(
             artifact_id="vm-health",
             path="registry-research-framework/audit/vm-health-check-latest.json",
             audience="contributor, VM operator",
@@ -380,7 +411,7 @@ def build_artifact_map(repo_root: Path = REPO_ROOT) -> dict[str, Any]:
         ),
     ]
 
-    attention_statuses = {"attention", "review-delete-eligible"}
+    attention_statuses = {"attention", "review-delete-eligible", "review-delete-ready"}
     attention = [item for item in artifacts if item.get("status") in attention_statuses]
     summary = {
         "artifact_count": len(artifacts),
@@ -390,6 +421,8 @@ def build_artifact_map(repo_root: Path = REPO_ROOT) -> dict[str, Any]:
         "operator96_non_ok_count": op96_aggregate.get("non_ok_count"),
         "operator96_noisy_result_count": op96_aggregate.get("noisy_result_count"),
         "cleanup_delete_eligible_count": cleanup.get("delete_eligible_count"),
+        "cleanup_retained_inventory_count": cleanup.get("retained_inventory_count"),
+        "cleanup_reference_migration_needed_count": retained_plan.get("reference_migration_needed_count"),
         "app_card_contract_pass_count": card_contracts.get("pass_count"),
         "app_card_contract_fail_count": card_contracts.get("fail_count"),
         "promoted_app_qa_live_success_count": promoted_qa.get("live_success_count"),
@@ -404,7 +437,7 @@ def build_artifact_map(repo_root: Path = REPO_ROOT) -> dict[str, Any]:
         "rules": {
             "end_user_surface": "Normal users start from the WPF app and validated app-surface records, not raw audit folders.",
             "operator96_surface": "Operator96 remains Contributor Lab / research observation unless ready_for_bounded_app_card is positive and all gates stay clean.",
-            "cleanup": "Do not delete archived/raw evidence unless the cleanup quarantine ledger reports live_reference_count=0 and a replacement or explicit obsolete reason exists.",
+            "cleanup": "Do not delete archived/raw evidence unless the cleanup quarantine ledger reports live_reference_count=0 and a replacement or explicit obsolete reason exists. Use the retained inventory plan to reduce references before deletion.",
             "performance_claims": "No benchmark/performance claim ships from a single noisy, low-confidence, or community-only observation.",
         },
         "raw_parse_do_not_start_here": [
@@ -439,6 +472,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Operator96 app-card ready: `{summary.get('operator96_normal_app_card_ready')}`.",
         f"- Operator96 noisy results: `{summary.get('operator96_noisy_result_count')}`; non-ok results: `{summary.get('operator96_non_ok_count')}`.",
         f"- Cleanup delete-eligible items: `{summary.get('cleanup_delete_eligible_count')}`.",
+        f"- Cleanup retained inventory: `{summary.get('cleanup_retained_inventory_count')}`; reference migration needed: `{summary.get('cleanup_reference_migration_needed_count')}`.",
         "",
         "## Rules",
         "",

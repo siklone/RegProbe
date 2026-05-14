@@ -102,6 +102,21 @@ def seed_clean_artifacts(repo: Path):
     )
     write_json(
         repo,
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        {
+            "summary": {
+                "item_count": 1,
+                "delete_ready_count": 0,
+                "reference_migration_needed_count": 1,
+                "intentional_reference_keep_count": 0,
+                "needs_replacement_or_retention_decision_count": 0,
+                "retained_pending_review_count": 0,
+                "release_state_counts": {"reference-migration-needed": 1},
+            }
+        },
+    )
+    write_json(
+        repo,
         "registry-research-framework/audit/vm-health-check-latest.json",
         {"status": "ok", "guest_health": "stable", "failed_checks": []},
     )
@@ -154,6 +169,12 @@ class ResearchArtifactMapTests(unittest.TestCase):
             self.assertEqual(by_id["cleanup-quarantine-ledger"]["details"]["delete_candidate_count"], 0)
             self.assertEqual(by_id["cleanup-quarantine-ledger"]["details"]["retained_inventory_count"], 1)
             self.assertEqual(by_id["cleanup-quarantine-ledger"]["details"]["blocking_referenced_count"], 1)
+            self.assertEqual(by_id["cleanup-retained-inventory-plan"]["status"], "retained-plan-ready")
+            self.assertEqual(by_id["cleanup-retained-inventory-plan"]["details"]["delete_ready_count"], 0)
+            self.assertEqual(
+                by_id["cleanup-retained-inventory-plan"]["details"]["reference_migration_needed_count"], 1
+            )
+            self.assertEqual(payload["summary"]["cleanup_reference_migration_needed_count"], 1)
             self.assertEqual(by_id["kvm-contributor-lab-smoke"]["status"], "ok")
             self.assertIn("evidence/raw/**", payload["raw_parse_do_not_start_here"])
 
@@ -179,6 +200,28 @@ class ResearchArtifactMapTests(unittest.TestCase):
             by_id = {item["id"]: item for item in payload["artifacts"]}
 
             self.assertEqual(by_id["cleanup-quarantine-ledger"]["status"], "review-delete-eligible")
+            self.assertEqual(payload["summary"]["attention_count"], 1)
+
+    def test_cleanup_retained_plan_delete_ready_requires_attention(self):
+        with tempfile.TemporaryDirectory() as temp:
+            repo = Path(temp)
+            seed_clean_artifacts(repo)
+            write_json(
+                repo,
+                "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+                {
+                    "summary": {
+                        "item_count": 1,
+                        "delete_ready_count": 1,
+                        "reference_migration_needed_count": 0,
+                    }
+                },
+            )
+
+            payload = self.module.build_artifact_map(repo)
+            by_id = {item["id"]: item for item in payload["artifacts"]}
+
+            self.assertEqual(by_id["cleanup-retained-inventory-plan"]["status"], "review-delete-ready")
             self.assertEqual(payload["summary"]["attention_count"], 1)
 
     def test_noisy_operator96_aggregate_requires_attention(self):
