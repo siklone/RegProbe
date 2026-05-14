@@ -81,7 +81,7 @@ Artifacts:
 - service-restart follow-up:
   - [`defender-threat-file-hash-mpengine-1-events.json`](../../evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-095038/defender-threat-file-hash-mpengine-1-events.json)
 - rebooted documented MpEngine path:
-  - [`defender-threat-file-hash-mpengine-1.txt`](../../evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039/defender-threat-file-hash-mpengine-1.txt)
+  - [`defender-threat-file-hash-mpengine-1.txt`](../../evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-mpengine-reboot-no-read-20260325.txt)
 - official Microsoft PE sample baseline:
   - [`defender-threat-file-hash-baseline-custom-events.json`](../../evidence/files/vm-tooling-staging/defender-threat-file-hash-baseline-1-custom-20260325-131902/defender-threat-file-hash-baseline-custom-events.json)
 - official Microsoft PE sample with legacy root:

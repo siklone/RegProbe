@@ -1,6 +1,6 @@
 # Operator96 App Surface Review
 
-- Generated UTC: `2026-05-14T12:52:30Z`
+- Generated UTC: `2026-05-14T17:39:16Z`
 - Matrix: `registry-research-framework/audit/operator96-enriched-value-matrix-20260510.json`
 - Aggregate: `registry-research-framework/audit/operator96-low-noise-rerun-aggregate-20260512.json`
 - Records: `96`

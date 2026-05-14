@@ -164,6 +164,33 @@ NEEDS_DECISION_TRACKS: dict[str, dict[str, str]] = {
     },
 }
 
+STAGING_ACTION_TRACKS: dict[str, dict[str, str]] = {
+    "rerun-needed": {
+        "decision_track": "vm-rerun-required",
+        "decision_status": "blocked-until-fresh-vm-evidence",
+        "evidence_role": "legacy staging pointer with no canonical raw replacement",
+        "retention_owner": "evidence",
+        "exit_criteria": "Run a fresh VM capture or replace with a checked-in evidence/raw artifact, then migrate live references.",
+        "app_surface_policy": "technical-evidence-only until rerun produces canonical artifacts",
+    },
+    "partial-derived-replacement-known": {
+        "decision_track": "partial-derived-needs-raw-trace",
+        "decision_status": "derived-summary-exists-but-raw-trace-missing",
+        "evidence_role": "placeholder for raw ETL where only derived perf evidence is checked in",
+        "retention_owner": "evidence",
+        "exit_criteria": "Capture or check in a canonical raw ETL/summary pair, or explicitly retire the ETL placeholder from live records.",
+        "app_surface_policy": "technical-evidence-only; do not surface as app-card proof",
+    },
+    "staging-source-of-record": {
+        "decision_track": "staging-source-promote-to-raw",
+        "decision_status": "staging-artifact-is-current-source",
+        "evidence_role": "staging artifact still carries distinct proof that must be promoted to evidence/raw",
+        "retention_owner": "evidence",
+        "exit_criteria": "Copy or regenerate the distinct proof under evidence/raw and migrate live references.",
+        "app_surface_policy": "technical-evidence-only until promoted to raw",
+    },
+}
+
 
 STAGING_CANONICALIZATION_DECISIONS: dict[str, dict[str, Any]] = {
     "evidence/files/vm-tooling-staging/defender-cloud-demo-extracted": {
@@ -239,14 +266,13 @@ STAGING_CANONICALIZATION_DECISIONS: dict[str, dict[str, Any]] = {
         "next_canonicalization_step": "Keep live record/index references on the evidence/raw runtime-diff JSON; leave the staging TXT only as audit history.",
     },
     "evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039": {
-        "canonicalization_state": "staging-source-of-record",
+        "canonicalization_state": "canonical-raw-replacement-known",
         "owning_records": ["security.threat-file-hash-logging"],
         "canonical_replacement_candidates": [
-            "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt",
-            "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt",
+            "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-mpengine-reboot-no-read-20260325.txt",
         ],
-        "retention_rationale": "Adjacent raw Procmon probes exist, but this MPENGINE reboot no-read sample remains a distinct validation lane.",
-        "next_canonicalization_step": "Regenerate or copy the MPENGINE no-read proof into evidence/raw before migrating the note/record references.",
+        "retention_rationale": "A canonical evidence/raw Procmon text artifact now carries the distinct rebooted MPENGINE no-read proof.",
+        "next_canonicalization_step": "Keep live record/index references on the evidence/raw Procmon text; leave the staging directory only as audit history.",
     },
     "evidence/files/vm-tooling-staging/hags_toggle_out.txt": {
         "canonicalization_state": "canonical-raw-replacement-known",
@@ -339,6 +365,15 @@ def planned_item(item: dict[str, Any]) -> dict[str, Any]:
             planned["next_action"] = (
                 "Keep as an active tooling output root; do not treat as evidence cleanup or delete-candidate work."
             )
+        elif staging_decision["canonicalization_state"] in STAGING_ACTION_TRACKS:
+            action_track = STAGING_ACTION_TRACKS[staging_decision["canonicalization_state"]]
+            planned["decision_track"] = action_track["decision_track"]
+            planned["decision_status"] = action_track["decision_status"]
+            planned["evidence_role"] = action_track["evidence_role"]
+            planned["retention_owner"] = action_track["retention_owner"]
+            planned["exit_criteria"] = action_track["exit_criteria"]
+            planned["app_surface_policy"] = action_track["app_surface_policy"]
+            planned["next_action"] = staging_decision["next_canonicalization_step"]
         planned["staging_canonicalization"] = staging_decision
         planned["canonicalization_state"] = staging_decision["canonicalization_state"]
         planned["owning_records"] = staging_decision["owning_records"]
