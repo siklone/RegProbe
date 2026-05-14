@@ -240,7 +240,7 @@
         "qemu:///session",
         "qemu-agent-command",
         "regprobe-win11-25h2-session",
-        "{\"execute\":\"guest-exec-status\",\"arguments\":{\"pid\":7312}}"
+        "{\"execute\":\"guest-exec-status\",\"arguments\":{\"pid\":6260}}"
       ],
       "returncode": 0,
       "stdout": "{\"return\":{\"exitcode\":0,\"out-data\":\"bnQgYXV0aG9yaXR5XHN5c3RlbQ0K\",\"exited\":true}}",
@@ -251,7 +251,7 @@
         "exited": true
       },
       "phase": "guest-exec-status",
-      "pid": 7312,
+      "pid": 6260,
       "exitcode": 0,
       "out_data": "nt authority\\system\r\n",
       "err_data": ""
