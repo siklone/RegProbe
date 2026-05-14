@@ -194,6 +194,28 @@ class CleanupQuarantineLedgerTests(unittest.TestCase):
             self.assertFalse(item["delete_eligible"])
             self.assertEqual(item["cleanup_status"], "retained-live-reference")
 
+    def test_oldest_staging_items_use_manual_canonical_raw_replacements(self):
+        with tempfile.TemporaryDirectory() as temp:
+            repo = Path(temp)
+            staging = repo / "evidence" / "files" / "vm-tooling-staging"
+            raw = repo / "evidence" / "raw" / "procmon" / "explorer-show-info-tips-validation-20260324"
+            staging.mkdir(parents=True)
+            raw.mkdir(parents=True)
+            target = staging / "showinfotip-1-hits.csv..md"
+            replacement = raw / "showinfotip-1-hits.csv"
+            target.write_text("legacy placeholder\n", encoding="utf-8")
+            replacement.write_text("Process,Operation,Path\n", encoding="utf-8")
+
+            items = self.module.oldest_staging_items(repo_root=repo, limit=1, output_paths=set())
+
+            self.assertEqual(len(items), 1)
+            self.assertEqual(
+                items[0]["replacement_artifacts"],
+                ["evidence/raw/procmon/explorer-show-info-tips-validation-20260324/showinfotip-1-hits.csv"],
+            )
+            self.assertEqual(items[0]["recommended_action"], "delete-after-review")
+            self.assertIn("canonical evidence/raw artifact", items[0]["stale_reason"])
+
     def test_markdown_separates_delete_candidates_from_retained_inventory(self):
         payload = {
             "generated_utc": "2026-05-14T00:00:00Z",

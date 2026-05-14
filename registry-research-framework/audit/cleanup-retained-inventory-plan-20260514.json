@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-14T14:40:37Z",
+  "generated_utc": "2026-05-14T15:39:03Z",
   "ledger": "registry-research-framework/audit/cleanup-quarantine-ledger-20260514.json",
   "purpose": "Action plan for cleanup retained inventory. It does not delete files and it does not redefine delete eligibility.",
   "rules": {
@@ -12,31 +12,38 @@
     "item_count": 89,
     "delete_ready_count": 0,
     "reference_migration_needed_count": 0,
-    "audit_only_retained_count": 15,
+    "audit_only_retained_count": 17,
     "intentional_reference_keep_count": 4,
-    "needs_replacement_or_retention_decision_count": 70,
-    "retention_decision_queue_count": 70,
+    "needs_replacement_or_retention_decision_count": 68,
+    "retention_decision_queue_count": 68,
     "retained_pending_review_count": 0,
     "release_state_counts": {
-      "audit-only-retained": 15,
+      "audit-only-retained": 17,
       "intentional-reference-keep": 4,
-      "needs-replacement-or-retention-decision": 70
+      "needs-replacement-or-retention-decision": 68
     },
     "decision_track_counts": {
       "archive-history-anchor": 10,
-      "audit-trail-retained": 15,
+      "audit-trail-retained": 17,
       "historical-audit-output": 25,
       "intentional-reference-keep": 4,
       "raw-trace-source-of-record": 25,
-      "staging-bundle-canonicalization": 10
+      "staging-bundle-canonicalization": 8
     },
     "decision_status_counts": {
       "explicitly-retained": 4,
-      "needs-canonical-evidence-or-retention-note": 10,
+      "needs-canonical-evidence-or-retention-note": 8,
       "retain-history-anchor": 10,
       "retain-until-derived-parse-reviewed": 25,
       "retain-until-supersession-is-explicit": 25,
-      "retained-for-history-only": 15
+      "retained-for-history-only": 17
+    },
+    "staging_canonicalization_state_counts": {
+      "active-tool-output-root": 1,
+      "canonical-raw-replacement-known": 2,
+      "partial-derived-replacement-known": 2,
+      "rerun-needed": 1,
+      "staging-source-of-record": 4
     },
     "category_counts": {
       "audit-archive-named-sample": 10,
@@ -51,26 +58,26 @@
       "evidence-tree-reference": 61,
       "other-reference": 70,
       "public-doc-reference": 4,
-      "research-index-reference": 186,
+      "research-index-reference": 176,
       "research-note-reference": 24,
-      "research-record-reference": 34
+      "research-record-reference": 32
     },
     "top_blocking_reference_paths": [
       {
         "path": "research/evidence-index.json",
-        "count": 47
+        "count": 45
       },
       {
         "path": "research/evidence-manifest.json",
-        "count": 44
+        "count": 42
       },
       {
         "path": "research/evidence-atlas.md",
-        "count": 39
+        "count": 37
       },
       {
         "path": "research/evidence-manifest.md",
-        "count": 38
+        "count": 36
       },
       {
         "path": "registry-research-framework/audit/rejected-closure-ledger.json",
@@ -78,7 +85,7 @@
       },
       {
         "path": "research/evidence-classes.json",
-        "count": 18
+        "count": 16
       },
       {
         "path": "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
@@ -144,71 +151,23 @@
       "replacement_artifacts": [],
       "recommended_action": "keep-pending-review",
       "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion"
-    },
-    {
-      "path": "evidence/files/vm-tooling-staging/showinfotip-1-hits.csv..md",
-      "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "needs-replacement-or-retention-decision",
-      "delete_candidate_state": "not-a-delete-candidate",
-      "decision_track": "staging-bundle-canonicalization",
-      "decision_status": "needs-canonical-evidence-or-retention-note",
-      "evidence_role": "legacy staging output that may still be the only referenced proof for a record",
-      "retention_owner": "evidence",
-      "exit_criteria": "Find a canonical evidence/raw replacement or add an explicit keep rationale naming the owning record/note.",
-      "app_surface_policy": "technical-evidence-only until canonicalized",
-      "can_become_delete_candidate": false,
-      "blocking_reference_count": 6,
-      "audit_reference_count": 4,
-      "blocking_reference_classes": {
-        "research-index-reference": 5,
-        "research-record-reference": 1
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "staging_canonicalization": {
+        "canonicalization_state": "rerun-needed",
+        "owning_records": [
+          "security.threat-file-hash-logging"
+        ],
+        "canonical_replacement_candidates": [],
+        "retention_rationale": "Only a Defender cloud demo extraction note currently remains; no canonical evidence/raw replacement was found in this repo.",
+        "next_canonicalization_step": "Rerun or replace the Defender cloud validation under evidence/raw before migrating the note reference."
       },
-      "blocking_references_sample": [
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/records/explorer.show-info-tips.review.json"
+      "canonicalization_state": "rerun-needed",
+      "owning_records": [
+        "security.threat-file-hash-logging"
       ],
-      "replacement_artifacts": [],
-      "recommended_action": "keep-pending-review",
-      "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion"
-    },
-    {
-      "path": "evidence/files/vm-tooling-staging/showsuperhidden-1-hits.csv..md",
-      "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "needs-replacement-or-retention-decision",
-      "delete_candidate_state": "not-a-delete-candidate",
-      "decision_track": "staging-bundle-canonicalization",
-      "decision_status": "needs-canonical-evidence-or-retention-note",
-      "evidence_role": "legacy staging output that may still be the only referenced proof for a record",
-      "retention_owner": "evidence",
-      "exit_criteria": "Find a canonical evidence/raw replacement or add an explicit keep rationale naming the owning record/note.",
-      "app_surface_policy": "technical-evidence-only until canonicalized",
-      "can_become_delete_candidate": false,
-      "blocking_reference_count": 6,
-      "audit_reference_count": 4,
-      "blocking_reference_classes": {
-        "research-index-reference": 5,
-        "research-record-reference": 1
-      },
-      "blocking_references_sample": [
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/records/explorer.show-protected-operating-system-files.review.json"
-      ],
-      "replacement_artifacts": [],
-      "recommended_action": "keep-pending-review",
-      "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion"
+      "canonical_replacement_candidates": [],
+      "retention_rationale": "Only a Defender cloud demo extraction note currently remains; no canonical evidence/raw replacement was found in this repo.",
+      "next_canonicalization_step": "Rerun or replace the Defender cloud validation under evidence/raw before migrating the note reference."
     },
     {
       "path": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md",
@@ -244,7 +203,27 @@
       "replacement_artifacts": [],
       "recommended_action": "keep-pending-review",
       "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion"
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "staging_canonicalization": {
+        "canonicalization_state": "partial-derived-replacement-known",
+        "owning_records": [
+          "system.kernel-thread-dpc-enable"
+        ],
+        "canonical_replacement_candidates": [
+          "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3.perf.csv"
+        ],
+        "retention_rationale": "A derived perf CSV exists, but it is not a byte-for-byte replacement for the original ETL placeholder.",
+        "next_canonicalization_step": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder."
+      },
+      "canonicalization_state": "partial-derived-replacement-known",
+      "owning_records": [
+        "system.kernel-thread-dpc-enable"
+      ],
+      "canonical_replacement_candidates": [
+        "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3.perf.csv"
+      ],
+      "retention_rationale": "A derived perf CSV exists, but it is not a byte-for-byte replacement for the original ETL placeholder.",
+      "next_canonicalization_step": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder."
     },
     {
       "path": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md",
@@ -280,7 +259,27 @@
       "replacement_artifacts": [],
       "recommended_action": "keep-pending-review",
       "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion"
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "staging_canonicalization": {
+        "canonicalization_state": "partial-derived-replacement-known",
+        "owning_records": [
+          "system.kernel-thread-dpc-enable"
+        ],
+        "canonical_replacement_candidates": [
+          "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2.perf.csv"
+        ],
+        "retention_rationale": "A derived perf CSV exists, but it is not a byte-for-byte replacement for the original ETL placeholder.",
+        "next_canonicalization_step": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder."
+      },
+      "canonicalization_state": "partial-derived-replacement-known",
+      "owning_records": [
+        "system.kernel-thread-dpc-enable"
+      ],
+      "canonical_replacement_candidates": [
+        "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2.perf.csv"
+      ],
+      "retention_rationale": "A derived perf CSV exists, but it is not a byte-for-byte replacement for the original ETL placeholder.",
+      "next_canonicalization_step": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder."
     },
     {
       "path": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md",
@@ -314,7 +313,31 @@
       "replacement_artifacts": [],
       "recommended_action": "keep-pending-review",
       "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion"
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "staging_canonicalization": {
+        "canonicalization_state": "staging-source-of-record",
+        "owning_records": [
+          "security.trusted-path-credential-prompting",
+          "system.disable-auto-maintenance",
+          "system.memory-large-system-cache-client"
+        ],
+        "canonical_replacement_candidates": [
+          "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json"
+        ],
+        "retention_rationale": "This placeholder points at a multi-record VM batch proof that still acts as historical source-of-record for several records.",
+        "next_canonicalization_step": "Copy or regenerate the batch proof into evidence/raw, then migrate record/index references in one dedicated PR."
+      },
+      "canonicalization_state": "staging-source-of-record",
+      "owning_records": [
+        "security.trusted-path-credential-prompting",
+        "system.disable-auto-maintenance",
+        "system.memory-large-system-cache-client"
+      ],
+      "canonical_replacement_candidates": [
+        "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json"
+      ],
+      "retention_rationale": "This placeholder points at a multi-record VM batch proof that still acts as historical source-of-record for several records.",
+      "next_canonicalization_step": "Copy or regenerate the batch proof into evidence/raw, then migrate record/index references in one dedicated PR."
     },
     {
       "path": "evidence/files/vm-tooling-staging/ghidra-probes",
@@ -341,7 +364,19 @@
       "replacement_artifacts": [],
       "recommended_action": "keep-pending-review",
       "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion"
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "staging_canonicalization": {
+        "canonicalization_state": "active-tool-output-root",
+        "owning_records": [],
+        "canonical_replacement_candidates": [],
+        "retention_rationale": "Current static-probe scripts still name this path as the host output root, so it is not a stale evidence bundle.",
+        "next_canonicalization_step": "Move script defaults only if a broader tooling-path cleanup is planned; do not delete as evidence cleanup."
+      },
+      "canonicalization_state": "active-tool-output-root",
+      "owning_records": [],
+      "canonical_replacement_candidates": [],
+      "retention_rationale": "Current static-probe scripts still name this path as the host output root, so it is not a stale evidence bundle.",
+      "next_canonicalization_step": "Move script defaults only if a broader tooling-path cleanup is planned; do not delete as evidence cleanup."
     },
     {
       "path": "evidence/files/vm-tooling-staging/beep_start_toggle_out.txt",
@@ -375,7 +410,29 @@
       "replacement_artifacts": [],
       "recommended_action": "keep-pending-review",
       "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion"
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "staging_canonicalization": {
+        "canonicalization_state": "staging-source-of-record",
+        "owning_records": [
+          "audio.disable-beep"
+        ],
+        "canonical_replacement_candidates": [
+          "evidence/raw/etw-stackwalk/audio-disable-beep-etw-qga-unblock-20260507/audio-disable-beep-etw-qga-unblock-20260507-summary.json",
+          "evidence/raw/ghidra/ghidra-audio-disable-beep-20260424-batch2"
+        ],
+        "retention_rationale": "Raw ETW/Ghidra adjuncts exist, but this text file is still the concise reversible value proof used by shipped app QA evidence.",
+        "next_canonicalization_step": "Create a canonical evidence/raw runtime-diff JSON for the beep value proof before migrating app QA and index references."
+      },
+      "canonicalization_state": "staging-source-of-record",
+      "owning_records": [
+        "audio.disable-beep"
+      ],
+      "canonical_replacement_candidates": [
+        "evidence/raw/etw-stackwalk/audio-disable-beep-etw-qga-unblock-20260507/audio-disable-beep-etw-qga-unblock-20260507-summary.json",
+        "evidence/raw/ghidra/ghidra-audio-disable-beep-20260424-batch2"
+      ],
+      "retention_rationale": "Raw ETW/Ghidra adjuncts exist, but this text file is still the concise reversible value proof used by shipped app QA evidence.",
+      "next_canonicalization_step": "Create a canonical evidence/raw runtime-diff JSON for the beep value proof before migrating app QA and index references."
     },
     {
       "path": "evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039",
@@ -408,7 +465,29 @@
       "replacement_artifacts": [],
       "recommended_action": "keep-pending-review",
       "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion"
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "staging_canonicalization": {
+        "canonicalization_state": "staging-source-of-record",
+        "owning_records": [
+          "security.threat-file-hash-logging"
+        ],
+        "canonical_replacement_candidates": [
+          "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt",
+          "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt"
+        ],
+        "retention_rationale": "Adjacent raw Procmon probes exist, but this MPENGINE reboot no-read sample remains a distinct validation lane.",
+        "next_canonicalization_step": "Regenerate or copy the MPENGINE no-read proof into evidence/raw before migrating the note/record references."
+      },
+      "canonicalization_state": "staging-source-of-record",
+      "owning_records": [
+        "security.threat-file-hash-logging"
+      ],
+      "canonical_replacement_candidates": [
+        "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt",
+        "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt"
+      ],
+      "retention_rationale": "Adjacent raw Procmon probes exist, but this MPENGINE reboot no-read sample remains a distinct validation lane.",
+      "next_canonicalization_step": "Regenerate or copy the MPENGINE no-read proof into evidence/raw before migrating the note/record references."
     },
     {
       "path": "evidence/files/vm-tooling-staging/hags_toggle_out.txt",
@@ -443,7 +522,29 @@
       "replacement_artifacts": [],
       "recommended_action": "keep-pending-review",
       "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion"
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "staging_canonicalization": {
+        "canonicalization_state": "staging-source-of-record",
+        "owning_records": [
+          "system.enable-hags"
+        ],
+        "canonical_replacement_candidates": [
+          "evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507-summary.json",
+          "evidence/raw/ghidra/ghidra-system-enable-hags-20260427b"
+        ],
+        "retention_rationale": "Raw ETW/Ghidra adjuncts exist, but this text file is still the concise reversible value proof for HwSchMode.",
+        "next_canonicalization_step": "Create a canonical evidence/raw runtime-diff JSON for the HAGS value proof before migrating record/index references."
+      },
+      "canonicalization_state": "staging-source-of-record",
+      "owning_records": [
+        "system.enable-hags"
+      ],
+      "canonical_replacement_candidates": [
+        "evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507-summary.json",
+        "evidence/raw/ghidra/ghidra-system-enable-hags-20260427b"
+      ],
+      "retention_rationale": "Raw ETW/Ghidra adjuncts exist, but this text file is still the concise reversible value proof for HwSchMode.",
+      "next_canonicalization_step": "Create a canonical evidence/raw runtime-diff JSON for the HAGS value proof before migrating record/index references."
     },
     {
       "path": "evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml",
@@ -2623,71 +2724,111 @@
       "replacement_artifacts": [],
       "recommended_action": "keep-pending-review",
       "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion"
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "staging_canonicalization": {
+        "canonicalization_state": "rerun-needed",
+        "owning_records": [
+          "security.threat-file-hash-logging"
+        ],
+        "canonical_replacement_candidates": [],
+        "retention_rationale": "Only a Defender cloud demo extraction note currently remains; no canonical evidence/raw replacement was found in this repo.",
+        "next_canonicalization_step": "Rerun or replace the Defender cloud validation under evidence/raw before migrating the note reference."
+      },
+      "canonicalization_state": "rerun-needed",
+      "owning_records": [
+        "security.threat-file-hash-logging"
+      ],
+      "canonical_replacement_candidates": [],
+      "retention_rationale": "Only a Defender cloud demo extraction note currently remains; no canonical evidence/raw replacement was found in this repo.",
+      "next_canonicalization_step": "Rerun or replace the Defender cloud validation under evidence/raw before migrating the note reference."
     },
     {
       "path": "evidence/files/vm-tooling-staging/showinfotip-1-hits.csv..md",
       "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "needs-replacement-or-retention-decision",
+      "cleanup_status": "retained-audit-trail-reference",
+      "release_state": "audit-only-retained",
       "delete_candidate_state": "not-a-delete-candidate",
-      "decision_track": "staging-bundle-canonicalization",
-      "decision_status": "needs-canonical-evidence-or-retention-note",
-      "evidence_role": "legacy staging output that may still be the only referenced proof for a record",
-      "retention_owner": "evidence",
-      "exit_criteria": "Find a canonical evidence/raw replacement or add an explicit keep rationale naming the owning record/note.",
-      "app_surface_policy": "technical-evidence-only until canonicalized",
+      "decision_track": "audit-trail-retained",
+      "decision_status": "retained-for-history-only",
+      "evidence_role": "historical cleanup/audit trail reference",
+      "retention_owner": "audit",
+      "exit_criteria": "Keep unless a future cleanup PR explicitly chooses to drop audit-history references.",
+      "app_surface_policy": "not-app-surface",
       "can_become_delete_candidate": false,
-      "blocking_reference_count": 6,
+      "blocking_reference_count": 0,
       "audit_reference_count": 4,
-      "blocking_reference_classes": {
-        "research-index-reference": 5,
-        "research-record-reference": 1
-      },
-      "blocking_references_sample": [
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/records/explorer.show-info-tips.review.json"
+      "blocking_reference_classes": {},
+      "blocking_references_sample": [],
+      "replacement_artifacts": [
+        "evidence/raw/procmon/explorer-show-info-tips-validation-20260324/showinfotip-1-hits.csv"
       ],
-      "replacement_artifacts": [],
-      "recommended_action": "keep-pending-review",
-      "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion"
+      "recommended_action": "delete-after-review",
+      "next_action": "No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references.",
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
+      "staging_canonicalization": {
+        "canonicalization_state": "canonical-raw-replacement-known",
+        "owning_records": [
+          "explorer.show-info-tips"
+        ],
+        "canonical_replacement_candidates": [
+          "evidence/raw/procmon/explorer-show-info-tips-validation-20260324/showinfotip-1-hits.csv"
+        ],
+        "retention_rationale": "The repo now has the checked-in Procmon CSV under evidence/raw; the staging placeholder is only a legacy pointer.",
+        "next_canonicalization_step": "Keep live record/index references on the evidence/raw CSV; leave the staging placeholder only as audit history."
+      },
+      "canonicalization_state": "canonical-raw-replacement-known",
+      "owning_records": [
+        "explorer.show-info-tips"
+      ],
+      "canonical_replacement_candidates": [
+        "evidence/raw/procmon/explorer-show-info-tips-validation-20260324/showinfotip-1-hits.csv"
+      ],
+      "retention_rationale": "The repo now has the checked-in Procmon CSV under evidence/raw; the staging placeholder is only a legacy pointer.",
+      "next_canonicalization_step": "Keep live record/index references on the evidence/raw CSV; leave the staging placeholder only as audit history."
     },
     {
       "path": "evidence/files/vm-tooling-staging/showsuperhidden-1-hits.csv..md",
       "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "needs-replacement-or-retention-decision",
+      "cleanup_status": "retained-audit-trail-reference",
+      "release_state": "audit-only-retained",
       "delete_candidate_state": "not-a-delete-candidate",
-      "decision_track": "staging-bundle-canonicalization",
-      "decision_status": "needs-canonical-evidence-or-retention-note",
-      "evidence_role": "legacy staging output that may still be the only referenced proof for a record",
-      "retention_owner": "evidence",
-      "exit_criteria": "Find a canonical evidence/raw replacement or add an explicit keep rationale naming the owning record/note.",
-      "app_surface_policy": "technical-evidence-only until canonicalized",
+      "decision_track": "audit-trail-retained",
+      "decision_status": "retained-for-history-only",
+      "evidence_role": "historical cleanup/audit trail reference",
+      "retention_owner": "audit",
+      "exit_criteria": "Keep unless a future cleanup PR explicitly chooses to drop audit-history references.",
+      "app_surface_policy": "not-app-surface",
       "can_become_delete_candidate": false,
-      "blocking_reference_count": 6,
+      "blocking_reference_count": 0,
       "audit_reference_count": 4,
-      "blocking_reference_classes": {
-        "research-index-reference": 5,
-        "research-record-reference": 1
-      },
-      "blocking_references_sample": [
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/records/explorer.show-protected-operating-system-files.review.json"
+      "blocking_reference_classes": {},
+      "blocking_references_sample": [],
+      "replacement_artifacts": [
+        "evidence/raw/procmon/explorer-show-protected-operating-system-files-validation-20260324/showsuperhidden-1-hits.csv"
       ],
-      "replacement_artifacts": [],
-      "recommended_action": "keep-pending-review",
-      "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion"
+      "recommended_action": "delete-after-review",
+      "next_action": "No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references.",
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
+      "staging_canonicalization": {
+        "canonicalization_state": "canonical-raw-replacement-known",
+        "owning_records": [
+          "explorer.show-protected-operating-system-files"
+        ],
+        "canonical_replacement_candidates": [
+          "evidence/raw/procmon/explorer-show-protected-operating-system-files-validation-20260324/showsuperhidden-1-hits.csv"
+        ],
+        "retention_rationale": "The repo now has the checked-in Procmon CSV under evidence/raw; the staging placeholder is only a legacy pointer.",
+        "next_canonicalization_step": "Keep live record/index references on the evidence/raw CSV; leave the staging placeholder only as audit history."
+      },
+      "canonicalization_state": "canonical-raw-replacement-known",
+      "owning_records": [
+        "explorer.show-protected-operating-system-files"
+      ],
+      "canonical_replacement_candidates": [
+        "evidence/raw/procmon/explorer-show-protected-operating-system-files-validation-20260324/showsuperhidden-1-hits.csv"
+      ],
+      "retention_rationale": "The repo now has the checked-in Procmon CSV under evidence/raw; the staging placeholder is only a legacy pointer.",
+      "next_canonicalization_step": "Keep live record/index references on the evidence/raw CSV; leave the staging placeholder only as audit history."
     },
     {
       "path": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md",
@@ -2723,7 +2864,27 @@
       "replacement_artifacts": [],
       "recommended_action": "keep-pending-review",
       "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion"
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "staging_canonicalization": {
+        "canonicalization_state": "partial-derived-replacement-known",
+        "owning_records": [
+          "system.kernel-thread-dpc-enable"
+        ],
+        "canonical_replacement_candidates": [
+          "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3.perf.csv"
+        ],
+        "retention_rationale": "A derived perf CSV exists, but it is not a byte-for-byte replacement for the original ETL placeholder.",
+        "next_canonicalization_step": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder."
+      },
+      "canonicalization_state": "partial-derived-replacement-known",
+      "owning_records": [
+        "system.kernel-thread-dpc-enable"
+      ],
+      "canonical_replacement_candidates": [
+        "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3.perf.csv"
+      ],
+      "retention_rationale": "A derived perf CSV exists, but it is not a byte-for-byte replacement for the original ETL placeholder.",
+      "next_canonicalization_step": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder."
     },
     {
       "path": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md",
@@ -2759,7 +2920,27 @@
       "replacement_artifacts": [],
       "recommended_action": "keep-pending-review",
       "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion"
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "staging_canonicalization": {
+        "canonicalization_state": "partial-derived-replacement-known",
+        "owning_records": [
+          "system.kernel-thread-dpc-enable"
+        ],
+        "canonical_replacement_candidates": [
+          "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2.perf.csv"
+        ],
+        "retention_rationale": "A derived perf CSV exists, but it is not a byte-for-byte replacement for the original ETL placeholder.",
+        "next_canonicalization_step": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder."
+      },
+      "canonicalization_state": "partial-derived-replacement-known",
+      "owning_records": [
+        "system.kernel-thread-dpc-enable"
+      ],
+      "canonical_replacement_candidates": [
+        "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2.perf.csv"
+      ],
+      "retention_rationale": "A derived perf CSV exists, but it is not a byte-for-byte replacement for the original ETL placeholder.",
+      "next_canonicalization_step": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder."
     },
     {
       "path": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md",
@@ -2793,7 +2974,31 @@
       "replacement_artifacts": [],
       "recommended_action": "keep-pending-review",
       "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion"
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "staging_canonicalization": {
+        "canonicalization_state": "staging-source-of-record",
+        "owning_records": [
+          "security.trusted-path-credential-prompting",
+          "system.disable-auto-maintenance",
+          "system.memory-large-system-cache-client"
+        ],
+        "canonical_replacement_candidates": [
+          "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json"
+        ],
+        "retention_rationale": "This placeholder points at a multi-record VM batch proof that still acts as historical source-of-record for several records.",
+        "next_canonicalization_step": "Copy or regenerate the batch proof into evidence/raw, then migrate record/index references in one dedicated PR."
+      },
+      "canonicalization_state": "staging-source-of-record",
+      "owning_records": [
+        "security.trusted-path-credential-prompting",
+        "system.disable-auto-maintenance",
+        "system.memory-large-system-cache-client"
+      ],
+      "canonical_replacement_candidates": [
+        "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json"
+      ],
+      "retention_rationale": "This placeholder points at a multi-record VM batch proof that still acts as historical source-of-record for several records.",
+      "next_canonicalization_step": "Copy or regenerate the batch proof into evidence/raw, then migrate record/index references in one dedicated PR."
     },
     {
       "path": "evidence/files/vm-tooling-staging/ghidra-probes",
@@ -2820,7 +3025,19 @@
       "replacement_artifacts": [],
       "recommended_action": "keep-pending-review",
       "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion"
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "staging_canonicalization": {
+        "canonicalization_state": "active-tool-output-root",
+        "owning_records": [],
+        "canonical_replacement_candidates": [],
+        "retention_rationale": "Current static-probe scripts still name this path as the host output root, so it is not a stale evidence bundle.",
+        "next_canonicalization_step": "Move script defaults only if a broader tooling-path cleanup is planned; do not delete as evidence cleanup."
+      },
+      "canonicalization_state": "active-tool-output-root",
+      "owning_records": [],
+      "canonical_replacement_candidates": [],
+      "retention_rationale": "Current static-probe scripts still name this path as the host output root, so it is not a stale evidence bundle.",
+      "next_canonicalization_step": "Move script defaults only if a broader tooling-path cleanup is planned; do not delete as evidence cleanup."
     },
     {
       "path": "evidence/files/vm-tooling-staging/beep_start_toggle_out.txt",
@@ -2854,7 +3071,29 @@
       "replacement_artifacts": [],
       "recommended_action": "keep-pending-review",
       "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion"
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "staging_canonicalization": {
+        "canonicalization_state": "staging-source-of-record",
+        "owning_records": [
+          "audio.disable-beep"
+        ],
+        "canonical_replacement_candidates": [
+          "evidence/raw/etw-stackwalk/audio-disable-beep-etw-qga-unblock-20260507/audio-disable-beep-etw-qga-unblock-20260507-summary.json",
+          "evidence/raw/ghidra/ghidra-audio-disable-beep-20260424-batch2"
+        ],
+        "retention_rationale": "Raw ETW/Ghidra adjuncts exist, but this text file is still the concise reversible value proof used by shipped app QA evidence.",
+        "next_canonicalization_step": "Create a canonical evidence/raw runtime-diff JSON for the beep value proof before migrating app QA and index references."
+      },
+      "canonicalization_state": "staging-source-of-record",
+      "owning_records": [
+        "audio.disable-beep"
+      ],
+      "canonical_replacement_candidates": [
+        "evidence/raw/etw-stackwalk/audio-disable-beep-etw-qga-unblock-20260507/audio-disable-beep-etw-qga-unblock-20260507-summary.json",
+        "evidence/raw/ghidra/ghidra-audio-disable-beep-20260424-batch2"
+      ],
+      "retention_rationale": "Raw ETW/Ghidra adjuncts exist, but this text file is still the concise reversible value proof used by shipped app QA evidence.",
+      "next_canonicalization_step": "Create a canonical evidence/raw runtime-diff JSON for the beep value proof before migrating app QA and index references."
     },
     {
       "path": "evidence/files/vm-tooling-staging/crossdevice_resume_probe.csv",
@@ -2959,7 +3198,29 @@
       "replacement_artifacts": [],
       "recommended_action": "keep-pending-review",
       "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion"
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "staging_canonicalization": {
+        "canonicalization_state": "staging-source-of-record",
+        "owning_records": [
+          "security.threat-file-hash-logging"
+        ],
+        "canonical_replacement_candidates": [
+          "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt",
+          "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt"
+        ],
+        "retention_rationale": "Adjacent raw Procmon probes exist, but this MPENGINE reboot no-read sample remains a distinct validation lane.",
+        "next_canonicalization_step": "Regenerate or copy the MPENGINE no-read proof into evidence/raw before migrating the note/record references."
+      },
+      "canonicalization_state": "staging-source-of-record",
+      "owning_records": [
+        "security.threat-file-hash-logging"
+      ],
+      "canonical_replacement_candidates": [
+        "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt",
+        "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt"
+      ],
+      "retention_rationale": "Adjacent raw Procmon probes exist, but this MPENGINE reboot no-read sample remains a distinct validation lane.",
+      "next_canonicalization_step": "Regenerate or copy the MPENGINE no-read proof into evidence/raw before migrating the note/record references."
     },
     {
       "path": "evidence/files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-20260325-012333",
@@ -3186,7 +3447,29 @@
       "replacement_artifacts": [],
       "recommended_action": "keep-pending-review",
       "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion"
+      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "staging_canonicalization": {
+        "canonicalization_state": "staging-source-of-record",
+        "owning_records": [
+          "system.enable-hags"
+        ],
+        "canonical_replacement_candidates": [
+          "evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507-summary.json",
+          "evidence/raw/ghidra/ghidra-system-enable-hags-20260427b"
+        ],
+        "retention_rationale": "Raw ETW/Ghidra adjuncts exist, but this text file is still the concise reversible value proof for HwSchMode.",
+        "next_canonicalization_step": "Create a canonical evidence/raw runtime-diff JSON for the HAGS value proof before migrating record/index references."
+      },
+      "canonicalization_state": "staging-source-of-record",
+      "owning_records": [
+        "system.enable-hags"
+      ],
+      "canonical_replacement_candidates": [
+        "evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507-summary.json",
+        "evidence/raw/ghidra/ghidra-system-enable-hags-20260427b"
+      ],
+      "retention_rationale": "Raw ETW/Ghidra adjuncts exist, but this text file is still the concise reversible value proof for HwSchMode.",
+      "next_canonicalization_step": "Create a canonical evidence/raw runtime-diff JSON for the HAGS value proof before migrating record/index references."
     },
     {
       "path": "evidence/files/vm-tooling-staging/hideemptydrives-0-hits.csv",

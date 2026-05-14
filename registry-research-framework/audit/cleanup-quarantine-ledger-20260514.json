@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-14T14:13:15Z",
+  "generated_utc": "2026-05-14T15:39:03Z",
   "purpose": "Quarantine ledger for cleanup review inventory. Only delete-candidate rows are cleanup candidates; retained rows are not deletion candidates.",
   "deletion_policy": [
     "No file is deleted by this generator.",
@@ -15,8 +15,8 @@
     "retained_inventory_count": 89,
     "delete_eligible_count": 0,
     "referenced_count": 89,
-    "blocking_referenced_count": 74,
-    "audit_only_referenced_count": 15,
+    "blocking_referenced_count": 72,
+    "audit_only_referenced_count": 17,
     "total_size_bytes": 678702358,
     "categories": {
       "audit-archive-named-sample": 10,
@@ -26,8 +26,8 @@
       "vm-tooling-staging-oldest-sample": 25
     },
     "cleanup_status_counts": {
-      "retained-audit-trail-reference": 15,
-      "retained-live-reference": 74
+      "retained-audit-trail-reference": 17,
+      "retained-live-reference": 72
     }
   },
   "items": [
@@ -254,28 +254,26 @@
     {
       "path": "evidence/files/vm-tooling-staging/showinfotip-1-hits.csv..md",
       "kind": "file",
-      "cleanup_status": "retained-live-reference",
+      "cleanup_status": "retained-audit-trail-reference",
       "category": "vm-tooling-staging-oldest-sample",
       "size_bytes": 306,
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
-      "replacement_artifacts": [],
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
+      "replacement_artifacts": [
+        "evidence/raw/procmon/explorer-show-info-tips-validation-20260324/showinfotip-1-hits.csv"
+      ],
       "reference_terms": [
         "evidence/files/vm-tooling-staging/showinfotip-1-hits.csv..md",
         "showinfotip-1-hits.csv.",
         "showinfotip-1-hits.csv..md"
       ],
-      "live_reference_count": 10,
+      "live_reference_count": 4,
       "audit_reference_count": 4,
-      "blocking_reference_count": 6,
+      "blocking_reference_count": 0,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
         "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
-        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
@@ -283,44 +281,35 @@
         "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
         "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
-      "blocking_references_sample": [
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/records/explorer.show-info-tips.review.json"
-      ],
+      "blocking_references_sample": [],
       "replacement_resolved_reference_count": 0,
       "replacement_resolved_references_sample": [],
       "delete_eligible": false,
-      "recommended_action": "keep-pending-review"
+      "recommended_action": "delete-after-review"
     },
     {
       "path": "evidence/files/vm-tooling-staging/showsuperhidden-1-hits.csv..md",
       "kind": "file",
-      "cleanup_status": "retained-live-reference",
+      "cleanup_status": "retained-audit-trail-reference",
       "category": "vm-tooling-staging-oldest-sample",
       "size_bytes": 310,
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
-      "replacement_artifacts": [],
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
+      "replacement_artifacts": [
+        "evidence/raw/procmon/explorer-show-protected-operating-system-files-validation-20260324/showsuperhidden-1-hits.csv"
+      ],
       "reference_terms": [
         "evidence/files/vm-tooling-staging/showsuperhidden-1-hits.csv..md",
         "showsuperhidden-1-hits.csv.",
         "showsuperhidden-1-hits.csv..md"
       ],
-      "live_reference_count": 10,
+      "live_reference_count": 4,
       "audit_reference_count": 4,
-      "blocking_reference_count": 6,
+      "blocking_reference_count": 0,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
         "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
-        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
@@ -328,18 +317,11 @@
         "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
         "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
-      "blocking_references_sample": [
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/records/explorer.show-protected-operating-system-files.review.json"
-      ],
+      "blocking_references_sample": [],
       "replacement_resolved_reference_count": 0,
       "replacement_resolved_references_sample": [],
       "delete_eligible": false,
-      "recommended_action": "keep-pending-review"
+      "recommended_action": "delete-after-review"
     },
     {
       "path": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md",

@@ -257,7 +257,7 @@
     "source_url": "evidence/files/vm-tooling-staging/showsuperhidden-result.txt",
     "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden ... Data: 1; RESTORED_SHOWSUPERHIDDEN_VALUE=1",
     "key_found_on_page": true,
-    "notes": "Raw hit exports were also copied to evidence/files/vm-tooling-staging/showsuperhidden-0-hits.csv and evidence/files/vm-tooling-staging/showsuperhidden-1-hits.csv..md"
+    "notes": "Raw hit exports were also copied to evidence/files/vm-tooling-staging/showsuperhidden-0-hits.csv and evidence/raw/procmon/explorer-show-protected-operating-system-files-validation-20260324/showsuperhidden-1-hits.csv"
   },
   "source_enrichment": {
     "last_updated_utc": "2026-04-28T13:17:56Z",

@@ -122,6 +122,34 @@ class CleanupRetainedInventoryPlanTests(unittest.TestCase):
             self.assertFalse(item["can_become_delete_candidate"])
             self.assertIn(item, plan["retention_decision_queue"])
 
+    def test_staging_canonicalization_metadata_explains_known_items(self):
+        with tempfile.TemporaryDirectory() as temp:
+            ledger = Path(temp) / "cleanup-quarantine-ledger.json"
+            write_ledger(
+                ledger,
+                [
+                    {
+                        "path": "evidence/files/vm-tooling-staging/hags_toggle_out.txt",
+                        "category": "vm-tooling-staging-oldest-sample",
+                        "cleanup_status": "retained-live-reference",
+                        "recommended_action": "keep-pending-review",
+                        "blocking_reference_count": 3,
+                        "blocking_references_sample": ["research/records/system.enable-hags.review.json"],
+                    }
+                ],
+            )
+
+            plan = self.module.build_plan(ledger)
+            item = plan["retained_inventory"][0]
+
+            self.assertEqual(item["canonicalization_state"], "staging-source-of-record")
+            self.assertEqual(item["owning_records"], ["system.enable-hags"])
+            self.assertIn("runtime-diff JSON", item["next_canonicalization_step"])
+            self.assertEqual(
+                plan["summary"]["staging_canonicalization_state_counts"],
+                {"staging-source-of-record": 1},
+            )
+
     def test_audit_only_references_have_explicit_release_state(self):
         with tempfile.TemporaryDirectory() as temp:
             ledger = Path(temp) / "cleanup-quarantine-ledger.json"

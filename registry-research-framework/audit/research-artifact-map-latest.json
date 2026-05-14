@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-14T14:41:26Z",
+  "generated_utc": "2026-05-14T15:39:03Z",
   "summary": {
     "artifact_count": 15,
     "attention_count": 0,
@@ -11,8 +11,8 @@
     "cleanup_delete_eligible_count": 0,
     "cleanup_retained_inventory_count": 89,
     "cleanup_reference_migration_needed_count": 0,
-    "cleanup_retention_decision_queue_count": 70,
-    "cleanup_audit_only_retained_count": 15,
+    "cleanup_retention_decision_queue_count": 68,
+    "cleanup_audit_only_retained_count": 17,
     "app_card_contract_pass_count": 258,
     "app_card_contract_fail_count": 0,
     "promoted_app_qa_live_success_count": 14,
@@ -183,8 +183,8 @@
         "delete_candidate_count": 0,
         "retained_inventory_count": 89,
         "referenced_count": 89,
-        "blocking_referenced_count": 74,
-        "audit_only_referenced_count": 15,
+        "blocking_referenced_count": 72,
+        "audit_only_referenced_count": 17,
         "delete_eligible_count": 0,
         "total_size_bytes": 678702358
       }
@@ -203,23 +203,23 @@
         "item_count": 89,
         "delete_ready_count": 0,
         "reference_migration_needed_count": 0,
-        "retention_decision_queue_count": 70,
-        "audit_only_retained_count": 15,
+        "retention_decision_queue_count": 68,
+        "audit_only_retained_count": 17,
         "intentional_reference_keep_count": 4,
-        "needs_replacement_or_retention_decision_count": 70,
+        "needs_replacement_or_retention_decision_count": 68,
         "retained_pending_review_count": 0,
         "release_state_counts": {
-          "audit-only-retained": 15,
+          "audit-only-retained": 17,
           "intentional-reference-keep": 4,
-          "needs-replacement-or-retention-decision": 70
+          "needs-replacement-or-retention-decision": 68
         },
         "decision_track_counts": {
           "archive-history-anchor": 10,
-          "audit-trail-retained": 15,
+          "audit-trail-retained": 17,
           "historical-audit-output": 25,
           "intentional-reference-keep": 4,
           "raw-trace-source-of-record": 25,
-          "staging-bundle-canonicalization": 10
+          "staging-bundle-canonicalization": 8
         }
       }
     },

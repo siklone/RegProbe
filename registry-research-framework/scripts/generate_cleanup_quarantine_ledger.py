@@ -27,6 +27,21 @@ LEDGER_OUTPUT_GLOBS = {
     "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
 }
 
+STAGING_CANONICAL_REPLACEMENTS: dict[str, list[str]] = {
+    "evidence/files/vm-tooling-staging/showinfotip-1-hits.csv..md": [
+        "evidence/raw/procmon/explorer-show-info-tips-validation-20260324/showinfotip-1-hits.csv"
+    ],
+    "evidence/files/vm-tooling-staging/showsuperhidden-1-hits.csv..md": [
+        "evidence/raw/procmon/explorer-show-protected-operating-system-files-validation-20260324/showsuperhidden-1-hits.csv"
+    ],
+}
+
+CLEANUP_TOOL_REFERENCE_PATHS = {
+    "registry-research-framework/scripts/generate_cleanup_retained_inventory_plan.py",
+    "tests/python/test_cleanup_quarantine_ledger.py",
+    "tests/python/test_cleanup_retained_inventory_plan.py",
+}
+
 
 def is_audit_trail_reference(path: str) -> bool:
     name = Path(path).name
@@ -356,8 +371,11 @@ def oldest_staging_items(
     paths = sorted((path for path in staging.iterdir()), key=lambda path: (path.stat().st_mtime, path.name))[:limit]
     items: list[dict[str, Any]] = []
     for path in paths:
+        path_rel = relative(path, repo_root)
         duplicate_replacements = duplicate_raw_replacements(path, repo_root=repo_root)
-        is_duplicate = bool(duplicate_replacements)
+        canonical_replacements = STAGING_CANONICAL_REPLACEMENTS.get(path_rel, [])
+        replacements = list(dict.fromkeys([*duplicate_replacements, *canonical_replacements]))
+        is_duplicate = bool(replacements)
         items.append(item_for(
             path,
             category="vm-tooling-staging-oldest-sample",
@@ -366,7 +384,7 @@ def oldest_staging_items(
                 if is_duplicate
                 else "staging diagnostic bundle; verify no record/evidence-index dependency before deletion"
             ),
-            replacement_artifacts=duplicate_replacements,
+            replacement_artifacts=replacements,
             recommended_action="delete-after-review" if is_duplicate else "keep-pending-review",
             repo_root=repo_root,
             output_paths=output_paths,
@@ -523,6 +541,7 @@ def build_ledger(
 
     ignore_reference_paths = {
         relative(Path(__file__), repo_root),
+        *CLEANUP_TOOL_REFERENCE_PATHS,
         *output_paths,
         *(str(item.get("path") or "") for item in items),
     }
