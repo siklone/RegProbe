@@ -53,11 +53,11 @@ public sealed class ContributorLabViewModel : ViewModelBase
                 .OrderBy(static bucket => bucket, StringComparer.OrdinalIgnoreCase)));
         _runCustomLookupCommand = new AsyncRelayCommand(
             () => RunContributorCommandAsync("Repo/evidence lookup", CustomEvidenceLookupCommand),
-            CanRunReadOnlyContributorCommand,
+            CanRunCustomValueContributorCommand,
             ex => SetCommandRunResult("Repo/evidence lookup", "Failed", ex.Message));
         _runCustomAppQaCommand = new AsyncRelayCommand(
             () => RunContributorCommandAsync("Existing app-card QA map", CustomAppQaCommand),
-            CanRunReadOnlyContributorCommand,
+            CanRunCustomValueContributorCommand,
             ex => SetCommandRunResult("Existing app-card QA map", "Failed", ex.Message));
         _runAppReadinessCommand = new AsyncRelayCommand(
             () => RunContributorCommandAsync("App readiness/contracts", "python3 registry-research-framework/scripts/check_app_retest_readiness.py --json"),
@@ -204,7 +204,7 @@ public sealed class ContributorLabViewModel : ViewModelBase
         $"python3 scripts/vm-kvm/vm-health-check.py --domain regprobe-win11-25h2-session --connect qemu:///session --snapshot-name {QuoteArg(Snapshot.VmSnapshotName)} --json";
 
     public string CustomVmExperimentCommand =>
-        $"python3 scripts/vm-kvm/run-guest-registry-value-experiment.py --domain regprobe-win11-25h2-session --connect qemu:///session --registry-path {QuoteArg(CustomRegistryPath)} --value-name {QuoteArg(CustomValueName)} --value-data {FirstExpectedValueOrDefault(CustomExpectedValues)} --smoke-profile gui --stage-wait-timeout 420 --reboot-wait-timeout 420 --post-reboot-delay-seconds 90 --require-domain-snapshot --auto-revert-snapshot-on-boot-failure --revert-snapshot-name clean-25h2-qga --abort-on-noisy-host";
+        $"python3 scripts/vm-kvm/run-guest-registry-value-experiment.py --domain regprobe-win11-25h2-session --connect qemu:///session --registry-path {QuoteArg(CustomRegistryPath)} --value-name {QuoteArg(CustomValueName)} --value-data {QuoteArg(FirstExpectedValueOrDefault(CustomExpectedValues))} --smoke-profile gui --stage-wait-timeout 420 --reboot-wait-timeout 420 --post-reboot-delay-seconds 90 --require-domain-snapshot --auto-revert-snapshot-on-boot-failure --revert-snapshot-name clean-25h2-qga --abort-on-noisy-host";
 
     public string CustomValueWorkflowChecklist =>
         "App checks: repo artifact hit, current/default value story, VM/QGA/snapshot readiness, one-value run command, boot/app-smoke result, benchmark observation, rollback proof, then app-card gate.";
@@ -213,6 +213,9 @@ public sealed class ContributorLabViewModel : ViewModelBase
         ReferenceEligible
             ? "Certified mutation templates are available, but still require per-run confirmation and a snapshot rollback plan."
             : "Mutation templates are copy-only until VM/QGA/snapshot and noise gates are certified; non-certified results are community/debug observations, never reference proof.";
+
+    public string ContributorExecutionPolicySummary =>
+        "In-app execution is limited to allowlisted, non-mutating lookup/readiness/VM-health checks. VM value experiments and campaign reruns stay copy-only in WPF v1; run them only after certified VM/snapshot health passes and confirm each mutation outside the app.";
 
     public IReadOnlyList<ContributorCommandPackViewModel> CustomValueDiscoverySteps =>
     [
@@ -393,7 +396,10 @@ public sealed class ContributorLabViewModel : ViewModelBase
     private bool CanRunReadOnlyContributorCommand()
         => AreToolsUnlocked
            && !IsContributorCommandRunning
-           && Snapshot.RepoRootFound
+           && Snapshot.RepoRootFound;
+
+    private bool CanRunCustomValueContributorCommand()
+        => CanRunReadOnlyContributorCommand()
            && HasCustomValueInput;
 
     private async Task RunContributorCommandAsync(string title, string command)

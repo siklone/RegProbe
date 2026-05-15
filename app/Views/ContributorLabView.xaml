@@ -70,6 +70,12 @@
                                    Margin="0,5,0,0"
                                    Foreground="#B8B8B8"
                                    TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding ExecutionPolicyLabel}"
+                                   Margin="0,5,0,0"
+                                   Foreground="#D7B79F"
+                                   FontFamily="{DynamicResource FontFamilyMono}"
+                                   FontSize="10"
+                                   TextWrapping="Wrap"/>
                         <TextBlock Text="{Binding Command}"
                                    Margin="0,7,0,0"
                                    Foreground="#DCDCDC"
@@ -300,6 +306,9 @@
                                            Margin="0,6,0,8"
                                            Style="{StaticResource UtilitySectionBodyTextStyle}"/>
                                 <TextBlock Text="{Binding CertifiedMutationGuardSummary}"
+                                           Margin="0,0,0,8"
+                                           Style="{StaticResource UtilitySectionBodyTextStyle}"/>
+                                <TextBlock Text="{Binding ContributorExecutionPolicySummary}"
                                            Margin="0,0,0,8"
                                            Style="{StaticResource UtilitySectionBodyTextStyle}"/>
                                 <TextBlock Text="Minimum evidence before app-card review: known current/default/target value, clean host-noise metadata, boot and GUI smoke result, rollback result, and bounded claim text."

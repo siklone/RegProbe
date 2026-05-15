@@ -134,8 +134,9 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Contains("--expected-value \"1\"", viewModel.CustomEvidenceLookupCommand, StringComparison.Ordinal);
         Assert.Contains("--registry-path \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\"", viewModel.CustomVmExperimentCommand, StringComparison.Ordinal);
         Assert.Contains("--value-name \"TimerCheckFlags\"", viewModel.CustomVmExperimentCommand, StringComparison.Ordinal);
-        Assert.Contains("--value-data 0", viewModel.CustomVmExperimentCommand, StringComparison.Ordinal);
+        Assert.Contains("--value-data \"0\"", viewModel.CustomVmExperimentCommand, StringComparison.Ordinal);
         Assert.Contains("--abort-on-noisy-host", viewModel.CustomVmExperimentCommand, StringComparison.Ordinal);
+        Assert.Contains("non-mutating lookup/readiness/VM-health", viewModel.ContributorExecutionPolicySummary, StringComparison.Ordinal);
 
         Assert.Contains("check_single_tweak_app_qa.py \"TimerCheckFlags\"", viewModel.CustomAppQaCommand, StringComparison.Ordinal);
         Assert.Contains("vm-health-check.py", viewModel.CustomVmHealthCommand, StringComparison.Ordinal);
@@ -146,6 +147,47 @@ public sealed class ContributorLabViewModelTests : IDisposable
                                                                   && step.MutatesGuest
                                                                   && step.RequiresCertifiedVm
                                                                   && step.Command.Contains("--value-name \"TimerCheckFlags\"", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void ReadinessAndVmHealthCommands_DoNotRequireCustomValueInput()
+    {
+        var viewModel = new ContributorLabViewModel(CreateSnapshot())
+        {
+            CustomValueName = string.Empty
+        };
+
+        Assert.False(viewModel.HasCustomValueInput);
+        viewModel.RiskAcknowledged = true;
+        viewModel.EnableContributorToolsCommand.Execute(null);
+
+        Assert.False(viewModel.RunCustomLookupCommand.CanExecute(null));
+        Assert.False(viewModel.RunCustomAppQaCommand.CanExecute(null));
+        Assert.True(viewModel.RunAppReadinessCommand.CanExecute(null));
+        Assert.True(viewModel.RunVmHealthCommand.CanExecute(null));
+    }
+
+    [Fact]
+    public void CommandPackExecutionPolicy_MarksMutatingPacksAsCopyOnly()
+    {
+        var mutatingPack = new ContributorCommandPackViewModel(new ContributorCommandPack(
+            "Single value VM experiment",
+            "Mutates the guest.",
+            "python3 scripts/vm-kvm/run-guest-registry-value-experiment.py --value-name Example",
+            "certified-ready",
+            RequiresCertifiedVm: true,
+            MutatesGuest: true));
+        var readOnlyPack = new ContributorCommandPackViewModel(new ContributorCommandPack(
+            "Single tweak lookup",
+            "Reads repo evidence.",
+            "python3 registry-research-framework/scripts/check_single_tweak.py Example --json",
+            "community-safe",
+            RequiresCertifiedVm: false,
+            MutatesGuest: false));
+
+        Assert.Contains("Copy-only", mutatingPack.ExecutionPolicyLabel, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("per-run confirmation", mutatingPack.ExecutionPolicyLabel, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("Read-only", readOnlyPack.ExecutionPolicyLabel, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]
