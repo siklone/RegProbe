@@ -596,6 +596,7 @@ public sealed partial class TweakItemViewModel : ViewModelBase
     public bool IsResearchDerived => string.Equals(_tweakOrigin, "research-derived", StringComparison.OrdinalIgnoreCase);
     public bool IsPromotionActionable => _isPromotionActionable;
     public bool CanDebugOverridePromotionGate => ContributorMode.IsEnabled && _debugOverrideAllowed;
+    public bool IsEndUserAppCardAllowed => ShowInApp && IsEvidenceClassActionable && IsPromotionActionable;
     public bool IsMutationAllowed => IsEvidenceClassActionable && (IsPromotionActionable || CanDebugOverridePromotionGate);
     public string PublicMutationGatingReason =>
         TweakVerdictPresentation.BuildPublicMutationGatingReason(
@@ -823,6 +824,7 @@ public sealed partial class TweakItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(EvidenceClassGatingReason));
         OnPropertyChanged(nameof(IsEvidenceClassActionable));
         OnPropertyChanged(nameof(ShowInApp));
+        OnPropertyChanged(nameof(IsEndUserAppCardAllowed));
         OnPropertyChanged(nameof(IsMutationAllowed));
         OnPropertyChanged(nameof(IsResearchGated));
         OnPropertyChanged(nameof(HasEvidenceClass));
@@ -865,6 +867,7 @@ public sealed partial class TweakItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(IsResearchDerived));
         OnPropertyChanged(nameof(IsPromotionActionable));
         OnPropertyChanged(nameof(CanDebugOverridePromotionGate));
+        OnPropertyChanged(nameof(IsEndUserAppCardAllowed));
         OnPropertyChanged(nameof(IsMutationAllowed));
         OnPropertyChanged(nameof(PublicMutationGatingReason));
         OnPropertyChanged(nameof(IsResearchGated));

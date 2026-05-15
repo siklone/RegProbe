@@ -94,6 +94,26 @@ public sealed class TweakEvidenceClassCatalogServiceTests : IDisposable
         Assert.Contains("discovery and naming context", clone.UpstreamLineage.Summary, StringComparison.OrdinalIgnoreCase);
     }
 
+    [Fact]
+    public void Store_LabelsCatalogOnlySourceAsDiscoveryNotSemanticsProof()
+    {
+        var store = new TweakEvidenceClassCatalogStore(_docsRoot);
+        var clone = store.CloneWithResolvedLinks(new TweakEvidenceClassEntry
+        {
+            RecordId = "system.catalog-only",
+            TweakId = "system.catalog-only",
+            UpstreamLineage = new TweakEvidenceProofBlock
+            {
+                Summary = "No upstream nohuto source link is attached to this record.",
+                HasNohutoLineage = false
+            }
+        });
+
+        Assert.NotNull(clone.UpstreamLineage);
+        Assert.Contains("Catalog-only source context is not a value-semantics proof", clone.UpstreamLineage!.Summary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("Docs, Runtime, and Rollback", clone.UpstreamLineage.Summary, StringComparison.OrdinalIgnoreCase);
+    }
+
     public void Dispose()
     {
         try

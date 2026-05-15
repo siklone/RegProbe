@@ -48,7 +48,7 @@ internal sealed class WorkspaceFilterEvaluator
             return false;
         }
 
-        if (!item.IsMutationAllowed)
+        if (!item.IsEndUserAppCardAllowed)
         {
             return false;
         }
