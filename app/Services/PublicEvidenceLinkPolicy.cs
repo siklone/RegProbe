@@ -26,7 +26,9 @@ internal static class PublicEvidenceLinkPolicy
 
         if (text.Contains("Upstream dump / pseudocode links are attached", StringComparison.OrdinalIgnoreCase))
         {
-            return "Source links are discovery and naming context only. They are not value-semantics proof; app safety comes from Docs, Runtime, and Rollback.";
+            return visibleSourceLinkCount > 0
+                ? "Source links are discovery and naming context only. They are not value-semantics proof; app safety comes from Docs, Runtime, and Rollback."
+                : NoLocalSourceMessage;
         }
 
         return text.Replace("nohuto", "external upstream", StringComparison.OrdinalIgnoreCase);

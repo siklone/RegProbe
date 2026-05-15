@@ -61,4 +61,45 @@ public sealed class TweaksShellStateViewModelTests
 
         Assert.Equal(string.Empty, viewModel.ScopeFilter);
     }
+
+    [Fact]
+    public void FilterOptions_ExposeStableLabelsAndValues_ForDropdownBinding()
+    {
+        var viewModel = new TweaksShellStateViewModel();
+
+        Assert.Collection(
+            viewModel.StatusFilterOptions,
+            option =>
+            {
+                Assert.Equal("STATUS", option.Label);
+                Assert.Equal(string.Empty, option.Value);
+            },
+            option =>
+            {
+                Assert.Equal("APPLIED", option.Label);
+                Assert.Equal("applied", option.Value);
+            },
+            option =>
+            {
+                Assert.Equal("ROLLED BACK", option.Label);
+                Assert.Equal("rolledback", option.Value);
+            });
+        Assert.Contains(viewModel.ScopeFilterOptions, option => option.Label == "MACHINE" && option.Value == "machine");
+        Assert.Contains(viewModel.ScopeFilterOptions, option => option.Label == "USER" && option.Value == "user");
+        Assert.Contains(viewModel.ScopeFilterOptions, option => option.Label == "MIXED" && option.Value == "mixed");
+    }
+
+    [Fact]
+    public void HasActiveFilters_IncludesStatusAndScope()
+    {
+        var viewModel = new TweaksShellStateViewModel();
+        Assert.False(viewModel.HasActiveFilters);
+
+        viewModel.StatusFilter = "applied";
+        Assert.True(viewModel.HasActiveFilters);
+
+        viewModel.StatusFilter = string.Empty;
+        viewModel.ScopeFilter = "machine";
+        Assert.True(viewModel.HasActiveFilters);
+    }
 }

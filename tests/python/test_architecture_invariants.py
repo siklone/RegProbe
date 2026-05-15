@@ -48,12 +48,14 @@ class ArchitectureInvariantTests(unittest.TestCase):
 
         self.assertIn('ResourceDictionary Source="Resources/TweaksWorkspaceResources.xaml"', app_xaml)
 
-    def test_tweak_filter_dropdowns_bind_selected_value_to_item_tags(self) -> None:
+    def test_tweak_filter_dropdowns_bind_selected_value_to_filter_option_values(self) -> None:
         secondary_panel = (
             REPO_ROOT / "app" / "Views" / "Tweaks" / "TweaksSecondaryPanel.xaml"
         ).read_text(encoding="utf-8")
 
-        self.assertIn('SelectedValuePath="Tag"', secondary_panel)
+        self.assertIn('ItemsSource="{Binding StatusFilterOptions}"', secondary_panel)
+        self.assertIn('ItemsSource="{Binding ScopeFilterOptions}"', secondary_panel)
+        self.assertIn('SelectedValuePath="Value"', secondary_panel)
         self.assertIn('SelectedValue="{Binding StatusFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"', secondary_panel)
         self.assertIn('SelectedValue="{Binding ScopeFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"', secondary_panel)
 

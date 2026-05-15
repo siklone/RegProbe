@@ -51,12 +51,12 @@ internal static class TweakProofSnapshotPresentation
         bool needsSourceReview,
         string provenanceSummary)
     {
-        if (hasLineageEvidenceFlag || hasUpstreamLineage || hasNohutoEvidence || hasWindowsInternalsContext)
+        if (hasLineageEvidenceFlag || hasUpstreamLineage || hasNohutoEvidence)
         {
             return "ready";
         }
 
-        if (needsSourceReview || !string.IsNullOrWhiteSpace(provenanceSummary))
+        if (hasWindowsInternalsContext || needsSourceReview || !string.IsNullOrWhiteSpace(provenanceSummary))
         {
             return "partial";
         }

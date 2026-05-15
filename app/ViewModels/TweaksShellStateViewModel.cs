@@ -19,6 +19,21 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
     private ConfigurationWorkspaceKind _selectedWorkspace = ConfigurationWorkspaceKind.Settings;
     private bool _isFlatView;
 
+    public IReadOnlyList<FilterOptionViewModel> StatusFilterOptions { get; } = new[]
+    {
+        new FilterOptionViewModel("STATUS", string.Empty),
+        new FilterOptionViewModel("APPLIED", "applied"),
+        new FilterOptionViewModel("ROLLED BACK", "rolledback")
+    };
+
+    public IReadOnlyList<FilterOptionViewModel> ScopeFilterOptions { get; } = new[]
+    {
+        new FilterOptionViewModel("SCOPE", string.Empty),
+        new FilterOptionViewModel("MACHINE", "machine"),
+        new FilterOptionViewModel("USER", "user"),
+        new FilterOptionViewModel("MIXED", "mixed")
+    };
+
     public ConfigurationWorkspaceKind SelectedWorkspace
     {
         get => _selectedWorkspace;
@@ -40,7 +55,13 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
     public string SearchText
     {
         get => _searchText;
-        set => SetProperty(ref _searchText, value);
+        set
+        {
+            if (SetProperty(ref _searchText, value))
+            {
+                OnPropertyChanged(nameof(HasActiveFilters));
+            }
+        }
     }
 
     public string StatusFilter
@@ -52,6 +73,7 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
             {
                 OnPropertyChanged(nameof(StatusFilterLabel));
                 OnPropertyChanged(nameof(HasStatusFilter));
+                OnPropertyChanged(nameof(HasActiveFilters));
             }
         }
     }
@@ -59,7 +81,14 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
     public string ScopeFilter
     {
         get => _scopeFilter;
-        set => SetProperty(ref _scopeFilter, value);
+        set
+        {
+            if (SetProperty(ref _scopeFilter, value))
+            {
+                OnPropertyChanged(nameof(HasScopeFilter));
+                OnPropertyChanged(nameof(HasActiveFilters));
+            }
+        }
     }
 
     public string StatusFilterLabel => _statusFilter switch
@@ -71,52 +100,115 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
 
     public bool HasStatusFilter => !string.IsNullOrEmpty(_statusFilter);
 
+    public bool HasScopeFilter => !string.IsNullOrEmpty(_scopeFilter);
+
+    public bool HasActiveFilters =>
+        HasStatusFilter
+        || HasScopeFilter
+        || ShowFavoritesOnly
+        || !ShowSafe
+        || !ShowAdvanced
+        || !ShowRisky
+        || !ShowClassA
+        || !ShowClassB
+        || !ShowClassC
+        || !ShowClassD
+        || !string.IsNullOrWhiteSpace(SearchText);
+
     public bool ShowSafe
     {
         get => _showSafe;
-        set => SetProperty(ref _showSafe, value);
+        set
+        {
+            if (SetProperty(ref _showSafe, value))
+            {
+                OnPropertyChanged(nameof(HasActiveFilters));
+            }
+        }
     }
 
     public bool ShowAdvanced
     {
         get => _showAdvanced;
-        set => SetProperty(ref _showAdvanced, value);
+        set
+        {
+            if (SetProperty(ref _showAdvanced, value))
+            {
+                OnPropertyChanged(nameof(HasActiveFilters));
+            }
+        }
     }
 
     public bool ShowRisky
     {
         get => _showRisky;
-        set => SetProperty(ref _showRisky, value);
+        set
+        {
+            if (SetProperty(ref _showRisky, value))
+            {
+                OnPropertyChanged(nameof(HasActiveFilters));
+            }
+        }
     }
 
     public bool ShowFavoritesOnly
     {
         get => _showFavoritesOnly;
-        set => SetProperty(ref _showFavoritesOnly, value);
+        set
+        {
+            if (SetProperty(ref _showFavoritesOnly, value))
+            {
+                OnPropertyChanged(nameof(HasActiveFilters));
+            }
+        }
     }
 
     public bool ShowClassA
     {
         get => _showClassA;
-        set => SetProperty(ref _showClassA, value);
+        set
+        {
+            if (SetProperty(ref _showClassA, value))
+            {
+                OnPropertyChanged(nameof(HasActiveFilters));
+            }
+        }
     }
 
     public bool ShowClassB
     {
         get => _showClassB;
-        set => SetProperty(ref _showClassB, value);
+        set
+        {
+            if (SetProperty(ref _showClassB, value))
+            {
+                OnPropertyChanged(nameof(HasActiveFilters));
+            }
+        }
     }
 
     public bool ShowClassC
     {
         get => _showClassC;
-        set => SetProperty(ref _showClassC, value);
+        set
+        {
+            if (SetProperty(ref _showClassC, value))
+            {
+                OnPropertyChanged(nameof(HasActiveFilters));
+            }
+        }
     }
 
     public bool ShowClassD
     {
         get => _showClassD;
-        set => SetProperty(ref _showClassD, value);
+        set
+        {
+            if (SetProperty(ref _showClassD, value))
+            {
+                OnPropertyChanged(nameof(HasActiveFilters));
+            }
+        }
     }
 
     public string SelectedCategoryName
