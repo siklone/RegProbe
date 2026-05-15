@@ -20,3 +20,8 @@ mapping, app readiness/contracts, certified VM health, and one-value VM
 experiments. The app does not turn a clean observation into an end-user card
 until current/default/target, rollback, app write, low-noise proof, and bounded
 claim text are all present.
+
+The app-side runner is intentionally narrow: it can run Contributor Lab's own
+allowlisted read-only lookup/readiness commands and show the output inline.
+Registry mutation, reboot, benchmark, and campaign commands stay copy-only and
+belong in an explicit disposable VM session.

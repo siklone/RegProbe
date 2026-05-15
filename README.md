@@ -195,6 +195,8 @@ template, inspect any existing app-card QA map, check app/readiness contracts,
 then run one value at a time in a certified disposable VM so boot, GUI smoke,
 benchmark observation, and rollback results stay attributable. Certified
 mutation remains copy-only unless the VM/QGA/snapshot health receipt is present.
+The app may run its own allowlisted read-only lookup/readiness commands, but it
+does not execute arbitrary contributor shell input.
 
 ## Single Setting Check
 
