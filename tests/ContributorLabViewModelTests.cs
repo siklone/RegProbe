@@ -179,6 +179,119 @@ public sealed class ContributorLabViewModelTests : IDisposable
     }
 
     [Fact]
+    public async Task CustomLookupResult_PrependsContributorDecisionSummaryBeforeRawJson()
+    {
+        var runner = new FakeContributorCommandRunner(new ContributorCommandRunResult(
+            ExitCode: 0,
+            StandardOutput: """
+            {
+              "status": "ok",
+              "match_count": 1,
+              "matches": [
+                {
+                  "candidate_id": "power.example",
+                  "promotion_state": "promoted",
+                  "apply_allowed": true,
+                  "restore_previous_supported": true,
+                  "restore_default_supported": true,
+                  "app_mapping_status": "matches-research",
+                  "catalog_entry": {"name": "Example Power Card"},
+                  "app_write_targets": [
+                    {"value_name": "SystemResponsiveness", "value": 10}
+                  ],
+                  "windows_and_recommended_profiles": [
+                    {
+                      "label": "Windows default",
+                      "states": [
+                        {"target_id": "system-responsiveness", "state_kind": "value", "value": 10}
+                      ]
+                    }
+                  ],
+                  "evidence": [
+                    {"kind": "official-doc"},
+                    {"kind": "etw-trace"}
+                  ],
+                  "expected_value_checks": [
+                    {"expected_value": "10", "found_any": true},
+                    {"expected_value": "30000", "found_any": false}
+                  ]
+                }
+              ]
+            }
+            """,
+            StandardError: string.Empty,
+            TimedOut: false));
+        var viewModel = new ContributorLabViewModel(CreateSnapshot(), runner)
+        {
+            CustomValueName = "SystemResponsiveness",
+            CustomExpectedValues = "10, 30000"
+        };
+        viewModel.RiskAcknowledged = true;
+        viewModel.EnableContributorToolsCommand.Execute(null);
+
+        await ((IAsyncCommand)viewModel.RunCustomLookupCommand).ExecuteAsync();
+
+        Assert.StartsWith("Contributor summary: ok", viewModel.CommandRunOutput, StringComparison.Ordinal);
+        Assert.Contains("Matched records: 1", viewModel.CommandRunOutput, StringComparison.Ordinal);
+        Assert.Contains("Best match: Example Power Card (promoted, apply_allowed=true)", viewModel.CommandRunOutput, StringComparison.Ordinal);
+        Assert.Contains("App writes: SystemResponsiveness=10", viewModel.CommandRunOutput, StringComparison.Ordinal);
+        Assert.Contains("Default/profile story: Windows default", viewModel.CommandRunOutput, StringComparison.Ordinal);
+        Assert.Contains("Evidence lanes: etw-trace=1, official-doc=1", viewModel.CommandRunOutput, StringComparison.Ordinal);
+        Assert.Contains("Expected values: 10: found, 30000: missing", viewModel.CommandRunOutput, StringComparison.Ordinal);
+        Assert.Contains("--- Raw JSON ---", viewModel.CommandRunOutput, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public async Task CustomAppQaResult_PrependsCardRollbackAndEvidenceSummary()
+    {
+        var runner = new FakeContributorCommandRunner(new ContributorCommandRunResult(
+            ExitCode: 0,
+            StandardOutput: """
+            {
+              "status": "ok",
+              "inspect_match_count": 2,
+              "qa_candidate_count": 1,
+              "candidates": [
+                {
+                  "candidate_id": "power.example",
+                  "apply_allowed": true,
+                  "restore_previous_supported": true,
+                  "restore_default_supported": true,
+                  "card_expectations": {
+                    "name": "Example Power Card",
+                    "category": "Power"
+                  },
+                  "value_expectations": ["10 -> matched"],
+                  "evidence_expectations": {
+                    "linked_evidence_count": 4,
+                    "runtime_read_signal_count": 1
+                  },
+                  "qa_report_path": "C:\\\\Tools\\\\ValidationController\\\\smoke\\\\power.example.qa.json"
+                }
+              ]
+            }
+            """,
+            StandardError: string.Empty,
+            TimedOut: false));
+        var viewModel = new ContributorLabViewModel(CreateSnapshot(), runner)
+        {
+            CustomValueName = "SystemResponsiveness",
+            CustomExpectedValues = "10"
+        };
+        viewModel.RiskAcknowledged = true;
+        viewModel.EnableContributorToolsCommand.Execute(null);
+
+        await ((IAsyncCommand)viewModel.RunCustomAppQaCommand).ExecuteAsync();
+
+        Assert.Contains("QA candidates: 1; inspect matches=2", viewModel.CommandRunOutput, StringComparison.Ordinal);
+        Assert.Contains("Card: Example Power Card (Power)", viewModel.CommandRunOutput, StringComparison.Ordinal);
+        Assert.Contains("Apply allowed: true; rollback previous=true; rollback default=true", viewModel.CommandRunOutput, StringComparison.Ordinal);
+        Assert.Contains("Value checks: 10 -> matched", viewModel.CommandRunOutput, StringComparison.Ordinal);
+        Assert.Contains("Evidence counts: linked=4, runtime=1", viewModel.CommandRunOutput, StringComparison.Ordinal);
+        Assert.Contains("power.example.qa.json", viewModel.CommandRunOutput, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public async Task ReadOnlyRunner_BlocksWhenGeneratedCommandIsNotAllowlisted()
     {
         var viewModel = new ContributorLabViewModel(CreateSnapshot(), new FakeContributorCommandRunner(
