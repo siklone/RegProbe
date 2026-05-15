@@ -435,10 +435,12 @@ public sealed class ContributorLabViewModel : ViewModelBase
             IsContributorCommandRunning = true;
             SetCommandRunResult(title, "Running", command);
             var result = await _commandRunner.RunAsync(Snapshot.RepoRoot, command).ConfigureAwait(false);
+            var preview = ContributorLabResultPreviewBuilder.Build(result.StandardOutput);
             var output = string.Join(
                 "\n\n",
                 new[]
                 {
+                    preview,
                     result.StandardOutput,
                     string.IsNullOrWhiteSpace(result.StandardError) ? string.Empty : "STDERR:\n" + result.StandardError
                 }.Where(static part => !string.IsNullOrWhiteSpace(part)));
