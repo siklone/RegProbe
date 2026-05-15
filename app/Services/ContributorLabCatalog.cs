@@ -59,22 +59,22 @@ public sealed record ContributorLabSnapshot(
     string VirtualizationFirmwareDetail,
     bool AppReadinessOk,
     bool AppCardsOk,
-    bool Operator96AggregateOk,
-    bool Operator96SurfaceReviewOk,
+    bool CustomValueAggregateOk,
+    bool CustomValueSurfaceReviewOk,
     bool VmHealthKnown,
     bool VmHealthOk,
     bool VmSnapshotKnown,
     bool VmSnapshotOk,
     string VmSnapshotName,
-    int Operator96RecordCount,
-    int Operator96ReadyForAppCard,
-    int Operator96BlockedByGate,
-    int Operator96NotAppSurfaceReady,
-    int Operator96BlockedBySafety,
-    bool Operator96AggregateSurfaceBlocked,
-    int Operator96NeedsLowNoiseRerun,
-    int Operator96NoisyResultCount,
-    int Operator96NonOkCount,
+    int CustomValueRecordCount,
+    int CustomValueReadyForAppCard,
+    int CustomValueBlockedByGate,
+    int CustomValueNotAppSurfaceReady,
+    int CustomValueBlockedBySafety,
+    bool CustomValueAggregateSurfaceBlocked,
+    int CustomValueNeedsLowNoiseRerun,
+    int CustomValueNoisyResultCount,
+    int CustomValueNonOkCount,
     int AppCardCandidateCount,
     int AppCardPassCount,
     string RunTier,
@@ -89,16 +89,16 @@ public sealed record ContributorLabSnapshot(
         && VmHealthOk
         && VmSnapshotKnown
         && VmSnapshotOk
-        && Operator96NoisyResultCount == 0
-        && Operator96NonOkCount == 0
-        && Operator96NeedsLowNoiseRerun == 0;
+        && CustomValueNoisyResultCount == 0
+        && CustomValueNonOkCount == 0
+        && CustomValueNeedsLowNoiseRerun == 0;
 }
 
 public static class ContributorLabCatalog
 {
-    public const string Operator96AggregatePath = "registry-research-framework/audit/operator96-low-noise-rerun-aggregate-20260512.json";
-    public const string Operator96SurfaceReviewPath = "registry-research-framework/audit/operator96-app-surface-review-20260510.json";
-    public const string Operator96EnrichedMatrixPath = "registry-research-framework/audit/operator96-enriched-value-matrix-20260510.json";
+    public const string CustomValueAggregatePath = "registry-research-framework/audit/operator96-low-noise-rerun-aggregate-20260512.json";
+    public const string CustomValueSurfaceReviewPath = "registry-research-framework/audit/operator96-app-surface-review-20260510.json";
+    public const string CustomValueEnrichedMatrixPath = "registry-research-framework/audit/operator96-enriched-value-matrix-20260510.json";
     public const string AppReadinessPath = "registry-research-framework/audit/app-retest-readiness-latest.json";
     public const string AppCardContractsPath = "registry-research-framework/audit/app-card-evidence-contracts-latest.json";
     public const string VmHealthPath = "registry-research-framework/audit/app-retest-vm-health-latest.json";
@@ -121,9 +121,9 @@ public static class ContributorLabCatalog
         var repoRoot = ResolveRepoRoot(repoRootOverride);
         var repoRootFound = IsRepoRoot(repoRoot);
 
-        var aggregate = ReadJson(repoRoot, Operator96AggregatePath);
-        var review = ReadJson(repoRoot, Operator96SurfaceReviewPath);
-        var matrix = ReadJson(repoRoot, Operator96EnrichedMatrixPath);
+        var aggregate = ReadJson(repoRoot, CustomValueAggregatePath);
+        var review = ReadJson(repoRoot, CustomValueSurfaceReviewPath);
+        var matrix = ReadJson(repoRoot, CustomValueEnrichedMatrixPath);
         var readiness = ReadJson(repoRoot, AppReadinessPath);
         var contracts = ReadJson(repoRoot, AppCardContractsPath);
         var vmHealth = ReadJson(repoRoot, VmHealthPath);
@@ -335,15 +335,15 @@ public static class ContributorLabCatalog
                 snapshot.VirtualizationFirmwareKnown ? snapshot.VirtualizationFirmwareEnabled ? "ok" : "warning" : "neutral"),
             Ready("App readiness", snapshot.AppReadinessOk, "Cards, rollback coverage, KVM lane health, and app smoke receipts."),
             Ready("App-card contracts", snapshot.AppCardsOk, $"{snapshot.AppCardPassCount}/{snapshot.AppCardCandidateCount} shipped cards pass."),
-            Ready("Custom value low-noise", snapshot.Operator96AggregateOk, $"non_ok={snapshot.Operator96NonOkCount}, noisy={snapshot.Operator96NoisyResultCount}; user-supplied seed batch."),
+            Ready("Custom value low-noise", snapshot.CustomValueAggregateOk, $"non_ok={snapshot.CustomValueNonOkCount}, noisy={snapshot.CustomValueNoisyResultCount}; user-supplied seed batch."),
             Ready(
                 "Custom value app-surface gate",
-                snapshot.Operator96SurfaceReviewOk,
-                $"ready={snapshot.Operator96ReadyForAppCard}, blocked_by_gate={snapshot.Operator96BlockedByGate}, not_ready={snapshot.Operator96NotAppSurfaceReady}, safety={snapshot.Operator96BlockedBySafety}, needs_rerun={snapshot.Operator96NeedsLowNoiseRerun}."),
+                snapshot.CustomValueSurfaceReviewOk,
+                $"ready={snapshot.CustomValueReadyForAppCard}, blocked_by_gate={snapshot.CustomValueBlockedByGate}, not_ready={snapshot.CustomValueNotAppSurfaceReady}, safety={snapshot.CustomValueBlockedBySafety}, needs_rerun={snapshot.CustomValueNeedsLowNoiseRerun}."),
             Ready(
                 "Custom value aggregate gate",
-                !snapshot.Operator96AggregateSurfaceBlocked,
-                snapshot.Operator96AggregateSurfaceBlocked
+                !snapshot.CustomValueAggregateSurfaceBlocked,
+                snapshot.CustomValueAggregateSurfaceBlocked
                     ? "Aggregate blockers are present; custom value experiments cannot support app-card promotion."
                     : "Aggregate blockers are clear; per-record app-card gates still decide promotion."),
             new(

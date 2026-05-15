@@ -92,45 +92,25 @@ public sealed class ContributorLabViewModel : ViewModelBase
 
     public string RepoRoot => Snapshot.RepoRootFound ? Snapshot.RepoRoot : "Repo root not found";
 
-    public int Operator96RecordCount => Snapshot.Operator96RecordCount;
+    public int CustomValueRecordCount => Snapshot.CustomValueRecordCount;
 
-    public int CustomValueRecordCount => Snapshot.Operator96RecordCount;
-
-    public int Operator96ReadyForAppCard => Snapshot.Operator96ReadyForAppCard;
-
-    public int CustomValueReadyForAppCard => Snapshot.Operator96ReadyForAppCard;
-
-    public int Operator96ResearchOnlyCount => System.Math.Max(0, Operator96RecordCount - Operator96ReadyForAppCard);
+    public int CustomValueReadyForAppCard => Snapshot.CustomValueReadyForAppCard;
 
     public int CustomValueResearchOnlyCount => System.Math.Max(0, CustomValueRecordCount - CustomValueReadyForAppCard);
 
-    public int Operator96BlockedByGate => Snapshot.Operator96BlockedByGate;
+    public int CustomValueBlockedByGate => Snapshot.CustomValueBlockedByGate;
 
-    public int CustomValueBlockedByGate => Snapshot.Operator96BlockedByGate;
+    public int CustomValueNotAppSurfaceReady => Snapshot.CustomValueNotAppSurfaceReady;
 
-    public int Operator96NotAppSurfaceReady => Snapshot.Operator96NotAppSurfaceReady;
+    public int CustomValueBlockedBySafety => Snapshot.CustomValueBlockedBySafety;
 
-    public int CustomValueNotAppSurfaceReady => Snapshot.Operator96NotAppSurfaceReady;
+    public bool CustomValueAggregateSurfaceBlocked => Snapshot.CustomValueAggregateSurfaceBlocked;
 
-    public int Operator96BlockedBySafety => Snapshot.Operator96BlockedBySafety;
+    public int CustomValueNeedsLowNoiseRerun => Snapshot.CustomValueNeedsLowNoiseRerun;
 
-    public int CustomValueBlockedBySafety => Snapshot.Operator96BlockedBySafety;
+    public int CustomValueNoisyResultCount => Snapshot.CustomValueNoisyResultCount;
 
-    public bool Operator96AggregateSurfaceBlocked => Snapshot.Operator96AggregateSurfaceBlocked;
-
-    public bool CustomValueAggregateSurfaceBlocked => Snapshot.Operator96AggregateSurfaceBlocked;
-
-    public int Operator96NeedsLowNoiseRerun => Snapshot.Operator96NeedsLowNoiseRerun;
-
-    public int CustomValueNeedsLowNoiseRerun => Snapshot.Operator96NeedsLowNoiseRerun;
-
-    public int Operator96NoisyResultCount => Snapshot.Operator96NoisyResultCount;
-
-    public int CustomValueNoisyResultCount => Snapshot.Operator96NoisyResultCount;
-
-    public int Operator96NonOkCount => Snapshot.Operator96NonOkCount;
-
-    public int CustomValueNonOkCount => Snapshot.Operator96NonOkCount;
+    public int CustomValueNonOkCount => Snapshot.CustomValueNonOkCount;
 
     public int AppCardCandidateCount => Snapshot.AppCardCandidateCount;
 
@@ -282,12 +262,6 @@ public sealed class ContributorLabViewModel : ViewModelBase
             : CustomValueReadyForAppCard > 0
                 ? "Review only ready_for_bounded_app_card records; keep all others in Contributor Lab."
                 : "Do not create end-user cards yet. Continue per-record rollback/default/app-write proof, then rerun the app-surface review.";
-
-    public string Operator96GateBreakdown =>
-        CustomValueGateBreakdown;
-
-    public string Operator96NextActionSummary =>
-        CustomValueNextActionSummary;
 
     public bool RiskAcknowledged
     {
