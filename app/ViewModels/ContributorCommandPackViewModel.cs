@@ -33,6 +33,12 @@ public sealed class ContributorCommandPackViewModel
             ? "VM preflight"
             : "Read-only";
 
+    public string ExecutionPolicyLabel => MutatesGuest
+        ? "Copy-only in WPF v1; run manually after certified VM health and per-run confirmation."
+        : RequiresCertifiedVm
+            ? "Non-mutating preflight; may be run from Contributor Lab."
+            : "Read-only contributor command.";
+
     public ICommand CopyCommand { get; }
 
     private static void CopyToClipboard(string text)
