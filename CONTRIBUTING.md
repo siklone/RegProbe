@@ -250,12 +250,14 @@ If you do not know the repo yet, use this order:
    reference-eligible.
 3. If you are on Windows, open Contributor Lab from the app to check local
    readiness and copy the safe command pack for the task. The lab exposes
-   read-only single-tweak, readiness, app-card contract, and custom registry
-   value experiment app-surface review commands. VM mutation packs stay
+   read-only single-tweak, app-card QA map, readiness, app-card contract, and
+   custom registry value app-surface review commands. VM mutation packs stay
    snapshot/certified gated and should be treated as command templates to run
-   from a repo shell. For a user-supplied key/value, use the lookup template
-   first, then run one edited VM experiment command per value so boot, app
-   smoke, benchmark observation, and rollback proof remain attributable.
+   from a repo shell. For a user-supplied key/value, use the five-step
+   discovery flow in the app: repo/evidence lookup, app-card QA map, app
+   readiness/contracts, VM health receipt, then one edited VM experiment command
+   per value so boot, app smoke, benchmark observation, and rollback proof
+   remain attributable.
 4. Run a single-setting inspection before editing anything. On Linux hosts
    without `Microsoft.WindowsDesktop.App`, use the Python mirror; use the .NET
    CLI in the Windows VM or on a desktop-runtime host only when you explicitly
@@ -266,14 +268,14 @@ python3 registry-research-framework/scripts/check_single_tweak.py SystemResponsi
 python3 registry-research-framework/scripts/check_single_tweak.py SystemResponsiveness --expected-value 10 --expected-value 30000
 ```
 
-4. Run the app-retest readiness check if you are about to verify cards, evidence, rollback, or KVM smoke:
+5. Run the app-retest readiness check if you are about to verify cards, evidence, rollback, or KVM smoke:
 
 ```bash
 python3 registry-research-framework/scripts/check_app_retest_readiness.py
 python3 registry-research-framework/scripts/check_app_retest_readiness.py --json
 ```
 
-5. Generate the single-card app QA plan before touching the desktop app:
+6. Generate the single-card app QA plan before touching the desktop app:
 
 ```bash
 python3 registry-research-framework/scripts/check_single_tweak_app_qa.py SystemResponsiveness
@@ -287,15 +289,15 @@ dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness --e
 dotnet run --project cli/cli.csproj -- research qa-plan SystemResponsiveness --expected-value 10 --expected-value 30000 --json
 ```
 
-6. If you are about to retest several shipped cards, plan or run a promoted batch:
+7. If you are about to retest several shipped cards, plan or run a promoted batch:
 
 ```bash
 python3 registry-research-framework/scripts/check_promoted_tweak_app_qa_batch.py --category Power --category Explorer --total-limit 4
 python3 registry-research-framework/scripts/check_promoted_tweak_app_qa_batch.py --id power.disable-fast-startup --id power.disable-windows-search --id explorer.hide-empty-drives --id privacy.disable-find-my-device --run-kvm --json
 ```
 
-6. Open the reported research record, app card doc, and source file together.
-7. Only then change provider code, research records, evidence, or docs.
+8. Open the reported research record, app card doc, and source file together.
+9. Only then change provider code, research records, evidence, or docs.
 
 That flow is the fastest way to answer beginner questions such as:
 
