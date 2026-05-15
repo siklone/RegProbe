@@ -114,7 +114,8 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Contains("blocked_by_gate=17", viewModel.Operator96GateBreakdown, StringComparison.Ordinal);
         Assert.Contains("blocked_by_gate=17", viewModel.CustomValueGateBreakdown, StringComparison.Ordinal);
         Assert.Contains("not_app_surface_ready=75", viewModel.Operator96GateBreakdown, StringComparison.Ordinal);
-        Assert.Contains("seed_batch=custom-value", viewModel.Operator96GateBreakdown, StringComparison.Ordinal);
+        Assert.Contains("surface=contributor-lab-only", viewModel.Operator96GateBreakdown, StringComparison.Ordinal);
+        Assert.Contains("surface=contributor-lab-only", viewModel.CustomValueGateBreakdown, StringComparison.Ordinal);
         Assert.Contains("Review only ready_for_bounded_app_card", viewModel.Operator96NextActionSummary, StringComparison.Ordinal);
         Assert.Contains("Review only ready_for_bounded_app_card", viewModel.CustomValueNextActionSummary, StringComparison.Ordinal);
         Assert.Contains("user-supplied key/value", viewModel.CustomValueWorkflowSummary, StringComparison.Ordinal);

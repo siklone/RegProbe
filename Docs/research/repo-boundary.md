@@ -87,9 +87,6 @@ clear reason.
 
 ## Naming Rule
 
-Do not turn temporary campaign IDs into product language. For example,
-`operator96` is a legacy artifact/campaign ID for the first 96-record seed
-batch used to validate the custom registry value experiment pipeline. Public
-and app-facing copy should say `custom registry value experiments` or
-`user-supplied key/value experiments`; only low-level artifact paths need the
-legacy ID.
+Do not turn temporary campaign IDs into product language. Public and app-facing
+copy should say `custom registry value experiments` or `user-supplied key/value
+experiments`; only low-level artifact paths should expose legacy campaign IDs.

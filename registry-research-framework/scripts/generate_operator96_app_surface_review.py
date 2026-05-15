@@ -177,7 +177,7 @@ def build_review(matrix_path: Path = DEFAULT_MATRIX, aggregate_path: Path | None
         },
         "policy": {
             "ship_rule": "Only ready_for_bounded_app_card may enter the app surface without another VM campaign.",
-            "contributor_lab_rule": "Clean custom registry value experiment records that are not ready_for_bounded_app_card are Contributor Lab research observations, not end-user optimization cards. operator96 is the legacy artifact ID for the current seed batch.",
+            "contributor_lab_rule": "Clean custom registry value experiment records that are not ready_for_bounded_app_card are Contributor Lab research observations, not end-user optimization cards.",
             "no_performance_claim_rule": "Low-confidence, harmful, noisy, or host-noise-unknown experiments are observations only.",
             "rerun_rule": "needs_low_noise_rerun means host noise was not clean; not_app_surface_ready means the run was clean enough to store but not positive/bounded enough to ship.",
             "aggregate_block_rule": "Aggregate non_ok or noisy_result_count greater than zero blocks all custom value app surfacing until a clean rerun exists.",

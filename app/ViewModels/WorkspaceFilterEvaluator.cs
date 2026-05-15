@@ -24,7 +24,7 @@ internal sealed class WorkspaceFilterEvaluator
         ArgumentNullException.ThrowIfNull(tweaks);
 
         return tweaks.Any(t =>
-            t.ShowInApp &&
+            t.IsEndUserAppCardAllowed &&
             GetWorkspaceKind(t) == _shellState.SelectedWorkspace &&
             string.Equals(t.Category, categoryName, StringComparison.OrdinalIgnoreCase));
     }

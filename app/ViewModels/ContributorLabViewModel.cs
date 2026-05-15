@@ -274,7 +274,7 @@ public sealed class ContributorLabViewModel : ViewModelBase
     ];
 
     public string CustomValueGateBreakdown =>
-        $"ready={CustomValueReadyForAppCard}; blocked_by_gate={CustomValueBlockedByGate}; not_app_surface_ready={CustomValueNotAppSurfaceReady}; safety={CustomValueBlockedBySafety}; aggregate_blocked={CustomValueAggregateSurfaceBlocked.ToString().ToLowerInvariant()}; seed_batch=custom-value";
+        $"ready={CustomValueReadyForAppCard}; blocked_by_gate={CustomValueBlockedByGate}; not_app_surface_ready={CustomValueNotAppSurfaceReady}; safety={CustomValueBlockedBySafety}; aggregate_blocked={CustomValueAggregateSurfaceBlocked.ToString().ToLowerInvariant()}; surface=contributor-lab-only";
 
     public string CustomValueNextActionSummary =>
         CustomValueAggregateSurfaceBlocked

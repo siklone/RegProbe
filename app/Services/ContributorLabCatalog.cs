@@ -335,7 +335,7 @@ public static class ContributorLabCatalog
                 snapshot.VirtualizationFirmwareKnown ? snapshot.VirtualizationFirmwareEnabled ? "ok" : "warning" : "neutral"),
             Ready("App readiness", snapshot.AppReadinessOk, "Cards, rollback coverage, KVM lane health, and app smoke receipts."),
             Ready("App-card contracts", snapshot.AppCardsOk, $"{snapshot.AppCardPassCount}/{snapshot.AppCardCandidateCount} shipped cards pass."),
-            Ready("Custom value low-noise", snapshot.Operator96AggregateOk, $"non_ok={snapshot.Operator96NonOkCount}, noisy={snapshot.Operator96NoisyResultCount}; seed batch: custom-value."),
+            Ready("Custom value low-noise", snapshot.Operator96AggregateOk, $"non_ok={snapshot.Operator96NonOkCount}, noisy={snapshot.Operator96NoisyResultCount}; user-supplied seed batch."),
             Ready(
                 "Custom value app-surface gate",
                 snapshot.Operator96SurfaceReviewOk,
