@@ -87,36 +87,32 @@ public sealed class ContributorLabViewModelTests : IDisposable
     }
 
     [Fact]
-    public void AppSurfacePolicySummary_BlocksCardsWhenOperator96HasNoisyOrNonOkCounts()
+    public void AppSurfacePolicySummary_BlocksCardsWhenCustomValuesHaveNoisyOrNonOkCounts()
     {
         var viewModel = new ContributorLabViewModel(CreateSnapshot() with
         {
-            Operator96ReadyForAppCard = 3,
-            Operator96NoisyResultCount = 1
+            CustomValueReadyForAppCard = 3,
+            CustomValueNoisyResultCount = 1
         });
 
         Assert.Contains("blocked from app cards", viewModel.AppSurfacePolicySummary, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]
-    public void Operator96ResearchOnlyCount_SubtractsReadyCardsFromResearchRecords()
+    public void CustomValueResearchOnlyCount_SubtractsReadyCardsFromResearchRecords()
     {
         var viewModel = new ContributorLabViewModel(CreateSnapshot() with
         {
-            Operator96RecordCount = 96,
-            Operator96ReadyForAppCard = 4,
-            Operator96BlockedByGate = 17,
-            Operator96NotAppSurfaceReady = 75
+            CustomValueRecordCount = 96,
+            CustomValueReadyForAppCard = 4,
+            CustomValueBlockedByGate = 17,
+            CustomValueNotAppSurfaceReady = 75
         });
 
-        Assert.Equal(92, viewModel.Operator96ResearchOnlyCount);
         Assert.Equal(92, viewModel.CustomValueResearchOnlyCount);
-        Assert.Contains("blocked_by_gate=17", viewModel.Operator96GateBreakdown, StringComparison.Ordinal);
         Assert.Contains("blocked_by_gate=17", viewModel.CustomValueGateBreakdown, StringComparison.Ordinal);
-        Assert.Contains("not_app_surface_ready=75", viewModel.Operator96GateBreakdown, StringComparison.Ordinal);
-        Assert.Contains("surface=contributor-lab-only", viewModel.Operator96GateBreakdown, StringComparison.Ordinal);
+        Assert.Contains("not_app_surface_ready=75", viewModel.CustomValueGateBreakdown, StringComparison.Ordinal);
         Assert.Contains("surface=contributor-lab-only", viewModel.CustomValueGateBreakdown, StringComparison.Ordinal);
-        Assert.Contains("Review only ready_for_bounded_app_card", viewModel.Operator96NextActionSummary, StringComparison.Ordinal);
         Assert.Contains("Review only ready_for_bounded_app_card", viewModel.CustomValueNextActionSummary, StringComparison.Ordinal);
         Assert.Contains("user-supplied key/value", viewModel.CustomValueWorkflowSummary, StringComparison.Ordinal);
         Assert.Contains("per-run confirmation", viewModel.CertifiedMutationGuardSummary, StringComparison.Ordinal);
@@ -342,9 +338,9 @@ public sealed class ContributorLabViewModelTests : IDisposable
     }
 
     [Fact]
-    public void Load_MapsOperator96ObservationsWithoutPromotingThemToAppCards()
+    public void Load_MapsCustomValueObservationsWithoutPromotingThemToAppCards()
     {
-        WriteArtifact(ContributorLabCatalog.Operator96AggregatePath, """
+        WriteArtifact(ContributorLabCatalog.CustomValueAggregatePath, """
         {
           "status": "ok",
           "summary": {
@@ -372,7 +368,7 @@ public sealed class ContributorLabViewModelTests : IDisposable
           ]
         }
         """);
-        WriteArtifact(ContributorLabCatalog.Operator96SurfaceReviewPath, """
+        WriteArtifact(ContributorLabCatalog.CustomValueSurfaceReviewPath, """
         {
           "status": "PASS",
           "summary": {
@@ -403,7 +399,7 @@ public sealed class ContributorLabViewModelTests : IDisposable
           ]
         }
         """);
-        WriteArtifact(ContributorLabCatalog.Operator96EnrichedMatrixPath, """
+        WriteArtifact(ContributorLabCatalog.CustomValueEnrichedMatrixPath, """
         {
           "records": [
             {
@@ -459,13 +455,13 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.True(snapshot.VmSnapshotOk);
         Assert.Equal("clean-25h2-qga", snapshot.VmSnapshotName);
         Assert.Contains(snapshot.ReadinessItems, item => item.Label == "VM snapshot receipt" && item.Status == "Ready");
-        Assert.Equal(0, snapshot.Operator96ReadyForAppCard);
-        Assert.Equal(1, snapshot.Operator96BlockedByGate);
-        Assert.Equal(0, snapshot.Operator96NotAppSurfaceReady);
-        Assert.False(snapshot.Operator96AggregateSurfaceBlocked);
+        Assert.Equal(0, snapshot.CustomValueReadyForAppCard);
+        Assert.Equal(1, snapshot.CustomValueBlockedByGate);
+        Assert.Equal(0, snapshot.CustomValueNotAppSurfaceReady);
+        Assert.False(snapshot.CustomValueAggregateSurfaceBlocked);
         var viewModel = new ContributorLabViewModel(snapshot);
-        Assert.Equal(1, viewModel.Operator96ResearchOnlyCount);
-        Assert.Contains("Do not create end-user cards yet", viewModel.Operator96NextActionSummary, StringComparison.Ordinal);
+        Assert.Equal(1, viewModel.CustomValueResearchOnlyCount);
+        Assert.Contains("Do not create end-user cards yet", viewModel.CustomValueNextActionSummary, StringComparison.Ordinal);
         Assert.Contains(snapshot.ReadinessItems, item => item.Label == "Custom value aggregate gate" && item.Status == "Ready");
         var observation = Assert.Single(snapshot.Observations);
         Assert.Equal("not_app_surface_ready", observation.Bucket);
@@ -541,22 +537,22 @@ public sealed class ContributorLabViewModelTests : IDisposable
             VirtualizationFirmwareDetail: "Firmware virtualization is enabled according to Win32_Processor.",
             AppReadinessOk: true,
             AppCardsOk: true,
-            Operator96AggregateOk: true,
-            Operator96SurfaceReviewOk: true,
+            CustomValueAggregateOk: true,
+            CustomValueSurfaceReviewOk: true,
             VmHealthKnown: true,
             VmHealthOk: true,
             VmSnapshotKnown: true,
             VmSnapshotOk: true,
             VmSnapshotName: "clean-25h2-qga",
-            Operator96RecordCount: 96,
-            Operator96ReadyForAppCard: 0,
-            Operator96BlockedByGate: 17,
-            Operator96NotAppSurfaceReady: 79,
-            Operator96BlockedBySafety: 0,
-            Operator96AggregateSurfaceBlocked: false,
-            Operator96NeedsLowNoiseRerun: 0,
-            Operator96NoisyResultCount: 0,
-            Operator96NonOkCount: 0,
+            CustomValueRecordCount: 96,
+            CustomValueReadyForAppCard: 0,
+            CustomValueBlockedByGate: 17,
+            CustomValueNotAppSurfaceReady: 79,
+            CustomValueBlockedBySafety: 0,
+            CustomValueAggregateSurfaceBlocked: false,
+            CustomValueNeedsLowNoiseRerun: 0,
+            CustomValueNoisyResultCount: 0,
+            CustomValueNonOkCount: 0,
             AppCardCandidateCount: 258,
             AppCardPassCount: 258,
             RunTier: "certified",
