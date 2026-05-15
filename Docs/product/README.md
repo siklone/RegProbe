@@ -21,6 +21,12 @@ experiments. The app does not turn a clean observation into an end-user card
 until current/default/target, rollback, app write, low-noise proof, and bounded
 claim text are all present.
 
+Contributor Lab also includes a research observation browser for the current
+custom registry value seed batch. It shows the bucket, blockers, tested values,
+verdict counts, confidence/noise badge, smoke receipt, and artifact pointer for
+each observation. This is intentionally contributor-only: it is a triage surface
+for deciding what to rerun or promote, not a normal optimization card list.
+
 The app-side runner is intentionally narrow: it can run Contributor Lab's own
 allowlisted read-only lookup/readiness commands and show the output inline.
 Registry mutation, reboot, benchmark, and campaign commands stay copy-only and

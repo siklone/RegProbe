@@ -189,7 +189,9 @@ contributor/dev contexts and starts behind an acknowledgement gate. It shows
 Windows/VM readiness, safe command packs, and custom registry value experiment
 observations without promoting them to normal end-user cards. The current
 legacy artifact ID for the first seed batch is `operator96`; it is not product
-branding. Its command packs are copyable contributor templates, not arbitrary
+branding. Its observation browser shows bucket, blockers, tested values,
+verdict/confidence/noise, smoke receipt, and artifact pointers for contributor
+triage only. Its command packs are copyable contributor templates, not arbitrary
 command execution. For user-supplied key/value work, start with the lookup
 template, inspect any existing app-card QA map, check app/readiness contracts,
 then run one value at a time in a certified disposable VM so boot, GUI smoke,

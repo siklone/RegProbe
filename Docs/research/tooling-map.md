@@ -92,6 +92,12 @@ custom registry value experiment observations without promoting them to normal
 app cards. `operator96` is only the legacy artifact/campaign ID for the first
 96-record seed batch; do not use it as product or public feature branding.
 
+The observation browser is the preferred app-side view for the current custom
+value seed batch. It surfaces bucket, app-card blockers, tested values,
+verdict/confidence/noise summaries, hard-smoke receipt, and artifact pointers
+so contributors can decide whether to rerun, research, or prepare a bounded
+app-card review without opening raw audit folders first.
+
 Contributor Lab v1 does not execute arbitrary commands. Certified mutation still
 belongs to the VM scripts listed above, with a clean snapshot, healthy QGA, and
 tight host-noise gate. The v1 command packs cover single-tweak lookup, app QA

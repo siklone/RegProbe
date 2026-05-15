@@ -38,6 +38,12 @@ public sealed record ContributorObservation(
     string SurfaceDestination,
     string PromotionChecklist,
     string ClaimBoundary,
+    string TestedValueSummary,
+    string VerdictSummary,
+    string SmokeSummary,
+    string ArtifactSummary,
+    string AppCardBlockerSummary,
+    string NoiseBadge,
     string CommandHint);
 
 public sealed record ContributorLabSnapshot(
@@ -156,7 +162,7 @@ public static class ContributorLabCatalog
             _ => "Community observed"
         };
 
-        var observations = BuildObservations(review, matrix);
+        var observations = BuildObservations(review, matrix, aggregate);
         var commandPacks = BuildCommandPacks(repoRoot, runTier == "certified");
         var requiredScriptsOk = repoRootFound && AllowlistedScriptPaths.All(path =>
             File.Exists(Path.Combine(repoRoot, path.Replace('/', Path.DirectorySeparatorChar))));
@@ -398,9 +404,20 @@ public static class ContributorLabCatalog
         }
     }
 
-    private static IReadOnlyList<ContributorObservation> BuildObservations(JsonDocument? review, JsonDocument? matrix)
+    private sealed record AggregateObservation(
+        string Value,
+        string Status,
+        string Verdict,
+        string Confidence,
+        string HostNoise,
+        string PrimaryDelta,
+        bool SmokeHardOk,
+        string ArtifactPath);
+
+    private static IReadOnlyList<ContributorObservation> BuildObservations(JsonDocument? review, JsonDocument? matrix, JsonDocument? aggregate)
     {
         var matrixRecords = RecordsByIndex(matrix);
+        var aggregateRecords = AggregateResultsByIndex(aggregate);
         var records = Array(review?.RootElement, "records");
         var result = new List<ContributorObservation>();
 
@@ -408,6 +425,8 @@ public static class ContributorLabCatalog
         {
             var index = Int(reviewRecord, "index");
             matrixRecords.TryGetValue(index, out var matrixRecord);
+            aggregateRecords.TryGetValue(index, out var aggregateForRecord);
+            aggregateForRecord ??= [];
             var candidateValues = CandidateValues(matrixRecord);
             var validatedValues = ValidatedValues(matrixRecord);
             var valueName = Text(reviewRecord, "value_name");
@@ -428,10 +447,65 @@ public static class ContributorLabCatalog
                 SurfaceDestination(reviewRecord),
                 PromotionChecklist(reviewRecord),
                 ClaimBoundary(reviewRecord),
+                TestedValueSummary(aggregateForRecord),
+                VerdictSummary(aggregateForRecord),
+                SmokeSummary(aggregateForRecord),
+                ArtifactSummary(aggregateForRecord),
+                AppCardBlockerSummary(reviewRecord),
+                NoiseBadge(aggregateForRecord),
                 command));
         }
 
         return result.OrderBy(item => item.Index).ToList();
+    }
+
+    private static Dictionary<int, List<AggregateObservation>> AggregateResultsByIndex(JsonDocument? document)
+    {
+        var result = new Dictionary<int, List<AggregateObservation>>();
+        foreach (var record in Array(document?.RootElement, "results"))
+        {
+            var index = Int(record, "index");
+            if (index <= 0)
+            {
+                continue;
+            }
+
+            var observations = Object(record, "observations");
+            var smoke = Object(observations, "smoke_hard_success");
+            var smokeOk = Bool(smoke, "apply_smoke_hard_success")
+                          && Bool(smoke, "post_reboot_smoke_hard_success")
+                          && Bool(smoke, "post_rollback_smoke_hard_success");
+            var value = Text(record, "value_data");
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                value = Text(record, "requested_data");
+            }
+
+            var item = new AggregateObservation(
+                value,
+                Text(record, "status"),
+                Text(observations, "verdict"),
+                Text(observations, "confidence"),
+                Text(observations, "host_noise"),
+                Text(observations, "primary_delta_pct"),
+                smokeOk,
+                Text(record, "artifact_json"));
+
+            if (!result.TryGetValue(index, out var list))
+            {
+                list = [];
+                result[index] = list;
+            }
+
+            list.Add(item);
+        }
+
+        foreach (var pair in result)
+        {
+            pair.Value.Sort(static (left, right) => string.Compare(left.Value, right.Value, StringComparison.OrdinalIgnoreCase));
+        }
+
+        return result;
     }
 
     private static Dictionary<int, JsonElement> RecordsByIndex(JsonDocument? document)
@@ -454,6 +528,91 @@ public static class ContributorLabCatalog
             .Select(candidate => Text(candidate, "value"))
             .Where(value => value.Length > 0)
             .Distinct());
+
+    private static string TestedValueSummary(IReadOnlyList<AggregateObservation> records)
+    {
+        if (records.Count == 0)
+        {
+            return "No low-noise value receipt attached yet.";
+        }
+
+        return JoinLimited(records.Select(record =>
+        {
+            var verdict = string.IsNullOrWhiteSpace(record.Verdict) ? record.Status : record.Verdict;
+            var confidence = string.IsNullOrWhiteSpace(record.Confidence) ? "unknown" : record.Confidence;
+            var noise = string.IsNullOrWhiteSpace(record.HostNoise) ? "unknown" : record.HostNoise;
+            var delta = string.IsNullOrWhiteSpace(record.PrimaryDelta) ? "delta n/a" : $"delta {record.PrimaryDelta}%";
+            return $"{record.Value}: {verdict}, {confidence}, noise={noise}, {delta}";
+        }));
+    }
+
+    private static string VerdictSummary(IReadOnlyList<AggregateObservation> records)
+        => records.Count == 0
+            ? "none"
+            : string.Join(", ", records
+                .GroupBy(record => string.IsNullOrWhiteSpace(record.Verdict) ? record.Status : record.Verdict)
+                .OrderBy(group => group.Key, StringComparer.OrdinalIgnoreCase)
+                .Select(group => $"{group.Key}={group.Count()}"));
+
+    private static string SmokeSummary(IReadOnlyList<AggregateObservation> records)
+        => records.Count == 0
+            ? "not rerun"
+            : $"{records.Count(record => record.SmokeHardOk)}/{records.Count} apply/reboot/rollback hard-smoke receipts passed";
+
+    private static string ArtifactSummary(IReadOnlyList<AggregateObservation> records)
+        => records.Count == 0
+            ? "no aggregate artifact attached"
+            : JoinLimited(records
+                .Select(record => record.ArtifactPath)
+                .Where(path => !string.IsNullOrWhiteSpace(path))
+                .Distinct(StringComparer.OrdinalIgnoreCase),
+                limit: 2);
+
+    private static string NoiseBadge(IReadOnlyList<AggregateObservation> records)
+    {
+        if (records.Count == 0)
+        {
+            return "No low-noise receipt";
+        }
+
+        return records.All(static record =>
+            string.Equals(record.Status, "ok", StringComparison.OrdinalIgnoreCase)
+            && string.Equals(record.HostNoise, "ok", StringComparison.OrdinalIgnoreCase))
+            ? "Low-noise VM receipt"
+            : "Noisy/debug only";
+    }
+
+    private static string AppCardBlockerSummary(JsonElement record)
+    {
+        var checklist = Object(record, "promotion_checklist");
+        var missing = Strings(checklist, "missing");
+        var reasons = Strings(record, "reasons");
+        var parts = new List<string>();
+        if (missing.Count > 0)
+        {
+            parts.Add("missing " + string.Join(", ", missing));
+        }
+
+        if (reasons.Count > 0)
+        {
+            parts.Add("reasons " + string.Join(", ", reasons));
+        }
+
+        return parts.Count == 0
+            ? "No app-card blockers listed; review bounded claim policy before surfacing."
+            : string.Join("; ", parts);
+    }
+
+    private static string JoinLimited(IEnumerable<string> values, int limit = 4)
+    {
+        var list = values.Where(value => !string.IsNullOrWhiteSpace(value)).ToList();
+        if (list.Count <= limit)
+        {
+            return string.Join("; ", list);
+        }
+
+        return string.Join("; ", list.Take(limit)) + $"; +{list.Count - limit} more";
+    }
 
     private static string DefaultSummary(JsonElement matrixRecord, JsonElement reviewRecord)
     {
