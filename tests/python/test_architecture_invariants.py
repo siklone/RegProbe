@@ -48,6 +48,31 @@ class ArchitectureInvariantTests(unittest.TestCase):
 
         self.assertIn('ResourceDictionary Source="Resources/TweaksWorkspaceResources.xaml"', app_xaml)
 
+    def test_tweak_filter_dropdowns_bind_selected_value_to_item_tags(self) -> None:
+        secondary_panel = (
+            REPO_ROOT / "app" / "Views" / "Tweaks" / "TweaksSecondaryPanel.xaml"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn('SelectedValuePath="Tag"', secondary_panel)
+        self.assertIn('SelectedValue="{Binding StatusFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"', secondary_panel)
+        self.assertIn('SelectedValue="{Binding ScopeFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"', secondary_panel)
+
+    def test_normal_tweak_surface_uses_end_user_card_gate_not_contributor_override(self) -> None:
+        filter_evaluator = (
+            REPO_ROOT / "app" / "ViewModels" / "WorkspaceFilterEvaluator.cs"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("item.IsEndUserAppCardAllowed", filter_evaluator)
+        self.assertNotIn("!item.IsMutationAllowed", filter_evaluator)
+
+    def test_public_source_copy_treats_catalog_only_as_non_semantics_proof(self) -> None:
+        policy = (
+            REPO_ROOT / "app" / "Services" / "PublicEvidenceLinkPolicy.cs"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("Catalog-only source context is not a value-semantics proof", policy)
+        self.assertIn("Docs, Runtime, and Rollback carry the app-safety proof", policy)
+
     def test_control_templates_do_not_bind_margin_from_padding(self) -> None:
         checked_paths = [
             REPO_ROOT / "app" / "MainWindow.xaml",

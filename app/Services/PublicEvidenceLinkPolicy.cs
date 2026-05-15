@@ -3,7 +3,7 @@ namespace RegProbe.App.Services;
 internal static class PublicEvidenceLinkPolicy
 {
     public const string NoLocalSourceMessage =
-        "No local source-code mirror is attached for this card. This is not a blocker when Docs, Runtime, and Rollback carry the proof.";
+        "No local source-code mirror or pseudocode evidence is attached for this card. Catalog-only source context is not a value-semantics proof; Docs, Runtime, and Rollback carry the app-safety proof.";
 
     public static bool IsSuppressedExternalPseudocodeUrl(string? url)
         => !string.IsNullOrWhiteSpace(url)
@@ -15,7 +15,7 @@ internal static class PublicEvidenceLinkPolicy
         if (string.IsNullOrWhiteSpace(text))
         {
             return visibleSourceLinkCount > 0
-                ? "Source links are discovery and naming context only. Value semantics and apply safety come from Docs, Runtime, and Rollback."
+                ? "Source links are discovery and naming context only. They are not value-semantics proof; app safety comes from Docs, Runtime, and Rollback."
                 : NoLocalSourceMessage;
         }
 
@@ -26,7 +26,7 @@ internal static class PublicEvidenceLinkPolicy
 
         if (text.Contains("Upstream dump / pseudocode links are attached", StringComparison.OrdinalIgnoreCase))
         {
-            return "Source links are discovery and naming context only. Value semantics and apply safety come from Docs, Runtime, and Rollback.";
+            return "Source links are discovery and naming context only. They are not value-semantics proof; app safety comes from Docs, Runtime, and Rollback.";
         }
 
         return text.Replace("nohuto", "external upstream", StringComparison.OrdinalIgnoreCase);

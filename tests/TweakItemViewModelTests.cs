@@ -109,8 +109,50 @@ public sealed class TweakItemViewModelTests
 
         Assert.True(viewModel.IsEvidenceClassActionable);
         Assert.False(viewModel.IsMutationAllowed);
+        Assert.False(viewModel.IsEndUserAppCardAllowed);
         Assert.True(viewModel.IsResearchGated);
         Assert.Equal("blocked", viewModel.PromotionState);
+    }
+
+    [Fact]
+    public void WorkspaceFilter_HidesResearchHoldCardsFromNormalAppSurface()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new TestTweak("system.hold-gate-test");
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false);
+
+        viewModel.ApplyEvidenceClassification(new TweakEvidenceClassEntry
+        {
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            EvidenceClass = "A",
+            ClassLabel = "Class A",
+            ClassTitle = "Ready",
+            ClassDescription = "Ready for app surface",
+            ActionState = "actionable",
+            GatingReason = string.Empty,
+            IsActionable = true,
+            ShowInApp = true,
+        });
+        viewModel.ApplyResearchPromotionGate(new TweakPromotionGateEntry
+        {
+            CandidateId = tweak.Id,
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            TweakOrigin = "research-derived",
+            PromotionState = "intentional-hold",
+            PromotionBlockers = new List<string> { "manual-review" },
+            RecordPromotionAllowed = false,
+            TweakIngestAllowed = false,
+            ApplyAllowed = false,
+            AppMappingStatus = "not-mapped",
+            NextMissingLayer = "intentional-hold",
+            DebugOverrideAllowed = true,
+        });
+        var evaluator = new WorkspaceFilterEvaluator(new TweaksShellStateViewModel());
+
+        Assert.False(viewModel.IsEndUserAppCardAllowed);
+        Assert.False(evaluator.FilterTweak(viewModel));
     }
 
     [Fact]
