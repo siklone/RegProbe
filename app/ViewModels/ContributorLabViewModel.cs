@@ -9,6 +9,9 @@ public sealed class ContributorLabViewModel : ViewModelBase
 {
     private bool _riskAcknowledged;
     private bool _areToolsUnlocked;
+    private string _customRegistryPath = @"HKLM\SYSTEM\CurrentControlSet\Control\Power";
+    private string _customValueName = "SystemResponsiveness";
+    private string _customExpectedValues = "10, 30000";
 
     public ContributorLabViewModel()
         : this(ContributorLabCatalog.Load())
@@ -79,7 +82,54 @@ public sealed class ContributorLabViewModel : ViewModelBase
                 : "Only ready_for_bounded_app_card records with known defaults, rollback proof, explicit app writes, and bounded claims may move into normal app cards.";
 
     public string CustomValueWorkflowSummary =>
-        "For a user-supplied key/value, start with repository lookup, then run one value at a time in a certified disposable VM. Record current/default/target, boot result, app smoke, benchmark deltas as observations only, and rollback proof before any app-card review.";
+        "For a user-supplied key/value, start with repository lookup from inside the app, then run one value at a time in a certified disposable VM. Record current/default/target, boot result, app smoke, benchmark deltas as observations only, and rollback proof before any app-card review.";
+
+    public string CustomRegistryPath
+    {
+        get => _customRegistryPath;
+        set
+        {
+            if (SetProperty(ref _customRegistryPath, value))
+            {
+                RaiseCustomValueCommandProperties();
+            }
+        }
+    }
+
+    public string CustomValueName
+    {
+        get => _customValueName;
+        set
+        {
+            if (SetProperty(ref _customValueName, value))
+            {
+                RaiseCustomValueCommandProperties();
+            }
+        }
+    }
+
+    public string CustomExpectedValues
+    {
+        get => _customExpectedValues;
+        set
+        {
+            if (SetProperty(ref _customExpectedValues, value))
+            {
+                RaiseCustomValueCommandProperties();
+            }
+        }
+    }
+
+    public bool HasCustomValueInput => !string.IsNullOrWhiteSpace(CustomValueName);
+
+    public string CustomEvidenceLookupCommand =>
+        $"python3 registry-research-framework/scripts/check_single_tweak.py {QuoteArg(CustomValueName)}{BuildExpectedValueArgs(CustomExpectedValues)} --json";
+
+    public string CustomVmExperimentCommand =>
+        $"python3 scripts/vm-kvm/run-guest-registry-value-experiment.py --domain regprobe-win11-25h2-session --connect qemu:///session --registry-path {QuoteArg(CustomRegistryPath)} --value-name {QuoteArg(CustomValueName)} --value-data {FirstExpectedValueOrDefault(CustomExpectedValues)} --smoke-profile gui --stage-wait-timeout 420 --reboot-wait-timeout 420 --post-reboot-delay-seconds 90 --require-domain-snapshot --auto-revert-snapshot-on-boot-failure --revert-snapshot-name clean-25h2-qga --abort-on-noisy-host";
+
+    public string CustomValueWorkflowChecklist =>
+        "App checks: repo artifact hit, current/default value story, VM/QGA/snapshot readiness, one-value run command, boot/app-smoke result, benchmark observation, rollback proof, then app-card gate.";
 
     public string CertifiedMutationGuardSummary =>
         ReferenceEligible
@@ -87,7 +137,7 @@ public sealed class ContributorLabViewModel : ViewModelBase
             : "Mutation templates are copy-only until VM/QGA/snapshot and noise gates are certified; non-certified results are community/debug observations, never reference proof.";
 
     public string Operator96GateBreakdown =>
-        $"ready={Operator96ReadyForAppCard}; blocked_by_gate={Operator96BlockedByGate}; not_app_surface_ready={Operator96NotAppSurfaceReady}; safety={Operator96BlockedBySafety}; aggregate_blocked={Operator96AggregateSurfaceBlocked.ToString().ToLowerInvariant()}; legacy_campaign_id=operator96";
+        $"ready={Operator96ReadyForAppCard}; blocked_by_gate={Operator96BlockedByGate}; not_app_surface_ready={Operator96NotAppSurfaceReady}; safety={Operator96BlockedBySafety}; aggregate_blocked={Operator96AggregateSurfaceBlocked.ToString().ToLowerInvariant()}; seed_batch=custom-value";
 
     public string Operator96NextActionSummary =>
         Operator96AggregateSurfaceBlocked
@@ -134,4 +184,32 @@ public sealed class ContributorLabViewModel : ViewModelBase
     public ObservableCollection<ContributorCommandPackViewModel> CommandPacks { get; }
 
     public ObservableCollection<ContributorObservation> Observations { get; }
+
+    private void RaiseCustomValueCommandProperties()
+    {
+        OnPropertyChanged(nameof(HasCustomValueInput));
+        OnPropertyChanged(nameof(CustomEvidenceLookupCommand));
+        OnPropertyChanged(nameof(CustomVmExperimentCommand));
+    }
+
+    private static string BuildExpectedValueArgs(string values)
+    {
+        var tokens = (values ?? string.Empty)
+            .Split([',', ';', ' ', '\t', '\r', '\n'], System.StringSplitOptions.RemoveEmptyEntries | System.StringSplitOptions.TrimEntries)
+            .Distinct(System.StringComparer.OrdinalIgnoreCase)
+            .Select(value => $" --expected-value {QuoteArg(value)}");
+        return string.Concat(tokens);
+    }
+
+    private static string FirstExpectedValueOrDefault(string values)
+        => (values ?? string.Empty)
+            .Split([',', ';', ' ', '\t', '\r', '\n'], System.StringSplitOptions.RemoveEmptyEntries | System.StringSplitOptions.TrimEntries)
+            .FirstOrDefault(static value => !string.IsNullOrWhiteSpace(value))
+           ?? "0";
+
+    private static string QuoteArg(string value)
+    {
+        var safe = (value ?? string.Empty).Replace("\"", "\\\"", System.StringComparison.Ordinal);
+        return string.IsNullOrWhiteSpace(safe) ? "REPLACE_VALUE_NAME" : $"\"{safe}\"";
+    }
 }

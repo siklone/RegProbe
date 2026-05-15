@@ -23,15 +23,13 @@ public sealed class TweakDocumentationLinker
             var insertIndex = 0;
             var hasCatalogEntry = _store.TryResolveCatalogEntry(tweak.Id, out var catalogEntry, out var anchorId);
 
-            if (!string.IsNullOrWhiteSpace(catalogPath))
+            if (!string.IsNullOrWhiteSpace(catalogPath) && !string.IsNullOrWhiteSpace(anchorId))
             {
                 var catalogHasAnchor = _store.HasDocAnchor(catalogPath, anchorId);
-                var catalogUrl = catalogHasAnchor ? TweakDocumentationCatalogStore.AppendDocAnchor(catalogPath, anchorId) : catalogPath;
-                var catalogTitle = catalogHasAnchor ? "Catalog entry" : "Catalog entry (missing)";
-                if (TryInsertReferenceLink(
+                if (catalogHasAnchor && TryInsertReferenceLink(
                         tweak,
-                        catalogTitle,
-                        catalogUrl,
+                        "Catalog entry",
+                        TweakDocumentationCatalogStore.AppendDocAnchor(catalogPath, anchorId),
                         insertIndex,
                         "Full tweak catalog with all entries.",
                         ReferenceLinkKind.Catalog))
@@ -40,15 +38,13 @@ public sealed class TweakDocumentationLinker
                 }
             }
 
-            if (!string.IsNullOrWhiteSpace(detailsPath))
+            if (!string.IsNullOrWhiteSpace(detailsPath) && !string.IsNullOrWhiteSpace(anchorId))
             {
                 var detailsHasAnchor = _store.HasDocAnchor(detailsPath, anchorId);
-                var detailsUrl = detailsHasAnchor ? TweakDocumentationCatalogStore.AppendDocAnchor(detailsPath, anchorId) : detailsPath;
-                var detailsTitle = detailsHasAnchor ? "Docs: Details" : "Docs: Details (missing)";
-                if (TryInsertReferenceLink(
+                if (detailsHasAnchor && TryInsertReferenceLink(
                         tweak,
-                        detailsTitle,
-                        detailsUrl,
+                        "Docs: Details",
+                        TweakDocumentationCatalogStore.AppendDocAnchor(detailsPath, anchorId),
                         insertIndex,
                         "Per-tweak summary (Changes, Risk, Source).",
                         ReferenceLinkKind.Details))
@@ -92,13 +88,10 @@ public sealed class TweakDocumentationLinker
                 {
                     var entryTitle = TweakDocumentationCatalogStore.BuildDocsTitle(catalogEntry.Category, prefix);
                     var hasAnchor = _store.HasDocAnchor(entryDocPath, anchorId);
-                    if (!hasAnchor) entryTitle += " (section missing)";
-
-                    var docUrl = hasAnchor ? TweakDocumentationCatalogStore.AppendDocAnchor(entryDocPath, anchorId) : entryDocPath;
-                    if (TryInsertReferenceLink(
+                    if (hasAnchor && TryInsertReferenceLink(
                             tweak,
                             entryTitle,
-                            docUrl,
+                            TweakDocumentationCatalogStore.AppendDocAnchor(entryDocPath, anchorId),
                             insertIndex,
                             "Category documentation for this tweak.",
                             ReferenceLinkKind.Docs))
@@ -113,11 +106,10 @@ public sealed class TweakDocumentationLinker
                     {
                         var fallbackTitle = TweakDocumentationCatalogStore.BuildDocsTitle(catalogEntry.Category, prefix) + " (file missing)";
                         var hasAnchor = _store.HasDocAnchor(fallbackDocPath, anchorId);
-                        var fallbackUrl = hasAnchor ? TweakDocumentationCatalogStore.AppendDocAnchor(fallbackDocPath, anchorId) : fallbackDocPath;
-                        if (TryInsertReferenceLink(
+                        if (hasAnchor && TryInsertReferenceLink(
                                 tweak,
                                 fallbackTitle,
-                                fallbackUrl,
+                                TweakDocumentationCatalogStore.AppendDocAnchor(fallbackDocPath, anchorId),
                                 insertIndex,
                                 "Category documentation for this tweak.",
                                 ReferenceLinkKind.Docs))
@@ -135,16 +127,16 @@ public sealed class TweakDocumentationLinker
 
             var title = TweakDocumentationCatalogStore.BuildDocsTitle(null, prefix);
             var hasFallbackAnchor = _store.HasDocAnchor(docPath, anchorId);
-            if (!hasFallbackAnchor) title += " (section missing)";
-
-            var fallbackDocUrl = hasFallbackAnchor ? TweakDocumentationCatalogStore.AppendDocAnchor(docPath, anchorId) : docPath;
-            TryInsertReferenceLink(
-                tweak,
-                title,
-                fallbackDocUrl,
-                insertIndex,
-                "Category documentation for this tweak.",
-                ReferenceLinkKind.Docs);
+            if (hasFallbackAnchor)
+            {
+                TryInsertReferenceLink(
+                    tweak,
+                    title,
+                    TweakDocumentationCatalogStore.AppendDocAnchor(docPath, anchorId),
+                    insertIndex,
+                    "Category documentation for this tweak.",
+                    ReferenceLinkKind.Docs);
+            }
         }
     }
 

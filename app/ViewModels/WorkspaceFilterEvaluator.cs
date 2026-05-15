@@ -48,6 +48,11 @@ internal sealed class WorkspaceFilterEvaluator
             return false;
         }
 
+        if (!item.IsMutationAllowed)
+        {
+            return false;
+        }
+
         if (GetWorkspaceKind(item) != _shellState.SelectedWorkspace)
         {
             return false;

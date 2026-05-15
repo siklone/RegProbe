@@ -83,13 +83,13 @@ internal sealed class TweakEvidenceClassCatalogStore
             Confidence = entry.Confidence,
             AppMappingStatus = entry.AppMappingStatus,
             RestoreStoryKnown = entry.RestoreStoryKnown,
-            ValidatedSemantics = CloneBlock(entry.ValidatedSemantics),
-            RuntimeProof = CloneBlock(entry.RuntimeProof),
-            UpstreamLineage = CloneBlock(entry.UpstreamLineage),
+            ValidatedSemantics = CloneBlock(entry.ValidatedSemantics, isSourceBlock: false),
+            RuntimeProof = CloneBlock(entry.RuntimeProof, isSourceBlock: false),
+            UpstreamLineage = CloneBlock(entry.UpstreamLineage, isSourceBlock: true),
         };
     }
 
-    private TweakEvidenceProofBlock? CloneBlock(TweakEvidenceProofBlock? block)
+    private TweakEvidenceProofBlock? CloneBlock(TweakEvidenceProofBlock? block, bool isSourceBlock)
     {
         if (block is null)
         {
@@ -104,17 +104,23 @@ internal sealed class TweakEvidenceClassCatalogStore
                 Kind = link.Kind,
                 Summary = link.Summary,
             })
-            .Where(link => !string.IsNullOrWhiteSpace(link.Url))
+            .Where(link => !string.IsNullOrWhiteSpace(link.Url)
+                           && (!isSourceBlock || !PublicEvidenceLinkPolicy.IsSuppressedExternalPseudocodeUrl(link.Url)))
             .ToList();
+        var hasNohutoLineage = !isSourceBlock || links.Count > 0
+            ? block.HasNohutoLineage
+            : false;
 
         return new TweakEvidenceProofBlock
         {
-            Summary = block.Summary,
+            Summary = isSourceBlock
+                ? PublicEvidenceLinkPolicy.SanitizeSourceSummary(block.Summary, links.Count)
+                : block.Summary,
             HasValidationProof = block.HasValidationProof,
             HasSemanticsEvidence = block.HasSemanticsEvidence,
             NeedsVmValidation = block.NeedsVmValidation,
             HasRuntimeEvidence = block.HasRuntimeEvidence,
-            HasNohutoLineage = block.HasNohutoLineage,
+            HasNohutoLineage = hasNohutoLineage,
             Links = links,
             PrimarySourceText = BuildPrimarySourceText(links.FirstOrDefault()),
         };

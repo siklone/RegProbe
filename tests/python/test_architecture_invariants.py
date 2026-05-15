@@ -411,6 +411,20 @@ class ArchitectureInvariantTests(unittest.TestCase):
         for path in expected_paths:
             self.assertTrue(path.exists(), f"Missing expected workspace browse split file: {path.relative_to(REPO_ROOT)}")
 
+    def test_app_resource_dictionary_loads_converters_before_modern_styles(self) -> None:
+        app_xaml = (REPO_ROOT / "app" / "App.xaml").read_text(encoding="utf-8")
+
+        converters_index = app_xaml.find('Source="Resources/Converters.xaml"')
+        modern_styles_index = app_xaml.find('Source="Resources/ModernStyles.xaml"')
+
+        self.assertNotEqual(-1, converters_index)
+        self.assertNotEqual(-1, modern_styles_index)
+        self.assertLess(
+            converters_index,
+            modern_styles_index,
+            "ModernStyles.xaml uses StaticResource converters, so Converters.xaml must load first.",
+        )
+
     def test_workspace_catalog_coordinator_stays_split_into_loader_metadata_and_coverage_files(self) -> None:
         coordinator_lines = (
             REPO_ROOT / "app" / "ViewModels" / "WorkspaceCatalogCoordinator.cs"

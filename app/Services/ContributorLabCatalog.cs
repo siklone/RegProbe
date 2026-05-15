@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.Json;
+using System.Management;
 using RegProbe.Application.Utilities;
 
 namespace RegProbe.Application.Services;
@@ -46,6 +47,10 @@ public sealed record ContributorLabSnapshot(
     bool IsElevated,
     bool PythonAvailable,
     bool GitAvailable,
+    bool RequiredScriptsOk,
+    bool VirtualizationFirmwareKnown,
+    bool VirtualizationFirmwareEnabled,
+    string VirtualizationFirmwareDetail,
     bool AppReadinessOk,
     bool AppCardsOk,
     bool Operator96AggregateOk,
@@ -149,6 +154,9 @@ public static class ContributorLabCatalog
 
         var observations = BuildObservations(review, matrix);
         var commandPacks = BuildCommandPacks(repoRoot, runTier == "certified");
+        var requiredScriptsOk = repoRootFound && AllowlistedScriptPaths.All(path =>
+            File.Exists(Path.Combine(repoRoot, path.Replace('/', Path.DirectorySeparatorChar))));
+        var virtualization = DetectVirtualizationFirmware();
 
         var snapshot = new ContributorLabSnapshot(
             repoRoot,
@@ -157,6 +165,10 @@ public static class ContributorLabCatalog
             ProcessElevation.IsElevated(),
             IsExecutableOnPath("python3") || IsExecutableOnPath("python") || IsExecutableOnPath("py"),
             IsExecutableOnPath("git"),
+            requiredScriptsOk,
+            virtualization.Known,
+            virtualization.Enabled,
+            virtualization.Detail,
             appReadinessOk,
             appCardsOk,
             aggregateOk,
@@ -296,7 +308,7 @@ public static class ContributorLabCatalog
         ];
     }
 
-    private static IReadOnlyList<ContributorReadinessItem> BuildReadinessItems(ContributorLabSnapshot snapshot)
+    public static IReadOnlyList<ContributorReadinessItem> BuildReadinessItems(ContributorLabSnapshot snapshot)
     {
         return
         [
@@ -305,9 +317,15 @@ public static class ContributorLabCatalog
             Ready("Python available", snapshot.PythonAvailable, "Python scripts are the canonical contributor API."),
             Ready("Git available", snapshot.GitAvailable, "Required for PR workflow and artifact review."),
             Ready("Repo root", snapshot.RepoRootFound, snapshot.RepoRootFound ? snapshot.RepoRoot : "Set REGPROBE_REPO_ROOT or launch from the repo checkout."),
+            Ready("Required scripts", snapshot.RequiredScriptsOk, "Single-tweak lookup, app QA, VM health, and value experiment scripts must exist in this checkout."),
+            new(
+                "BIOS virtualization",
+                snapshot.VirtualizationFirmwareKnown ? snapshot.VirtualizationFirmwareEnabled ? "Ready" : "Needs attention" : "Unknown",
+                snapshot.VirtualizationFirmwareDetail,
+                snapshot.VirtualizationFirmwareKnown ? snapshot.VirtualizationFirmwareEnabled ? "ok" : "warning" : "neutral"),
             Ready("App readiness", snapshot.AppReadinessOk, "Cards, rollback coverage, KVM lane health, and app smoke receipts."),
             Ready("App-card contracts", snapshot.AppCardsOk, $"{snapshot.AppCardPassCount}/{snapshot.AppCardCandidateCount} shipped cards pass."),
-            Ready("Custom value low-noise", snapshot.Operator96AggregateOk, $"non_ok={snapshot.Operator96NonOkCount}, noisy={snapshot.Operator96NoisyResultCount}; legacy campaign id: operator96."),
+            Ready("Custom value low-noise", snapshot.Operator96AggregateOk, $"non_ok={snapshot.Operator96NonOkCount}, noisy={snapshot.Operator96NoisyResultCount}; seed batch: custom-value."),
             Ready(
                 "Custom value app-surface gate",
                 snapshot.Operator96SurfaceReviewOk,
@@ -318,6 +336,13 @@ public static class ContributorLabCatalog
                 snapshot.Operator96AggregateSurfaceBlocked
                     ? "Aggregate blockers are present; custom value experiments cannot support app-card promotion."
                     : "Aggregate blockers are clear; per-record app-card gates still decide promotion."),
+            new(
+                "VM configured",
+                snapshot.VmHealthKnown ? snapshot.VmHealthOk ? "Ready" : "Needs attention" : "Unknown",
+                snapshot.VmHealthKnown
+                    ? "Latest VM health artifact found for regprobe-win11-25h2-session."
+                    : "Run vm-health-check so the app can see whether the contributor VM is configured.",
+                snapshot.VmHealthKnown ? snapshot.VmHealthOk ? "ok" : "warning" : "neutral"),
             new(
                 "VM/QGA latest receipt",
                 snapshot.VmHealthKnown ? snapshot.VmHealthOk ? "Ready" : "Needs attention" : "Unknown",
@@ -336,6 +361,38 @@ public static class ContributorLabCatalog
 
     private static ContributorReadinessItem Ready(string label, bool ok, string detail)
         => new(label, ok ? "Ready" : "Needs attention", detail, ok ? "ok" : "warning");
+
+    private static (bool Known, bool Enabled, string Detail) DetectVirtualizationFirmware()
+    {
+        if (!OperatingSystem.IsWindows())
+        {
+            return (false, false, "Auto-detection is Windows-only; verify BIOS/UEFI virtualization before certified VM mutation.");
+        }
+
+        try
+        {
+            using var searcher = new ManagementObjectSearcher(
+                "SELECT VirtualizationFirmwareEnabled FROM Win32_Processor");
+            foreach (ManagementObject processor in searcher.Get().Cast<ManagementObject>())
+            {
+                using (processor)
+                {
+                    if (processor["VirtualizationFirmwareEnabled"] is bool enabled)
+                    {
+                        return enabled
+                            ? (true, true, "Firmware virtualization is enabled according to Win32_Processor.")
+                            : (true, false, "Firmware virtualization is disabled or hidden; enable VT-x/AMD-V/SVM before certified VM runs.");
+                    }
+                }
+            }
+
+            return (false, false, "Win32_Processor did not expose VirtualizationFirmwareEnabled.");
+        }
+        catch (Exception ex) when (ex is ManagementException or UnauthorizedAccessException or COMException)
+        {
+            return (false, false, $"Could not query firmware virtualization: {ex.Message}");
+        }
+    }
 
     private static IReadOnlyList<ContributorObservation> BuildObservations(JsonDocument? review, JsonDocument? matrix)
     {

@@ -41,15 +41,24 @@ public sealed class TweakProvenanceCatalogService
                 continue;
             }
 
-            tweak.HasNohutoEvidence = entry.HasNohutoEvidence;
+            var visibleReferences = entry.References
+                .Where(static reference => !PublicEvidenceLinkPolicy.IsSuppressedExternalPseudocodeUrl(reference.Url))
+                .Take(4)
+                .ToList();
+
+            tweak.HasNohutoEvidence = entry.HasNohutoEvidence
+                                      && visibleReferences.Any(static reference =>
+                                          string.Equals(reference.Kind, "nohuto", StringComparison.OrdinalIgnoreCase));
             tweak.HasWindowsInternalsContext = entry.HasWindowsInternalsContext;
             tweak.NeedsSourceReview = entry.NeedsReview;
-            tweak.ProvenanceSummary = string.IsNullOrWhiteSpace(entry.Summary)
-                ? BuildFallbackSummary(entry)
-                : entry.Summary.Trim();
+            tweak.ProvenanceSummary = PublicEvidenceLinkPolicy.SanitizeSourceSummary(
+                string.IsNullOrWhiteSpace(entry.Summary)
+                    ? BuildFallbackSummary(entry)
+                    : entry.Summary,
+                visibleReferences.Count);
 
             var insertIndex = 0;
-            foreach (var reference in entry.References.Take(4))
+            foreach (var reference in visibleReferences)
             {
                 var resolvedUrl = _store.ResolvePath(reference.Url);
                 if (string.IsNullOrWhiteSpace(resolvedUrl))

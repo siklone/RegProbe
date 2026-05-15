@@ -291,6 +291,59 @@
 
                         <Border Style="{StaticResource ContributorCardStyle}">
                             <StackPanel>
+                                <TextBlock Text="Ask about a key/value"
+                                           Style="{StaticResource UtilitySectionTitleTextStyle}"/>
+                                <TextBlock Text="Start here when somebody asks: does this key/value exist, what values are known, what evidence do we have, and what exact VM command should test the next value?"
+                                           Margin="0,6,0,10"
+                                           Style="{StaticResource UtilitySectionBodyTextStyle}"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="12"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="12"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Registry path"
+                                                   Style="{StaticResource ContributorMonoTextStyle}"/>
+                                        <TextBox Text="{Binding CustomRegistryPath, UpdateSourceTrigger=PropertyChanged}"
+                                                 Margin="0,5,0,0"
+                                                 Style="{StaticResource ModernTextBox}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Text="Value name"
+                                                   Style="{StaticResource ContributorMonoTextStyle}"/>
+                                        <TextBox Text="{Binding CustomValueName, UpdateSourceTrigger=PropertyChanged}"
+                                                 Margin="0,5,0,0"
+                                                 Style="{StaticResource ModernTextBox}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="4">
+                                        <TextBlock Text="Values to check"
+                                                   Style="{StaticResource ContributorMonoTextStyle}"/>
+                                        <TextBox Text="{Binding CustomExpectedValues, UpdateSourceTrigger=PropertyChanged}"
+                                                 Margin="0,5,0,0"
+                                                 Style="{StaticResource ModernTextBox}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <TextBlock Text="{Binding CustomValueWorkflowChecklist}"
+                                           Margin="0,10,0,8"
+                                           Style="{StaticResource ContributorMonoTextStyle}"/>
+                                <TextBlock Text="Non-mutating lookup"
+                                           Style="{StaticResource UtilitySectionBodyTextStyle}"/>
+                                <TextBlock Text="{Binding CustomEvidenceLookupCommand}"
+                                           Margin="0,4,0,8"
+                                           Style="{StaticResource ContributorMonoTextStyle}"/>
+                                <TextBlock Text="Certified VM experiment command"
+                                           Style="{StaticResource UtilitySectionBodyTextStyle}"/>
+                                <TextBlock Text="{Binding CustomVmExperimentCommand}"
+                                           Margin="0,4,0,0"
+                                           Style="{StaticResource ContributorMonoTextStyle}"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource ContributorCardStyle}">
+                            <StackPanel>
                                 <TextBlock Text="Command packs"
                                            Style="{StaticResource UtilitySectionTitleTextStyle}"/>
                                 <TextBlock Text="These are allowlisted command templates. The WPF app does not execute arbitrary contributor commands in v1."

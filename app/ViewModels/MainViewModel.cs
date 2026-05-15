@@ -68,7 +68,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     public bool CanUseStagingEnvironment => false;
 
-    public bool IsContributorEntryVisible => ContributorMode.IsEnabled;
+    public bool IsContributorEntryVisible => true;
 
     public bool CanFocusSearch => IsConfigurationViewActive || IsRepairsViewActive;
 
