@@ -91,7 +91,7 @@ public sealed class TweakEvidenceClassCatalogServiceTests : IDisposable
         Assert.Empty(clone.UpstreamLineage!.Links);
         Assert.False(clone.UpstreamLineage.HasNohutoLineage);
         Assert.DoesNotContain("nohuto", clone.UpstreamLineage.Summary, StringComparison.OrdinalIgnoreCase);
-        Assert.Contains("discovery and naming context", clone.UpstreamLineage.Summary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("No local source-code mirror", clone.UpstreamLineage.Summary, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]
@@ -112,6 +112,36 @@ public sealed class TweakEvidenceClassCatalogServiceTests : IDisposable
         Assert.NotNull(clone.UpstreamLineage);
         Assert.Contains("Catalog-only source context is not a value-semantics proof", clone.UpstreamLineage!.Summary, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("Docs, Runtime, and Rollback", clone.UpstreamLineage.Summary, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public void Store_LabelsSuppressedPseudocodeWithoutVisibleLinks_AsNoLocalSource()
+    {
+        var store = new TweakEvidenceClassCatalogStore(_docsRoot);
+        var clone = store.CloneWithResolvedLinks(new TweakEvidenceClassEntry
+        {
+            RecordId = "system.external-pseudocode-only",
+            TweakId = "system.external-pseudocode-only",
+            UpstreamLineage = new TweakEvidenceProofBlock
+            {
+                Summary = "Upstream dump / pseudocode links are attached to this record.",
+                HasNohutoLineage = true,
+                Links =
+                {
+                    new TweakEvidenceLink
+                    {
+                        Title = "decompiled-pseudocode / USBHUB3",
+                        Url = "https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3",
+                        Kind = "nohuto"
+                    }
+                }
+            }
+        });
+
+        Assert.NotNull(clone.UpstreamLineage);
+        Assert.Empty(clone.UpstreamLineage!.Links);
+        Assert.False(clone.UpstreamLineage.HasNohutoLineage);
+        Assert.Contains("No local source-code mirror", clone.UpstreamLineage.Summary, StringComparison.OrdinalIgnoreCase);
     }
 
     public void Dispose()

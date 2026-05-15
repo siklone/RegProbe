@@ -85,7 +85,7 @@ public sealed partial class TweakItemViewModel
     {
         var docsLinks = MergeLinks(
             _validatedSemanticsLinks,
-            ReferenceLinks.Where(static link => link.Kind is ReferenceLinkKind.Docs or ReferenceLinkKind.Details));
+            ReferenceLinks.Where(static link => link.Kind is ReferenceLinkKind.Catalog or ReferenceLinkKind.Docs or ReferenceLinkKind.Details));
         var runtimeLinks = MergeLinks(_runtimeProofLinks);
         var sourceLinks = MergeLinks(
             _upstreamLineageLinks,

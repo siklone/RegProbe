@@ -92,25 +92,20 @@
                     </Grid.ColumnDefinitions>
 
                     <ComboBox Grid.Column="0"
-                              SelectedValuePath="Tag"
+                              ItemsSource="{Binding StatusFilterOptions}"
+                              DisplayMemberPath="Label"
+                              SelectedValuePath="Value"
                               SelectedValue="{Binding StatusFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               ToolTip="Filter by status"
-                              Style="{StaticResource CompactFilterComboStyle}">
-                        <ComboBoxItem Content="STATUS" Tag=""/>
-                        <ComboBoxItem Content="APPLIED" Tag="applied"/>
-                        <ComboBoxItem Content="ROLLED BACK" Tag="rolledback"/>
-                    </ComboBox>
+                              Style="{StaticResource CompactFilterComboStyle}"/>
 
                     <ComboBox Grid.Column="2"
-                              SelectedValuePath="Tag"
+                              ItemsSource="{Binding ScopeFilterOptions}"
+                              DisplayMemberPath="Label"
+                              SelectedValuePath="Value"
                               SelectedValue="{Binding ScopeFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               ToolTip="Filter by scope"
-                              Style="{StaticResource CompactFilterComboStyle}">
-                        <ComboBoxItem Content="SCOPE" Tag=""/>
-                        <ComboBoxItem Content="MACHINE" Tag="machine"/>
-                        <ComboBoxItem Content="USER" Tag="user"/>
-                        <ComboBoxItem Content="MIXED" Tag="mixed"/>
-                    </ComboBox>
+                              Style="{StaticResource CompactFilterComboStyle}"/>
                 </Grid>
             </StackPanel>
 

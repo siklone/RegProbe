@@ -52,9 +52,7 @@ public sealed class WorkspaceBrowseCoordinator : IDisposable
         var scopedText = _shellState.IsAllCategoriesSelected
             ? $"{visibleCount} of {totalCount} {noun}"
             : $"{visibleCount} of {totalCount} {noun} in {_shellState.SelectedCategoryLabel}";
-        var filterSuffix = string.IsNullOrWhiteSpace(_shellState.SearchText) && !_shellState.ShowFavoritesOnly
-            ? string.Empty
-            : " filtered";
+        var filterSuffix = _shellState.HasActiveFilters ? " filtered" : string.Empty;
 
         _presentationState.SetFilterSummary($"{scopedText}{filterSuffix}", visibleCount > 0);
 

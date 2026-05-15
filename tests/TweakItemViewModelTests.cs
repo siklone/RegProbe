@@ -157,6 +157,39 @@ public sealed class TweakItemViewModelTests
     }
 
     [Fact]
+    public void SourceSnapshot_TreatsCatalogOnlySummary_AsPartialNotReady()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new TestTweak("system.catalog-only-source");
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false);
+
+        viewModel.ApplyEvidenceClassification(new TweakEvidenceClassEntry
+        {
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            EvidenceClass = "A",
+            ClassLabel = "Class A",
+            ClassTitle = "Ready",
+            ClassDescription = "Ready for app surface",
+            ActionState = "actionable",
+            GatingReason = string.Empty,
+            IsActionable = true,
+            ShowInApp = true,
+            UpstreamLineage = new TweakEvidenceProofBlock
+            {
+                Summary = PublicEvidenceLinkPolicy.NoLocalSourceMessage,
+                HasNohutoLineage = false
+            }
+        });
+
+        Assert.False(viewModel.HasUpstreamLineage);
+        Assert.Equal("partial", viewModel.SourceSnapshotState);
+        var sourceLane = Assert.Single(viewModel.ProofLanes, lane => lane.Key == "source");
+        Assert.False(sourceLane.HasLinks);
+        Assert.Contains("Catalog-only source context", sourceLane.Summary, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
     public void ApplyAllowedVerdict_UsesProofAndRollbackSnapshots()
     {
         var pipeline = new TweakExecutionPipeline(new RecordingLogger());
