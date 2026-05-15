@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,6 +19,8 @@ public sealed class ContributorLabViewModel : ViewModelBase
     private string _customRegistryPath = @"HKLM\SYSTEM\CurrentControlSet\Control\Power";
     private string _customValueName = "SystemResponsiveness";
     private string _customExpectedValues = "10, 30000";
+    private string _observationSearchText = string.Empty;
+    private string _observationBucketFilter = "all";
     private readonly IContributorLabCommandRunner _commandRunner;
     private readonly AsyncRelayCommand _runCustomLookupCommand;
     private readonly AsyncRelayCommand _runCustomAppQaCommand;
@@ -42,6 +45,12 @@ public sealed class ContributorLabViewModel : ViewModelBase
         CommandPacks = new ObservableCollection<ContributorCommandPackViewModel>(
             snapshot.CommandPacks.Select(pack => new ContributorCommandPackViewModel(pack)));
         Observations = new ObservableCollection<ContributorObservation>(snapshot.Observations);
+        ObservationBucketOptions = new ObservableCollection<string>(
+            new[] { "all" }.Concat(Observations
+                .Select(static observation => observation.Bucket)
+                .Where(static bucket => !string.IsNullOrWhiteSpace(bucket))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .OrderBy(static bucket => bucket, StringComparer.OrdinalIgnoreCase)));
         _runCustomLookupCommand = new AsyncRelayCommand(
             () => RunContributorCommandAsync("Repo/evidence lookup", CustomEvidenceLookupCommand),
             CanRunReadOnlyContributorCommand,
@@ -328,6 +337,41 @@ public sealed class ContributorLabViewModel : ViewModelBase
 
     public ObservableCollection<ContributorObservation> Observations { get; }
 
+    public ObservableCollection<string> ObservationBucketOptions { get; }
+
+    public string ObservationSearchText
+    {
+        get => _observationSearchText;
+        set
+        {
+            if (SetProperty(ref _observationSearchText, value))
+            {
+                RaiseObservationFilterProperties();
+            }
+        }
+    }
+
+    public string ObservationBucketFilter
+    {
+        get => _observationBucketFilter;
+        set
+        {
+            var next = string.IsNullOrWhiteSpace(value) ? "all" : value;
+            if (SetProperty(ref _observationBucketFilter, next))
+            {
+                RaiseObservationFilterProperties();
+            }
+        }
+    }
+
+    public IEnumerable<ContributorObservation> FilteredObservations =>
+        Observations.Where(MatchesObservationFilter);
+
+    public int FilteredObservationCount => FilteredObservations.Count();
+
+    public string ObservationBrowserSummary =>
+        $"Showing {FilteredObservationCount}/{Observations.Count} research observations. App-card promotion still requires known default/current/target, tested rollback, explicit app write, clean low-noise proof, and bounded claims.";
+
     private void RaiseCustomValueCommandProperties()
     {
         OnPropertyChanged(nameof(HasCustomValueInput));
@@ -338,6 +382,39 @@ public sealed class ContributorLabViewModel : ViewModelBase
         OnPropertyChanged(nameof(CustomValueDiscoverySteps));
         RaiseContributorCommandCanExecuteChanged();
     }
+
+    private bool MatchesObservationFilter(ContributorObservation observation)
+    {
+        var bucketMatches = string.Equals(ObservationBucketFilter, "all", StringComparison.OrdinalIgnoreCase)
+                            || string.Equals(observation.Bucket, ObservationBucketFilter, StringComparison.OrdinalIgnoreCase);
+        if (!bucketMatches)
+        {
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(ObservationSearchText))
+        {
+            return true;
+        }
+
+        var needle = ObservationSearchText.Trim();
+        return Contains(observation.ValueName, needle)
+               || Contains(observation.RegistryPath, needle)
+               || Contains(observation.Reason, needle)
+               || Contains(observation.TestedValueSummary, needle)
+               || Contains(observation.VerdictSummary, needle)
+               || Contains(observation.AppCardBlockerSummary, needle);
+    }
+
+    private void RaiseObservationFilterProperties()
+    {
+        OnPropertyChanged(nameof(FilteredObservations));
+        OnPropertyChanged(nameof(FilteredObservationCount));
+        OnPropertyChanged(nameof(ObservationBrowserSummary));
+    }
+
+    private static bool Contains(string source, string needle)
+        => (source ?? string.Empty).Contains(needle, StringComparison.OrdinalIgnoreCase);
 
     private bool CanRunReadOnlyContributorCommand()
         => AreToolsUnlocked

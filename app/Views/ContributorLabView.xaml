@@ -164,7 +164,25 @@
                         <TextBlock Text="{Binding NoiseSummary, StringFormat={}Noise: {0}}"
                                    Margin="0,5,0,0"
                                    Style="{StaticResource ContributorMonoTextStyle}"/>
+                        <TextBlock Text="{Binding NoiseBadge, StringFormat={}Badge: {0}}"
+                                   Margin="0,5,0,0"
+                                   Style="{StaticResource ContributorMonoTextStyle}"/>
+                        <TextBlock Text="{Binding TestedValueSummary, StringFormat={}Tested: {0}}"
+                                   Margin="0,5,0,0"
+                                   Style="{StaticResource ContributorMonoTextStyle}"/>
+                        <TextBlock Text="{Binding VerdictSummary, StringFormat={}Verdicts: {0}}"
+                                   Margin="0,5,0,0"
+                                   Style="{StaticResource ContributorMonoTextStyle}"/>
+                        <TextBlock Text="{Binding SmokeSummary, StringFormat={}Smoke: {0}}"
+                                   Margin="0,5,0,0"
+                                   Style="{StaticResource ContributorMonoTextStyle}"/>
                         <TextBlock Text="{Binding ClaimBoundary, StringFormat={}Boundary: {0}}"
+                                   Margin="0,5,0,0"
+                                   Style="{StaticResource ContributorMonoTextStyle}"/>
+                        <TextBlock Text="{Binding AppCardBlockerSummary, StringFormat={}Blockers: {0}}"
+                                   Margin="0,5,0,0"
+                                   Style="{StaticResource ContributorMonoTextStyle}"/>
+                        <TextBlock Text="{Binding ArtifactSummary, StringFormat={}Artifacts: {0}}"
                                    Margin="0,5,0,0"
                                    Style="{StaticResource ContributorMonoTextStyle}"/>
                     </StackPanel>
@@ -400,7 +418,31 @@
                                 <TextBlock Text="These are user-supplied key/path/value experiments from a historical seed batch. They can be inspected, rerun, and used for PR review, but they do not enter normal user cards until the promotion gate for each record is complete."
                                            Margin="0,6,0,10"
                                            Style="{StaticResource UtilitySectionBodyTextStyle}"/>
-                                <ItemsControl ItemsSource="{Binding Observations}"
+                                <TextBlock Text="{Binding ObservationBrowserSummary}"
+                                           Margin="0,0,0,10"
+                                           Style="{StaticResource ContributorMonoTextStyle}"/>
+                                <Grid Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="12"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Search value/path/verdict/blockers"
+                                                   Style="{StaticResource ContributorMonoTextStyle}"/>
+                                        <TextBox Text="{Binding ObservationSearchText, UpdateSourceTrigger=PropertyChanged}"
+                                                 Margin="0,5,0,0"
+                                                 Style="{StaticResource ModernTextBox}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Text="Bucket"
+                                                   Style="{StaticResource ContributorMonoTextStyle}"/>
+                                        <ComboBox ItemsSource="{Binding ObservationBucketOptions}"
+                                                  SelectedItem="{Binding ObservationBucketFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                  Margin="0,5,0,0"/>
+                                    </StackPanel>
+                                </Grid>
+                                <ItemsControl ItemsSource="{Binding FilteredObservations}"
                                               ItemTemplate="{StaticResource ObservationTemplate}"/>
                             </StackPanel>
                         </Border>

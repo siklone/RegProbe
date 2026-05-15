@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using RegProbe.Application.Services;
@@ -235,7 +236,26 @@ public sealed class ContributorLabViewModelTests : IDisposable
           "summary": {
             "non_ok_count": 0,
             "noisy_result_count": 0
-          }
+          },
+          "results": [
+            {
+              "index": 1,
+              "status": "ok",
+              "value_data": 0,
+              "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-001-enablething-0.json",
+              "observations": {
+                "verdict": "low_confidence",
+                "confidence": "low",
+                "host_noise": "ok",
+                "primary_delta_pct": 0.5,
+                "smoke_hard_success": {
+                  "apply_smoke_hard_success": true,
+                  "post_reboot_smoke_hard_success": true,
+                  "post_rollback_smoke_hard_success": true
+                }
+              }
+            }
+          ]
         }
         """);
         WriteArtifact(ContributorLabCatalog.Operator96SurfaceReviewPath, """
@@ -340,6 +360,39 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Equal("contributor-lab-research-only", observation.SurfaceDestination);
         Assert.Contains("rollback_tested", observation.PromotionChecklist, StringComparison.Ordinal);
         Assert.Contains("VM smoke only", observation.ClaimBoundary, StringComparison.Ordinal);
+        Assert.Contains("0: low_confidence", observation.TestedValueSummary, StringComparison.Ordinal);
+        Assert.Equal("low_confidence=1", observation.VerdictSummary);
+        Assert.Equal("1/1 apply/reboot/rollback hard-smoke receipts passed", observation.SmokeSummary);
+        Assert.Equal("Low-noise VM receipt", observation.NoiseBadge);
+        Assert.Contains("rollback_tested", observation.AppCardBlockerSummary, StringComparison.Ordinal);
+        Assert.Contains("registry-value-experiments-low-noise", observation.ArtifactSummary, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void ObservationBrowser_FiltersByBucketAndSearchText()
+    {
+        var snapshot = CreateSnapshot() with
+        {
+            Observations =
+            [
+                Observation(1, "TimerCheckFlags", "blocked_by_gate", "missing rollback", "harmful=1"),
+                Observation(2, "MfBufferingThreshold", "not_app_surface_ready", "needs bounded claim", "low_confidence=1")
+            ]
+        };
+        var viewModel = new ContributorLabViewModel(snapshot);
+
+        Assert.Equal(2, viewModel.FilteredObservationCount);
+        Assert.Contains("Showing 2/2", viewModel.ObservationBrowserSummary, StringComparison.Ordinal);
+
+        viewModel.ObservationBucketFilter = "blocked_by_gate";
+        Assert.Equal(1, viewModel.FilteredObservationCount);
+        Assert.Equal("TimerCheckFlags", viewModel.FilteredObservations.Single().ValueName);
+
+        viewModel.ObservationSearchText = "harmful";
+        Assert.Equal(1, viewModel.FilteredObservationCount);
+
+        viewModel.ObservationSearchText = "buffer";
+        Assert.Equal(0, viewModel.FilteredObservationCount);
     }
 
     public void Dispose()
@@ -397,6 +450,34 @@ public sealed class ContributorLabViewModelTests : IDisposable
             ReadinessItems: Array.Empty<ContributorReadinessItem>(),
             CommandPacks: Array.Empty<ContributorCommandPack>(),
             Observations: Array.Empty<ContributorObservation>());
+
+    private static ContributorObservation Observation(
+        int index,
+        string valueName,
+        string bucket,
+        string blockers,
+        string verdicts)
+        => new(
+            index,
+            valueName,
+            @"HKLM\Software\Example",
+            bucket,
+            "reason",
+            "known-absent",
+            "0, 1",
+            "0",
+            "low=1",
+            "ok=1",
+            "contributor-lab-research-only",
+            blockers,
+            "VM smoke only; no performance claim",
+            $"{valueName}: tested",
+            verdicts,
+            "1/1 apply/reboot/rollback hard-smoke receipts passed",
+            "artifact.json",
+            blockers,
+            "Low-noise VM receipt",
+            "python3 registry-research-framework/scripts/check_single_tweak.py Example --json");
 
     private sealed class FakeContributorCommandRunner : IContributorLabCommandRunner
     {
