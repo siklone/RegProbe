@@ -644,7 +644,7 @@ public sealed partial class TweakItemViewModel : ViewModelBase
         HasNohutoEvidence,
         HasWindowsInternalsContext,
         NeedsSourceReview,
-        ProvenanceSummary);
+        string.IsNullOrWhiteSpace(ProvenanceSummary) ? UpstreamLineageSummary : ProvenanceSummary);
     public string SourceSnapshotText => TweakProofSnapshotPresentation.BuildSnapshotText("Source", SourceSnapshotState);
     public string RollbackSnapshotState => TweakProofSnapshotPresentation.BuildRollbackSnapshotState(
         _rollbackVerified,

@@ -91,7 +91,7 @@ public sealed class TweakEvidenceClassCatalogServiceTests : IDisposable
         Assert.Empty(clone.UpstreamLineage!.Links);
         Assert.False(clone.UpstreamLineage.HasNohutoLineage);
         Assert.DoesNotContain("nohuto", clone.UpstreamLineage.Summary, StringComparison.OrdinalIgnoreCase);
-        Assert.Contains("discovery and naming context", clone.UpstreamLineage.Summary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("No local source-code mirror", clone.UpstreamLineage.Summary, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]
