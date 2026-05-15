@@ -97,10 +97,13 @@ public sealed class ContributorLabViewModelTests : IDisposable
         });
 
         Assert.Equal(92, viewModel.Operator96ResearchOnlyCount);
+        Assert.Equal(92, viewModel.CustomValueResearchOnlyCount);
         Assert.Contains("blocked_by_gate=17", viewModel.Operator96GateBreakdown, StringComparison.Ordinal);
+        Assert.Contains("blocked_by_gate=17", viewModel.CustomValueGateBreakdown, StringComparison.Ordinal);
         Assert.Contains("not_app_surface_ready=75", viewModel.Operator96GateBreakdown, StringComparison.Ordinal);
         Assert.Contains("seed_batch=custom-value", viewModel.Operator96GateBreakdown, StringComparison.Ordinal);
         Assert.Contains("Review only ready_for_bounded_app_card", viewModel.Operator96NextActionSummary, StringComparison.Ordinal);
+        Assert.Contains("Review only ready_for_bounded_app_card", viewModel.CustomValueNextActionSummary, StringComparison.Ordinal);
         Assert.Contains("user-supplied key/value", viewModel.CustomValueWorkflowSummary, StringComparison.Ordinal);
         Assert.Contains("per-run confirmation", viewModel.CertifiedMutationGuardSummary, StringComparison.Ordinal);
     }
@@ -123,6 +126,35 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Contains("--value-name \"TimerCheckFlags\"", viewModel.CustomVmExperimentCommand, StringComparison.Ordinal);
         Assert.Contains("--value-data 0", viewModel.CustomVmExperimentCommand, StringComparison.Ordinal);
         Assert.Contains("--abort-on-noisy-host", viewModel.CustomVmExperimentCommand, StringComparison.Ordinal);
+
+        Assert.Contains("check_single_tweak_app_qa.py \"TimerCheckFlags\"", viewModel.CustomAppQaCommand, StringComparison.Ordinal);
+        Assert.Contains("vm-health-check.py", viewModel.CustomVmHealthCommand, StringComparison.Ordinal);
+        Assert.Contains(viewModel.CustomValueDiscoverySteps, step => step.Title == "1. Repo/evidence lookup"
+                                                                  && !step.MutatesGuest
+                                                                  && step.Command.Contains("check_single_tweak.py", StringComparison.Ordinal));
+        Assert.Contains(viewModel.CustomValueDiscoverySteps, step => step.Title == "5. One-value VM experiment"
+                                                                  && step.MutatesGuest
+                                                                  && step.RequiresCertifiedVm
+                                                                  && step.Command.Contains("--value-name \"TimerCheckFlags\"", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void ReferenceEligible_RequiresVmHealthAndSnapshotReceipt()
+    {
+        var snapshot = CreateSnapshot() with
+        {
+            RunTier = "certified",
+            VmHealthKnown = false,
+            VmHealthOk = false,
+            VmSnapshotKnown = false,
+            VmSnapshotOk = false
+        };
+        var viewModel = new ContributorLabViewModel(snapshot);
+
+        Assert.False(snapshot.ReferenceEligible);
+        Assert.Contains("copy-only", viewModel.CertifiedMutationGuardSummary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains(viewModel.CustomValueDiscoverySteps, step => step.Title == "4. Certified VM health"
+                                                                  && step.Tier == "certified-required");
     }
 
     [Fact]

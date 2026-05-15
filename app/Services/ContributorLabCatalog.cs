@@ -79,6 +79,10 @@ public sealed record ContributorLabSnapshot(
 {
     public bool ReferenceEligible =>
         string.Equals(RunTier, "certified", StringComparison.OrdinalIgnoreCase)
+        && VmHealthKnown
+        && VmHealthOk
+        && VmSnapshotKnown
+        && VmSnapshotOk
         && Operator96NoisyResultCount == 0
         && Operator96NonOkCount == 0
         && Operator96NeedsLowNoiseRerun == 0;
@@ -140,7 +144,7 @@ public static class ContributorLabCatalog
         var vmSnapshotOk = Text(vmSnapshot, "status") == "ok" && Bool(vmSnapshot, "exists");
         var vmSnapshotName = Text(vmSnapshot, "snapshot_name");
 
-        var runTier = aggregateOk && surfaceOk && appReadinessOk && appCardsOk
+        var runTier = aggregateOk && surfaceOk && appReadinessOk && appCardsOk && vmHealthKnown && vmHealthOk && vmSnapshotKnown && vmSnapshotOk
             ? "certified"
             : noisy > 0 || nonOk > 0 || needsRerun > 0
                 ? "noisy"
@@ -272,7 +276,7 @@ public static class ContributorLabCatalog
                 MutatesGuest: true),
             new(
                 "Custom value app-surface review",
-                "Recompute why user-supplied registry value observations stay research-only or become eligible for bounded app-card review. Uses the legacy operator96 artifact set as the current seed fixture.",
+                "Recompute why user-supplied registry value observations stay research-only or become eligible for bounded app-card review. Uses the current custom-value artifact set; the script name is a legacy fixture name.",
                 "python3 registry-research-framework/scripts/generate_operator96_app_surface_review.py --json",
                 "community-safe",
                 RequiresCertifiedVm: false,

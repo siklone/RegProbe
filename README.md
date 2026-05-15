@@ -191,8 +191,10 @@ observations without promoting them to normal end-user cards. The current
 legacy artifact ID for the first seed batch is `operator96`; it is not product
 branding. Its command packs are copyable contributor templates, not arbitrary
 command execution. For user-supplied key/value work, start with the lookup
-template, then run one value at a time in a certified disposable VM so boot,
-GUI smoke, benchmark observation, and rollback results stay attributable.
+template, inspect any existing app-card QA map, check app/readiness contracts,
+then run one value at a time in a certified disposable VM so boot, GUI smoke,
+benchmark observation, and rollback results stay attributable. Certified
+mutation remains copy-only unless the VM/QGA/snapshot health receipt is present.
 
 ## Single Setting Check
 

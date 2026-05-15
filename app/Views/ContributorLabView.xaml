@@ -231,10 +231,10 @@
                                 <TextBlock Text="{Binding AppSurfacePolicySummary}"
                                            Margin="0,6,0,8"
                                            Style="{StaticResource UtilitySectionBodyTextStyle}"/>
-                                <TextBlock Text="{Binding Operator96GateBreakdown, StringFormat={}Custom value gate: {0}}"
+                                <TextBlock Text="{Binding CustomValueGateBreakdown, StringFormat={}Custom value gate: {0}}"
                                            Margin="0,0,0,5"
                                            Style="{StaticResource ContributorMonoTextStyle}"/>
-                                <TextBlock Text="{Binding Operator96NextActionSummary}"
+                                <TextBlock Text="{Binding CustomValueNextActionSummary}"
                                            Margin="0,0,0,8"
                                            Style="{StaticResource UtilitySectionBodyTextStyle}"/>
                                 <WrapPanel>
@@ -244,31 +244,31 @@
                                     <TextBlock Text="{Binding AppCardCandidateCount, StringFormat={}Candidates: {0}}"
                                                Margin="0,0,18,0"
                                                Style="{StaticResource ContributorMonoTextStyle}"/>
-                                    <TextBlock Text="{Binding Operator96RecordCount, StringFormat={}Custom value records: {0}}"
+                                    <TextBlock Text="{Binding CustomValueRecordCount, StringFormat={}Custom value records: {0}}"
                                                Margin="0,0,18,0"
                                                Style="{StaticResource ContributorMonoTextStyle}"/>
-                                    <TextBlock Text="{Binding Operator96ReadyForAppCard, StringFormat={}Ready for app card: {0}}"
+                                    <TextBlock Text="{Binding CustomValueReadyForAppCard, StringFormat={}Ready for app card: {0}}"
                                                Margin="0,0,18,0"
                                                Style="{StaticResource ContributorMonoTextStyle}"/>
-                                    <TextBlock Text="{Binding Operator96ResearchOnlyCount, StringFormat={}Research-only: {0}}"
+                                    <TextBlock Text="{Binding CustomValueResearchOnlyCount, StringFormat={}Research-only: {0}}"
                                                Margin="0,0,18,0"
                                                Style="{StaticResource ContributorMonoTextStyle}"/>
-                                    <TextBlock Text="{Binding Operator96BlockedByGate, StringFormat={}Blocked by gate: {0}}"
+                                    <TextBlock Text="{Binding CustomValueBlockedByGate, StringFormat={}Blocked by gate: {0}}"
                                                Margin="0,0,18,0"
                                                Style="{StaticResource ContributorMonoTextStyle}"/>
-                                    <TextBlock Text="{Binding Operator96NotAppSurfaceReady, StringFormat={}Not app-ready: {0}}"
+                                    <TextBlock Text="{Binding CustomValueNotAppSurfaceReady, StringFormat={}Not app-ready: {0}}"
                                                Margin="0,0,18,0"
                                                Style="{StaticResource ContributorMonoTextStyle}"/>
-                                    <TextBlock Text="{Binding Operator96BlockedBySafety, StringFormat={}Safety blocked: {0}}"
+                                    <TextBlock Text="{Binding CustomValueBlockedBySafety, StringFormat={}Safety blocked: {0}}"
                                                Margin="0,0,18,0"
                                                Style="{StaticResource ContributorMonoTextStyle}"/>
-                                    <TextBlock Text="{Binding Operator96NeedsLowNoiseRerun, StringFormat={}Needs low-noise rerun: {0}}"
+                                    <TextBlock Text="{Binding CustomValueNeedsLowNoiseRerun, StringFormat={}Needs low-noise rerun: {0}}"
                                                Margin="0,0,18,0"
                                                Style="{StaticResource ContributorMonoTextStyle}"/>
-                                    <TextBlock Text="{Binding Operator96NoisyResultCount, StringFormat={}Noisy: {0}}"
+                                    <TextBlock Text="{Binding CustomValueNoisyResultCount, StringFormat={}Noisy: {0}}"
                                                Margin="0,0,18,0"
                                                Style="{StaticResource ContributorMonoTextStyle}"/>
-                                    <TextBlock Text="{Binding Operator96NonOkCount, StringFormat={}Non-ok: {0}}"
+                                    <TextBlock Text="{Binding CustomValueNonOkCount, StringFormat={}Non-ok: {0}}"
                                                Style="{StaticResource ContributorMonoTextStyle}"/>
                                 </WrapPanel>
                             </StackPanel>
@@ -329,16 +329,13 @@
                                 <TextBlock Text="{Binding CustomValueWorkflowChecklist}"
                                            Margin="0,10,0,8"
                                            Style="{StaticResource ContributorMonoTextStyle}"/>
-                                <TextBlock Text="Non-mutating lookup"
+                                <TextBlock Text="Evidence discovery steps"
                                            Style="{StaticResource UtilitySectionBodyTextStyle}"/>
-                                <TextBlock Text="{Binding CustomEvidenceLookupCommand}"
+                                <TextBlock Text="Run these in order. The first three are read-only; VM mutation stays copy-only unless the certified VM health gate passes and the contributor confirms the run."
                                            Margin="0,4,0,8"
-                                           Style="{StaticResource ContributorMonoTextStyle}"/>
-                                <TextBlock Text="Certified VM experiment command"
                                            Style="{StaticResource UtilitySectionBodyTextStyle}"/>
-                                <TextBlock Text="{Binding CustomVmExperimentCommand}"
-                                           Margin="0,4,0,0"
-                                           Style="{StaticResource ContributorMonoTextStyle}"/>
+                                <ItemsControl ItemsSource="{Binding CustomValueDiscoverySteps}"
+                                              ItemTemplate="{StaticResource CommandPackTemplate}"/>
                             </StackPanel>
                         </Border>
 
@@ -358,7 +355,7 @@
                             <StackPanel>
                                 <TextBlock Text="Custom registry value experiments"
                                            Style="{StaticResource UtilitySectionTitleTextStyle}"/>
-                                <TextBlock Text="These are user-supplied key/path/value experiments seeded by a historical 96-record batch. They can be inspected, rerun, and used for PR review, but they do not enter normal user cards until the promotion gate for each record is complete."
+                                <TextBlock Text="These are user-supplied key/path/value experiments from a historical seed batch. They can be inspected, rerun, and used for PR review, but they do not enter normal user cards until the promotion gate for each record is complete."
                                            Margin="0,6,0,10"
                                            Style="{StaticResource UtilitySectionBodyTextStyle}"/>
                                 <ItemsControl ItemsSource="{Binding Observations}"
