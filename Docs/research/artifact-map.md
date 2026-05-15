@@ -1,6 +1,6 @@
 # Research Artifact Map
 
-Generated: `2026-05-14T21:15:03Z`
+Generated: `2026-05-15T11:08:58Z`
 
 This is the contributor entrypoint for current research artifacts. Use it
 instead of browsing raw audit folders first.
@@ -18,7 +18,7 @@ instead of browsing raw audit folders first.
 ## Rules
 
 - `end_user_surface`: Normal users start from the WPF app and validated app-surface records, not raw audit folders.
-- `operator96_surface`: Custom registry value experiments remain Contributor Lab / research observations unless ready_for_bounded_app_card is positive and all gates stay clean. operator96 is a legacy artifact ID, not product branding.
+- `custom_value_surface`: Custom registry value experiments remain Contributor Lab / research observations unless ready_for_bounded_app_card is positive and all gates stay clean. operator96 is a legacy file/campaign ID, not product branding.
 - `cleanup`: Do not delete archived/raw evidence unless the cleanup quarantine ledger reports live_reference_count=0 and a replacement or explicit obsolete reason exists. Use the retained inventory plan to reduce references before deletion.
 - `performance_claims`: No benchmark/performance claim ships from a single noisy, low-confidence, or community-only observation.
 
@@ -32,8 +32,8 @@ instead of browsing raw audit folders first.
 | `promoted-app-qa-live-batch` | `canonical-latest` | `ok` | contributor, release QA | `registry-research-framework/audit/promoted-app-qa-batch-latest.json` | You need evidence that a representative shipped-card batch still applies and rolls back. | You need total coverage across every card; use promoted-app-qa-coverage. |
 | `promoted-app-qa-coverage` | `canonical-latest` | `ok` | contributor, release QA | `registry-research-framework/audit/promoted-app-qa-coverage-latest.json` | You need to know whether any promoted app-QA category remains uncovered. | You need newest run detail; use promoted-app-qa-live-batch. |
 | `single-tweak-lookup` | `canonical-script` | `reference` | contributor, agentic AI | `registry-research-framework/scripts/check_single_tweak.py` | A user asks whether a key/value exists, is read, or is written by the app. | You need live app mutation; use check_single_tweak_app_qa.py or KVM app QA. |
-| `operator96-low-noise-aggregate` | `canonical-research` | `ok` | contributor, research | `registry-research-framework/audit/operator96-low-noise-rerun-aggregate-20260512.json` | You need to know whether noisy/non-ok reruns remain. | You are building normal end-user app cards. |
-| `operator96-app-surface-review` | `canonical-research` | `research-only-ok` | contributor, research | `registry-research-framework/audit/operator96-app-surface-review-20260510.json` | You need to decide whether any user-supplied key/value experiment may enter app cards. | You want an optimization claim; this review blocks unbounded claims. |
+| `custom-value-low-noise-aggregate` | `canonical-research` | `ok` | contributor, research | `registry-research-framework/audit/operator96-low-noise-rerun-aggregate-20260512.json` | You need to know whether noisy/non-ok reruns remain. | You are building normal end-user app cards. |
+| `custom-value-app-surface-review` | `canonical-research` | `research-only-ok` | contributor, research | `registry-research-framework/audit/operator96-app-surface-review-20260510.json` | You need to decide whether any user-supplied key/value experiment may enter app cards. | You want an optimization claim; this review blocks unbounded claims. |
 | `cleanup-quarantine-ledger` | `canonical-safety-ledger` | `no-delete-eligible` | maintainer, contributor | `registry-research-framework/audit/cleanup-quarantine-ledger-20260514.json` | Before deleting or moving any archived/raw evidence or historical parse artifact. | You are looking for shipped app state; use app-surface/readiness artifacts. |
 | `cleanup-retained-inventory-plan` | `canonical-action-plan` | `retained-plan-ready` | maintainer, contributor | `registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json` | After the quarantine ledger reports retained inventory and you need to reduce references or decide explicit retention. | You need the deletion safety contract itself; use cleanup-quarantine-ledger. |
 | `vm-health` | `canonical-latest` | `ok` | contributor, VM operator | `registry-research-framework/audit/vm-health-check-latest.json` | Before ETW, Ghidra, app deploy smoke, or registry mutation experiments. | You need historical VM incident context. |

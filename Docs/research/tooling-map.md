@@ -44,10 +44,10 @@ These scripts are active entry points for day-to-day contributor work.
 | `scripts/vm-kvm/run-guest-registry-value-experiment.py` | canonical | One-value VM experiment runner with host noise gate, optional `--abort-on-noisy-host`, and reboot/rollback checks. |
 | `registry-research-framework/scripts/analyze_registry_value_experiments.py` | canonical | Retro-analyze registry value experiment artifacts and produce verdict summaries. |
 | `registry-research-framework/scripts/generate_research_artifact_map.py` | canonical | Generate the current artifact map so contributors start from canonical outputs instead of raw parse folders. |
-| `registry-research-framework/scripts/generate_operator96_enriched_value_matrix.py` | canonical | Generate enriched candidate values with source boundaries and community-hint tags for the current custom-value seed batch. |
-| `registry-research-framework/scripts/generate_operator96_app_surface_review.py` | canonical | Review enriched custom registry value experiments for app-surface eligibility. |
-| `registry-research-framework/scripts/generate_operator96_low_noise_rerun_plan.py` | canonical | Plan low-noise reruns for records whose prior observations are not reference quality. |
-| `registry-research-framework/scripts/aggregate_operator96_low_noise_rerun_campaign.py` | canonical | Aggregate low-noise tranche outputs into one campaign summary. |
+| `registry-research-framework/scripts/generate_operator96_enriched_value_matrix.py` | canonical | Generate enriched candidate values with source boundaries and community-hint tags for the current custom-value seed batch; `operator96` is only the legacy file/campaign name. |
+| `registry-research-framework/scripts/generate_operator96_app_surface_review.py` | canonical | Review enriched custom registry value experiments for app-surface eligibility; keep records in Contributor Lab unless the bounded-card gate passes. |
+| `registry-research-framework/scripts/generate_operator96_low_noise_rerun_plan.py` | canonical | Plan low-noise reruns for custom-value records whose prior observations are not reference quality. |
+| `registry-research-framework/scripts/aggregate_operator96_low_noise_rerun_campaign.py` | canonical | Aggregate custom-value low-noise tranche outputs into one campaign summary. |
 | `scripts/refresh_research_publish_surfaces.py` | canonical | Refresh generated research publish surfaces after record or gate changes. |
 | `scripts/generate_promotion_gates.py` | canonical | Rebuild app promotion gates from validated research state. |
 | `scripts/research/generate_app_surface_manifest.py` | canonical | Rebuild the app-surface manifest from surfaceable research records. |

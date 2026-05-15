@@ -354,8 +354,8 @@ def pilot_items(repo_root: Path = REPO_ROOT, output_paths: set[str] | None = Non
     items = [
         item_for(
             path,
-            category="operator96-superseded-pilot",
-            stale_reason="pilot artifact superseded by full operator96 baseline, but referenced as safety example",
+            category="custom-value-superseded-pilot",
+            stale_reason="pilot artifact superseded by the full custom registry value baseline, but referenced as safety example",
             replacement_artifacts=REPLACEMENT_ARTIFACTS,
             recommended_action="keep-referenced",
             repo_root=repo_root,
@@ -369,8 +369,8 @@ def pilot_items(repo_root: Path = REPO_ROOT, output_paths: set[str] | None = Non
         items.append(
             item_for(
                 pilot_bench,
-                category="operator96-superseded-pilot",
-                stale_reason="early operator value pilot superseded by full 179/179 matrix and enriched matrix",
+                category="custom-value-superseded-pilot",
+                stale_reason="early custom value pilot superseded by full 179/179 matrix and enriched matrix",
                 replacement_artifacts=REPLACEMENT_ARTIFACTS,
                 recommended_action="delete-after-review",
                 repo_root=repo_root,
