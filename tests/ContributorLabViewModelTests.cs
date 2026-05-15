@@ -99,10 +99,43 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Equal(92, viewModel.Operator96ResearchOnlyCount);
         Assert.Contains("blocked_by_gate=17", viewModel.Operator96GateBreakdown, StringComparison.Ordinal);
         Assert.Contains("not_app_surface_ready=75", viewModel.Operator96GateBreakdown, StringComparison.Ordinal);
-        Assert.Contains("legacy_campaign_id=operator96", viewModel.Operator96GateBreakdown, StringComparison.Ordinal);
+        Assert.Contains("seed_batch=custom-value", viewModel.Operator96GateBreakdown, StringComparison.Ordinal);
         Assert.Contains("Review only ready_for_bounded_app_card", viewModel.Operator96NextActionSummary, StringComparison.Ordinal);
         Assert.Contains("user-supplied key/value", viewModel.CustomValueWorkflowSummary, StringComparison.Ordinal);
         Assert.Contains("per-run confirmation", viewModel.CertifiedMutationGuardSummary, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void CustomValueInput_BuildsLookupAndCertifiedVmCommands()
+    {
+        var viewModel = new ContributorLabViewModel(CreateSnapshot())
+        {
+            CustomRegistryPath = @"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel",
+            CustomValueName = "TimerCheckFlags",
+            CustomExpectedValues = "0, 1"
+        };
+
+        Assert.True(viewModel.HasCustomValueInput);
+        Assert.Contains("check_single_tweak.py \"TimerCheckFlags\"", viewModel.CustomEvidenceLookupCommand, StringComparison.Ordinal);
+        Assert.Contains("--expected-value \"0\"", viewModel.CustomEvidenceLookupCommand, StringComparison.Ordinal);
+        Assert.Contains("--expected-value \"1\"", viewModel.CustomEvidenceLookupCommand, StringComparison.Ordinal);
+        Assert.Contains("--registry-path \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\"", viewModel.CustomVmExperimentCommand, StringComparison.Ordinal);
+        Assert.Contains("--value-name \"TimerCheckFlags\"", viewModel.CustomVmExperimentCommand, StringComparison.Ordinal);
+        Assert.Contains("--value-data 0", viewModel.CustomVmExperimentCommand, StringComparison.Ordinal);
+        Assert.Contains("--abort-on-noisy-host", viewModel.CustomVmExperimentCommand, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void ReadinessItems_SurfaceScriptsVirtualizationAndVmSetup()
+    {
+        var snapshot = CreateSnapshot() with
+        {
+            ReadinessItems = ContributorLabCatalog.BuildReadinessItems(CreateSnapshot())
+        };
+
+        Assert.Contains(snapshot.ReadinessItems, item => item.Label == "Required scripts" && item.Status == "Ready");
+        Assert.Contains(snapshot.ReadinessItems, item => item.Label == "BIOS virtualization" && item.Status == "Ready");
+        Assert.Contains(snapshot.ReadinessItems, item => item.Label == "VM configured" && item.Status == "Ready");
     }
 
     [Fact]
@@ -247,6 +280,10 @@ public sealed class ContributorLabViewModelTests : IDisposable
             IsElevated: true,
             PythonAvailable: true,
             GitAvailable: true,
+            RequiredScriptsOk: true,
+            VirtualizationFirmwareKnown: true,
+            VirtualizationFirmwareEnabled: true,
+            VirtualizationFirmwareDetail: "Firmware virtualization is enabled according to Win32_Processor.",
             AppReadinessOk: true,
             AppCardsOk: true,
             Operator96AggregateOk: true,

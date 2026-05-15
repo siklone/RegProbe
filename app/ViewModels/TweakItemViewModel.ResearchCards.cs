@@ -89,7 +89,10 @@ public sealed partial class TweakItemViewModel
         var runtimeLinks = MergeLinks(_runtimeProofLinks);
         var sourceLinks = MergeLinks(
             _upstreamLineageLinks,
-            ReferenceLinks.Where(static link => link.Kind is ReferenceLinkKind.Source or ReferenceLinkKind.Catalog));
+            ReferenceLinks.Where(static link => link.Kind is ReferenceLinkKind.Source));
+        var sourceSummary = PublicEvidenceLinkPolicy.SanitizeSourceSummary(
+            string.IsNullOrWhiteSpace(UpstreamLineageSummary) ? ProvenanceSummary : UpstreamLineageSummary,
+            sourceLinks.Count);
 
         return new List<TweakProofLaneViewModel>
         {
@@ -113,7 +116,7 @@ public sealed partial class TweakItemViewModel
                 "source",
                 "SOURCE",
                 SourceSnapshotState,
-                string.IsNullOrWhiteSpace(UpstreamLineageSummary) ? ProvenanceSummary : UpstreamLineageSummary,
+                sourceSummary,
                 UpstreamLineageSource,
                 sourceLinks,
                 TweakResearchPresentation.GetProofAccentBrush("source", ResearchAccentBrush)),
@@ -225,7 +228,9 @@ public sealed partial class TweakItemViewModel
         var mapped = new List<ReferenceLink>(links.Count);
         foreach (var link in links)
         {
-            if (link is null || string.IsNullOrWhiteSpace(link.Url))
+            if (link is null
+                || string.IsNullOrWhiteSpace(link.Url)
+                || PublicEvidenceLinkPolicy.IsSuppressedExternalPseudocodeUrl(link.Url))
             {
                 continue;
             }
@@ -269,7 +274,10 @@ public sealed partial class TweakItemViewModel
 
             foreach (var link in group)
             {
-                if (link is null || string.IsNullOrWhiteSpace(link.Url) || !seen.Add(link.Url))
+                if (link is null
+                    || string.IsNullOrWhiteSpace(link.Url)
+                    || PublicEvidenceLinkPolicy.IsSuppressedExternalPseudocodeUrl(link.Url)
+                    || !seen.Add(link.Url))
                 {
                     continue;
                 }
