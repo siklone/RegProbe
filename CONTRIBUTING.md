@@ -257,7 +257,9 @@ If you do not know the repo yet, use this order:
    discovery flow in the app: repo/evidence lookup, app-card QA map, app
    readiness/contracts, VM health receipt, then one edited VM experiment command
    per value so boot, app smoke, benchmark observation, and rollback proof
-   remain attributable.
+   remain attributable. The app can execute its own allowlisted read-only
+   lookup/readiness commands; mutation/campaign commands are still templates to
+   copy into a deliberate VM session.
 4. Run a single-setting inspection before editing anything. On Linux hosts
    without `Microsoft.WindowsDesktop.App`, use the Python mirror; use the .NET
    CLI in the Windows VM or on a desktop-runtime host only when you explicitly

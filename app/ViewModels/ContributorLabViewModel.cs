@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using RegProbe.Application.Services;
 
@@ -10,22 +11,53 @@ public sealed class ContributorLabViewModel : ViewModelBase
 {
     private bool _riskAcknowledged;
     private bool _areToolsUnlocked;
+    private bool _isContributorCommandRunning;
+    private string _commandRunTitle = "No command run yet";
+    private string _commandRunStatus = "Idle";
+    private string _commandRunOutput = "Use the read-only buttons below to run lookup/readiness commands from the app.";
     private string _customRegistryPath = @"HKLM\SYSTEM\CurrentControlSet\Control\Power";
     private string _customValueName = "SystemResponsiveness";
     private string _customExpectedValues = "10, 30000";
+    private readonly IContributorLabCommandRunner _commandRunner;
+    private readonly AsyncRelayCommand _runCustomLookupCommand;
+    private readonly AsyncRelayCommand _runCustomAppQaCommand;
+    private readonly AsyncRelayCommand _runAppReadinessCommand;
+    private readonly AsyncRelayCommand _runVmHealthCommand;
 
     public ContributorLabViewModel()
-        : this(ContributorLabCatalog.Load())
+        : this(ContributorLabCatalog.Load(), new ContributorLabCommandRunner())
     {
     }
 
     public ContributorLabViewModel(ContributorLabSnapshot snapshot)
+        : this(snapshot, new ContributorLabCommandRunner())
+    {
+    }
+
+    public ContributorLabViewModel(ContributorLabSnapshot snapshot, IContributorLabCommandRunner commandRunner)
     {
         Snapshot = snapshot;
+        _commandRunner = commandRunner;
         ReadinessItems = new ObservableCollection<ContributorReadinessItem>(snapshot.ReadinessItems);
         CommandPacks = new ObservableCollection<ContributorCommandPackViewModel>(
             snapshot.CommandPacks.Select(pack => new ContributorCommandPackViewModel(pack)));
         Observations = new ObservableCollection<ContributorObservation>(snapshot.Observations);
+        _runCustomLookupCommand = new AsyncRelayCommand(
+            () => RunContributorCommandAsync("Repo/evidence lookup", CustomEvidenceLookupCommand),
+            CanRunReadOnlyContributorCommand,
+            ex => SetCommandRunResult("Repo/evidence lookup", "Failed", ex.Message));
+        _runCustomAppQaCommand = new AsyncRelayCommand(
+            () => RunContributorCommandAsync("Existing app-card QA map", CustomAppQaCommand),
+            CanRunReadOnlyContributorCommand,
+            ex => SetCommandRunResult("Existing app-card QA map", "Failed", ex.Message));
+        _runAppReadinessCommand = new AsyncRelayCommand(
+            () => RunContributorCommandAsync("App readiness/contracts", "python3 registry-research-framework/scripts/check_app_retest_readiness.py --json"),
+            CanRunReadOnlyContributorCommand,
+            ex => SetCommandRunResult("App readiness/contracts", "Failed", ex.Message));
+        _runVmHealthCommand = new AsyncRelayCommand(
+            () => RunContributorCommandAsync("Certified VM health", CustomVmHealthCommand),
+            CanRunReadOnlyContributorCommand,
+            ex => SetCommandRunResult("Certified VM health", "Failed", ex.Message));
 
         EnableContributorToolsCommand = new RelayCommand(
             _ => AreToolsUnlocked = true,
@@ -143,6 +175,36 @@ public sealed class ContributorLabViewModel : ViewModelBase
 
     public bool HasCustomValueInput => !string.IsNullOrWhiteSpace(CustomValueName);
 
+    public bool IsContributorCommandRunning
+    {
+        get => _isContributorCommandRunning;
+        private set
+        {
+            if (SetProperty(ref _isContributorCommandRunning, value))
+            {
+                RaiseContributorCommandCanExecuteChanged();
+            }
+        }
+    }
+
+    public string CommandRunTitle
+    {
+        get => _commandRunTitle;
+        private set => SetProperty(ref _commandRunTitle, value);
+    }
+
+    public string CommandRunStatus
+    {
+        get => _commandRunStatus;
+        private set => SetProperty(ref _commandRunStatus, value);
+    }
+
+    public string CommandRunOutput
+    {
+        get => _commandRunOutput;
+        private set => SetProperty(ref _commandRunOutput, value);
+    }
+
     public string CustomEvidenceLookupCommand =>
         $"python3 registry-research-framework/scripts/check_single_tweak.py {QuoteArg(CustomValueName)}{BuildExpectedValueArgs(CustomExpectedValues)} --json";
 
@@ -239,6 +301,7 @@ public sealed class ContributorLabViewModel : ViewModelBase
             {
                 OnPropertyChanged(nameof(IsGateVisible));
                 OnPropertyChanged(nameof(IsToolsVisible));
+                RaiseContributorCommandCanExecuteChanged();
             }
         }
     }
@@ -250,6 +313,14 @@ public sealed class ContributorLabViewModel : ViewModelBase
     public RelayCommand EnableContributorToolsCommand { get; }
 
     public ICommand ResetAcknowledgmentCommand { get; }
+
+    public ICommand RunCustomLookupCommand => _runCustomLookupCommand;
+
+    public ICommand RunCustomAppQaCommand => _runCustomAppQaCommand;
+
+    public ICommand RunAppReadinessCommand => _runAppReadinessCommand;
+
+    public ICommand RunVmHealthCommand => _runVmHealthCommand;
 
     public ObservableCollection<ContributorReadinessItem> ReadinessItems { get; }
 
@@ -265,6 +336,67 @@ public sealed class ContributorLabViewModel : ViewModelBase
         OnPropertyChanged(nameof(CustomVmHealthCommand));
         OnPropertyChanged(nameof(CustomVmExperimentCommand));
         OnPropertyChanged(nameof(CustomValueDiscoverySteps));
+        RaiseContributorCommandCanExecuteChanged();
+    }
+
+    private bool CanRunReadOnlyContributorCommand()
+        => AreToolsUnlocked
+           && !IsContributorCommandRunning
+           && Snapshot.RepoRootFound
+           && HasCustomValueInput;
+
+    private async Task RunContributorCommandAsync(string title, string command)
+    {
+        if (!ContributorLabCatalog.IsAllowlistedCommand(command))
+        {
+            SetCommandRunResult(title, "Blocked", "Command is not allowlisted for Contributor Lab.");
+            return;
+        }
+
+        try
+        {
+            IsContributorCommandRunning = true;
+            SetCommandRunResult(title, "Running", command);
+            var result = await _commandRunner.RunAsync(Snapshot.RepoRoot, command).ConfigureAwait(false);
+            var output = string.Join(
+                "\n\n",
+                new[]
+                {
+                    result.StandardOutput,
+                    string.IsNullOrWhiteSpace(result.StandardError) ? string.Empty : "STDERR:\n" + result.StandardError
+                }.Where(static part => !string.IsNullOrWhiteSpace(part)));
+            SetCommandRunResult(
+                title,
+                result.IsSuccess ? "Success" : result.TimedOut ? "Timed out" : $"Exit {result.ExitCode}",
+                TruncateOutput(string.IsNullOrWhiteSpace(output) ? "(no output)" : output));
+        }
+        finally
+        {
+            IsContributorCommandRunning = false;
+        }
+    }
+
+    private void SetCommandRunResult(string title, string status, string output)
+    {
+        CommandRunTitle = title;
+        CommandRunStatus = status;
+        CommandRunOutput = output;
+    }
+
+    private void RaiseContributorCommandCanExecuteChanged()
+    {
+        _runCustomLookupCommand.RaiseCanExecuteChanged();
+        _runCustomAppQaCommand.RaiseCanExecuteChanged();
+        _runAppReadinessCommand.RaiseCanExecuteChanged();
+        _runVmHealthCommand.RaiseCanExecuteChanged();
+    }
+
+    private static string TruncateOutput(string output)
+    {
+        const int maxLength = 20000;
+        return output.Length <= maxLength
+            ? output
+            : output[..maxLength] + "\n\n... output truncated in Contributor Lab preview ...";
     }
 
     private static string BuildExpectedValueArgs(string values)

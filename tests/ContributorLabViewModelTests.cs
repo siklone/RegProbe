@@ -1,5 +1,7 @@
 using System;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 using RegProbe.Application.Services;
 using RegProbe.App.ViewModels;
 
@@ -50,6 +52,16 @@ public sealed class ContributorLabViewModelTests : IDisposable
             "python3 registry-research-framework/scripts/check_single_tweak.py Foo --json; del C:\\important"));
         Assert.False(ContributorLabCatalog.IsAllowlistedCommand(
             "python3 registry-research-framework/scripts/check_single_tweak.py Foo --json\ncmd.exe /c del C:\\important"));
+    }
+
+    [Fact]
+    public void CommandRunner_SplitsQuotedRegistryPathsWithoutDroppingBackslashes()
+    {
+        var tokens = ContributorLabCommandRunner.SplitCommandLine(
+            "python3 scripts/vm-kvm/run-guest-registry-value-experiment.py --registry-path \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" --value-name \"TimerCheckFlags\"");
+
+        Assert.Contains("HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power", tokens);
+        Assert.Contains("TimerCheckFlags", tokens);
     }
 
     [Fact]
@@ -136,6 +148,50 @@ public sealed class ContributorLabViewModelTests : IDisposable
                                                                   && step.MutatesGuest
                                                                   && step.RequiresCertifiedVm
                                                                   && step.Command.Contains("--value-name \"TimerCheckFlags\"", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public async Task ReadOnlyRunner_RunsAllowlistedCustomLookupAfterGateUnlock()
+    {
+        var runner = new FakeContributorCommandRunner(new ContributorCommandRunResult(
+            ExitCode: 0,
+            StandardOutput: "{\"status\":\"ok\",\"matched\":true}",
+            StandardError: string.Empty,
+            TimedOut: false));
+        var viewModel = new ContributorLabViewModel(CreateSnapshot(), runner)
+        {
+            CustomValueName = "TimerCheckFlags",
+            CustomExpectedValues = "0, 1"
+        };
+
+        Assert.False(viewModel.RunCustomLookupCommand.CanExecute(null));
+        viewModel.RiskAcknowledged = true;
+        viewModel.EnableContributorToolsCommand.Execute(null);
+        Assert.True(viewModel.RunCustomLookupCommand.CanExecute(null));
+
+        await ((IAsyncCommand)viewModel.RunCustomLookupCommand).ExecuteAsync();
+
+        Assert.Equal("Repo/evidence lookup", viewModel.CommandRunTitle);
+        Assert.Equal("Success", viewModel.CommandRunStatus);
+        Assert.Contains("\"matched\":true", viewModel.CommandRunOutput, StringComparison.Ordinal);
+        Assert.Contains("check_single_tweak.py \"TimerCheckFlags\"", runner.LastCommand, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public async Task ReadOnlyRunner_BlocksWhenGeneratedCommandIsNotAllowlisted()
+    {
+        var viewModel = new ContributorLabViewModel(CreateSnapshot(), new FakeContributorCommandRunner(
+            new ContributorCommandRunResult(0, "should-not-run", string.Empty, TimedOut: false)))
+        {
+            CustomValueName = "Bad;Command"
+        };
+        viewModel.RiskAcknowledged = true;
+        viewModel.EnableContributorToolsCommand.Execute(null);
+
+        await ((IAsyncCommand)viewModel.RunCustomLookupCommand).ExecuteAsync();
+
+        Assert.Equal("Blocked", viewModel.CommandRunStatus);
+        Assert.Contains("not allowlisted", viewModel.CommandRunOutput, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]
@@ -341,4 +397,25 @@ public sealed class ContributorLabViewModelTests : IDisposable
             ReadinessItems: Array.Empty<ContributorReadinessItem>(),
             CommandPacks: Array.Empty<ContributorCommandPack>(),
             Observations: Array.Empty<ContributorObservation>());
+
+    private sealed class FakeContributorCommandRunner : IContributorLabCommandRunner
+    {
+        private readonly ContributorCommandRunResult _result;
+
+        public FakeContributorCommandRunner(ContributorCommandRunResult result)
+        {
+            _result = result;
+        }
+
+        public string LastCommand { get; private set; } = string.Empty;
+
+        public Task<ContributorCommandRunResult> RunAsync(
+            string repoRoot,
+            string command,
+            CancellationToken cancellationToken = default)
+        {
+            LastCommand = command;
+            return Task.FromResult(_result);
+        }
+    }
 }
