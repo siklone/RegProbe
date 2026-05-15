@@ -327,7 +327,7 @@ def build_artifact_map(repo_root: Path = REPO_ROOT) -> dict[str, Any]:
             path="registry-research-framework/audit/operator96-low-noise-rerun-aggregate-20260512.json",
             audience="contributor, research",
             tier="canonical-research",
-            purpose="Low-noise aggregate for custom registry value experiments. The file keeps the legacy operator96 artifact name for compatibility only.",
+            purpose="Low-noise aggregate for custom registry value experiments. The path keeps a legacy campaign filename for compatibility only.",
             use_when="You need to know whether noisy/non-ok reruns remain.",
             avoid_when="You are building normal end-user app cards.",
             status=op96_aggregate_status,
@@ -452,7 +452,7 @@ def build_artifact_map(repo_root: Path = REPO_ROOT) -> dict[str, Any]:
         "summary": summary,
         "rules": {
             "end_user_surface": "Normal users start from the WPF app and validated app-surface records, not raw audit folders.",
-            "custom_value_surface": "Custom registry value experiments remain Contributor Lab / research observations unless ready_for_bounded_app_card is positive and all gates stay clean. operator96 is a legacy file/campaign ID, not product branding.",
+            "custom_value_surface": "Custom registry value experiments remain Contributor Lab / research observations unless ready_for_bounded_app_card is positive and all gates stay clean. Legacy file names in artifact paths are not product branding.",
             "cleanup": "Do not delete archived/raw evidence unless the cleanup quarantine ledger reports live_reference_count=0 and a replacement or explicit obsolete reason exists. Use the retained inventory plan to reduce references before deletion.",
             "performance_claims": "No benchmark/performance claim ships from a single noisy, low-confidence, or community-only observation.",
         },

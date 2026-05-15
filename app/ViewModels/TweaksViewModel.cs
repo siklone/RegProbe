@@ -233,9 +233,9 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public int TotalTweaksAvailable => _presentationState.TotalTweaksAvailable;
 
-    public int SettingsWorkspaceCount => Tweaks.Count(t => t.ShowInApp && GetWorkspaceKind(t) == ConfigurationWorkspaceKind.Settings);
+    public int SettingsWorkspaceCount => Tweaks.Count(t => t.IsEndUserAppCardAllowed && GetWorkspaceKind(t) == ConfigurationWorkspaceKind.Settings);
 
-    public int MaintenanceWorkspaceCount => Tweaks.Count(t => t.ShowInApp && GetWorkspaceKind(t) == ConfigurationWorkspaceKind.Maintenance);
+    public int MaintenanceWorkspaceCount => Tweaks.Count(t => t.IsEndUserAppCardAllowed && GetWorkspaceKind(t) == ConfigurationWorkspaceKind.Maintenance);
 
     public int CurrentWorkspaceItemCount => SelectedWorkspace == ConfigurationWorkspaceKind.Maintenance
         ? MaintenanceWorkspaceCount
@@ -776,9 +776,9 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private void RefreshSummaryStats()
     {
         _presentationState.SetInventoryCounts(
-            Tweaks.Count(t => t.ShowInApp),
-            Tweaks.Count(t => t.ShowInApp && t.IsApplied),
-            Tweaks.Count(t => t.ShowInApp && t.WasRolledBack));
+            Tweaks.Count(t => t.IsEndUserAppCardAllowed),
+            Tweaks.Count(t => t.IsEndUserAppCardAllowed && t.IsApplied),
+            Tweaks.Count(t => t.IsEndUserAppCardAllowed && t.WasRolledBack));
         RaiseWorkspaceMetricsChanged();
         _inventoryCoordinator.UpdateStatusMessage(Tweaks);
         _selectedTweakPane.NotifySelectionStateChanged();
@@ -790,19 +790,19 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         {
             return RepairsRowsView.Cast<RepairsItemViewModel>()
                 .Select(row => row.Source)
-                .Where(t => t.ShowInApp)
+                .Where(t => t.IsEndUserAppCardAllowed)
                 .ToList();
         }
 
         return TweaksView.Cast<TweakItemViewModel>()
-            .Where(t => t.ShowInApp)
+            .Where(t => t.IsEndUserAppCardAllowed)
             .ToList();
     }
 
     private List<TweakItemViewModel> GetVisibleSettingsTweaks()
     {
         return TweaksView.Cast<TweakItemViewModel>()
-            .Where(t => t.ShowInApp)
+            .Where(t => t.IsEndUserAppCardAllowed)
             .ToList();
     }
 

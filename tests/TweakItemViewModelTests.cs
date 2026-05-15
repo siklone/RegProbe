@@ -153,6 +153,7 @@ public sealed class TweakItemViewModelTests
 
         Assert.False(viewModel.IsEndUserAppCardAllowed);
         Assert.False(evaluator.FilterTweak(viewModel));
+        Assert.False(evaluator.CurrentWorkspaceContainsCategory(new[] { viewModel }, viewModel.Category));
     }
 
     [Fact]

@@ -1,6 +1,6 @@
 # Custom Registry Value App Surface Review
 
-- Generated UTC: `2026-05-14T23:42:13Z`
+- Generated UTC: `2026-05-15T12:57:08Z`
 - Matrix: `registry-research-framework/audit/operator96-enriched-value-matrix-20260510.json`
 - Aggregate: `registry-research-framework/audit/operator96-low-noise-rerun-aggregate-20260512.json`
 - Records: `96`
@@ -14,7 +14,7 @@
 ## Policy
 
 - Only ready_for_bounded_app_card may enter the app surface without another VM campaign.
-- Clean custom registry value experiment records that are not ready_for_bounded_app_card are Contributor Lab research observations, not end-user optimization cards. operator96 is the legacy artifact ID for the current seed batch.
+- Clean custom registry value experiment records that are not ready_for_bounded_app_card are Contributor Lab research observations, not end-user optimization cards.
 - Low-confidence, harmful, noisy, or host-noise-unknown experiments are observations only.
 - needs_low_noise_rerun means host noise was not clean; not_app_surface_ready means the run was clean enough to store but not positive/bounded enough to ship.
 - Aggregate non_ok or noisy_result_count greater than zero blocks all custom value app surfacing until a clean rerun exists.
