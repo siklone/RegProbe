@@ -1,6 +1,6 @@
 # Cleanup Quarantine Ledger
 
-Generated: `2026-05-14T18:54:10Z`
+Generated: `2026-05-15T11:08:46Z`
 
 Quarantine ledger for cleanup review inventory. Only delete-candidate rows are cleanup candidates; retained rows are not deletion candidates.
 
@@ -20,8 +20,8 @@ Quarantine ledger for cleanup review inventory. Only delete-candidate rows are c
 | Delete candidates | 0 |
 | Retained inventory items | 89 |
 | Referenced items | 89 |
-| Blocking referenced items | 65 |
-| Audit-only referenced items | 24 |
+| Blocking referenced items | 66 |
+| Audit-only referenced items | 23 |
 | Delete eligible after review | 0 |
 | Total sampled size bytes | 678702358 |
 
@@ -30,17 +30,17 @@ Quarantine ledger for cleanup review inventory. Only delete-candidate rows are c
 | Category | Count |
 |---|---:|
 | `audit-archive-named-sample` | 10 |
+| `custom-value-superseded-pilot` | 4 |
 | `large-raw-trace-sample` | 25 |
 | `old-dated-audit-output-sample` | 25 |
-| `operator96-superseded-pilot` | 4 |
 | `vm-tooling-staging-oldest-sample` | 25 |
 
 ## Cleanup Statuses
 
 | Status | Count | Meaning |
 |---|---:|---|
-| `retained-audit-trail-reference` | 24 | Not a deletion candidate yet; only audit/history references point at it. |
-| `retained-live-reference` | 65 | Not a deletion candidate; real blocking references still point at it. |
+| `retained-audit-trail-reference` | 23 | Not a deletion candidate yet; only audit/history references point at it. |
+| `retained-live-reference` | 66 | Not a deletion candidate; real blocking references still point at it. |
 
 ## Delete Candidates
 
@@ -54,10 +54,10 @@ Rows here were inspected by the cleanup scanner but are not deletion candidates.
 
 | Path | Status | Category | Live refs | Blocking refs | Audit refs | Action | Reason |
 |---|---|---|---:|---:|---:|---|---|
-| `registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.json` | `retained-live-reference` | `operator96-superseded-pilot` | 9 | 5 | 4 | `keep-referenced` | pilot artifact superseded by full operator96 baseline, but referenced as safety example |
-| `registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.md` | `retained-live-reference` | `operator96-superseded-pilot` | 9 | 5 | 4 | `keep-referenced` | pilot artifact superseded by full operator96 baseline, but referenced as safety example |
-| `registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.json` | `retained-live-reference` | `operator96-superseded-pilot` | 11 | 7 | 4 | `keep-referenced` | pilot artifact superseded by full operator96 baseline, but referenced as safety example |
-| `registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.md` | `retained-live-reference` | `operator96-superseded-pilot` | 11 | 7 | 4 | `keep-referenced` | pilot artifact superseded by full operator96 baseline, but referenced as safety example |
+| `registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.json` | `retained-live-reference` | `custom-value-superseded-pilot` | 9 | 5 | 4 | `keep-referenced` | pilot artifact superseded by the full custom registry value baseline, but referenced as safety example |
+| `registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.md` | `retained-live-reference` | `custom-value-superseded-pilot` | 9 | 5 | 4 | `keep-referenced` | pilot artifact superseded by the full custom registry value baseline, but referenced as safety example |
+| `registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.json` | `retained-live-reference` | `custom-value-superseded-pilot` | 11 | 7 | 4 | `keep-referenced` | pilot artifact superseded by the full custom registry value baseline, but referenced as safety example |
+| `registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.md` | `retained-live-reference` | `custom-value-superseded-pilot` | 11 | 7 | 4 | `keep-referenced` | pilot artifact superseded by the full custom registry value baseline, but referenced as safety example |
 | `evidence/files/vm-tooling-staging/defender-cloud-demo-extracted` | `retained-audit-trail-reference` | `vm-tooling-staging-oldest-sample` | 4 | 0 | 4 | `delete-after-review` | staging diagnostic bundle duplicated by canonical evidence/raw artifact |
 | `evidence/files/vm-tooling-staging/showinfotip-1-hits.csv..md` | `retained-audit-trail-reference` | `vm-tooling-staging-oldest-sample` | 4 | 0 | 4 | `delete-after-review` | staging diagnostic bundle duplicated by canonical evidence/raw artifact |
 | `evidence/files/vm-tooling-staging/showsuperhidden-1-hits.csv..md` | `retained-audit-trail-reference` | `vm-tooling-staging-oldest-sample` | 4 | 0 | 4 | `delete-after-review` | staging diagnostic bundle duplicated by canonical evidence/raw artifact |
@@ -65,7 +65,7 @@ Rows here were inspected by the cleanup scanner but are not deletion candidates.
 | `evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md` | `retained-audit-trail-reference` | `vm-tooling-staging-oldest-sample` | 4 | 0 | 4 | `delete-after-review` | staging diagnostic bundle duplicated by canonical evidence/raw artifact |
 | `evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md` | `retained-audit-trail-reference` | `vm-tooling-staging-oldest-sample` | 4 | 0 | 4 | `delete-after-review` | staging diagnostic bundle duplicated by canonical evidence/raw artifact |
 | `evidence/files/vm-tooling-staging/ghidra-probes` | `retained-live-reference` | `vm-tooling-staging-oldest-sample` | 6 | 2 | 4 | `keep-pending-review` | staging diagnostic bundle; verify no record/evidence-index dependency before deletion |
-| `evidence/files/vm-tooling-staging/beep_start_toggle_out.txt` | `retained-audit-trail-reference` | `vm-tooling-staging-oldest-sample` | 4 | 0 | 4 | `delete-after-review` | staging diagnostic bundle duplicated by canonical evidence/raw artifact |
+| `evidence/files/vm-tooling-staging/beep_start_toggle_out.txt` | `retained-live-reference` | `vm-tooling-staging-oldest-sample` | 5 | 1 | 4 | `delete-after-review` | staging diagnostic bundle duplicated by canonical evidence/raw artifact |
 | `evidence/files/vm-tooling-staging/crossdevice_resume_probe.csv` | `retained-audit-trail-reference` | `vm-tooling-staging-oldest-sample` | 4 | 0 | 4 | `delete-after-review` | staging diagnostic bundle duplicated by canonical evidence/raw artifact |
 | `evidence/files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118` | `retained-audit-trail-reference` | `vm-tooling-staging-oldest-sample` | 4 | 0 | 4 | `delete-after-review` | staging diagnostic bundle duplicated by canonical evidence/raw artifact |
 | `evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845` | `retained-audit-trail-reference` | `vm-tooling-staging-oldest-sample` | 4 | 0 | 4 | `delete-after-review` | staging diagnostic bundle duplicated by canonical evidence/raw artifact |

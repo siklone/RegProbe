@@ -170,12 +170,13 @@ class ResearchArtifactMapTests(unittest.TestCase):
             by_id = {item["id"]: item for item in payload["artifacts"]}
 
             self.assertEqual(payload["summary"]["attention_count"], 0)
-            self.assertEqual(payload["summary"]["operator96_noisy_result_count"], 0)
-            self.assertEqual(payload["summary"]["operator96_normal_app_card_ready"], 0)
-            self.assertEqual(by_id["operator96-low-noise-aggregate"]["status"], "ok")
-            self.assertEqual(by_id["operator96-app-surface-review"]["status"], "research-only-ok")
+            self.assertEqual(payload["summary"]["custom_value_noisy_result_count"], 0)
+            self.assertEqual(payload["summary"]["custom_value_normal_app_card_ready"], 0)
+            self.assertEqual(by_id["custom-value-low-noise-aggregate"]["status"], "ok")
+            self.assertEqual(by_id["custom-value-app-surface-review"]["status"], "research-only-ok")
             self.assertEqual(by_id["cleanup-quarantine-ledger"]["status"], "no-delete-eligible")
             self.assertEqual(by_id["cleanup-quarantine-ledger"]["details"]["delete_candidate_count"], 0)
+            self.assertEqual(by_id["cleanup-quarantine-ledger"]["details"]["review_inventory_count"], 1)
             self.assertEqual(by_id["cleanup-quarantine-ledger"]["details"]["retained_inventory_count"], 1)
             self.assertEqual(by_id["cleanup-quarantine-ledger"]["details"]["blocking_referenced_count"], 1)
             self.assertEqual(by_id["cleanup-retained-inventory-plan"]["status"], "retained-plan-ready")
@@ -265,8 +266,8 @@ class ResearchArtifactMapTests(unittest.TestCase):
             payload = self.module.build_artifact_map(repo)
             by_id = {item["id"]: item for item in payload["artifacts"]}
 
-            self.assertEqual(by_id["operator96-low-noise-aggregate"]["status"], "attention")
-            self.assertEqual(payload["summary"]["operator96_noisy_result_count"], 1)
+            self.assertEqual(by_id["custom-value-low-noise-aggregate"]["status"], "attention")
+            self.assertEqual(payload["summary"]["custom_value_noisy_result_count"], 1)
             self.assertEqual(payload["summary"]["attention_count"], 1)
 
 

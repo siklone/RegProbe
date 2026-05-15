@@ -125,8 +125,8 @@ def summarize_operator96_surface(repo_root: Path) -> tuple[str, dict[str, Any]]:
 
 
 def summarize_cleanup_ledger(repo_root: Path) -> tuple[str, dict[str, Any]]:
-    candidates = sorted((repo_root / "registry-research-framework" / "audit").glob("cleanup-quarantine-ledger-*.json"))
-    path = candidates[-1] if candidates else repo_root / "registry-research-framework" / "audit" / "cleanup-quarantine-ledger-20260514.json"
+    ledgers = sorted((repo_root / "registry-research-framework" / "audit").glob("cleanup-quarantine-ledger-*.json"))
+    path = ledgers[-1] if ledgers else repo_root / "registry-research-framework" / "audit" / "cleanup-quarantine-ledger-20260514.json"
     payload = load_json(path)
     summary = payload.get("summary") if isinstance(payload.get("summary"), dict) else {}
     delete_eligible = int(summary.get("delete_eligible_count") or 0)
@@ -134,6 +134,7 @@ def summarize_cleanup_ledger(repo_root: Path) -> tuple[str, dict[str, Any]]:
     return status_from_bool(ok, ok_label="no-delete-eligible", fail_label="review-delete-eligible"), {
         "ledger_path": rel(path, repo_root) if path.exists() else rel(path, repo_root),
         "total_items": summary.get("total_items"),
+        "review_inventory_count": summary.get("total_items"),
         "delete_candidate_count": summary.get("delete_candidate_count"),
         "retained_inventory_count": summary.get("retained_inventory_count"),
         "referenced_count": summary.get("referenced_count"),
@@ -322,18 +323,18 @@ def build_artifact_map(repo_root: Path = REPO_ROOT) -> dict[str, Any]:
             status="reference",
         ),
         static_artifact(
-            artifact_id="operator96-low-noise-aggregate",
+            artifact_id="custom-value-low-noise-aggregate",
             path="registry-research-framework/audit/operator96-low-noise-rerun-aggregate-20260512.json",
             audience="contributor, research",
             tier="canonical-research",
-            purpose="Low-noise aggregate for custom registry value experiments. The legacy artifact ID is operator96.",
+            purpose="Low-noise aggregate for custom registry value experiments. The file keeps the legacy operator96 artifact name for compatibility only.",
             use_when="You need to know whether noisy/non-ok reruns remain.",
             avoid_when="You are building normal end-user app cards.",
             status=op96_aggregate_status,
             details=op96_aggregate,
         ),
         static_artifact(
-            artifact_id="operator96-app-surface-review",
+            artifact_id="custom-value-app-surface-review",
             path="registry-research-framework/audit/operator96-app-surface-review-20260510.json",
             audience="contributor, research",
             tier="canonical-research",
@@ -348,7 +349,7 @@ def build_artifact_map(repo_root: Path = REPO_ROOT) -> dict[str, Any]:
             path=str(cleanup.get("ledger_path") or "registry-research-framework/audit/cleanup-quarantine-ledger-20260514.json"),
             audience="maintainer, contributor",
             tier="canonical-safety-ledger",
-            purpose="Deletion-first safety gate for stale reports, raw traces, old parses, and staging bundles.",
+            purpose="Review-inventory safety ledger for stale reports, raw traces, old parses, and staging bundles. Only delete-candidate rows are deletion candidates.",
             use_when="Before deleting or moving any archived/raw evidence or historical parse artifact.",
             avoid_when="You are looking for shipped app state; use app-surface/readiness artifacts.",
             status=cleanup_status,
@@ -426,6 +427,9 @@ def build_artifact_map(repo_root: Path = REPO_ROOT) -> dict[str, Any]:
         "artifact_count": len(artifacts),
         "attention_count": len(attention),
         "normal_app_cards_source": "Docs/research/app-surface/validated-registry-values.json",
+        "custom_value_normal_app_card_ready": op96_surface.get("ready_for_bounded_app_card"),
+        "custom_value_non_ok_count": op96_aggregate.get("non_ok_count"),
+        "custom_value_noisy_result_count": op96_aggregate.get("noisy_result_count"),
         "operator96_normal_app_card_ready": op96_surface.get("ready_for_bounded_app_card"),
         "operator96_non_ok_count": op96_aggregate.get("non_ok_count"),
         "operator96_noisy_result_count": op96_aggregate.get("noisy_result_count"),
@@ -448,7 +452,7 @@ def build_artifact_map(repo_root: Path = REPO_ROOT) -> dict[str, Any]:
         "summary": summary,
         "rules": {
             "end_user_surface": "Normal users start from the WPF app and validated app-surface records, not raw audit folders.",
-            "operator96_surface": "Custom registry value experiments remain Contributor Lab / research observations unless ready_for_bounded_app_card is positive and all gates stay clean. operator96 is a legacy artifact ID, not product branding.",
+            "custom_value_surface": "Custom registry value experiments remain Contributor Lab / research observations unless ready_for_bounded_app_card is positive and all gates stay clean. operator96 is a legacy file/campaign ID, not product branding.",
             "cleanup": "Do not delete archived/raw evidence unless the cleanup quarantine ledger reports live_reference_count=0 and a replacement or explicit obsolete reason exists. Use the retained inventory plan to reduce references before deletion.",
             "performance_claims": "No benchmark/performance claim ships from a single noisy, low-confidence, or community-only observation.",
         },
@@ -481,8 +485,8 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- App-card contracts: `{summary.get('app_card_contract_pass_count')}` pass, `{summary.get('app_card_contract_fail_count')}` fail.",
         f"- Promoted app QA latest: `{summary.get('promoted_app_qa_live_success_count')}` live success, `{summary.get('promoted_app_qa_live_failure_count')}` live failure.",
         f"- Contributor Lab VM smoke: `{summary.get('contributor_lab_smoke_status')}`.",
-        f"- Custom value app-card ready: `{summary.get('operator96_normal_app_card_ready')}`.",
-        f"- Custom value noisy results: `{summary.get('operator96_noisy_result_count')}`; non-ok results: `{summary.get('operator96_non_ok_count')}`.",
+        f"- Custom value app-card ready: `{summary.get('custom_value_normal_app_card_ready')}`.",
+        f"- Custom value noisy results: `{summary.get('custom_value_noisy_result_count')}`; non-ok results: `{summary.get('custom_value_non_ok_count')}`.",
         f"- Cleanup delete-eligible items: `{summary.get('cleanup_delete_eligible_count')}`.",
         f"- Cleanup retained inventory: `{summary.get('cleanup_retained_inventory_count')}`; active actions: `{summary.get('cleanup_active_action_count')}`; reference migration needed: `{summary.get('cleanup_reference_migration_needed_count')}`; retention decision queue: `{summary.get('cleanup_retention_decision_queue_count')}`; audit-only retained: `{summary.get('cleanup_audit_only_retained_count')}`.",
         "",
