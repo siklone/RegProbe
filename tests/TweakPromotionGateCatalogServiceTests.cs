@@ -25,11 +25,12 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
               "evaluator_version": "3.6.0",
               "generated_utc": "2026-04-09T12:00:00Z",
               "summary": {
-                "total_records": 5,
+                "total_records": 6,
                 "promotion_state_counts": {
                   "blocked": 1,
                   "promoted": 3,
-                  "revalidation-pending": 1
+                  "revalidation-pending": 1,
+                  "intentional-hold": 1
                 }
               },
               "entries": [
@@ -132,6 +133,22 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
                     "revalidation_needed": true,
                     "stale_reason": "explicit hold"
                   }
+                },
+                {
+                  "candidate_id": "legacy.intentional-hold",
+                  "record_id": "legacy.intentional-hold",
+                  "tweak_id": "legacy.intentional-hold",
+                  "tweak_origin": "legacy-curated",
+                  "promotion_state": "intentional-hold",
+                  "promotion_blockers": ["manual-review"],
+                  "record_promotion_allowed": false,
+                  "tweak_ingest_allowed": true,
+                  "apply_allowed": false,
+                  "app_mapping_status": "hold",
+                  "next_missing_layer": "intentional-hold",
+                  "debug_override_allowed": true,
+                  "schema_compatibility_mode": "native",
+                  "evaluator_version": "3.6.0"
                 }
               ]
             }
@@ -252,6 +269,25 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
 
         Assert.False(decision.Allowed);
         Assert.Equal("promotion-state:promoted", decision.Message);
+    }
+
+    [Fact]
+    public void ApplyRequest_RejectsIntentionalHoldEvenWhenLegacyCurated()
+    {
+        var service = new TweakPromotionGateCatalogService(_docsRoot);
+
+        var denied = service.EvaluateApplyRequest("legacy.intentional-hold");
+        var overrideAttempt = service.EvaluateApplyRequest(
+            "legacy.intentional-hold",
+            overrideRequested: true,
+            overrideReason: "debug",
+            contributorMode: true);
+
+        Assert.False(denied.Allowed);
+        Assert.Equal("promotion-state:intentional-hold", denied.Message);
+        Assert.False(overrideAttempt.Allowed);
+        Assert.False(overrideAttempt.OverrideUsed);
+        Assert.Equal("promotion-state:intentional-hold", overrideAttempt.Message);
     }
 
     [Fact]

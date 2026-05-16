@@ -112,6 +112,37 @@ public sealed class TweakEvidenceClassCatalogServiceTests : IDisposable
         Assert.NotNull(clone.UpstreamLineage);
         Assert.Contains("Catalog-only source context is not a value-semantics proof", clone.UpstreamLineage!.Summary, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("Docs, Runtime, and Rollback", clone.UpstreamLineage.Summary, StringComparison.OrdinalIgnoreCase);
+        Assert.Empty(clone.UpstreamLineage.PrimarySourceText);
+    }
+
+    [Fact]
+    public void Store_DoesNotPromoteCatalogLinkAsPrimarySourceText()
+    {
+        var store = new TweakEvidenceClassCatalogStore(_docsRoot);
+        var clone = store.CloneWithResolvedLinks(new TweakEvidenceClassEntry
+        {
+            RecordId = "system.catalog-link-only",
+            TweakId = "system.catalog-link-only",
+            UpstreamLineage = new TweakEvidenceProofBlock
+            {
+                Summary = "No upstream nohuto source link is attached to this record.",
+                HasNohutoLineage = false,
+                Links =
+                {
+                    new TweakEvidenceLink
+                    {
+                        Title = "Catalog entry",
+                        Url = "Docs/research/evidence-atlas.md",
+                        Kind = "catalog"
+                    }
+                }
+            }
+        });
+
+        Assert.NotNull(clone.UpstreamLineage);
+        Assert.Single(clone.UpstreamLineage!.Links);
+        Assert.Equal("catalog", clone.UpstreamLineage.Links[0].Kind);
+        Assert.Empty(clone.UpstreamLineage.PrimarySourceText);
     }
 
     [Fact]

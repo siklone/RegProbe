@@ -163,6 +163,51 @@ public sealed class TweakItemViewModelTests
     }
 
     [Fact]
+    public void LegacyCuratedIntentionalHold_IsStillReviewOnly()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new TestTweak("security.legacy-hold-gate-test");
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false);
+
+        viewModel.ApplyEvidenceClassification(new TweakEvidenceClassEntry
+        {
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            EvidenceClass = "A",
+            ClassLabel = "Class A",
+            ClassTitle = "Ready",
+            ClassDescription = "Ready for app surface",
+            ActionState = "actionable",
+            GatingReason = string.Empty,
+            IsActionable = true,
+            ShowInApp = true,
+        });
+        viewModel.ApplyResearchPromotionGate(new TweakPromotionGateEntry
+        {
+            CandidateId = tweak.Id,
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            TweakOrigin = "legacy-curated",
+            PromotionState = "intentional-hold",
+            PromotionBlockers = new List<string> { "manual-review" },
+            RecordPromotionAllowed = false,
+            TweakIngestAllowed = true,
+            ApplyAllowed = false,
+            AppMappingStatus = "hold",
+            NextMissingLayer = "intentional-hold",
+            DebugOverrideAllowed = true,
+        });
+        var evaluator = new WorkspaceFilterEvaluator(new TweaksShellStateViewModel());
+
+        Assert.False(viewModel.IsPromotionActionable);
+        Assert.False(viewModel.IsMutationAllowed);
+        Assert.False(viewModel.IsEndUserAppCardAllowed);
+        Assert.Equal("Review only", viewModel.PrimaryActionDisplayText);
+        Assert.False(viewModel.ApplyCommand.CanExecute(null));
+        Assert.False(evaluator.FilterTweak(viewModel));
+    }
+
+    [Fact]
     public void SourceSnapshot_TreatsCatalogOnlySummary_AsPartialNotReady()
     {
         var pipeline = new TweakExecutionPipeline(new RecordingLogger());
@@ -192,6 +237,49 @@ public sealed class TweakItemViewModelTests
         Assert.Equal("partial", viewModel.SourceSnapshotState);
         var sourceLane = Assert.Single(viewModel.ProofLanes, lane => lane.Key == "source");
         Assert.False(sourceLane.HasLinks);
+        Assert.Contains("Catalog-only source context", sourceLane.Summary, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public void SourceSnapshot_DoesNotTreatCatalogLinkAsSourceProof()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new TestTweak("system.catalog-link-source");
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false);
+
+        viewModel.ApplyEvidenceClassification(new TweakEvidenceClassEntry
+        {
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            EvidenceClass = "A",
+            ClassLabel = "Class A",
+            ClassTitle = "Ready",
+            ClassDescription = "Ready for app surface",
+            ActionState = "actionable",
+            GatingReason = string.Empty,
+            IsActionable = true,
+            ShowInApp = true,
+            UpstreamLineage = new TweakEvidenceProofBlock
+            {
+                Summary = PublicEvidenceLinkPolicy.NoLocalSourceMessage,
+                HasNohutoLineage = false,
+                Links =
+                {
+                    new TweakEvidenceLink
+                    {
+                        Title = "Catalog entry",
+                        Url = "Docs/research/evidence-atlas.md",
+                        Kind = "catalog"
+                    }
+                }
+            }
+        });
+
+        Assert.False(viewModel.HasUpstreamLineage);
+        Assert.Equal("partial", viewModel.SourceSnapshotState);
+        var sourceLane = Assert.Single(viewModel.ProofLanes, lane => lane.Key == "source");
+        Assert.False(sourceLane.HasLinks);
+        Assert.DoesNotContain(sourceLane.Links, link => link.Kind == ReferenceLinkKind.Catalog);
         Assert.Contains("Catalog-only source context", sourceLane.Summary, StringComparison.OrdinalIgnoreCase);
     }
 
