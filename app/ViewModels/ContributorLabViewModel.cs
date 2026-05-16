@@ -82,7 +82,7 @@ public sealed class ContributorLabViewModel : ViewModelBase
 
     public string Title => "Contributor Lab";
 
-    public string Subtitle => "Windows-first research workspace for contributors and agentic AI. Normal users should stay in Tweaks.";
+    public string Subtitle => "Windows-first single key/value evidence workspace for contributors and agentic AI. Normal users should stay in Tweaks.";
 
     public string VerificationBadge => Snapshot.VerificationBadge;
 

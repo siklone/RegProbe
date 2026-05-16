@@ -211,7 +211,7 @@
                                        Style="{StaticResource UtilitySectionTitleTextStyle}"/>
                             <TextBlock Margin="0,8,0,0"
                                        Style="{StaticResource UtilitySectionBodyTextStyle}"
-                                       Text="This area is for people validating registry behavior with disposable VMs, snapshots, and reproducible scripts. It can lead to registry mutation, guest reboot, broken boot states, or noisy benchmark data if used casually."/>
+                                       Text="This area is for people validating user-supplied registry keys and values with disposable VMs, snapshots, and reproducible scripts. It can lead to registry mutation, guest reboot, broken boot states, or noisy benchmark data if used casually."/>
                             <TextBlock Margin="0,8,0,0"
                                        Style="{StaticResource UtilitySectionBodyTextStyle}"
                                        Text="Normal RegProbe users should use Tweaks. Contributor Lab data is research context unless it is reference-eligible and backed by clean VM artifacts."/>
