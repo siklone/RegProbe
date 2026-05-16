@@ -60,7 +60,7 @@
         "RollbackStoryText": "Rollback: Verified via record-restore-story.",
         "HasClaimBoundary": true,
         "WhatWeKnowSummary": "Claim: These settings affect whether TCP/IP task offloads stay enabled and how MMCSS reserves CPU for multimedia work. Evidence: DisableTaskOffload remains covered by the separate Microsoft task-offload page. This validation proof focuses on the narrower MMCSS claim for SystemResponsiveness: path plus rounding/clamping behavior. The opaque NetworkThrottlingIndex write remains only in... Rollback: Rollback: Verified via record-restore-story.",
-        "WhatWeDoNotClaimSummary": "Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "WhatWeDoNotClaimSummary": "Source boundary: Source links are discovery and naming context only. They are not value-semantics proof; app safety comes from Docs, Runtime, and Rollback.",
         "ProofLanes": [
           {
             "Key": "docs",
@@ -80,7 +80,7 @@
             "Key": "source",
             "Label": "SOURCE",
             "State": "ready",
-            "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+            "Summary": "Source links are discovery and naming context only. They are not value-semantics proof; app safety comes from Docs, Runtime, and Rollback.",
             "Source": "win-config / system/desc.md: https://github.com/nohuto/win-config/blob/main/system/desc.md"
           },
           {
@@ -92,6 +92,11 @@
           }
         ],
         "ReferenceLinks": [
+          {
+            "Title": "Windows Internals resource page",
+            "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+            "Kind": "Docs"
+          },
           {
             "Title": "Docs: Details",
             "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#power.disable-network-power-saving.policy",
@@ -121,7 +126,7 @@
               "Action": "Detect",
               "StatusText": "Detected",
               "Message": "Detected 1 of 2 values (matches: 0, missing: 1).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\SystemResponsiveness: 20 -> 10\n- HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters\\DisableTaskOffload: missing",
-              "TimestampText": "13:20:44"
+              "TimestampText": "14:20:06"
             },
             {
               "Action": "Apply",
@@ -159,19 +164,19 @@
               "Action": "Detect",
               "StatusText": "Detected",
               "Message": "Detected 1 of 2 values (matches: 0, missing: 1).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\SystemResponsiveness: 20 -> 10\n- HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters\\DisableTaskOffload: missing",
-              "TimestampText": "13:20:44"
+              "TimestampText": "14:20:06"
             },
             {
               "Action": "Apply",
               "StatusText": "Applied",
               "Message": "Updated 2 values.",
-              "TimestampText": "13:20:47"
+              "TimestampText": "14:20:14"
             },
             {
               "Action": "Verify",
               "StatusText": "Verified",
               "Message": "Verified desired values.",
-              "TimestampText": "13:20:47"
+              "TimestampText": "14:20:14"
             },
             {
               "Action": "Rollback",
@@ -197,25 +202,25 @@
               "Action": "Detect",
               "StatusText": "Detected",
               "Message": "Detected 1 of 2 values (matches: 0, missing: 1).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\SystemResponsiveness: 20 -> 10\n- HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters\\DisableTaskOffload: missing",
-              "TimestampText": "13:20:44"
+              "TimestampText": "14:20:06"
             },
             {
               "Action": "Apply",
               "StatusText": "Applied",
               "Message": "Updated 2 values.",
-              "TimestampText": "13:20:47"
+              "TimestampText": "14:20:14"
             },
             {
               "Action": "Verify",
               "StatusText": "Verified",
               "Message": "Verified desired values.",
-              "TimestampText": "13:20:47"
+              "TimestampText": "14:20:14"
             },
             {
               "Action": "Rollback",
               "StatusText": "Rolled back",
               "Message": "Rolled back registry values.",
-              "TimestampText": "13:20:48"
+              "TimestampText": "14:20:15"
             }
           ]
         },
@@ -235,31 +240,31 @@
               "Action": "Detect",
               "StatusText": "Detected",
               "Message": "Detected 1 of 2 values (matches: 0, missing: 1).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\SystemResponsiveness: 20 -> 10\n- HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters\\DisableTaskOffload: missing",
-              "TimestampText": "13:20:48"
+              "TimestampText": "14:20:15"
             },
             {
               "Action": "Apply",
               "StatusText": "Applied",
               "Message": "Updated 2 values.",
-              "TimestampText": "13:20:47"
+              "TimestampText": "14:20:14"
             },
             {
               "Action": "Verify",
               "StatusText": "Verified",
               "Message": "Verified desired values.",
-              "TimestampText": "13:20:47"
+              "TimestampText": "14:20:14"
             },
             {
               "Action": "Rollback",
               "StatusText": "Rolled back",
               "Message": "Rolled back registry values.",
-              "TimestampText": "13:20:48"
+              "TimestampText": "14:20:15"
             }
           ]
         }
       ],
-      "StartedAtUtc": "2026-05-14T10:20:44.9203191+00:00",
-      "CompletedAtUtc": "2026-05-14T10:20:48.5680947+00:00"
+      "StartedAtUtc": "2026-05-16T11:20:06.6248954+00:00",
+      "CompletedAtUtc": "2026-05-16T11:20:15.0396404+00:00"
     }
   }
 ]
