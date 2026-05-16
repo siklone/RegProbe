@@ -14,6 +14,8 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 AUDIT_DIR = REPO_ROOT / "registry-research-framework" / "audit"
 DEFAULT_PLAN = AUDIT_DIR / "operator96-value-campaign-20260509.json"
 DEFAULT_CAMPAIGN = AUDIT_DIR / "operator96-value-campaign-tranche-20260509.json"
+DISPLAY_NAME = "Custom Registry Value Enriched Matrix"
+LEGACY_ARTIFACT_PREFIX = "operator96"
 
 REFERENCE_CATALOG = [
     {
@@ -258,8 +260,8 @@ def build_candidates(
             value,
             {
                 "source_kind": "vm-validated",
-                "source_label": proof.get("experiment_id") or "operator96-baseline",
-                "reason": f"operator96 baseline VM experiment status={proof.get('status')} verdict={proof.get('verdict')}",
+                "source_label": proof.get("experiment_id") or "custom-value-baseline",
+                "reason": f"custom value baseline VM experiment status={proof.get('status')} verdict={proof.get('verdict')}",
             },
         )
 
@@ -405,6 +407,9 @@ def build_matrix(plan_payload: dict[str, Any], campaign_payload: dict[str, Any],
         "schema_version": "1.0",
         "generated_utc": now_utc(),
         "campaign_id": "operator96-enriched-values-20260510",
+        "display_name": DISPLAY_NAME,
+        "legacy_artifact_prefix": LEGACY_ARTIFACT_PREFIX,
+        "legacy_artifact_note": "operator96 is a historical filename prefix for the user-supplied seed batch, not product branding.",
         "inputs": {
             "plan_records": len(records),
             "campaign_results": len(campaign_payload.get("results") or []),
@@ -428,10 +433,12 @@ def build_matrix(plan_payload: dict[str, Any], campaign_payload: dict[str, Any],
 
 def render_markdown(payload: dict[str, Any]) -> str:
     lines = [
-        "# Custom Registry Value Enriched Matrix",
+        f"# {payload.get('display_name') or DISPLAY_NAME}",
         "",
         f"- Generated UTC: `{payload.get('generated_utc')}`",
         f"- Campaign: `{payload.get('campaign_id')}`",
+        f"- Legacy artifact prefix: `{payload.get('legacy_artifact_prefix')}`",
+        f"- Legacy note: {payload.get('legacy_artifact_note')}",
         f"- Records: `{(payload.get('summary') or {}).get('records')}`",
         f"- Candidate values: `{(payload.get('summary') or {}).get('candidate_values')}`",
         f"- App-card eligible records: `{(payload.get('summary') or {}).get('app_card_eligible_records')}`",

@@ -65,7 +65,7 @@
     {
       "id": "runtime-evidence",
       "source_kind": "local-runtime",
-      "title": "ETW/Procmon/Ghidra/operator96 VM artifacts",
+      "title": "ETW/Procmon/Ghidra custom-value VM artifacts",
       "url": "",
       "use_for": [
         "runtime validation",
@@ -10798,5 +10798,8 @@
         ]
       }
     }
-  ]
+  ],
+  "display_name": "Custom Registry Value Enriched Matrix",
+  "legacy_artifact_prefix": "operator96",
+  "legacy_artifact_note": "operator96 is a historical filename prefix for the user-supplied seed batch, not product branding."
 }

@@ -15,6 +15,8 @@ DEFAULT_MATRIX = AUDIT_DIR / "operator96-enriched-value-matrix-20260510.json"
 DEFAULT_AGGREGATE = AUDIT_DIR / "operator96-low-noise-rerun-aggregate-20260512.json"
 JSON_OUTPUT = AUDIT_DIR / "operator96-app-surface-review-20260510.json"
 MARKDOWN_OUTPUT = AUDIT_DIR / "operator96-app-surface-review-20260510.md"
+DISPLAY_NAME = "Custom Registry Value App Surface Review"
+LEGACY_ARTIFACT_PREFIX = "operator96"
 
 SAFETY_VERDICTS = {"boot_failure", "rollback_failure", "app_breakage"}
 NOISY_VERDICTS = {"noisy"}
@@ -163,6 +165,9 @@ def build_review(matrix_path: Path = DEFAULT_MATRIX, aggregate_path: Path | None
         "matrix": display_path(matrix_path),
         "aggregate": display_path(aggregate_path),
         "campaign_id": "operator96-app-surface-review-20260510",
+        "display_name": DISPLAY_NAME,
+        "legacy_artifact_prefix": LEGACY_ARTIFACT_PREFIX,
+        "legacy_artifact_note": "operator96 is a historical filename prefix for the user-supplied seed batch, not product branding.",
         "status": "FAIL" if aggregate_blockers else "PASS",
         "summary": {
             "record_count": len(records),
@@ -189,11 +194,13 @@ def build_review(matrix_path: Path = DEFAULT_MATRIX, aggregate_path: Path | None
 def render_markdown(review: dict[str, Any]) -> str:
     summary = review.get("summary") or {}
     lines = [
-        "# Custom Registry Value App Surface Review",
+        f"# {review.get('display_name') or DISPLAY_NAME}",
         "",
         f"- Generated UTC: `{review.get('generated_utc')}`",
         f"- Matrix: `{review.get('matrix')}`",
         f"- Aggregate: `{review.get('aggregate')}`",
+        f"- Legacy artifact prefix: `{review.get('legacy_artifact_prefix')}`",
+        f"- Legacy note: {review.get('legacy_artifact_note')}",
         f"- Records: `{summary.get('record_count')}`",
         f"- Ready for bounded app card: `{summary.get('ready_for_bounded_app_card')}`",
         f"- Needs low-noise rerun: `{summary.get('needs_low_noise_rerun')}`",
