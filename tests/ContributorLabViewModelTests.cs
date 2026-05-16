@@ -44,6 +44,10 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.True(ContributorLabCatalog.IsAllowlistedCommand(
             "python3 registry-research-framework/scripts/check_single_tweak.py REPLACE_VALUE_NAME --expected-value 0 --expected-value 1 --json"));
         Assert.True(ContributorLabCatalog.IsAllowlistedCommand(
+            "python3 registry-research-framework/scripts/generate_custom_value_app_surface_review.py --json"));
+        Assert.True(ContributorLabCatalog.IsAllowlistedCommand(
+            "python3 registry-research-framework/scripts/generate_operator96_app_surface_review.py --json"));
+        Assert.True(ContributorLabCatalog.IsAllowlistedCommand(
             "py -3 scripts/vm-kvm/vm-health-check.py --domain regprobe-win11-25h2-session --json"));
         Assert.True(ContributorLabCatalog.IsAllowlistedCommand(
             "python3 scripts/vm-kvm/run-guest-registry-value-experiment.py --registry-path \"HKLM\\REPLACE\\KEY\\PATH\" --value-name REPLACE_VALUE_NAME --value-data REPLACE_DWORD_VALUE"));
@@ -72,7 +76,11 @@ public sealed class ContributorLabViewModelTests : IDisposable
 
         Assert.Contains(packs, pack => pack.Title == "Representative promoted app QA batch" && pack.MutatesGuest && pack.RequiresCertifiedVm);
         Assert.Contains(packs, pack => pack.Title == "Custom key/value lookup template" && !pack.MutatesGuest && !pack.RequiresCertifiedVm);
-        Assert.Contains(packs, pack => pack.Title == "Custom value app-surface review" && !pack.MutatesGuest && !pack.RequiresCertifiedVm);
+        Assert.Contains(packs, pack => pack.Title == "Custom value app-surface review"
+                                      && !pack.MutatesGuest
+                                      && !pack.RequiresCertifiedVm
+                                      && pack.Command.Contains("generate_custom_value_app_surface_review.py", StringComparison.Ordinal)
+                                      && !pack.Command.Contains("generate_operator96_app_surface_review.py", StringComparison.Ordinal));
         Assert.Contains(packs, pack => pack.Title == "Custom value tranche rerun" && pack.MutatesGuest && pack.RequiresCertifiedVm);
         Assert.Contains(packs, pack => pack.Title == "Custom key/value VM experiment template"
                                       && pack.MutatesGuest
