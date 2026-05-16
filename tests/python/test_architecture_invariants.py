@@ -59,6 +59,13 @@ class ArchitectureInvariantTests(unittest.TestCase):
         self.assertIn('SelectedValue="{Binding StatusFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"', secondary_panel)
         self.assertIn('SelectedValue="{Binding ScopeFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"', secondary_panel)
 
+        list_resources = (
+            REPO_ROOT / "app" / "Resources" / "Tweaks" / "List.xaml"
+        ).read_text(encoding="utf-8")
+        self.assertIn('x:Name="TemplateRoot"', list_resources)
+        self.assertIn('PlacementTarget="{Binding ElementName=TemplateRoot}"', list_resources)
+        self.assertIn('MinWidth="{Binding ActualWidth, ElementName=TemplateRoot}"', list_resources)
+
         tweaks_view_model = (
             REPO_ROOT / "app" / "ViewModels" / "TweaksViewModel.cs"
         ).read_text(encoding="utf-8")
