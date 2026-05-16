@@ -137,6 +137,14 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Contains("--value-data \"0\"", viewModel.CustomVmExperimentCommand, StringComparison.Ordinal);
         Assert.Contains("--abort-on-noisy-host", viewModel.CustomVmExperimentCommand, StringComparison.Ordinal);
         Assert.Contains("non-mutating lookup/readiness/VM-health", viewModel.ContributorExecutionPolicySummary, StringComparison.Ordinal);
+        Assert.Contains("TimerCheckFlags", viewModel.CustomValueInvestigationContract, StringComparison.Ordinal);
+        Assert.Contains("HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel", viewModel.CustomValueInvestigationContract, StringComparison.Ordinal);
+        Assert.Contains("target value(s) 0, 1", viewModel.CustomValueStorySummary, StringComparison.Ordinal);
+        Assert.Contains("First VM target: 0", viewModel.CustomValueStorySummary, StringComparison.Ordinal);
+        Assert.Contains("copy-only", viewModel.CustomValueMutationBoundarySummary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains(viewModel.CustomValueEvidenceChecklist, item => item.Contains("Current value", StringComparison.Ordinal)
+                                                                       && item.Contains("absent", StringComparison.Ordinal));
+        Assert.Contains(viewModel.CustomValueEvidenceChecklist, item => item.Contains("Rollback story", StringComparison.Ordinal));
 
         Assert.Contains("check_single_tweak_app_qa.py \"TimerCheckFlags\"", viewModel.CustomAppQaCommand, StringComparison.Ordinal);
         Assert.Contains("vm-health-check.py", viewModel.CustomVmHealthCommand, StringComparison.Ordinal);
@@ -147,6 +155,30 @@ public sealed class ContributorLabViewModelTests : IDisposable
                                                                   && step.MutatesGuest
                                                                   && step.RequiresCertifiedVm
                                                                   && step.Command.Contains("--value-name \"TimerCheckFlags\"", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void CustomValueInvestigationCopy_MarksNonCertifiedMutationAsCommunityDebug()
+    {
+        var viewModel = new ContributorLabViewModel(CreateSnapshot() with
+        {
+            RunTier = "community",
+            VmHealthOk = false,
+            VmSnapshotOk = false,
+            CustomValueNoisyResultCount = 0,
+            CustomValueNonOkCount = 0
+        })
+        {
+            CustomValueName = "EnableThing",
+            CustomExpectedValues = string.Empty
+        };
+
+        Assert.Contains("EnableThing", viewModel.CustomValueInvestigationContract, StringComparison.Ordinal);
+        Assert.Contains("target value(s) not listed yet", viewModel.CustomValueStorySummary, StringComparison.Ordinal);
+        Assert.Contains("First VM target: 0", viewModel.CustomValueStorySummary, StringComparison.Ordinal);
+        Assert.Contains("community/debug", viewModel.CustomValueMutationBoundarySummary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains(viewModel.CustomValueEvidenceChecklist, item => item.Contains("Default story", StringComparison.Ordinal));
+        Assert.Contains(viewModel.CustomValueEvidenceChecklist, item => item.Contains("Evidence boundary", StringComparison.Ordinal));
     }
 
     [Fact]
@@ -273,6 +305,7 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.StartsWith("Contributor summary: ok", viewModel.CommandRunOutput, StringComparison.Ordinal);
         Assert.Contains("Matched records: 1", viewModel.CommandRunOutput, StringComparison.Ordinal);
         Assert.Contains("Best match: Example Power Card (promoted, apply_allowed=true)", viewModel.CommandRunOutput, StringComparison.Ordinal);
+        Assert.Contains("Value story inputs:", viewModel.CommandRunOutput, StringComparison.Ordinal);
         Assert.Contains("App writes: SystemResponsiveness=10", viewModel.CommandRunOutput, StringComparison.Ordinal);
         Assert.Contains("Default/profile story: Windows default", viewModel.CommandRunOutput, StringComparison.Ordinal);
         Assert.Contains("Evidence lanes: etw-trace=1, official-doc=1", viewModel.CommandRunOutput, StringComparison.Ordinal);
