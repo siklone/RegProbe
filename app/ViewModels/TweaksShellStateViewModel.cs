@@ -72,6 +72,7 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
             if (SetProperty(ref _statusFilter, value))
             {
                 OnPropertyChanged(nameof(StatusFilterLabel));
+                OnPropertyChanged(nameof(StatusFilterDisplayText));
                 OnPropertyChanged(nameof(HasStatusFilter));
                 OnPropertyChanged(nameof(HasActiveFilters));
             }
@@ -85,6 +86,7 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
         {
             if (SetProperty(ref _scopeFilter, value))
             {
+                OnPropertyChanged(nameof(ScopeFilterDisplayText));
                 OnPropertyChanged(nameof(HasScopeFilter));
                 OnPropertyChanged(nameof(HasActiveFilters));
             }
@@ -97,6 +99,10 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
         "rolledback" => "Rolled Back Settings",
         _ => string.Empty
     };
+
+    public string StatusFilterDisplayText => FindOptionLabel(StatusFilterOptions, _statusFilter, "STATUS");
+
+    public string ScopeFilterDisplayText => FindOptionLabel(ScopeFilterOptions, _scopeFilter, "SCOPE");
 
     public bool HasStatusFilter => !string.IsNullOrEmpty(_statusFilter);
 
@@ -307,6 +313,10 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
         SelectedCategoryName = string.Empty;
     }
 
+    public void CycleStatusFilter() => StatusFilter = NextOptionValue(StatusFilterOptions, StatusFilter);
+
+    public void CycleScopeFilter() => ScopeFilter = NextOptionValue(ScopeFilterOptions, ScopeFilter);
+
     private void RaiseWorkspacePropertiesChanged()
     {
         OnPropertyChanged(nameof(IsSettingsWorkspaceSelected));
@@ -337,5 +347,36 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
         OnPropertyChanged(nameof(SelectedCategoryLabel));
         OnPropertyChanged(nameof(CanClearCategorySelection));
         OnPropertyChanged(nameof(SelectedCategoryContext));
+    }
+
+    private static string FindOptionLabel(
+        IReadOnlyList<FilterOptionViewModel> options,
+        string value,
+        string fallback)
+    {
+        return options.FirstOrDefault(option =>
+            string.Equals(option.Value, value, StringComparison.OrdinalIgnoreCase))?.Label ?? fallback;
+    }
+
+    private static string NextOptionValue(
+        IReadOnlyList<FilterOptionViewModel> options,
+        string currentValue)
+    {
+        if (options.Count == 0)
+        {
+            return string.Empty;
+        }
+
+        var currentIndex = -1;
+        for (var index = 0; index < options.Count; index++)
+        {
+            if (string.Equals(options[index].Value, currentValue, StringComparison.OrdinalIgnoreCase))
+            {
+                currentIndex = index;
+                break;
+            }
+        }
+
+        return options[(currentIndex + 1) % options.Count].Value;
     }
 }

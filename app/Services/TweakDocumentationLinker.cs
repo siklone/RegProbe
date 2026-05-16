@@ -28,10 +28,10 @@ public sealed class TweakDocumentationLinker
                 var catalogHasAnchor = _store.HasDocAnchor(catalogPath, anchorId);
                 if (catalogHasAnchor && TryInsertReferenceLink(
                         tweak,
-                        "Catalog entry",
+                        "Catalog index",
                         TweakDocumentationCatalogStore.AppendDocAnchor(catalogPath, anchorId),
                         insertIndex,
-                        "Full tweak catalog with all entries.",
+                        "Local catalog index. Naming/navigation context only; not value-semantics proof.",
                         ReferenceLinkKind.Catalog))
                 {
                     insertIndex++;
