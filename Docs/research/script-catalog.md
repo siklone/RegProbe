@@ -154,7 +154,7 @@ KVM/QGA runners, bridge helpers, and host-side orchestration for the research la
 - `scripts/vm-kvm/run-guest-app-launch-smoke.py`
   Runs a KVM guest app launch smoke check against an existing deploy and distinguishes guest launch failures from transport or summary-contract failures.
 - `scripts/vm-kvm/run-guest-app-publish-deploy-smoke.py`
-  Builds, packages, deploys, and smoke-tests the app through the KVM lane while preserving nested deploy-smoke error details.
+  Builds, packages, deploys, and smoke-tests the app through the KVM lane while preserving nested deploy-smoke error details. Defaults to a self-contained Windows publish so clean VMs without Microsoft.WindowsDesktop.App can run the app; use `--framework-dependent` only when the guest runtime is already installed.
 - `scripts/vm-kvm/run-guest-app-tweak-qa-batch.py`
   Runs one or more shipped tweaks through the hidden desktop-app startup QA lane by calling the guest-side helper and returning the JSON reports as a host-driven batch.
 - `scripts/vm-kvm/run-guest-etw-stackwalk-capture.py`
