@@ -218,13 +218,17 @@ class CleanupQuarantineLedgerTests(unittest.TestCase):
 
     def test_markdown_separates_delete_candidates_from_retained_inventory(self):
         payload = {
+            "candidate_semantics": "candidate means cleanup_status=delete-candidate.",
             "generated_utc": "2026-05-14T00:00:00Z",
             "purpose": "test",
             "deletion_policy": [],
             "summary": {
                 "total_items": 1,
+                "review_inventory_count": 1,
                 "delete_candidate_count": 0,
+                "cleanup_candidate_count": 0,
                 "retained_inventory_count": 1,
+                "retained_not_candidate_count": 1,
                 "referenced_count": 1,
                 "blocking_referenced_count": 1,
                 "audit_only_referenced_count": 0,
@@ -249,10 +253,39 @@ class CleanupQuarantineLedgerTests(unittest.TestCase):
 
         markdown = self.module.render_markdown(payload)
 
+        self.assertIn("Candidate semantics: candidate means cleanup_status=delete-candidate.", markdown)
+        self.assertIn("| Cleanup candidates | 0 |", markdown)
+        self.assertIn("| Retained non-candidates | 1 |", markdown)
         self.assertIn("## Delete Candidates", markdown)
         self.assertIn("_No delete candidates in this ledger._", markdown)
         self.assertIn("## Retained Inventory", markdown)
         self.assertIn("retained-live-reference", markdown)
+
+    def test_build_ledger_exposes_review_inventory_without_calling_it_candidates(self):
+        with tempfile.TemporaryDirectory() as temp:
+            repo = Path(temp)
+            audit = repo / "registry-research-framework" / "audit"
+            experiments = audit / "registry-value-experiments"
+            experiments.mkdir(parents=True)
+            target = experiments / "pilot-perf-calculate-actual-utilization-0.json"
+            target.write_text("{}\n", encoding="utf-8")
+            (repo / "README.md").write_text("pilot-perf-calculate-actual-utilization-0\n", encoding="utf-8")
+
+            payload = self.module.build_ledger(
+                repo_root=repo,
+                output_paths=set(),
+                staging_limit=0,
+                raw_trace_limit=0,
+                audit_archive_limit=0,
+                old_audit_limit=0,
+            )
+
+            self.assertEqual(payload["schema_version"], "1.1")
+            self.assertIn("candidate means cleanup_status=delete-candidate", payload["candidate_semantics"])
+            self.assertEqual(payload["summary"]["review_inventory_count"], 1)
+            self.assertEqual(payload["summary"]["cleanup_candidate_count"], 0)
+            self.assertEqual(payload["summary"]["retained_not_candidate_count"], 1)
+            self.assertEqual(payload["summary"]["delete_candidate_count"], 0)
 
 
 if __name__ == "__main__":

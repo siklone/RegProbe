@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-15T12:57:56Z",
+  "generated_utc": "2026-05-16T16:40:41Z",
   "summary": {
     "artifact_count": 15,
     "attention_count": 0,
@@ -8,11 +8,17 @@
     "custom_value_normal_app_card_ready": 0,
     "custom_value_non_ok_count": 0,
     "custom_value_noisy_result_count": 0,
+    "custom_value_legacy_artifact_prefix": "operator96",
+    "custom_value_legacy_artifact_note": "operator96 is a historical filename prefix for the user-supplied custom registry value seed batch, not product branding.",
     "operator96_normal_app_card_ready": 0,
     "operator96_non_ok_count": 0,
     "operator96_noisy_result_count": 0,
+    "operator96_legacy_alias": true,
     "cleanup_delete_eligible_count": 0,
+    "cleanup_candidate_count": 0,
+    "cleanup_review_inventory_count": 89,
     "cleanup_retained_inventory_count": 89,
+    "cleanup_retained_not_candidate_count": 89,
     "cleanup_reference_migration_needed_count": 0,
     "cleanup_active_action_count": 0,
     "cleanup_retention_decision_queue_count": 0,
@@ -186,12 +192,15 @@
         "total_items": 89,
         "review_inventory_count": 89,
         "delete_candidate_count": 0,
+        "cleanup_candidate_count": 0,
         "retained_inventory_count": 89,
+        "retained_not_candidate_count": 89,
         "referenced_count": 89,
-        "blocking_referenced_count": 66,
-        "audit_only_referenced_count": 23,
+        "blocking_referenced_count": 65,
+        "audit_only_referenced_count": 24,
         "delete_eligible_count": 0,
-        "total_size_bytes": 678702358
+        "total_size_bytes": 678702358,
+        "candidate_semantics": "candidate means cleanup_status=delete-candidate. Review inventory and retained inventory are explicitly not deletion candidates."
       }
     },
     {
