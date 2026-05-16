@@ -112,6 +112,8 @@ public sealed class TweakItemViewModelTests
         Assert.False(viewModel.IsEndUserAppCardAllowed);
         Assert.True(viewModel.IsResearchGated);
         Assert.Equal("blocked", viewModel.PromotionState);
+        Assert.Equal("Review only", viewModel.PrimaryActionDisplayText);
+        Assert.False(viewModel.ApplyCommand.CanExecute(null));
     }
 
     [Fact]
@@ -152,6 +154,10 @@ public sealed class TweakItemViewModelTests
         var evaluator = new WorkspaceFilterEvaluator(new TweaksShellStateViewModel());
 
         Assert.False(viewModel.IsEndUserAppCardAllowed);
+        Assert.True(viewModel.IsPromotionHold);
+        Assert.False(viewModel.CanDebugOverridePromotionGate);
+        Assert.Equal("Review only", viewModel.PrimaryActionDisplayText);
+        Assert.False(viewModel.ApplyCommand.CanExecute(null));
         Assert.False(evaluator.FilterTweak(viewModel));
         Assert.False(evaluator.CurrentWorkspaceContainsCategory(new[] { viewModel }, viewModel.Category));
     }

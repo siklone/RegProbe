@@ -281,7 +281,7 @@
                 </StackPanel>
 
                 <StackPanel Grid.Column="3" Margin="0,14,14,14" VerticalAlignment="Top">
-                    <Button Content="{Binding ActionButtonText}" Command="{Binding ApplyCommand}" ToolTip="{Binding PrimaryActionTooltip}" Style="{StaticResource ConfigurationPrimaryActionButtonStyle}"/>
+                    <Button Content="{Binding PrimaryActionDisplayText}" Command="{Binding ApplyCommand}" ToolTip="{Binding PrimaryActionTooltip}" Style="{StaticResource ConfigurationPrimaryActionButtonStyle}"/>
                     <Button Content="Restore" Command="{Binding RollbackCommand}" Style="{StaticResource ConfigurationSecondaryActionButtonStyle}" Margin="0,6,0,0"/>
                 </StackPanel>
             </Grid>

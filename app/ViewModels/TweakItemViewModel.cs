@@ -281,11 +281,15 @@ public sealed partial class TweakItemViewModel : ViewModelBase
         {
             if (SetProperty(ref _actionButtonText, value))
             {
+                OnPropertyChanged(nameof(PrimaryActionDisplayText));
                 OnPropertyChanged(nameof(RepairsActionButtonText));
                 OnPropertyChanged(nameof(ValueSummaryRows));
             }
         }
     }
+
+    public string PrimaryActionDisplayText =>
+        TweakRollbackPresentation.BuildConfigurationPrimaryActionText(IsMutationAllowed, ActionButtonText);
 
     public string RepairsActionButtonText => TweakSurfacePresentation.BuildRepairsActionButtonText(ActionButtonText);
 
@@ -595,7 +599,8 @@ public sealed partial class TweakItemViewModel : ViewModelBase
     public string PromotionGatingReason => _promotionGatingReason;
     public bool IsResearchDerived => string.Equals(_tweakOrigin, "research-derived", StringComparison.OrdinalIgnoreCase);
     public bool IsPromotionActionable => _isPromotionActionable;
-    public bool CanDebugOverridePromotionGate => ContributorMode.IsEnabled && _debugOverrideAllowed;
+    public bool IsPromotionHold => TweakVerdictPresentation.IsHoldState(PromotionState);
+    public bool CanDebugOverridePromotionGate => ContributorMode.IsEnabled && _debugOverrideAllowed && !IsPromotionHold;
     public bool IsEndUserAppCardAllowed => ShowInApp && IsEvidenceClassActionable && IsPromotionActionable;
     public bool IsMutationAllowed => IsEvidenceClassActionable && (IsPromotionActionable || CanDebugOverridePromotionGate);
     public string PublicMutationGatingReason =>
@@ -826,6 +831,7 @@ public sealed partial class TweakItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(ShowInApp));
         OnPropertyChanged(nameof(IsEndUserAppCardAllowed));
         OnPropertyChanged(nameof(IsMutationAllowed));
+        OnPropertyChanged(nameof(PrimaryActionDisplayText));
         OnPropertyChanged(nameof(IsResearchGated));
         OnPropertyChanged(nameof(HasEvidenceClass));
         OnPropertyChanged(nameof(EvidenceClassBrush));
@@ -866,9 +872,11 @@ public sealed partial class TweakItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(PromotionGatingReason));
         OnPropertyChanged(nameof(IsResearchDerived));
         OnPropertyChanged(nameof(IsPromotionActionable));
+        OnPropertyChanged(nameof(IsPromotionHold));
         OnPropertyChanged(nameof(CanDebugOverridePromotionGate));
         OnPropertyChanged(nameof(IsEndUserAppCardAllowed));
         OnPropertyChanged(nameof(IsMutationAllowed));
+        OnPropertyChanged(nameof(PrimaryActionDisplayText));
         OnPropertyChanged(nameof(PublicMutationGatingReason));
         OnPropertyChanged(nameof(IsResearchGated));
         OnPropertyChanged(nameof(ConfigurationPrimaryActionTooltip));
