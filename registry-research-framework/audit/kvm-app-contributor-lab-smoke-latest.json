@@ -6,10 +6,10 @@
   "runtime": "win-x64",
   "self_contained": true,
   "dotnet_path": "/home/rai/.dotnet/dotnet",
-  "work_root": "/tmp/regprobe-app-publish-smoke-xagfytz1",
-  "publish_dir": "/tmp/regprobe-app-publish-smoke-xagfytz1/publish",
-  "publish_zip_path": "/tmp/regprobe-app-publish-smoke-xagfytz1/RegProbe.App.publish.zip",
-  "launch_wait_timeout": 20,
+  "work_root": "/tmp/regprobe-app-publish-smoke-3p_v2cbe",
+  "publish_dir": "/tmp/regprobe-app-publish-smoke-3p_v2cbe/publish",
+  "publish_zip_path": "/tmp/regprobe-app-publish-smoke-3p_v2cbe/RegProbe.App.publish.zip",
+  "launch_wait_timeout": 30,
   "linger_seconds": 8,
   "app_args": [
     "--contributor-lab"
@@ -29,12 +29,12 @@
       "true",
       "-p:EnableWindowsTargeting=true",
       "-o",
-      "/tmp/regprobe-app-publish-smoke-xagfytz1/publish"
+      "/tmp/regprobe-app-publish-smoke-3p_v2cbe/publish"
     ],
     "project_path": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/app/app.csproj",
-    "publish_dir": "/tmp/regprobe-app-publish-smoke-xagfytz1/publish",
+    "publish_dir": "/tmp/regprobe-app-publish-smoke-3p_v2cbe/publish",
     "self_contained": true,
-    "stdout": "Determining projects to restore...\n  All projects are up-to-date for restore.\n  core -> /run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/core/bin/Release/net8.0-windows/RegProbe.Core.dll\n  infrastructure -> /run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/infrastructure/bin/Release/net8.0-windows/RegProbe.Infrastructure.dll\n  engine -> /run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/engine/bin/Release/net8.0-windows/RegProbe.Engine.dll\n  application -> /run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/application/bin/Release/net8.0-windows/RegProbe.Application.dll\n  plugins-devtools -> /run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/plugins-devtools/bin/Release/net8.0-windows/RegProbe.Plugins.DevTools.dll\n  elevated-host -> /run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/elevated-host/bin/Release/net8.0-windows/win-x64/RegProbe.ElevatedHost.dll\n  app -> /run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/app/bin/Release/net8.0-windows/win-x64/RegProbe.App.dll\n  app -> /tmp/regprobe-app-publish-smoke-xagfytz1/publish/",
+    "stdout": "Determining projects to restore...\n  All projects are up-to-date for restore.\n  core -> /run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/core/bin/Release/net8.0-windows/RegProbe.Core.dll\n  infrastructure -> /run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/infrastructure/bin/Release/net8.0-windows/RegProbe.Infrastructure.dll\n  engine -> /run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/engine/bin/Release/net8.0-windows/RegProbe.Engine.dll\n  application -> /run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/application/bin/Release/net8.0-windows/RegProbe.Application.dll\n  plugins-devtools -> /run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/plugins-devtools/bin/Release/net8.0-windows/RegProbe.Plugins.DevTools.dll\n  elevated-host -> /run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/elevated-host/bin/Release/net8.0-windows/win-x64/RegProbe.ElevatedHost.dll\n  app -> /run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/app/bin/Release/net8.0-windows/win-x64/RegProbe.App.dll\n  app -> /tmp/regprobe-app-publish-smoke-3p_v2cbe/publish/",
     "stderr": "",
     "published_file_count": 547,
     "app_exe_exists": true
@@ -42,27 +42,27 @@
   "zip_returncode": 0,
   "zip_payload": {
     "status": "ok",
-    "publish_dir": "/tmp/regprobe-app-publish-smoke-xagfytz1/publish",
-    "publish_zip_path": "/tmp/regprobe-app-publish-smoke-xagfytz1/RegProbe.App.publish.zip",
+    "publish_dir": "/tmp/regprobe-app-publish-smoke-3p_v2cbe/publish",
+    "publish_zip_path": "/tmp/regprobe-app-publish-smoke-3p_v2cbe/RegProbe.App.publish.zip",
     "archived_file_count": 547,
     "app_exe_archived": true
   },
   "deploy_smoke_returncode": 0,
   "deploy_smoke_payload": {
     "summary_source": "guest-app-deploy-smoke",
-    "publish_zip": "/tmp/regprobe-app-publish-smoke-xagfytz1/RegProbe.App.publish.zip",
+    "publish_zip": "/tmp/regprobe-app-publish-smoke-3p_v2cbe/RegProbe.App.publish.zip",
     "guest_publish_zip_path": "C:\\Tools\\Inbound\\app-publish-current-branch.zip",
     "guest_app_root": "C:\\Tools\\AppSmoke",
     "guest_app_exe": "C:\\Tools\\AppSmoke\\RegProbe.App.exe",
     "app_args": [
       "--contributor-lab"
     ],
-    "launch_wait_timeout": 20,
+    "launch_wait_timeout": 30,
     "linger_seconds": 8,
     "prepare_returncode": 0,
     "prepare_payload": {
       "status": "exited",
-      "pid": 3768,
+      "pid": 5056,
       "path": "powershell.exe",
       "arg": [
         "-NoProfile",
@@ -77,16 +77,16 @@
     "upload_payload": {
       "status": "uploaded",
       "domain": "regprobe-win11-25h2-session",
-      "source": "/tmp/regprobe-app-publish-smoke-xagfytz1/RegProbe.App.publish.zip",
+      "source": "/tmp/regprobe-app-publish-smoke-3p_v2cbe/RegProbe.App.publish.zip",
       "destination": "C:\\Tools\\Inbound\\app-publish-current-branch.zip",
-      "size_bytes": 167356182,
-      "written_bytes": 167356182,
-      "sha256": "4be41032c3102d97691a5b5b7d37de78b9c9f7704310ea4d97fe6b47b3a5d026"
+      "size_bytes": 167382887,
+      "written_bytes": 167382887,
+      "sha256": "2ee87aa79c2150087dc335dc721c00b0e6c7ff18b9efec8b5f2af34f4d7fd737"
     },
     "deploy_returncode": 0,
     "deploy_payload": {
       "status": "exited",
-      "pid": 7280,
+      "pid": 3132,
       "path": "powershell.exe",
       "arg": [
         "-NoProfile",
@@ -105,12 +105,12 @@
         "--contributor-lab"
       ],
       "crash_log_dir": "C:\\Users\\Administrator\\AppData\\Local\\RegProbe\\CrashLogs",
-      "launch_wait_timeout": 20,
+      "launch_wait_timeout": 30,
       "linger_seconds": 8,
       "launch_returncode": 0,
       "launch_payload": {
         "status": "exited",
-        "pid": 4264,
+        "pid": 5996,
         "path": "powershell.exe",
         "arg": [
           "-NoProfile",
@@ -118,15 +118,15 @@
           "$exe='C:\\Tools\\AppSmoke\\RegProbe.App.exe'; $arguments=@('--contributor-lab'); if(-not (Test-Path -LiteralPath $exe)){ throw \"Missing app executable: $exe\" }; $startInfo=@{FilePath=$exe; PassThru=$true}; if($arguments.Count -gt 0){ $startInfo.ArgumentList=$arguments }; $proc=Start-Process @startInfo; [pscustomobject]@{Pid=$proc.Id; ProcessName=$proc.ProcessName; Args=$arguments} | ConvertTo-Json -Compress"
         ],
         "exitcode": 0,
-        "stdout": "{\"Pid\":11108,\"ProcessName\":\"RegProbe.App\",\"Args\":[\"--contributor-lab\"]}\r\n",
+        "stdout": "{\"Pid\":1476,\"ProcessName\":\"RegProbe.App\",\"Args\":[\"--contributor-lab\"]}\r\n",
         "stderr": ""
       },
       "process_info": {
         "ProcessName": "RegProbe.App",
-        "Id": 11108,
+        "Id": 1476,
         "SessionId": 0,
         "Path": "C:\\Tools\\AppSmoke\\RegProbe.App.exe",
-        "StartTime": "/Date(1778751141673)/"
+        "StartTime": "/Date(1778955656342)/"
       },
       "baseline_crash_log": null,
       "latest_crash_log": null,
