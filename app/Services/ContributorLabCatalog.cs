@@ -110,6 +110,7 @@ public static class ContributorLabCatalog
         "registry-research-framework/scripts/check_app_retest_readiness.py",
         "registry-research-framework/scripts/check_app_card_evidence_contracts.py",
         "registry-research-framework/scripts/check_promoted_tweak_app_qa_batch.py",
+        "registry-research-framework/scripts/generate_custom_value_app_surface_review.py",
         "registry-research-framework/scripts/generate_operator96_app_surface_review.py",
         "scripts/vm-kvm/vm-health-check.py",
         "scripts/vm-kvm/run-guest-registry-value-experiment.py",
@@ -282,8 +283,8 @@ public static class ContributorLabCatalog
                 MutatesGuest: true),
             new(
                 "Custom value app-surface review",
-                "Recompute why user-supplied registry value observations stay research-only or become eligible for bounded app-card review. Uses the current custom-value artifact set; the script name is a legacy fixture name.",
-                "python3 registry-research-framework/scripts/generate_operator96_app_surface_review.py --json",
+                "Recompute why user-supplied registry value observations stay research-only or become eligible for bounded app-card review.",
+                "python3 registry-research-framework/scripts/generate_custom_value_app_surface_review.py --json",
                 "community-safe",
                 RequiresCertifiedVm: false,
                 MutatesGuest: false),
