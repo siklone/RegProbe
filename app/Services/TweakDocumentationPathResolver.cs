@@ -121,7 +121,7 @@ internal sealed class TweakDocumentationPathResolver
             return false;
         }
 
-        title = string.IsNullOrWhiteSpace(line) ? "Source file" : $"Source file (L{line})";
+        title = BuildSourceTitle(normalized, line);
         path = fullPath;
         return true;
     }
@@ -151,6 +151,18 @@ internal sealed class TweakDocumentationPathResolver
             : linePart.Trim();
 
         return (sourcePath[..markerIndex], normalizedLine);
+    }
+
+    private static string BuildSourceTitle(string normalizedPath, string? line)
+    {
+        var label = normalizedPath.EndsWith(".cs", StringComparison.OrdinalIgnoreCase)
+            ? "App implementation source"
+            : normalizedPath.Contains("research/records/", StringComparison.OrdinalIgnoreCase)
+                || normalizedPath.EndsWith(".json", StringComparison.OrdinalIgnoreCase)
+                    ? "Local research record"
+                    : "Local source definition";
+
+        return string.IsNullOrWhiteSpace(line) ? label : $"{label} (L{line})";
     }
 
     private static string NormalizeRelativePath(string path)
