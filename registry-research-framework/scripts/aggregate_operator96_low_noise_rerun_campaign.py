@@ -14,7 +14,12 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 AUDIT_DIR = REPO_ROOT / "registry-research-framework" / "audit"
 DEFAULT_OUTPUT = AUDIT_DIR / "operator96-low-noise-rerun-aggregate-20260510.json"
 DEFAULT_MARKDOWN_OUTPUT = AUDIT_DIR / "operator96-low-noise-rerun-aggregate-20260510.md"
-DEFAULT_GLOB = "operator96-low-noise-rerun-tranche*.json"
+# Default to the clean certified rerun wave. Older 20260510 tranche files are
+# retained as audit history, but including them would reintroduce noisy/debug
+# observations into the current reference aggregate.
+DEFAULT_GLOB = "operator96-low-noise-rerun-tranche-20260512-*.json"
+DISPLAY_NAME = "Custom Registry Value Low-Noise Rerun Aggregate"
+LEGACY_ARTIFACT_PREFIX = "operator96"
 
 OLD_TRANCHE_RE = re.compile(r"operator96-low-noise-rerun-tranche(?:-(?P<number>\d+))?-(?P<date>\d{8})\.json$")
 NEW_TRANCHE_RE = re.compile(r"operator96-low-noise-rerun-tranche-(?P<date>\d{8})-(?P<number>\d+)\.json$")
@@ -152,6 +157,9 @@ def build_aggregate(paths: list[Path]) -> dict[str, Any]:
         "schema_version": "1.0",
         "generated_utc": now_utc(),
         "campaign_id": "operator96-low-noise-rerun-aggregate-20260510",
+        "display_name": DISPLAY_NAME,
+        "legacy_artifact_prefix": LEGACY_ARTIFACT_PREFIX,
+        "legacy_artifact_note": "operator96 is a historical filename prefix for the user-supplied seed batch, not product branding.",
         "status": status,
         "source_campaigns": source_campaigns,
         "summary": {
@@ -178,10 +186,12 @@ def build_aggregate(paths: list[Path]) -> dict[str, Any]:
 def render_markdown(payload: dict[str, Any]) -> str:
     summary = payload.get("summary") or {}
     lines = [
-        "# Custom Registry Value Low-Noise Rerun Aggregate",
+        f"# {payload.get('display_name') or DISPLAY_NAME}",
         "",
         f"- Generated UTC: `{payload.get('generated_utc')}`",
         f"- Status: `{payload.get('status')}`",
+        f"- Legacy artifact prefix: `{payload.get('legacy_artifact_prefix')}`",
+        f"- Legacy note: {payload.get('legacy_artifact_note')}",
         f"- Source campaigns: `{summary.get('source_campaign_count')}`",
         f"- Plan entries: `{summary.get('plan_count')}`",
         f"- Results: `{summary.get('result_count')}`",
