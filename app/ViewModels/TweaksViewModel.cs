@@ -380,6 +380,9 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         set => _shellState.SearchText = value;
     }
 
+    public IReadOnlyList<FilterOptionViewModel> StatusFilterOptions => _shellState.StatusFilterOptions;
+    public IReadOnlyList<FilterOptionViewModel> ScopeFilterOptions => _shellState.ScopeFilterOptions;
+
     public string StatusFilter
     {
         get => _shellState.StatusFilter;

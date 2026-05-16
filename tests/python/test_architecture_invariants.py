@@ -59,6 +59,12 @@ class ArchitectureInvariantTests(unittest.TestCase):
         self.assertIn('SelectedValue="{Binding StatusFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"', secondary_panel)
         self.assertIn('SelectedValue="{Binding ScopeFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"', secondary_panel)
 
+        tweaks_view_model = (
+            REPO_ROOT / "app" / "ViewModels" / "TweaksViewModel.cs"
+        ).read_text(encoding="utf-8")
+        self.assertIn("StatusFilterOptions => _shellState.StatusFilterOptions", tweaks_view_model)
+        self.assertIn("ScopeFilterOptions => _shellState.ScopeFilterOptions", tweaks_view_model)
+
     def test_normal_tweak_surface_uses_end_user_card_gate_not_contributor_override(self) -> None:
         filter_evaluator = (
             REPO_ROOT / "app" / "ViewModels" / "WorkspaceFilterEvaluator.cs"
