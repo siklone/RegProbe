@@ -685,7 +685,9 @@ public sealed partial class TweakItemViewModel : ViewModelBase
     public bool HasRuntimeProof => !string.IsNullOrWhiteSpace(RuntimeProofSummary);
     public string UpstreamLineageSummary => _upstreamLineageSummary;
     public string UpstreamLineageSource => _upstreamLineageSource;
-    public bool HasUpstreamLineage => _upstreamLineageLinks.Count > 0 || !string.IsNullOrWhiteSpace(UpstreamLineageSource);
+    public bool HasUpstreamLineage =>
+        _upstreamLineageLinks.Any(static link => link.Kind is ReferenceLinkKind.Source)
+        || !string.IsNullOrWhiteSpace(UpstreamLineageSource);
     public bool HasEvidenceProofBoxes => HasValidatedSemantics || HasRuntimeProof || HasUpstreamLineage;
     public bool HasNohutoEvidence
     {
@@ -797,8 +799,9 @@ public sealed partial class TweakItemViewModel : ViewModelBase
         _tweakOrigin = string.IsNullOrWhiteSpace(entry.TweakOrigin) ? "legacy-curated" : entry.TweakOrigin;
         _promotionState = string.IsNullOrWhiteSpace(entry.PromotionState) ? "promoted" : entry.PromotionState;
         _isPromotionActionable =
-            string.Equals(_tweakOrigin, "legacy-curated", StringComparison.OrdinalIgnoreCase)
-            || string.Equals(_promotionState, "promoted", StringComparison.OrdinalIgnoreCase);
+            !TweakVerdictPresentation.IsHoldState(_promotionState)
+            && (string.Equals(_tweakOrigin, "legacy-curated", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(_promotionState, "promoted", StringComparison.OrdinalIgnoreCase));
         _debugOverrideAllowed = entry.DebugOverrideAllowed;
         _promotionGatingReason = string.IsNullOrWhiteSpace(entry.GatingReason)
             ? "Promotion pending."
