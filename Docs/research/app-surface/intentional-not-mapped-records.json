@@ -85,6 +85,12 @@
       "notes": "The duplicate user-side provider entry was removed on 2026-03-13. The supported live implementation is system.disable-search-highlights-policy."
     },
     {
+      "record_id": "system.executive-additional-worker-threads",
+      "reason": "intentional-hold-closed",
+      "provider_source": "not currently shipped in the app",
+      "notes": "The checked-in app does not expose the Executive worker-thread pair as an end-user tweak because NT auto-sizes worker pools and manual overrides require per-machine profiling."
+    },
+    {
       "record_id": "system.io-allow-remote-dasd",
       "reason": "retired-unsupported-surface",
       "provider_source": "not currently shipped in the app",
@@ -125,6 +131,12 @@
       "reason": "watchdog-cluster-held",
       "provider_source": "not currently shipped in the app",
       "notes": "The app does not currently expose this kernel timer diagnostic policy as a tweak surface."
+    },
+    {
+      "record_id": "system.kernel.disable-exception-chain-validation",
+      "reason": "security-hold-closed",
+      "provider_source": "not currently shipped in the app",
+      "notes": "The checked-in app does not expose DisableExceptionChainValidation because setting it disables an exception-chain validation mitigation and must remain isolated-lab research only."
     },
     {
       "record_id": "system.reduce-shutdown-timeouts",

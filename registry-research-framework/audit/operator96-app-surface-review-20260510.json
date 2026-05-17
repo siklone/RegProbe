@@ -1,9 +1,12 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-15T12:57:08Z",
+  "generated_utc": "2026-05-17T03:48:36Z",
   "matrix": "registry-research-framework/audit/operator96-enriched-value-matrix-20260510.json",
   "aggregate": "registry-research-framework/audit/operator96-low-noise-rerun-aggregate-20260512.json",
   "campaign_id": "operator96-app-surface-review-20260510",
+  "display_name": "Custom Registry Value App Surface Review",
+  "legacy_artifact_prefix": "operator96",
+  "legacy_artifact_note": "operator96 is a historical filename prefix for the user-supplied seed batch, not product branding.",
   "status": "PASS",
   "summary": {
     "record_count": 96,
@@ -4821,8 +4824,5 @@
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "do-not-surface-unless-blocker-is-researched-away"
     }
-  ],
-  "display_name": "Custom Registry Value App Surface Review",
-  "legacy_artifact_prefix": "operator96",
-  "legacy_artifact_note": "operator96 is a historical filename prefix for the user-supplied seed batch, not product branding."
+  ]
 }
