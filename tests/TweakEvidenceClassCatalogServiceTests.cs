@@ -175,6 +175,37 @@ public sealed class TweakEvidenceClassCatalogServiceTests : IDisposable
         Assert.Contains("No RegProbe-controlled local source mirror", clone.UpstreamLineage.Summary, StringComparison.OrdinalIgnoreCase);
     }
 
+    [Fact]
+    public void Store_SuppressesExternalNohutoWinConfigAsUserFacingSourceProof()
+    {
+        var store = new TweakEvidenceClassCatalogStore(_docsRoot);
+        var clone = store.CloneWithResolvedLinks(new TweakEvidenceClassEntry
+        {
+            RecordId = "system.external-win-config-only",
+            TweakId = "system.external-win-config-only",
+            UpstreamLineage = new TweakEvidenceProofBlock
+            {
+                Summary = "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+                HasNohutoLineage = true,
+                Links =
+                {
+                    new TweakEvidenceLink
+                    {
+                        Title = "win-config / system/desc.md",
+                        Url = "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+                        Kind = "nohuto"
+                    }
+                }
+            }
+        });
+
+        Assert.NotNull(clone.UpstreamLineage);
+        Assert.Empty(clone.UpstreamLineage!.Links);
+        Assert.False(clone.UpstreamLineage.HasNohutoLineage);
+        Assert.Empty(clone.UpstreamLineage.PrimarySourceText);
+        Assert.Contains("No RegProbe-controlled local source mirror", clone.UpstreamLineage.Summary, StringComparison.OrdinalIgnoreCase);
+    }
+
     public void Dispose()
     {
         try

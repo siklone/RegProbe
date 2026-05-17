@@ -105,7 +105,7 @@ internal sealed class TweakEvidenceClassCatalogStore
                 Summary = link.Summary,
             })
             .Where(link => !string.IsNullOrWhiteSpace(link.Url)
-                           && (!isSourceBlock || !PublicEvidenceLinkPolicy.IsSuppressedExternalPseudocodeUrl(link.Url)))
+                           && (!isSourceBlock || !PublicEvidenceLinkPolicy.IsSuppressedExternalSourceUrl(link.Url)))
             .ToList();
         var hasNohutoLineage = !isSourceBlock || links.Count > 0
             ? block.HasNohutoLineage
