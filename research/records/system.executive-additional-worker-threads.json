@@ -52,27 +52,10 @@
     ]
   },
   "app_current_implementation": {
-    "status": "matches-research",
-    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
-    "notes": "The app now surfaces the validated Session Manager Executive worker-thread pair as a research-card batch.",
-    "writes": [
-      {
-        "target_id": "session-manager-executive-worker-thread-pair",
-        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
-        "value_name": "AdditionalCriticalWorkerThreads",
-        "value_type": "REG_DWORD",
-        "state_kind": "value",
-        "value": 0
-      },
-      {
-        "target_id": "session-manager-executive-worker-thread-pair",
-        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
-        "value_name": "AdditionalDelayedWorkerThreads",
-        "value_type": "REG_DWORD",
-        "state_kind": "value",
-        "value": 0
-      }
-    ]
+    "status": "not-mapped",
+    "provider_source": "not currently shipped in the app",
+    "notes": "The checked-in app does not expose the Executive worker-thread pair as an end-user tweak because NT auto-sizes worker pools and manual overrides require per-machine profiling.",
+    "writes": []
   },
   "windows_defaults": [
     {
