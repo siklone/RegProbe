@@ -112,6 +112,8 @@ public sealed class TweakItemViewModelTests
         Assert.False(viewModel.IsEndUserAppCardAllowed);
         Assert.True(viewModel.IsResearchGated);
         Assert.Equal("blocked", viewModel.PromotionState);
+        Assert.Equal("Review only", viewModel.PrimaryActionDisplayText);
+        Assert.False(viewModel.ApplyCommand.CanExecute(null));
     }
 
     [Fact]
@@ -152,8 +154,105 @@ public sealed class TweakItemViewModelTests
         var evaluator = new WorkspaceFilterEvaluator(new TweaksShellStateViewModel());
 
         Assert.False(viewModel.IsEndUserAppCardAllowed);
+        Assert.True(viewModel.IsPromotionHold);
+        Assert.False(viewModel.CanDebugOverridePromotionGate);
+        Assert.Equal("Review only", viewModel.PrimaryActionDisplayText);
+        Assert.False(viewModel.ApplyCommand.CanExecute(null));
         Assert.False(evaluator.FilterTweak(viewModel));
         Assert.False(evaluator.CurrentWorkspaceContainsCategory(new[] { viewModel }, viewModel.Category));
+    }
+
+    [Fact]
+    public void StartupQa_BlocksNormalRunsForNonEndUserCards()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new TestTweak("security.review-only-test");
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false);
+
+        viewModel.ApplyEvidenceClassification(new TweakEvidenceClassEntry
+        {
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            EvidenceClass = "A",
+            ClassLabel = "Class A",
+            ClassTitle = "Ready",
+            ClassDescription = "Ready for review",
+            ActionState = "actionable",
+            GatingReason = string.Empty,
+            IsActionable = true,
+            ShowInApp = true,
+        });
+        viewModel.ApplyResearchPromotionGate(new TweakPromotionGateEntry
+        {
+            CandidateId = tweak.Id,
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            TweakOrigin = "research-derived",
+            PromotionState = "intentional-hold",
+            RecordPromotionAllowed = false,
+            TweakIngestAllowed = false,
+            ApplyAllowed = false,
+            AppMappingStatus = "review-only",
+            NextMissingLayer = "intentional-hold",
+            DebugOverrideAllowed = true,
+        });
+
+        var normalRequest = new StartupQaRequest(
+            tweak.Id,
+            "C:\\Temp\\qa.json",
+            RollbackAfterApply: true,
+            AllowGatedMutation: false,
+            ShutdownWhenDone: false);
+        var gatedRequest = normalRequest with { AllowGatedMutation = true };
+
+        Assert.False(viewModel.IsEndUserAppCardAllowed);
+        Assert.True(StartupQaRunner.BlocksNormalAppCardQa(viewModel, normalRequest));
+        Assert.False(StartupQaRunner.BlocksNormalAppCardQa(viewModel, gatedRequest));
+    }
+
+    [Fact]
+    public void LegacyCuratedIntentionalHold_IsStillReviewOnly()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new TestTweak("security.legacy-hold-gate-test");
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false);
+
+        viewModel.ApplyEvidenceClassification(new TweakEvidenceClassEntry
+        {
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            EvidenceClass = "A",
+            ClassLabel = "Class A",
+            ClassTitle = "Ready",
+            ClassDescription = "Ready for app surface",
+            ActionState = "actionable",
+            GatingReason = string.Empty,
+            IsActionable = true,
+            ShowInApp = true,
+        });
+        viewModel.ApplyResearchPromotionGate(new TweakPromotionGateEntry
+        {
+            CandidateId = tweak.Id,
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            TweakOrigin = "legacy-curated",
+            PromotionState = "intentional-hold",
+            PromotionBlockers = new List<string> { "manual-review" },
+            RecordPromotionAllowed = false,
+            TweakIngestAllowed = true,
+            ApplyAllowed = false,
+            AppMappingStatus = "hold",
+            NextMissingLayer = "intentional-hold",
+            DebugOverrideAllowed = true,
+        });
+        var evaluator = new WorkspaceFilterEvaluator(new TweaksShellStateViewModel());
+
+        Assert.False(viewModel.IsPromotionActionable);
+        Assert.False(viewModel.IsMutationAllowed);
+        Assert.False(viewModel.IsEndUserAppCardAllowed);
+        Assert.Equal("Review only", viewModel.PrimaryActionDisplayText);
+        Assert.False(viewModel.ApplyCommand.CanExecute(null));
+        Assert.False(evaluator.FilterTweak(viewModel));
     }
 
     [Fact]
@@ -186,6 +285,49 @@ public sealed class TweakItemViewModelTests
         Assert.Equal("partial", viewModel.SourceSnapshotState);
         var sourceLane = Assert.Single(viewModel.ProofLanes, lane => lane.Key == "source");
         Assert.False(sourceLane.HasLinks);
+        Assert.Contains("Catalog-only source context", sourceLane.Summary, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public void SourceSnapshot_DoesNotTreatCatalogLinkAsSourceProof()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new TestTweak("system.catalog-link-source");
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false);
+
+        viewModel.ApplyEvidenceClassification(new TweakEvidenceClassEntry
+        {
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            EvidenceClass = "A",
+            ClassLabel = "Class A",
+            ClassTitle = "Ready",
+            ClassDescription = "Ready for app surface",
+            ActionState = "actionable",
+            GatingReason = string.Empty,
+            IsActionable = true,
+            ShowInApp = true,
+            UpstreamLineage = new TweakEvidenceProofBlock
+            {
+                Summary = PublicEvidenceLinkPolicy.NoLocalSourceMessage,
+                HasNohutoLineage = false,
+                Links =
+                {
+                    new TweakEvidenceLink
+                    {
+                        Title = "Catalog entry",
+                        Url = "Docs/research/evidence-atlas.md",
+                        Kind = "catalog"
+                    }
+                }
+            }
+        });
+
+        Assert.False(viewModel.HasUpstreamLineage);
+        Assert.Equal("partial", viewModel.SourceSnapshotState);
+        var sourceLane = Assert.Single(viewModel.ProofLanes, lane => lane.Key == "source");
+        Assert.False(sourceLane.HasLinks);
+        Assert.DoesNotContain(sourceLane.Links, link => link.Kind == ReferenceLinkKind.Catalog);
         Assert.Contains("Catalog-only source context", sourceLane.Summary, StringComparison.OrdinalIgnoreCase);
     }
 
@@ -333,6 +475,39 @@ public sealed class TweakItemViewModelTests
         Assert.Equal("partial", viewModel.RuntimeSnapshotState);
         Assert.Equal("missing", viewModel.RollbackSnapshotState);
         Assert.Contains("evidence-first", viewModel.RiskSnapshotText);
+    }
+
+    [Fact]
+    public void RuntimeSnapshot_TreatsPlaceholderRuntimeSummaryAsPartial()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new TestTweak("security.runtime-placeholder-test");
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false);
+
+        viewModel.ApplyEvidenceClassification(new TweakEvidenceClassEntry
+        {
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            EvidenceClass = "D",
+            ClassLabel = "Class D",
+            ClassTitle = "Needs runtime proof",
+            ClassDescription = "Runtime evidence still pending",
+            ActionState = "research-gated",
+            GatingReason = "Evidence pending",
+            IsActionable = false,
+            ShowInApp = true,
+            RuntimeProof = new TweakEvidenceProofBlock
+            {
+                Summary = "No runtime proof is attached yet. This record still needs VM validation.",
+                NeedsVmValidation = true
+            }
+        });
+
+        Assert.False(viewModel.HasRuntimeProof);
+        Assert.Equal("partial", viewModel.RuntimeSnapshotState);
+        var runtimeLane = Assert.Single(viewModel.ProofLanes, lane => lane.Key == "runtime");
+        Assert.Equal("partial", runtimeLane.State);
+        Assert.Contains("No runtime proof", runtimeLane.Summary, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]

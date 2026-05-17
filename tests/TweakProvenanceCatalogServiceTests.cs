@@ -1,7 +1,14 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using RegProbe.App.Services;
+using RegProbe.App.ViewModels;
+using RegProbe.Core;
+using RegProbe.Engine;
+using RegProbe.Engine.Tweaks;
+using RegProbe.Infrastructure;
 
 namespace RegProbe.Tests;
 
@@ -101,6 +108,23 @@ public sealed class TweakProvenanceCatalogServiceTests : IDisposable
             reference.Url.Contains("netsh-winsock", StringComparison.OrdinalIgnoreCase));
     }
 
+    [Fact]
+    public void Apply_SuppressesExternalNohutoReferences_AsUserFacingSourceProof()
+    {
+        var service = new TweakProvenanceCatalogService(_docsRoot);
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var viewModel = new TweakItemViewModel(new TestTweak("cleanup.eventlog-system"), pipeline, isElevated: false);
+
+        service.Apply(new[] { viewModel });
+
+        Assert.False(viewModel.HasNohutoEvidence);
+        Assert.DoesNotContain(
+            viewModel.ReferenceLinks,
+            link => link.Url.Contains("github.com/nohuto/", StringComparison.OrdinalIgnoreCase));
+        Assert.DoesNotContain(viewModel.ReferenceLinks, link => link.Kind == ReferenceLinkKind.Source);
+        Assert.Contains("No RegProbe-controlled local source mirror", viewModel.ProvenanceSummary, StringComparison.OrdinalIgnoreCase);
+    }
+
     public void Dispose()
     {
         try
@@ -114,5 +138,38 @@ public sealed class TweakProvenanceCatalogServiceTests : IDisposable
         {
             // Best effort cleanup for temp fixtures.
         }
+    }
+
+    private sealed class RecordingLogger : IAppLogger
+    {
+        public void Log(LogLevel level, string message, Exception? exception = null)
+        {
+        }
+    }
+
+    private sealed class TestTweak : ITweak
+    {
+        public TestTweak(string id)
+        {
+            Id = id;
+        }
+
+        public string Id { get; }
+        public string Name => "Test";
+        public string Description => "Test";
+        public TweakRiskLevel Risk => TweakRiskLevel.Safe;
+        public bool RequiresElevation => false;
+
+        public Task<TweakResult> DetectAsync(CancellationToken ct)
+            => Task.FromResult(new TweakResult(TweakStatus.Detected, "Detected", DateTimeOffset.UtcNow));
+
+        public Task<TweakResult> ApplyAsync(CancellationToken ct)
+            => Task.FromResult(new TweakResult(TweakStatus.Applied, "Applied", DateTimeOffset.UtcNow));
+
+        public Task<TweakResult> VerifyAsync(CancellationToken ct)
+            => Task.FromResult(new TweakResult(TweakStatus.Verified, "Verified", DateTimeOffset.UtcNow));
+
+        public Task<TweakResult> RollbackAsync(CancellationToken ct)
+            => Task.FromResult(new TweakResult(TweakStatus.RolledBack, "Rolled back", DateTimeOffset.UtcNow));
     }
 }

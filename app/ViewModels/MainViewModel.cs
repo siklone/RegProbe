@@ -70,6 +70,9 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     public bool IsContributorEntryVisible => true;
 
+    public string ContributorEntryTooltip =>
+        "Contributor Lab is visible for discovery, but locked behind an explicit VM/snapshot risk acknowledgement.";
+
     public bool CanFocusSearch => IsConfigurationViewActive || IsRepairsViewActive;
 
     public string FocusSearchLabel => CanFocusSearch ? "Search" : "Search unavailable";

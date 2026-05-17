@@ -578,9 +578,10 @@ def build_ledger(
     status_counts = Counter(str(item.get("cleanup_status")) for item in items)
     delete_candidate_count = status_counts.get("delete-candidate", 0)
     return {
-        "schema_version": "1.0",
+        "schema_version": "1.1",
         "generated_utc": generated_utc or now_utc(),
         "purpose": "Quarantine ledger for cleanup review inventory. Only delete-candidate rows are cleanup candidates; retained rows are not deletion candidates.",
+        "candidate_semantics": "candidate means cleanup_status=delete-candidate. Review inventory and retained inventory are explicitly not deletion candidates.",
         "deletion_policy": [
             "No file is deleted by this generator.",
             "Delete only when live_reference_count is 0.",
@@ -590,8 +591,11 @@ def build_ledger(
         ],
         "summary": {
             "total_items": len(items),
+            "review_inventory_count": len(items),
             "delete_candidate_count": delete_candidate_count,
+            "cleanup_candidate_count": delete_candidate_count,
             "retained_inventory_count": len(items) - delete_candidate_count,
+            "retained_not_candidate_count": len(items) - delete_candidate_count,
             "delete_eligible_count": sum(1 for item in items if item.get("delete_eligible")),
             "referenced_count": sum(1 for item in items if int(item.get("live_reference_count") or 0) > 0),
             "blocking_referenced_count": sum(1 for item in items if int(item.get("blocking_reference_count") or 0) > 0),
@@ -618,6 +622,8 @@ def render_markdown(payload: dict[str, Any]) -> str:
         "",
         str(payload.get("purpose") or ""),
         "",
+        f"Candidate semantics: {payload.get('candidate_semantics') or 'Only delete-candidate rows are cleanup candidates.'}",
+        "",
         "## Deletion Policy",
         "",
     ]
@@ -631,12 +637,13 @@ def render_markdown(payload: dict[str, Any]) -> str:
             "| Metric | Value |",
             "|---|---:|",
             f"| Review inventory items | {int(summary.get('total_items') or 0)} |",
-            f"| Delete candidates | {int(summary.get('delete_candidate_count') or 0)} |",
+            f"| Cleanup candidates | {int(summary.get('cleanup_candidate_count') if summary.get('cleanup_candidate_count') is not None else summary.get('delete_candidate_count') or 0)} |",
             f"| Retained inventory items | {int(summary.get('retained_inventory_count') or 0)} |",
+            f"| Retained non-candidates | {int(summary.get('retained_not_candidate_count') if summary.get('retained_not_candidate_count') is not None else summary.get('retained_inventory_count') or 0)} |",
             f"| Referenced items | {int(summary.get('referenced_count') or 0)} |",
             f"| Blocking referenced items | {int(summary.get('blocking_referenced_count') or 0)} |",
             f"| Audit-only referenced items | {int(summary.get('audit_only_referenced_count') or 0)} |",
-            f"| Delete eligible after review | {int(summary.get('delete_eligible_count') or 0)} |",
+            f"| Delete eligible now | {int(summary.get('delete_eligible_count') or 0)} |",
             f"| Total sampled size bytes | {int(summary.get('total_size_bytes') or 0)} |",
             "",
             "## Categories",

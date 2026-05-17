@@ -1,6 +1,6 @@
 # Research Artifact Map
 
-Generated: `2026-05-15T12:57:56Z`
+Generated: `2026-05-17T03:48:02Z`
 
 This is the contributor entrypoint for current research artifacts. Use it
 instead of browsing raw audit folders first.
@@ -12,6 +12,8 @@ instead of browsing raw audit folders first.
 - Contributor Lab VM smoke: `ok`.
 - Custom value app-card ready: `0`.
 - Custom value noisy results: `0`; non-ok results: `0`.
+- Custom value legacy prefix: `operator96` is historical filename context, not product branding.
+- Cleanup candidates: `0`; review inventory: `89`; retained non-candidates: `89`.
 - Cleanup delete-eligible items: `0`.
 - Cleanup retained inventory: `89`; active actions: `0`; reference migration needed: `0`; retention decision queue: `0`; audit-only retained: `24`.
 

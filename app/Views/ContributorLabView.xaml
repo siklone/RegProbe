@@ -211,14 +211,14 @@
                                        Style="{StaticResource UtilitySectionTitleTextStyle}"/>
                             <TextBlock Margin="0,8,0,0"
                                        Style="{StaticResource UtilitySectionBodyTextStyle}"
-                                       Text="This area is for people validating registry behavior with disposable VMs, snapshots, and reproducible scripts. It can lead to registry mutation, guest reboot, broken boot states, or noisy benchmark data if used casually."/>
+                                       Text="{Binding RiskGateSummary}"/>
                             <TextBlock Margin="0,8,0,0"
                                        Style="{StaticResource UtilitySectionBodyTextStyle}"
-                                       Text="Normal RegProbe users should use Tweaks. Contributor Lab data is research context unless it is reference-eligible and backed by clean VM artifacts."/>
+                                       Text="{Binding RiskGateBoundary}"/>
                             <CheckBox IsChecked="{Binding RiskAcknowledged}"
                                       Margin="0,14,0,0"
                                       Foreground="#E7E7E7"
-                                      Content="I read this and understand that certified mutation requires a disposable Windows 11 VM, a clean snapshot, rollback proof, and tight noise gates."/>
+                                      Content="{Binding RiskAcknowledgementText}"/>
                             <Button Content="Enable Contributor Lab"
                                     Command="{Binding EnableContributorToolsCommand}"
                                     HorizontalAlignment="Left"
@@ -356,6 +356,35 @@
                                 <TextBlock Text="{Binding CustomValueWorkflowChecklist}"
                                            Margin="0,10,0,8"
                                            Style="{StaticResource ContributorMonoTextStyle}"/>
+                                <Border Background="#080D12"
+                                        BorderBrush="#263B50"
+                                        BorderThickness="1"
+                                        CornerRadius="8"
+                                        Padding="10"
+                                        Margin="0,0,0,10">
+                                    <StackPanel>
+                                        <TextBlock Text="Single key investigation contract"
+                                                   Style="{StaticResource UtilitySectionBodyTextStyle}"/>
+                                        <TextBlock Text="{Binding CustomValueInvestigationContract}"
+                                                   Margin="0,5,0,6"
+                                                   Style="{StaticResource ContributorMonoTextStyle}"/>
+                                        <TextBlock Text="{Binding CustomValueStorySummary}"
+                                                   Margin="0,0,0,6"
+                                                   Style="{StaticResource ContributorMonoTextStyle}"/>
+                                        <TextBlock Text="{Binding CustomValueMutationBoundarySummary}"
+                                                   Margin="0,0,0,8"
+                                                   Style="{StaticResource UtilitySectionBodyTextStyle}"/>
+                                        <ItemsControl ItemsSource="{Binding CustomValueEvidenceChecklist}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding StringFormat='- {0}'}"
+                                                               Margin="0,2,0,0"
+                                                               Style="{StaticResource UtilitySectionBodyTextStyle}"/>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </StackPanel>
+                                </Border>
                                 <WrapPanel Margin="0,0,0,10">
                                     <Button Content="Run lookup"
                                             Command="{Binding RunCustomLookupCommand}"

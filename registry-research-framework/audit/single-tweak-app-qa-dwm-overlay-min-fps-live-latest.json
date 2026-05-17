@@ -1,0 +1,230 @@
+{
+  "TweakId": "system.dwm-disable-overlay-min-fps",
+  "TweakName": "DWM Overlay Minimum FPS Check",
+  "Success": true,
+  "Status": "ok",
+  "Summary": "Apply/verify path completed and rollback restored the tweak.",
+  "RollbackRequested": true,
+  "GatedMutationOverrideRequested": false,
+  "GatedMutationOverrideUsed": false,
+  "Card": {
+    "TweakId": "system.dwm-disable-overlay-min-fps",
+    "Name": "DWM Overlay Minimum FPS Check",
+    "Category": "System",
+    "Description": "Windows can use hardware overlays for some content, and one of the checks looks at how fast the surface is animating. This setting turns that minimum-FPS check off.",
+    "FriendlyDescription": "Windows can use hardware overlays for some content, and one of the checks looks at how fast the surface is animating. This setting turns that minimum-FPS check off.",
+    "RegistryPath": "HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm\\OverlayMinFPS",
+    "EvidenceClass": "A",
+    "EvidenceClassTitle": "Cross-Layer Verified",
+    "ResearchStatus": "PROMOTED",
+    "IsMutationAllowed": true,
+    "RollbackSnapshotState": "ready",
+    "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+    "HasClaimBoundary": true,
+    "WhatWeKnowSummary": "Claim: Windows can use hardware overlays for some content, and one of the checks looks at how fast the surface is animating. This setting turns that minimum-FPS check off. Evidence: Microsoft Learn documents the exact DWM runtime path and explains that setting OverlayMinFPS to 0 disables the minimum frame-rate check used for overlay assignment. Rollback: Rollback: Verified via record-restore-story.",
+    "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+    "ProofLanes": [
+      {
+        "Key": "docs",
+        "Label": "DOCS",
+        "State": "ready",
+        "Summary": "Microsoft Learn documents the exact DWM runtime path and explains that setting OverlayMinFPS to 0 disables the minimum frame-rate check used for overlay assignment.",
+        "Source": ""
+      },
+      {
+        "Key": "runtime",
+        "Label": "RUNTIME",
+        "State": "ready",
+        "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "Source": ""
+      },
+      {
+        "Key": "source",
+        "Label": "SOURCE",
+        "State": "partial",
+        "Summary": "No RegProbe-controlled local source mirror or pseudocode evidence is attached for this card. Catalog-only source context is not a value-semantics proof; the catalog index is naming/navigation context only. Docs, Runtime, and Rollback carry the app-safety proof.",
+        "Source": ""
+      },
+      {
+        "Key": "rollback",
+        "Label": "ROLLBACK",
+        "State": "ready",
+        "Summary": "Rollback: Verified via record-restore-story.",
+        "Source": "record-restore-story"
+      }
+    ],
+    "ReferenceLinks": [
+      {
+        "Title": "Docs: Details",
+        "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#system.dwm-disable-overlay-min-fps",
+        "Kind": "Details"
+      },
+      {
+        "Title": "Docs: Win-Config",
+        "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.dwm-disable-overlay-min-fps",
+        "Kind": "Docs"
+      },
+      {
+        "Title": "Docs: System",
+        "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md#system.dwm-disable-overlay-min-fps",
+        "Kind": "Docs"
+      }
+    ]
+  },
+  "Stages": [
+    {
+      "Stage": "detect-before",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Value not set.",
+      "OutcomeSummary": "Detect - Success",
+      "CurrentValue": "Not set",
+      "TargetValue": "0 (0x0)",
+      "WasRolledBack": false,
+      "IsMutationAllowed": true,
+      "HasSuccessfulApplyStory": false,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Value not set.",
+          "TimestampText": "20:45:45"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        }
+      ]
+    },
+    {
+      "Stage": "apply",
+      "AppliedStatus": "Applied",
+      "StatusMessage": "Run completed.",
+      "OutcomeSummary": "Apply - Success",
+      "CurrentValue": "0 (0x0)",
+      "TargetValue": "0 (0x0)",
+      "WasRolledBack": false,
+      "IsMutationAllowed": true,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Value not set.",
+          "TimestampText": "20:45:45"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Set value to 0.",
+          "TimestampText": "20:45:50"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Verified desired value.",
+          "TimestampText": "20:45:50"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Not required",
+          "Message": "Step not executed.",
+          "TimestampText": "-"
+        }
+      ]
+    },
+    {
+      "Stage": "rollback",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Removed value to restore default.",
+      "OutcomeSummary": "Rollback - Rolled Back",
+      "CurrentValue": "0 (0x0)",
+      "TargetValue": "0 (0x0)",
+      "WasRolledBack": true,
+      "IsMutationAllowed": true,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": true,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Value not set.",
+          "TimestampText": "20:45:45"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Set value to 0.",
+          "TimestampText": "20:45:50"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Verified desired value.",
+          "TimestampText": "20:45:50"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Rolled back",
+          "Message": "Removed value to restore default.",
+          "TimestampText": "20:45:50"
+        }
+      ]
+    },
+    {
+      "Stage": "detect-after",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Value not set.",
+      "OutcomeSummary": "Detect - Success",
+      "CurrentValue": "Not set",
+      "TargetValue": "0 (0x0)",
+      "WasRolledBack": true,
+      "IsMutationAllowed": true,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": true,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Value not set.",
+          "TimestampText": "20:45:50"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Set value to 0.",
+          "TimestampText": "20:45:50"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Verified desired value.",
+          "TimestampText": "20:45:50"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Rolled back",
+          "Message": "Removed value to restore default.",
+          "TimestampText": "20:45:50"
+        }
+      ]
+    }
+  ],
+  "StartedAtUtc": "2026-05-17T17:45:45.7498629+00:00",
+  "CompletedAtUtc": "2026-05-17T17:45:50.9216686+00:00"
+}

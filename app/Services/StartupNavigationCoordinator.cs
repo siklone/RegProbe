@@ -18,7 +18,7 @@ internal static class StartupNavigationCoordinator
         }
 
         var target = workspace.Tweaks.FirstOrDefault(tweak =>
-            tweak.ShowInApp
+            tweak.IsEndUserAppCardAllowed
             && string.Equals(tweak.Id, tweakId.Trim(), StringComparison.OrdinalIgnoreCase));
         if (target is null)
         {

@@ -343,10 +343,19 @@ def main() -> int:
     parser.add_argument("--project-path", default="app/app.csproj")
     parser.add_argument("--configuration", default="Release")
     parser.add_argument("--runtime", default="win-x64")
-    parser.add_argument(
+    publish_mode = parser.add_mutually_exclusive_group()
+    publish_mode.add_argument(
         "--self-contained",
+        dest="self_contained",
         action="store_true",
-        help="Publish with the Windows runtime included. Use this for VMs without dotnet/Microsoft.WindowsDesktop.App installed.",
+        default=True,
+        help="Publish with the Windows runtime included. This is the default for clean VM smoke lanes.",
+    )
+    publish_mode.add_argument(
+        "--framework-dependent",
+        dest="self_contained",
+        action="store_false",
+        help="Publish without bundling the runtime. Use only when the guest already has Microsoft.WindowsDesktop.App installed.",
     )
     parser.add_argument("--dotnet-path")
     parser.add_argument("--work-root")

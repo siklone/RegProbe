@@ -56,26 +56,31 @@ public static class ContributorLabResultPreviewBuilder
             var candidateId = Text(best, "candidate_id");
             AppendLine(builder, $"Best match: {FirstNonEmpty(name, candidateId, "unknown")} ({Text(best, "promotion_state", "unknown")}, apply_allowed={BoolText(best, "apply_allowed")})");
             AppendLine(builder, $"App mapping: {Text(best, "app_mapping_status", "unknown")}; rollback previous={BoolText(best, "restore_previous_supported")}; rollback default={BoolText(best, "restore_default_supported")}");
+            AppendLine(
+                builder,
+                $"Value story inputs: tracked targets={Array(best, "record_targets").Count}; default/profile records={Array(best, "windows_and_recommended_profiles").Count}; app writes={Array(best, "app_write_targets").Count}");
 
             var appWrites = Array(best, "app_write_targets")
                 .Select(FormatTarget)
                 .Where(static value => !string.IsNullOrWhiteSpace(value))
                 .Take(3)
                 .ToList();
-            if (appWrites.Count > 0)
-            {
-                AppendLine(builder, "App writes: " + string.Join("; ", appWrites));
-            }
+            AppendLine(
+                builder,
+                "App writes: " + (appWrites.Count > 0
+                    ? string.Join("; ", appWrites)
+                    : "none listed (not app-card-ready until the app write is explicit)"));
 
             var profiles = Array(best, "windows_and_recommended_profiles")
                 .Select(FormatProfile)
                 .Where(static value => !string.IsNullOrWhiteSpace(value))
                 .Take(2)
                 .ToList();
-            if (profiles.Count > 0)
-            {
-                AppendLine(builder, "Default/profile story: " + string.Join("; ", profiles));
-            }
+            AppendLine(
+                builder,
+                "Default/profile story: " + (profiles.Count > 0
+                    ? string.Join("; ", profiles)
+                    : "none listed (default must be found or marked unknown before app-card review)"));
 
             var evidenceKinds = Array(best, "evidence")
                 .Select(evidence => Text(evidence, "kind"))

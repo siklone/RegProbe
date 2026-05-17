@@ -9,10 +9,12 @@ This folder is the quickest public path into RegProbe.
 
 The goal here is clarity: what the app does, what it does not do, what a safe session looks like, and how the product explains trust without asking a new reader to absorb the whole research pipeline first.
 
-Contributor Lab is not part of the normal end-user flow. In repo/dev builds it
-provides a gated Windows-first workspace for contributors to inspect readiness,
-copy canonical Python commands, and review research-only observations without
-promoting them into shipped cards.
+Contributor Lab is not part of the normal end-user flow. It is visible in the app
+shell so contributors can find it, but it opens to a locked acknowledgement gate
+before any readiness, command pack, or research-observation detail is shown. Once
+unlocked, it provides a Windows-first workspace for contributors to inspect
+readiness, copy canonical Python commands, and review research-only observations
+without promoting them into shipped cards.
 
 For user-supplied key/value research, Contributor Lab presents the workflow as
 ordered evidence discovery steps: repo/evidence lookup, existing app-card QA
