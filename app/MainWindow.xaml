@@ -350,10 +350,11 @@
                             Tag="{Binding IsRepairsViewActive}"
                             Margin="0,0,16,0"
                             Style="{StaticResource ShellTopTabButtonStyle}"/>
-                    <Button Content="Contributor"
+                    <Button Content="Contributor Lab"
                             Command="{Binding ShowContributorCommand}"
                             Tag="{Binding IsContributorViewActive}"
                             Visibility="{Binding IsContributorEntryVisible, Converter={StaticResource BoolToVisibility}}"
+                            ToolTip="{Binding ContributorEntryTooltip}"
                             Margin="0,0,16,0"
                             Style="{StaticResource ShellTopTabButtonStyle}"/>
                     <Button Content="Diagnostics"

@@ -63,6 +63,9 @@ class Operator96AppSurfaceReviewTests(unittest.TestCase):
         self.assertEqual(review["summary"]["needs_low_noise_rerun"], 0)
         self.assertEqual(review["summary"]["not_app_surface_ready"], 79)
         self.assertEqual(review["summary"]["blocked_by_gate"], 17)
+        self.assertEqual(review["display_name"], "Custom Registry Value App Surface Review")
+        self.assertEqual(review["legacy_artifact_prefix"], "operator96")
+        self.assertIn("historical filename prefix", review["legacy_artifact_note"])
 
         watchdog = next(
             record

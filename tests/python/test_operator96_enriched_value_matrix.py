@@ -159,6 +159,17 @@ class Operator96EnrichedValueMatrixTests(unittest.TestCase):
         self.assertFalse(gate["eligible_for_app_card"])
         self.assertIn("security-mitigation-override", gate["blockers"])
 
+    def test_payload_uses_neutral_display_name_with_legacy_filename_note(self):
+        payload = self.module.build_matrix(
+            {"plan": [row()]},
+            {"results": []},
+            [],
+        )
+
+        self.assertEqual(payload["display_name"], "Custom Registry Value Enriched Matrix")
+        self.assertEqual(payload["legacy_artifact_prefix"], "operator96")
+        self.assertIn("historical filename prefix", payload["legacy_artifact_note"])
+
 
 if __name__ == "__main__":
     unittest.main()

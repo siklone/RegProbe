@@ -6794,27 +6794,6 @@
           ]
         },
         {
-          "id": "system.executive-additional-worker-threads",
-          "name": "Executive Additional Worker Threads",
-          "description": "These values appear to control extra executive worker threads for internal critical and delayed work queues. They are low-level kernel-adjacent knobs and are being tracked as research only.",
-          "documentation": "research/records/system.executive-additional-worker-threads.json",
-          "verified": true,
-          "batch_entries": [
-            {
-              "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
-              "value_name": "AdditionalCriticalWorkerThreads",
-              "type": "REG_DWORD",
-              "target_value": 0
-            },
-            {
-              "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
-              "value_name": "AdditionalDelayedWorkerThreads",
-              "type": "REG_DWORD",
-              "target_value": 0
-            }
-          ]
-        },
-        {
           "id": "system.graphics-tdr-ddi-delay",
           "name": "Graphics TDR DDI Delay",
           "description": "Windows gives graphics-driver threads a limited amount of time to leave the driver during TDR recovery. This setting controls that delay.",
@@ -6959,17 +6938,6 @@
               ]
             }
           ]
-        },
-        {
-          "id": "system.kernel.disable-exception-chain-validation",
-          "name": "Disable Exception Chain Validation",
-          "description": "DisableExceptionChainValidation is a low-level Session Manager Kernel registry value tied to exception-chain policy handling during early boot.",
-          "documentation": "research/records/system.kernel.disable-exception-chain-validation.json",
-          "verified": true,
-          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
-          "value_name": "DisableExceptionChainValidation",
-          "type": "REG_DWORD",
-          "recommended_value": 1
         },
         {
           "id": "system.memory-clear-pagefile-at-shutdown",

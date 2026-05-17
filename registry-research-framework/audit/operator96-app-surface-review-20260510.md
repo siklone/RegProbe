@@ -1,8 +1,10 @@
 # Custom Registry Value App Surface Review
 
-- Generated UTC: `2026-05-15T12:57:08Z`
+- Generated UTC: `2026-05-17T14:47:31Z`
 - Matrix: `registry-research-framework/audit/operator96-enriched-value-matrix-20260510.json`
 - Aggregate: `registry-research-framework/audit/operator96-low-noise-rerun-aggregate-20260512.json`
+- Legacy artifact prefix: `operator96`
+- Legacy note: operator96 is a historical filename prefix for the user-supplied seed batch, not product branding.
 - Records: `96`
 - Ready for bounded app card: `0`
 - Needs low-noise rerun: `0`

@@ -37,12 +37,12 @@ public sealed class TweakProvenanceCatalogService
                 tweak.HasNohutoEvidence = false;
                 tweak.HasWindowsInternalsContext = false;
                 tweak.NeedsSourceReview = true;
-                tweak.ProvenanceSummary = "No upstream dump or pseudocode source is linked yet. Keep this tweak in review until the validation proof and app mapping are strong enough.";
+                tweak.ProvenanceSummary = PublicEvidenceLinkPolicy.NoLocalSourceMessage;
                 continue;
             }
 
             var visibleReferences = entry.References
-                .Where(static reference => !PublicEvidenceLinkPolicy.IsSuppressedExternalPseudocodeUrl(reference.Url))
+                .Where(static reference => !PublicEvidenceLinkPolicy.IsSuppressedExternalSourceUrl(reference.Url))
                 .Take(4)
                 .ToList();
 
@@ -84,12 +84,12 @@ public sealed class TweakProvenanceCatalogService
     {
         if (entry.HasNohutoEvidence && entry.HasWindowsInternalsContext)
         {
-            return "Linked to upstream dump / pseudocode sources and Windows Internals notes. Value semantics are still validated in the research record.";
+            return "Linked to source-discovery notes and Windows Internals context. Value semantics are still validated in the research record.";
         }
 
         if (entry.HasNohutoEvidence)
         {
-            return "Linked to upstream dump / pseudocode sources. These links show where the setting came from, not what each value means.";
+            return "Linked to source-discovery notes. These links show where the setting came from, not what each value means.";
         }
 
         if (entry.HasWindowsInternalsContext)

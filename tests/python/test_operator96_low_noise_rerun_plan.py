@@ -37,6 +37,9 @@ class Operator96LowNoiseRerunPlanTests(unittest.TestCase):
         self.assertIn("--abort-on-noisy-host", plan["commands"]["run"])
         self.assertIn("--run", plan["commands"]["run"])
         self.assertNotIn("--run", plan["commands"]["plan_only"])
+        self.assertEqual(plan["display_name"], "Custom Registry Value Low-Noise Rerun Plan")
+        self.assertEqual(plan["legacy_artifact_prefix"], "operator96")
+        self.assertIn("historical filename prefix", plan["legacy_artifact_note"])
 
     def test_real_repo_second_tranche_is_empty_when_no_low_noise_records_remain(self):
         plan = self.module.build_plan(

@@ -19,11 +19,11 @@ Before adding or deleting generated data, read
 canonical scripts, and sanitized audit fixtures belong in git; credentials,
 personal VM state, raw noisy dumps, and machine-local scratch output do not.
 
-Windows contributors can also use the WPF Contributor Lab from a repo/dev build.
-It is gated by an explicit acknowledgement and is intentionally conservative:
-readiness checks, command packs, and research observations are visible there,
-but direct mutation still requires certified VM/snapshot readiness and the
-canonical Python/VM scripts.
+Windows contributors can also use the WPF Contributor Lab from the app shell. It
+is visible for discovery, gated by an explicit acknowledgement, and intentionally
+conservative: readiness checks, command packs, and research observations appear
+there after acknowledgement, but direct mutation still requires certified
+VM/snapshot readiness and the canonical Python/VM scripts.
 
 ## Core Rules
 
@@ -313,7 +313,12 @@ If you are validating the desktop app itself, `research qa-plan` is the next hop
 
 When you run several live promoted batches, treat `registry-research-framework/audit/promoted-app-qa-batch-latest.json` as the newest snapshot only. The cumulative view lives in `registry-research-framework/audit/promoted-app-qa-batch-history.jsonl` plus the paired coverage files `promoted-app-qa-coverage-latest.json` and `promoted-app-qa-coverage-latest.md`.
 
-Current audit snapshot: as of 2026-05-14, app retest readiness is passing with `265` app-surface entries, `0` app-only backlog items, `261` apply-allowed records, and `0` missing rollback stories. App-card contracts are `258/258 PASS`, promoted app-QA coverage is `258/258` (`100.0%`), and the latest live promoted app-QA batch is `14/14 PASS`. Custom registry value experiment reruns have `non_ok=0` and `noisy_result_count=0`, but remain Contributor Lab observations because `ready_for_bounded_app_card=0`; use the Contributor Lab observation browser for bucket, blocker, tested-value, verdict/noise, smoke, and artifact triage. If you change shipped providers, card mapping, promotion gates, evidence links, or rollback behavior, refresh the artifact map, readiness, app-card contracts, and promoted app-QA batch coverage before handing the repo back.
+Current audit snapshot: as of 2026-05-16, app retest readiness is passing with `265` app-surface entries, `0` app-only backlog items, `261` apply-allowed records, and `0` missing rollback stories. App-card contracts are `258/258 PASS`, promoted app-QA coverage is `258/258` (`100.0%`), and the latest live promoted app-QA batch is `14/14 PASS`. Custom registry value experiment reruns have `non_ok=0` and `noisy_result_count=0`, but remain Contributor Lab observations because `ready_for_bounded_app_card=0`; use the Contributor Lab observation browser for bucket, blocker, tested-value, verdict/noise, smoke, and artifact triage. Treat any `operator96` path prefix as legacy artifact naming for the user-supplied seed batch, not product branding. Cleanup quarantine currently reports `cleanup_candidate_count=0`, `review_inventory_count=89`, and `retained_not_candidate_count=89`, so the 89-row ledger is retained review inventory, not a deletion-candidate queue. If you change shipped providers, card mapping, promotion gates, evidence links, rollback behavior, or cleanup classification, refresh the artifact map, readiness, app-card contracts, and promoted app-QA batch coverage before handing the repo back.
+
+When working on user-supplied custom registry value experiments, prefer the
+neutral `generate_custom_value_*` and `aggregate_custom_value_*` script
+entrypoints. Historical `operator96_*` names stay available only so old
+artifacts and tests remain reproducible.
 
 For a single-card retest, keep a JSON artifact when the result will be needed later:
 

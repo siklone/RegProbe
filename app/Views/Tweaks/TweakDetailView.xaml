@@ -294,7 +294,7 @@
                                   Style="{StaticResource DetailHeaderToggleButtonStyle}"
                                   Visibility="{Binding SelectedTweakPane.HasSelectedTweak, Converter={StaticResource BoolToVisibility}}"/>
 
-                    <Button Content="{Binding SelectedTweakPane.SelectedTweak.ActionButtonText}"
+                    <Button Content="{Binding SelectedTweakPane.SelectedTweak.PrimaryActionDisplayText}"
                             Command="{Binding SelectedTweakPane.SelectedTweak.ApplyCommand}"
                             ToolTip="{Binding SelectedTweakPane.SelectedTweak.ConfigurationPrimaryActionTooltip}"
                             Style="{StaticResource DetailHeaderApplyButtonStyle}"

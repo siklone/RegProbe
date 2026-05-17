@@ -17,6 +17,8 @@ MARKDOWN_OUTPUT = AUDIT_DIR / "operator96-low-noise-rerun-plan-20260510.md"
 DEFAULT_OUTPUT_DIR = "registry-research-framework/audit/registry-value-experiments-low-noise-20260510"
 DEFAULT_CAMPAIGN_OUTPUT = "registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260510.json"
 DEFAULT_MARKDOWN_OUTPUT = "registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260510.md"
+DISPLAY_NAME = "Custom Registry Value Low-Noise Rerun Plan"
+LEGACY_ARTIFACT_PREFIX = "operator96"
 
 
 def normalize_text(value: Any) -> str:
@@ -110,6 +112,9 @@ def build_plan(
         "generated_utc": datetime.now(UTC).isoformat(timespec="seconds").replace("+00:00", "Z"),
         "review": str(review_path.relative_to(REPO_ROOT)),
         "campaign_id": "operator96-low-noise-rerun-20260510",
+        "display_name": DISPLAY_NAME,
+        "legacy_artifact_prefix": LEGACY_ARTIFACT_PREFIX,
+        "legacy_artifact_note": "operator96 is a historical filename prefix for the user-supplied seed batch, not product branding.",
         "status": "PASS",
         "summary": {
             "candidate_record_count": len(records),
@@ -158,10 +163,12 @@ def render_markdown(plan: dict[str, Any]) -> str:
     summary = plan.get("summary") or {}
     commands = plan.get("commands") or {}
     lines = [
-        "# Custom Registry Value Low-Noise Rerun Plan",
+        f"# {plan.get('display_name') or DISPLAY_NAME}",
         "",
         f"- Generated UTC: `{plan.get('generated_utc')}`",
         f"- Review: `{plan.get('review')}`",
+        f"- Legacy artifact prefix: `{plan.get('legacy_artifact_prefix')}`",
+        f"- Legacy note: {plan.get('legacy_artifact_note')}",
         f"- Candidate records: `{summary.get('candidate_record_count')}`",
         f"- Start offset: `{summary.get('start_offset')}`",
         f"- Tranche records: `{summary.get('tranche_record_count')}`",

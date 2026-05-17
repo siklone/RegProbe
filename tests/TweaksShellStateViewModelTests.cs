@@ -102,4 +102,30 @@ public sealed class TweaksShellStateViewModelTests
         viewModel.ScopeFilter = "machine";
         Assert.True(viewModel.HasActiveFilters);
     }
+
+    [Fact]
+    public void CycleFilters_ChangesStatusAndScopeWithoutDropdownDependency()
+    {
+        var viewModel = new TweaksShellStateViewModel();
+
+        Assert.Equal("STATUS", viewModel.StatusFilterDisplayText);
+        viewModel.CycleStatusFilter();
+        Assert.Equal("applied", viewModel.StatusFilter);
+        Assert.Equal("APPLIED", viewModel.StatusFilterDisplayText);
+        viewModel.CycleStatusFilter();
+        Assert.Equal("rolledback", viewModel.StatusFilter);
+        viewModel.CycleStatusFilter();
+        Assert.Equal(string.Empty, viewModel.StatusFilter);
+
+        Assert.Equal("SCOPE", viewModel.ScopeFilterDisplayText);
+        viewModel.CycleScopeFilter();
+        Assert.Equal("machine", viewModel.ScopeFilter);
+        Assert.Equal("MACHINE", viewModel.ScopeFilterDisplayText);
+        viewModel.CycleScopeFilter();
+        Assert.Equal("user", viewModel.ScopeFilter);
+        viewModel.CycleScopeFilter();
+        Assert.Equal("mixed", viewModel.ScopeFilter);
+        viewModel.CycleScopeFilter();
+        Assert.Equal(string.Empty, viewModel.ScopeFilter);
+    }
 }

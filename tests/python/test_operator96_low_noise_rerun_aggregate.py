@@ -39,7 +39,7 @@ class Operator96LowNoiseRerunAggregateTests(unittest.TestCase):
             ):
                 write_json(root / name, "{}")
 
-            paths = self.module.find_campaign_paths(root)
+            paths = self.module.find_campaign_paths(root, pattern="operator96-low-noise-rerun-tranche*.json")
 
         self.assertEqual([path.name for path in paths], [
             "operator96-low-noise-rerun-tranche-20260510.json",
@@ -98,7 +98,9 @@ class Operator96LowNoiseRerunAggregateTests(unittest.TestCase):
             two = root / "operator96-low-noise-rerun-tranche-02-20260510.json"
             write_json(one, self.module.json.dumps(first))
             write_json(two, self.module.json.dumps(second))
-            aggregate = self.module.build_aggregate(self.module.find_campaign_paths(root))
+            aggregate = self.module.build_aggregate(
+                self.module.find_campaign_paths(root, pattern="operator96-low-noise-rerun-tranche*.json")
+            )
 
         self.assertEqual(aggregate["status"], "ok")
         self.assertEqual(aggregate["summary"]["result_count"], 2)
@@ -107,6 +109,15 @@ class Operator96LowNoiseRerunAggregateTests(unittest.TestCase):
         self.assertEqual(aggregate["summary"]["host_noise_counts"], {"noisy": 1, "ok": 1})
         self.assertEqual(aggregate["summary"]["noisy_result_count"], 1)
         self.assertEqual(aggregate["summary"]["noisy_results"][0]["experiment_id"], "exp-2")
+        self.assertEqual(aggregate["display_name"], "Custom Registry Value Low-Noise Rerun Aggregate")
+        self.assertEqual(aggregate["legacy_artifact_prefix"], "operator96")
+        self.assertIn("historical filename prefix", aggregate["legacy_artifact_note"])
+
+    def test_default_glob_points_to_clean_certified_rerun_wave(self):
+        self.assertEqual(
+            self.module.DEFAULT_GLOB,
+            "operator96-low-noise-rerun-tranche-20260512-*.json",
+        )
 
     def test_non_ok_source_marks_aggregate_for_review(self):
         payload = {

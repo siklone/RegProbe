@@ -48,24 +48,44 @@ class ArchitectureInvariantTests(unittest.TestCase):
 
         self.assertIn('ResourceDictionary Source="Resources/TweaksWorkspaceResources.xaml"', app_xaml)
 
-    def test_tweak_filter_dropdowns_bind_selected_value_to_filter_option_values(self) -> None:
+    def test_tweak_filter_buttons_bind_status_and_scope_cycle_commands(self) -> None:
         secondary_panel = (
             REPO_ROOT / "app" / "Views" / "Tweaks" / "TweaksSecondaryPanel.xaml"
         ).read_text(encoding="utf-8")
 
-        self.assertIn('ItemsSource="{Binding StatusFilterOptions}"', secondary_panel)
-        self.assertIn('ItemsSource="{Binding ScopeFilterOptions}"', secondary_panel)
-        self.assertIn('SelectedValuePath="Value"', secondary_panel)
-        self.assertIn('SelectedValue="{Binding StatusFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"', secondary_panel)
-        self.assertIn('SelectedValue="{Binding ScopeFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"', secondary_panel)
+        self.assertIn('Content="{Binding StatusFilterDisplayText}"', secondary_panel)
+        self.assertIn('Command="{Binding CycleStatusFilterCommand}"', secondary_panel)
+        self.assertIn('Content="{Binding ScopeFilterDisplayText}"', secondary_panel)
+        self.assertIn('Command="{Binding CycleScopeFilterCommand}"', secondary_panel)
+
+        list_resources = (
+            REPO_ROOT / "app" / "Resources" / "Tweaks" / "List.xaml"
+        ).read_text(encoding="utf-8")
+        self.assertIn('x:Key="CompactFilterButtonStyle"', list_resources)
+
+        tweaks_filter_view_model = (
+            REPO_ROOT / "app" / "ViewModels" / "TweaksViewModel.Filters.cs"
+        ).read_text(encoding="utf-8")
+        self.assertIn("StatusFilterOptions => _shellState.StatusFilterOptions", tweaks_filter_view_model)
+        self.assertIn("ScopeFilterOptions => _shellState.ScopeFilterOptions", tweaks_filter_view_model)
+        self.assertIn("CycleStatusFilterCommand", tweaks_filter_view_model)
+        self.assertIn("CycleScopeFilterCommand", tweaks_filter_view_model)
 
     def test_normal_tweak_surface_uses_end_user_card_gate_not_contributor_override(self) -> None:
         filter_evaluator = (
             REPO_ROOT / "app" / "ViewModels" / "WorkspaceFilterEvaluator.cs"
         ).read_text(encoding="utf-8")
+        startup_navigation = (
+            REPO_ROOT / "app" / "Services" / "StartupNavigationCoordinator.cs"
+        ).read_text(encoding="utf-8")
+        startup_qa = (
+            REPO_ROOT / "app" / "Services" / "StartupQaRunner.cs"
+        ).read_text(encoding="utf-8")
 
         self.assertIn("item.IsEndUserAppCardAllowed", filter_evaluator)
         self.assertNotIn("!item.IsMutationAllowed", filter_evaluator)
+        self.assertIn("tweak.IsEndUserAppCardAllowed", startup_navigation)
+        self.assertIn("BlocksNormalAppCardQa", startup_qa)
 
     def test_public_source_copy_treats_catalog_only_as_non_semantics_proof(self) -> None:
         policy = (
@@ -74,6 +94,18 @@ class ArchitectureInvariantTests(unittest.TestCase):
 
         self.assertIn("Catalog-only source context is not a value-semantics proof", policy)
         self.assertIn("Docs, Runtime, and Rollback carry the app-safety proof", policy)
+
+    def test_contributor_lab_public_copy_uses_custom_value_language(self) -> None:
+        checked_paths = [
+            REPO_ROOT / "app" / "ViewModels" / "ContributorLabViewModel.cs",
+            REPO_ROOT / "app" / "Views" / "ContributorLabView.xaml",
+        ]
+
+        for path in checked_paths:
+            text = path.read_text(encoding="utf-8")
+            self.assertIn("custom", text.lower(), path.relative_to(REPO_ROOT))
+            self.assertIn("user-supplied", text.lower(), path.relative_to(REPO_ROOT))
+            self.assertNotIn("operator96", text.lower(), path.relative_to(REPO_ROOT))
 
     def test_control_templates_do_not_bind_margin_from_padding(self) -> None:
         checked_paths = [

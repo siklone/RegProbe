@@ -80,6 +80,9 @@ internal static class TweakVerdictPresentation
         _ => "Research-only"
     };
 
+    public static bool IsHoldState(string promotionState)
+        => promotionState.Contains("hold", StringComparison.OrdinalIgnoreCase);
+
     public static string BuildCompactStateText(string verdictState) => verdictState switch
     {
         "allowed" => "Verified",

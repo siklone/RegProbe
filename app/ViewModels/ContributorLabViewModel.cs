@@ -82,7 +82,16 @@ public sealed class ContributorLabViewModel : ViewModelBase
 
     public string Title => "Contributor Lab";
 
-    public string Subtitle => "Windows-first research workspace for contributors and agentic AI. Normal users should stay in Tweaks.";
+    public string Subtitle => "Windows-first single key/value evidence workspace for contributors and agentic AI. Normal users should stay in Tweaks.";
+
+    public string RiskGateSummary =>
+        "This area validates user-supplied registry keys and values with disposable Windows VMs, clean snapshots, QGA health checks, and reproducible Python scripts. It can mutate the guest registry, reboot the VM, break boot, or produce noisy benchmark data if used casually.";
+
+    public string RiskGateBoundary =>
+        "Normal optimization users should stay in Tweaks. Contributor Lab separates certified, community, and noisy/debug observations; only clean reference-eligible evidence can ever support app-card review.";
+
+    public string RiskAcknowledgementText =>
+        "I read this and understand that certified mutation requires BIOS/UEFI virtualization, a disposable Windows 11 VM, a clean snapshot, healthy QGA, rollback proof, and tight noise gates.";
 
     public string VerificationBadge => Snapshot.VerificationBadge;
 
@@ -208,6 +217,27 @@ public sealed class ContributorLabViewModel : ViewModelBase
 
     public string CustomValueWorkflowChecklist =>
         "App checks: repo artifact hit, current/default value story, VM/QGA/snapshot readiness, one-value run command, boot/app-smoke result, benchmark observation, rollback proof, then app-card gate.";
+
+    public string CustomValueInvestigationContract =>
+        $"Question: does {FirstNonEmpty(CustomValueName, "REPLACE_VALUE_NAME")} exist under {FirstNonEmpty(CustomRegistryPath, "REPLACE_REGISTRY_PATH")}, which values are known, and is there enough evidence for a bounded app card?";
+
+    public string CustomValueStorySummary =>
+        $"Value story to capture: current system value, known Windows/default profile, target value(s) {ExpectedValuesForDisplay(CustomExpectedValues)}, and rollback action (restore previous, restore default, or delete if originally absent). First VM target: {FirstExpectedValueOrDefault(CustomExpectedValues)}.";
+
+    public string CustomValueMutationBoundarySummary =>
+        ReferenceEligible
+            ? "Read-only lookup/readiness commands may run in WPF. VM value experiments still stay copy-only in v1: confirm the clean snapshot/QGA receipt, run one value at a time, and keep rollback ready."
+            : "Read-only lookup/readiness commands may run in WPF. VM mutation commands stay copy-only because this environment is not reference-eligible; results are community/debug until certified VM and noise gates pass.";
+
+    public IReadOnlyList<string> CustomValueEvidenceChecklist =>
+    [
+        "Current value: capture the live registry value, or explicitly record that the value/key is absent.",
+        "Default story: show the known Windows/default profile when available; otherwise mark default unknown instead of guessing.",
+        "Target story: list each tested value and the source/reason for trying it.",
+        "Rollback story: state whether rollback restores previous, restores default, or deletes an originally absent value.",
+        "Runtime safety: certified VM health, boot result, Windows shell/app smoke, and rollback smoke must be recorded before app-card review.",
+        "Evidence boundary: ETW/Procmon/Ghidra/noise/tranche details stay technical; normal cards only show bounded user-facing claims.",
+    ];
 
     public string CertifiedMutationGuardSummary =>
         ReferenceEligible
@@ -356,6 +386,10 @@ public sealed class ContributorLabViewModel : ViewModelBase
         OnPropertyChanged(nameof(CustomAppQaCommand));
         OnPropertyChanged(nameof(CustomVmHealthCommand));
         OnPropertyChanged(nameof(CustomVmExperimentCommand));
+        OnPropertyChanged(nameof(CustomValueInvestigationContract));
+        OnPropertyChanged(nameof(CustomValueStorySummary));
+        OnPropertyChanged(nameof(CustomValueMutationBoundarySummary));
+        OnPropertyChanged(nameof(CustomValueEvidenceChecklist));
         OnPropertyChanged(nameof(CustomValueDiscoverySteps));
         RaiseContributorCommandCanExecuteChanged();
     }
@@ -472,6 +506,20 @@ public sealed class ContributorLabViewModel : ViewModelBase
             .Split([',', ';', ' ', '\t', '\r', '\n'], System.StringSplitOptions.RemoveEmptyEntries | System.StringSplitOptions.TrimEntries)
             .FirstOrDefault(static value => !string.IsNullOrWhiteSpace(value))
            ?? "0";
+
+    private static string ExpectedValuesForDisplay(string values)
+    {
+        var tokens = (values ?? string.Empty)
+            .Split([',', ';', ' ', '\t', '\r', '\n'], System.StringSplitOptions.RemoveEmptyEntries | System.StringSplitOptions.TrimEntries)
+            .Distinct(System.StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+        return tokens.Length == 0
+            ? "not listed yet"
+            : string.Join(", ", tokens);
+    }
+
+    private static string FirstNonEmpty(params string[] values)
+        => values.FirstOrDefault(static value => !string.IsNullOrWhiteSpace(value)) ?? string.Empty;
 
     private static string QuoteArg(string value)
     {
