@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using RegProbe.App.Services;
 using RegProbe.App.Utilities;
+using RegProbe.Application.Utilities;
 
 namespace RegProbe.App.ViewModels;
 
@@ -68,7 +69,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     public bool CanUseStagingEnvironment => false;
 
-    public bool IsContributorEntryVisible => true;
+    public bool IsContributorEntryVisible => ContributorMode.IsEnabled;
 
     public bool CanFocusSearch => IsConfigurationViewActive || IsRepairsViewActive;
 
