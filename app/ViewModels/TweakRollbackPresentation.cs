@@ -2,6 +2,18 @@ namespace RegProbe.App.ViewModels;
 
 internal static class TweakRollbackPresentation
 {
+    public static string BuildConfigurationPrimaryActionText(
+        bool isMutationAllowed,
+        string actionButtonText)
+    {
+        if (isMutationAllowed)
+        {
+            return string.IsNullOrWhiteSpace(actionButtonText) ? "Apply" : actionButtonText;
+        }
+
+        return "Review only";
+    }
+
     public static string BuildRestoreDefaultTooltip(
         bool isMutationAllowed,
         string publicMutationGatingReason,

@@ -105,7 +105,7 @@ internal sealed class TweakEvidenceClassCatalogStore
                 Summary = link.Summary,
             })
             .Where(link => !string.IsNullOrWhiteSpace(link.Url)
-                           && (!isSourceBlock || !PublicEvidenceLinkPolicy.IsSuppressedExternalPseudocodeUrl(link.Url)))
+                           && (!isSourceBlock || !PublicEvidenceLinkPolicy.IsSuppressedExternalSourceUrl(link.Url)))
             .ToList();
         var hasNohutoLineage = !isSourceBlock || links.Count > 0
             ? block.HasNohutoLineage
@@ -122,7 +122,7 @@ internal sealed class TweakEvidenceClassCatalogStore
             HasRuntimeEvidence = block.HasRuntimeEvidence,
             HasNohutoLineage = hasNohutoLineage,
             Links = links,
-            PrimarySourceText = BuildPrimarySourceText(links.FirstOrDefault()),
+            PrimarySourceText = BuildPrimarySourceText(links.FirstOrDefault(IsSourceProofLink)),
         };
     }
 
@@ -180,4 +180,8 @@ internal sealed class TweakEvidenceClassCatalogStore
             ? link.Url
             : $"{link.Title}: {link.Url}";
     }
+
+    private static bool IsSourceProofLink(TweakEvidenceLink link)
+        => string.Equals(link.Kind, "source", StringComparison.OrdinalIgnoreCase)
+           || string.Equals(link.Kind, "nohuto", StringComparison.OrdinalIgnoreCase);
 }

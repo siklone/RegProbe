@@ -27,7 +27,7 @@ using RegProbe.Infrastructure;
 
 namespace RegProbe.App.ViewModels;
 
-public sealed class TweaksViewModel : ViewModelBase, IDisposable
+public sealed partial class TweaksViewModel : ViewModelBase, IDisposable
 {
     private bool _isDisposed;
     private readonly ITweakLogStore _logStore;
@@ -35,6 +35,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly RelayCommand _clearCategorySelectionCommand;
     private readonly RelayCommand _filterAppliedCommand;
     private readonly RelayCommand _filterRolledBackCommand;
+    private readonly RelayCommand _cycleStatusFilterCommand;
+    private readonly RelayCommand _cycleScopeFilterCommand;
     private readonly RelayCommand _showSettingsWorkspaceCommand;
     private readonly RelayCommand _showMaintenanceWorkspaceCommand;
     private readonly RelayCommand _toggleSecondaryPanelCommand;
@@ -142,6 +144,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _clearCategorySelectionCommand = new RelayCommand(_ => SelectedCategoryName = string.Empty);
         _filterAppliedCommand = new RelayCommand(_ => _configurationCoordinator.ShowAppliedOnly());
         _filterRolledBackCommand = new RelayCommand(_ => _configurationCoordinator.ShowRolledBackOnly());
+        _cycleStatusFilterCommand = new RelayCommand(_ => _shellState.CycleStatusFilter());
+        _cycleScopeFilterCommand = new RelayCommand(_ => _shellState.CycleScopeFilter());
         _showSettingsWorkspaceCommand = new RelayCommand(_ => _configurationCoordinator.ShowConfigurationWorkspace());
         _showMaintenanceWorkspaceCommand = new RelayCommand(_ => SelectedWorkspace = ConfigurationWorkspaceKind.Maintenance);
         _toggleSecondaryPanelCommand = new RelayCommand(_ => IsSecondaryPanelCollapsed = !IsSecondaryPanelCollapsed);
@@ -378,22 +382,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     {
         get => _shellState.SearchText;
         set => _shellState.SearchText = value;
-    }
-
-    public string StatusFilter
-    {
-        get => _shellState.StatusFilter;
-        set => _shellState.StatusFilter = value;
-    }
-
-    public string StatusFilterLabel => _shellState.StatusFilterLabel;
-
-    public bool HasStatusFilter => _shellState.HasStatusFilter;
-
-    public string ScopeFilter
-    {
-        get => _shellState.ScopeFilter;
-        set => _shellState.ScopeFilter = value;
     }
 
     public bool IsSecondaryPanelCollapsed

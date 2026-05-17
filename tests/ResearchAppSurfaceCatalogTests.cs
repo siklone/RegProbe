@@ -395,8 +395,8 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.NotNull(taskbarAlignmentTweak);
         Assert.NotNull(watchdogTweak);
         Assert.NotNull(subtreeTweak);
-        Assert.NotNull(executiveTweak);
-        Assert.NotNull(kernelTweak);
+        Assert.Null(executiveTweak);
+        Assert.Null(kernelTweak);
         Assert.NotNull(bsodAutoRebootTweak);
         Assert.NotNull(bsodDisplayParametersTweak);
         Assert.NotNull(disableFullscreenOptimizationsTweak);
@@ -881,8 +881,6 @@ public sealed class ResearchAppSurfaceCatalogTests
         Assert.IsType<RegistryValueBatchTweak>(optimizeGamingNetworkTweak);
         Assert.IsType<RegistryValueBatchTweak>(watchdogTweak);
         Assert.IsType<RegistrySubtreeTweak>(subtreeTweak);
-        Assert.IsType<RegistryValueBatchTweak>(executiveTweak);
-        Assert.IsType<RegistryValueTweak>(kernelTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(bsodAutoRebootTweak);
         Assert.IsType<RegistryValuePresetBatchTweak>(bsodDisplayParametersTweak);
         Assert.IsType<RegistryValueBatchTweak>(disableFullscreenOptimizationsTweak);

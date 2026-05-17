@@ -1,8 +1,10 @@
 # Research Tooling Map
 
 This page is the contributor-facing map for RegProbe tooling. It does not move
-files or rename scripts; it explains which entry points are canonical today and
-which ones are retained for compatibility or history.
+files; it explains which entry points are canonical today and which ones are
+retained for compatibility or history. Some neutral `custom_value` wrappers
+delegate to historical artifact modules so old JSON paths stay reproducible
+without turning old campaign names into public product language.
 
 ## Audience Boundary
 
@@ -44,10 +46,10 @@ These scripts are active entry points for day-to-day contributor work.
 | `scripts/vm-kvm/run-guest-registry-value-experiment.py` | canonical | One-value VM experiment runner with host noise gate, optional `--abort-on-noisy-host`, and reboot/rollback checks. |
 | `registry-research-framework/scripts/analyze_registry_value_experiments.py` | canonical | Retro-analyze registry value experiment artifacts and produce verdict summaries. |
 | `registry-research-framework/scripts/generate_research_artifact_map.py` | canonical | Generate the current artifact map so contributors start from canonical outputs instead of raw parse folders. |
-| `registry-research-framework/scripts/generate_operator96_enriched_value_matrix.py` | canonical | Generate enriched candidate values with source boundaries and community-hint tags for the current custom-value seed batch. |
-| `registry-research-framework/scripts/generate_operator96_app_surface_review.py` | canonical | Review enriched custom registry value experiments for app-surface eligibility; keep records in Contributor Lab unless the bounded-card gate passes. |
-| `registry-research-framework/scripts/generate_operator96_low_noise_rerun_plan.py` | canonical | Plan low-noise reruns for custom-value records whose prior observations are not reference quality. |
-| `registry-research-framework/scripts/aggregate_operator96_low_noise_rerun_campaign.py` | canonical | Aggregate custom-value low-noise tranche outputs into one campaign summary. |
+| `registry-research-framework/scripts/generate_custom_value_enriched_matrix.py` | canonical | Generate enriched candidate values with source boundaries and community-hint tags for the current user-supplied custom-value seed batch. |
+| `registry-research-framework/scripts/generate_custom_value_app_surface_review.py` | canonical | Review enriched custom registry value experiments for app-surface eligibility; keep records in Contributor Lab unless the bounded-card gate passes. |
+| `registry-research-framework/scripts/generate_custom_value_low_noise_rerun_plan.py` | canonical | Plan low-noise reruns for custom-value records whose prior observations are not reference quality. |
+| `registry-research-framework/scripts/aggregate_custom_value_low_noise_rerun_campaign.py` | canonical | Aggregate custom-value low-noise tranche outputs into one campaign summary. |
 | `scripts/refresh_research_publish_surfaces.py` | canonical | Refresh generated research publish surfaces after record or gate changes. |
 | `scripts/generate_promotion_gates.py` | canonical | Rebuild app promotion gates from validated research state. |
 | `scripts/research/generate_app_surface_manifest.py` | canonical | Rebuild the app-surface manifest from surfaceable research records. |
@@ -85,12 +87,14 @@ users and should not be presented as the primary research path.
 
 ## WPF Contributor Lab
 
-Repo/dev builds expose a gated Contributor Lab in the desktop app. It is a
-Windows-first companion for contributors, not an end-user optimization screen.
-Use it to check local readiness, copy canonical Python command packs, and review
-custom registry value experiment observations without promoting them to normal
-app cards. Treat legacy campaign IDs as artifact-path details only; do not use
-them as product or public feature branding.
+The desktop app exposes a gated Contributor Lab tab. It is visible for
+discoverability, but locked behind explicit acknowledgement so normal users do
+not see contributor pipeline detail by default. It is a Windows-first companion
+for contributors, not an end-user optimization screen. Use it to check local
+readiness, copy canonical Python command packs, and review custom registry value
+experiment observations without promoting them to normal app cards. Treat legacy
+campaign IDs as artifact-path details only; do not use them as product or public
+feature branding.
 
 The observation browser is the preferred app-side view for the current custom
 value seed batch. It surfaces bucket, app-card blockers, tested values,
@@ -114,6 +118,17 @@ older `Docs/` pages are retained so historical artifacts remain reproducible.
 Do not delete or move them during routine cleanup. If a script is replaced,
 mark the replacement here first, then use a cleanup quarantine ledger before any
 deletion.
+
+Historical custom-value script names that include `operator96` are compatibility
+aliases for the random user-supplied seed batch and should not be presented as
+product branding:
+
+| Legacy script | Status | Canonical replacement |
+|---|---|---|
+| `registry-research-framework/scripts/generate_operator96_enriched_value_matrix.py` | compatibility | `registry-research-framework/scripts/generate_custom_value_enriched_matrix.py` |
+| `registry-research-framework/scripts/generate_operator96_app_surface_review.py` | compatibility | `registry-research-framework/scripts/generate_custom_value_app_surface_review.py` |
+| `registry-research-framework/scripts/generate_operator96_low_noise_rerun_plan.py` | compatibility | `registry-research-framework/scripts/generate_custom_value_low_noise_rerun_plan.py` |
+| `registry-research-framework/scripts/aggregate_operator96_low_noise_rerun_campaign.py` | compatibility | `registry-research-framework/scripts/aggregate_custom_value_low_noise_rerun_campaign.py` |
 
 ## Agentic AI Workflow
 

@@ -1,12 +1,12 @@
 # App Retest Readiness
 
 - Status: **PASS**
-- Generated UTC: `2026-05-15T15:00:16Z`
+- Generated UTC: `2026-05-17T15:02:15Z`
 
 ## Summary
 - `record_count`: `356`
 - `promotion_gate_entry_count`: `356`
-- `app_surface_entry_count`: `265`
+- `app_surface_entry_count`: `263`
 - `app_only_tweak_count`: `0`
 - `apply_allowed_record_count`: `261`
 - `missing_rollback_story_count`: `0`

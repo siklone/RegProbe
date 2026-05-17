@@ -43,6 +43,17 @@ internal static class TweakProofSnapshotPresentation
         return "missing";
     }
 
+    public static bool HasRuntimeProofSummary(string? summary)
+    {
+        if (string.IsNullOrWhiteSpace(summary))
+        {
+            return false;
+        }
+
+        return !summary.Contains("No runtime proof", StringComparison.OrdinalIgnoreCase)
+               && !summary.Contains("needs VM validation", StringComparison.OrdinalIgnoreCase);
+    }
+
     public static string BuildSourceSnapshotState(
         bool hasLineageEvidenceFlag,
         bool hasUpstreamLineage,

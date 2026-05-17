@@ -88,7 +88,7 @@ public sealed partial class TweakItemViewModel
             ReferenceLinks.Where(static link => link.Kind is ReferenceLinkKind.Catalog or ReferenceLinkKind.Docs or ReferenceLinkKind.Details));
         var runtimeLinks = MergeLinks(_runtimeProofLinks);
         var sourceLinks = MergeLinks(
-            _upstreamLineageLinks,
+            _upstreamLineageLinks.Where(IsSourceProofLink),
             ReferenceLinks.Where(static link => link.Kind is ReferenceLinkKind.Source));
         var sourceSummary = PublicEvidenceLinkPolicy.SanitizeSourceSummary(
             string.IsNullOrWhiteSpace(UpstreamLineageSummary) ? ProvenanceSummary : UpstreamLineageSummary,
@@ -230,7 +230,7 @@ public sealed partial class TweakItemViewModel
         {
             if (link is null
                 || string.IsNullOrWhiteSpace(link.Url)
-                || PublicEvidenceLinkPolicy.IsSuppressedExternalPseudocodeUrl(link.Url))
+                || PublicEvidenceLinkPolicy.IsSuppressedExternalSourceUrl(link.Url))
             {
                 continue;
             }
@@ -261,6 +261,9 @@ public sealed partial class TweakItemViewModel
         };
     }
 
+    private static bool IsSourceProofLink(ReferenceLink link)
+        => link.Kind is ReferenceLinkKind.Source;
+
     private static IReadOnlyList<ReferenceLink> MergeLinks(params IEnumerable<ReferenceLink>[] groups)
     {
         var merged = new List<ReferenceLink>();
@@ -276,7 +279,7 @@ public sealed partial class TweakItemViewModel
             {
                 if (link is null
                     || string.IsNullOrWhiteSpace(link.Url)
-                    || PublicEvidenceLinkPolicy.IsSuppressedExternalPseudocodeUrl(link.Url)
+                    || PublicEvidenceLinkPolicy.IsSuppressedExternalSourceUrl(link.Url)
                     || !seen.Add(link.Url))
                 {
                     continue;

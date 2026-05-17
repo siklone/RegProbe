@@ -146,6 +146,7 @@ class VmKvmAppPublishDeploySmokeTests(unittest.TestCase):
         self.assertEqual(payload["blockers"], [])
         self.assertIn("run-guest-app-deploy-smoke.py", payload["next_step"][1])
         self.assertIn("run-guest-app-publish-deploy-smoke.py", payload["recommended_execute_command"][1])
+        self.assertIn("--self-contained", payload["recommended_execute_command"])
         self.assertIn("--launch-wait-timeout", payload["next_step"])
         self.assertIn("--linger-seconds", payload["recommended_execute_command"])
         self.assertEqual(len(payload["operator_checklist"]), 5)
@@ -201,6 +202,7 @@ class VmKvmAppPublishDeploySmokeTests(unittest.TestCase):
         self.assertIn("publish_command", payload)
         self.assertEqual(payload["publish_command"][1:3], ["publish", str(REPO_ROOT / "app" / "app.csproj")])
         self.assertIn("-p:EnableWindowsTargeting=true", payload["publish_command"])
+        self.assertEqual(payload["publish_command"][payload["publish_command"].index("--self-contained") + 1], "true")
         self.assertEqual(payload["zip_preview"]["source_dir"], str(work_root / "publish"))
         self.assertEqual(payload["zip_preview"]["zip_path"], str(work_root / "RegProbe.App.publish.zip"))
         self.assertIn("run-guest-app-deploy-smoke.py", payload["deploy_smoke_command"][1])
@@ -210,6 +212,23 @@ class VmKvmAppPublishDeploySmokeTests(unittest.TestCase):
         self.assertEqual(payload["app_args"], ["--contributor-lab"])
         self.assertEqual(payload["guest_paths"]["app_root"], r"C:\Tools\AppSmoke")
         self.assertEqual(payload["recovery_action"], "none")
+
+    def test_dry_run_can_request_framework_dependent_publish_when_guest_runtime_exists(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            argv = [
+                "run-guest-app-publish-deploy-smoke.py",
+                "--work-root",
+                temp_root,
+                "--dry-run",
+                "--framework-dependent",
+            ]
+
+            with mock.patch.object(sys, "argv", argv), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = app_publish_deploy_smoke.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(payload["publish_command"][payload["publish_command"].index("--self-contained") + 1], "false")
 
     def test_run_dotnet_publish_sets_enable_windows_targeting(self) -> None:
         completed = mock.Mock(returncode=0, stdout="publish ok", stderr="")
