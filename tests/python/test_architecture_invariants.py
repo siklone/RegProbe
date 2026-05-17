@@ -48,20 +48,20 @@ class ArchitectureInvariantTests(unittest.TestCase):
 
         self.assertIn('ResourceDictionary Source="Resources/TweaksWorkspaceResources.xaml"', app_xaml)
 
-    def test_tweak_filter_dropdowns_bind_status_and_scope_directly(self) -> None:
+    def test_tweak_filter_buttons_bind_status_and_scope_cycle_commands(self) -> None:
         secondary_panel = (
             REPO_ROOT / "app" / "Views" / "Tweaks" / "TweaksSecondaryPanel.xaml"
         ).read_text(encoding="utf-8")
 
-        self.assertIn('ItemsSource="{Binding StatusFilterOptions}"', secondary_panel)
-        self.assertIn('SelectedValue="{Binding StatusFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"', secondary_panel)
-        self.assertIn('ItemsSource="{Binding ScopeFilterOptions}"', secondary_panel)
-        self.assertIn('SelectedValue="{Binding ScopeFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"', secondary_panel)
+        self.assertIn('Content="{Binding StatusFilterDisplayText}"', secondary_panel)
+        self.assertIn('Command="{Binding CycleStatusFilterCommand}"', secondary_panel)
+        self.assertIn('Content="{Binding ScopeFilterDisplayText}"', secondary_panel)
+        self.assertIn('Command="{Binding CycleScopeFilterCommand}"', secondary_panel)
 
         list_resources = (
             REPO_ROOT / "app" / "Resources" / "Tweaks" / "List.xaml"
         ).read_text(encoding="utf-8")
-        self.assertIn('x:Key="CompactFilterComboStyle"', list_resources)
+        self.assertIn('x:Key="CompactFilterButtonStyle"', list_resources)
 
         tweaks_filter_view_model = (
             REPO_ROOT / "app" / "ViewModels" / "TweaksViewModel.Filters.cs"

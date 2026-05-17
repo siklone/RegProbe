@@ -91,21 +91,17 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <ComboBox Grid.Column="0"
-                              ItemsSource="{Binding StatusFilterOptions}"
-                              DisplayMemberPath="Label"
-                              SelectedValuePath="Value"
-                              SelectedValue="{Binding StatusFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              ToolTip="Filter by status: all, applied, rolled back"
-                              Style="{StaticResource CompactFilterComboStyle}"/>
+                    <Button Grid.Column="0"
+                            Content="{Binding StatusFilterDisplayText}"
+                            Command="{Binding CycleStatusFilterCommand}"
+                            ToolTip="Cycle status filter: all, applied, rolled back"
+                            Style="{StaticResource CompactFilterButtonStyle}"/>
 
-                    <ComboBox Grid.Column="2"
-                              ItemsSource="{Binding ScopeFilterOptions}"
-                              DisplayMemberPath="Label"
-                              SelectedValuePath="Value"
-                              SelectedValue="{Binding ScopeFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              ToolTip="Filter by scope: all, machine, user, mixed"
-                              Style="{StaticResource CompactFilterComboStyle}"/>
+                    <Button Grid.Column="2"
+                            Content="{Binding ScopeFilterDisplayText}"
+                            Command="{Binding CycleScopeFilterCommand}"
+                            ToolTip="Cycle scope filter: all, machine, user, mixed"
+                            Style="{StaticResource CompactFilterButtonStyle}"/>
                 </Grid>
             </StackPanel>
 
