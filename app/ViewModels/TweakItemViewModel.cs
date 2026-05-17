@@ -682,7 +682,7 @@ public sealed partial class TweakItemViewModel : ViewModelBase
     public bool HasValidatedSemantics => !string.IsNullOrWhiteSpace(ValidatedSemanticsSummary);
     public string RuntimeProofSummary => _runtimeProofSummary;
     public string RuntimeProofSource => _runtimeProofSource;
-    public bool HasRuntimeProof => !string.IsNullOrWhiteSpace(RuntimeProofSummary);
+    public bool HasRuntimeProof => TweakProofSnapshotPresentation.HasRuntimeProofSummary(RuntimeProofSummary);
     public string UpstreamLineageSummary => _upstreamLineageSummary;
     public string UpstreamLineageSource => _upstreamLineageSource;
     public bool HasUpstreamLineage =>

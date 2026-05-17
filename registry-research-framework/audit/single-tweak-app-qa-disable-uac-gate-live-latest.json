@@ -1,0 +1,77 @@
+{
+  "TweakId": "security.disable-uac",
+  "TweakName": "Disable UAC (Full)",
+  "Success": false,
+  "Status": "not-app-card-ready",
+  "Summary": "This tweak exists in the catalog, but it is not a shipped end-user app card. Use Contributor Lab or the explicit QA-only gated mutation override for research review.",
+  "RollbackRequested": true,
+  "GatedMutationOverrideRequested": false,
+  "GatedMutationOverrideUsed": false,
+  "Card": {
+    "TweakId": "security.disable-uac",
+    "Name": "Disable UAC (Full)",
+    "Category": "Security",
+    "Description": "Disables User Account Control entirely. Requires a reboot and severely lowers system security.",
+    "FriendlyDescription": "Disables User Account Control entirely. Requires a reboot and severely lowers system security.",
+    "RegistryPath": "",
+    "EvidenceClass": "D",
+    "EvidenceClassTitle": "Key Known, Value Semantics Unknown",
+    "ResearchStatus": "INTENTIONAL HOLD",
+    "IsMutationAllowed": false,
+    "RollbackSnapshotState": "ready",
+    "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+    "HasClaimBoundary": true,
+    "WhatWeKnowSummary": "Claim: Disables User Account Control entirely. Requires a reboot and severely lowers system security. Evidence: The security documentation lists security.disable-uac as the full UAC disable card and points at the current engine command tweak. Rollback: Rollback: Verified via record-restore-story.",
+    "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending Runtime: No runtime proof is attached yet. This record still needs VM validation.",
+    "ProofLanes": [
+      {
+        "Key": "docs",
+        "Label": "DOCS",
+        "State": "ready",
+        "Summary": "The security documentation lists security.disable-uac as the full UAC disable card and points at the current engine command tweak.",
+        "Source": ""
+      },
+      {
+        "Key": "runtime",
+        "Label": "RUNTIME",
+        "State": "partial",
+        "Summary": "No runtime proof is attached yet. This record still needs VM validation.",
+        "Source": ""
+      },
+      {
+        "Key": "source",
+        "Label": "SOURCE",
+        "State": "partial",
+        "Summary": "No RegProbe-controlled local source mirror or pseudocode evidence is attached for this card. Catalog-only source context is not a value-semantics proof; the catalog index is naming/navigation context only. Docs, Runtime, and Rollback carry the app-safety proof.",
+        "Source": ""
+      },
+      {
+        "Key": "rollback",
+        "Label": "ROLLBACK",
+        "State": "ready",
+        "Summary": "Rollback: Verified via record-restore-story.",
+        "Source": "record-restore-story"
+      }
+    ],
+    "ReferenceLinks": [
+      {
+        "Title": "Windows Internals resource page",
+        "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+        "Kind": "Docs"
+      },
+      {
+        "Title": "Docs: Details",
+        "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#security.disable-uac",
+        "Kind": "Details"
+      },
+      {
+        "Title": "Docs: Security",
+        "Url": "C:\\Tools\\AppSmoke\\Docs\\security\\security-verified.md#security.disable-uac",
+        "Kind": "Docs"
+      }
+    ]
+  },
+  "Stages": [],
+  "StartedAtUtc": "2026-05-17T19:38:37.9590156+00:00",
+  "CompletedAtUtc": "2026-05-17T19:38:37.9683935+00:00"
+}
