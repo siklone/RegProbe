@@ -111,7 +111,6 @@ public static class ContributorLabCatalog
         "registry-research-framework/scripts/check_app_card_evidence_contracts.py",
         "registry-research-framework/scripts/check_promoted_tweak_app_qa_batch.py",
         "registry-research-framework/scripts/generate_custom_value_app_surface_review.py",
-        "registry-research-framework/scripts/generate_operator96_app_surface_review.py",
         "scripts/vm-kvm/vm-health-check.py",
         "scripts/vm-kvm/run-guest-registry-value-experiment.py",
         "scripts/vm-kvm/run-guest-registry-value-campaign.py",
