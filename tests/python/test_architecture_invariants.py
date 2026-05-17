@@ -95,6 +95,18 @@ class ArchitectureInvariantTests(unittest.TestCase):
         self.assertIn("Catalog-only source context is not a value-semantics proof", policy)
         self.assertIn("Docs, Runtime, and Rollback carry the app-safety proof", policy)
 
+    def test_contributor_lab_public_copy_uses_custom_value_language(self) -> None:
+        checked_paths = [
+            REPO_ROOT / "app" / "ViewModels" / "ContributorLabViewModel.cs",
+            REPO_ROOT / "app" / "Views" / "ContributorLabView.xaml",
+        ]
+
+        for path in checked_paths:
+            text = path.read_text(encoding="utf-8")
+            self.assertIn("custom", text.lower(), path.relative_to(REPO_ROOT))
+            self.assertIn("user-supplied", text.lower(), path.relative_to(REPO_ROOT))
+            self.assertNotIn("operator96", text.lower(), path.relative_to(REPO_ROOT))
+
     def test_control_templates_do_not_bind_margin_from_padding(self) -> None:
         checked_paths = [
             REPO_ROOT / "app" / "MainWindow.xaml",

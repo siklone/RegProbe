@@ -573,6 +573,8 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Equal("Low-noise VM receipt", observation.NoiseBadge);
         Assert.Contains("rollback_tested", observation.AppCardBlockerSummary, StringComparison.Ordinal);
         Assert.Contains("registry-value-experiments-low-noise", observation.ArtifactSummary, StringComparison.Ordinal);
+        Assert.Contains("custom-value-seed-001-enablething-0.json", observation.ArtifactSummary, StringComparison.Ordinal);
+        Assert.DoesNotContain("operator96", observation.ArtifactSummary, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]
