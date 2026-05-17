@@ -16,6 +16,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 FRAMEWORK_ROOT = REPO_ROOT / "registry-research-framework"
 DEFAULT_OUTPUT_PATH = FRAMEWORK_ROOT / "audit" / "research-quality-gate.json"
 DEFAULT_MARKDOWN_PATH = FRAMEWORK_ROOT / "audit" / "research-quality-gate.md"
+DEFAULT_STEP_TIMEOUT_SECONDS = 300
 
 
 @dataclass(frozen=True)
@@ -53,7 +54,15 @@ def tail(value: str, limit: int = 4000) -> str:
     return value[-limit:] if len(value) > limit else value
 
 
-def run_step(step: GateStep) -> dict[str, Any]:
+def normalize_subprocess_output(value: str | bytes | None) -> str:
+    if value is None:
+        return ""
+    if isinstance(value, bytes):
+        return value.decode("utf-8", errors="replace")
+    return value
+
+
+def run_step(step: GateStep, *, timeout_seconds: int = DEFAULT_STEP_TIMEOUT_SECONDS) -> dict[str, Any]:
     if step.skipped:
         return {
             "step_id": step.step_id,
@@ -65,16 +74,41 @@ def run_step(step: GateStep) -> dict[str, Any]:
             "duration_ms": 0,
             "stdout_tail": "",
             "stderr_tail": "",
+            "timed_out": False,
+            "timeout_seconds": timeout_seconds,
         }
 
     started = time.monotonic()
-    completed = subprocess.run(
-        step.command,
-        cwd=REPO_ROOT,
-        text=True,
-        capture_output=True,
-        check=False,
-    )
+    try:
+        completed = subprocess.run(
+            step.command,
+            cwd=REPO_ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+            timeout=timeout_seconds,
+        )
+    except subprocess.TimeoutExpired as exc:
+        duration_ms = int((time.monotonic() - started) * 1000)
+        stderr_tail = tail(
+            normalize_subprocess_output(exc.stderr)
+            or f"Step timed out after {timeout_seconds} seconds. No stderr was captured."
+        )
+        return {
+            "step_id": step.step_id,
+            "label": step.label,
+            "status": "fail",
+            "skip_reason": None,
+            "command": step.command,
+            "returncode": None,
+            "duration_ms": duration_ms,
+            "stdout_tail": tail(normalize_subprocess_output(exc.stdout)),
+            "stderr_tail": stderr_tail,
+            "timed_out": True,
+            "timeout_seconds": timeout_seconds,
+            "error_kind": "timeout",
+        }
+
     duration_ms = int((time.monotonic() - started) * 1000)
     return {
         "step_id": step.step_id,
@@ -86,6 +120,8 @@ def run_step(step: GateStep) -> dict[str, Any]:
         "duration_ms": duration_ms,
         "stdout_tail": tail(completed.stdout or ""),
         "stderr_tail": tail(completed.stderr or ""),
+        "timed_out": False,
+        "timeout_seconds": timeout_seconds,
     }
 
 
@@ -236,9 +272,10 @@ def quality_gate_payload(
     steps: list[GateStep],
     *,
     generated_utc: str | None = None,
+    step_timeout_seconds: int = DEFAULT_STEP_TIMEOUT_SECONDS,
 ) -> dict[str, Any]:
     generated_utc = generated_utc or now_utc()
-    results = [run_step(step) for step in steps]
+    results = [run_step(step, timeout_seconds=step_timeout_seconds) for step in steps]
     failed = [result for result in results if result.get("status") == "fail"]
     skipped = [result for result in results if result.get("status") == "skipped"]
     passed = [result for result in results if result.get("status") == "pass"]
@@ -246,6 +283,7 @@ def quality_gate_payload(
         "schema_version": "1.0",
         "generated_utc": generated_utc,
         "quality_gate_status": "PASS" if not failed else "FAIL",
+        "step_timeout_seconds": step_timeout_seconds,
         "counts": {
             "step_count": len(results),
             "passed": len(passed),
@@ -275,6 +313,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         lines.append(
             f"- `{result.get('step_id')}`: `{result.get('status')}`"
             + (f" returncode=`{result.get('returncode')}`" if result.get("returncode") is not None else "")
+            + (f" timeout=`{result.get('timeout_seconds')}s`" if result.get("timed_out") else "")
         )
     failures = [result for result in payload.get("steps") or [] if result.get("status") == "fail"]
     lines.extend(["", "## Failures", ""])
@@ -301,9 +340,17 @@ def main() -> int:
     parser.add_argument("--skip-gate-thresholds", action="store_true")
     parser.add_argument("--skip-url-validation", action="store_true")
     parser.add_argument("--skip-mcp-readiness", action="store_true")
+    parser.add_argument(
+        "--step-timeout-seconds",
+        type=int,
+        default=DEFAULT_STEP_TIMEOUT_SECONDS,
+        help="Maximum runtime for each quality gate subprocess before it fails fast.",
+    )
     args = parser.parse_args()
+    if args.step_timeout_seconds <= 0:
+        parser.error("--step-timeout-seconds must be greater than zero")
 
-    payload = quality_gate_payload(default_steps(args))
+    payload = quality_gate_payload(default_steps(args), step_timeout_seconds=args.step_timeout_seconds)
     write_json(args.output, payload)
     write_text(args.markdown_output, render_markdown(payload))
     print(json.dumps(payload, indent=2))
