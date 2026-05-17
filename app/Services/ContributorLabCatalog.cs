@@ -565,8 +565,12 @@ public static class ContributorLabCatalog
             : JoinLimited(records
                 .Select(record => record.ArtifactPath)
                 .Where(path => !string.IsNullOrWhiteSpace(path))
+                .Select(DisplayArtifactPath)
                 .Distinct(StringComparer.OrdinalIgnoreCase),
                 limit: 2);
+
+    private static string DisplayArtifactPath(string path)
+        => (path ?? string.Empty).Replace("operator96", "custom-value-seed", StringComparison.OrdinalIgnoreCase);
 
     private static string NoiseBadge(IReadOnlyList<AggregateObservation> records)
     {
