@@ -14,6 +14,8 @@ APP_FACING_RECEIPTS = [
 
 FORBIDDEN_PUBLIC_SOURCE_FRAGMENTS = [
     "github.com/nohuto/decompiled-pseudocode",
+    "github.com/nohuto/win-config",
+    "github.com/nohuto/win-registry",
     "decompiled-pseudocode /",
     "No upstream nohuto source link",
     "Upstream dump / pseudocode links are attached",
