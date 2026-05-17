@@ -59,7 +59,7 @@ public sealed class ContributorLabViewModelTests : IDisposable
             "python3 registry-research-framework/scripts/check_single_tweak.py REPLACE_VALUE_NAME --expected-value 0 --expected-value 1 --json"));
         Assert.True(ContributorLabCatalog.IsAllowlistedCommand(
             "python3 registry-research-framework/scripts/generate_custom_value_app_surface_review.py --json"));
-        Assert.True(ContributorLabCatalog.IsAllowlistedCommand(
+        Assert.False(ContributorLabCatalog.IsAllowlistedCommand(
             "python3 registry-research-framework/scripts/generate_operator96_app_surface_review.py --json"));
         Assert.True(ContributorLabCatalog.IsAllowlistedCommand(
             "py -3 scripts/vm-kvm/vm-health-check.py --domain regprobe-win11-25h2-session --json"));
