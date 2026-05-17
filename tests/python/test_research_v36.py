@@ -8459,6 +8459,37 @@ class ResearchQualityGateTests(unittest.TestCase):
         self.assertEqual(payload["steps"][0]["returncode"], 7)
         self.assertIn("bad", payload["steps"][0]["stdout_tail"])
 
+    def test_quality_gate_payload_fails_fast_on_step_timeout(self) -> None:
+        def fake_run(*args, **kwargs):
+            raise subprocess.TimeoutExpired(
+                cmd=args[0],
+                timeout=kwargs["timeout"],
+                output=b"partial stdout",
+                stderr=b"partial stderr",
+            )
+
+        with unittest.mock.patch.object(research_quality_gate.subprocess, "run", side_effect=fake_run):
+            payload = research_quality_gate.quality_gate_payload(
+                [
+                    research_quality_gate.GateStep(
+                        "timeout-step",
+                        "Timeout Step",
+                        [sys.executable, "-c", "import time; time.sleep(60)"],
+                    )
+                ],
+                generated_utc="2026-04-13T00:00:00Z",
+                step_timeout_seconds=7,
+            )
+
+        self.assertEqual(payload["quality_gate_status"], "FAIL")
+        self.assertEqual(payload["step_timeout_seconds"], 7)
+        self.assertEqual(payload["failed_step_ids"], ["timeout-step"])
+        self.assertTrue(payload["steps"][0]["timed_out"])
+        self.assertEqual(payload["steps"][0]["timeout_seconds"], 7)
+        self.assertEqual(payload["steps"][0]["error_kind"], "timeout")
+        self.assertIn("partial stdout", payload["steps"][0]["stdout_tail"])
+        self.assertIn("partial stderr", payload["steps"][0]["stderr_tail"])
+
 
 if __name__ == "__main__":
     unittest.main()
