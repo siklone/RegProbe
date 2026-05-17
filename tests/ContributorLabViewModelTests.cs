@@ -37,6 +37,20 @@ public sealed class ContributorLabViewModelTests : IDisposable
     }
 
     [Fact]
+    public void GateCopy_ExplainsContributorRiskAndRunTierBoundary()
+    {
+        var viewModel = new ContributorLabViewModel(CreateSnapshot());
+
+        Assert.Contains("user-supplied registry keys", viewModel.RiskGateSummary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("QGA", viewModel.RiskGateSummary, StringComparison.Ordinal);
+        Assert.Contains("noisy benchmark", viewModel.RiskGateSummary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("Normal optimization users", viewModel.RiskGateBoundary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("certified, community, and noisy/debug", viewModel.RiskGateBoundary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("BIOS/UEFI virtualization", viewModel.RiskAcknowledgementText, StringComparison.Ordinal);
+        Assert.Contains("healthy QGA", viewModel.RiskAcknowledgementText, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
     public void Allowlist_AcceptsKnownPythonScriptsAndRejectsArbitraryCommands()
     {
         Assert.True(ContributorLabCatalog.IsAllowlistedCommand(

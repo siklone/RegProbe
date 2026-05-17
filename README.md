@@ -169,7 +169,7 @@ The current v3.6 research snapshot is zero-pending: no active blockers, no promo
 - I want the public support story: [Support matrix](Docs/product/support-matrix.md)
 - I want to build the app: [Build and run](#build-and-run)
 - I want to contribute research: [Contributing](CONTRIBUTING.md)
-- I want contributor tools inside the app: open Contributor Lab from a repo/dev build
+- I want contributor tools inside the app: open the gated Contributor Lab tab
 - I want the contributor tooling map: [Research tooling map](Docs/research/tooling-map.md)
 - I want the current artifact map instead of raw audit folders: [Research artifact map](Docs/research/artifact-map.md)
 - I want to understand certified vs community runs: [Run tiers](Docs/research/run-tiers.md)
@@ -184,21 +184,22 @@ prefer Python mirrors for new research work, especially on Linux hosts without
 the Windows desktop runtime. The `tweak list/apply/revert` CLI path is retained
 for advanced Windows/headless workflows, not for normal app users.
 
-Contributor Lab is the app-side companion for that boundary. It appears only in
-contributor/dev contexts and starts behind an acknowledgement gate. It shows
-Windows/VM readiness, safe command packs, and custom registry value experiment
-observations without promoting them to normal end-user cards. Its observation
-browser shows bucket, blockers, tested values, verdict/confidence/noise, smoke
-receipt, and artifact pointers for contributor triage only. Legacy file names
-may appear in artifact paths, but the product concept is user-supplied custom
-registry values. Its command packs are copyable contributor templates, not
-arbitrary command execution. For user-supplied key/value work, start with the lookup
-template, inspect any existing app-card QA map, check app/readiness contracts,
-then run one value at a time in a certified disposable VM so boot, GUI smoke,
-benchmark observation, and rollback results stay attributable. Certified
-mutation remains copy-only unless the VM/QGA/snapshot health receipt is present.
-The app may run its own allowlisted read-only lookup/readiness commands, but it
-does not execute arbitrary contributor shell input.
+Contributor Lab is the app-side companion for that boundary. It is visible in the
+app shell for discovery, but starts behind an acknowledgement gate so normal
+users do not see pipeline internals by default. It shows Windows/VM readiness,
+safe command packs, and custom registry value experiment observations without
+promoting them to normal end-user cards. Its observation browser shows bucket,
+blockers, tested values, verdict/confidence/noise, smoke receipt, and artifact
+pointers for contributor triage only. Legacy file names may appear in artifact
+paths, but the product concept is user-supplied custom registry values. Its
+command packs are copyable contributor templates, not arbitrary command
+execution. For user-supplied key/value work, start with the lookup template,
+inspect any existing app-card QA map, check app/readiness contracts, then run
+one value at a time in a certified disposable VM so boot, GUI smoke, benchmark
+observation, and rollback results stay attributable. Certified mutation remains
+copy-only unless the VM/QGA/snapshot health receipt is present. The app may run
+its own allowlisted read-only lookup/readiness commands, but it does not execute
+arbitrary contributor shell input.
 
 ## Single Setting Check
 

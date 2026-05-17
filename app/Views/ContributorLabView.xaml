@@ -211,14 +211,14 @@
                                        Style="{StaticResource UtilitySectionTitleTextStyle}"/>
                             <TextBlock Margin="0,8,0,0"
                                        Style="{StaticResource UtilitySectionBodyTextStyle}"
-                                       Text="This area is for people validating user-supplied registry keys and values with disposable VMs, snapshots, and reproducible scripts. It can lead to registry mutation, guest reboot, broken boot states, or noisy benchmark data if used casually."/>
+                                       Text="{Binding RiskGateSummary}"/>
                             <TextBlock Margin="0,8,0,0"
                                        Style="{StaticResource UtilitySectionBodyTextStyle}"
-                                       Text="Normal RegProbe users should use Tweaks. Contributor Lab data is research context unless it is reference-eligible and backed by clean VM artifacts."/>
+                                       Text="{Binding RiskGateBoundary}"/>
                             <CheckBox IsChecked="{Binding RiskAcknowledged}"
                                       Margin="0,14,0,0"
                                       Foreground="#E7E7E7"
-                                      Content="I read this and understand that certified mutation requires a disposable Windows 11 VM, a clean snapshot, rollback proof, and tight noise gates."/>
+                                      Content="{Binding RiskAcknowledgementText}"/>
                             <Button Content="Enable Contributor Lab"
                                     Command="{Binding EnableContributorToolsCommand}"
                                     HorizontalAlignment="Left"
