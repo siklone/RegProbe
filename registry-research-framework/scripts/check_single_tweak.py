@@ -544,7 +544,11 @@ def build_single_tweak_report(
             "record_file": str(record_path.relative_to(root)),
             "record_status": normalize_text(record.get("record_status")),
             "promotion_state": normalize_text((promotion_gate or {}).get("promotion_state")),
-            "apply_allowed": bool(((promotion_gate or {}).get("record_promotion_allowed")))
+            "apply_allowed": (
+                bool((promotion_gate or {}).get("record_promotion_allowed"))
+                if (promotion_gate or {}).get("record_promotion_allowed") is not None
+                else bool((promotion_gate or {}).get("apply_allowed"))
+            )
             if promotion_gate
             else bool(((record.get("decision") or {}).get("apply_allowed"))),
             "restore_default_supported": bool(((record.get("decision") or {}).get("restore_default_supported"))),

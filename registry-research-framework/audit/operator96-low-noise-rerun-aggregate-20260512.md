@@ -1,7 +1,9 @@
-# Operator96 Low-Noise Rerun Aggregate
+# Custom Registry Value Low-Noise Rerun Aggregate
 
 - Generated UTC: `2026-05-13T22:27:38Z`
 - Status: `ok`
+- Legacy artifact prefix: `operator96`
+- Legacy note: operator96 is a historical filename prefix for the user-supplied seed batch, not product branding.
 - Source campaigns: `16`
 - Plan entries: `147`
 - Results: `147`

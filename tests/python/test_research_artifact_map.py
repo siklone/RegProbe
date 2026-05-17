@@ -172,12 +172,20 @@ class ResearchArtifactMapTests(unittest.TestCase):
             self.assertEqual(payload["summary"]["attention_count"], 0)
             self.assertEqual(payload["summary"]["custom_value_noisy_result_count"], 0)
             self.assertEqual(payload["summary"]["custom_value_normal_app_card_ready"], 0)
+            self.assertEqual(payload["summary"]["custom_value_legacy_artifact_prefix"], "operator96")
+            self.assertTrue(payload["summary"]["operator96_legacy_alias"])
             self.assertEqual(by_id["custom-value-low-noise-aggregate"]["status"], "ok")
             self.assertEqual(by_id["custom-value-app-surface-review"]["status"], "research-only-ok")
             self.assertEqual(by_id["cleanup-quarantine-ledger"]["status"], "no-delete-eligible")
             self.assertEqual(by_id["cleanup-quarantine-ledger"]["details"]["delete_candidate_count"], 0)
+            self.assertEqual(by_id["cleanup-quarantine-ledger"]["details"]["cleanup_candidate_count"], 0)
             self.assertEqual(by_id["cleanup-quarantine-ledger"]["details"]["review_inventory_count"], 1)
             self.assertEqual(by_id["cleanup-quarantine-ledger"]["details"]["retained_inventory_count"], 1)
+            self.assertEqual(by_id["cleanup-quarantine-ledger"]["details"]["retained_not_candidate_count"], 1)
+            self.assertIn(
+                "not deletion candidates",
+                by_id["cleanup-quarantine-ledger"]["details"]["candidate_semantics"],
+            )
             self.assertEqual(by_id["cleanup-quarantine-ledger"]["details"]["blocking_referenced_count"], 1)
             self.assertEqual(by_id["cleanup-retained-inventory-plan"]["status"], "retained-plan-ready")
             self.assertEqual(by_id["cleanup-retained-inventory-plan"]["details"]["delete_ready_count"], 0)

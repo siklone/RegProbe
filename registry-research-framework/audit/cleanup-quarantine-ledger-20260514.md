@@ -1,8 +1,10 @@
 # Cleanup Quarantine Ledger
 
-Generated: `2026-05-15T11:08:46Z`
+Generated: `2026-05-16T16:38:52Z`
 
 Quarantine ledger for cleanup review inventory. Only delete-candidate rows are cleanup candidates; retained rows are not deletion candidates.
+
+Candidate semantics: candidate means cleanup_status=delete-candidate. Review inventory and retained inventory are explicitly not deletion candidates.
 
 ## Deletion Policy
 
@@ -17,12 +19,13 @@ Quarantine ledger for cleanup review inventory. Only delete-candidate rows are c
 | Metric | Value |
 |---|---:|
 | Review inventory items | 89 |
-| Delete candidates | 0 |
+| Cleanup candidates | 0 |
 | Retained inventory items | 89 |
+| Retained non-candidates | 89 |
 | Referenced items | 89 |
-| Blocking referenced items | 66 |
-| Audit-only referenced items | 23 |
-| Delete eligible after review | 0 |
+| Blocking referenced items | 65 |
+| Audit-only referenced items | 24 |
+| Delete eligible now | 0 |
 | Total sampled size bytes | 678702358 |
 
 ## Categories
@@ -39,8 +42,8 @@ Quarantine ledger for cleanup review inventory. Only delete-candidate rows are c
 
 | Status | Count | Meaning |
 |---|---:|---|
-| `retained-audit-trail-reference` | 23 | Not a deletion candidate yet; only audit/history references point at it. |
-| `retained-live-reference` | 66 | Not a deletion candidate; real blocking references still point at it. |
+| `retained-audit-trail-reference` | 24 | Not a deletion candidate yet; only audit/history references point at it. |
+| `retained-live-reference` | 65 | Not a deletion candidate; real blocking references still point at it. |
 
 ## Delete Candidates
 
@@ -65,7 +68,7 @@ Rows here were inspected by the cleanup scanner but are not deletion candidates.
 | `evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md` | `retained-audit-trail-reference` | `vm-tooling-staging-oldest-sample` | 4 | 0 | 4 | `delete-after-review` | staging diagnostic bundle duplicated by canonical evidence/raw artifact |
 | `evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md` | `retained-audit-trail-reference` | `vm-tooling-staging-oldest-sample` | 4 | 0 | 4 | `delete-after-review` | staging diagnostic bundle duplicated by canonical evidence/raw artifact |
 | `evidence/files/vm-tooling-staging/ghidra-probes` | `retained-live-reference` | `vm-tooling-staging-oldest-sample` | 6 | 2 | 4 | `keep-pending-review` | staging diagnostic bundle; verify no record/evidence-index dependency before deletion |
-| `evidence/files/vm-tooling-staging/beep_start_toggle_out.txt` | `retained-live-reference` | `vm-tooling-staging-oldest-sample` | 5 | 1 | 4 | `delete-after-review` | staging diagnostic bundle duplicated by canonical evidence/raw artifact |
+| `evidence/files/vm-tooling-staging/beep_start_toggle_out.txt` | `retained-audit-trail-reference` | `vm-tooling-staging-oldest-sample` | 4 | 0 | 4 | `delete-after-review` | staging diagnostic bundle duplicated by canonical evidence/raw artifact |
 | `evidence/files/vm-tooling-staging/crossdevice_resume_probe.csv` | `retained-audit-trail-reference` | `vm-tooling-staging-oldest-sample` | 4 | 0 | 4 | `delete-after-review` | staging diagnostic bundle duplicated by canonical evidence/raw artifact |
 | `evidence/files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118` | `retained-audit-trail-reference` | `vm-tooling-staging-oldest-sample` | 4 | 0 | 4 | `delete-after-review` | staging diagnostic bundle duplicated by canonical evidence/raw artifact |
 | `evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845` | `retained-audit-trail-reference` | `vm-tooling-staging-oldest-sample` | 4 | 0 | 4 | `delete-after-review` | staging diagnostic bundle duplicated by canonical evidence/raw artifact |

@@ -37,12 +37,30 @@ public sealed class ContributorLabViewModelTests : IDisposable
     }
 
     [Fact]
+    public void GateCopy_ExplainsContributorRiskAndRunTierBoundary()
+    {
+        var viewModel = new ContributorLabViewModel(CreateSnapshot());
+
+        Assert.Contains("user-supplied registry keys", viewModel.RiskGateSummary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("QGA", viewModel.RiskGateSummary, StringComparison.Ordinal);
+        Assert.Contains("noisy benchmark", viewModel.RiskGateSummary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("Normal optimization users", viewModel.RiskGateBoundary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("certified, community, and noisy/debug", viewModel.RiskGateBoundary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("BIOS/UEFI virtualization", viewModel.RiskAcknowledgementText, StringComparison.Ordinal);
+        Assert.Contains("healthy QGA", viewModel.RiskAcknowledgementText, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
     public void Allowlist_AcceptsKnownPythonScriptsAndRejectsArbitraryCommands()
     {
         Assert.True(ContributorLabCatalog.IsAllowlistedCommand(
             "python3 registry-research-framework/scripts/check_single_tweak.py SystemResponsiveness --json"));
         Assert.True(ContributorLabCatalog.IsAllowlistedCommand(
             "python3 registry-research-framework/scripts/check_single_tweak.py REPLACE_VALUE_NAME --expected-value 0 --expected-value 1 --json"));
+        Assert.True(ContributorLabCatalog.IsAllowlistedCommand(
+            "python3 registry-research-framework/scripts/generate_custom_value_app_surface_review.py --json"));
+        Assert.False(ContributorLabCatalog.IsAllowlistedCommand(
+            "python3 registry-research-framework/scripts/generate_operator96_app_surface_review.py --json"));
         Assert.True(ContributorLabCatalog.IsAllowlistedCommand(
             "py -3 scripts/vm-kvm/vm-health-check.py --domain regprobe-win11-25h2-session --json"));
         Assert.True(ContributorLabCatalog.IsAllowlistedCommand(
@@ -72,7 +90,11 @@ public sealed class ContributorLabViewModelTests : IDisposable
 
         Assert.Contains(packs, pack => pack.Title == "Representative promoted app QA batch" && pack.MutatesGuest && pack.RequiresCertifiedVm);
         Assert.Contains(packs, pack => pack.Title == "Custom key/value lookup template" && !pack.MutatesGuest && !pack.RequiresCertifiedVm);
-        Assert.Contains(packs, pack => pack.Title == "Custom value app-surface review" && !pack.MutatesGuest && !pack.RequiresCertifiedVm);
+        Assert.Contains(packs, pack => pack.Title == "Custom value app-surface review"
+                                      && !pack.MutatesGuest
+                                      && !pack.RequiresCertifiedVm
+                                      && pack.Command.Contains("generate_custom_value_app_surface_review.py", StringComparison.Ordinal)
+                                      && !pack.Command.Contains("generate_operator96_app_surface_review.py", StringComparison.Ordinal));
         Assert.Contains(packs, pack => pack.Title == "Custom value tranche rerun" && pack.MutatesGuest && pack.RequiresCertifiedVm);
         Assert.Contains(packs, pack => pack.Title == "Custom key/value VM experiment template"
                                       && pack.MutatesGuest
@@ -137,6 +159,14 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Contains("--value-data \"0\"", viewModel.CustomVmExperimentCommand, StringComparison.Ordinal);
         Assert.Contains("--abort-on-noisy-host", viewModel.CustomVmExperimentCommand, StringComparison.Ordinal);
         Assert.Contains("non-mutating lookup/readiness/VM-health", viewModel.ContributorExecutionPolicySummary, StringComparison.Ordinal);
+        Assert.Contains("TimerCheckFlags", viewModel.CustomValueInvestigationContract, StringComparison.Ordinal);
+        Assert.Contains("HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel", viewModel.CustomValueInvestigationContract, StringComparison.Ordinal);
+        Assert.Contains("target value(s) 0, 1", viewModel.CustomValueStorySummary, StringComparison.Ordinal);
+        Assert.Contains("First VM target: 0", viewModel.CustomValueStorySummary, StringComparison.Ordinal);
+        Assert.Contains("copy-only", viewModel.CustomValueMutationBoundarySummary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains(viewModel.CustomValueEvidenceChecklist, item => item.Contains("Current value", StringComparison.Ordinal)
+                                                                       && item.Contains("absent", StringComparison.Ordinal));
+        Assert.Contains(viewModel.CustomValueEvidenceChecklist, item => item.Contains("Rollback story", StringComparison.Ordinal));
 
         Assert.Contains("check_single_tweak_app_qa.py \"TimerCheckFlags\"", viewModel.CustomAppQaCommand, StringComparison.Ordinal);
         Assert.Contains("vm-health-check.py", viewModel.CustomVmHealthCommand, StringComparison.Ordinal);
@@ -147,6 +177,30 @@ public sealed class ContributorLabViewModelTests : IDisposable
                                                                   && step.MutatesGuest
                                                                   && step.RequiresCertifiedVm
                                                                   && step.Command.Contains("--value-name \"TimerCheckFlags\"", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void CustomValueInvestigationCopy_MarksNonCertifiedMutationAsCommunityDebug()
+    {
+        var viewModel = new ContributorLabViewModel(CreateSnapshot() with
+        {
+            RunTier = "community",
+            VmHealthOk = false,
+            VmSnapshotOk = false,
+            CustomValueNoisyResultCount = 0,
+            CustomValueNonOkCount = 0
+        })
+        {
+            CustomValueName = "EnableThing",
+            CustomExpectedValues = string.Empty
+        };
+
+        Assert.Contains("EnableThing", viewModel.CustomValueInvestigationContract, StringComparison.Ordinal);
+        Assert.Contains("target value(s) not listed yet", viewModel.CustomValueStorySummary, StringComparison.Ordinal);
+        Assert.Contains("First VM target: 0", viewModel.CustomValueStorySummary, StringComparison.Ordinal);
+        Assert.Contains("community/debug", viewModel.CustomValueMutationBoundarySummary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains(viewModel.CustomValueEvidenceChecklist, item => item.Contains("Default story", StringComparison.Ordinal));
+        Assert.Contains(viewModel.CustomValueEvidenceChecklist, item => item.Contains("Evidence boundary", StringComparison.Ordinal));
     }
 
     [Fact]
@@ -273,6 +327,7 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.StartsWith("Contributor summary: ok", viewModel.CommandRunOutput, StringComparison.Ordinal);
         Assert.Contains("Matched records: 1", viewModel.CommandRunOutput, StringComparison.Ordinal);
         Assert.Contains("Best match: Example Power Card (promoted, apply_allowed=true)", viewModel.CommandRunOutput, StringComparison.Ordinal);
+        Assert.Contains("Value story inputs:", viewModel.CommandRunOutput, StringComparison.Ordinal);
         Assert.Contains("App writes: SystemResponsiveness=10", viewModel.CommandRunOutput, StringComparison.Ordinal);
         Assert.Contains("Default/profile story: Windows default", viewModel.CommandRunOutput, StringComparison.Ordinal);
         Assert.Contains("Evidence lanes: etw-trace=1, official-doc=1", viewModel.CommandRunOutput, StringComparison.Ordinal);
@@ -518,6 +573,8 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Equal("Low-noise VM receipt", observation.NoiseBadge);
         Assert.Contains("rollback_tested", observation.AppCardBlockerSummary, StringComparison.Ordinal);
         Assert.Contains("registry-value-experiments-low-noise", observation.ArtifactSummary, StringComparison.Ordinal);
+        Assert.Contains("custom-value-seed-001-enablething-0.json", observation.ArtifactSummary, StringComparison.Ordinal);
+        Assert.DoesNotContain("operator96", observation.ArtifactSummary, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]

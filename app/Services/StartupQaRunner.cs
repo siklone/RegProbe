@@ -60,6 +60,23 @@ internal static class StartupQaRunner
         var stages = new List<QaRunStageReport>();
         var card = QaRunCardSnapshot.Create(tweak);
 
+        if (BlocksNormalAppCardQa(tweak, request))
+        {
+            return new QaRunReport(
+                tweak.Id,
+                tweak.Name,
+                false,
+                "not-app-card-ready",
+                "This tweak exists in the catalog, but it is not a shipped end-user app card. Use Contributor Lab or the explicit QA-only gated mutation override for research review.",
+                request.RollbackAfterApply,
+                request.AllowGatedMutation,
+                GatedMutationOverrideUsed: false,
+                card,
+                stages,
+                startedAt,
+                DateTimeOffset.UtcNow);
+        }
+
         await tweak.RunDetectAsync(CancellationToken.None);
         stages.Add(QaRunStageReport.Create("detect-before", tweak));
 
@@ -268,6 +285,9 @@ internal static class StartupQaRunner
         => HasStepStatus(applyStage, "Apply", "Skipped")
            && HasStepStatus(applyStage, "Verify", "Verified")
            && HasStepStatus(applyStage, "Rollback", "Skipped");
+
+    internal static bool BlocksNormalAppCardQa(TweakItemViewModel tweak, StartupQaRequest request)
+        => !request.AllowGatedMutation && !tweak.IsEndUserAppCardAllowed;
 
     private static bool HasStepStatus(QaRunStageReport stage, string action, params string[] statuses)
         => stage.Steps.Any(step =>

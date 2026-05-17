@@ -1,7 +1,9 @@
-# Operator96 Enriched Value Matrix
+# Custom Registry Value Enriched Matrix
 
 - Generated UTC: `2026-05-13T22:35:34Z`
 - Campaign: `operator96-enriched-values-20260510`
+- Legacy artifact prefix: `operator96`
+- Legacy note: operator96 is a historical filename prefix for the user-supplied seed batch, not product branding.
 - Records: `96`
 - Candidate values: `205`
 - App-card eligible records: `79`
@@ -13,7 +15,7 @@
 - `microsoft-fast-startup`: Distinguishing fast startup from wake-from-hibernation (https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/distinguishing-fast-startup-from-wake-from-hibernation)
 - `sysinternals-procmon`: Process Monitor (https://learn.microsoft.com/en-us/sysinternals/downloads/procmon)
 - `local-vm-defaults`: Win11 25H2 VM observed defaults
-- `runtime-evidence`: ETW/Procmon/Ghidra/operator96 VM artifacts
+- `runtime-evidence`: ETW/Procmon/Ghidra custom-value VM artifacts
 - `reactos-static`: ReactOS/static string hints (https://github.com/reactos/reactos)
 
 ## Records

@@ -78,7 +78,7 @@ class SingleTweakAppQaTests(unittest.TestCase):
         self.assertEqual(candidate["qa_tweak_id"], "privacy.set-diagnostic-data-to-minimum-supported-level")
         self.assertEqual(candidate["expected_report"]["allowed_statuses"], ["ok", "not-applicable"])
 
-    def test_temp_repo_generates_mutation_blocked_plan(self) -> None:
+    def test_temp_repo_excludes_blocked_records_from_app_card_qa_plan(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             repo_root = Path(temp_root)
             (repo_root / "research" / "records").mkdir(parents=True)
@@ -199,13 +199,25 @@ class SingleTweakAppQaTests(unittest.TestCase):
                 repo_root=repo_root,
             )
 
-            self.assertEqual(report["status"], "ok")
-            candidate = report["candidates"][0]
-            self.assertFalse(candidate["apply_allowed"])
-            self.assertEqual(candidate["expected_report"]["status"], "mutation-blocked")
-            self.assertFalse(candidate["expected_report"]["success"])
-            self.assertEqual(candidate["expected_report"]["required_stages"], ["detect-before"])
-            self.assertTrue(candidate["expected_report"]["required_card_snapshot"]["claim_boundary_required"])
+            self.assertEqual(report["status"], "no-app-card-match")
+            self.assertEqual(report["qa_candidate_count"], 0)
+            self.assertEqual(report["closest_matches"][0]["candidate_id"], "system.test-setting")
+            self.assertFalse(report["closest_matches"][0]["apply_allowed"])
+            self.assertFalse(report["closest_matches"][0]["app_card_ready"])
+
+    def test_real_repo_does_not_treat_rejected_uac_as_app_qa_card(self) -> None:
+        report = single_tweak_app_qa.build_single_tweak_app_qa_report(
+            "security.disable-uac",
+            exact=True,
+            limit=1,
+            repo_root=REPO_ROOT,
+        )
+
+        self.assertEqual(report["status"], "no-app-card-match")
+        self.assertEqual(report["qa_candidate_count"], 0)
+        self.assertEqual(report["closest_matches"][0]["candidate_id"], "security.disable-uac")
+        self.assertFalse(report["closest_matches"][0]["apply_allowed"])
+        self.assertFalse(report["closest_matches"][0]["app_card_ready"])
 
 
 if __name__ == "__main__":

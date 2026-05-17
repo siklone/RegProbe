@@ -8,11 +8,14 @@ internal static class TweakPromotionGateMutationEvaluator
         string? overrideReason,
         bool contributorModeEnabled)
     {
+        var isHold = IsHoldState(entry.PromotionState);
         var allowedWithoutOverride =
-            string.Equals(entry.TweakOrigin, "legacy-curated", StringComparison.OrdinalIgnoreCase)
-            || entry.TweakIngestAllowed;
+            !isHold
+            && (string.Equals(entry.TweakOrigin, "legacy-curated", StringComparison.OrdinalIgnoreCase)
+                || entry.TweakIngestAllowed);
         var overrideUsed =
-            !allowedWithoutOverride
+            !isHold
+            && !allowedWithoutOverride
             && overrideRequested
             && contributorModeEnabled
             && entry.DebugOverrideAllowed;
@@ -81,4 +84,7 @@ internal static class TweakPromotionGateMutationEvaluator
 
     private static bool IsLegacyCurated(TweakPromotionGateEntry entry)
         => string.Equals(entry.TweakOrigin, "legacy-curated", StringComparison.OrdinalIgnoreCase);
+
+    private static bool IsHoldState(string? promotionState)
+        => promotionState?.Contains("hold", StringComparison.OrdinalIgnoreCase) == true;
 }
