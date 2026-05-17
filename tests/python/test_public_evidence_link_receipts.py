@@ -10,6 +10,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 APP_FACING_RECEIPTS = [
     REPO_ROOT / "registry-research-framework" / "audit" / "promoted-app-qa-batch-latest.json",
     REPO_ROOT / "registry-research-framework" / "audit" / "single-tweak-app-qa-systemresponsiveness-live-latest.json",
+    REPO_ROOT / "registry-research-framework" / "audit" / "single-tweak-app-qa-disable-uac-gate-live-latest.json",
 ]
 
 FORBIDDEN_PUBLIC_SOURCE_FRAGMENTS = [

@@ -305,6 +305,14 @@ def build_candidate_plan(
     return plan
 
 
+def is_app_card_qa_candidate(match: dict[str, Any]) -> bool:
+    surface = match.get("app_surface_entry") or {}
+    catalog = match.get("catalog_entry") or {}
+    if not bool(match.get("apply_allowed")):
+        return False
+    return bool(surface.get("present")) or bool(catalog)
+
+
 def build_single_tweak_app_qa_report(
     query: str,
     *,
@@ -359,9 +367,7 @@ def build_single_tweak_app_qa_report(
         normalized_tweak_id = tweak_id.lower()
         if normalized_tweak_id in seen_tweak_ids:
             continue
-        surface = match.get("app_surface_entry") or {}
-        catalog = match.get("catalog_entry") or {}
-        if not surface.get("present") and not catalog:
+        if not is_app_card_qa_candidate(match):
             continue
         candidates.append(
             build_candidate_plan(
@@ -387,7 +393,9 @@ def build_single_tweak_app_qa_report(
                 "record_id": normalize_text(match.get("record_id")),
                 "tweak_id": normalize_text(match.get("tweak_id")),
                 "promotion_state": normalize_text(match.get("promotion_state")),
+                "apply_allowed": bool(match.get("apply_allowed")),
                 "app_surface_present": bool((match.get("app_surface_entry") or {}).get("present")),
+                "app_card_ready": is_app_card_qa_candidate(match),
             }
             for match in matches[: max(1, limit)]
         ]

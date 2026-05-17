@@ -75,9 +75,17 @@ class ArchitectureInvariantTests(unittest.TestCase):
         filter_evaluator = (
             REPO_ROOT / "app" / "ViewModels" / "WorkspaceFilterEvaluator.cs"
         ).read_text(encoding="utf-8")
+        startup_navigation = (
+            REPO_ROOT / "app" / "Services" / "StartupNavigationCoordinator.cs"
+        ).read_text(encoding="utf-8")
+        startup_qa = (
+            REPO_ROOT / "app" / "Services" / "StartupQaRunner.cs"
+        ).read_text(encoding="utf-8")
 
         self.assertIn("item.IsEndUserAppCardAllowed", filter_evaluator)
         self.assertNotIn("!item.IsMutationAllowed", filter_evaluator)
+        self.assertIn("tweak.IsEndUserAppCardAllowed", startup_navigation)
+        self.assertIn("BlocksNormalAppCardQa", startup_qa)
 
     def test_public_source_copy_treats_catalog_only_as_non_semantics_proof(self) -> None:
         policy = (
