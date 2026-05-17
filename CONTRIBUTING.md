@@ -19,11 +19,11 @@ Before adding or deleting generated data, read
 canonical scripts, and sanitized audit fixtures belong in git; credentials,
 personal VM state, raw noisy dumps, and machine-local scratch output do not.
 
-Windows contributors can also use the WPF Contributor Lab from a repo/dev build.
-It is gated by an explicit acknowledgement and is intentionally conservative:
-readiness checks, command packs, and research observations are visible there,
-but direct mutation still requires certified VM/snapshot readiness and the
-canonical Python/VM scripts.
+Windows contributors can also use the WPF Contributor Lab from the app shell. It
+is visible for discovery, gated by an explicit acknowledgement, and intentionally
+conservative: readiness checks, command packs, and research observations appear
+there after acknowledgement, but direct mutation still requires certified
+VM/snapshot readiness and the canonical Python/VM scripts.
 
 ## Core Rules
 

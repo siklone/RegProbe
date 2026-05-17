@@ -87,12 +87,14 @@ users and should not be presented as the primary research path.
 
 ## WPF Contributor Lab
 
-Repo/dev builds expose a gated Contributor Lab in the desktop app. It is a
-Windows-first companion for contributors, not an end-user optimization screen.
-Use it to check local readiness, copy canonical Python command packs, and review
-custom registry value experiment observations without promoting them to normal
-app cards. Treat legacy campaign IDs as artifact-path details only; do not use
-them as product or public feature branding.
+The desktop app exposes a gated Contributor Lab tab. It is visible for
+discoverability, but locked behind explicit acknowledgement so normal users do
+not see contributor pipeline detail by default. It is a Windows-first companion
+for contributors, not an end-user optimization screen. Use it to check local
+readiness, copy canonical Python command packs, and review custom registry value
+experiment observations without promoting them to normal app cards. Treat legacy
+campaign IDs as artifact-path details only; do not use them as product or public
+feature branding.
 
 The observation browser is the preferred app-side view for the current custom
 value seed batch. It surfaces bucket, app-card blockers, tested values,

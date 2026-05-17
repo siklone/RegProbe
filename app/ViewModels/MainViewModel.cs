@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Windows.Input;
 using RegProbe.App.Services;
 using RegProbe.App.Utilities;
-using RegProbe.Application.Utilities;
 
 namespace RegProbe.App.ViewModels;
 
@@ -69,7 +68,10 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     public bool CanUseStagingEnvironment => false;
 
-    public bool IsContributorEntryVisible => ContributorMode.IsEnabled;
+    public bool IsContributorEntryVisible => true;
+
+    public string ContributorEntryTooltip =>
+        "Contributor Lab is visible for discovery, but locked behind an explicit VM/snapshot risk acknowledgement.";
 
     public bool CanFocusSearch => IsConfigurationViewActive || IsRepairsViewActive;
 

@@ -84,6 +84,15 @@ public sealed class ContributorLabViewModel : ViewModelBase
 
     public string Subtitle => "Windows-first single key/value evidence workspace for contributors and agentic AI. Normal users should stay in Tweaks.";
 
+    public string RiskGateSummary =>
+        "This area validates user-supplied registry keys and values with disposable Windows VMs, clean snapshots, QGA health checks, and reproducible Python scripts. It can mutate the guest registry, reboot the VM, break boot, or produce noisy benchmark data if used casually.";
+
+    public string RiskGateBoundary =>
+        "Normal optimization users should stay in Tweaks. Contributor Lab separates certified, community, and noisy/debug observations; only clean reference-eligible evidence can ever support app-card review.";
+
+    public string RiskAcknowledgementText =>
+        "I read this and understand that certified mutation requires BIOS/UEFI virtualization, a disposable Windows 11 VM, a clean snapshot, healthy QGA, rollback proof, and tight noise gates.";
+
     public string VerificationBadge => Snapshot.VerificationBadge;
 
     public string RunTier => Snapshot.RunTier;
