@@ -253,8 +253,11 @@ public sealed class ContributorLabViewModel : ViewModelBase
     public string CustomVmHealthCommand =>
         $"python3 scripts/vm-kvm/vm-health-check.py --domain regprobe-win11-25h2-session --connect qemu:///session --snapshot-name {QuoteArg(Snapshot.VmSnapshotName)} --json";
 
+    public string CustomVmExperimentOutputName =>
+        $"custom-value-{SlugForArtifact(CustomValueName, "replace-value-name")}-{SlugForArtifact(FirstExpectedValueOrDefault(CustomExpectedValues), "0")}";
+
     public string CustomVmExperimentCommand =>
-        $"python3 scripts/vm-kvm/run-guest-registry-value-experiment.py --domain regprobe-win11-25h2-session --connect qemu:///session --registry-path {QuoteArg(CustomRegistryPath)} --value-name {QuoteArg(CustomValueName)} --value-data {QuoteArg(FirstExpectedValueOrDefault(CustomExpectedValues))} --smoke-profile gui --stage-wait-timeout 420 --reboot-wait-timeout 420 --post-reboot-delay-seconds 90 --require-domain-snapshot --auto-revert-snapshot-on-boot-failure --revert-snapshot-name clean-25h2-qga --abort-on-noisy-host";
+        $"python3 scripts/vm-kvm/run-guest-registry-value-experiment.py --domain regprobe-win11-25h2-session --connect qemu:///session --registry-path {QuoteArg(CustomRegistryPath)} --value-name {QuoteArg(CustomValueName)} --value-data {QuoteArg(FirstExpectedValueOrDefault(CustomExpectedValues))} --output-name {QuoteArg(CustomVmExperimentOutputName)} --smoke-profile gui --stage-wait-timeout 420 --reboot-wait-timeout 420 --post-reboot-delay-seconds 90 --require-domain-snapshot --auto-revert-snapshot-on-boot-failure --revert-snapshot-name clean-25h2-qga --abort-on-noisy-host";
 
     public string CustomValueWorkflowChecklist =>
         "App checks: repo artifact hit, current/default value story, VM/QGA/snapshot readiness, one-value run command, boot/app-smoke result, benchmark observation, rollback proof, then app-card gate.";
@@ -426,6 +429,7 @@ public sealed class ContributorLabViewModel : ViewModelBase
         OnPropertyChanged(nameof(CustomEvidenceLookupCommand));
         OnPropertyChanged(nameof(CustomAppQaCommand));
         OnPropertyChanged(nameof(CustomVmHealthCommand));
+        OnPropertyChanged(nameof(CustomVmExperimentOutputName));
         OnPropertyChanged(nameof(CustomVmExperimentCommand));
         OnPropertyChanged(nameof(CustomValueInvestigationContract));
         OnPropertyChanged(nameof(CustomValueStorySummary));
@@ -566,5 +570,19 @@ public sealed class ContributorLabViewModel : ViewModelBase
     {
         var safe = (value ?? string.Empty).Replace("\"", "\\\"", System.StringComparison.Ordinal);
         return string.IsNullOrWhiteSpace(safe) ? "REPLACE_VALUE_NAME" : $"\"{safe}\"";
+    }
+
+    private static string SlugForArtifact(string value, string fallback)
+    {
+        var source = string.IsNullOrWhiteSpace(value) ? fallback : value.Trim();
+        var chars = source
+            .ToLowerInvariant()
+            .Select(static ch => char.IsLetterOrDigit(ch) ? ch : '-')
+            .ToArray();
+        var slug = string.Join(
+            "-",
+            new string(chars)
+                .Split('-', System.StringSplitOptions.RemoveEmptyEntries | System.StringSplitOptions.TrimEntries));
+        return string.IsNullOrWhiteSpace(slug) ? fallback : slug;
     }
 }

@@ -192,7 +192,10 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Contains("--registry-path \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\"", viewModel.CustomVmExperimentCommand, StringComparison.Ordinal);
         Assert.Contains("--value-name \"TimerCheckFlags\"", viewModel.CustomVmExperimentCommand, StringComparison.Ordinal);
         Assert.Contains("--value-data \"0\"", viewModel.CustomVmExperimentCommand, StringComparison.Ordinal);
+        Assert.Equal("custom-value-timercheckflags-0", viewModel.CustomVmExperimentOutputName);
+        Assert.Contains("--output-name \"custom-value-timercheckflags-0\"", viewModel.CustomVmExperimentCommand, StringComparison.Ordinal);
         Assert.Contains("--abort-on-noisy-host", viewModel.CustomVmExperimentCommand, StringComparison.Ordinal);
+        Assert.DoesNotContain("operator96", viewModel.CustomVmExperimentCommand, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("non-mutating lookup/readiness/VM-health", viewModel.ContributorExecutionPolicySummary, StringComparison.Ordinal);
         Assert.Contains("TimerCheckFlags", viewModel.CustomValueInvestigationContract, StringComparison.Ordinal);
         Assert.Contains("HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel", viewModel.CustomValueInvestigationContract, StringComparison.Ordinal);
@@ -211,7 +214,23 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Contains(viewModel.CustomValueDiscoverySteps, step => step.Title == "5. One-value VM experiment"
                                                                   && step.MutatesGuest
                                                                   && step.RequiresCertifiedVm
+                                                                  && step.Command.Contains("--output-name \"custom-value-timercheckflags-0\"", StringComparison.Ordinal)
                                                                   && step.Command.Contains("--value-name \"TimerCheckFlags\"", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void CustomValueInput_SanitizesVmExperimentOutputName()
+    {
+        var viewModel = new ContributorLabViewModel(CreateSnapshot())
+        {
+            CustomValueName = "Disable CFG Export Suppression",
+            CustomExpectedValues = "0x00000001"
+        };
+
+        Assert.Equal("custom-value-disable-cfg-export-suppression-0x00000001", viewModel.CustomVmExperimentOutputName);
+        Assert.Contains("--output-name \"custom-value-disable-cfg-export-suppression-0x00000001\"", viewModel.CustomVmExperimentCommand, StringComparison.Ordinal);
+        Assert.DoesNotContain(" ", viewModel.CustomVmExperimentOutputName, StringComparison.Ordinal);
+        Assert.DoesNotContain("operator96", viewModel.CustomVmExperimentOutputName, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]
