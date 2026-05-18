@@ -163,6 +163,51 @@ public sealed class TweakItemViewModelTests
     }
 
     [Fact]
+    public void WorkspaceFilter_StatusFilterMatchesCardResearchStatus()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new TestTweak("system.promoted-status-filter");
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false);
+
+        viewModel.ApplyEvidenceClassification(new TweakEvidenceClassEntry
+        {
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            EvidenceClass = "A",
+            ClassLabel = "Class A",
+            ClassTitle = "Ready",
+            ClassDescription = "Ready for app surface",
+            ActionState = "actionable",
+            GatingReason = string.Empty,
+            IsActionable = true,
+            ShowInApp = true,
+        });
+        viewModel.ApplyResearchPromotionGate(new TweakPromotionGateEntry
+        {
+            CandidateId = tweak.Id,
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            TweakOrigin = "research-derived",
+            PromotionState = "promoted",
+            RecordPromotionAllowed = true,
+            TweakIngestAllowed = true,
+            ApplyAllowed = true,
+            AppMappingStatus = "matches-research",
+            NextMissingLayer = "none",
+        });
+
+        var shellState = new TweaksShellStateViewModel { StatusFilter = "promoted" };
+        var evaluator = new WorkspaceFilterEvaluator(shellState);
+
+        Assert.Equal("promoted", viewModel.ResearchStatusTone);
+        Assert.True(evaluator.FilterTweak(viewModel));
+
+        shellState.StatusFilter = "hold";
+
+        Assert.False(evaluator.FilterTweak(viewModel));
+    }
+
+    [Fact]
     public void StartupQa_BlocksNormalRunsForNonEndUserCards()
     {
         var pipeline = new TweakExecutionPipeline(new RecordingLogger());
@@ -328,6 +373,39 @@ public sealed class TweakItemViewModelTests
         var sourceLane = Assert.Single(viewModel.ProofLanes, lane => lane.Key == "source");
         Assert.False(sourceLane.HasLinks);
         Assert.DoesNotContain(sourceLane.Links, link => link.Kind == ReferenceLinkKind.Catalog);
+        Assert.Contains("Catalog-only source context", sourceLane.Summary, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public void SourceSnapshot_DemotesSuppressedExternalLineageToPartial()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new TestTweak("system.suppressed-external-source");
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false);
+
+        viewModel.ApplyEvidenceClassification(new TweakEvidenceClassEntry
+        {
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            EvidenceClass = "A",
+            ClassLabel = "Class A",
+            ClassTitle = "Ready",
+            ClassDescription = "Ready for app surface",
+            ActionState = "actionable",
+            GatingReason = string.Empty,
+            IsActionable = true,
+            ShowInApp = true,
+            UpstreamLineage = new TweakEvidenceProofBlock
+            {
+                Summary = PublicEvidenceLinkPolicy.NoLocalSourceMessage,
+                HasNohutoLineage = true,
+                HasValidationProof = true
+            }
+        });
+
+        Assert.Equal("partial", viewModel.SourceSnapshotState);
+        var sourceLane = Assert.Single(viewModel.ProofLanes, lane => lane.Key == "source");
+        Assert.False(sourceLane.HasLinks);
         Assert.Contains("Catalog-only source context", sourceLane.Summary, StringComparison.OrdinalIgnoreCase);
     }
 

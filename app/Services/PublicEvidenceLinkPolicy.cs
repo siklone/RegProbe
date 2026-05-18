@@ -14,6 +14,18 @@ internal static class PublicEvidenceLinkPolicy
            || (!string.IsNullOrWhiteSpace(url)
                && url.Contains("github.com/nohuto/", StringComparison.OrdinalIgnoreCase));
 
+    public static bool IsNoLocalSourceSummary(string? summary)
+    {
+        if (string.IsNullOrWhiteSpace(summary))
+        {
+            return false;
+        }
+
+        return summary.Contains("No RegProbe-controlled local source mirror", StringComparison.OrdinalIgnoreCase)
+               || summary.Contains("Catalog-only source context", StringComparison.OrdinalIgnoreCase)
+               || summary.Contains("No upstream nohuto source link", StringComparison.OrdinalIgnoreCase);
+    }
+
     public static string SanitizeSourceSummary(string? summary, int visibleSourceLinkCount)
     {
         var text = summary?.Trim() ?? string.Empty;
