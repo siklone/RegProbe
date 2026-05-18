@@ -24,6 +24,7 @@ REQUIRED_CARD_FIELDS = [
     "ProofLanes",
 ]
 REQUIRED_PROOF_LANES = ["docs", "runtime", "source", "rollback"]
+VALID_ABSENT_PROBE_STATUSES = {"absent-key", "absent-value"}
 
 
 def parse_report_text(report_text: str) -> tuple[dict[str, object], str | None]:
@@ -173,6 +174,170 @@ def summarize_contract_failures(failures: list[str]) -> str:
     return "QA card snapshot contract failed: " + "; ".join(failures)
 
 
+def split_registry_value_path(registry_path: str | None) -> dict[str, str] | None:
+    if not registry_path or not registry_path.strip():
+        return None
+
+    normalized = registry_path.strip().replace("/", "\\").rstrip("\\")
+    parts = [part for part in normalized.split("\\") if part]
+    if len(parts) < 3:
+        return None
+
+    root = parts[0].upper()
+    if root not in {"HKLM", "HKEY_LOCAL_MACHINE", "HKCU", "HKEY_CURRENT_USER", "HKCR", "HKEY_CLASSES_ROOT", "HKU", "HKEY_USERS"}:
+        return None
+
+    key_path = "\\".join(parts[:-1])
+    value_name = parts[-1]
+    ps_root = {
+        "HKEY_LOCAL_MACHINE": "HKLM",
+        "HKEY_CURRENT_USER": "HKCU",
+        "HKEY_CLASSES_ROOT": "HKCR",
+        "HKEY_USERS": "HKU",
+    }.get(root, root)
+
+    return {
+        "registry_path": normalized,
+        "key_path": key_path,
+        "value_name": value_name,
+        "powershell_key_path": ps_root + ":\\" + "\\".join(parts[1:-1]),
+    }
+
+
+def powershell_single_quote(value: str) -> str:
+    return "'" + value.replace("'", "''") + "'"
+
+
+def build_registry_probe_command(powershell_key_path: str, value_name: str) -> str:
+    key = powershell_single_quote(powershell_key_path)
+    name = powershell_single_quote(value_name)
+    return (
+        "$ErrorActionPreference = 'Stop';"
+        f"$key = {key};"
+        f"$name = {name};"
+        "if (-not (Test-Path -LiteralPath $key)) {"
+        "  [pscustomobject]@{ status='absent-key'; exists=$false; key_path=$key; value_name=$name; value=$null; value_text='' } | ConvertTo-Json -Compress; exit 0"
+        "};"
+        "$item = Get-ItemProperty -LiteralPath $key -Name $name -ErrorAction SilentlyContinue;"
+        "$prop = if ($null -eq $item) { $null } else { $item.PSObject.Properties[$name] };"
+        "if ($null -eq $prop) {"
+        "  [pscustomobject]@{ status='absent-value'; exists=$false; key_path=$key; value_name=$name; value=$null; value_text='' } | ConvertTo-Json -Compress; exit 0"
+        "};"
+        "$value = $prop.Value;"
+        "[pscustomobject]@{ status='ok'; exists=$true; key_path=$key; value_name=$name; value=$value; value_text=([string]$value); value_type=($value.GetType().FullName) } | ConvertTo-Json -Compress"
+    )
+
+
+def parse_registry_probe_stdout(stdout: str) -> dict[str, object]:
+    for line in reversed((stdout or "").splitlines()):
+        text = line.strip()
+        if not text:
+            continue
+        try:
+            payload = json.loads(text)
+        except json.JSONDecodeError:
+            continue
+        if isinstance(payload, dict):
+            return payload
+    return {
+        "status": "parse-error",
+        "exists": None,
+        "stdout": stdout,
+    }
+
+
+def probe_guest_registry_value(repo_root: Path, registry_path: str | None, wait_timeout: int) -> dict[str, object]:
+    split = split_registry_value_path(registry_path)
+    if not split:
+        return {
+            "status": "skipped",
+            "reason": "registry-path-not-parseable",
+            "registry_path": registry_path or "",
+        }
+
+    command = build_registry_probe_command(split["powershell_key_path"], split["value_name"])
+    proc = subprocess.run(
+        [
+            sys.executable,
+            str(repo_root / "scripts" / "vm-kvm" / "qga-exec.py"),
+            "--path",
+            "powershell.exe",
+            "--arg=-NoProfile",
+            "--arg=-ExecutionPolicy",
+            "--arg=Bypass",
+            "--arg=-Command",
+            f"--arg={command}",
+            "--wait-timeout",
+            str(max(10, min(wait_timeout, 60))),
+        ],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+    )
+
+    try:
+        outer = json.loads(proc.stdout)
+    except json.JSONDecodeError:
+        outer = {
+            "status": "parse-error",
+            "stdout": proc.stdout,
+            "stderr": proc.stderr,
+        }
+
+    execution_stdout = outer.get("stdout") if isinstance(outer, dict) else ""
+    probe = parse_registry_probe_stdout(execution_stdout if isinstance(execution_stdout, str) else "")
+    probe.update(
+        {
+            "registry_path": split["registry_path"],
+            "key_path": split["key_path"],
+            "powershell_key_path": split["powershell_key_path"],
+            "value_name": split["value_name"],
+            "qga_returncode": proc.returncode,
+            "qga_status": outer.get("status") if isinstance(outer, dict) else None,
+            "qga_exitcode": outer.get("exitcode") if isinstance(outer, dict) else None,
+            "qga_stderr": proc.stderr,
+        }
+    )
+    if proc.returncode != 0 or (isinstance(outer, dict) and outer.get("exitcode") not in (0, None)):
+        probe["status"] = "probe-error"
+    return probe
+
+
+def find_stage_current_value(report: dict[str, object], stage_name: str) -> str:
+    for stage in report.get("Stages") or []:
+        if not isinstance(stage, dict):
+            continue
+        if str(stage.get("Stage") or "").strip().lower() == stage_name.lower():
+            return str(stage.get("CurrentValue") or "").strip()
+    return ""
+
+
+def normalize_reported_value(value: str) -> str:
+    text = (value or "").strip()
+    if "(" in text:
+        text = text.split("(", 1)[0].strip()
+    return text.lower()
+
+
+def evaluate_post_run_registry_probe(report: dict[str, object], probe: dict[str, object]) -> str:
+    status = str(probe.get("status") or "")
+    if status == "skipped":
+        return "skipped"
+    if status == "probe-error" or status == "parse-error":
+        return "probe-error"
+
+    expected = normalize_reported_value(find_stage_current_value(report, "detect-after"))
+    if not expected:
+        return "unchecked"
+
+    exists = bool(probe.get("exists"))
+    if expected == "not set":
+        return "verified" if not exists or status in VALID_ABSENT_PROBE_STATUSES else "mismatch"
+
+    actual = normalize_reported_value(str(probe.get("value_text") or probe.get("value") or ""))
+    return "verified" if exists and actual == expected else "mismatch"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run guest-side RegProbe tweak QA batch through the interactive app harness.")
     parser.add_argument("--id", action="append", default=[], help="Tweak id to validate. Repeat for multiple ids.")
@@ -250,6 +415,15 @@ def main() -> int:
         app_success = bool(report.get("Success")) if report else False
         card_snapshot = summarize_card_snapshot(report) if report else {}
         contract_failures = list(card_snapshot.get("failures") or []) if isinstance(card_snapshot, dict) else []
+        card = report.get("Card") if isinstance(report.get("Card"), dict) else {}
+        registry_probe = probe_guest_registry_value(
+            repo_root,
+            str(card.get("RegistryPath") or "") if isinstance(card, dict) else "",
+            args.wait_timeout,
+        ) if report else {"status": "skipped", "reason": "missing-report"}
+        registry_probe_verification = evaluate_post_run_registry_probe(report, registry_probe) if report else "skipped"
+        if registry_probe_verification in {"probe-error", "mismatch"}:
+            contract_failures.append("post-run-registry-" + registry_probe_verification)
         success = app_success and not contract_failures
         overall_success = overall_success and success
         results.append(
@@ -274,6 +448,8 @@ def main() -> int:
                 "report_card_missing_fields": card_snapshot.get("missing_fields") if isinstance(card_snapshot, dict) else [],
                 "report_card_proof_lanes": card_snapshot.get("proof_lanes") if isinstance(card_snapshot, dict) else [],
                 "report_card_missing_proof_lanes": card_snapshot.get("missing_proof_lanes") if isinstance(card_snapshot, dict) else [],
+                "post_run_registry_probe": registry_probe,
+                "post_run_registry_verification": registry_probe_verification,
                 "report": report,
             }
         )
