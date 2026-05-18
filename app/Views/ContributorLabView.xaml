@@ -235,6 +235,21 @@
                                 <TextBlock Text="{Binding RepoRoot}"
                                            Margin="0,5,0,10"
                                            Style="{StaticResource ContributorMonoTextStyle}"/>
+                                <Border Background="#0E1411"
+                                        BorderBrush="#244A34"
+                                        BorderThickness="1"
+                                        CornerRadius="8"
+                                        Padding="10"
+                                        Margin="0,0,0,10">
+                                    <StackPanel>
+                                        <TextBlock Text="Next safe action"
+                                                   Foreground="#F5F5F5"
+                                                   FontWeight="SemiBold"/>
+                                        <TextBlock Text="{Binding ContributorReadinessDecisionSummary}"
+                                                   Margin="0,5,0,0"
+                                                   Style="{StaticResource UtilitySectionBodyTextStyle}"/>
+                                    </StackPanel>
+                                </Border>
                                 <WrapPanel>
                                     <ItemsControl ItemsSource="{Binding ReadinessItems}"
                                                   ItemTemplate="{StaticResource ReadinessItemTemplate}">
