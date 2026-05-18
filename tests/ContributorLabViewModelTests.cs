@@ -135,6 +135,9 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Contains("blocked_by_gate=17", viewModel.CustomValueGateBreakdown, StringComparison.Ordinal);
         Assert.Contains("not_app_surface_ready=75", viewModel.CustomValueGateBreakdown, StringComparison.Ordinal);
         Assert.Contains("surface=contributor-lab-only", viewModel.CustomValueGateBreakdown, StringComparison.Ordinal);
+        Assert.Contains("app-card review-ready, not shipped cards", viewModel.CustomValueSurfaceBoundarySummary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("App-card review-ready (not shipped): 4", viewModel.CustomValueReviewReadySummary, StringComparison.Ordinal);
+        Assert.Contains("contributor-only observations: 92", viewModel.CustomValueReviewReadySummary, StringComparison.Ordinal);
         Assert.Contains("Review only ready_for_bounded_app_card", viewModel.CustomValueNextActionSummary, StringComparison.Ordinal);
         Assert.Contains("user-supplied key/value", viewModel.CustomValueWorkflowSummary, StringComparison.Ordinal);
         Assert.Contains("per-run confirmation", viewModel.CertifiedMutationGuardSummary, StringComparison.Ordinal);
@@ -559,6 +562,8 @@ public sealed class ContributorLabViewModelTests : IDisposable
         var viewModel = new ContributorLabViewModel(snapshot);
         Assert.Equal(1, viewModel.CustomValueResearchOnlyCount);
         Assert.Contains("Do not create end-user cards yet", viewModel.CustomValueNextActionSummary, StringComparison.Ordinal);
+        Assert.Contains("All 1 custom value records stay in Contributor Lab", viewModel.CustomValueSurfaceBoundarySummary, StringComparison.Ordinal);
+        Assert.Contains("not optimization recommendations or shipped cards", viewModel.ObservationBrowserSummary, StringComparison.OrdinalIgnoreCase);
         Assert.Contains(snapshot.ReadinessItems, item => item.Label == "Custom value aggregate gate" && item.Status == "Ready");
         var observation = Assert.Single(snapshot.Observations);
         Assert.Equal("not_app_surface_ready", observation.Bucket);

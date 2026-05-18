@@ -132,6 +132,14 @@ public sealed class ContributorLabViewModel : ViewModelBase
                 ? "Custom registry value experiments are clean Contributor Lab research observations. They are not normal optimization cards until each record has a known default/current value story, tested rollback, explicit app-write, clean low-noise proof, and bounded claims."
                 : "Only ready_for_bounded_app_card records with known defaults, rollback proof, explicit app writes, and bounded claims may move into normal app cards.";
 
+    public string CustomValueSurfaceBoundarySummary =>
+        CustomValueReadyForAppCard == 0
+            ? $"All {CustomValueRecordCount} custom value records stay in Contributor Lab. End users still only see the {AppCardPassCount} shipped cards that pass app-card contracts."
+            : $"{CustomValueReadyForAppCard} custom value records are app-card review-ready, not shipped cards. Keep the remaining {CustomValueResearchOnlyCount} records research-only until per-record default/current/target/rollback proof is complete.";
+
+    public string CustomValueReviewReadySummary =>
+        $"App-card review-ready (not shipped): {CustomValueReadyForAppCard}; contributor-only observations: {CustomValueResearchOnlyCount}.";
+
     public string CustomValueWorkflowSummary =>
         "For a user-supplied key/value, start with repository lookup from inside the app, then run one value at a time in a certified disposable VM. Record current/default/target, boot result, app smoke, benchmark deltas as observations only, and rollback proof before any app-card review.";
 
@@ -377,7 +385,7 @@ public sealed class ContributorLabViewModel : ViewModelBase
     public int FilteredObservationCount => FilteredObservations.Count();
 
     public string ObservationBrowserSummary =>
-        $"Showing {FilteredObservationCount}/{Observations.Count} research observations. App-card promotion still requires known default/current/target, tested rollback, explicit app write, clean low-noise proof, and bounded claims.";
+        $"Showing {FilteredObservationCount}/{Observations.Count} contributor research observations. These are not optimization recommendations or shipped cards; app-card promotion still requires known default/current/target, tested rollback, explicit app write, clean low-noise proof, and bounded claims.";
 
     private void RaiseCustomValueCommandProperties()
     {
