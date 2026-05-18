@@ -1,3 +1,4 @@
+using RegProbe.App.Services;
 using RegProbe.Core;
 
 namespace RegProbe.App.ViewModels;
@@ -62,6 +63,11 @@ internal static class TweakProofSnapshotPresentation
         bool needsSourceReview,
         string provenanceSummary)
     {
+        if (PublicEvidenceLinkPolicy.IsNoLocalSourceSummary(provenanceSummary))
+        {
+            return "partial";
+        }
+
         if (hasLineageEvidenceFlag || hasUpstreamLineage || hasNohutoEvidence)
         {
             return "ready";

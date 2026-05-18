@@ -68,12 +68,7 @@ internal sealed class WorkspaceFilterEvaluator
 
         if (!string.IsNullOrEmpty(_shellState.StatusFilter))
         {
-            if (_shellState.StatusFilter == "applied" && !item.IsApplied)
-            {
-                return false;
-            }
-
-            if (_shellState.StatusFilter == "rolledback" && !item.WasRolledBack)
+            if (!MatchesStatusFilter(item))
             {
                 return false;
             }
@@ -139,5 +134,18 @@ internal sealed class WorkspaceFilterEvaluator
 
         item.IsHighlighted = matches;
         return matches;
+    }
+
+    private bool MatchesStatusFilter(TweakItemViewModel item)
+    {
+        return _shellState.StatusFilter switch
+        {
+            "promoted" => string.Equals(item.ResearchStatusTone, "promoted", StringComparison.OrdinalIgnoreCase),
+            "hold" => string.Equals(item.ResearchStatusTone, "intentional-hold", StringComparison.OrdinalIgnoreCase)
+                      || item.IsResearchGated,
+            "applied" => item.IsApplied,
+            "rolledback" => item.WasRolledBack,
+            _ => true
+        };
     }
 }

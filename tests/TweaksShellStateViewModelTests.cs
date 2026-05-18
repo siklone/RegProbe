@@ -76,6 +76,16 @@ public sealed class TweaksShellStateViewModelTests
             },
             option =>
             {
+                Assert.Equal("PROMOTED", option.Label);
+                Assert.Equal("promoted", option.Value);
+            },
+            option =>
+            {
+                Assert.Equal("HOLD/REVIEW", option.Label);
+                Assert.Equal("hold", option.Value);
+            },
+            option =>
+            {
                 Assert.Equal("APPLIED", option.Label);
                 Assert.Equal("applied", option.Value);
             },
@@ -109,6 +119,12 @@ public sealed class TweaksShellStateViewModelTests
         var viewModel = new TweaksShellStateViewModel();
 
         Assert.Equal("STATUS", viewModel.StatusFilterDisplayText);
+        viewModel.CycleStatusFilter();
+        Assert.Equal("promoted", viewModel.StatusFilter);
+        Assert.Equal("PROMOTED", viewModel.StatusFilterDisplayText);
+        viewModel.CycleStatusFilter();
+        Assert.Equal("hold", viewModel.StatusFilter);
+        Assert.Equal("HOLD/REVIEW", viewModel.StatusFilterDisplayText);
         viewModel.CycleStatusFilter();
         Assert.Equal("applied", viewModel.StatusFilter);
         Assert.Equal("APPLIED", viewModel.StatusFilterDisplayText);

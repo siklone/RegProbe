@@ -22,6 +22,8 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
     public IReadOnlyList<FilterOptionViewModel> StatusFilterOptions { get; } = new[]
     {
         new FilterOptionViewModel("STATUS", string.Empty),
+        new FilterOptionViewModel("PROMOTED", "promoted"),
+        new FilterOptionViewModel("HOLD/REVIEW", "hold"),
         new FilterOptionViewModel("APPLIED", "applied"),
         new FilterOptionViewModel("ROLLED BACK", "rolledback")
     };
@@ -95,6 +97,8 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
 
     public string StatusFilterLabel => _statusFilter switch
     {
+        "promoted" => "Promoted Cards",
+        "hold" => "Review/Hold Cards",
         "applied" => "Applied Settings",
         "rolledback" => "Rolled Back Settings",
         _ => string.Empty
