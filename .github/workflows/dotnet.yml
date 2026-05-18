@@ -22,6 +22,7 @@ permissions:
 env:
   DOTNET_VERSION: "8.0.x"
   PYTHON_VERSION: "3.12"
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
   CONFIGURATION: Release
   RUNTIME: win-x64
   SOLUTION: RegProbe.sln
@@ -37,19 +38,19 @@ env:
 jobs:
   build:
     name: Build
-    runs-on: windows-latest
+    runs-on: windows-2025-vs2026
     steps:
       - name: Enable long paths for checkout
         run: git config --system core.longpaths true
 
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           persist-credentials: false
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
@@ -59,7 +60,7 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Cache .NET packages
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.nuget/packages
           key: ${{ runner.os }}-dotnet-packages-${{ hashFiles('**/*.csproj') }}
@@ -75,18 +76,18 @@ jobs:
   unit-tests:
     name: Unit Tests
     needs: build
-    runs-on: windows-latest
+    runs-on: windows-2025-vs2026
     steps:
       - name: Enable long paths for checkout
         run: git config --system core.longpaths true
 
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           persist-credentials: false
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
@@ -152,14 +153,14 @@ jobs:
           PY
 
       - name: Upload unit test results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: unit-test-results
           path: TestResults/Unit/*.trx
 
       - name: Upload coverage report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: coverage-report
@@ -203,19 +204,19 @@ jobs:
   integration-tests:
     name: Integration Tests
     needs: build
-    runs-on: windows-latest
+    runs-on: windows-2025-vs2026
     if: github.event_name != 'release'
     steps:
       - name: Enable long paths for checkout
         run: git config --system core.longpaths true
 
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           persist-credentials: false
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
@@ -231,7 +232,7 @@ jobs:
           --results-directory TestResults/Integration
 
       - name: Upload integration test results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: integration-test-results
@@ -240,19 +241,19 @@ jobs:
   code-quality:
     name: Code Quality
     needs: build
-    runs-on: windows-latest
+    runs-on: windows-2025-vs2026
     steps:
       - name: Enable long paths for checkout
         run: git config --system core.longpaths true
 
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           persist-credentials: false
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
@@ -302,7 +303,7 @@ jobs:
         run: pwsh -NoProfile -ExecutionPolicy Bypass -File tests/Invoke-PipelineQualitySmoke.ps1
 
       - name: Upload research quality gate artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: research-quality-gate
@@ -324,19 +325,19 @@ jobs:
   publish:
     name: Publish Application
     needs: [unit-tests, integration-tests, code-quality]
-    runs-on: windows-latest
+    runs-on: windows-2025-vs2026
     if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
     steps:
       - name: Enable long paths for checkout
         run: git config --global core.longpaths true
 
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           persist-credentials: false
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
@@ -440,7 +441,7 @@ jobs:
           PY
 
       - name: Upload publish artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: RegProbe-${{ github.sha }}
           path: |
@@ -452,7 +453,7 @@ jobs:
   release:
     name: Create Release
     needs: [unit-tests, integration-tests, code-quality]
-    runs-on: windows-latest
+    runs-on: windows-2025-vs2026
     if: github.event_name == 'release'
     permissions:
       contents: write
@@ -461,12 +462,12 @@ jobs:
         run: git config --global core.longpaths true
 
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           persist-credentials: false
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
