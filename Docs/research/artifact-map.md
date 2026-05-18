@@ -1,6 +1,6 @@
 # Research Artifact Map
 
-Generated: `2026-05-17T03:48:02Z`
+Generated: `2026-05-18T10:08:50Z`
 
 This is the contributor entrypoint for current research artifacts. Use it
 instead of browsing raw audit folders first.
@@ -8,7 +8,7 @@ instead of browsing raw audit folders first.
 ## Current Gates
 
 - App-card contracts: `258` pass, `0` fail.
-- Promoted app QA latest: `14` live success, `0` live failure.
+- Promoted app QA latest: `3` live success, `0` live failure.
 - Contributor Lab VM smoke: `ok`.
 - Custom value app-card ready: `0`.
 - Custom value noisy results: `0`; non-ok results: `0`.

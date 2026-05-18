@@ -86,6 +86,7 @@ def run_app_launch_smoke(
     repo_root: Path,
     *,
     app_exe: str,
+    working_dir: str,
     app_args: list[str],
     launch_wait_timeout: int,
     linger_seconds: int,
@@ -101,6 +102,8 @@ def run_app_launch_smoke(
         "--linger-seconds",
         str(linger_seconds),
     ]
+    if working_dir:
+        cmd.extend(["--working-dir", working_dir])
     for app_arg in app_args:
         cmd.append(f"--app-arg={app_arg}")
     if leave_running:
@@ -146,6 +149,11 @@ def main() -> int:
     parser.add_argument("--guest-publish-zip-path", default=r"C:\Tools\Inbound\app-publish-current-branch.zip")
     parser.add_argument("--guest-app-root", default=r"C:\Tools\AppSmoke")
     parser.add_argument("--guest-app-exe", default=r"C:\Tools\AppSmoke\RegProbe.App.exe")
+    parser.add_argument(
+        "--guest-working-dir",
+        default="",
+        help="Optional guest working directory for app launch. Use a repo checkout path for Contributor Lab readiness smoke.",
+    )
     parser.add_argument("--launch-wait-timeout", type=int, default=20)
     parser.add_argument("--linger-seconds", type=int, default=5)
     parser.add_argument("--leave-running", action="store_true")
@@ -166,6 +174,7 @@ def main() -> int:
         "guest_publish_zip_path": args.guest_publish_zip_path,
         "guest_app_root": args.guest_app_root,
         "guest_app_exe": args.guest_app_exe,
+        "guest_working_dir": args.guest_working_dir,
         "app_args": args.app_arg,
         "launch_wait_timeout": args.launch_wait_timeout,
         "linger_seconds": args.linger_seconds,
@@ -267,6 +276,7 @@ def main() -> int:
     smoke_returncode, smoke_payload = run_app_launch_smoke(
         repo_root,
         app_exe=args.guest_app_exe,
+        working_dir=args.guest_working_dir,
         app_args=args.app_arg,
         launch_wait_timeout=args.launch_wait_timeout,
         linger_seconds=args.linger_seconds,

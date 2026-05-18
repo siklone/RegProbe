@@ -80,6 +80,7 @@ class VmKvmAppDeploySmokeTests(unittest.TestCase):
             exit_code, payload = app_deploy_smoke.run_app_launch_smoke(
                 REPO_ROOT,
                 app_exe=r"C:\Tools\AppSmoke\RegProbe.App.exe",
+                working_dir="",
                 app_args=[],
                 launch_wait_timeout=37,
                 linger_seconds=5,
@@ -98,6 +99,7 @@ class VmKvmAppDeploySmokeTests(unittest.TestCase):
             exit_code, payload = app_deploy_smoke.run_app_launch_smoke(
                 REPO_ROOT,
                 app_exe=r"C:\Tools\AppSmoke\RegProbe.App.exe",
+                working_dir="",
                 app_args=["--contributor-lab"],
                 launch_wait_timeout=37,
                 linger_seconds=5,
@@ -106,6 +108,25 @@ class VmKvmAppDeploySmokeTests(unittest.TestCase):
 
         cmd = run_mock.call_args.args[0]
         self.assertIn("--app-arg=--contributor-lab", cmd)
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(payload["status"], "ok")
+
+    def test_run_app_launch_smoke_passes_working_dir(self) -> None:
+        completed = mock.Mock(returncode=0, stdout='{"status":"ok"}', stderr="")
+        with mock.patch.object(app_deploy_smoke.subprocess, "run", return_value=completed) as run_mock:
+            exit_code, payload = app_deploy_smoke.run_app_launch_smoke(
+                REPO_ROOT,
+                app_exe=r"C:\Tools\AppSmoke\RegProbe.App.exe",
+                working_dir=r"C:\RegProbeSource",
+                app_args=[],
+                launch_wait_timeout=37,
+                linger_seconds=5,
+                leave_running=False,
+            )
+
+        cmd = run_mock.call_args.args[0]
+        self.assertIn("--working-dir", cmd)
+        self.assertIn(r"C:\RegProbeSource", cmd)
         self.assertEqual(exit_code, 0)
         self.assertEqual(payload["status"], "ok")
 
@@ -120,6 +141,8 @@ class VmKvmAppDeploySmokeTests(unittest.TestCase):
                 "--linger-seconds",
                 "1",
                 "--app-arg=--contributor-lab",
+                "--guest-working-dir",
+                r"C:\RegProbeSource",
             ]
 
             with mock.patch.object(sys, "argv", argv), mock.patch.object(
@@ -145,6 +168,7 @@ class VmKvmAppDeploySmokeTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertEqual(payload["status"], "ok")
         self.assertEqual(payload["app_args"], ["--contributor-lab"])
+        self.assertEqual(payload["guest_working_dir"], r"C:\RegProbeSource")
         self.assertEqual(payload["recovery_action"], "none")
 
     def test_main_returns_error_when_upload_fails(self) -> None:

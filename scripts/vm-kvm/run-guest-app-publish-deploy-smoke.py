@@ -107,6 +107,7 @@ def run_app_deploy_smoke(
     guest_publish_zip_path: str,
     guest_app_root: str,
     guest_app_exe: str,
+    guest_working_dir: str,
 ) -> tuple[int, dict[str, Any]]:
     cmd = [
         sys.executable,
@@ -124,6 +125,8 @@ def run_app_deploy_smoke(
         "--guest-app-exe",
         guest_app_exe,
     ]
+    if guest_working_dir:
+        cmd.extend(["--guest-working-dir", guest_working_dir])
     for app_arg in app_args:
         cmd.append(f"--app-arg={app_arg}")
     if leave_running:
@@ -142,6 +145,7 @@ def build_deploy_smoke_command(
     guest_publish_zip_path: str,
     guest_app_root: str,
     guest_app_exe: str,
+    guest_working_dir: str,
 ) -> list[str]:
     cmd = [
         sys.executable,
@@ -159,6 +163,8 @@ def build_deploy_smoke_command(
         "--guest-app-exe",
         guest_app_exe,
     ]
+    if guest_working_dir:
+        cmd.extend(["--guest-working-dir", guest_working_dir])
     for app_arg in app_args:
         cmd.append(f"--app-arg={app_arg}")
     if leave_running:
@@ -183,6 +189,7 @@ def build_dry_run_payload(
     guest_publish_zip_path: str,
     guest_app_root: str,
     guest_app_exe: str,
+    guest_working_dir: str,
     artifact_retention: str,
     self_contained: bool,
 ) -> dict[str, Any]:
@@ -210,6 +217,7 @@ def build_dry_run_payload(
         guest_publish_zip_path=guest_publish_zip_path,
         guest_app_root=guest_app_root,
         guest_app_exe=guest_app_exe,
+        guest_working_dir=guest_working_dir,
     )
     return apply_summary_contract(
         {
@@ -228,6 +236,7 @@ def build_dry_run_payload(
             "launch_wait_timeout": launch_wait_timeout,
             "linger_seconds": linger_seconds,
             "app_args": app_args,
+            "guest_working_dir": guest_working_dir,
             "artifact_retention": artifact_retention,
             "publish_command": publish_cmd,
             "zip_preview": {
@@ -261,6 +270,7 @@ def build_verify_only_payload(
     guest_publish_zip_path: str,
     guest_app_root: str,
     guest_app_exe: str,
+    guest_working_dir: str,
     artifact_retention: str,
     self_contained: bool,
 ) -> dict[str, Any]:
@@ -297,6 +307,7 @@ def build_verify_only_payload(
         guest_publish_zip_path=guest_publish_zip_path,
         guest_app_root=guest_app_root,
         guest_app_exe=guest_app_exe,
+        guest_working_dir=guest_working_dir,
         artifact_retention=artifact_retention,
         self_contained=self_contained,
     )
@@ -310,6 +321,8 @@ def build_verify_only_payload(
         recommended_execute_command.append("--leave-running")
     for app_arg in app_args:
         recommended_execute_command.append(f"--app-arg={app_arg}")
+    if guest_working_dir:
+        recommended_execute_command.append(f"--guest-working-dir={guest_working_dir}")
     if self_contained:
         recommended_execute_command.append("--self-contained")
     if artifact_retention == "kept":
@@ -374,6 +387,11 @@ def main() -> int:
     parser.add_argument("--guest-publish-zip-path", default=r"C:\Tools\Inbound\app-publish-current-branch.zip")
     parser.add_argument("--guest-app-root", default=r"C:\Tools\AppSmoke")
     parser.add_argument("--guest-app-exe", default=r"C:\Tools\AppSmoke\RegProbe.App.exe")
+    parser.add_argument(
+        "--guest-working-dir",
+        default="",
+        help="Optional guest working directory for app launch. Use a repo checkout path for Contributor Lab readiness smoke.",
+    )
     args = parser.parse_args()
 
     repo_root = Path(args.repo_root).resolve()
@@ -409,6 +427,7 @@ def main() -> int:
         "launch_wait_timeout": args.launch_wait_timeout,
         "linger_seconds": args.linger_seconds,
         "app_args": args.app_arg,
+        "guest_working_dir": args.guest_working_dir,
         "artifact_retention": "kept" if args.keep_artifacts or args.work_root else "ephemeral",
     }
 
@@ -430,6 +449,7 @@ def main() -> int:
                 guest_publish_zip_path=args.guest_publish_zip_path,
                 guest_app_root=args.guest_app_root,
                 guest_app_exe=args.guest_app_exe,
+                guest_working_dir=args.guest_working_dir,
                 artifact_retention=summary["artifact_retention"],
                 self_contained=args.self_contained,
             )
@@ -453,6 +473,7 @@ def main() -> int:
                 guest_publish_zip_path=args.guest_publish_zip_path,
                 guest_app_root=args.guest_app_root,
                 guest_app_exe=args.guest_app_exe,
+                guest_working_dir=args.guest_working_dir,
                 artifact_retention=summary["artifact_retention"],
                 self_contained=args.self_contained,
             )
@@ -522,6 +543,7 @@ def main() -> int:
             guest_publish_zip_path=args.guest_publish_zip_path,
             guest_app_root=args.guest_app_root,
             guest_app_exe=args.guest_app_exe,
+            guest_working_dir=args.guest_working_dir,
         )
         summary["deploy_smoke_returncode"] = deploy_smoke_returncode
         summary["deploy_smoke_payload"] = deploy_smoke_payload
