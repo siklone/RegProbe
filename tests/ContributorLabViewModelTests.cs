@@ -121,6 +121,38 @@ public sealed class ContributorLabViewModelTests : IDisposable
     }
 
     [Fact]
+    public void ContributorReadinessDecisionSummary_GivesOneNextSafeAction()
+    {
+        var certified = new ContributorLabViewModel(CreateSnapshot());
+        Assert.Contains("certified reference lane is ready", certified.ContributorReadinessDecisionSummary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("one value at a time", certified.ContributorReadinessDecisionSummary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("ready_for_bounded_app_card", certified.ContributorReadinessDecisionSummary, StringComparison.Ordinal);
+
+        var noisy = new ContributorLabViewModel(CreateSnapshot() with
+        {
+            CustomValueNoisyResultCount = 1,
+            CustomValueNeedsLowNoiseRerun = 1
+        });
+        Assert.Contains("rerun noisy", noisy.ContributorReadinessDecisionSummary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("debug-only", noisy.ContributorReadinessDecisionSummary, StringComparison.OrdinalIgnoreCase);
+
+        var community = new ContributorLabViewModel(CreateSnapshot() with
+        {
+            RunTier = "community",
+            VmHealthOk = false,
+            VmSnapshotOk = false
+        });
+        Assert.Contains("copy-only/community-debug", community.ContributorReadinessDecisionSummary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("QGA", community.ContributorReadinessDecisionSummary, StringComparison.Ordinal);
+
+        var missingScripts = new ContributorLabViewModel(CreateSnapshot() with
+        {
+            RequiredScriptsOk = false
+        });
+        Assert.Contains("repair the contributor script checkout", missingScripts.ContributorReadinessDecisionSummary, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
     public void CustomValueResearchOnlyCount_SubtractsReadyCardsFromResearchRecords()
     {
         var viewModel = new ContributorLabViewModel(CreateSnapshot() with

@@ -143,6 +143,39 @@ public sealed class ContributorLabViewModel : ViewModelBase
     public string CustomValueWorkflowSummary =>
         "For a user-supplied key/value, start with repository lookup from inside the app, then run one value at a time in a certified disposable VM. Record current/default/target, boot result, app smoke, benchmark deltas as observations only, and rollback proof before any app-card review.";
 
+    public string ContributorReadinessDecisionSummary
+    {
+        get
+        {
+            if (!Snapshot.RepoRootFound)
+            {
+                return "Next safe action: open RegProbe from the repository root or set REGPROBE_REPO_ROOT. Contributor commands stay disabled until the repo is found.";
+            }
+
+            if (!Snapshot.RequiredScriptsOk)
+            {
+                return "Next safe action: repair the contributor script checkout before running lookups. The app only runs allowlisted scripts, so missing scripts block reliable evidence work.";
+            }
+
+            if (CustomValueNonOkCount > 0 || CustomValueNoisyResultCount > 0 || CustomValueNeedsLowNoiseRerun > 0)
+            {
+                return "Next safe action: rerun noisy, non-ok, or needs-low-noise custom value records before any app-card review or certified claim. These observations remain debug-only.";
+            }
+
+            if (!Snapshot.AppReadinessOk || !Snapshot.AppCardsOk)
+            {
+                return "Next safe action: fix existing app readiness and app-card contract checks before adding or promoting new card surfaces.";
+            }
+
+            if (!ReferenceEligible)
+            {
+                return "Next safe action: use in-app lookup/app-QA/readiness checks, but keep VM mutation commands copy-only/community-debug until VM health, QGA, clean snapshot, and run tier are certified.";
+            }
+
+            return "Next safe action: certified reference lane is ready. Run exactly one value at a time, confirm each mutation, capture current/default/target/rollback proof, and keep custom values in Contributor Lab until ready_for_bounded_app_card passes.";
+        }
+    }
+
     public string CustomRegistryPath
     {
         get => _customRegistryPath;
