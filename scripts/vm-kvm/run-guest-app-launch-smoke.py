@@ -79,17 +79,21 @@ def launch_app_process(
     repo_root: Path,
     *,
     app_exe: str,
+    working_dir: str | None,
     app_args: list[str],
     wait_timeout: int,
 ) -> tuple[int, dict[str, Any]]:
     ps = (
         f"$exe={quote_ps(app_exe)}; "
+        f"$workingDir={quote_ps(working_dir or '')}; "
         f"$arguments={quote_ps_array(app_args)}; "
         "if(-not (Test-Path -LiteralPath $exe)){ throw \"Missing app executable: $exe\" }; "
+        "if(-not [string]::IsNullOrWhiteSpace($workingDir) -and -not (Test-Path -LiteralPath $workingDir)){ throw \"Missing working directory: $workingDir\" }; "
         "$startInfo=@{FilePath=$exe; PassThru=$true}; "
+        "if(-not [string]::IsNullOrWhiteSpace($workingDir)){ $startInfo.WorkingDirectory=$workingDir }; "
         "if($arguments.Count -gt 0){ $startInfo.ArgumentList=$arguments }; "
         "$proc=Start-Process @startInfo; "
-        "[pscustomobject]@{Pid=$proc.Id; ProcessName=$proc.ProcessName; Args=$arguments} | ConvertTo-Json -Compress"
+        "[pscustomobject]@{Pid=$proc.Id; ProcessName=$proc.ProcessName; WorkingDirectory=$workingDir; Args=$arguments} | ConvertTo-Json -Compress"
     )
     return run_qga_exec(
         repo_root,
@@ -157,6 +161,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Run a guest-side RegProbe app launch smoke through qga-exec.")
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
     parser.add_argument("--app-exe", default=r"C:\Tools\AppSmoke\RegProbe.App.exe")
+    parser.add_argument(
+        "--working-dir",
+        default="",
+        help="Optional guest working directory for the app process. Use a repo checkout path for Contributor Lab readiness smoke.",
+    )
     parser.add_argument("--crash-log-dir", default=crash_log_dir())
     parser.add_argument("--launch-wait-timeout", type=int, default=20)
     parser.add_argument("--linger-seconds", type=int, default=5)
@@ -176,6 +185,7 @@ def main() -> int:
     launch_returncode, launch_payload = launch_app_process(
         repo_root,
         app_exe=args.app_exe,
+        working_dir=args.working_dir or None,
         app_args=args.app_arg,
         wait_timeout=args.launch_wait_timeout,
     )
@@ -208,6 +218,7 @@ def main() -> int:
     summary: dict[str, Any] = {
         "summary_source": "guest-app-launch-smoke",
         "app_exe": args.app_exe,
+        "working_dir": args.working_dir,
         "app_args": args.app_arg,
         "crash_log_dir": args.crash_log_dir,
         "launch_wait_timeout": args.launch_wait_timeout,
