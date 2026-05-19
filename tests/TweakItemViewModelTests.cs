@@ -410,6 +410,51 @@ public sealed class TweakItemViewModelTests
     }
 
     [Fact]
+    public void SourceSnapshot_SuppressesExternalNohutoPseudocodeLinks()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new TestTweak("system.external-pseudocode-source");
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false);
+
+        viewModel.ApplyEvidenceClassification(new TweakEvidenceClassEntry
+        {
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            EvidenceClass = "A",
+            ClassLabel = "Class A",
+            ClassTitle = "Ready",
+            ClassDescription = "Ready for app surface",
+            ActionState = "actionable",
+            GatingReason = string.Empty,
+            IsActionable = true,
+            ShowInApp = true,
+            UpstreamLineage = new TweakEvidenceProofBlock
+            {
+                Summary = "Upstream dump / pseudocode links are attached to this record.",
+                PrimarySourceText = "decompiled-pseudocode / USBHUB3: https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3",
+                HasNohutoLineage = true,
+                HasValidationProof = true,
+                Links =
+                {
+                    new TweakEvidenceLink
+                    {
+                        Title = "decompiled-pseudocode / USBHUB3",
+                        Url = "https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3",
+                        Kind = "source"
+                    }
+                }
+            }
+        });
+
+        Assert.False(viewModel.HasUpstreamLineage);
+        Assert.Equal("partial", viewModel.SourceSnapshotState);
+        var sourceLane = Assert.Single(viewModel.ProofLanes, lane => lane.Key == "source");
+        Assert.False(sourceLane.HasPrimarySourceText);
+        Assert.False(sourceLane.HasLinks);
+        Assert.Contains("RegProbe-controlled local source mirror", sourceLane.Summary, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
     public void ApplyAllowedVerdict_UsesProofAndRollbackSnapshots()
     {
         var pipeline = new TweakExecutionPipeline(new RecordingLogger());

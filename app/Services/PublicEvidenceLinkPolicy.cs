@@ -14,6 +14,47 @@ internal static class PublicEvidenceLinkPolicy
            || (!string.IsNullOrWhiteSpace(url)
                && url.Contains("github.com/nohuto/", StringComparison.OrdinalIgnoreCase));
 
+    public static bool IsSuppressedExternalSourceText(string? text)
+        => !string.IsNullOrWhiteSpace(text)
+           && text.Contains("github.com/nohuto/", StringComparison.OrdinalIgnoreCase);
+
+    public static string SanitizePrimarySourceText(string? text)
+    {
+        if (string.IsNullOrWhiteSpace(text) || IsSuppressedExternalSourceText(text))
+        {
+            return string.Empty;
+        }
+
+        return text.Trim().Replace("nohuto", "local source mirror", StringComparison.OrdinalIgnoreCase);
+    }
+
+    public static bool IsExternalOnlySourceEvidence(
+        string? summary,
+        string? primarySourceText,
+        int visibleSourceLinkCount)
+    {
+        if (visibleSourceLinkCount > 0)
+        {
+            return false;
+        }
+
+        if (IsSuppressedExternalSourceText(primarySourceText) || IsNoLocalSourceSummary(summary))
+        {
+            return true;
+        }
+
+        if (string.IsNullOrWhiteSpace(summary))
+        {
+            return false;
+        }
+
+        return summary.Contains("Upstream dump / pseudocode links are attached", StringComparison.OrdinalIgnoreCase)
+               || summary.Contains("nohuto", StringComparison.OrdinalIgnoreCase)
+               || summary.Contains("upstream dump", StringComparison.OrdinalIgnoreCase)
+               || summary.Contains("pseudocode", StringComparison.OrdinalIgnoreCase)
+               || summary.Contains("upstream documentation", StringComparison.OrdinalIgnoreCase);
+    }
+
     public static bool IsNoLocalSourceSummary(string? summary)
     {
         if (string.IsNullOrWhiteSpace(summary))
@@ -48,11 +89,7 @@ internal static class PublicEvidenceLinkPolicy
                 : NoLocalSourceMessage;
         }
 
-        if (visibleSourceLinkCount <= 0
-            && (text.Contains("nohuto", StringComparison.OrdinalIgnoreCase)
-                || text.Contains("upstream dump", StringComparison.OrdinalIgnoreCase)
-                || text.Contains("pseudocode", StringComparison.OrdinalIgnoreCase)
-                || text.Contains("upstream documentation", StringComparison.OrdinalIgnoreCase)))
+        if (IsExternalOnlySourceEvidence(text, primarySourceText: null, visibleSourceLinkCount))
         {
             return NoLocalSourceMessage;
         }
