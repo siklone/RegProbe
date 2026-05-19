@@ -627,6 +627,10 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Equal("0, 1", observation.CandidateValues);
         Assert.Equal("0", observation.ValidatedValues);
         Assert.Equal("contributor-lab-research-only", observation.SurfaceDestination);
+        Assert.Contains("one-value snapshot-safe VM experiment", observation.NextAction, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("Research-only", observation.AppCardReadinessSummary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("rollback_tested", observation.MissingProofSummary, StringComparison.Ordinal);
+        Assert.Contains("Certified-low-noise receipt", observation.RunTierAction, StringComparison.Ordinal);
         Assert.Contains("rollback_tested", observation.PromotionChecklist, StringComparison.Ordinal);
         Assert.Contains("VM smoke only", observation.ClaimBoundary, StringComparison.Ordinal);
         Assert.Contains("0: low_confidence", observation.TestedValueSummary, StringComparison.Ordinal);
@@ -637,6 +641,136 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Contains("registry-value-experiments-low-noise", observation.ArtifactSummary, StringComparison.Ordinal);
         Assert.Contains("custom-value-seed-001-enablething-0.json", observation.ArtifactSummary, StringComparison.Ordinal);
         Assert.DoesNotContain("operator96", observation.ArtifactSummary, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public void Load_DerivesActionGuidanceForNoisyAndReadyCustomValueRecords()
+    {
+        WriteArtifact(ContributorLabCatalog.CustomValueAggregatePath, """
+        {
+          "status": "ok",
+          "summary": {
+            "non_ok_count": 0,
+            "noisy_result_count": 1
+          },
+          "results": [
+            {
+              "index": 1,
+              "status": "ok",
+              "value_data": 1,
+              "observations": {
+                "verdict": "low_confidence",
+                "confidence": "low",
+                "host_noise": "noisy",
+                "primary_delta_pct": 1.2,
+                "smoke_hard_success": {
+                  "apply_smoke_hard_success": true,
+                  "post_reboot_smoke_hard_success": true,
+                  "post_rollback_smoke_hard_success": true
+                }
+              }
+            },
+            {
+              "index": 2,
+              "status": "ok",
+              "value_data": 0,
+              "observations": {
+                "verdict": "neutral",
+                "confidence": "medium",
+                "host_noise": "ok",
+                "primary_delta_pct": 0,
+                "smoke_hard_success": {
+                  "apply_smoke_hard_success": true,
+                  "post_reboot_smoke_hard_success": true,
+                  "post_rollback_smoke_hard_success": true
+                }
+              }
+            }
+          ]
+        }
+        """);
+        WriteArtifact(ContributorLabCatalog.CustomValueSurfaceReviewPath, """
+        {
+          "status": "PASS",
+          "summary": {
+            "record_count": 2,
+            "ready_for_bounded_app_card": 1,
+            "blocked_by_gate": 0,
+            "not_app_surface_ready": 0,
+            "blocked_by_safety": 0,
+            "aggregate_surface_blocked": true,
+            "needs_low_noise_rerun": 1
+          },
+          "records": [
+            {
+              "index": 1,
+              "value_name": "NoisyThing",
+              "registry_path": "HKLM\\Software\\Example",
+              "app_surface_bucket": "needs_low_noise_rerun",
+              "normal_app_card_allowed": false,
+              "surface_destination": "contributor-lab-research-only",
+              "promotion_checklist": {
+                "missing": ["clean_low_noise_vm_proofs"]
+              },
+              "reasons": ["needs-low-noise-rerun"],
+              "proof_confidence_counts": {"low": 1},
+              "proof_host_noise_counts": {"noisy": 1}
+            },
+            {
+              "index": 2,
+              "value_name": "ReadyThing",
+              "registry_path": "HKLM\\Software\\Example",
+              "app_surface_bucket": "ready_for_bounded_app_card",
+              "normal_app_card_allowed": true,
+              "app_surface_ready": true,
+              "surface_destination": "normal-app-card-review",
+              "claim_boundary": "Bounded smoke-only claim",
+              "promotion_checklist": {
+                "missing": []
+              },
+              "reasons": [],
+              "proof_confidence_counts": {"medium": 1},
+              "proof_host_noise_counts": {"ok": 1}
+            }
+          ]
+        }
+        """);
+        WriteArtifact(ContributorLabCatalog.CustomValueEnrichedMatrixPath, """
+        {
+          "records": [
+            {
+              "index": 1,
+              "value_name": "NoisyThing",
+              "registry_path": "HKLM\\Software\\Example",
+              "default_status": "known",
+              "default_value": 0,
+              "candidates": [{"value": 1, "vm_validated": false}]
+            },
+            {
+              "index": 2,
+              "value_name": "ReadyThing",
+              "registry_path": "HKLM\\Software\\Example",
+              "default_status": "known",
+              "default_value": 0,
+              "candidates": [{"value": 0, "vm_validated": true}]
+            }
+          ]
+        }
+        """);
+
+        var observations = ContributorLabCatalog.Load(_root).Observations;
+
+        var noisy = observations.Single(item => item.ValueName == "NoisyThing");
+        Assert.Contains("certified low-noise VM lane", noisy.NextAction, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("low-noise rerun", noisy.AppCardReadinessSummary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("clean_low_noise_vm_proofs", noisy.MissingProofSummary, StringComparison.Ordinal);
+        Assert.Contains("Noisy/debug receipt", noisy.RunTierAction, StringComparison.Ordinal);
+
+        var ready = observations.Single(item => item.ValueName == "ReadyThing");
+        Assert.Contains("ready for bounded app-card review", ready.NextAction, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("Ready for bounded app-card review", ready.AppCardReadinessSummary, StringComparison.Ordinal);
+        Assert.Equal("No missing proof gates listed.", ready.MissingProofSummary);
+        Assert.Contains("Certified-low-noise receipt", ready.RunTierAction, StringComparison.Ordinal);
     }
 
     [Fact]
@@ -734,6 +868,14 @@ public sealed class ContributorLabViewModelTests : IDisposable
             @"HKLM\Software\Example",
             bucket,
             "reason",
+            blockers.Contains("rollback", StringComparison.OrdinalIgnoreCase)
+                ? "Next: run one-value snapshot-safe VM experiment and capture apply, verify, and rollback proof."
+                : "Next: keep in Contributor Lab and decide whether another value, source lane, or bounded claim closes the gap.",
+            bucket == "ready_for_bounded_app_card"
+                ? "Ready for bounded app-card review; not auto-shipped to end users."
+                : "Research-only until app-card contract explicitly passes.",
+            string.IsNullOrWhiteSpace(blockers) ? "No missing proof gates listed." : $"Missing proof: {blockers}",
+            "Certified-low-noise receipt: usable as research evidence, not an end-user card unless gates pass.",
             "known-absent",
             "0, 1",
             "0",

@@ -30,6 +30,10 @@ public sealed record ContributorObservation(
     string RegistryPath,
     string Bucket,
     string Reason,
+    string NextAction,
+    string AppCardReadinessSummary,
+    string MissingProofSummary,
+    string RunTierAction,
     string DefaultSummary,
     string CandidateValues,
     string ValidatedValues,
@@ -437,6 +441,10 @@ public static class ContributorLabCatalog
                 registryPath,
                 Text(reviewRecord, "app_surface_bucket"),
                 string.Join(", ", Strings(reviewRecord, "reasons")),
+                NextAction(reviewRecord, aggregateForRecord),
+                AppCardReadinessSummary(reviewRecord),
+                MissingProofSummary(reviewRecord),
+                RunTierAction(aggregateForRecord),
                 DefaultSummary(matrixRecord, reviewRecord),
                 string.IsNullOrWhiteSpace(candidateValues) ? "none listed" : candidateValues,
                 string.IsNullOrWhiteSpace(validatedValues) ? "none certified yet" : validatedValues,
@@ -583,6 +591,104 @@ public static class ContributorLabCatalog
             ? "Low-noise VM receipt"
             : "Noisy/debug only";
     }
+
+    private static string NextAction(JsonElement record, IReadOnlyList<AggregateObservation> aggregateRecords)
+    {
+        var bucket = Text(record, "app_surface_bucket");
+        var missing = MissingChecklist(record);
+
+        if (bucket.Equals("needs_low_noise_rerun", StringComparison.OrdinalIgnoreCase)
+            || missing.Any(static item => item.Contains("low_noise", StringComparison.OrdinalIgnoreCase))
+            || HasNoisyOrNonOkReceipt(aggregateRecords))
+        {
+            return "Next: rerun in the certified low-noise VM lane before using this as verdict or app-card proof.";
+        }
+
+        if (bucket.Equals("blocked_by_safety", StringComparison.OrdinalIgnoreCase))
+        {
+            return "Next: keep research-only and open a safety/hold review before any mutating app-card path.";
+        }
+
+        if (missing.Any(static item => item.Contains("rollback", StringComparison.OrdinalIgnoreCase)))
+        {
+            return "Next: run one-value snapshot-safe VM experiment and capture apply, verify, and rollback proof.";
+        }
+
+        if (missing.Any(static item => item.Contains("default", StringComparison.OrdinalIgnoreCase)
+                                       || item.Contains("current", StringComparison.OrdinalIgnoreCase)
+                                       || item.Contains("target", StringComparison.OrdinalIgnoreCase)
+                                       || item.Contains("app_write", StringComparison.OrdinalIgnoreCase)))
+        {
+            return "Next: fill current/default/target/app-write proof before app-card review.";
+        }
+
+        if (missing.Any(static item => item.Contains("bounded", StringComparison.OrdinalIgnoreCase)
+                                       || item.Contains("positive", StringComparison.OrdinalIgnoreCase)
+                                       || item.Contains("claim", StringComparison.OrdinalIgnoreCase)))
+        {
+            return "Next: keep as research observation until bounded evidence exists; do not claim optimization or performance gain.";
+        }
+
+        if (IsReadyForAppCardReview(record))
+        {
+            return "Next: ready for bounded app-card review; still needs human copy review before shipping to end users.";
+        }
+
+        if (aggregateRecords.Count == 0)
+        {
+            return "Next: attach a certified VM receipt or leave this as catalog-only research context.";
+        }
+
+        return "Next: keep in Contributor Lab and decide whether another value, source lane, or bounded claim closes the gap.";
+    }
+
+    private static string AppCardReadinessSummary(JsonElement record)
+    {
+        if (IsReadyForAppCardReview(record))
+        {
+            return "Ready for bounded app-card review; not auto-shipped to end users.";
+        }
+
+        return Text(record, "app_surface_bucket").ToLowerInvariant() switch
+        {
+            "blocked_by_gate" => "Not app-card ready: promotion gates still block user-facing card review.",
+            "needs_low_noise_rerun" => "Not app-card ready: low-noise rerun is required before claims or cards.",
+            "blocked_by_safety" => "Not app-card ready: safety review or hold/reject decision is required.",
+            "not_app_surface_ready" => "Research-only: keep in Contributor Lab until default/current/target/rollback proof and bounded claim pass.",
+            _ => "Research-only until app-card contract explicitly passes."
+        };
+    }
+
+    private static string MissingProofSummary(JsonElement record)
+    {
+        var missing = MissingChecklist(record);
+        return missing.Count == 0
+            ? "No missing proof gates listed."
+            : "Missing proof: " + string.Join(", ", missing);
+    }
+
+    private static string RunTierAction(IReadOnlyList<AggregateObservation> records)
+    {
+        if (records.Count == 0)
+        {
+            return "No run-tier receipt yet; export commands only until a certified VM run lands.";
+        }
+
+        return HasNoisyOrNonOkReceipt(records)
+            ? "Noisy/debug receipt: rerun before any claim, verdict upgrade, or card review."
+            : "Certified-low-noise receipt: usable as research evidence, not an end-user card unless gates pass.";
+    }
+
+    private static bool IsReadyForAppCardReview(JsonElement record)
+        => Bool(record, "normal_app_card_allowed") || Bool(record, "app_surface_ready");
+
+    private static IReadOnlyList<string> MissingChecklist(JsonElement record)
+        => Strings(Object(record, "promotion_checklist"), "missing");
+
+    private static bool HasNoisyOrNonOkReceipt(IReadOnlyList<AggregateObservation> records)
+        => records.Any(static record =>
+            !string.Equals(record.Status, "ok", StringComparison.OrdinalIgnoreCase)
+            || !string.Equals(record.HostNoise, "ok", StringComparison.OrdinalIgnoreCase));
 
     private static string AppCardBlockerSummary(JsonElement record)
     {

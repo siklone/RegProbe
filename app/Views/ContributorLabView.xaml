@@ -134,6 +134,31 @@
                                    Margin="0,6,0,0"
                                    Foreground="#B8B8B8"
                                    TextWrapping="Wrap"/>
+                        <Border Margin="0,8,0,0"
+                                Padding="8"
+                                Background="#171307"
+                                BorderBrush="#5A431A"
+                                BorderThickness="1"
+                                CornerRadius="6">
+                            <StackPanel>
+                                <TextBlock Text="{Binding NextAction}"
+                                           Foreground="#F4D293"
+                                           FontWeight="SemiBold"
+                                           TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding AppCardReadinessSummary, StringFormat={}App-card readiness: {0}}"
+                                           Margin="0,4,0,0"
+                                           Foreground="#D7B79F"
+                                           FontFamily="{DynamicResource FontFamilyMono}"
+                                           FontSize="9"
+                                           TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding MissingProofSummary}"
+                                           Margin="0,3,0,0"
+                                           Foreground="#B8B8B8"
+                                           FontFamily="{DynamicResource FontFamilyMono}"
+                                           FontSize="9"
+                                           TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
                         <TextBlock Text="{Binding SurfaceDestination, StringFormat={}Surface: {0}}"
                                    Margin="0,6,0,0"
                                    Foreground="#D7B79F"
@@ -171,6 +196,9 @@
                                    Margin="0,5,0,0"
                                    Style="{StaticResource ContributorMonoTextStyle}"/>
                         <TextBlock Text="{Binding NoiseBadge, StringFormat={}Badge: {0}}"
+                                   Margin="0,5,0,0"
+                                   Style="{StaticResource ContributorMonoTextStyle}"/>
+                        <TextBlock Text="{Binding RunTierAction, StringFormat={}Tier action: {0}}"
                                    Margin="0,5,0,0"
                                    Style="{StaticResource ContributorMonoTextStyle}"/>
                         <TextBlock Text="{Binding TestedValueSummary, StringFormat={}Tested: {0}}"
