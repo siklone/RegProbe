@@ -240,6 +240,33 @@ class RegistryValueCampaignTests(unittest.TestCase):
         self.assertIn("0.5", command)
         self.assertIn("--abort-on-noisy-host", command)
 
+    def test_markdown_uses_custom_value_seed_language(self):
+        payload = {
+            "generated_utc": "2026-05-19T00:00:00Z",
+            "status": "planned",
+            "plan": [
+                {
+                    "index": 1,
+                    "experiment_id": "operator96-001-enablething-1",
+                    "registry_path": "HKLM\\Software\\Example",
+                    "value_name": "EnableThing",
+                    "value_data": 1,
+                    "default_kind": "observed-absent",
+                    "source_quality": "vm-observed",
+                }
+            ],
+            "results": [],
+        }
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = Path(tmpdir) / "campaign.md"
+            self.module.write_plan_markdown(payload, path)
+            text = path.read_text(encoding="utf-8")
+
+        self.assertIn("# Custom Registry Value Seed Campaign", text)
+        self.assertIn("historical filename context", text)
+        self.assertNotIn("# Operator 96 Registry Value Campaign", text)
+
 
 if __name__ == "__main__":
     unittest.main()
