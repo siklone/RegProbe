@@ -644,9 +644,9 @@ public sealed partial class TweakItemViewModel : ViewModelBase
         HasValidatedSemantics);
     public string RuntimeSnapshotText => TweakProofSnapshotPresentation.BuildSnapshotText("Runtime", RuntimeSnapshotState);
     public string SourceSnapshotState => TweakProofSnapshotPresentation.BuildSourceSnapshotState(
-        _hasLineageEvidenceFlag,
+        _hasLineageEvidenceFlag && HasUpstreamLineage,
         HasUpstreamLineage,
-        HasNohutoEvidence,
+        HasNohutoEvidence && HasUpstreamLineage,
         HasWindowsInternalsContext,
         NeedsSourceReview,
         string.IsNullOrWhiteSpace(ProvenanceSummary) ? UpstreamLineageSummary : ProvenanceSummary);
@@ -687,7 +687,16 @@ public sealed partial class TweakItemViewModel : ViewModelBase
     public string UpstreamLineageSource => _upstreamLineageSource;
     public bool HasUpstreamLineage =>
         _upstreamLineageLinks.Any(static link => link.Kind is ReferenceLinkKind.Source)
-        || !string.IsNullOrWhiteSpace(UpstreamLineageSource);
+        || (_hasLineageEvidenceFlag
+            && !PublicEvidenceLinkPolicy.IsExternalOnlySourceEvidence(
+                string.IsNullOrWhiteSpace(UpstreamLineageSummary) ? ProvenanceSummary : UpstreamLineageSummary,
+                UpstreamLineageSource,
+                0))
+        || (!string.IsNullOrWhiteSpace(UpstreamLineageSource)
+            && !PublicEvidenceLinkPolicy.IsExternalOnlySourceEvidence(
+                string.IsNullOrWhiteSpace(UpstreamLineageSummary) ? ProvenanceSummary : UpstreamLineageSummary,
+                UpstreamLineageSource,
+                0));
     public bool HasEvidenceProofBoxes => HasValidatedSemantics || HasRuntimeProof || HasUpstreamLineage;
     public bool HasNohutoEvidence
     {

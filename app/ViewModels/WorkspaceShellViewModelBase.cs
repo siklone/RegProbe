@@ -87,6 +87,14 @@ public abstract class WorkspaceShellViewModelBase : ViewModelBase, IDisposable
 
     public string ToolbarSectionLabel => Workspace.ToolbarSectionLabel;
 
+    public ICommand CycleStatusFilterCommand => Workspace.CycleStatusFilterCommand;
+
+    public ICommand CycleScopeFilterCommand => Workspace.CycleScopeFilterCommand;
+
+    public string StatusFilterDisplayText => Workspace.StatusFilterDisplayText;
+
+    public string ScopeFilterDisplayText => Workspace.ScopeFilterDisplayText;
+
     public string SearchText
     {
         get => Workspace.SearchText;

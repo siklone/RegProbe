@@ -93,6 +93,7 @@ public sealed partial class TweakItemViewModel
         var sourceSummary = PublicEvidenceLinkPolicy.SanitizeSourceSummary(
             string.IsNullOrWhiteSpace(UpstreamLineageSummary) ? ProvenanceSummary : UpstreamLineageSummary,
             sourceLinks.Count);
+        var sourcePrimaryText = PublicEvidenceLinkPolicy.SanitizePrimarySourceText(UpstreamLineageSource);
 
         return new List<TweakProofLaneViewModel>
         {
@@ -117,7 +118,7 @@ public sealed partial class TweakItemViewModel
                 "SOURCE",
                 SourceSnapshotState,
                 sourceSummary,
-                UpstreamLineageSource,
+                sourcePrimaryText,
                 sourceLinks,
                 TweakResearchPresentation.GetProofAccentBrush("source", ResearchAccentBrush)),
             new(

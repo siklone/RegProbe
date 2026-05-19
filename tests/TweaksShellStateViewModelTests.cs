@@ -144,4 +144,19 @@ public sealed class TweaksShellStateViewModelTests
         viewModel.CycleScopeFilter();
         Assert.Equal(string.Empty, viewModel.ScopeFilter);
     }
+
+    [Fact]
+    public void ConfigurationShell_ExposesSecondaryPanelFilterCommands()
+    {
+        using var workspace = new TweaksViewModel(null, new BusyService());
+        var shell = new ConfigurationShellViewModel(workspace);
+
+        Assert.Equal("STATUS", shell.StatusFilterDisplayText);
+        shell.CycleStatusFilterCommand.Execute(null);
+        Assert.Equal("PROMOTED", shell.StatusFilterDisplayText);
+
+        Assert.Equal("SCOPE", shell.ScopeFilterDisplayText);
+        shell.CycleScopeFilterCommand.Execute(null);
+        Assert.Equal("MACHINE", shell.ScopeFilterDisplayText);
+    }
 }
