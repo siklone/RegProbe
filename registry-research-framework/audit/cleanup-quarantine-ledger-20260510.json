@@ -1,7 +1,8 @@
 {
-  "schema_version": "1.0",
-  "generated_utc": "2026-05-15T04:37:11Z",
+  "schema_version": "1.1",
+  "generated_utc": "2026-05-18T23:45:25Z",
   "purpose": "Quarantine ledger for cleanup review inventory. Only delete-candidate rows are cleanup candidates; retained rows are not deletion candidates.",
+  "candidate_semantics": "candidate means cleanup_status=delete-candidate. Review inventory and retained inventory are explicitly not deletion candidates.",
   "deletion_policy": [
     "No file is deleted by this generator.",
     "Delete only when live_reference_count is 0.",
@@ -11,23 +12,26 @@
   ],
   "summary": {
     "total_items": 89,
+    "review_inventory_count": 89,
     "delete_candidate_count": 0,
+    "cleanup_candidate_count": 0,
     "retained_inventory_count": 89,
+    "retained_not_candidate_count": 89,
     "delete_eligible_count": 0,
     "referenced_count": 89,
-    "blocking_referenced_count": 66,
-    "audit_only_referenced_count": 23,
+    "blocking_referenced_count": 65,
+    "audit_only_referenced_count": 24,
     "total_size_bytes": 678702358,
     "categories": {
       "audit-archive-named-sample": 10,
+      "custom-value-superseded-pilot": 4,
       "large-raw-trace-sample": 25,
       "old-dated-audit-output-sample": 25,
-      "operator96-superseded-pilot": 4,
       "vm-tooling-staging-oldest-sample": 25
     },
     "cleanup_status_counts": {
-      "retained-audit-trail-reference": 23,
-      "retained-live-reference": 66
+      "retained-audit-trail-reference": 24,
+      "retained-live-reference": 65
     }
   },
   "items": [
@@ -35,9 +39,9 @@
       "path": "registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.json",
       "kind": "file",
       "cleanup_status": "retained-live-reference",
-      "category": "operator96-superseded-pilot",
+      "category": "custom-value-superseded-pilot",
       "size_bytes": 4469,
-      "stale_reason": "pilot artifact superseded by full operator96 baseline, but referenced as safety example",
+      "stale_reason": "pilot artifact superseded by the full custom registry value baseline, but referenced as safety example",
       "replacement_artifacts": [
         "registry-research-framework/audit/operator96-value-campaign-tranche-20260509.json",
         "registry-research-framework/audit/registry-value-experiment-analysis.json",
@@ -83,9 +87,9 @@
       "path": "registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.md",
       "kind": "file",
       "cleanup_status": "retained-live-reference",
-      "category": "operator96-superseded-pilot",
+      "category": "custom-value-superseded-pilot",
       "size_bytes": 3741,
-      "stale_reason": "pilot artifact superseded by full operator96 baseline, but referenced as safety example",
+      "stale_reason": "pilot artifact superseded by the full custom registry value baseline, but referenced as safety example",
       "replacement_artifacts": [
         "registry-research-framework/audit/operator96-value-campaign-tranche-20260509.json",
         "registry-research-framework/audit/registry-value-experiment-analysis.json",
@@ -131,9 +135,9 @@
       "path": "registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.json",
       "kind": "file",
       "cleanup_status": "retained-live-reference",
-      "category": "operator96-superseded-pilot",
+      "category": "custom-value-superseded-pilot",
       "size_bytes": 12248,
-      "stale_reason": "pilot artifact superseded by full operator96 baseline, but referenced as safety example",
+      "stale_reason": "pilot artifact superseded by the full custom registry value baseline, but referenced as safety example",
       "replacement_artifacts": [
         "registry-research-framework/audit/operator96-value-campaign-tranche-20260509.json",
         "registry-research-framework/audit/registry-value-experiment-analysis.json",
@@ -183,9 +187,9 @@
       "path": "registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.md",
       "kind": "file",
       "cleanup_status": "retained-live-reference",
-      "category": "operator96-superseded-pilot",
+      "category": "custom-value-superseded-pilot",
       "size_bytes": 1737,
-      "stale_reason": "pilot artifact superseded by full operator96 baseline, but referenced as safety example",
+      "stale_reason": "pilot artifact superseded by the full custom registry value baseline, but referenced as safety example",
       "replacement_artifacts": [
         "registry-research-framework/audit/operator96-value-campaign-tranche-20260509.json",
         "registry-research-framework/audit/registry-value-experiment-analysis.json",
@@ -493,7 +497,7 @@
     {
       "path": "evidence/files/vm-tooling-staging/beep_start_toggle_out.txt",
       "kind": "file",
-      "cleanup_status": "retained-live-reference",
+      "cleanup_status": "retained-audit-trail-reference",
       "category": "vm-tooling-staging-oldest-sample",
       "size_bytes": 42,
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
@@ -505,15 +509,14 @@
         "beep_start_toggle_out.txt",
         "evidence/files/vm-tooling-staging/beep_start_toggle_out.txt"
       ],
-      "live_reference_count": 5,
+      "live_reference_count": 4,
       "audit_reference_count": 4,
-      "blocking_reference_count": 1,
+      "blocking_reference_count": 0,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260514.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260514.md",
         "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
-        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
-        "registry-research-framework/audit/promoted-app-qa-batch-latest.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260514.json",
@@ -521,9 +524,7 @@
         "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
         "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
-      "blocking_references_sample": [
-        "registry-research-framework/audit/promoted-app-qa-batch-latest.json"
-      ],
+      "blocking_references_sample": [],
       "replacement_resolved_reference_count": 1,
       "replacement_resolved_references_sample": [
         "evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json"
