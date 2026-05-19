@@ -50,6 +50,13 @@ public static class ContributorLabResultPreviewBuilder
 
         AppendLine(builder, $"Matched records: {Int(root, "match_count", matches.GetArrayLength())}");
         var best = matches.EnumerateArray().FirstOrDefault();
+        if (best.ValueKind != JsonValueKind.Object)
+        {
+            AppendLine(builder, "App-card gate: no matching research/app record.");
+            AppendLine(builder, "Next action: run repo/source/evidence search first; do not mutate a VM until the key/path/value has at least a candidate record or explicit no-evidence note.");
+            return;
+        }
+
         if (best.ValueKind == JsonValueKind.Object)
         {
             var name = Text(Object(best, "catalog_entry"), "name");
@@ -91,12 +98,16 @@ public static class ContributorLabResultPreviewBuilder
             AppendLine(builder, "Evidence lanes: " + FirstNonEmpty(string.Join(", ", evidenceKinds), "none listed"));
         }
 
-        var expected = matches.EnumerateArray()
+        var expectedChecks = matches.EnumerateArray()
             .SelectMany(match => Array(match, "expected_value_checks"))
+            .ToList();
+        var expected = expectedChecks
             .GroupBy(check => Text(check, "expected_value"))
             .Where(group => !string.IsNullOrWhiteSpace(group.Key))
             .Select(group => $"{group.Key}: {(group.Any(check => Bool(check, "found_any")) ? "found" : "missing")}");
         AppendLine(builder, "Expected values: " + FirstNonEmpty(string.Join(", ", expected), "none requested"));
+        AppendLine(builder, "App-card gate: " + BuildSingleTweakGateSummary(best, expectedChecks));
+        AppendLine(builder, "Next action: " + BuildSingleTweakNextAction(best, expectedChecks));
     }
 
     private static void AppendAppQaPreview(StringBuilder builder, JsonElement root)
@@ -162,6 +173,87 @@ public static class ContributorLabResultPreviewBuilder
         var qga = Object(checks, "qga");
         AppendLine(builder, $"VM health: qga={FirstNonEmpty(Text(qga, "status"), Text(root, "status", "unknown"))}; snapshot={FirstNonEmpty(Text(snapshot, "status"), "unknown")}; snapshot_exists={BoolText(snapshot, "exists")}");
     }
+
+    private static string BuildSingleTweakGateSummary(JsonElement match, IReadOnlyList<JsonElement> expectedChecks)
+    {
+        var missing = SingleTweakMissingItems(match, expectedChecks);
+        return missing.Count == 0
+            ? "candidate has app write, default/profile story, rollback, evidence, and requested expected values."
+            : "missing " + string.Join(", ", missing);
+    }
+
+    private static string BuildSingleTweakNextAction(JsonElement match, IReadOnlyList<JsonElement> expectedChecks)
+    {
+        var missingExpected = MissingExpectedValues(expectedChecks);
+        if (missingExpected.Count > 0)
+        {
+            return $"investigate expected value(s) {string.Join(", ", missingExpected)} via repo/source search before treating them as supported targets.";
+        }
+
+        if (Array(match, "app_write_targets").Count == 0)
+        {
+            return "find the app write target or keep this out of end-user cards; a card cannot apply what the app cannot explicitly write.";
+        }
+
+        if (Array(match, "windows_and_recommended_profiles").Count == 0)
+        {
+            return "find or explicitly mark the default/current value story before app-card review.";
+        }
+
+        if (!Bool(match, "restore_previous_supported") && !Bool(match, "restore_default_supported"))
+        {
+            return "add rollback proof before app-card review; mutation without restore/delete story stays research-only.";
+        }
+
+        if (Array(match, "evidence").Count == 0)
+        {
+            return "attach at least one evidence lane; use repo/source evidence first, then VM runtime proof if the value remains plausible.";
+        }
+
+        return Bool(match, "apply_allowed")
+            ? "ready for app QA mapping or bounded card review; still verify current/default/target/rollback on the target machine."
+            : "record exists but apply is not allowed; keep it as Contributor Lab research or resolve the promotion gate first.";
+    }
+
+    private static IReadOnlyList<string> SingleTweakMissingItems(JsonElement match, IReadOnlyList<JsonElement> expectedChecks)
+    {
+        var missing = new List<string>();
+        if (Array(match, "app_write_targets").Count == 0)
+        {
+            missing.Add("app write");
+        }
+
+        if (Array(match, "windows_and_recommended_profiles").Count == 0)
+        {
+            missing.Add("default/profile");
+        }
+
+        if (!Bool(match, "restore_previous_supported") && !Bool(match, "restore_default_supported"))
+        {
+            missing.Add("rollback");
+        }
+
+        if (Array(match, "evidence").Count == 0)
+        {
+            missing.Add("evidence");
+        }
+
+        var missingExpected = MissingExpectedValues(expectedChecks);
+        if (missingExpected.Count > 0)
+        {
+            missing.Add("expected value(s) " + string.Join(", ", missingExpected));
+        }
+
+        return missing;
+    }
+
+    private static IReadOnlyList<string> MissingExpectedValues(IReadOnlyList<JsonElement> expectedChecks)
+        => expectedChecks
+            .Where(static check => !Bool(check, "found_any"))
+            .Select(static check => Text(check, "expected_value"))
+            .Where(static value => !string.IsNullOrWhiteSpace(value))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToList();
 
     private static string FormatTarget(JsonElement target)
     {

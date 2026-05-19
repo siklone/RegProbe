@@ -392,7 +392,39 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Contains("Default/profile story: Windows default", viewModel.CommandRunOutput, StringComparison.Ordinal);
         Assert.Contains("Evidence lanes: etw-trace=1, official-doc=1", viewModel.CommandRunOutput, StringComparison.Ordinal);
         Assert.Contains("Expected values: 10: found, 30000: missing", viewModel.CommandRunOutput, StringComparison.Ordinal);
+        Assert.Contains("App-card gate: missing expected value(s) 30000", viewModel.CommandRunOutput, StringComparison.Ordinal);
+        Assert.Contains("Next action: investigate expected value(s) 30000", viewModel.CommandRunOutput, StringComparison.Ordinal);
         Assert.Contains("--- Raw JSON ---", viewModel.CommandRunOutput, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public async Task CustomLookupResult_ExplainsNoMatchBeforeAnyVmMutation()
+    {
+        var runner = new FakeContributorCommandRunner(new ContributorCommandRunResult(
+            ExitCode: 0,
+            StandardOutput: """
+            {
+              "status": "no-match",
+              "query": "MysteryValue",
+              "match_count": 0,
+              "matches": []
+            }
+            """,
+            StandardError: string.Empty,
+            TimedOut: false));
+        var viewModel = new ContributorLabViewModel(CreateSnapshot(), runner)
+        {
+            CustomValueName = "MysteryValue",
+            CustomExpectedValues = "0, 1"
+        };
+        viewModel.RiskAcknowledged = true;
+        viewModel.EnableContributorToolsCommand.Execute(null);
+
+        await ((IAsyncCommand)viewModel.RunCustomLookupCommand).ExecuteAsync();
+
+        Assert.Contains("Matched records: 0", viewModel.CommandRunOutput, StringComparison.Ordinal);
+        Assert.Contains("App-card gate: no matching research/app record", viewModel.CommandRunOutput, StringComparison.Ordinal);
+        Assert.Contains("do not mutate a VM", viewModel.CommandRunOutput, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]
