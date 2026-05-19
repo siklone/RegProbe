@@ -112,8 +112,6 @@ public static class ContributorLabCatalog
         "registry-research-framework/scripts/check_promoted_tweak_app_qa_batch.py",
         "registry-research-framework/scripts/generate_custom_value_app_surface_review.py",
         "scripts/vm-kvm/vm-health-check.py",
-        "scripts/vm-kvm/run-guest-registry-value-experiment.py",
-        "scripts/vm-kvm/run-guest-registry-value-campaign.py",
     ];
 
     public static ContributorLabSnapshot Load(string? repoRootOverride = null)
@@ -311,7 +309,7 @@ public static class ContributorLabCatalog
             new(
                 "Custom value tranche rerun",
                 "Continue or rerun the value matrix in small snapshot-safe checkpoints; results remain research observations until app-surface gates pass.",
-                "python3 scripts/vm-kvm/run-guest-registry-value-campaign.py --run --limit-experiments 10 --max-values-per-record 2 --smoke-profile gui --stage-wait-timeout 420 --reboot-wait-timeout 420 --post-reboot-delay-seconds 90",
+                "python3 scripts/vm-kvm/run-guest-registry-value-campaign.py --run --limit-experiments 10 --max-values-per-record 2 --smoke-profile gui --stage-wait-timeout 420 --reboot-wait-timeout 420 --post-reboot-delay-seconds 90 --snapshot-name clean-25h2-qga --abort-on-noisy-host --stop-on-failure",
                 certifiedReady ? "certified-ready" : "certified-required",
                 RequiresCertifiedVm: true,
                 MutatesGuest: true),

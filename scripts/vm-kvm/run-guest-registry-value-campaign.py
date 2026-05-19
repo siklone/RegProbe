@@ -336,7 +336,9 @@ def run_experiment(
 
 def write_plan_markdown(payload: dict[str, Any], path: Path) -> None:
     lines = [
-        "# Operator 96 Registry Value Campaign",
+        "# Custom Registry Value Seed Campaign",
+        "",
+        "This campaign may still contain `operator96` filenames because that was the original artifact prefix for the user-supplied seed batch. Treat it as historical filename context, not product branding.",
         "",
         f"- Generated UTC: `{payload['generated_utc']}`",
         f"- Status: **{payload['status']}**",
@@ -442,6 +444,9 @@ def main() -> int:
 
     payload: dict[str, Any] = {
         "generated_utc": now_utc(),
+        "display_name": "Custom Registry Value Seed Campaign",
+        "legacy_artifact_prefix": "operator96",
+        "legacy_artifact_note": "operator96 is a historical filename prefix for the user-supplied custom registry value seed batch, not product branding.",
         "status": "planned" if not args.run else "running",
         "report": str(report_path.relative_to(REPO_ROOT)),
         "smoke_profile": args.smoke_profile,

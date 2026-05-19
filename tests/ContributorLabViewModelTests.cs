@@ -63,8 +63,10 @@ public sealed class ContributorLabViewModelTests : IDisposable
             "python3 registry-research-framework/scripts/generate_operator96_app_surface_review.py --json"));
         Assert.True(ContributorLabCatalog.IsAllowlistedCommand(
             "py -3 scripts/vm-kvm/vm-health-check.py --domain regprobe-win11-25h2-session --json"));
-        Assert.True(ContributorLabCatalog.IsAllowlistedCommand(
+        Assert.False(ContributorLabCatalog.IsAllowlistedCommand(
             "python3 scripts/vm-kvm/run-guest-registry-value-experiment.py --registry-path \"HKLM\\REPLACE\\KEY\\PATH\" --value-name REPLACE_VALUE_NAME --value-data REPLACE_DWORD_VALUE"));
+        Assert.False(ContributorLabCatalog.IsAllowlistedCommand(
+            "python3 scripts/vm-kvm/run-guest-registry-value-campaign.py --run --limit-experiments 10"));
 
         Assert.False(ContributorLabCatalog.IsAllowlistedCommand("cmd.exe /c del C:\\important"));
         Assert.False(ContributorLabCatalog.IsAllowlistedCommand(
@@ -96,6 +98,10 @@ public sealed class ContributorLabViewModelTests : IDisposable
                                       && pack.Command.Contains("generate_custom_value_app_surface_review.py", StringComparison.Ordinal)
                                       && !pack.Command.Contains("generate_operator96_app_surface_review.py", StringComparison.Ordinal));
         Assert.Contains(packs, pack => pack.Title == "Custom value tranche rerun" && pack.MutatesGuest && pack.RequiresCertifiedVm);
+        Assert.Contains(packs, pack => pack.Title == "Custom value tranche rerun"
+                                      && pack.Command.Contains("--snapshot-name clean-25h2-qga", StringComparison.Ordinal)
+                                      && pack.Command.Contains("--abort-on-noisy-host", StringComparison.Ordinal)
+                                      && pack.Command.Contains("--stop-on-failure", StringComparison.Ordinal));
         Assert.Contains(packs, pack => pack.Title == "Custom key/value VM experiment template"
                                       && pack.MutatesGuest
                                       && pack.RequiresCertifiedVm
