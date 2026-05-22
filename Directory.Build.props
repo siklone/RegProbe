@@ -13,9 +13,9 @@
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisLevel>latest</AnalysisLevel>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     <DefaultItemExcludes>$(DefaultItemExcludes);**\artifacts\**</DefaultItemExcludes>
     
     <WarningsAsErrors>CS8600;CS8601;CS8602;CS8603;CS8604</WarningsAsErrors>
   </PropertyGroup>
 </Project>
-

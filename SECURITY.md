@@ -24,6 +24,19 @@ The main security goals for RegProbe are:
 - make rollback and verification first-class parts of system changes
 - avoid shipping "research only" registry ideas as trusted user actions
 
+## Supply Chain Hygiene
+
+RegProbe is a .NET/WPF repository and should not require npm packages for the
+normal app, CLI, or CI build. If JavaScript tooling is introduced later, it must
+come with a committed lockfile, script-audit notes, and a clear reason it belongs
+in the public repo.
+
+NuGet restores are constrained to the committed package lockfiles and the
+repository `NuGet.Config`. CI uses locked restore mode so package resolution
+changes are reviewed as code changes instead of silently drifting during builds.
+
+Recent supply-chain spot checks are tracked under `Docs/security/`.
+
 ## Elevated Host Boundary
 
 The intended boundary is that `RegProbe.ElevatedHost` performs bounded operating-system actions that the app has already mapped and requested explicitly. That may include registry writes, file or directory changes used by repair flows, scheduled task changes, or service configuration changes that belong to a defined tweak or repair action.
