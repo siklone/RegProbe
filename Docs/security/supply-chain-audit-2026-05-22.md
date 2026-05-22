@@ -20,6 +20,8 @@ incident and the ongoing npm ecosystem malware risk.
 - Added `NuGet.Config` with a single explicit package source: `nuget.org`.
 - Added NuGet package source mapping so all package IDs resolve only from
   `nuget.org`.
+- Added `global.json` and pinned CI to .NET SDK `8.0.420` so SDK-provided
+  implicit packages do not drift between local and GitHub runners.
 - Enabled committed NuGet lockfiles through `RestorePackagesWithLockFile`.
 - Generated `packages.lock.json` for each project.
 - Changed CI restore commands to `dotnet restore RegProbe.sln -r win-x64
