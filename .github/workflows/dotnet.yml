@@ -68,7 +68,7 @@ jobs:
             ${{ runner.os }}-dotnet-packages-
 
       - name: Restore dependencies
-        run: dotnet restore ${{ env.SOLUTION }}
+        run: dotnet restore ${{ env.SOLUTION }} -r ${{ env.RUNTIME }} --locked-mode
 
       - name: Build solution
         run: dotnet build ${{ env.SOLUTION }} -c ${{ env.CONFIGURATION }} --no-restore
@@ -97,7 +97,7 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Restore dependencies
-        run: dotnet restore ${{ env.SOLUTION }}
+        run: dotnet restore ${{ env.SOLUTION }} -r ${{ env.RUNTIME }} --locked-mode
 
       - name: Run unit tests with coverage gates
         run: >
@@ -221,7 +221,7 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Restore dependencies
-        run: dotnet restore ${{ env.SOLUTION }}
+        run: dotnet restore ${{ env.SOLUTION }} -r ${{ env.RUNTIME }} --locked-mode
 
       - name: Run SAFE flow integration tests
         run: >
@@ -263,7 +263,7 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Restore dependencies
-        run: dotnet restore ${{ env.SOLUTION }}
+        run: dotnet restore ${{ env.SOLUTION }} -r ${{ env.RUNTIME }} --locked-mode
 
       - name: Build with warnings-as-errors
         run: dotnet build ${{ env.SOLUTION }} -c ${{ env.CONFIGURATION }} --no-restore /p:TreatWarningsAsErrors=true
@@ -347,16 +347,16 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Restore dependencies
-        run: dotnet restore ${{ env.SOLUTION }}
+        run: dotnet restore ${{ env.SOLUTION }} -r ${{ env.RUNTIME }} --locked-mode
 
       - name: Build ElevatedHost
-        run: dotnet publish ${{ env.ELEVATED_HOST_PROJECT }} -c ${{ env.CONFIGURATION }} -r ${{ env.RUNTIME }} --self-contained -o publish/ElevatedHost
+        run: dotnet publish ${{ env.ELEVATED_HOST_PROJECT }} -c ${{ env.CONFIGURATION }} -r ${{ env.RUNTIME }} --self-contained --no-restore -o publish/ElevatedHost
 
       - name: Publish main application
-        run: dotnet publish ${{ env.APP_PROJECT }} -c ${{ env.CONFIGURATION }} -r ${{ env.RUNTIME }} --self-contained -o publish
+        run: dotnet publish ${{ env.APP_PROJECT }} -c ${{ env.CONFIGURATION }} -r ${{ env.RUNTIME }} --self-contained --no-restore -o publish
 
       - name: Publish CLI
-        run: dotnet publish ${{ env.CLI_PROJECT }} -c ${{ env.CONFIGURATION }} -r ${{ env.RUNTIME }} --self-contained false -o publish-cli
+        run: dotnet publish ${{ env.CLI_PROJECT }} -c ${{ env.CONFIGURATION }} -r ${{ env.RUNTIME }} --self-contained false --no-restore -o publish-cli
 
       - name: Copy documentation
         run: |
@@ -477,16 +477,16 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Restore dependencies
-        run: dotnet restore ${{ env.SOLUTION }}
+        run: dotnet restore ${{ env.SOLUTION }} -r ${{ env.RUNTIME }} --locked-mode
 
       - name: Build ElevatedHost
-        run: dotnet publish ${{ env.ELEVATED_HOST_PROJECT }} -c ${{ env.CONFIGURATION }} -r ${{ env.RUNTIME }} --self-contained -o release/ElevatedHost
+        run: dotnet publish ${{ env.ELEVATED_HOST_PROJECT }} -c ${{ env.CONFIGURATION }} -r ${{ env.RUNTIME }} --self-contained --no-restore -o release/ElevatedHost
 
       - name: Publish main application
-        run: dotnet publish ${{ env.APP_PROJECT }} -c ${{ env.CONFIGURATION }} -r ${{ env.RUNTIME }} --self-contained -o release
+        run: dotnet publish ${{ env.APP_PROJECT }} -c ${{ env.CONFIGURATION }} -r ${{ env.RUNTIME }} --self-contained --no-restore -o release
 
       - name: Publish CLI
-        run: dotnet publish ${{ env.CLI_PROJECT }} -c ${{ env.CONFIGURATION }} -r ${{ env.RUNTIME }} --self-contained false -o release-cli
+        run: dotnet publish ${{ env.CLI_PROJECT }} -c ${{ env.CONFIGURATION }} -r ${{ env.RUNTIME }} --self-contained false --no-restore -o release-cli
 
       - name: Copy documentation
         run: |
