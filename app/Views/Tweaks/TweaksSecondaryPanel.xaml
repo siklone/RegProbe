@@ -91,17 +91,21 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="0"
-                            Content="{Binding StatusFilterDisplayText}"
-                            Command="{Binding CycleStatusFilterCommand}"
-                            ToolTip="Cycle status filter: all, promoted, hold/review, applied, rolled back"
-                            Style="{StaticResource CompactFilterButtonStyle}"/>
+                    <ComboBox Grid.Column="0"
+                              ItemsSource="{Binding StatusFilterOptions}"
+                              SelectedValue="{Binding StatusFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedValuePath="Value"
+                              DisplayMemberPath="Label"
+                              ToolTip="Filter shipped cards by status"
+                              Style="{StaticResource CompactFilterComboStyle}"/>
 
-                    <Button Grid.Column="2"
-                            Content="{Binding ScopeFilterDisplayText}"
-                            Command="{Binding CycleScopeFilterCommand}"
-                            ToolTip="Cycle scope filter: all, machine, user, mixed"
-                            Style="{StaticResource CompactFilterButtonStyle}"/>
+                    <ComboBox Grid.Column="2"
+                              ItemsSource="{Binding ScopeFilterOptions}"
+                              SelectedValue="{Binding ScopeFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedValuePath="Value"
+                              DisplayMemberPath="Label"
+                              ToolTip="Filter shipped cards by registry scope"
+                              Style="{StaticResource CompactFilterComboStyle}"/>
                 </Grid>
             </StackPanel>
 

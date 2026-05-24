@@ -42,7 +42,7 @@ public sealed class TweakProvenanceCatalogService
             }
 
             var visibleReferences = entry.References
-                .Where(static reference => !PublicEvidenceLinkPolicy.IsSuppressedExternalSourceUrl(reference.Url))
+                .Where(static reference => !PublicEvidenceLinkPolicy.ShouldSuppressSourceLink(reference.Url))
                 .Take(4)
                 .ToList();
 

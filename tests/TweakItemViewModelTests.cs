@@ -455,6 +455,53 @@ public sealed class TweakItemViewModelTests
     }
 
     [Fact]
+    public void SourceSnapshot_SuppressesMissingLocalPseudocodeMirrorLinks()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new TestTweak("system.missing-local-pseudocode-source");
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false);
+        const string missingMirrorPath = "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/MissingSymbol.c";
+
+        viewModel.ApplyEvidenceClassification(new TweakEvidenceClassEntry
+        {
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            EvidenceClass = "A",
+            ClassLabel = "Class A",
+            ClassTitle = "Ready",
+            ClassDescription = "Ready for app surface",
+            ActionState = "actionable",
+            GatingReason = string.Empty,
+            IsActionable = true,
+            ShowInApp = true,
+            UpstreamLineage = new TweakEvidenceProofBlock
+            {
+                Summary = "Upstream dump / pseudocode links are attached to this record.",
+                PrimarySourceText = $"local pseudocode mirror: {missingMirrorPath}",
+                HasNohutoLineage = true,
+                HasValidationProof = true,
+                Links =
+                {
+                    new TweakEvidenceLink
+                    {
+                        Title = "local pseudocode mirror / MissingSymbol",
+                        Url = missingMirrorPath,
+                        Kind = "source"
+                    }
+                }
+            }
+        });
+
+        Assert.True(PublicEvidenceLinkPolicy.IsMissingLocalSourceMirrorUrl(missingMirrorPath));
+        Assert.False(viewModel.HasUpstreamLineage);
+        Assert.Equal("partial", viewModel.SourceSnapshotState);
+        var sourceLane = Assert.Single(viewModel.ProofLanes, lane => lane.Key == "source");
+        Assert.False(sourceLane.HasPrimarySourceText);
+        Assert.False(sourceLane.HasLinks);
+        Assert.Contains("RegProbe-controlled local source mirror", sourceLane.Summary, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
     public void ApplyAllowedVerdict_UsesProofAndRollbackSnapshots()
     {
         var pipeline = new TweakExecutionPipeline(new RecordingLogger());

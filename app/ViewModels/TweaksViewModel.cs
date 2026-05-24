@@ -35,8 +35,6 @@ public sealed partial class TweaksViewModel : ViewModelBase, IDisposable
     private readonly RelayCommand _clearCategorySelectionCommand;
     private readonly RelayCommand _filterAppliedCommand;
     private readonly RelayCommand _filterRolledBackCommand;
-    private readonly RelayCommand _cycleStatusFilterCommand;
-    private readonly RelayCommand _cycleScopeFilterCommand;
     private readonly RelayCommand _showSettingsWorkspaceCommand;
     private readonly RelayCommand _showMaintenanceWorkspaceCommand;
     private readonly RelayCommand _toggleSecondaryPanelCommand;
@@ -144,8 +142,6 @@ public sealed partial class TweaksViewModel : ViewModelBase, IDisposable
         _clearCategorySelectionCommand = new RelayCommand(_ => SelectedCategoryName = string.Empty);
         _filterAppliedCommand = new RelayCommand(_ => _configurationCoordinator.ShowAppliedOnly());
         _filterRolledBackCommand = new RelayCommand(_ => _configurationCoordinator.ShowRolledBackOnly());
-        _cycleStatusFilterCommand = new RelayCommand(_ => _shellState.CycleStatusFilter());
-        _cycleScopeFilterCommand = new RelayCommand(_ => _shellState.CycleScopeFilter());
         _showSettingsWorkspaceCommand = new RelayCommand(_ => _configurationCoordinator.ShowConfigurationWorkspace());
         _showMaintenanceWorkspaceCommand = new RelayCommand(_ => SelectedWorkspace = ConfigurationWorkspaceKind.Maintenance);
         _toggleSecondaryPanelCommand = new RelayCommand(_ => IsSecondaryPanelCollapsed = !IsSecondaryPanelCollapsed);

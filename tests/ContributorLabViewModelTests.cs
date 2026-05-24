@@ -130,6 +130,11 @@ public sealed class ContributorLabViewModelTests : IDisposable
     public void ContributorReadinessDecisionSummary_GivesOneNextSafeAction()
     {
         var certified = new ContributorLabViewModel(CreateSnapshot());
+        Assert.Equal("Certified reference lane", certified.ContributorLabOperatingMode);
+        Assert.Contains("reference-eligible", certified.ContributorLabOperatingModeDetail, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("shipped cards", certified.EndUserSurfaceSummary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("user-supplied custom value observations", certified.ContributorResearchSummary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("copy-only in v1", certified.ContributorActionBoundarySummary, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("certified reference lane is ready", certified.ContributorReadinessDecisionSummary, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("one value at a time", certified.ContributorReadinessDecisionSummary, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("ready_for_bounded_app_card", certified.ContributorReadinessDecisionSummary, StringComparison.Ordinal);
@@ -139,6 +144,8 @@ public sealed class ContributorLabViewModelTests : IDisposable
             CustomValueNoisyResultCount = 1,
             CustomValueNeedsLowNoiseRerun = 1
         });
+        Assert.Equal("Noisy/debug lane", noisy.ContributorLabOperatingMode);
+        Assert.Contains("debug-only", noisy.ContributorLabOperatingModeDetail, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("rerun noisy", noisy.ContributorReadinessDecisionSummary, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("debug-only", noisy.ContributorReadinessDecisionSummary, StringComparison.OrdinalIgnoreCase);
 
@@ -148,6 +155,8 @@ public sealed class ContributorLabViewModelTests : IDisposable
             VmHealthOk = false,
             VmSnapshotOk = false
         });
+        Assert.Equal("Community observation lane", community.ContributorLabOperatingMode);
+        Assert.Contains("community/debug", community.ContributorLabOperatingModeDetail, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("copy-only/community-debug", community.ContributorReadinessDecisionSummary, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("QGA", community.ContributorReadinessDecisionSummary, StringComparison.Ordinal);
 

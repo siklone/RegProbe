@@ -99,6 +99,37 @@ public sealed class ContributorLabViewModel : ViewModelBase
 
     public bool ReferenceEligible => Snapshot.ReferenceEligible;
 
+    public bool HasOpenCustomValueNoiseGate =>
+        CustomValueNonOkCount > 0
+        || CustomValueNoisyResultCount > 0
+        || CustomValueNeedsLowNoiseRerun > 0;
+
+    public string ContributorLabOperatingMode => RunTier switch
+    {
+        _ when HasOpenCustomValueNoiseGate => "Noisy/debug lane",
+        "certified" => "Certified reference lane",
+        "noisy" => "Noisy/debug lane",
+        _ => "Community observation lane"
+    };
+
+    public string ContributorLabOperatingModeDetail =>
+        HasOpenCustomValueNoiseGate
+            ? "One or more noise/non-ok/rerun gates is open. Keep results debug-only and rerun before using them for verdicts or app-card review."
+            : ReferenceEligible
+                ? "VM health, snapshot receipt, app contracts, and low-noise gates are clean enough for reference-eligible contributor evidence."
+                : RunTier.Equals("noisy", StringComparison.OrdinalIgnoreCase)
+                ? "One or more noise/non-ok/rerun gates is open. Keep results debug-only and rerun before using them for verdicts or app-card review."
+                : "Read-only app checks are useful, but mutation results remain community/debug until VM health, snapshot, and noise gates are certified.";
+
+    public string EndUserSurfaceSummary =>
+        $"{AppCardPassCount}/{AppCardCandidateCount} shipped cards pass the app-card contract. Normal users see only app-ready cards with bounded claims, visible current/default/target/rollback copy, and no VM pipeline details.";
+
+    public string ContributorResearchSummary =>
+        $"{CustomValueRecordCount} user-supplied custom value observations are available for contributor review; {CustomValueReadyForAppCard} are app-card review-ready, {CustomValueResearchOnlyCount} stay research-only, noisy={CustomValueNoisyResultCount}, non_ok={CustomValueNonOkCount}, needs_low_noise_rerun={CustomValueNeedsLowNoiseRerun}.";
+
+    public string ContributorActionBoundarySummary =>
+        "WPF can run allowlisted read-only lookup/readiness/VM-health commands. Mutating VM experiments stay copy-only in v1 and require a disposable snapshot plus per-run confirmation.";
+
     public string RepoRoot => Snapshot.RepoRootFound ? Snapshot.RepoRoot : "Repo root not found";
 
     public int CustomValueRecordCount => Snapshot.CustomValueRecordCount;
@@ -126,7 +157,7 @@ public sealed class ContributorLabViewModel : ViewModelBase
     public int AppCardPassCount => Snapshot.AppCardPassCount;
 
     public string AppSurfacePolicySummary =>
-        CustomValueNonOkCount > 0 || CustomValueNoisyResultCount > 0 || CustomValueNeedsLowNoiseRerun > 0
+        HasOpenCustomValueNoiseGate
             ? "Custom registry value experiments are blocked from app cards until non_ok, noisy, and low-noise rerun counts are all zero."
             : CustomValueReadyForAppCard == 0
                 ? "Custom registry value experiments are clean Contributor Lab research observations. They are not normal optimization cards until each record has a known default/current value story, tested rollback, explicit app-write, clean low-noise proof, and bounded claims."
@@ -157,7 +188,7 @@ public sealed class ContributorLabViewModel : ViewModelBase
                 return "Next safe action: repair the contributor script checkout before running lookups. The app only runs allowlisted scripts, so missing scripts block reliable evidence work.";
             }
 
-            if (CustomValueNonOkCount > 0 || CustomValueNoisyResultCount > 0 || CustomValueNeedsLowNoiseRerun > 0)
+            if (HasOpenCustomValueNoiseGate)
             {
                 return "Next safe action: rerun noisy, non-ok, or needs-low-noise custom value records before any app-card review or certified claim. These observations remain debug-only.";
             }

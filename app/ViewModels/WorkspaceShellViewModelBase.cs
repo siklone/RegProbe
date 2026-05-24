@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -87,9 +88,21 @@ public abstract class WorkspaceShellViewModelBase : ViewModelBase, IDisposable
 
     public string ToolbarSectionLabel => Workspace.ToolbarSectionLabel;
 
-    public ICommand CycleStatusFilterCommand => Workspace.CycleStatusFilterCommand;
+    public IReadOnlyList<FilterOptionViewModel> StatusFilterOptions => Workspace.StatusFilterOptions;
 
-    public ICommand CycleScopeFilterCommand => Workspace.CycleScopeFilterCommand;
+    public IReadOnlyList<FilterOptionViewModel> ScopeFilterOptions => Workspace.ScopeFilterOptions;
+
+    public string StatusFilter
+    {
+        get => Workspace.StatusFilter;
+        set => Workspace.StatusFilter = value;
+    }
+
+    public string ScopeFilter
+    {
+        get => Workspace.ScopeFilter;
+        set => Workspace.ScopeFilter = value;
+    }
 
     public string StatusFilterDisplayText => Workspace.StatusFilterDisplayText;
 
