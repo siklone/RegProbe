@@ -81,11 +81,6 @@ public sealed class TweaksShellStateViewModelTests
             },
             option =>
             {
-                Assert.Equal("HOLD/REVIEW", option.Label);
-                Assert.Equal("hold", option.Value);
-            },
-            option =>
-            {
                 Assert.Equal("APPLIED", option.Label);
                 Assert.Equal("applied", option.Value);
             },
@@ -119,44 +114,43 @@ public sealed class TweaksShellStateViewModelTests
         var viewModel = new TweaksShellStateViewModel();
 
         Assert.Equal("STATUS", viewModel.StatusFilterDisplayText);
-        viewModel.CycleStatusFilter();
+        viewModel.StatusFilter = "promoted";
         Assert.Equal("promoted", viewModel.StatusFilter);
         Assert.Equal("PROMOTED", viewModel.StatusFilterDisplayText);
-        viewModel.CycleStatusFilter();
-        Assert.Equal("hold", viewModel.StatusFilter);
-        Assert.Equal("HOLD/REVIEW", viewModel.StatusFilterDisplayText);
-        viewModel.CycleStatusFilter();
+        viewModel.StatusFilter = "applied";
         Assert.Equal("applied", viewModel.StatusFilter);
         Assert.Equal("APPLIED", viewModel.StatusFilterDisplayText);
-        viewModel.CycleStatusFilter();
+        viewModel.StatusFilter = "rolledback";
         Assert.Equal("rolledback", viewModel.StatusFilter);
-        viewModel.CycleStatusFilter();
+        viewModel.StatusFilter = string.Empty;
         Assert.Equal(string.Empty, viewModel.StatusFilter);
 
         Assert.Equal("SCOPE", viewModel.ScopeFilterDisplayText);
-        viewModel.CycleScopeFilter();
+        viewModel.ScopeFilter = "machine";
         Assert.Equal("machine", viewModel.ScopeFilter);
         Assert.Equal("MACHINE", viewModel.ScopeFilterDisplayText);
-        viewModel.CycleScopeFilter();
+        viewModel.ScopeFilter = "user";
         Assert.Equal("user", viewModel.ScopeFilter);
-        viewModel.CycleScopeFilter();
+        viewModel.ScopeFilter = "mixed";
         Assert.Equal("mixed", viewModel.ScopeFilter);
-        viewModel.CycleScopeFilter();
+        viewModel.ScopeFilter = string.Empty;
         Assert.Equal(string.Empty, viewModel.ScopeFilter);
     }
 
     [Fact]
-    public void ConfigurationShell_ExposesSecondaryPanelFilterCommands()
+    public void ConfigurationShell_ExposesSecondaryPanelFilterState()
     {
         using var workspace = new TweaksViewModel(null, new BusyService());
         var shell = new ConfigurationShellViewModel(workspace);
 
+        Assert.Equal(workspace.StatusFilterOptions, shell.StatusFilterOptions);
         Assert.Equal("STATUS", shell.StatusFilterDisplayText);
-        shell.CycleStatusFilterCommand.Execute(null);
+        shell.StatusFilter = "promoted";
         Assert.Equal("PROMOTED", shell.StatusFilterDisplayText);
 
+        Assert.Equal(workspace.ScopeFilterOptions, shell.ScopeFilterOptions);
         Assert.Equal("SCOPE", shell.ScopeFilterDisplayText);
-        shell.CycleScopeFilterCommand.Execute(null);
+        shell.ScopeFilter = "machine";
         Assert.Equal("MACHINE", shell.ScopeFilterDisplayText);
     }
 }

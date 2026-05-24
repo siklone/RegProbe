@@ -231,7 +231,7 @@ public sealed partial class TweakItemViewModel
         {
             if (link is null
                 || string.IsNullOrWhiteSpace(link.Url)
-                || PublicEvidenceLinkPolicy.IsSuppressedExternalSourceUrl(link.Url))
+                || PublicEvidenceLinkPolicy.ShouldSuppressSourceLink(link.Url))
             {
                 continue;
             }
@@ -280,7 +280,7 @@ public sealed partial class TweakItemViewModel
             {
                 if (link is null
                     || string.IsNullOrWhiteSpace(link.Url)
-                    || PublicEvidenceLinkPolicy.IsSuppressedExternalSourceUrl(link.Url)
+                    || PublicEvidenceLinkPolicy.ShouldSuppressSourceLink(link.Url)
                     || !seen.Add(link.Url))
                 {
                     continue;

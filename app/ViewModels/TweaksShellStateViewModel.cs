@@ -23,7 +23,6 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
     {
         new FilterOptionViewModel("STATUS", string.Empty),
         new FilterOptionViewModel("PROMOTED", "promoted"),
-        new FilterOptionViewModel("HOLD/REVIEW", "hold"),
         new FilterOptionViewModel("APPLIED", "applied"),
         new FilterOptionViewModel("ROLLED BACK", "rolledback")
     };
@@ -317,10 +316,6 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
         SelectedCategoryName = string.Empty;
     }
 
-    public void CycleStatusFilter() => StatusFilter = NextOptionValue(StatusFilterOptions, StatusFilter);
-
-    public void CycleScopeFilter() => ScopeFilter = NextOptionValue(ScopeFilterOptions, ScopeFilter);
-
     private void RaiseWorkspacePropertiesChanged()
     {
         OnPropertyChanged(nameof(IsSettingsWorkspaceSelected));
@@ -362,25 +357,4 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
             string.Equals(option.Value, value, StringComparison.OrdinalIgnoreCase))?.Label ?? fallback;
     }
 
-    private static string NextOptionValue(
-        IReadOnlyList<FilterOptionViewModel> options,
-        string currentValue)
-    {
-        if (options.Count == 0)
-        {
-            return string.Empty;
-        }
-
-        var currentIndex = -1;
-        for (var index = 0; index < options.Count; index++)
-        {
-            if (string.Equals(options[index].Value, currentValue, StringComparison.OrdinalIgnoreCase))
-            {
-                currentIndex = index;
-                break;
-            }
-        }
-
-        return options[(currentIndex + 1) % options.Count].Value;
-    }
 }

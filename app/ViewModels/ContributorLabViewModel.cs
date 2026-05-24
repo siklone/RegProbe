@@ -99,6 +99,29 @@ public sealed class ContributorLabViewModel : ViewModelBase
 
     public bool ReferenceEligible => Snapshot.ReferenceEligible;
 
+    public string ContributorLabOperatingMode => RunTier switch
+    {
+        "certified" => "Certified reference lane",
+        "noisy" => "Noisy/debug lane",
+        _ => "Community observation lane"
+    };
+
+    public string ContributorLabOperatingModeDetail =>
+        ReferenceEligible
+            ? "VM health, snapshot receipt, app contracts, and low-noise gates are clean enough for reference-eligible contributor evidence."
+            : RunTier.Equals("noisy", StringComparison.OrdinalIgnoreCase)
+                ? "One or more noise/non-ok/rerun gates is open. Keep results debug-only and rerun before using them for verdicts or app-card review."
+                : "Read-only app checks are useful, but mutation results remain community/debug until VM health, snapshot, and noise gates are certified.";
+
+    public string EndUserSurfaceSummary =>
+        $"{AppCardPassCount}/{AppCardCandidateCount} shipped cards pass the app-card contract. Normal users see only app-ready cards with bounded claims, visible current/default/target/rollback copy, and no VM pipeline details.";
+
+    public string ContributorResearchSummary =>
+        $"{CustomValueRecordCount} user-supplied custom value observations are available for contributor review; {CustomValueReadyForAppCard} are app-card review-ready, {CustomValueResearchOnlyCount} stay research-only, noisy={CustomValueNoisyResultCount}, non_ok={CustomValueNonOkCount}, needs_low_noise_rerun={CustomValueNeedsLowNoiseRerun}.";
+
+    public string ContributorActionBoundarySummary =>
+        "WPF can run allowlisted read-only lookup/readiness/VM-health commands. Mutating VM experiments stay copy-only in v1 and require a disposable snapshot plus per-run confirmation.";
+
     public string RepoRoot => Snapshot.RepoRootFound ? Snapshot.RepoRoot : "Repo root not found";
 
     public int CustomValueRecordCount => Snapshot.CustomValueRecordCount;

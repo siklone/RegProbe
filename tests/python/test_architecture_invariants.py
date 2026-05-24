@@ -48,28 +48,36 @@ class ArchitectureInvariantTests(unittest.TestCase):
 
         self.assertIn('ResourceDictionary Source="Resources/TweaksWorkspaceResources.xaml"', app_xaml)
 
-    def test_tweak_filter_buttons_bind_status_and_scope_cycle_commands(self) -> None:
+    def test_tweak_filter_dropdowns_bind_status_and_scope_options(self) -> None:
         secondary_panel = (
             REPO_ROOT / "app" / "Views" / "Tweaks" / "TweaksSecondaryPanel.xaml"
         ).read_text(encoding="utf-8")
 
-        self.assertIn('Content="{Binding StatusFilterDisplayText}"', secondary_panel)
-        self.assertIn('Command="{Binding CycleStatusFilterCommand}"', secondary_panel)
-        self.assertIn('Content="{Binding ScopeFilterDisplayText}"', secondary_panel)
-        self.assertIn('Command="{Binding CycleScopeFilterCommand}"', secondary_panel)
+        self.assertIn('ItemsSource="{Binding StatusFilterOptions}"', secondary_panel)
+        self.assertIn('SelectedValue="{Binding StatusFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"', secondary_panel)
+        self.assertIn('ItemsSource="{Binding ScopeFilterOptions}"', secondary_panel)
+        self.assertIn('SelectedValue="{Binding ScopeFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"', secondary_panel)
 
         list_resources = (
             REPO_ROOT / "app" / "Resources" / "Tweaks" / "List.xaml"
         ).read_text(encoding="utf-8")
-        self.assertIn('x:Key="CompactFilterButtonStyle"', list_resources)
+        self.assertIn('x:Key="CompactFilterComboStyle"', list_resources)
 
         tweaks_filter_view_model = (
             REPO_ROOT / "app" / "ViewModels" / "TweaksViewModel.Filters.cs"
         ).read_text(encoding="utf-8")
         self.assertIn("StatusFilterOptions => _shellState.StatusFilterOptions", tweaks_filter_view_model)
         self.assertIn("ScopeFilterOptions => _shellState.ScopeFilterOptions", tweaks_filter_view_model)
-        self.assertIn("CycleStatusFilterCommand", tweaks_filter_view_model)
-        self.assertIn("CycleScopeFilterCommand", tweaks_filter_view_model)
+        self.assertNotIn("CycleStatusFilterCommand", tweaks_filter_view_model)
+        self.assertNotIn("CycleScopeFilterCommand", tweaks_filter_view_model)
+
+        workspace_shell_view_model = (
+            REPO_ROOT / "app" / "ViewModels" / "WorkspaceShellViewModelBase.cs"
+        ).read_text(encoding="utf-8")
+        self.assertIn("StatusFilterOptions => Workspace.StatusFilterOptions", workspace_shell_view_model)
+        self.assertIn("ScopeFilterOptions => Workspace.ScopeFilterOptions", workspace_shell_view_model)
+        self.assertIn("get => Workspace.StatusFilter", workspace_shell_view_model)
+        self.assertIn("set => Workspace.StatusFilter = value", workspace_shell_view_model)
 
     def test_normal_tweak_surface_uses_end_user_card_gate_not_contributor_override(self) -> None:
         filter_evaluator = (

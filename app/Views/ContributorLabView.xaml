@@ -258,6 +258,88 @@
                     <StackPanel Visibility="{Binding IsToolsVisible, Converter={StaticResource BoolToVisibility}}">
                         <Border Style="{StaticResource ContributorCardStyle}">
                             <StackPanel>
+                                <TextBlock Text="Lab dashboard"
+                                           Style="{StaticResource UtilitySectionTitleTextStyle}"/>
+                                <TextBlock Text="This dashboard separates normal app cards from contributor-only research so nobody has to read raw artifact folders first."
+                                           Margin="0,6,0,10"
+                                           Style="{StaticResource UtilitySectionBodyTextStyle}"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="12"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="12"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border Grid.Column="0"
+                                            Background="#0E1411"
+                                            BorderBrush="#244A34"
+                                            BorderThickness="1"
+                                            CornerRadius="10"
+                                            Padding="12">
+                                        <StackPanel>
+                                            <TextBlock Text="End-user surface"
+                                                       Foreground="#F5F5F5"
+                                                       FontWeight="SemiBold"/>
+                                            <TextBlock Text="{Binding EndUserSurfaceSummary}"
+                                                       Margin="0,6,0,0"
+                                                       Style="{StaticResource UtilitySectionBodyTextStyle}"/>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Border Grid.Column="2"
+                                            Background="#11100D"
+                                            BorderBrush="#4A321E"
+                                            BorderThickness="1"
+                                            CornerRadius="10"
+                                            Padding="12">
+                                        <StackPanel>
+                                            <TextBlock Text="Contributor research"
+                                                       Foreground="#F5F5F5"
+                                                       FontWeight="SemiBold"/>
+                                            <TextBlock Text="{Binding ContributorResearchSummary}"
+                                                       Margin="0,6,0,0"
+                                                       Style="{StaticResource UtilitySectionBodyTextStyle}"/>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Border Grid.Column="4"
+                                            Background="#080D12"
+                                            BorderBrush="#263B50"
+                                            BorderThickness="1"
+                                            CornerRadius="10"
+                                            Padding="12">
+                                        <StackPanel>
+                                            <WrapPanel>
+                                                <TextBlock Text="{Binding ContributorLabOperatingMode}"
+                                                           Foreground="#F5F5F5"
+                                                           FontWeight="SemiBold"/>
+                                                <TextBlock Text="{Binding VerificationBadge, StringFormat={}  [{0}]}"
+                                                           Foreground="#9FB5D7"
+                                                           FontFamily="{DynamicResource FontFamilyMono}"
+                                                           FontSize="10"/>
+                                            </WrapPanel>
+                                            <TextBlock Text="{Binding ContributorLabOperatingModeDetail}"
+                                                       Margin="0,6,0,0"
+                                                       Style="{StaticResource UtilitySectionBodyTextStyle}"/>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                                <Border Background="#080D12"
+                                        BorderBrush="#1F3550"
+                                        BorderThickness="1"
+                                        CornerRadius="8"
+                                        Padding="10"
+                                        Margin="0,10,0,0">
+                                    <TextBlock Text="{Binding ContributorActionBoundarySummary}"
+                                               Style="{StaticResource ContributorMonoTextStyle}"/>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource ContributorCardStyle}">
+                            <StackPanel>
                                 <TextBlock Text="Readiness"
                                            Style="{StaticResource UtilitySectionTitleTextStyle}"/>
                                 <TextBlock Text="{Binding RepoRoot}"

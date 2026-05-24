@@ -1,5 +1,9 @@
 namespace RegProbe.App.Services;
 
+using System;
+using System.IO;
+using RegProbe.App.Utilities;
+
 internal static class PublicEvidenceLinkPolicy
 {
     public const string NoLocalSourceMessage =
@@ -14,6 +18,29 @@ internal static class PublicEvidenceLinkPolicy
            || (!string.IsNullOrWhiteSpace(url)
                && url.Contains("github.com/nohuto/", StringComparison.OrdinalIgnoreCase));
 
+    public static bool IsMissingLocalSourceMirrorUrl(string? url)
+    {
+        if (string.IsNullOrWhiteSpace(url)
+            || (Uri.TryCreate(url, UriKind.Absolute, out var absoluteUri)
+                && (string.Equals(absoluteUri.Scheme, Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase)
+                    || string.Equals(absoluteUri.Scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase))))
+        {
+            return false;
+        }
+
+        var rawPath = url.Split('#', 2)[0].Trim();
+        if (!rawPath.Contains("research/_source-mirrors/", StringComparison.OrdinalIgnoreCase)
+            && !rawPath.Contains(@"research\_source-mirrors\", StringComparison.OrdinalIgnoreCase))
+        {
+            return false;
+        }
+
+        return !TryResolveRepoPath(rawPath, out _);
+    }
+
+    public static bool ShouldSuppressSourceLink(string? url)
+        => IsSuppressedExternalSourceUrl(url) || IsMissingLocalSourceMirrorUrl(url);
+
     public static bool IsSuppressedExternalSourceText(string? text)
         => !string.IsNullOrWhiteSpace(text)
            && text.Contains("github.com/nohuto/", StringComparison.OrdinalIgnoreCase);
@@ -21,6 +48,11 @@ internal static class PublicEvidenceLinkPolicy
     public static string SanitizePrimarySourceText(string? text)
     {
         if (string.IsNullOrWhiteSpace(text) || IsSuppressedExternalSourceText(text))
+        {
+            return string.Empty;
+        }
+
+        if (ContainsMissingLocalSourceMirrorReference(text))
         {
             return string.Empty;
         }
@@ -95,5 +127,57 @@ internal static class PublicEvidenceLinkPolicy
         }
 
         return text.Replace("nohuto", "external upstream", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static bool TryResolveRepoPath(string path, out string localPath)
+    {
+        localPath = string.Empty;
+        if (string.IsNullOrWhiteSpace(path))
+        {
+            return false;
+        }
+
+        var normalized = path.Replace('/', Path.DirectorySeparatorChar).Trim();
+        if (Path.IsPathRooted(normalized) && File.Exists(normalized))
+        {
+            localPath = normalized;
+            return true;
+        }
+
+        var docsRoot = DocsLocator.TryFindDocsRoot();
+        var repoRoot = string.IsNullOrWhiteSpace(docsRoot)
+            ? string.Empty
+            : Directory.GetParent(docsRoot)?.FullName ?? string.Empty;
+        if (string.IsNullOrWhiteSpace(repoRoot))
+        {
+            return false;
+        }
+
+        var candidate = Path.Combine(repoRoot, normalized.TrimStart(Path.DirectorySeparatorChar));
+        if (!File.Exists(candidate))
+        {
+            return false;
+        }
+
+        localPath = candidate;
+        return true;
+    }
+
+    private static bool ContainsMissingLocalSourceMirrorReference(string text)
+    {
+        foreach (var token in text.Split(
+                     new[] { ' ', '\t', '\r', '\n' },
+                     StringSplitOptions.RemoveEmptyEntries))
+        {
+            var candidate = token.Trim()
+                .TrimStart('(', '[', '{', '<', '"', '\'')
+                .TrimEnd('.', ',', ';', ':', ')', ']', '}', '>', '"', '\'');
+            if (IsMissingLocalSourceMirrorUrl(candidate))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
