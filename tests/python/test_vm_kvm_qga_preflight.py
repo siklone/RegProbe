@@ -164,8 +164,10 @@ class VmKvmQgaPreflightTests(unittest.TestCase):
                 "configured_dotnet_path_exists": True,
                 "dotnet_on_path": False,
                 "dotnet_path": r"C:\Tools\DotNetSDK\8.0.416\dotnet.exe",
+                "core_runtime_present": True,
+                "core_runtime_versions": ["8.0.27"],
                 "desktop_runtime_present": True,
-                "desktop_runtime_versions": ["8.0.0"],
+                "desktop_runtime_versions": ["8.0.27"],
             }
         ).encode("utf-8")
         with mock.patch.object(
@@ -189,8 +191,10 @@ class VmKvmQgaPreflightTests(unittest.TestCase):
 
         self.assertEqual(payload["status"], "ok")
         self.assertEqual(payload["checks"]["guest_dotnet_toolchain"]["status"], "ok")
+        self.assertTrue(payload["checks"]["guest_dotnet_toolchain"]["core_runtime_present"])
+        self.assertEqual(payload["checks"]["guest_dotnet_toolchain"]["core_runtime_versions"], ["8.0.27"])
         self.assertTrue(payload["checks"]["guest_dotnet_toolchain"]["desktop_runtime_present"])
-        self.assertEqual(payload["checks"]["guest_dotnet_toolchain"]["desktop_runtime_versions"], ["8.0.0"])
+        self.assertEqual(payload["checks"]["guest_dotnet_toolchain"]["desktop_runtime_versions"], ["8.0.27"])
 
     def test_guest_dotnet_toolchain_check_fails_when_desktop_runtime_is_missing(self) -> None:
         toolchain_json = json.dumps(
@@ -199,6 +203,8 @@ class VmKvmQgaPreflightTests(unittest.TestCase):
                 "configured_dotnet_path_exists": True,
                 "dotnet_on_path": False,
                 "dotnet_path": r"C:\Tools\DotNetSDK\8.0.416\dotnet.exe",
+                "core_runtime_present": True,
+                "core_runtime_versions": ["8.0.27"],
                 "desktop_runtime_present": False,
                 "desktop_runtime_versions": [],
             }
@@ -226,6 +232,43 @@ class VmKvmQgaPreflightTests(unittest.TestCase):
         self.assertIn("guest_dotnet_toolchain", payload["failed_checks"])
         self.assertEqual(payload["checks"]["guest_dotnet_toolchain"]["status"], "error")
         self.assertIn("Microsoft.WindowsDesktop.App", payload["checks"]["guest_dotnet_toolchain"]["error"])
+
+    def test_guest_dotnet_toolchain_check_fails_when_core_runtime_is_missing(self) -> None:
+        toolchain_json = json.dumps(
+            {
+                "configured_dotnet_path": r"C:\Tools\DotNetSDK\8.0.416\dotnet.exe",
+                "configured_dotnet_path_exists": True,
+                "dotnet_on_path": False,
+                "dotnet_path": r"C:\Tools\DotNetSDK\8.0.416\dotnet.exe",
+                "core_runtime_present": False,
+                "core_runtime_versions": [],
+                "desktop_runtime_present": True,
+                "desktop_runtime_versions": ["8.0.27"],
+            }
+        ).encode("utf-8")
+        with mock.patch.object(
+            qga_preflight.subprocess,
+            "run",
+            side_effect=[
+                cp(["virsh"], 0, "running\n"),
+                cp(["virsh"], 0, qga({})),
+                cp(["virsh"], 0, qga({"version": "qga-test"})),
+                cp(["virsh"], 0, qga({"pid": 42})),
+                cp(["virsh"], 0, qga({"exited": True, "exitcode": 0, "out-data": base64.b64encode(b"nt authority\\system").decode("ascii")})),
+                cp(["virsh"], 0, qga({"pid": 77})),
+                cp(["virsh"], 0, qga({"exited": True, "exitcode": 0, "out-data": base64.b64encode(toolchain_json).decode("ascii")})),
+            ],
+        ), mock.patch.object(qga_preflight.time, "time", return_value=0.0):
+            payload = qga_preflight.run_qga_preflight(
+                domain="vm",
+                connect="qemu:///session",
+                check_guest_dotnet=True,
+            )
+
+        self.assertEqual(payload["status"], "error")
+        self.assertIn("guest_dotnet_toolchain", payload["failed_checks"])
+        self.assertEqual(payload["checks"]["guest_dotnet_toolchain"]["status"], "error")
+        self.assertIn("Microsoft.NETCore.App", payload["checks"]["guest_dotnet_toolchain"]["error"])
 
     def test_missing_snapshot_fails_health_contract_when_requested(self) -> None:
         with mock.patch.object(

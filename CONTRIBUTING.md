@@ -655,11 +655,13 @@ dotnet test tests/tests.csproj -c Release --no-build -v minimal
 If the host can build but cannot execute `net8.0-windows` tests because the WindowsDesktop runtime is missing, use the KVM guest test lane:
 
 ```bash
+python3 scripts/vm-kvm/vm-health-check.py --domain regprobe-win11-25h2-session --connect qemu:///session --snapshot-name clean-25h2-qga --check-guest-dotnet --json
+python3 scripts/vm-kvm/run-guest-dotnet-toolchain-bootstrap.py --domain regprobe-win11-25h2-session --connect qemu:///session --wait-timeout 1800
 dotnet build tests/tests.csproj -c Release -p:EnableWindowsTargeting=true
 python3 scripts/vm-kvm/run-guest-dotnet-tests.py --wait-timeout 1800
 ```
 
-The guest runner preserves the repo layout expected by C# tests by staging `Docs`, `research/records`, `research/promotion-gates.json`, and `tests/bin/Release/net8.0-windows` under `C:\RegProbe`.
+The bootstrap command mutates only the disposable VM toolchain under `C:\Tools\DotNetSDK\8.0.416`; keep using the snapshot lane. The guest runner preserves the repo layout expected by C# tests by staging `Docs`, `research/records`, `research/promotion-gates.json`, and `tests/bin/Release/net8.0-windows` under `C:\RegProbe`.
 
 For research changes:
 

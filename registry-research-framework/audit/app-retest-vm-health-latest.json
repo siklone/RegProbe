@@ -240,7 +240,7 @@
         "qemu:///session",
         "qemu-agent-command",
         "regprobe-win11-25h2-session",
-        "{\"execute\":\"guest-exec-status\",\"arguments\":{\"pid\":7612}}"
+        "{\"execute\":\"guest-exec-status\",\"arguments\":{\"pid\":3340}}"
       ],
       "returncode": 0,
       "stdout": "{\"return\":{\"exitcode\":0,\"out-data\":\"bnQgYXV0aG9yaXR5XHN5c3RlbQ0K\",\"exited\":true}}",
@@ -251,10 +251,48 @@
         "exited": true
       },
       "phase": "guest-exec-status",
-      "pid": 7612,
+      "pid": 3340,
       "exitcode": 0,
       "out_data": "nt authority\\system\r\n",
       "err_data": ""
+    },
+    "guest_dotnet_toolchain": {
+      "status": "ok",
+      "command": [
+        "virsh",
+        "-c",
+        "qemu:///session",
+        "qemu-agent-command",
+        "regprobe-win11-25h2-session",
+        "{\"execute\":\"guest-exec-status\",\"arguments\":{\"pid\":9448}}"
+      ],
+      "returncode": 0,
+      "stdout": "{\"return\":{\"exitcode\":0,\"out-data\":\"eyJjb25maWd1cmVkX2RvdG5ldF9wYXRoIjoiQzpcXFRvb2xzXFxEb3ROZXRTREtcXDguMC40MTZcXGRvdG5ldC5leGUiLCJjb25maWd1cmVkX2RvdG5ldF9wYXRoX2V4aXN0cyI6dHJ1ZSwiZG90bmV0X29uX3BhdGgiOmZhbHNlLCJkb3RuZXRfcGF0aCI6IkM6XFxUb29sc1xcRG90TmV0U0RLXFw4LjAuNDE2XFxkb3RuZXQuZXhlIiwiY29yZV9ydW50aW1lX3ByZXNlbnQiOnRydWUsImNvcmVfcnVudGltZV92ZXJzaW9ucyI6WyI4LjAuMjIiLCI4LjAuMjciXSwiZGVza3RvcF9ydW50aW1lX3ByZXNlbnQiOnRydWUsImRlc2t0b3BfcnVudGltZV92ZXJzaW9ucyI6WyI4LjAuMjIiLCI4LjAuMjciXX0NCg==\",\"exited\":true}}",
+      "stderr": "",
+      "return": {
+        "exitcode": 0,
+        "out-data": "eyJjb25maWd1cmVkX2RvdG5ldF9wYXRoIjoiQzpcXFRvb2xzXFxEb3ROZXRTREtcXDguMC40MTZcXGRvdG5ldC5leGUiLCJjb25maWd1cmVkX2RvdG5ldF9wYXRoX2V4aXN0cyI6dHJ1ZSwiZG90bmV0X29uX3BhdGgiOmZhbHNlLCJkb3RuZXRfcGF0aCI6IkM6XFxUb29sc1xcRG90TmV0U0RLXFw4LjAuNDE2XFxkb3RuZXQuZXhlIiwiY29yZV9ydW50aW1lX3ByZXNlbnQiOnRydWUsImNvcmVfcnVudGltZV92ZXJzaW9ucyI6WyI4LjAuMjIiLCI4LjAuMjciXSwiZGVza3RvcF9ydW50aW1lX3ByZXNlbnQiOnRydWUsImRlc2t0b3BfcnVudGltZV92ZXJzaW9ucyI6WyI4LjAuMjIiLCI4LjAuMjciXX0NCg==",
+        "exited": true
+      },
+      "phase": "guest-dotnet-toolchain-status",
+      "pid": 9448,
+      "exitcode": 0,
+      "out_data": "{\"configured_dotnet_path\":\"C:\\\\Tools\\\\DotNetSDK\\\\8.0.416\\\\dotnet.exe\",\"configured_dotnet_path_exists\":true,\"dotnet_on_path\":false,\"dotnet_path\":\"C:\\\\Tools\\\\DotNetSDK\\\\8.0.416\\\\dotnet.exe\",\"core_runtime_present\":true,\"core_runtime_versions\":[\"8.0.22\",\"8.0.27\"],\"desktop_runtime_present\":true,\"desktop_runtime_versions\":[\"8.0.22\",\"8.0.27\"]}",
+      "err_data": "",
+      "configured_dotnet_path": "C:\\Tools\\DotNetSDK\\8.0.416\\dotnet.exe",
+      "configured_dotnet_path_exists": true,
+      "dotnet_on_path": false,
+      "dotnet_path": "C:\\Tools\\DotNetSDK\\8.0.416\\dotnet.exe",
+      "core_runtime_present": true,
+      "core_runtime_versions": [
+        "8.0.22",
+        "8.0.27"
+      ],
+      "desktop_runtime_present": true,
+      "desktop_runtime_versions": [
+        "8.0.22",
+        "8.0.27"
+      ]
     },
     "snapshot": {
       "status": "ok",
