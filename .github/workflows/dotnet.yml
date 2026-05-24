@@ -296,8 +296,12 @@ jobs:
         run: echo "Skipping Ghidra autotrigger smoke gate on Windows; it requires python3/curl/virsh host tooling."
 
       - name: Research quality gate summary
-        continue-on-error: true
-        run: python registry-research-framework/scripts/run_research_quality_gate.py --skip-python-tests --skip-ghidra-smoke
+        run: |
+          python registry-research-framework/scripts/run_research_quality_gate.py --skip-python-tests --skip-ghidra-smoke
+          if ($LASTEXITCODE -ne 0) {
+            Write-Host "Research quality gate summary reported non-blocking findings; see uploaded artifacts for details."
+            exit 0
+          }
 
       - name: Run PowerShell pipeline smoke checks
         run: pwsh -NoProfile -ExecutionPolicy Bypass -File tests/Invoke-PipelineQualitySmoke.ps1
