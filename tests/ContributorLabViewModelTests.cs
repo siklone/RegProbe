@@ -63,6 +63,8 @@ public sealed class ContributorLabViewModelTests : IDisposable
             "python3 registry-research-framework/scripts/generate_operator96_app_surface_review.py --json"));
         Assert.True(ContributorLabCatalog.IsAllowlistedCommand(
             "py -3 scripts/vm-kvm/vm-health-check.py --domain regprobe-win11-25h2-session --json"));
+        Assert.True(ContributorLabCatalog.IsAllowlistedCommand(
+            "python3 scripts/vm-kvm/vm-health-check.py --domain regprobe-win11-25h2-session --snapshot-name clean-25h2-qga --check-guest-dotnet --json"));
         Assert.False(ContributorLabCatalog.IsAllowlistedCommand(
             "python3 scripts/vm-kvm/run-guest-registry-value-experiment.py --registry-path \"HKLM\\REPLACE\\KEY\\PATH\" --value-name REPLACE_VALUE_NAME --value-data REPLACE_DWORD_VALUE"));
         Assert.False(ContributorLabCatalog.IsAllowlistedCommand(
@@ -109,6 +111,11 @@ public sealed class ContributorLabViewModelTests : IDisposable
                                       && pack.Command.Contains("--abort-on-noisy-host", StringComparison.Ordinal));
         Assert.Contains(packs, pack => pack.Title == "Certified VM health"
                                       && pack.Command.Contains("--snapshot-name clean-25h2-qga", StringComparison.Ordinal));
+        Assert.Contains(packs, pack => pack.Title == "VM .NET test toolchain"
+                                      && !pack.MutatesGuest
+                                      && pack.RequiresCertifiedVm
+                                      && pack.Command.Contains("--check-guest-dotnet", StringComparison.Ordinal)
+                                      && pack.Command.Contains("vm-health-check.py", StringComparison.Ordinal));
         Assert.Contains(packs, pack => pack.Title == "Single value VM experiment"
                                       && pack.Command.Contains("--value-name MfBufferingThreshold", StringComparison.Ordinal)
                                       && !pack.Command.Contains("--value-name SystemResponsiveness", StringComparison.Ordinal));
@@ -533,6 +540,7 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Contains(snapshot.ReadinessItems, item => item.Label == "Required scripts" && item.Status == "Ready");
         Assert.Contains(snapshot.ReadinessItems, item => item.Label == "BIOS virtualization" && item.Status == "Ready");
         Assert.Contains(snapshot.ReadinessItems, item => item.Label == "VM configured" && item.Status == "Ready");
+        Assert.Contains(snapshot.ReadinessItems, item => item.Label == "VM .NET test toolchain" && item.Status == "Ready");
     }
 
     [Fact]
@@ -634,14 +642,23 @@ public sealed class ContributorLabViewModelTests : IDisposable
         WriteArtifact(ContributorLabCatalog.VmHealthPath, """
         {
           "status": "ok",
-          "checks": {
-            "snapshot": {
-              "status": "ok",
-              "exists": true,
-              "snapshot_name": "clean-25h2-qga"
+            "checks": {
+              "snapshot": {
+                "status": "ok",
+                "exists": true,
+                "snapshot_name": "clean-25h2-qga"
+              },
+              "guest_dotnet_toolchain": {
+                "status": "ok",
+                "configured_dotnet_path": "C:\\Tools\\DotNetSDK\\8.0.416\\dotnet.exe",
+                "configured_dotnet_path_exists": true,
+                "dotnet_on_path": false,
+                "dotnet_path": "C:\\Tools\\DotNetSDK\\8.0.416\\dotnet.exe",
+                "desktop_runtime_present": true,
+                "desktop_runtime_versions": ["8.0.0"]
+              }
             }
           }
-        }
         """);
 
         var snapshot = ContributorLabCatalog.Load(_root);
@@ -652,7 +669,11 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.True(snapshot.VmSnapshotKnown);
         Assert.True(snapshot.VmSnapshotOk);
         Assert.Equal("clean-25h2-qga", snapshot.VmSnapshotName);
+        Assert.True(snapshot.VmDotNetKnown);
+        Assert.True(snapshot.VmDotNetOk);
+        Assert.Contains("Microsoft.WindowsDesktop.App 8.0.0", snapshot.VmDotNetDetail, StringComparison.Ordinal);
         Assert.Contains(snapshot.ReadinessItems, item => item.Label == "VM snapshot receipt" && item.Status == "Ready");
+        Assert.Contains(snapshot.ReadinessItems, item => item.Label == "VM .NET test toolchain" && item.Status == "Ready");
         Assert.Equal(0, snapshot.CustomValueReadyForAppCard);
         Assert.Equal(1, snapshot.CustomValueBlockedByGate);
         Assert.Equal(0, snapshot.CustomValueNotAppSurfaceReady);
@@ -880,6 +901,9 @@ public sealed class ContributorLabViewModelTests : IDisposable
             VmSnapshotKnown: true,
             VmSnapshotOk: true,
             VmSnapshotName: "clean-25h2-qga",
+            VmDotNetKnown: true,
+            VmDotNetOk: true,
+            VmDotNetDetail: "Guest dotnet is available at C:\\Tools\\DotNetSDK\\8.0.416\\dotnet.exe with Microsoft.WindowsDesktop.App 8.0.0.",
             CustomValueRecordCount: 96,
             CustomValueReadyForAppCard: 0,
             CustomValueBlockedByGate: 17,

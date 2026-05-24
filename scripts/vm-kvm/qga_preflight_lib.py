@@ -187,6 +187,135 @@ def check_guest_exec(
     }
 
 
+def check_guest_dotnet_toolchain(
+    domain: str,
+    connect: str,
+    *,
+    timeout: int,
+    wait_timeout: int,
+    poll_interval: float,
+    guest_dotnet_path: str,
+) -> dict[str, Any]:
+    ps_script = rf"""
+$configuredDotnetPath = '{guest_dotnet_path}'
+$configuredPathExists = Test-Path -LiteralPath $configuredDotnetPath
+$pathCommand = Get-Command dotnet -ErrorAction SilentlyContinue
+$resolvedDotnetPath = ''
+if ($configuredPathExists) {{
+    $resolvedDotnetPath = $configuredDotnetPath
+}} elseif ($pathCommand) {{
+    $resolvedDotnetPath = $pathCommand.Source
+}}
+
+$desktopRoots = New-Object System.Collections.Generic.List[string]
+if (-not [string]::IsNullOrWhiteSpace($resolvedDotnetPath)) {{
+    $dotnetRoot = Split-Path -Parent $resolvedDotnetPath
+    $desktopRoots.Add((Join-Path $dotnetRoot 'shared\Microsoft.WindowsDesktop.App'))
+}}
+$desktopRoots.Add('C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App')
+
+$desktopVersions = @()
+foreach ($root in $desktopRoots | Select-Object -Unique) {{
+    if (Test-Path -LiteralPath $root) {{
+        $desktopVersions += Get-ChildItem -LiteralPath $root -Directory -ErrorAction SilentlyContinue |
+            Select-Object -ExpandProperty Name
+    }}
+}}
+
+[pscustomobject]@{{
+    configured_dotnet_path = $configuredDotnetPath
+    configured_dotnet_path_exists = [bool]$configuredPathExists
+    dotnet_on_path = [bool]$pathCommand
+    dotnet_path = $resolvedDotnetPath
+    desktop_runtime_present = [bool]($desktopVersions.Count -gt 0)
+    desktop_runtime_versions = @($desktopVersions | Sort-Object -Unique)
+}} | ConvertTo-Json -Compress
+"""
+    start_payload = {
+        "execute": "guest-exec",
+        "arguments": {
+            "path": "powershell.exe",
+            "arg": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command",
+                ps_script,
+            ],
+            "capture-output": True,
+        },
+    }
+    start_check, start_return = run_agent_command(domain, start_payload, connect=connect, timeout=timeout)
+    if start_check.get("status") != "ok":
+        start_check["phase"] = "guest-dotnet-toolchain-start"
+        return start_check
+    if not isinstance(start_return, dict) or not isinstance(start_return.get("pid"), int):
+        start_check["status"] = "error"
+        start_check["phase"] = "guest-dotnet-toolchain-start"
+        start_check["error"] = "guest-exec did not return a numeric pid"
+        return start_check
+
+    pid = int(start_return["pid"])
+    deadline = time.time() + max(wait_timeout, 1)
+    last_check: dict[str, Any] | None = None
+    while time.time() < deadline:
+        status_check, status_return = run_agent_command(
+            domain,
+            {
+                "execute": "guest-exec-status",
+                "arguments": {"pid": pid},
+            },
+            connect=connect,
+            timeout=timeout,
+        )
+        status_check["phase"] = "guest-dotnet-toolchain-status"
+        status_check["pid"] = pid
+        last_check = status_check
+        if status_check.get("status") != "ok":
+            return status_check
+        if isinstance(status_return, dict) and status_return.get("exited") is True:
+            exitcode = int(status_return.get("exitcode", 0))
+            out_data = decode_qga_text(status_return.get("out-data")).strip()
+            err_data = decode_qga_text(status_return.get("err-data")).strip()
+            payload = dict(status_check)
+            payload["exitcode"] = exitcode
+            payload["out_data"] = out_data
+            payload["err_data"] = err_data
+            if exitcode != 0:
+                payload["status"] = "error"
+                payload["error"] = err_data or out_data or f"guest dotnet check exited with {exitcode}"
+                return payload
+            try:
+                toolchain = json.loads(out_data) if out_data else {}
+            except json.JSONDecodeError as exc:
+                payload["status"] = "error"
+                payload["error"] = f"guest dotnet check did not return JSON: {exc}"
+                return payload
+            if not isinstance(toolchain, dict):
+                payload["status"] = "error"
+                payload["error"] = "guest dotnet check JSON payload is not an object"
+                return payload
+            dotnet_ready = bool(toolchain.get("configured_dotnet_path_exists") or toolchain.get("dotnet_on_path"))
+            desktop_ready = bool(toolchain.get("desktop_runtime_present"))
+            payload.update(toolchain)
+            payload["status"] = "ok" if dotnet_ready and desktop_ready else "error"
+            if not dotnet_ready:
+                payload["error"] = "Guest .NET SDK/runtime command is not available at the configured path or PATH."
+            elif not desktop_ready:
+                payload["error"] = "Guest Microsoft.WindowsDesktop.App runtime is missing."
+            return payload
+        time.sleep(max(poll_interval, 0.1))
+
+    return {
+        "status": "timeout",
+        "phase": "guest-dotnet-toolchain-status",
+        "pid": pid,
+        "timeout_seconds": wait_timeout,
+        "error": f"guest dotnet toolchain check did not exit after {wait_timeout}s",
+        "last_status": last_check,
+    }
+
+
 def skipped_check(reason: str) -> dict[str, Any]:
     return {
         "status": "skipped",
@@ -245,6 +374,8 @@ def run_qga_preflight(
     wait_timeout: int = 30,
     poll_interval: float = 1.0,
     snapshot_name: str | None = None,
+    check_guest_dotnet: bool = False,
+    guest_dotnet_path: str = r"C:\Tools\DotNetSDK\8.0.416\dotnet.exe",
 ) -> dict[str, Any]:
     checks: dict[str, Any] = {}
     checks["domstate"] = check_domstate(domain, connect, timeout=timeout)
@@ -252,6 +383,8 @@ def run_qga_preflight(
         checks["guest_ping"] = skipped_check("domstate-not-running")
         checks["guest_info"] = skipped_check("domstate-not-running")
         checks["guest_exec"] = skipped_check("domstate-not-running")
+        if check_guest_dotnet:
+            checks["guest_dotnet_toolchain"] = skipped_check("domstate-not-running")
         if snapshot_name:
             checks["snapshot"] = skipped_check("domstate-not-running")
         return preflight_payload(domain=domain, connect=connect, checks=checks)
@@ -268,9 +401,20 @@ def run_qga_preflight(
             wait_timeout=wait_timeout,
             poll_interval=poll_interval,
         )
+        if check_guest_dotnet:
+            checks["guest_dotnet_toolchain"] = check_guest_dotnet_toolchain(
+                domain,
+                connect,
+                timeout=timeout,
+                wait_timeout=wait_timeout,
+                poll_interval=poll_interval,
+                guest_dotnet_path=guest_dotnet_path,
+            )
     else:
         checks["guest_info"] = skipped_check("guest-ping-failed")
         checks["guest_exec"] = skipped_check("guest-ping-failed")
+        if check_guest_dotnet:
+            checks["guest_dotnet_toolchain"] = skipped_check("guest-ping-failed")
     if snapshot_name:
         checks["snapshot"] = check_snapshot_info(domain, connect, snapshot_name, timeout=timeout)
     return preflight_payload(domain=domain, connect=connect, checks=checks)
