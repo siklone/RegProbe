@@ -282,7 +282,7 @@ public sealed class ContributorLabViewModel : ViewModelBase
         $"python3 registry-research-framework/scripts/check_single_tweak_app_qa.py {QuoteArg(CustomValueName)}{BuildExpectedValueArgs(CustomExpectedValues)} --json";
 
     public string CustomVmHealthCommand =>
-        $"python3 scripts/vm-kvm/vm-health-check.py --domain regprobe-win11-25h2-session --connect qemu:///session --snapshot-name {QuoteArg(Snapshot.VmSnapshotName)} --json";
+        $"python3 scripts/vm-kvm/vm-health-check.py --domain regprobe-win11-25h2-session --connect qemu:///session --snapshot-name {QuoteArg(Snapshot.VmSnapshotName)} --check-guest-dotnet --json";
 
     public string CustomVmExperimentOutputName =>
         $"custom-value-{SlugForArtifact(CustomValueName, "replace-value-name")}-{SlugForArtifact(FirstExpectedValueOrDefault(CustomExpectedValues), "0")}";

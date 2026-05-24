@@ -237,9 +237,12 @@ public sealed class ContributorLabViewModelTests : IDisposable
 
         Assert.Contains("check_single_tweak_app_qa.py \"TimerCheckFlags\"", viewModel.CustomAppQaCommand, StringComparison.Ordinal);
         Assert.Contains("vm-health-check.py", viewModel.CustomVmHealthCommand, StringComparison.Ordinal);
+        Assert.Contains("--check-guest-dotnet", viewModel.CustomVmHealthCommand, StringComparison.Ordinal);
         Assert.Contains(viewModel.CustomValueDiscoverySteps, step => step.Title == "1. Repo/evidence lookup"
                                                                   && !step.MutatesGuest
                                                                   && step.Command.Contains("check_single_tweak.py", StringComparison.Ordinal));
+        Assert.Contains(viewModel.CustomValueDiscoverySteps, step => step.Title == "4. Certified VM health"
+                                                                  && step.Command.Contains("--check-guest-dotnet", StringComparison.Ordinal));
         Assert.Contains(viewModel.CustomValueDiscoverySteps, step => step.Title == "5. One-value VM experiment"
                                                                   && step.MutatesGuest
                                                                   && step.RequiresCertifiedVm
