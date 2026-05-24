@@ -12,8 +12,8 @@
       },
       "Microsoft.Diagnostics.Tracing.TraceEvent": {
         "type": "Transitive",
-        "resolved": "3.2.2",
-        "contentHash": "jQqXyG5cOpuaODN5ratqGPDF7oteCUWt5amHq424lFSkeLNiOgI8hwAYs8Qx3NXVBOAfnqKwqa9yQ2D7HnwJww==",
+        "resolved": "3.2.3",
+        "contentHash": "DsqAbbyV2u+HlVyN6dyelS7BffzYRy4WdYYKTRGyFtOqA5kix70D1Gcy+2QtEB+0Kxb7GKqFtgxvUFKfPrF/yw==",
         "dependencies": {
           "Microsoft.Diagnostics.NETCore.Client": "0.2.510501",
           "Microsoft.Win32.Registry": "5.0.0",
@@ -189,7 +189,7 @@
       "RegProbe.Infrastructure": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.Diagnostics.Tracing.TraceEvent": "[3.2.2, )",
+          "Microsoft.Diagnostics.Tracing.TraceEvent": "[3.2.3, )",
           "Microsoft.Win32.Registry": "[5.0.0, )",
           "RegProbe.Core": "[0.1.0, )",
           "System.Diagnostics.PerformanceCounter": "[10.0.8, )"
