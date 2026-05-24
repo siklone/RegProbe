@@ -157,6 +157,76 @@ class VmKvmQgaPreflightTests(unittest.TestCase):
         self.assertEqual(payload["checks"]["snapshot"]["snapshot_name"], "clean-25h2-qga")
         self.assertEqual(payload["checks"]["snapshot"]["info"]["name"], "clean-25h2-qga")
 
+    def test_guest_dotnet_toolchain_check_passes_when_dotnet_and_desktop_runtime_exist(self) -> None:
+        toolchain_json = json.dumps(
+            {
+                "configured_dotnet_path": r"C:\Tools\DotNetSDK\8.0.416\dotnet.exe",
+                "configured_dotnet_path_exists": True,
+                "dotnet_on_path": False,
+                "dotnet_path": r"C:\Tools\DotNetSDK\8.0.416\dotnet.exe",
+                "desktop_runtime_present": True,
+                "desktop_runtime_versions": ["8.0.0"],
+            }
+        ).encode("utf-8")
+        with mock.patch.object(
+            qga_preflight.subprocess,
+            "run",
+            side_effect=[
+                cp(["virsh"], 0, "running\n"),
+                cp(["virsh"], 0, qga({})),
+                cp(["virsh"], 0, qga({"version": "qga-test"})),
+                cp(["virsh"], 0, qga({"pid": 42})),
+                cp(["virsh"], 0, qga({"exited": True, "exitcode": 0, "out-data": base64.b64encode(b"nt authority\\system").decode("ascii")})),
+                cp(["virsh"], 0, qga({"pid": 77})),
+                cp(["virsh"], 0, qga({"exited": True, "exitcode": 0, "out-data": base64.b64encode(toolchain_json).decode("ascii")})),
+            ],
+        ), mock.patch.object(qga_preflight.time, "time", return_value=0.0):
+            payload = qga_preflight.run_qga_preflight(
+                domain="vm",
+                connect="qemu:///session",
+                check_guest_dotnet=True,
+            )
+
+        self.assertEqual(payload["status"], "ok")
+        self.assertEqual(payload["checks"]["guest_dotnet_toolchain"]["status"], "ok")
+        self.assertTrue(payload["checks"]["guest_dotnet_toolchain"]["desktop_runtime_present"])
+        self.assertEqual(payload["checks"]["guest_dotnet_toolchain"]["desktop_runtime_versions"], ["8.0.0"])
+
+    def test_guest_dotnet_toolchain_check_fails_when_desktop_runtime_is_missing(self) -> None:
+        toolchain_json = json.dumps(
+            {
+                "configured_dotnet_path": r"C:\Tools\DotNetSDK\8.0.416\dotnet.exe",
+                "configured_dotnet_path_exists": True,
+                "dotnet_on_path": False,
+                "dotnet_path": r"C:\Tools\DotNetSDK\8.0.416\dotnet.exe",
+                "desktop_runtime_present": False,
+                "desktop_runtime_versions": [],
+            }
+        ).encode("utf-8")
+        with mock.patch.object(
+            qga_preflight.subprocess,
+            "run",
+            side_effect=[
+                cp(["virsh"], 0, "running\n"),
+                cp(["virsh"], 0, qga({})),
+                cp(["virsh"], 0, qga({"version": "qga-test"})),
+                cp(["virsh"], 0, qga({"pid": 42})),
+                cp(["virsh"], 0, qga({"exited": True, "exitcode": 0, "out-data": base64.b64encode(b"nt authority\\system").decode("ascii")})),
+                cp(["virsh"], 0, qga({"pid": 77})),
+                cp(["virsh"], 0, qga({"exited": True, "exitcode": 0, "out-data": base64.b64encode(toolchain_json).decode("ascii")})),
+            ],
+        ), mock.patch.object(qga_preflight.time, "time", return_value=0.0):
+            payload = qga_preflight.run_qga_preflight(
+                domain="vm",
+                connect="qemu:///session",
+                check_guest_dotnet=True,
+            )
+
+        self.assertEqual(payload["status"], "error")
+        self.assertIn("guest_dotnet_toolchain", payload["failed_checks"])
+        self.assertEqual(payload["checks"]["guest_dotnet_toolchain"]["status"], "error")
+        self.assertIn("Microsoft.WindowsDesktop.App", payload["checks"]["guest_dotnet_toolchain"]["error"])
+
     def test_missing_snapshot_fails_health_contract_when_requested(self) -> None:
         with mock.patch.object(
             qga_preflight.subprocess,
@@ -197,6 +267,35 @@ class VmKvmQgaPreflightTests(unittest.TestCase):
         self.assertEqual(payload["status"], "ok")
         self.assertEqual(payload["summary_source"], "qga-preflight")
         self.assertEqual(preflight_mock.call_args.kwargs["snapshot_name"], "clean")
+        self.assertFalse(preflight_mock.call_args.kwargs["check_guest_dotnet"])
+
+    def test_vm_health_check_cli_forwards_guest_dotnet_options(self) -> None:
+        with mock.patch.object(
+            sys,
+            "argv",
+            [
+                "vm-health-check.py",
+                "--domain",
+                "vm",
+                "--connect",
+                "qemu:///session",
+                "--snapshot-name",
+                "clean",
+                "--check-guest-dotnet",
+                "--guest-dotnet-path",
+                r"C:\DotNet\dotnet.exe",
+                "--json",
+            ],
+        ), mock.patch.object(
+            vm_health_check,
+            "run_qga_preflight",
+            return_value={"status": "ok", "summary_source": "qga-preflight", "checks": {}},
+        ) as preflight_mock, mock.patch("sys.stdout", new_callable=io.StringIO):
+            exit_code = vm_health_check.main()
+
+        self.assertEqual(exit_code, 0)
+        self.assertTrue(preflight_mock.call_args.kwargs["check_guest_dotnet"])
+        self.assertEqual(preflight_mock.call_args.kwargs["guest_dotnet_path"], r"C:\DotNet\dotnet.exe")
 
 
 if __name__ == "__main__":

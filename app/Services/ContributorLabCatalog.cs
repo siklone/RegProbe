@@ -70,6 +70,9 @@ public sealed record ContributorLabSnapshot(
     bool VmSnapshotKnown,
     bool VmSnapshotOk,
     string VmSnapshotName,
+    bool VmDotNetKnown,
+    bool VmDotNetOk,
+    string VmDotNetDetail,
     int CustomValueRecordCount,
     int CustomValueReadyForAppCard,
     int CustomValueBlockedByGate,
@@ -151,6 +154,10 @@ public static class ContributorLabCatalog
         var vmSnapshotKnown = vmSnapshot.ValueKind == JsonValueKind.Object;
         var vmSnapshotOk = Text(vmSnapshot, "status") == "ok" && Bool(vmSnapshot, "exists");
         var vmSnapshotName = Text(vmSnapshot, "snapshot_name");
+        var vmDotNet = Object(Object(vmHealth, "checks"), "guest_dotnet_toolchain");
+        var vmDotNetKnown = vmDotNet.ValueKind == JsonValueKind.Object;
+        var vmDotNetOk = Text(vmDotNet, "status") == "ok";
+        var vmDotNetDetail = BuildVmDotNetDetail(vmDotNet);
 
         var runTier = aggregateOk && surfaceOk && appReadinessOk && appCardsOk && vmHealthKnown && vmHealthOk && vmSnapshotKnown && vmSnapshotOk
             ? "certified"
@@ -190,6 +197,9 @@ public static class ContributorLabCatalog
             vmSnapshotKnown,
             vmSnapshotKnown && vmSnapshotOk,
             string.IsNullOrWhiteSpace(vmSnapshotName) ? "clean-25h2-qga" : vmSnapshotName,
+            vmDotNetKnown,
+            vmDotNetKnown && vmDotNetOk,
+            vmDotNetDetail,
             Int(reviewSummary, "record_count"),
             Int(reviewSummary, "ready_for_bounded_app_card"),
             Int(reviewSummary, "blocked_by_gate"),
@@ -297,6 +307,13 @@ public static class ContributorLabCatalog
                 RequiresCertifiedVm: true,
                 MutatesGuest: false),
             new(
+                "VM .NET test toolchain",
+                "Non-mutating QGA check for the guest dotnet command and Microsoft.WindowsDesktop.App runtime used by VM-side C# tests.",
+                "python3 scripts/vm-kvm/vm-health-check.py --domain regprobe-win11-25h2-session --connect qemu:///session --snapshot-name clean-25h2-qga --check-guest-dotnet --json",
+                certifiedReady ? "certified-check" : "certified-required",
+                RequiresCertifiedVm: true,
+                MutatesGuest: false),
+            new(
                 "Single value VM experiment",
                 "Apply one value in the disposable VM, reboot-smoke it, rollback, and abort before mutation if host noise is not clean.",
                 "python3 scripts/vm-kvm/run-guest-registry-value-experiment.py --domain regprobe-win11-25h2-session --connect qemu:///session --registry-path \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power\" --value-name MfBufferingThreshold --value-data 0 --smoke-profile gui --stage-wait-timeout 420 --reboot-wait-timeout 420 --post-reboot-delay-seconds 90 --require-domain-snapshot --auto-revert-snapshot-on-boot-failure --revert-snapshot-name clean-25h2-qga --abort-on-noisy-host",
@@ -367,6 +384,13 @@ public static class ContributorLabCatalog
                     ? $"{snapshot.VmSnapshotName} snapshot check is present in latest health artifact."
                     : "Run vm-health-check with --snapshot-name clean-25h2-qga before certified mutation.",
                 snapshot.VmSnapshotKnown ? snapshot.VmSnapshotOk ? "ok" : "warning" : "neutral"),
+            new(
+                "VM .NET test toolchain",
+                snapshot.VmDotNetKnown ? snapshot.VmDotNetOk ? "Ready" : "Needs attention" : "Unknown",
+                snapshot.VmDotNetKnown
+                    ? snapshot.VmDotNetDetail
+                    : "Run vm-health-check with --check-guest-dotnet before relying on VM-side C# test execution.",
+                snapshot.VmDotNetKnown ? snapshot.VmDotNetOk ? "ok" : "warning" : "neutral"),
             new("Run tier", snapshot.VerificationBadge, $"Current aggregate tier: {snapshot.RunTier}.", snapshot.ReferenceEligible ? "ok" : "warning"),
         ];
     }
@@ -404,6 +428,37 @@ public static class ContributorLabCatalog
         {
             return (false, false, $"Could not query firmware virtualization: {ex.Message}");
         }
+    }
+
+    private static string BuildVmDotNetDetail(JsonElement toolchain)
+    {
+        if (toolchain.ValueKind != JsonValueKind.Object)
+        {
+            return string.Empty;
+        }
+
+        var dotnetPath = Text(toolchain, "dotnet_path");
+        var configuredPath = Text(toolchain, "configured_dotnet_path");
+        var versions = Strings(toolchain, "desktop_runtime_versions");
+        if (Text(toolchain, "status") == "ok")
+        {
+            var versionText = versions.Count == 0 ? "unknown WindowsDesktop runtime version" : string.Join(", ", versions);
+            return $"Guest dotnet is available at {FirstNonEmpty(dotnetPath, configuredPath, "PATH")} with Microsoft.WindowsDesktop.App {versionText}.";
+        }
+
+        var error = Text(toolchain, "error");
+        if (!string.IsNullOrWhiteSpace(error))
+        {
+            return error;
+        }
+
+        var dotnetState = Bool(toolchain, "configured_dotnet_path_exists") || Bool(toolchain, "dotnet_on_path")
+            ? $"dotnet found at {FirstNonEmpty(dotnetPath, configuredPath, "PATH")}"
+            : $"dotnet missing at {FirstNonEmpty(configuredPath, "configured path")} and PATH";
+        var desktopState = Bool(toolchain, "desktop_runtime_present")
+            ? "Microsoft.WindowsDesktop.App runtime present"
+            : "Microsoft.WindowsDesktop.App runtime missing";
+        return $"{dotnetState}; {desktopState}.";
     }
 
     private sealed record AggregateObservation(
@@ -926,4 +981,7 @@ public static class ContributorLabCatalog
 
         return value.EnumerateArray().Select(item => item.ToString()).Where(item => !string.IsNullOrWhiteSpace(item)).ToList();
     }
+
+    private static string FirstNonEmpty(params string[] values)
+        => values.FirstOrDefault(value => !string.IsNullOrWhiteSpace(value)) ?? string.Empty;
 }
