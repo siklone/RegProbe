@@ -207,12 +207,23 @@ if ($configuredPathExists) {{
     $resolvedDotnetPath = $pathCommand.Source
 }}
 
+$coreRoots = New-Object System.Collections.Generic.List[string]
 $desktopRoots = New-Object System.Collections.Generic.List[string]
 if (-not [string]::IsNullOrWhiteSpace($resolvedDotnetPath)) {{
     $dotnetRoot = Split-Path -Parent $resolvedDotnetPath
+    $coreRoots.Add((Join-Path $dotnetRoot 'shared\Microsoft.NETCore.App'))
     $desktopRoots.Add((Join-Path $dotnetRoot 'shared\Microsoft.WindowsDesktop.App'))
 }}
+$coreRoots.Add('C:\Program Files\dotnet\shared\Microsoft.NETCore.App')
 $desktopRoots.Add('C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App')
+
+$coreVersions = @()
+foreach ($root in $coreRoots | Select-Object -Unique) {{
+    if (Test-Path -LiteralPath $root) {{
+        $coreVersions += Get-ChildItem -LiteralPath $root -Directory -ErrorAction SilentlyContinue |
+            Select-Object -ExpandProperty Name
+    }}
+}}
 
 $desktopVersions = @()
 foreach ($root in $desktopRoots | Select-Object -Unique) {{
@@ -227,6 +238,8 @@ foreach ($root in $desktopRoots | Select-Object -Unique) {{
     configured_dotnet_path_exists = [bool]$configuredPathExists
     dotnet_on_path = [bool]$pathCommand
     dotnet_path = $resolvedDotnetPath
+    core_runtime_present = [bool]($coreVersions.Count -gt 0)
+    core_runtime_versions = @($coreVersions | Sort-Object -Unique)
     desktop_runtime_present = [bool]($desktopVersions.Count -gt 0)
     desktop_runtime_versions = @($desktopVersions | Sort-Object -Unique)
 }} | ConvertTo-Json -Compress
@@ -296,11 +309,14 @@ foreach ($root in $desktopRoots | Select-Object -Unique) {{
                 payload["error"] = "guest dotnet check JSON payload is not an object"
                 return payload
             dotnet_ready = bool(toolchain.get("configured_dotnet_path_exists") or toolchain.get("dotnet_on_path"))
+            core_ready = bool(toolchain.get("core_runtime_present"))
             desktop_ready = bool(toolchain.get("desktop_runtime_present"))
             payload.update(toolchain)
-            payload["status"] = "ok" if dotnet_ready and desktop_ready else "error"
+            payload["status"] = "ok" if dotnet_ready and core_ready and desktop_ready else "error"
             if not dotnet_ready:
                 payload["error"] = "Guest .NET SDK/runtime command is not available at the configured path or PATH."
+            elif not core_ready:
+                payload["error"] = "Guest Microsoft.NETCore.App runtime is missing."
             elif not desktop_ready:
                 payload["error"] = "Guest Microsoft.WindowsDesktop.App runtime is missing."
             return payload

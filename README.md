@@ -527,6 +527,12 @@ On hosts using the repo-local SDK:
 If a Linux host can build `net8.0-windows` but cannot execute the WPF testhost because `Microsoft.WindowsDesktop.App` is unavailable, run the tests in the KVM Windows guest instead:
 
 ```bash
+# First confirm the guest SDK/Desktop runtime receipt.
+python3 scripts/vm-kvm/vm-health-check.py --domain regprobe-win11-25h2-session --connect qemu:///session --snapshot-name clean-25h2-qga --check-guest-dotnet --json
+
+# If that reports a missing guest dotnet/Desktop runtime, bootstrap the disposable VM toolchain.
+python3 scripts/vm-kvm/run-guest-dotnet-toolchain-bootstrap.py --domain regprobe-win11-25h2-session --connect qemu:///session --wait-timeout 1800
+
 # Build the test output on the host first if needed
 ./dotnetw build tests/tests.csproj -c Release -p:EnableWindowsTargeting=true
 

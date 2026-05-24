@@ -121,6 +121,14 @@ public static class ContributorLabCatalog
         "scripts/vm-kvm/vm-health-check.py",
     ];
 
+    private static readonly string[] RequiredScriptPaths =
+    [
+        .. AllowlistedScriptPaths,
+        "scripts/vm-kvm/run-guest-dotnet-toolchain-bootstrap.py",
+        "scripts/vm-kvm/run-guest-registry-value-campaign.py",
+        "scripts/vm-kvm/run-guest-registry-value-experiment.py",
+    ];
+
     public static ContributorLabSnapshot Load(string? repoRootOverride = null)
     {
         var repoRoot = ResolveRepoRoot(repoRootOverride);
@@ -173,7 +181,7 @@ public static class ContributorLabCatalog
 
         var observations = BuildObservations(review, matrix, aggregate);
         var commandPacks = BuildCommandPacks(repoRoot, runTier == "certified");
-        var requiredScriptsOk = repoRootFound && AllowlistedScriptPaths.All(path =>
+        var requiredScriptsOk = repoRootFound && RequiredScriptPaths.All(path =>
             File.Exists(Path.Combine(repoRoot, path.Replace('/', Path.DirectorySeparatorChar))));
         var virtualization = DetectVirtualizationFirmware();
 
@@ -314,6 +322,13 @@ public static class ContributorLabCatalog
                 RequiresCertifiedVm: true,
                 MutatesGuest: false),
             new(
+                "VM .NET toolchain bootstrap",
+                "Install the guest portable .NET SDK plus Microsoft.WindowsDesktop.App runtime so VM-side C# tests can run. Use only on a disposable certified VM snapshot.",
+                "python3 scripts/vm-kvm/run-guest-dotnet-toolchain-bootstrap.py --domain regprobe-win11-25h2-session --connect qemu:///session --install-dir C:\\\\Tools\\\\DotNetSDK\\\\8.0.416 --sdk-version 8.0.416 --desktop-runtime-channel 8.0 --wait-timeout 1800",
+                certifiedReady ? "certified-mutation" : "certified-required",
+                RequiresCertifiedVm: true,
+                MutatesGuest: true),
+            new(
                 "Single value VM experiment",
                 "Apply one value in the disposable VM, reboot-smoke it, rollback, and abort before mutation if host noise is not clean.",
                 "python3 scripts/vm-kvm/run-guest-registry-value-experiment.py --domain regprobe-win11-25h2-session --connect qemu:///session --registry-path \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power\" --value-name MfBufferingThreshold --value-data 0 --smoke-profile gui --stage-wait-timeout 420 --reboot-wait-timeout 420 --post-reboot-delay-seconds 90 --require-domain-snapshot --auto-revert-snapshot-on-boot-failure --revert-snapshot-name clean-25h2-qga --abort-on-noisy-host",
@@ -346,7 +361,7 @@ public static class ContributorLabCatalog
             Ready("Python available", snapshot.PythonAvailable, "Python scripts are the canonical contributor API."),
             Ready("Git available", snapshot.GitAvailable, "Required for PR workflow and artifact review."),
             Ready("Repo root", snapshot.RepoRootFound, snapshot.RepoRootFound ? snapshot.RepoRoot : "Set REGPROBE_REPO_ROOT or launch from the repo checkout."),
-            Ready("Required scripts", snapshot.RequiredScriptsOk, "Single-tweak lookup, app QA, VM health, and value experiment scripts must exist in this checkout."),
+            Ready("Required scripts", snapshot.RequiredScriptsOk, "Single-tweak lookup, app QA, VM health, VM .NET bootstrap, and value experiment scripts must exist in this checkout."),
             new(
                 "BIOS virtualization",
                 snapshot.VirtualizationFirmwareKnown ? snapshot.VirtualizationFirmwareEnabled ? "Ready" : "Needs attention" : "Unknown",
@@ -439,11 +454,13 @@ public static class ContributorLabCatalog
 
         var dotnetPath = Text(toolchain, "dotnet_path");
         var configuredPath = Text(toolchain, "configured_dotnet_path");
-        var versions = Strings(toolchain, "desktop_runtime_versions");
+        var coreVersions = Strings(toolchain, "core_runtime_versions");
+        var desktopVersions = Strings(toolchain, "desktop_runtime_versions");
         if (Text(toolchain, "status") == "ok")
         {
-            var versionText = versions.Count == 0 ? "unknown WindowsDesktop runtime version" : string.Join(", ", versions);
-            return $"Guest dotnet is available at {FirstNonEmpty(dotnetPath, configuredPath, "PATH")} with Microsoft.WindowsDesktop.App {versionText}.";
+            var coreText = coreVersions.Count == 0 ? "unknown NETCore runtime" : string.Join(", ", coreVersions);
+            var desktopText = desktopVersions.Count == 0 ? "unknown WindowsDesktop runtime" : string.Join(", ", desktopVersions);
+            return $"Guest dotnet is available at {FirstNonEmpty(dotnetPath, configuredPath, "PATH")} with Microsoft.NETCore.App {coreText} and Microsoft.WindowsDesktop.App {desktopText}.";
         }
 
         var error = Text(toolchain, "error");
@@ -455,10 +472,13 @@ public static class ContributorLabCatalog
         var dotnetState = Bool(toolchain, "configured_dotnet_path_exists") || Bool(toolchain, "dotnet_on_path")
             ? $"dotnet found at {FirstNonEmpty(dotnetPath, configuredPath, "PATH")}"
             : $"dotnet missing at {FirstNonEmpty(configuredPath, "configured path")} and PATH";
+        var coreState = Bool(toolchain, "core_runtime_present")
+            ? "Microsoft.NETCore.App runtime present"
+            : "Microsoft.NETCore.App runtime missing";
         var desktopState = Bool(toolchain, "desktop_runtime_present")
             ? "Microsoft.WindowsDesktop.App runtime present"
             : "Microsoft.WindowsDesktop.App runtime missing";
-        return $"{dotnetState}; {desktopState}.";
+        return $"{dotnetState}; {coreState}; {desktopState}.";
     }
 
     private sealed record AggregateObservation(

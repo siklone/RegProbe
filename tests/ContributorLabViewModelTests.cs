@@ -66,6 +66,8 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.True(ContributorLabCatalog.IsAllowlistedCommand(
             "python3 scripts/vm-kvm/vm-health-check.py --domain regprobe-win11-25h2-session --snapshot-name clean-25h2-qga --check-guest-dotnet --json"));
         Assert.False(ContributorLabCatalog.IsAllowlistedCommand(
+            "python3 scripts/vm-kvm/run-guest-dotnet-toolchain-bootstrap.py --domain regprobe-win11-25h2-session"));
+        Assert.False(ContributorLabCatalog.IsAllowlistedCommand(
             "python3 scripts/vm-kvm/run-guest-registry-value-experiment.py --registry-path \"HKLM\\REPLACE\\KEY\\PATH\" --value-name REPLACE_VALUE_NAME --value-data REPLACE_DWORD_VALUE"));
         Assert.False(ContributorLabCatalog.IsAllowlistedCommand(
             "python3 scripts/vm-kvm/run-guest-registry-value-campaign.py --run --limit-experiments 10"));
@@ -116,6 +118,11 @@ public sealed class ContributorLabViewModelTests : IDisposable
                                       && pack.RequiresCertifiedVm
                                       && pack.Command.Contains("--check-guest-dotnet", StringComparison.Ordinal)
                                       && pack.Command.Contains("vm-health-check.py", StringComparison.Ordinal));
+        Assert.Contains(packs, pack => pack.Title == "VM .NET toolchain bootstrap"
+                                      && pack.MutatesGuest
+                                      && pack.RequiresCertifiedVm
+                                      && pack.Command.Contains("run-guest-dotnet-toolchain-bootstrap.py", StringComparison.Ordinal)
+                                      && pack.Command.Contains("--desktop-runtime-channel 8.0", StringComparison.Ordinal));
         Assert.Contains(packs, pack => pack.Title == "Single value VM experiment"
                                       && pack.Command.Contains("--value-name MfBufferingThreshold", StringComparison.Ordinal)
                                       && !pack.Command.Contains("--value-name SystemResponsiveness", StringComparison.Ordinal));
@@ -654,8 +661,10 @@ public sealed class ContributorLabViewModelTests : IDisposable
                 "configured_dotnet_path_exists": true,
                 "dotnet_on_path": false,
                 "dotnet_path": "C:\\Tools\\DotNetSDK\\8.0.416\\dotnet.exe",
+                "core_runtime_present": true,
+                "core_runtime_versions": ["8.0.27"],
                 "desktop_runtime_present": true,
-                "desktop_runtime_versions": ["8.0.0"]
+                "desktop_runtime_versions": ["8.0.27"]
               }
             }
           }
@@ -671,7 +680,8 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Equal("clean-25h2-qga", snapshot.VmSnapshotName);
         Assert.True(snapshot.VmDotNetKnown);
         Assert.True(snapshot.VmDotNetOk);
-        Assert.Contains("Microsoft.WindowsDesktop.App 8.0.0", snapshot.VmDotNetDetail, StringComparison.Ordinal);
+        Assert.Contains("Microsoft.NETCore.App 8.0.27", snapshot.VmDotNetDetail, StringComparison.Ordinal);
+        Assert.Contains("Microsoft.WindowsDesktop.App 8.0.27", snapshot.VmDotNetDetail, StringComparison.Ordinal);
         Assert.Contains(snapshot.ReadinessItems, item => item.Label == "VM snapshot receipt" && item.Status == "Ready");
         Assert.Contains(snapshot.ReadinessItems, item => item.Label == "VM .NET test toolchain" && item.Status == "Ready");
         Assert.Equal(0, snapshot.CustomValueReadyForAppCard);
@@ -903,7 +913,7 @@ public sealed class ContributorLabViewModelTests : IDisposable
             VmSnapshotName: "clean-25h2-qga",
             VmDotNetKnown: true,
             VmDotNetOk: true,
-            VmDotNetDetail: "Guest dotnet is available at C:\\Tools\\DotNetSDK\\8.0.416\\dotnet.exe with Microsoft.WindowsDesktop.App 8.0.0.",
+            VmDotNetDetail: "Guest dotnet is available at C:\\Tools\\DotNetSDK\\8.0.416\\dotnet.exe with Microsoft.NETCore.App 8.0.27 and Microsoft.WindowsDesktop.App 8.0.27.",
             CustomValueRecordCount: 96,
             CustomValueReadyForAppCard: 0,
             CustomValueBlockedByGate: 17,
