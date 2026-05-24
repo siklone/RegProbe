@@ -14,6 +14,8 @@ AUDIT_DIR = REPO_ROOT / "registry-research-framework" / "audit"
 REPORT_PATH = AUDIT_DIR / "public-repo-hygiene-check.json"
 MARKDOWN_PATH = AUDIT_DIR / "public-repo-hygiene-check.md"
 ABSOLUTE_LOCAL_LINK_PATTERN = re.compile(r"\]\(([A-Za-z]:[\\/][^)]+)\)")
+GITHUB_ACTION_SHA_PATTERN = re.compile(r"^[0-9a-fA-F]{40}$")
+REMOTE_GITHUB_ACTION_REF_PATTERN = re.compile(r"^\s*(?:-\s*)?uses:\s*([^#\s]+)")
 COMPARATIVE_PROSE_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
     ("useful", re.compile(r"\buseful\b", re.IGNORECASE)),
     ("strongest", re.compile(r"\bstrongest\b", re.IGNORECASE)),
@@ -98,6 +100,42 @@ def parse_push_branches(workflow_text: str) -> list[str]:
     return [item.strip().strip("'\"") for item in match.group(1).split(",") if item.strip()]
 
 
+def find_unpinned_workflow_actions(workflow_paths: list[Path], repo_root: Path) -> list[dict[str, Any]]:
+    violations: list[dict[str, Any]] = []
+    for path in workflow_paths:
+        for line_number, raw_line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
+            match = REMOTE_GITHUB_ACTION_REF_PATTERN.search(raw_line)
+            if not match:
+                continue
+
+            action_ref = match.group(1).strip().strip("'\"")
+            if action_ref.startswith("./") or action_ref.startswith("docker://"):
+                continue
+
+            if "@" not in action_ref:
+                violations.append(
+                    {
+                        "file": path.relative_to(repo_root).as_posix(),
+                        "line": line_number,
+                        "action": action_ref,
+                        "reason": "missing_ref",
+                    }
+                )
+                continue
+
+            _, ref = action_ref.rsplit("@", 1)
+            if not GITHUB_ACTION_SHA_PATTERN.fullmatch(ref):
+                violations.append(
+                    {
+                        "file": path.relative_to(repo_root).as_posix(),
+                        "line": line_number,
+                        "action": action_ref,
+                        "reason": "ref_is_not_full_commit_sha",
+                    }
+                )
+    return violations
+
+
 def build_public_repo_hygiene_report(repo_root: Path) -> dict[str, Any]:
     markdown_files = iter_public_markdown_files(repo_root)
     absolute_path_violations = find_absolute_local_path_violations(markdown_files, repo_root)
@@ -121,7 +159,11 @@ def build_public_repo_hygiene_report(repo_root: Path) -> dict[str, Any]:
         issue_template_dir / "research-finding.yml",
     ]
 
+    workflow_paths = sorted((repo_root / ".github" / "workflows").glob("*.yml")) + sorted(
+        (repo_root / ".github" / "workflows").glob("*.yaml")
+    )
     workflow_push_branches = parse_push_branches(workflow_path.read_text(encoding="utf-8")) if workflow_path.exists() else []
+    unpinned_workflow_actions = find_unpinned_workflow_actions(workflow_paths, repo_root)
 
     readme_text = readme_path.read_text(encoding="utf-8")
     contributing_text = contributing_path.read_text(encoding="utf-8") if contributing_path.exists() else ""
@@ -137,6 +179,7 @@ def build_public_repo_hygiene_report(repo_root: Path) -> dict[str, Any]:
         "security_policy_present": security_path.exists(),
         "readme_has_product_entry": "## What RegProbe Does" in readme_text and "## Start Here" in readme_text,
         "workflow_push_main_only": workflow_push_branches == ["main"],
+        "github_actions_pinned_to_shas": not unpinned_workflow_actions,
         "placeholder_unittest_removed": not placeholder_test_path.exists(),
         "absolute_local_paths_removed": not absolute_path_violations,
         "comparative_public_prose_removed": not comparative_prose_violations,
@@ -174,6 +217,10 @@ def build_public_repo_hygiene_report(repo_root: Path) -> dict[str, Any]:
         errors.append("README.md is missing the product-first entry sections ('## What RegProbe Does' and '## Start Here').")
     if not checks["workflow_push_main_only"]:
         errors.append(f"Workflow push branches drifted from main-only policy: {workflow_push_branches or 'missing'}")
+    if unpinned_workflow_actions:
+        errors.append(
+            f"Found {len(unpinned_workflow_actions)} GitHub Action reference(s) not pinned to full commit SHAs."
+        )
     if not checks["placeholder_unittest_removed"]:
         errors.append("tests/UnitTest1.cs is still present.")
     if absolute_path_violations:
@@ -240,6 +287,7 @@ def build_public_repo_hygiene_report(repo_root: Path) -> dict[str, Any]:
         "check_status": "PASS" if not errors else "FAIL",
         "checks": checks,
         "workflow_push_branches": workflow_push_branches,
+        "unpinned_workflow_actions": unpinned_workflow_actions,
         "required_issue_templates": [path.relative_to(repo_root).as_posix() for path in required_issue_templates],
         "public_markdown_files": [path.relative_to(repo_root).as_posix() for path in markdown_files],
         "comparative_prose_scan_files": [path.relative_to(repo_root).as_posix() for path in comparative_prose_scan_files],
