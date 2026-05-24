@@ -1,10 +1,11 @@
 {
-  "generated_utc": "2026-05-08T19:00:30Z",
+  "generated_utc": "2026-05-24T07:18:10Z",
   "check_status": "PASS",
   "checks": {
     "security_policy_present": true,
     "readme_has_product_entry": true,
     "workflow_push_main_only": true,
+    "github_actions_pinned_to_shas": true,
     "placeholder_unittest_removed": true,
     "absolute_local_paths_removed": true,
     "comparative_public_prose_removed": true,
@@ -37,6 +38,7 @@
   "workflow_push_branches": [
     "main"
   ],
+  "unpinned_workflow_actions": [],
   "required_issue_templates": [
     ".github/ISSUE_TEMPLATE/bug-report.yml",
     ".github/ISSUE_TEMPLATE/feature-request.yml",
@@ -75,6 +77,7 @@
     "Docs/power/power.md",
     "Docs/privacy/privacy-verified.md",
     "Docs/privacy/privacy.md",
+    "Docs/product/10-minute-user-test.md",
     "Docs/product/README.md",
     "Docs/product/cli.md",
     "Docs/product/media.md",
@@ -83,14 +86,19 @@
     "Docs/research/APP_SURFACING_POLICY.md",
     "Docs/research/EVIDENCE_STATUS.md",
     "Docs/research/README.md",
+    "Docs/research/artifact-map.md",
     "Docs/research/how-to-read-a-record.md",
     "Docs/research/proof-model.md",
+    "Docs/research/repo-boundary.md",
+    "Docs/research/run-tiers.md",
     "Docs/research/runtime-escalation.md",
     "Docs/research/script-catalog.md",
     "Docs/research/templates/setting-record.md",
+    "Docs/research/tooling-map.md",
     "Docs/research/vm-workflow.md",
     "Docs/security/security-verified.md",
     "Docs/security/security.md",
+    "Docs/security/supply-chain-audit-2026-05-22.md",
     "Docs/security/use-case-guide.md",
     "Docs/system/dashboard_hardware_live_checklist.md",
     "Docs/system/system.md",

@@ -27,16 +27,16 @@ incident and the ongoing npm ecosystem malware risk.
 - Changed CI restore commands to `dotnet restore RegProbe.sln -r win-x64
   --locked-mode`.
 - Changed CI publish steps to use `--no-restore` after the locked restore.
+- Pinned GitHub Actions workflow dependencies to full commit SHAs while keeping
+  the original major tag in a line comment for review context.
+- Added a public repo hygiene guard that fails if future workflow action
+  references drift back to mutable tags.
 
 ## Residual Notes
 
 - Test projects still use `xunit` 2.9.3, which NuGet marks as `Legacy` with
   `xunit.v3` as the long-term alternative. This is not a shipped runtime app
   dependency, but it is a cleanup candidate.
-- GitHub Actions are still referenced by major tags such as `actions/checkout@v6`.
-  The workflow already uses least-privilege default permissions and
-  `persist-credentials: false`; pinning actions to immutable commit SHAs is a
-  reasonable next hardening step if we want a stricter supply-chain policy.
 - Contributor VM bootstrap scripts intentionally download external research
   tooling such as Sysinternals, .NET installer scripts, DiskSpd, Java, Ghidra,
   and Windows SDK components. Those scripts are contributor/research lanes, not

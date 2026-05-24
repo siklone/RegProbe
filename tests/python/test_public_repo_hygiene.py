@@ -139,6 +139,33 @@ class PublicRepoHygieneTests(unittest.TestCase):
             self.assertTrue(any("media refresh or rename-drift rules" in error for error in report["errors"]))
             self.assertEqual(len(report["absolute_local_path_violations"]), 1)
 
+    def test_finds_unpinned_github_action_references(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            repo_root = Path(temp_root)
+            workflow_dir = repo_root / ".github" / "workflows"
+            workflow_dir.mkdir(parents=True)
+            workflow_path = workflow_dir / "dotnet.yml"
+            workflow_path.write_text(
+                "\n".join(
+                    [
+                        "name: test",
+                        "jobs:",
+                        "  check:",
+                        "    steps:",
+                        "      - uses: actions/checkout@v6",
+                        "      - uses: actions/setup-dotnet@c2fa09f4bde5ebb9d1777cf28262a3eb3db3ced7 # v5",
+                        "      - uses: ./local-action",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            violations = public_repo_hygiene.find_unpinned_workflow_actions([workflow_path], repo_root)
+
+            self.assertEqual(len(violations), 1)
+            self.assertEqual(violations[0]["action"], "actions/checkout@v6")
+            self.assertEqual(violations[0]["reason"], "ref_is_not_full_commit_sha")
+
     def test_report_flags_comparative_public_prose_drift(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             repo_root = Path(temp_root)

@@ -35,6 +35,10 @@ NuGet restores are constrained to the committed package lockfiles and the
 repository `NuGet.Config`. CI uses locked restore mode so package resolution
 changes are reviewed as code changes instead of silently drifting during builds.
 
+GitHub Actions workflow dependencies are pinned to immutable commit SHAs. The
+source major tag stays in a YAML comment so reviewers can see which upstream
+release line the SHA came from.
+
 Recent supply-chain spot checks are tracked under `Docs/security/`.
 
 ## Elevated Host Boundary
