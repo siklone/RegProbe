@@ -91,21 +91,19 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <ComboBox Grid.Column="0"
-                              ItemsSource="{Binding StatusFilterOptions}"
-                              SelectedValue="{Binding StatusFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              SelectedValuePath="Value"
-                              DisplayMemberPath="Label"
-                              ToolTip="Filter shipped cards by status"
-                              Style="{StaticResource CompactFilterComboStyle}"/>
+                    <Button Grid.Column="0"
+                            Content="{Binding StatusFilterDisplayText}"
+                            Command="{Binding CycleStatusFilterCommand}"
+                            Tag="{Binding HasStatusFilter}"
+                            ToolTip="Click to cycle status filters: promoted, hold, applied, rolled back, all."
+                            Style="{StaticResource CompactFilterButtonStyle}"/>
 
-                    <ComboBox Grid.Column="2"
-                              ItemsSource="{Binding ScopeFilterOptions}"
-                              SelectedValue="{Binding ScopeFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              SelectedValuePath="Value"
-                              DisplayMemberPath="Label"
-                              ToolTip="Filter shipped cards by registry scope"
-                              Style="{StaticResource CompactFilterComboStyle}"/>
+                    <Button Grid.Column="2"
+                            Content="{Binding ScopeFilterDisplayText}"
+                            Command="{Binding CycleScopeFilterCommand}"
+                            Tag="{Binding HasScopeFilter}"
+                            ToolTip="Click to cycle scope filters: machine, user, mixed, all."
+                            Style="{StaticResource CompactFilterButtonStyle}"/>
                 </Grid>
             </StackPanel>
 

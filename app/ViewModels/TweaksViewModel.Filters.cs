@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Windows.Input;
+
 namespace RegProbe.App.ViewModels;
 
 public sealed partial class TweaksViewModel
@@ -19,6 +21,8 @@ public sealed partial class TweaksViewModel
 
     public bool HasStatusFilter => _shellState.HasStatusFilter;
 
+    public ICommand CycleStatusFilterCommand => _shellState.CycleStatusFilterCommand;
+
     public string ScopeFilter
     {
         get => _shellState.ScopeFilter;
@@ -26,4 +30,8 @@ public sealed partial class TweaksViewModel
     }
 
     public string ScopeFilterDisplayText => _shellState.ScopeFilterDisplayText;
+
+    public bool HasScopeFilter => _shellState.HasScopeFilter;
+
+    public ICommand CycleScopeFilterCommand => _shellState.CycleScopeFilterCommand;
 }
