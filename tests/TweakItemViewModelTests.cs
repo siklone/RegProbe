@@ -41,6 +41,69 @@ public sealed class TweakItemViewModelTests
     }
 
     [Fact]
+    public void ApplyReviewRows_SurfaceCurrentDefaultTargetAndRollback()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new ChoiceTestTweak();
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false)
+        {
+            CurrentValue = "Privacy",
+            TargetValue = "Default"
+        };
+
+        viewModel.ApplyResearchPromotionGate(new TweakPromotionGateEntry
+        {
+            CandidateId = tweak.Id,
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            TweakOrigin = "research-derived",
+            PromotionState = "promoted",
+            RecordPromotionAllowed = true,
+            TweakIngestAllowed = true,
+            ApplyAllowed = true,
+            AppMappingStatus = "matches-research",
+            NextMissingLayer = "none",
+            RollbackStatus = new TweakRollbackGateStatus
+            {
+                RollbackDeclared = true,
+                RollbackExecuted = true,
+                RollbackVerified = true,
+                RollbackVerificationMethod = "record-restore-story"
+            }
+        });
+
+        var rows = viewModel.ApplyReviewRows;
+
+        Assert.Equal(4, rows.Count);
+        Assert.Equal("CURRENT", rows[0].Label);
+        Assert.Equal("Privacy", rows[0].Value);
+        Assert.Equal("KNOWN DEFAULT", rows[1].Label);
+        Assert.Equal("Default", rows[1].Value);
+        Assert.Equal("TARGET", rows[2].Label);
+        Assert.Equal("Default", rows[2].Value);
+        Assert.Equal("ROLLBACK", rows[3].Label);
+        Assert.Contains("Verified", rows[3].Value);
+        Assert.Contains("Verified restore", rows[3].Detail);
+    }
+
+    [Fact]
+    public void ApplyReviewRows_CallOutCapturedPreviousStateWhenNoDefaultIsPublished()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new TestTweak("system.no-default-review");
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false)
+        {
+            CurrentValue = "0",
+            TargetValue = "1"
+        };
+
+        var defaultRow = Assert.Single(viewModel.ApplyReviewRows, row => row.Label == "KNOWN DEFAULT");
+
+        Assert.Equal("Not published on this card", defaultRow.Value);
+        Assert.Contains("captured previous state", defaultRow.Detail, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
     public async Task RunDetectAsync_SwitchesToRunDetails_AndWritesTerminalOutput()
     {
         var pipeline = new TweakExecutionPipeline(new RecordingLogger());

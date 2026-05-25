@@ -284,6 +284,7 @@ public sealed partial class TweakItemViewModel : ViewModelBase
                 OnPropertyChanged(nameof(PrimaryActionDisplayText));
                 OnPropertyChanged(nameof(RepairsActionButtonText));
                 OnPropertyChanged(nameof(ValueSummaryRows));
+                OnPropertyChanged(nameof(ApplyReviewRows));
             }
         }
     }
@@ -347,6 +348,7 @@ public sealed partial class TweakItemViewModel : ViewModelBase
 
             OnPropertyChanged(nameof(SelectedChoiceDescription));
             OnPropertyChanged(nameof(ValueSummaryRows));
+            OnPropertyChanged(nameof(ApplyReviewRows));
 
             if (_isSyncingChoiceOption || value is null || _tweak is not IChoiceTweak choiceTweak)
             {
@@ -447,6 +449,7 @@ public sealed partial class TweakItemViewModel : ViewModelBase
                 OnPropertyChanged(nameof(StatusText));
                 OnPropertyChanged(nameof(StatusTooltip));
                 OnPropertyChanged(nameof(ValueSummaryRows));
+                OnPropertyChanged(nameof(ApplyReviewRows));
             }
         }
     }
@@ -462,6 +465,7 @@ public sealed partial class TweakItemViewModel : ViewModelBase
                 OnPropertyChanged(nameof(ConfigurationCompactInfoLine));
                 OnPropertyChanged(nameof(CompactInfoTooltip));
                 OnPropertyChanged(nameof(ValueSummaryRows));
+                OnPropertyChanged(nameof(ApplyReviewRows));
             }
         }
     }
@@ -477,6 +481,7 @@ public sealed partial class TweakItemViewModel : ViewModelBase
                 OnPropertyChanged(nameof(InventoryFreshnessText));
                 OnPropertyChanged(nameof(ConfigurationInventoryFreshnessText));
                 OnPropertyChanged(nameof(ValueSummaryRows));
+                OnPropertyChanged(nameof(ApplyReviewRows));
             }
         }
     }
@@ -491,6 +496,7 @@ public sealed partial class TweakItemViewModel : ViewModelBase
                 OnPropertyChanged(nameof(InventoryFreshnessText));
                 OnPropertyChanged(nameof(ConfigurationInventoryFreshnessText));
                 OnPropertyChanged(nameof(ValueSummaryRows));
+                OnPropertyChanged(nameof(ApplyReviewRows));
             }
         }
     }
@@ -930,6 +936,7 @@ public sealed partial class TweakItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(RiskSnapshotText));
         OnPropertyChanged(nameof(RollbackStoryText));
         OnPropertyChanged(nameof(ValueSummaryRows));
+        OnPropertyChanged(nameof(ApplyReviewRows));
         OnPropertyChanged(nameof(ProofLanes));
         OnPropertyChanged(nameof(ProofBars));
         OnPropertyChanged(nameof(WhatWeKnowSummary));
