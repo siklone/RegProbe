@@ -160,6 +160,60 @@
         <Setter Property="ItemContainerStyle" Value="{StaticResource CompactFilterComboItemStyle}"/>
     </Style>
 
+    <Style x:Key="CompactFilterButtonStyle" TargetType="Button">
+        <Setter Property="Height" Value="28"/>
+        <Setter Property="Foreground" Value="#F0F5FC"/>
+        <Setter Property="Background" Value="{DynamicResource ResearchCardBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ResearchBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="8,0"/>
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Root"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="5"
+                            Padding="{TemplateBinding Padding}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Left"/>
+                            <TextBlock Grid.Column="1"
+                                       Text=">"
+                                       Foreground="{DynamicResource ResearchTextMutedBrush}"
+                                       FontFamily="{DynamicResource FontFamilyMono}"
+                                       FontSize="9"
+                                       Margin="6,0,0,0"
+                                       VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Root" Property="Background" Value="{DynamicResource ResearchPanelBrush}"/>
+                            <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource ResearchBorderHoverBrush}"/>
+                        </Trigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" Value="True">
+                            <Setter TargetName="Root" Property="Background" Value="#102018"/>
+                            <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource ResearchAccentBrush}"/>
+                            <Setter Property="Foreground" Value="#F4FFF8"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="ChipStyle" TargetType="CheckBox">
         <Setter Property="Foreground" Value="{DynamicResource ResearchTextSecondaryBrush}"/>
         <Setter Property="Background" Value="Transparent"/>

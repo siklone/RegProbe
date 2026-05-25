@@ -1,4 +1,5 @@
 using RegProbe.App.Services;
+using System.Windows.Input;
 
 namespace RegProbe.App.ViewModels;
 
@@ -18,11 +19,20 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
     private string _selectedCategoryName = string.Empty;
     private ConfigurationWorkspaceKind _selectedWorkspace = ConfigurationWorkspaceKind.Settings;
     private bool _isFlatView;
+    private readonly RelayCommand _cycleStatusFilterCommand;
+    private readonly RelayCommand _cycleScopeFilterCommand;
+
+    public TweaksShellStateViewModel()
+    {
+        _cycleStatusFilterCommand = new RelayCommand(_ => CycleStatusFilter());
+        _cycleScopeFilterCommand = new RelayCommand(_ => CycleScopeFilter());
+    }
 
     public IReadOnlyList<FilterOptionViewModel> StatusFilterOptions { get; } = new[]
     {
         new FilterOptionViewModel("STATUS", string.Empty),
         new FilterOptionViewModel("PROMOTED", "promoted"),
+        new FilterOptionViewModel("HOLD", "hold"),
         new FilterOptionViewModel("APPLIED", "applied"),
         new FilterOptionViewModel("ROLLED BACK", "rolledback")
     };
@@ -34,6 +44,10 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
         new FilterOptionViewModel("USER", "user"),
         new FilterOptionViewModel("MIXED", "mixed")
     };
+
+    public ICommand CycleStatusFilterCommand => _cycleStatusFilterCommand;
+
+    public ICommand CycleScopeFilterCommand => _cycleScopeFilterCommand;
 
     public ConfigurationWorkspaceKind SelectedWorkspace
     {
@@ -314,6 +328,37 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
         ShowClassC = true;
         ShowClassD = true;
         SelectedCategoryName = string.Empty;
+    }
+
+    private void CycleStatusFilter()
+    {
+        StatusFilter = NextFilterValue(StatusFilterOptions, StatusFilter);
+    }
+
+    private void CycleScopeFilter()
+    {
+        ScopeFilter = NextFilterValue(ScopeFilterOptions, ScopeFilter);
+    }
+
+    private static string NextFilterValue(IReadOnlyList<FilterOptionViewModel> options, string currentValue)
+    {
+        if (options.Count == 0)
+        {
+            return string.Empty;
+        }
+
+        var currentIndex = -1;
+        for (var index = 0; index < options.Count; index++)
+        {
+            if (string.Equals(options[index].Value, currentValue, StringComparison.OrdinalIgnoreCase))
+            {
+                currentIndex = index;
+                break;
+            }
+        }
+
+        var nextIndex = currentIndex < 0 ? 0 : (currentIndex + 1) % options.Count;
+        return options[nextIndex].Value;
     }
 
     private void RaiseWorkspacePropertiesChanged()
