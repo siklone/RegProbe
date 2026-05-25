@@ -376,22 +376,27 @@
                                 <StackPanel>
                                     <TextBlock Text="APPLY REVIEW"
                                                Style="{StaticResource SectionTitleStyle}"/>
-                                    <TextBlock Text="Before applying, confirm the current value, known/default value when available, target value, and rollback behavior."
+                                    <TextBlock Text="Before applying, check these four rows for this PC. Normal users should only need the values, the target, and the restore story here."
                                                Margin="0,5,0,0"
                                                Foreground="{DynamicResource ResearchTextSecondaryBrush}"
                                                FontSize="11"
                                                TextWrapping="Wrap"/>
-                                    <Border Margin="0,6,0,0"
-                                            Background="#0D0D0D"
-                                            BorderBrush="{DynamicResource ResearchBorderBrush}"
+                                    <Border Margin="0,7,0,0"
+                                            Background="#0D1612"
+                                            BorderBrush="#20523D"
                                             BorderThickness="1"
-                                            CornerRadius="8"
+                                            CornerRadius="10"
                                             Padding="10,8">
-                                        <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.ConfigurationCompactInfoLine}"
-                                                   Foreground="{DynamicResource ResearchTextPrimaryBrush}"
-                                                   FontFamily="{DynamicResource FontFamilyMono}"
-                                                   FontSize="11"
-                                                   TextWrapping="Wrap"/>
+                                        <StackPanel>
+                                            <TextBlock Text="PRE-APPLY CHECKLIST"
+                                                       Foreground="#65E6A1"
+                                                       FontSize="8"
+                                                       FontWeight="Bold"
+                                                       FontFamily="{DynamicResource FontFamilyMono}"/>
+                                            <ItemsControl Margin="0,7,0,0"
+                                                          ItemsSource="{Binding SelectedTweakPane.SelectedTweak.ApplyReviewRows}"
+                                                          ItemTemplate="{StaticResource ValueSummaryRowTemplate}"/>
+                                        </StackPanel>
                                     </Border>
                                 </StackPanel>
                             </Border>

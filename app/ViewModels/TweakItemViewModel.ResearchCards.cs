@@ -81,6 +81,8 @@ public sealed partial class TweakItemViewModel
 
     public IReadOnlyList<TweakValueSummaryRowViewModel> ValueSummaryRows => BuildValueSummaryRows();
 
+    public IReadOnlyList<TweakValueSummaryRowViewModel> ApplyReviewRows => BuildApplyReviewRows();
+
     private IReadOnlyList<TweakProofLaneViewModel> BuildProofLanes()
     {
         var docsLinks = MergeLinks(
@@ -211,6 +213,56 @@ public sealed partial class TweakItemViewModel
         }
 
         return rows;
+    }
+
+    private IReadOnlyList<TweakValueSummaryRowViewModel> BuildApplyReviewRows()
+    {
+        var currentValue = string.IsNullOrWhiteSpace(CurrentValue) ? "Unknown" : CurrentValue;
+        var defaultValue = BuildKnownDefaultReviewValue();
+        var targetValue = string.IsNullOrWhiteSpace(TargetValue) ? "Preferred state" : TargetValue;
+        var rollbackValue = string.IsNullOrWhiteSpace(RollbackStoryText) ? RollbackSnapshotText : RollbackStoryText;
+
+        return new List<TweakValueSummaryRowViewModel>
+        {
+            new(
+                "CURRENT",
+                currentValue,
+                HasDetectedState ? ConfigurationInventoryFreshnessText : "Read from this PC before applying if unknown"),
+            new(
+                "KNOWN DEFAULT",
+                defaultValue,
+                HasDefaultChoice ? DefaultVsPreviousSummary : "Rollback uses the captured previous state"),
+            new(
+                "TARGET",
+                targetValue,
+                ActionButtonText),
+            new(
+                "ROLLBACK",
+                rollbackValue,
+                BuildRollbackReviewDetail())
+        };
+    }
+
+    private string BuildKnownDefaultReviewValue()
+    {
+        if (!HasDefaultChoice)
+        {
+            return "Not published on this card";
+        }
+
+        return string.IsNullOrWhiteSpace(DefaultChoiceLabel)
+            ? "Built-in default option is available"
+            : DefaultChoiceLabel;
+    }
+
+    private string BuildRollbackReviewDetail()
+    {
+        return RollbackSnapshotState switch
+        {
+            "ready" => "Verified restore/delete story",
+            "partial" => "Declared, but review before applying",
+            _ => "Not ready for normal apply"
+        };
     }
 
     private static void ReplaceLinks(List<ReferenceLink> target, IReadOnlyList<ReferenceLink> source)
