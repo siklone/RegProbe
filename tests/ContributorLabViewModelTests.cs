@@ -216,6 +216,7 @@ public sealed class ContributorLabViewModelTests : IDisposable
 
         Assert.True(viewModel.HasCustomValueInput);
         Assert.Contains("check_single_tweak.py \"TimerCheckFlags\"", viewModel.CustomEvidenceLookupCommand, StringComparison.Ordinal);
+        Assert.Contains("--registry-path \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\"", viewModel.CustomEvidenceLookupCommand, StringComparison.Ordinal);
         Assert.Contains("--expected-value \"0\"", viewModel.CustomEvidenceLookupCommand, StringComparison.Ordinal);
         Assert.Contains("--expected-value \"1\"", viewModel.CustomEvidenceLookupCommand, StringComparison.Ordinal);
         Assert.Contains("--registry-path \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\"", viewModel.CustomVmExperimentCommand, StringComparison.Ordinal);
@@ -226,6 +227,9 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Contains("--abort-on-noisy-host", viewModel.CustomVmExperimentCommand, StringComparison.Ordinal);
         Assert.DoesNotContain("operator96", viewModel.CustomVmExperimentCommand, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("non-mutating lookup/readiness/VM-health", viewModel.ContributorExecutionPolicySummary, StringComparison.Ordinal);
+        Assert.Contains("checks both the value name and path", viewModel.CustomValueInputHelp, StringComparison.Ordinal);
+        Assert.Contains("default/current/target", viewModel.CustomValueAppCardEntryCriteria, StringComparison.Ordinal);
+        Assert.Contains("one-off seed batch", viewModel.CustomValueObservationBoundarySummary, StringComparison.Ordinal);
         Assert.Contains("TimerCheckFlags", viewModel.CustomValueInvestigationContract, StringComparison.Ordinal);
         Assert.Contains("HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel", viewModel.CustomValueInvestigationContract, StringComparison.Ordinal);
         Assert.Contains("target value(s) 0, 1", viewModel.CustomValueStorySummary, StringComparison.Ordinal);
@@ -355,6 +359,7 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Equal("Success", viewModel.CommandRunStatus);
         Assert.Contains("\"matched\":true", viewModel.CommandRunOutput, StringComparison.Ordinal);
         Assert.Contains("check_single_tweak.py \"TimerCheckFlags\"", runner.LastCommand, StringComparison.Ordinal);
+        Assert.Contains("--registry-path \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\"", runner.LastCommand, StringComparison.Ordinal);
     }
 
     [Fact]
@@ -378,6 +383,17 @@ public sealed class ContributorLabViewModelTests : IDisposable
                   "app_write_targets": [
                     {"value_name": "SystemResponsiveness", "value": 10}
                   ],
+                  "registry_path_query_check": {
+                    "query": "HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Multimedia\\\\SystemProfile",
+                    "matched": true,
+                    "hits": [
+                      {
+                        "path": "HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Multimedia\\\\SystemProfile",
+                        "value_name": "SystemResponsiveness",
+                        "source": "app_current_implementation.writes"
+                      }
+                    ]
+                  },
                   "windows_and_recommended_profiles": [
                     {
                       "label": "Windows default",
@@ -414,6 +430,7 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Contains("Matched records: 1", viewModel.CommandRunOutput, StringComparison.Ordinal);
         Assert.Contains("Best match: Example Power Card (promoted, apply_allowed=true)", viewModel.CommandRunOutput, StringComparison.Ordinal);
         Assert.Contains("Value story inputs:", viewModel.CommandRunOutput, StringComparison.Ordinal);
+        Assert.Contains("Registry path check: matched (1 hit(s))", viewModel.CommandRunOutput, StringComparison.Ordinal);
         Assert.Contains("App writes: SystemResponsiveness=10", viewModel.CommandRunOutput, StringComparison.Ordinal);
         Assert.Contains("Default/profile story: Windows default", viewModel.CommandRunOutput, StringComparison.Ordinal);
         Assert.Contains("Evidence lanes: etw-trace=1, official-doc=1", viewModel.CommandRunOutput, StringComparison.Ordinal);

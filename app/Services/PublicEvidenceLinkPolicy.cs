@@ -7,7 +7,7 @@ using RegProbe.App.Utilities;
 internal static class PublicEvidenceLinkPolicy
 {
     public const string NoLocalSourceMessage =
-        "No RegProbe-controlled local source mirror or pseudocode evidence is attached for this card. Catalog-only source context is not a value-semantics proof; the catalog index is naming/navigation context only. Docs, Runtime, and Rollback carry the app-safety proof.";
+        "No RegProbe-controlled local source mirror or pseudocode evidence is attached for this card. Source stays partial: Catalog-only source context is not a value-semantics proof, and the catalog index is naming/navigation context only. Docs, Runtime, and Rollback carry the app-safety proof.";
 
     public static bool IsSuppressedExternalPseudocodeUrl(string? url)
         => !string.IsNullOrWhiteSpace(url)

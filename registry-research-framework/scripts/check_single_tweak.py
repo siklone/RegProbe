@@ -258,6 +258,7 @@ def score_record_match(
     catalog_entry: dict[str, str] | None,
     surface_entry: dict[str, Any] | None,
     exact: bool,
+    registry_path_query: str = "",
 ) -> tuple[int, list[str]]:
     normalized_query = normalize_search_text(query)
     reasons: list[str] = []
@@ -298,8 +299,9 @@ def score_record_match(
         matched_structural = True
         matched_any = True
 
+    all_targets = collect_record_targets(record) + collect_app_write_targets(record) + collect_surface_targets(surface_entry)
     target_match_score = 0
-    for target in collect_record_targets(record) + collect_app_write_targets(record) + collect_surface_targets(surface_entry):
+    for target in all_targets:
         value_name = normalize_text(target.get("value_name"))
         path = normalize_text(target.get("path"))
         if normalized_query == normalize_search_text(value_name) and value_name:
@@ -325,6 +327,16 @@ def score_record_match(
             matched_any = True
 
     score += target_match_score
+    path_check = build_registry_path_query_check(registry_path_query, all_targets, exact=exact)
+    if registry_path_query:
+        if path_check["matched"]:
+            score += 85
+            reasons.append("registry path query matched tracked path")
+            matched_structural = True
+            matched_any = True
+        elif matched_structural:
+            score -= 20
+            reasons.append("registry path query did not match this record's tracked paths")
 
     text_fields = [
         normalize_text(record.get("summary")),
@@ -348,6 +360,45 @@ def score_record_match(
         reasons.append(f"promotion state weight: {promotion_state}")
 
     return score, reasons
+
+
+def registry_path_matches(expected_path: str, actual_path: Any, exact: bool) -> bool:
+    expected = normalize_search_text(expected_path)
+    actual = normalize_search_text(actual_path)
+    if not expected or not actual:
+        return False
+
+    if exact:
+        return expected == actual
+
+    return expected in actual or actual in expected
+
+
+def build_registry_path_query_check(
+    registry_path_query: str,
+    targets: list[dict[str, Any]],
+    *,
+    exact: bool,
+) -> dict[str, Any]:
+    query = normalize_text(registry_path_query)
+    hits: list[dict[str, Any]] = []
+    if not query:
+        return {"query": "", "matched": False, "hits": hits}
+
+    for target in targets:
+        path = normalize_text(target.get("path"))
+        if not registry_path_matches(query, path, exact):
+            continue
+
+        hits.append(
+            {
+                "path": path,
+                "value_name": normalize_text(target.get("value_name")),
+                "source": normalize_text(target.get("_source")),
+            }
+        )
+
+    return {"query": query, "matched": bool(hits), "hits": hits}
 
 
 def extract_expected_value_checks(
@@ -474,6 +525,7 @@ def build_single_tweak_report(
     query: str,
     *,
     expected_values: list[str] | None = None,
+    registry_path_query: str = "",
     exact: bool = False,
     limit: int = 5,
     repo_root: Path | None = None,
@@ -484,10 +536,12 @@ def build_single_tweak_report(
     app_surface_path = root / "Docs" / "research" / "app-surface" / "validated-registry-values.json"
     records_root = root / "research" / "records"
     query = normalize_text(query)
+    registry_path_query = normalize_text(registry_path_query)
     expected_values = [normalize_text(value) for value in (expected_values or []) if normalize_text(value)]
 
     report: dict[str, Any] = {
         "query": query,
+        "registry_path_query": registry_path_query,
         "expected_values": expected_values,
         "exact": exact,
         "limit": limit,
@@ -527,13 +581,21 @@ def build_single_tweak_report(
 
         enriched_record = dict(record)
         enriched_record["_promotion_gate"] = promotion_gate or {}
-        score, match_reasons = score_record_match(query, enriched_record, catalog_entry, surface_entry, exact)
+        score, match_reasons = score_record_match(
+            query,
+            enriched_record,
+            catalog_entry,
+            surface_entry,
+            exact,
+            registry_path_query=registry_path_query,
+        )
         if score < 50:
             continue
 
         record_targets = collect_record_targets(record)
         app_writes = collect_app_write_targets(record)
         surface_targets = collect_surface_targets(surface_entry)
+        all_targets = record_targets + app_writes + surface_targets
         profiles = collect_profile_states(record)
         validation_proof = record.get("validation_proof") or {}
 
@@ -567,6 +629,11 @@ def build_single_tweak_report(
             "record_targets": record_targets,
             "app_write_targets": app_writes,
             "surface_targets": surface_targets,
+            "registry_path_query_check": build_registry_path_query_check(
+                registry_path_query,
+                all_targets,
+                exact=exact,
+            ),
             "windows_and_recommended_profiles": profiles,
             "validation_proof": {
                 "source_url": normalize_text(validation_proof.get("source_url")),
@@ -663,6 +730,8 @@ def build_single_tweak_report(
 def render_single_tweak_report(report: dict[str, Any]) -> str:
     lines: list[str] = []
     lines.append(f"Query: {report.get('query')}")
+    if report.get("registry_path_query"):
+        lines.append(f"Registry path query: {report.get('registry_path_query')}")
     if report.get("expected_values"):
         lines.append(f"Expected values: {', '.join(report['expected_values'])}")
     lines.append(f"Status: {report.get('status')}")
@@ -704,6 +773,18 @@ def render_single_tweak_report(report: dict[str, Any]) -> str:
             lines.append(f"  research_doc: {surface.get('documentation')}")
 
         lines.append(f"  summary: {match.get('record_summary')}")
+        path_check = match.get("registry_path_query_check") or {}
+        if path_check.get("query"):
+            lines.append(
+                "  registry_path_query: "
+                f"{'matched' if path_check.get('matched') else 'not found on this record'}"
+            )
+            for hit in path_check.get("hits") or []:
+                lines.append(
+                    "    - "
+                    f"{hit.get('path')} :: {hit.get('value_name')}"
+                    + (f" ({hit.get('source')})" if hit.get("source") else "")
+                )
 
         record_targets = match.get("record_targets") or []
         if record_targets:
@@ -811,6 +892,11 @@ def main() -> int:
         default=[],
         help="Optional value to verify against tracked targets, app writes, and profile states. Repeat as needed.",
     )
+    parser.add_argument(
+        "--registry-path",
+        default="",
+        help="Optional registry path to check alongside the value/tweak query. It boosts path-matching records and reports whether the path is tracked.",
+    )
     parser.add_argument("--exact", action="store_true", help="Require exact token matches instead of substring matches.")
     parser.add_argument("--limit", type=int, default=5, help="Maximum match count to emit (default: 5).")
     parser.add_argument("--json", action="store_true", help="Emit the report as JSON.")
@@ -819,6 +905,7 @@ def main() -> int:
     report = build_single_tweak_report(
         args.query,
         expected_values=args.expected_values,
+        registry_path_query=args.registry_path,
         exact=args.exact,
         limit=max(1, args.limit),
     )

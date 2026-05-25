@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System;
 using System.Windows.Media;
+using RegProbe.App.Services;
 
 namespace RegProbe.App.ViewModels;
 
@@ -51,6 +52,15 @@ public sealed class TweakProofLaneViewModel
     public bool HasPrimarySourceText => !string.IsNullOrWhiteSpace(PrimarySourceText);
 
     public bool HasLinks => Links.Count > 0;
+
+    public bool HasSourceBoundaryCallout =>
+        string.Equals(Key, "source", StringComparison.OrdinalIgnoreCase)
+        && PublicEvidenceLinkPolicy.IsNoLocalSourceSummary(Summary);
+
+    public string SourceBoundaryTitle => "Local source proof is not attached";
+
+    public string SourceBoundaryDetail =>
+        "Catalog context may explain naming or navigation, but it is not pseudocode/source proof and not value-semantics proof. Use Docs, Runtime, and Rollback for app safety until a RegProbe-controlled local source mirror exists.";
 
     public string EmptyMessage => $"{Label} proof is still pending.";
 }
