@@ -174,6 +174,15 @@ public sealed class ContributorLabViewModel : ViewModelBase
     public string CustomValueWorkflowSummary =>
         "For a user-supplied key/value, start with repository lookup from inside the app, then run one value at a time in a certified disposable VM. Record current/default/target, boot result, app smoke, benchmark deltas as observations only, and rollback proof before any app-card review.";
 
+    public string CustomValueInputHelp =>
+        "Paste the full hive path, the exact value name, and candidate values. The lookup is read-only and checks both the value name and path before any VM mutation is considered.";
+
+    public string CustomValueAppCardEntryCriteria =>
+        "A custom key/value becomes an end-user card only after default/current/target values are known, rollback is tested, the app can explicitly write it, source claims are bounded, and low-noise VM evidence is clean.";
+
+    public string CustomValueObservationBoundarySummary =>
+        "These are user-supplied registry path/value observations from a one-off seed batch. Legacy artifact filenames are not product branding; each row stays Contributor Lab research until its own promotion gate passes.";
+
     public string ContributorReadinessDecisionSummary
     {
         get
@@ -276,7 +285,7 @@ public sealed class ContributorLabViewModel : ViewModelBase
     }
 
     public string CustomEvidenceLookupCommand =>
-        $"python3 registry-research-framework/scripts/check_single_tweak.py {QuoteArg(CustomValueName)}{BuildExpectedValueArgs(CustomExpectedValues)} --json";
+        $"python3 registry-research-framework/scripts/check_single_tweak.py {QuoteArg(CustomValueName)} --registry-path {QuoteArg(CustomRegistryPath)}{BuildExpectedValueArgs(CustomExpectedValues)} --json";
 
     public string CustomAppQaCommand =>
         $"python3 registry-research-framework/scripts/check_single_tweak_app_qa.py {QuoteArg(CustomValueName)}{BuildExpectedValueArgs(CustomExpectedValues)} --json";

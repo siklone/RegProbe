@@ -63,6 +63,14 @@ public static class ContributorLabResultPreviewBuilder
             var candidateId = Text(best, "candidate_id");
             AppendLine(builder, $"Best match: {FirstNonEmpty(name, candidateId, "unknown")} ({Text(best, "promotion_state", "unknown")}, apply_allowed={BoolText(best, "apply_allowed")})");
             AppendLine(builder, $"App mapping: {Text(best, "app_mapping_status", "unknown")}; rollback previous={BoolText(best, "restore_previous_supported")}; rollback default={BoolText(best, "restore_default_supported")}");
+            var pathCheck = Object(best, "registry_path_query_check");
+            if (!string.IsNullOrWhiteSpace(Text(pathCheck, "query")))
+            {
+                AppendLine(
+                    builder,
+                    $"Registry path check: {(Bool(pathCheck, "matched") ? "matched" : "not found on best match")} ({Array(pathCheck, "hits").Count} hit(s))");
+            }
+
             AppendLine(
                 builder,
                 $"Value story inputs: tracked targets={Array(best, "record_targets").Count}; default/profile records={Array(best, "windows_and_recommended_profiles").Count}; app writes={Array(best, "app_write_targets").Count}");
@@ -221,6 +229,12 @@ public static class ContributorLabResultPreviewBuilder
         if (Array(match, "app_write_targets").Count == 0)
         {
             missing.Add("app write");
+        }
+
+        var pathCheck = Object(match, "registry_path_query_check");
+        if (!string.IsNullOrWhiteSpace(Text(pathCheck, "query")) && !Bool(pathCheck, "matched"))
+        {
+            missing.Add("registry path");
         }
 
         if (Array(match, "windows_and_recommended_profiles").Count == 0)

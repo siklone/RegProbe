@@ -330,6 +330,8 @@ public sealed class TweakItemViewModelTests
         Assert.Equal("partial", viewModel.SourceSnapshotState);
         var sourceLane = Assert.Single(viewModel.ProofLanes, lane => lane.Key == "source");
         Assert.False(sourceLane.HasLinks);
+        Assert.True(sourceLane.HasSourceBoundaryCallout);
+        Assert.Contains("Catalog context", sourceLane.SourceBoundaryDetail, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("Catalog-only source context", sourceLane.Summary, StringComparison.OrdinalIgnoreCase);
     }
 
@@ -451,6 +453,7 @@ public sealed class TweakItemViewModelTests
         var sourceLane = Assert.Single(viewModel.ProofLanes, lane => lane.Key == "source");
         Assert.False(sourceLane.HasPrimarySourceText);
         Assert.False(sourceLane.HasLinks);
+        Assert.True(sourceLane.HasSourceBoundaryCallout);
         Assert.Contains("RegProbe-controlled local source mirror", sourceLane.Summary, StringComparison.OrdinalIgnoreCase);
     }
 

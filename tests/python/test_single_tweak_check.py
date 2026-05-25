@@ -170,16 +170,34 @@ class SingleTweakCheckTests(unittest.TestCase):
             report = single_tweak_check.build_single_tweak_report(
                 "SystemResponsiveness",
                 expected_values=["10"],
+                registry_path_query="HKLM\\Software\\RegProbe",
                 repo_root=repo_root,
             )
 
             self.assertEqual(report["status"], "ok")
+            self.assertEqual(report["registry_path_query"], "HKLM\\Software\\RegProbe")
             self.assertEqual(report["match_count"], 1)
             match = report["matches"][0]
             self.assertEqual(match["record_id"], "system.test-setting")
             self.assertTrue(match["app_surface_entry"]["present"])
+            self.assertTrue(match["registry_path_query_check"]["matched"])
+            self.assertEqual(match["registry_path_query_check"]["hits"][0]["value_name"], "SystemResponsiveness")
             self.assertEqual(len(match["runtime_read_signals"]), 1)
             self.assertTrue(match["expected_value_checks"][0]["found_any"])
+
+    def test_registry_path_query_reports_miss_without_hiding_value_match(self) -> None:
+        report = single_tweak_check.build_single_tweak_report(
+            "SystemResponsiveness",
+            expected_values=["10"],
+            registry_path_query="HKLM\\Software\\MissingPath",
+            repo_root=REPO_ROOT,
+        )
+
+        self.assertEqual(report["status"], "ok")
+        self.assertGreater(report["match_count"], 0)
+        first_match = report["matches"][0]
+        self.assertEqual(first_match["record_id"], "power.disable-network-power-saving.policy")
+        self.assertFalse(first_match["registry_path_query_check"]["matched"])
 
     def test_report_returns_no_match_for_unknown_query(self) -> None:
         report = single_tweak_check.build_single_tweak_report(

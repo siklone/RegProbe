@@ -535,6 +535,27 @@
                                                                    FontFamily="{DynamicResource FontFamilyMono}"
                                                                    Visibility="{Binding HasSummary, Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
 
+                                                        <Border Margin="0,8,0,0"
+                                                                Background="#171307"
+                                                                BorderBrush="#5A431A"
+                                                                BorderThickness="1"
+                                                                CornerRadius="7"
+                                                                Padding="10,8"
+                                                                Visibility="{Binding HasSourceBoundaryCallout, Converter={StaticResource BoolToVisibility}}">
+                                                            <StackPanel>
+                                                                <TextBlock Text="{Binding SourceBoundaryTitle}"
+                                                                           Foreground="#F4D293"
+                                                                           FontSize="8"
+                                                                           FontWeight="Bold"
+                                                                           FontFamily="{DynamicResource FontFamilyMono}"/>
+                                                                <TextBlock Text="{Binding SourceBoundaryDetail}"
+                                                                           Margin="0,4,0,0"
+                                                                           Foreground="#D7B79F"
+                                                                           FontSize="10"
+                                                                           TextWrapping="Wrap"/>
+                                                            </StackPanel>
+                                                        </Border>
+
                                                         <Border Style="{StaticResource ProofSourceCalloutStyle}"
                                                                 Visibility="{Binding HasPrimarySourceText, Converter={StaticResource BoolToVisibility}}">
                                                             <StackPanel>
