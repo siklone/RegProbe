@@ -19,6 +19,7 @@ public sealed class ContributorLabViewModel : ViewModelBase
     private string _customRegistryPath = @"HKLM\SYSTEM\CurrentControlSet\Control\Power";
     private string _customValueName = "SystemResponsiveness";
     private string _customExpectedValues = "10, 30000";
+    private string _customStaticBinaryPath = @"C:\Windows\System32\ntoskrnl.exe";
     private string _observationSearchText = string.Empty;
     private string _observationBucketFilter = "all";
     private readonly IContributorLabCommandRunner _commandRunner;
@@ -252,6 +253,18 @@ public sealed class ContributorLabViewModel : ViewModelBase
         }
     }
 
+    public string CustomStaticBinaryPath
+    {
+        get => _customStaticBinaryPath;
+        set
+        {
+            if (SetProperty(ref _customStaticBinaryPath, value))
+            {
+                RaiseCustomValueCommandProperties();
+            }
+        }
+    }
+
     public bool HasCustomValueInput => !string.IsNullOrWhiteSpace(CustomValueName);
 
     public bool IsContributorCommandRunning
@@ -296,11 +309,23 @@ public sealed class ContributorLabViewModel : ViewModelBase
     public string CustomVmExperimentOutputName =>
         $"custom-value-{SlugForArtifact(CustomValueName, "replace-value-name")}-{SlugForArtifact(FirstExpectedValueOrDefault(CustomExpectedValues), "0")}";
 
+    public string CustomEvidenceRunSlug =>
+        $"custom-value-{SlugForArtifact(CustomValueName, "replace-value-name")}";
+
     public string CustomVmExperimentCommand =>
         $"python3 scripts/vm-kvm/run-guest-registry-value-experiment.py --domain regprobe-win11-25h2-session --connect qemu:///session --registry-path {QuoteArg(CustomRegistryPath)} --value-name {QuoteArg(CustomValueName)} --value-data {QuoteArg(FirstExpectedValueOrDefault(CustomExpectedValues))} --output-name {QuoteArg(CustomVmExperimentOutputName)} --smoke-profile gui --stage-wait-timeout 420 --reboot-wait-timeout 420 --post-reboot-delay-seconds 90 --require-domain-snapshot --auto-revert-snapshot-on-boot-failure --revert-snapshot-name clean-25h2-qga --abort-on-noisy-host";
 
+    public string CustomEtwStackwalkCommand =>
+        $"python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --domain regprobe-win11-25h2-session --connect qemu:///session --registry-path {QuoteArg(CustomRegistryPath)} --value-name {QuoteArg(CustomValueName)} --run-id {QuoteArg(CustomEvidenceRunSlug + "-etw-stackwalk")} --duration-seconds 45 --timeout-seconds 300 --first-artifact-timeout-seconds 120 --artifact-upload-timeout-seconds 300 --launch-transport qga --preflight require --upload-etl --ingest-to-repo";
+
+    public string CustomProcmonBootlogCommand =>
+        $"python3 scripts/vm-kvm/run-guest-procmon-bootlog.py --domain regprobe-win11-25h2-session --connect qemu:///session --registry-path {QuoteArg(CustomRegistryPath)} --value-name {QuoteArg(CustomValueName)} --output-name {QuoteArg(CustomEvidenceRunSlug + "-procmon-bootlog")} --prepare-timeout-seconds 300 --timeout-seconds 420 --first-artifact-timeout-seconds 180 --reboot-settle-seconds 90";
+
+    public string CustomGhidraStringXrefCommand =>
+        $"python3 scripts/vm-kvm/run-guest-ghidra-string-xref-probe.py --domain regprobe-win11-25h2-session --connect qemu:///session --binary-path {QuoteArg(CustomStaticBinaryPath)} --pattern {QuoteArg(CustomValueName)} --output-name {QuoteArg(CustomEvidenceRunSlug + "-ghidra-string")} --launch-transport qga --preflight require --timeout-seconds 900";
+
     public string CustomValueWorkflowChecklist =>
-        "App checks: repo artifact hit, current/default value story, VM/QGA/snapshot readiness, one-value run command, boot/app-smoke result, benchmark observation, rollback proof, then app-card gate.";
+        "App checks: repo artifact hit, current/default value story, VM/QGA/snapshot readiness, ETW/Procmon/Ghidra evidence lane when needed, one-value run command, boot/app-smoke result, benchmark observation, rollback proof, then app-card gate.";
 
     public string CustomValueInvestigationContract =>
         $"Question: does {FirstNonEmpty(CustomValueName, "REPLACE_VALUE_NAME")} exist under {FirstNonEmpty(CustomRegistryPath, "REPLACE_REGISTRY_PATH")}, which values are known, and is there enough evidence for a bounded app card?";
@@ -318,6 +343,7 @@ public sealed class ContributorLabViewModel : ViewModelBase
         "Current value: capture the live registry value, or explicitly record that the value/key is absent.",
         "Default story: show the known Windows/default profile when available; otherwise mark default unknown instead of guessing.",
         "Target story: list each tested value and the source/reason for trying it.",
+        "Source/escalation story: if repo lookup is empty or opaque, run ETW stackwalk, Procmon bootlog, and a targeted Ghidra string xref before claiming no evidence.",
         "Rollback story: state whether rollback restores previous, restores default, or deletes an originally absent value.",
         "Runtime safety: certified VM health, boot result, Windows shell/app smoke, and rollback smoke must be recorded before app-card review.",
         "Evidence boundary: ETW/Procmon/Ghidra/noise/tranche details stay technical; normal cards only show bounded user-facing claims.",
@@ -362,7 +388,28 @@ public sealed class ContributorLabViewModel : ViewModelBase
             RequiresCertifiedVm: true,
             MutatesGuest: false)),
         new(new ContributorCommandPack(
-            "5. One-value VM experiment",
+            "5. ETW stackwalk evidence",
+            "Capture registry read/write stackwalk evidence for this exact key/value. Use this before mutation when the repo/source story is missing or ambiguous.",
+            CustomEtwStackwalkCommand,
+            ReferenceEligible ? "certified-evidence" : "certified-required",
+            RequiresCertifiedVm: true,
+            MutatesGuest: false)),
+        new(new ContributorCommandPack(
+            "6. Procmon bootlog evidence",
+            "Capture boot/runtime registry access around the exact key/value. This reboots the disposable guest, so keep the snapshot clean and rollback-ready.",
+            CustomProcmonBootlogCommand,
+            ReferenceEligible ? "certified-evidence" : "certified-required",
+            RequiresCertifiedVm: true,
+            MutatesGuest: true)),
+        new(new ContributorCommandPack(
+            "7. Ghidra string xref evidence",
+            "Search the selected Windows binary for the value-name string and xrefs. This is static lineage, not value-semantics proof by itself.",
+            CustomGhidraStringXrefCommand,
+            ReferenceEligible ? "certified-static" : "certified-required",
+            RequiresCertifiedVm: true,
+            MutatesGuest: false)),
+        new(new ContributorCommandPack(
+            "8. One-value VM experiment",
             "Apply exactly one value in the disposable VM, run boot/app smoke and microbench observations, then rollback from snapshot if needed.",
             CustomVmExperimentCommand,
             ReferenceEligible ? "certified-ready" : "certified-required",
@@ -470,7 +517,11 @@ public sealed class ContributorLabViewModel : ViewModelBase
         OnPropertyChanged(nameof(CustomAppQaCommand));
         OnPropertyChanged(nameof(CustomVmHealthCommand));
         OnPropertyChanged(nameof(CustomVmExperimentOutputName));
+        OnPropertyChanged(nameof(CustomEvidenceRunSlug));
         OnPropertyChanged(nameof(CustomVmExperimentCommand));
+        OnPropertyChanged(nameof(CustomEtwStackwalkCommand));
+        OnPropertyChanged(nameof(CustomProcmonBootlogCommand));
+        OnPropertyChanged(nameof(CustomGhidraStringXrefCommand));
         OnPropertyChanged(nameof(CustomValueInvestigationContract));
         OnPropertyChanged(nameof(CustomValueStorySummary));
         OnPropertyChanged(nameof(CustomValueMutationBoundarySummary));

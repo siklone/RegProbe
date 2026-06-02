@@ -30,13 +30,13 @@ public sealed class ContributorCommandPackViewModel
     public string SafetyLabel => MutatesGuest
         ? "VM mutation: snapshot required"
         : RequiresCertifiedVm
-            ? "VM preflight"
+            ? "VM evidence lane"
             : "Read-only";
 
     public string ExecutionPolicyLabel => MutatesGuest
         ? "Copy-only in WPF v1; run manually after certified VM health and per-run confirmation."
         : RequiresCertifiedVm
-            ? "Non-mutating preflight; may be run from Contributor Lab."
+            ? "Copy-only unless exposed by a dedicated safe Run button; verify certified VM/QGA/snapshot health first."
             : "Read-only contributor command.";
 
     public ICommand CopyCommand { get; }
