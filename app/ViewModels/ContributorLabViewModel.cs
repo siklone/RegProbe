@@ -327,6 +327,12 @@ public sealed class ContributorLabViewModel : ViewModelBase
     public string CustomValueWorkflowChecklist =>
         "App checks: repo artifact hit, current/default value story, VM/QGA/snapshot readiness, ETW/Procmon/Ghidra evidence lane when needed, one-value run command, boot/app-smoke result, benchmark observation, rollback proof, then app-card gate.";
 
+    public string CustomValueInAppActionSummary =>
+        $"Safe in-app actions for {FirstNonEmpty(CustomValueName, "this value")}: run repo/evidence lookup, map any shipped app-card QA path, check app readiness/contracts, and verify VM/QGA/snapshot health. These buttons are allowlisted and do not mutate the registry.";
+
+    public string CustomValueEscalationPlanSummary =>
+        $"If lookup is empty, opaque, or missing expected value(s) {ExpectedValuesForDisplay(CustomExpectedValues)}, escalate in order: ETW stackwalk, Procmon bootlog, targeted Ghidra string xref, then exactly one snapshot-safe VM value experiment. VM evidence/mutation packs stay copy-only in WPF v1 and must be run only after certified VM health passes.";
+
     public string CustomValueInvestigationContract =>
         $"Question: does {FirstNonEmpty(CustomValueName, "REPLACE_VALUE_NAME")} exist under {FirstNonEmpty(CustomRegistryPath, "REPLACE_REGISTRY_PATH")}, which values are known, and is there enough evidence for a bounded app card?";
 
@@ -522,6 +528,8 @@ public sealed class ContributorLabViewModel : ViewModelBase
         OnPropertyChanged(nameof(CustomEtwStackwalkCommand));
         OnPropertyChanged(nameof(CustomProcmonBootlogCommand));
         OnPropertyChanged(nameof(CustomGhidraStringXrefCommand));
+        OnPropertyChanged(nameof(CustomValueInAppActionSummary));
+        OnPropertyChanged(nameof(CustomValueEscalationPlanSummary));
         OnPropertyChanged(nameof(CustomValueInvestigationContract));
         OnPropertyChanged(nameof(CustomValueStorySummary));
         OnPropertyChanged(nameof(CustomValueMutationBoundarySummary));

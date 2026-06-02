@@ -230,6 +230,11 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Contains("checks both the value name and path", viewModel.CustomValueInputHelp, StringComparison.Ordinal);
         Assert.Contains("default/current/target", viewModel.CustomValueAppCardEntryCriteria, StringComparison.Ordinal);
         Assert.Contains("one-off seed batch", viewModel.CustomValueObservationBoundarySummary, StringComparison.Ordinal);
+        Assert.Contains("Safe in-app actions for TimerCheckFlags", viewModel.CustomValueInAppActionSummary, StringComparison.Ordinal);
+        Assert.Contains("do not mutate the registry", viewModel.CustomValueInAppActionSummary, StringComparison.Ordinal);
+        Assert.Contains("missing expected value(s) 0, 1", viewModel.CustomValueEscalationPlanSummary, StringComparison.Ordinal);
+        Assert.Contains("ETW stackwalk, Procmon bootlog, targeted Ghidra string xref", viewModel.CustomValueEscalationPlanSummary, StringComparison.Ordinal);
+        Assert.Contains("copy-only in WPF v1", viewModel.CustomValueEscalationPlanSummary, StringComparison.Ordinal);
         Assert.Equal("custom-value-timercheckflags", viewModel.CustomEvidenceRunSlug);
         Assert.Contains("TimerCheckFlags", viewModel.CustomValueInvestigationContract, StringComparison.Ordinal);
         Assert.Contains("HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel", viewModel.CustomValueInvestigationContract, StringComparison.Ordinal);
