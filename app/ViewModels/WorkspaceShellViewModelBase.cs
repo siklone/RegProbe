@@ -108,6 +108,14 @@ public abstract class WorkspaceShellViewModelBase : ViewModelBase, IDisposable
 
     public string ScopeFilterDisplayText => Workspace.ScopeFilterDisplayText;
 
+    public bool HasStatusFilter => Workspace.HasStatusFilter;
+
+    public bool HasScopeFilter => Workspace.HasScopeFilter;
+
+    public ICommand CycleStatusFilterCommand => Workspace.CycleStatusFilterCommand;
+
+    public ICommand CycleScopeFilterCommand => Workspace.CycleScopeFilterCommand;
+
     public string SearchText
     {
         get => Workspace.SearchText;
