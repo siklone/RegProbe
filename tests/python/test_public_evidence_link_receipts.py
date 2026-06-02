@@ -54,15 +54,15 @@ class PublicEvidenceLinkReceiptTests(unittest.TestCase):
 
     def test_catalog_only_public_copy_names_the_actual_proof_lanes(self) -> None:
         payload = json.loads(APP_FACING_RECEIPTS[0].read_text(encoding="utf-8"))
-        catalog_only_summaries = [
+        source_context_summaries = [
             text
             for text in iter_strings(payload)
-            if "Catalog-only source context" in text
+            if "Source lane is contributor context only" in text
         ]
 
-        self.assertGreater(len(catalog_only_summaries), 0)
-        for summary in catalog_only_summaries:
-            self.assertIn("not a value-semantics proof", summary)
+        self.assertGreater(len(source_context_summaries), 0)
+        for summary in source_context_summaries:
+            self.assertIn("do not prove value behavior", summary)
             self.assertIn("Docs, Runtime, and Rollback", summary)
 
 

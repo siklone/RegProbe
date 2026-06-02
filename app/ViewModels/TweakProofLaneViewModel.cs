@@ -39,7 +39,10 @@ public sealed class TweakProofLaneViewModel
 
     public Brush AccentBrush { get; }
 
-    public string StateText => TweakResearchPresentation.BuildProofStateText(State);
+    public string StateText =>
+        HasSourceBoundaryCallout
+            ? "CONTEXT"
+            : TweakResearchPresentation.BuildProofStateText(State);
 
     public Brush StateBackgroundBrush => TweakResearchPresentation.GetProofStateBackgroundBrush(State);
 
@@ -57,10 +60,13 @@ public sealed class TweakProofLaneViewModel
         string.Equals(Key, "source", StringComparison.OrdinalIgnoreCase)
         && PublicEvidenceLinkPolicy.IsNoLocalSourceSummary(Summary);
 
-    public string SourceBoundaryTitle => "Local source proof is not attached";
+    public string SourceBoundaryTitle => "Source lane is contributor context";
 
     public string SourceBoundaryDetail =>
-        "Catalog context may explain naming or navigation, but it is not pseudocode/source proof and not value-semantics proof. Use Docs, Runtime, and Rollback for app safety until a RegProbe-controlled local source mirror exists.";
+        "No RegProbe-controlled source or pseudocode mirror is attached. Catalog matches are not value-behavior proof, so normal users should rely on Docs, Runtime, and Rollback. Contributors can use the Contributor Lab evidence lanes to add local source proof.";
 
-    public string EmptyMessage => $"{Label} proof is still pending.";
+    public string EmptyMessage =>
+        string.Equals(Key, "source", StringComparison.OrdinalIgnoreCase)
+            ? "Source context is not attached for this card."
+            : $"{Label} proof is still pending.";
 }

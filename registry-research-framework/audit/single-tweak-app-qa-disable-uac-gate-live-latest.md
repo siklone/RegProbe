@@ -14,7 +14,7 @@
 | --- | --- | --- |
 | Docs | `ready` | Repo security docs identify the legacy full-UAC-disable command. |
 | Runtime | `partial` | Runtime proof is still missing; no app-card-ready runtime claim is made. |
-| Source | `partial` | Catalog-only source context is not treated as value-semantics proof. |
+| Source | `partial` | Source lane is contributor context only; catalog/source context is not treated as value-behavior proof. |
 | Rollback | `ready` | Record restore story is present, but promotion remains rejected because the action is high-risk. |
 
 ## Acceptance

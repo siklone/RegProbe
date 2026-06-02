@@ -104,8 +104,8 @@ class ArchitectureInvariantTests(unittest.TestCase):
             REPO_ROOT / "app" / "Services" / "PublicEvidenceLinkPolicy.cs"
         ).read_text(encoding="utf-8")
 
-        self.assertIn("Catalog-only source context is not a value-semantics proof", policy)
-        self.assertIn("Docs, Runtime, and Rollback carry the app-safety proof", policy)
+        self.assertIn("Source lane is contributor context only", policy)
+        self.assertIn("Trust the Docs, Runtime, and Rollback lanes for normal app safety", policy)
 
     def test_contributor_lab_public_copy_uses_custom_value_language(self) -> None:
         checked_paths = [

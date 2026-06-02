@@ -31,7 +31,7 @@ public sealed class TweakDocumentationLinker
                         "Catalog index",
                         TweakDocumentationCatalogStore.AppendDocAnchor(catalogPath, anchorId),
                         insertIndex,
-                        "Local catalog index. Naming/navigation context only; not value-semantics proof.",
+                        "Local catalog index. Naming/navigation context only; not value-behavior proof.",
                         ReferenceLinkKind.Catalog))
                 {
                     insertIndex++;
