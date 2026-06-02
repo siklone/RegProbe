@@ -122,7 +122,7 @@ public sealed class TweakProvenanceCatalogServiceTests : IDisposable
             viewModel.ReferenceLinks,
             link => link.Url.Contains("github.com/nohuto/", StringComparison.OrdinalIgnoreCase));
         Assert.DoesNotContain(viewModel.ReferenceLinks, link => link.Kind == ReferenceLinkKind.Source);
-        Assert.Contains("No RegProbe-controlled local source mirror", viewModel.ProvenanceSummary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("No RegProbe-controlled source or pseudocode mirror", viewModel.ProvenanceSummary, StringComparison.OrdinalIgnoreCase);
     }
 
     public void Dispose()

@@ -394,8 +394,11 @@ public sealed class TweakItemViewModelTests
         var sourceLane = Assert.Single(viewModel.ProofLanes, lane => lane.Key == "source");
         Assert.False(sourceLane.HasLinks);
         Assert.True(sourceLane.HasSourceBoundaryCallout);
-        Assert.Contains("Catalog context", sourceLane.SourceBoundaryDetail, StringComparison.OrdinalIgnoreCase);
-        Assert.Contains("Catalog-only source context", sourceLane.Summary, StringComparison.OrdinalIgnoreCase);
+        Assert.Equal("CONTEXT", sourceLane.StateText);
+        Assert.Contains("contributor context", sourceLane.SourceBoundaryTitle, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("Contributor Lab", sourceLane.SourceBoundaryDetail, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("not value-behavior proof", sourceLane.SourceBoundaryDetail, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("Source lane is contributor context only", sourceLane.Summary, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]
@@ -438,7 +441,8 @@ public sealed class TweakItemViewModelTests
         var sourceLane = Assert.Single(viewModel.ProofLanes, lane => lane.Key == "source");
         Assert.False(sourceLane.HasLinks);
         Assert.DoesNotContain(sourceLane.Links, link => link.Kind == ReferenceLinkKind.Catalog);
-        Assert.Contains("Catalog-only source context", sourceLane.Summary, StringComparison.OrdinalIgnoreCase);
+        Assert.Equal("CONTEXT", sourceLane.StateText);
+        Assert.Contains("Source lane is contributor context only", sourceLane.Summary, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]
@@ -471,7 +475,8 @@ public sealed class TweakItemViewModelTests
         Assert.Equal("partial", viewModel.SourceSnapshotState);
         var sourceLane = Assert.Single(viewModel.ProofLanes, lane => lane.Key == "source");
         Assert.False(sourceLane.HasLinks);
-        Assert.Contains("Catalog-only source context", sourceLane.Summary, StringComparison.OrdinalIgnoreCase);
+        Assert.Equal("CONTEXT", sourceLane.StateText);
+        Assert.Contains("Source lane is contributor context only", sourceLane.Summary, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]
@@ -517,7 +522,8 @@ public sealed class TweakItemViewModelTests
         Assert.False(sourceLane.HasPrimarySourceText);
         Assert.False(sourceLane.HasLinks);
         Assert.True(sourceLane.HasSourceBoundaryCallout);
-        Assert.Contains("RegProbe-controlled local source mirror", sourceLane.Summary, StringComparison.OrdinalIgnoreCase);
+        Assert.Equal("CONTEXT", sourceLane.StateText);
+        Assert.Contains("RegProbe-controlled source or pseudocode mirror", sourceLane.Summary, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]
@@ -564,7 +570,8 @@ public sealed class TweakItemViewModelTests
         var sourceLane = Assert.Single(viewModel.ProofLanes, lane => lane.Key == "source");
         Assert.False(sourceLane.HasPrimarySourceText);
         Assert.False(sourceLane.HasLinks);
-        Assert.Contains("RegProbe-controlled local source mirror", sourceLane.Summary, StringComparison.OrdinalIgnoreCase);
+        Assert.Equal("CONTEXT", sourceLane.StateText);
+        Assert.Contains("RegProbe-controlled source or pseudocode mirror", sourceLane.Summary, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]

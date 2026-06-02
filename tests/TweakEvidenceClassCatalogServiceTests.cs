@@ -91,7 +91,7 @@ public sealed class TweakEvidenceClassCatalogServiceTests : IDisposable
         Assert.Empty(clone.UpstreamLineage!.Links);
         Assert.False(clone.UpstreamLineage.HasNohutoLineage);
         Assert.DoesNotContain("nohuto", clone.UpstreamLineage.Summary, StringComparison.OrdinalIgnoreCase);
-        Assert.Contains("No RegProbe-controlled local source mirror", clone.UpstreamLineage.Summary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("No RegProbe-controlled source or pseudocode mirror", clone.UpstreamLineage.Summary, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]
@@ -110,7 +110,7 @@ public sealed class TweakEvidenceClassCatalogServiceTests : IDisposable
         });
 
         Assert.NotNull(clone.UpstreamLineage);
-        Assert.Contains("Catalog-only source context is not a value-semantics proof", clone.UpstreamLineage!.Summary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("Source lane is contributor context only", clone.UpstreamLineage!.Summary, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("Docs, Runtime, and Rollback", clone.UpstreamLineage.Summary, StringComparison.OrdinalIgnoreCase);
         Assert.Empty(clone.UpstreamLineage.PrimarySourceText);
     }
@@ -172,7 +172,7 @@ public sealed class TweakEvidenceClassCatalogServiceTests : IDisposable
         Assert.NotNull(clone.UpstreamLineage);
         Assert.Empty(clone.UpstreamLineage!.Links);
         Assert.False(clone.UpstreamLineage.HasNohutoLineage);
-        Assert.Contains("No RegProbe-controlled local source mirror", clone.UpstreamLineage.Summary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("No RegProbe-controlled source or pseudocode mirror", clone.UpstreamLineage.Summary, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]
@@ -203,7 +203,7 @@ public sealed class TweakEvidenceClassCatalogServiceTests : IDisposable
         Assert.Empty(clone.UpstreamLineage!.Links);
         Assert.False(clone.UpstreamLineage.HasNohutoLineage);
         Assert.Empty(clone.UpstreamLineage.PrimarySourceText);
-        Assert.Contains("No RegProbe-controlled local source mirror", clone.UpstreamLineage.Summary, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("No RegProbe-controlled source or pseudocode mirror", clone.UpstreamLineage.Summary, StringComparison.OrdinalIgnoreCase);
     }
 
     public void Dispose()

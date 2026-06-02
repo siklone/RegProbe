@@ -7,7 +7,10 @@ using RegProbe.App.Utilities;
 internal static class PublicEvidenceLinkPolicy
 {
     public const string NoLocalSourceMessage =
-        "No RegProbe-controlled local source mirror or pseudocode evidence is attached for this card. Source stays partial: Catalog-only source context is not a value-semantics proof, and the catalog index is naming/navigation context only. Docs, Runtime, and Rollback carry the app-safety proof.";
+        "No RegProbe-controlled source or pseudocode mirror is attached for this card. The Source lane is contributor context only: catalog matches can explain naming/navigation, but they do not prove value behavior. Trust the Docs, Runtime, and Rollback lanes for normal app safety.";
+
+    public const string LocalSourceContextMessage =
+        "RegProbe-controlled source or pseudocode context is attached for discovery and naming. It is not value-behavior proof by itself; app safety still comes from Docs, Runtime, and Rollback.";
 
     public static bool IsSuppressedExternalPseudocodeUrl(string? url)
         => !string.IsNullOrWhiteSpace(url)
@@ -95,7 +98,9 @@ internal static class PublicEvidenceLinkPolicy
         }
 
         return summary.Contains("No RegProbe-controlled local source mirror", StringComparison.OrdinalIgnoreCase)
+               || summary.Contains("No RegProbe-controlled source or pseudocode mirror", StringComparison.OrdinalIgnoreCase)
                || summary.Contains("Catalog-only source context", StringComparison.OrdinalIgnoreCase)
+               || summary.Contains("Source lane is contributor context only", StringComparison.OrdinalIgnoreCase)
                || summary.Contains("No upstream nohuto source link", StringComparison.OrdinalIgnoreCase);
     }
 
@@ -105,7 +110,7 @@ internal static class PublicEvidenceLinkPolicy
         if (string.IsNullOrWhiteSpace(text))
         {
             return visibleSourceLinkCount > 0
-                ? "Local source/pseudocode links provide discovery and naming context. They are not value-semantics proof by themselves; app safety comes from Docs, Runtime, and Rollback."
+                ? LocalSourceContextMessage
                 : NoLocalSourceMessage;
         }
 
@@ -117,7 +122,7 @@ internal static class PublicEvidenceLinkPolicy
         if (text.Contains("Upstream dump / pseudocode links are attached", StringComparison.OrdinalIgnoreCase))
         {
             return visibleSourceLinkCount > 0
-                ? "Local source/pseudocode links provide discovery and naming context. They are not value-semantics proof by themselves; app safety comes from Docs, Runtime, and Rollback."
+                ? LocalSourceContextMessage
                 : NoLocalSourceMessage;
         }
 
