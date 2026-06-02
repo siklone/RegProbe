@@ -153,12 +153,18 @@ public sealed class TweaksShellStateViewModelTests
 
         Assert.Equal(workspace.StatusFilterOptions, shell.StatusFilterOptions);
         Assert.Equal("STATUS", shell.StatusFilterDisplayText);
-        workspace.CycleStatusFilterCommand.Execute(null);
+        Assert.False(shell.HasStatusFilter);
+        Assert.Same(workspace.CycleStatusFilterCommand, shell.CycleStatusFilterCommand);
+        shell.CycleStatusFilterCommand.Execute(null);
         Assert.Equal("PROMOTED", shell.StatusFilterDisplayText);
+        Assert.True(shell.HasStatusFilter);
 
         Assert.Equal(workspace.ScopeFilterOptions, shell.ScopeFilterOptions);
         Assert.Equal("SCOPE", shell.ScopeFilterDisplayText);
-        workspace.CycleScopeFilterCommand.Execute(null);
+        Assert.False(shell.HasScopeFilter);
+        Assert.Same(workspace.CycleScopeFilterCommand, shell.CycleScopeFilterCommand);
+        shell.CycleScopeFilterCommand.Execute(null);
         Assert.Equal("MACHINE", shell.ScopeFilterDisplayText);
+        Assert.True(shell.HasScopeFilter);
     }
 }
