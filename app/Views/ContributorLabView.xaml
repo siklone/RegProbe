@@ -513,6 +513,13 @@
                                 <TextBlock Text="{Binding CustomValueWorkflowChecklist}"
                                            Margin="0,10,0,8"
                                            Style="{StaticResource ContributorMonoTextStyle}"/>
+                                <StackPanel Margin="0,0,0,10">
+                                    <TextBlock Text="Static binary for Ghidra string xref"
+                                               Style="{StaticResource ContributorMonoTextStyle}"/>
+                                    <TextBox Text="{Binding CustomStaticBinaryPath, UpdateSourceTrigger=PropertyChanged}"
+                                             Margin="0,5,0,0"
+                                             Style="{StaticResource ModernTextBox}"/>
+                                </StackPanel>
                                 <Border Background="#080D12"
                                         BorderBrush="#263B50"
                                         BorderThickness="1"

@@ -230,6 +230,7 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Contains("checks both the value name and path", viewModel.CustomValueInputHelp, StringComparison.Ordinal);
         Assert.Contains("default/current/target", viewModel.CustomValueAppCardEntryCriteria, StringComparison.Ordinal);
         Assert.Contains("one-off seed batch", viewModel.CustomValueObservationBoundarySummary, StringComparison.Ordinal);
+        Assert.Equal("custom-value-timercheckflags", viewModel.CustomEvidenceRunSlug);
         Assert.Contains("TimerCheckFlags", viewModel.CustomValueInvestigationContract, StringComparison.Ordinal);
         Assert.Contains("HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel", viewModel.CustomValueInvestigationContract, StringComparison.Ordinal);
         Assert.Contains("target value(s) 0, 1", viewModel.CustomValueStorySummary, StringComparison.Ordinal);
@@ -237,17 +238,44 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Contains("copy-only", viewModel.CustomValueMutationBoundarySummary, StringComparison.OrdinalIgnoreCase);
         Assert.Contains(viewModel.CustomValueEvidenceChecklist, item => item.Contains("Current value", StringComparison.Ordinal)
                                                                        && item.Contains("absent", StringComparison.Ordinal));
+        Assert.Contains(viewModel.CustomValueEvidenceChecklist, item => item.Contains("ETW stackwalk", StringComparison.Ordinal)
+                                                                       && item.Contains("Ghidra string xref", StringComparison.Ordinal));
         Assert.Contains(viewModel.CustomValueEvidenceChecklist, item => item.Contains("Rollback story", StringComparison.Ordinal));
 
         Assert.Contains("check_single_tweak_app_qa.py \"TimerCheckFlags\"", viewModel.CustomAppQaCommand, StringComparison.Ordinal);
         Assert.Contains("vm-health-check.py", viewModel.CustomVmHealthCommand, StringComparison.Ordinal);
         Assert.Contains("--check-guest-dotnet", viewModel.CustomVmHealthCommand, StringComparison.Ordinal);
+        Assert.Contains("run-guest-etw-stackwalk-capture.py", viewModel.CustomEtwStackwalkCommand, StringComparison.Ordinal);
+        Assert.Contains("--run-id \"custom-value-timercheckflags-etw-stackwalk\"", viewModel.CustomEtwStackwalkCommand, StringComparison.Ordinal);
+        Assert.Contains("--registry-path \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\"", viewModel.CustomEtwStackwalkCommand, StringComparison.Ordinal);
+        Assert.Contains("--value-name \"TimerCheckFlags\"", viewModel.CustomEtwStackwalkCommand, StringComparison.Ordinal);
+        Assert.Contains("--preflight require", viewModel.CustomEtwStackwalkCommand, StringComparison.Ordinal);
+        Assert.Contains("--ingest-to-repo", viewModel.CustomEtwStackwalkCommand, StringComparison.Ordinal);
+        Assert.Contains("run-guest-procmon-bootlog.py", viewModel.CustomProcmonBootlogCommand, StringComparison.Ordinal);
+        Assert.Contains("--output-name \"custom-value-timercheckflags-procmon-bootlog\"", viewModel.CustomProcmonBootlogCommand, StringComparison.Ordinal);
+        Assert.Contains("--reboot-settle-seconds 90", viewModel.CustomProcmonBootlogCommand, StringComparison.Ordinal);
+        Assert.Contains("run-guest-ghidra-string-xref-probe.py", viewModel.CustomGhidraStringXrefCommand, StringComparison.Ordinal);
+        Assert.Contains("--binary-path \"C:\\Windows\\System32\\ntoskrnl.exe\"", viewModel.CustomGhidraStringXrefCommand, StringComparison.Ordinal);
+        Assert.Contains("--pattern \"TimerCheckFlags\"", viewModel.CustomGhidraStringXrefCommand, StringComparison.Ordinal);
+        Assert.Contains("--output-name \"custom-value-timercheckflags-ghidra-string\"", viewModel.CustomGhidraStringXrefCommand, StringComparison.Ordinal);
         Assert.Contains(viewModel.CustomValueDiscoverySteps, step => step.Title == "1. Repo/evidence lookup"
                                                                   && !step.MutatesGuest
                                                                   && step.Command.Contains("check_single_tweak.py", StringComparison.Ordinal));
         Assert.Contains(viewModel.CustomValueDiscoverySteps, step => step.Title == "4. Certified VM health"
                                                                   && step.Command.Contains("--check-guest-dotnet", StringComparison.Ordinal));
-        Assert.Contains(viewModel.CustomValueDiscoverySteps, step => step.Title == "5. One-value VM experiment"
+        Assert.Contains(viewModel.CustomValueDiscoverySteps, step => step.Title == "5. ETW stackwalk evidence"
+                                                                  && !step.MutatesGuest
+                                                                  && step.RequiresCertifiedVm
+                                                                  && step.Command.Contains("run-guest-etw-stackwalk-capture.py", StringComparison.Ordinal));
+        Assert.Contains(viewModel.CustomValueDiscoverySteps, step => step.Title == "6. Procmon bootlog evidence"
+                                                                  && step.MutatesGuest
+                                                                  && step.RequiresCertifiedVm
+                                                                  && step.Command.Contains("run-guest-procmon-bootlog.py", StringComparison.Ordinal));
+        Assert.Contains(viewModel.CustomValueDiscoverySteps, step => step.Title == "7. Ghidra string xref evidence"
+                                                                  && !step.MutatesGuest
+                                                                  && step.RequiresCertifiedVm
+                                                                  && step.Command.Contains("run-guest-ghidra-string-xref-probe.py", StringComparison.Ordinal));
+        Assert.Contains(viewModel.CustomValueDiscoverySteps, step => step.Title == "8. One-value VM experiment"
                                                                   && step.MutatesGuest
                                                                   && step.RequiresCertifiedVm
                                                                   && step.Command.Contains("--output-name \"custom-value-timercheckflags-0\"", StringComparison.Ordinal)
@@ -265,6 +293,8 @@ public sealed class ContributorLabViewModelTests : IDisposable
 
         Assert.Equal("custom-value-disable-cfg-export-suppression-0x00000001", viewModel.CustomVmExperimentOutputName);
         Assert.Contains("--output-name \"custom-value-disable-cfg-export-suppression-0x00000001\"", viewModel.CustomVmExperimentCommand, StringComparison.Ordinal);
+        Assert.Contains("--run-id \"custom-value-disable-cfg-export-suppression-etw-stackwalk\"", viewModel.CustomEtwStackwalkCommand, StringComparison.Ordinal);
+        Assert.Contains("--output-name \"custom-value-disable-cfg-export-suppression-ghidra-string\"", viewModel.CustomGhidraStringXrefCommand, StringComparison.Ordinal);
         Assert.DoesNotContain(" ", viewModel.CustomVmExperimentOutputName, StringComparison.Ordinal);
         Assert.DoesNotContain("operator96", viewModel.CustomVmExperimentOutputName, StringComparison.OrdinalIgnoreCase);
     }
@@ -332,6 +362,15 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Contains("Copy-only", mutatingPack.ExecutionPolicyLabel, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("per-run confirmation", mutatingPack.ExecutionPolicyLabel, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("Read-only", readOnlyPack.ExecutionPolicyLabel, StringComparison.OrdinalIgnoreCase);
+        var evidencePack = new ContributorCommandPackViewModel(new ContributorCommandPack(
+            "ETW stackwalk evidence",
+            "Captures evidence.",
+            "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --value-name Example",
+            "certified-evidence",
+            RequiresCertifiedVm: true,
+            MutatesGuest: false));
+        Assert.Contains("VM evidence lane", evidencePack.SafetyLabel, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("dedicated safe Run button", evidencePack.ExecutionPolicyLabel, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]
