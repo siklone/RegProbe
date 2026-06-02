@@ -235,6 +235,7 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Contains("missing expected value(s) 0, 1", viewModel.CustomValueEscalationPlanSummary, StringComparison.Ordinal);
         Assert.Contains("ETW stackwalk, Procmon bootlog, targeted Ghidra string xref", viewModel.CustomValueEscalationPlanSummary, StringComparison.Ordinal);
         Assert.Contains("copy-only in WPF v1", viewModel.CustomValueEscalationPlanSummary, StringComparison.Ordinal);
+        Assert.Contains("Copy a complete investigation pack for TimerCheckFlags", viewModel.CustomValueInvestigationPackSummary, StringComparison.Ordinal);
         Assert.Equal("custom-value-timercheckflags", viewModel.CustomEvidenceRunSlug);
         Assert.Contains("TimerCheckFlags", viewModel.CustomValueInvestigationContract, StringComparison.Ordinal);
         Assert.Contains("HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel", viewModel.CustomValueInvestigationContract, StringComparison.Ordinal);
@@ -285,6 +286,30 @@ public sealed class ContributorLabViewModelTests : IDisposable
                                                                   && step.RequiresCertifiedVm
                                                                   && step.Command.Contains("--output-name \"custom-value-timercheckflags-0\"", StringComparison.Ordinal)
                                                                   && step.Command.Contains("--value-name \"TimerCheckFlags\"", StringComparison.Ordinal));
+
+        var pack = viewModel.CustomValueInvestigationPack;
+        Assert.Contains("# RegProbe Contributor Investigation Pack", pack, StringComparison.Ordinal);
+        Assert.Contains("Value name: `TimerCheckFlags`", pack, StringComparison.Ordinal);
+        Assert.Contains("Registry path: `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel`", pack, StringComparison.Ordinal);
+        Assert.Contains("Candidate values: `0, 1`", pack, StringComparison.Ordinal);
+        Assert.Contains("## Safe In-App Checks", pack, StringComparison.Ordinal);
+        Assert.Contains("check_single_tweak.py \"TimerCheckFlags\"", pack, StringComparison.Ordinal);
+        Assert.Contains("## Evidence Escalation Commands", pack, StringComparison.Ordinal);
+        Assert.Contains("run-guest-etw-stackwalk-capture.py", pack, StringComparison.Ordinal);
+        Assert.Contains("run-guest-procmon-bootlog.py", pack, StringComparison.Ordinal);
+        Assert.Contains("run-guest-ghidra-string-xref-probe.py", pack, StringComparison.Ordinal);
+        Assert.Contains("run-guest-registry-value-experiment.py", pack, StringComparison.Ordinal);
+        Assert.Contains("## App-Card Entry Criteria", pack, StringComparison.Ordinal);
+        Assert.False(viewModel.CopyCustomInvestigationPackCommand.CanExecute(null));
+
+        viewModel.RiskAcknowledged = true;
+        viewModel.EnableContributorToolsCommand.Execute(null);
+
+        Assert.True(viewModel.CopyCustomInvestigationPackCommand.CanExecute(null));
+        viewModel.CopyCustomInvestigationPackCommand.Execute(null);
+        Assert.Equal("Investigation pack", viewModel.CommandRunTitle);
+        Assert.Equal("Copied", viewModel.CommandRunStatus);
+        Assert.Contains("run-guest-registry-value-experiment.py", viewModel.CommandRunOutput, StringComparison.Ordinal);
     }
 
     [Fact]

@@ -584,7 +584,14 @@
                                             Command="{Binding RunVmHealthCommand}"
                                             Margin="0,0,8,8"
                                             Style="{StaticResource UtilityInlineLinkButtonStyle}"/>
+                                    <Button Content="Copy investigation pack"
+                                            Command="{Binding CopyCustomInvestigationPackCommand}"
+                                            Margin="0,0,8,8"
+                                            Style="{StaticResource UtilityInlineLinkButtonStyle}"/>
                                 </WrapPanel>
+                                <TextBlock Text="{Binding CustomValueInvestigationPackSummary}"
+                                           Margin="0,0,0,10"
+                                           Style="{StaticResource ContributorMonoTextStyle}"/>
                                 <Border Background="#080D12"
                                         BorderBrush="#1F3550"
                                         BorderThickness="1"

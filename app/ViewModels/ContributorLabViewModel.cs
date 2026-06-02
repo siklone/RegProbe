@@ -2,7 +2,9 @@ using System.Collections.ObjectModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using RegProbe.Application.Services;
 
@@ -27,6 +29,7 @@ public sealed class ContributorLabViewModel : ViewModelBase
     private readonly AsyncRelayCommand _runCustomAppQaCommand;
     private readonly AsyncRelayCommand _runAppReadinessCommand;
     private readonly AsyncRelayCommand _runVmHealthCommand;
+    private readonly RelayCommand _copyCustomInvestigationPackCommand;
 
     public ContributorLabViewModel()
         : this(ContributorLabCatalog.Load(), new ContributorLabCommandRunner())
@@ -68,6 +71,9 @@ public sealed class ContributorLabViewModel : ViewModelBase
             () => RunContributorCommandAsync("Certified VM health", CustomVmHealthCommand),
             CanRunReadOnlyContributorCommand,
             ex => SetCommandRunResult("Certified VM health", "Failed", ex.Message));
+        _copyCustomInvestigationPackCommand = new RelayCommand(
+            _ => CopyCustomInvestigationPack(),
+            _ => CanRunCustomValueContributorCommand());
 
         EnableContributorToolsCommand = new RelayCommand(
             _ => AreToolsUnlocked = true,
@@ -333,6 +339,11 @@ public sealed class ContributorLabViewModel : ViewModelBase
     public string CustomValueEscalationPlanSummary =>
         $"If lookup is empty, opaque, or missing expected value(s) {ExpectedValuesForDisplay(CustomExpectedValues)}, escalate in order: ETW stackwalk, Procmon bootlog, targeted Ghidra string xref, then exactly one snapshot-safe VM value experiment. VM evidence/mutation packs stay copy-only in WPF v1 and must be run only after certified VM health passes.";
 
+    public string CustomValueInvestigationPackSummary =>
+        $"Copy a complete investigation pack for {FirstNonEmpty(CustomValueName, "this value")}: problem statement, current/default/target/rollback checklist, safe in-app commands, certified evidence escalation commands, and app-card entry criteria.";
+
+    public string CustomValueInvestigationPack => BuildCustomValueInvestigationPack();
+
     public string CustomValueInvestigationContract =>
         $"Question: does {FirstNonEmpty(CustomValueName, "REPLACE_VALUE_NAME")} exist under {FirstNonEmpty(CustomRegistryPath, "REPLACE_REGISTRY_PATH")}, which values are known, and is there enough evidence for a bounded app card?";
 
@@ -475,6 +486,8 @@ public sealed class ContributorLabViewModel : ViewModelBase
 
     public ICommand RunVmHealthCommand => _runVmHealthCommand;
 
+    public ICommand CopyCustomInvestigationPackCommand => _copyCustomInvestigationPackCommand;
+
     public ObservableCollection<ContributorReadinessItem> ReadinessItems { get; }
 
     public ObservableCollection<ContributorCommandPackViewModel> CommandPacks { get; }
@@ -530,6 +543,8 @@ public sealed class ContributorLabViewModel : ViewModelBase
         OnPropertyChanged(nameof(CustomGhidraStringXrefCommand));
         OnPropertyChanged(nameof(CustomValueInAppActionSummary));
         OnPropertyChanged(nameof(CustomValueEscalationPlanSummary));
+        OnPropertyChanged(nameof(CustomValueInvestigationPackSummary));
+        OnPropertyChanged(nameof(CustomValueInvestigationPack));
         OnPropertyChanged(nameof(CustomValueInvestigationContract));
         OnPropertyChanged(nameof(CustomValueStorySummary));
         OnPropertyChanged(nameof(CustomValueMutationBoundarySummary));
@@ -626,6 +641,79 @@ public sealed class ContributorLabViewModel : ViewModelBase
         _runCustomAppQaCommand.RaiseCanExecuteChanged();
         _runAppReadinessCommand.RaiseCanExecuteChanged();
         _runVmHealthCommand.RaiseCanExecuteChanged();
+        _copyCustomInvestigationPackCommand.RaiseCanExecuteChanged();
+    }
+
+    private void CopyCustomInvestigationPack()
+    {
+        var pack = CustomValueInvestigationPack;
+        TryCopyToClipboard(pack);
+        SetCommandRunResult("Investigation pack", "Copied", TruncateOutput(pack));
+    }
+
+    private string BuildCustomValueInvestigationPack()
+    {
+        var builder = new StringBuilder();
+        builder.AppendLine("# RegProbe Contributor Investigation Pack");
+        builder.AppendLine();
+        builder.AppendLine($"- Value name: `{FirstNonEmpty(CustomValueName, "REPLACE_VALUE_NAME")}`");
+        builder.AppendLine($"- Registry path: `{FirstNonEmpty(CustomRegistryPath, "REPLACE_REGISTRY_PATH")}`");
+        builder.AppendLine($"- Candidate values: `{ExpectedValuesForDisplay(CustomExpectedValues)}`");
+        builder.AppendLine($"- Static binary hint: `{FirstNonEmpty(CustomStaticBinaryPath, "REPLACE_BINARY_PATH")}`");
+        builder.AppendLine($"- Run tier: `{RunTier}` / badge `{VerificationBadge}` / reference eligible `{ReferenceEligible.ToString().ToLowerInvariant()}`");
+        builder.AppendLine("- Boundary: user-supplied custom value investigation; not an end-user app card until default/current/target, rollback, app-write, low-noise evidence, and bounded claim gates pass.");
+        builder.AppendLine();
+        builder.AppendLine("## Question");
+        builder.AppendLine(CustomValueInvestigationContract);
+        builder.AppendLine();
+        builder.AppendLine("## Value Story To Capture");
+        builder.AppendLine(CustomValueStorySummary);
+        builder.AppendLine();
+        builder.AppendLine("## Evidence Checklist");
+        foreach (var item in CustomValueEvidenceChecklist)
+        {
+            builder.AppendLine("- " + item);
+        }
+
+        builder.AppendLine();
+        builder.AppendLine("## Safe In-App Checks");
+        AppendCommand(builder, "Repo/evidence lookup", CustomEvidenceLookupCommand);
+        AppendCommand(builder, "Existing app-card QA map", CustomAppQaCommand);
+        AppendCommand(builder, "App readiness/contracts", "python3 registry-research-framework/scripts/check_app_retest_readiness.py --json");
+        AppendCommand(builder, "Certified VM health", CustomVmHealthCommand);
+        builder.AppendLine();
+        builder.AppendLine("## Evidence Escalation Commands");
+        builder.AppendLine("Run these in order when the lookup is empty, opaque, or missing expected value evidence. VM evidence/mutation packs are copy-only in WPF v1 and require certified VM/QGA/snapshot health first.");
+        AppendCommand(builder, "ETW stackwalk evidence", CustomEtwStackwalkCommand);
+        AppendCommand(builder, "Procmon bootlog evidence", CustomProcmonBootlogCommand);
+        AppendCommand(builder, "Ghidra string xref evidence", CustomGhidraStringXrefCommand);
+        AppendCommand(builder, "One-value VM experiment", CustomVmExperimentCommand);
+        builder.AppendLine();
+        builder.AppendLine("## App-Card Entry Criteria");
+        builder.AppendLine(CustomValueAppCardEntryCriteria);
+        builder.AppendLine(CustomValueMutationBoundarySummary);
+        return builder.ToString().TrimEnd();
+    }
+
+    private static void AppendCommand(StringBuilder builder, string title, string command)
+    {
+        builder.AppendLine();
+        builder.AppendLine($"### {title}");
+        builder.AppendLine("```bash");
+        builder.AppendLine(command);
+        builder.AppendLine("```");
+    }
+
+    private static void TryCopyToClipboard(string text)
+    {
+        try
+        {
+            Clipboard.SetText(text ?? string.Empty);
+        }
+        catch
+        {
+            // Clipboard access can fail in headless tests or locked desktops; the pack is still shown in the run output.
+        }
     }
 
     private static string TruncateOutput(string output)
